@@ -95,22 +95,39 @@ DISCOVER_MASS_BASE_URL = "https://discovermass.com"
 # ZIP codes are critical for small towns that may not have their own parish —
 # we search by ZIP to find the nearest serving church.
 TARGET_COMMUNITIES = [
+    # Communities WITH their own CatholicIndex city page:
     {"name": "Canal Winchester", "county": "Franklin", "state": "OH", "zips": ["43110"]},
-    {"name": "Obetz", "county": "Franklin", "state": "OH", "zips": ["43207"]},
-    {"name": "Hamilton Township", "county": "Franklin", "state": "OH", "zips": ["43137"]},
-    {"name": "Lithopolis", "county": "Fairfield", "state": "OH", "zips": ["43136"]},
-    {"name": "Lockbourne", "county": "Franklin", "state": "OH", "zips": ["43137"]},
     {"name": "Groveport", "county": "Franklin", "state": "OH", "zips": ["43125"]},
-    {"name": "Madison Township", "county": "Franklin", "state": "OH", "zips": ["43110", "43125"]},
-    {"name": "West Columbus", "county": "Franklin", "state": "OH", "zips": ["43204", "43223"]},
-    {"name": "Lincoln Village", "county": "Franklin", "state": "OH", "zips": ["43228"]},
-    {"name": "Prairie Township", "county": "Franklin", "state": "OH", "zips": ["43123", "43228"]},
-    {"name": "Westgate", "county": "Franklin", "state": "OH", "zips": ["43204"]},
-    {"name": "Galloway", "county": "Franklin", "state": "OH", "zips": ["43119"]},
     {"name": "Hilliard", "county": "Franklin", "state": "OH", "zips": ["43026"]},
     {"name": "Grove City", "county": "Franklin", "state": "OH", "zips": ["43123"]},
-    {"name": "Urbancrest", "county": "Franklin", "state": "OH", "zips": ["43123"]},
-    {"name": "Commercial Point", "county": "Pickaway", "state": "OH", "zips": ["43116"]},
+
+    # Communities WITHOUT their own CatholicIndex city page.
+    # "fallback_city" tells the scraper which nearby city page to use instead.
+    # We then filter results by distance to only include nearby churches.
+    {"name": "Obetz", "county": "Franklin", "state": "OH", "zips": ["43207"],
+     "fallback_city": "Columbus"},
+    {"name": "Hamilton Township", "county": "Franklin", "state": "OH", "zips": ["43137"],
+     "fallback_city": "Columbus"},
+    {"name": "Lithopolis", "county": "Fairfield", "state": "OH", "zips": ["43136"],
+     "fallback_city": "Columbus"},
+    {"name": "Lockbourne", "county": "Franklin", "state": "OH", "zips": ["43137"],
+     "fallback_city": "Columbus"},
+    {"name": "Madison Township", "county": "Franklin", "state": "OH", "zips": ["43110", "43125"],
+     "fallback_city": "Columbus"},
+    {"name": "West Columbus", "county": "Franklin", "state": "OH", "zips": ["43204", "43223"],
+     "fallback_city": "Columbus"},
+    {"name": "Lincoln Village", "county": "Franklin", "state": "OH", "zips": ["43228"],
+     "fallback_city": "Columbus"},
+    {"name": "Prairie Township", "county": "Franklin", "state": "OH", "zips": ["43123", "43228"],
+     "fallback_city": "Columbus"},
+    {"name": "Westgate", "county": "Franklin", "state": "OH", "zips": ["43204"],
+     "fallback_city": "Columbus"},
+    {"name": "Galloway", "county": "Franklin", "state": "OH", "zips": ["43119"],
+     "fallback_city": "Columbus"},
+    {"name": "Urbancrest", "county": "Franklin", "state": "OH", "zips": ["43123"],
+     "fallback_city": "Columbus"},
+    {"name": "Commercial Point", "county": "Pickaway", "state": "OH", "zips": ["43116"],
+     "fallback_city": "Columbus"},
 ]
 
 # ---------------------------------------------------------------------------

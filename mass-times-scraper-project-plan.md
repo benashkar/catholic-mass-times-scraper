@@ -126,36 +126,48 @@
 
 ## Phase Plan
 
-### Phase 1: Church Discovery & Mapping
-**Goal:** Build a complete list of Catholic churches serving each of the 15 communities.
+### Phase 1: Church Discovery & Mapping ✅ COMPLETE
+**Goal:** Build a complete list of Catholic churches serving each of the 16 communities.
 
-- [ ] For each community, determine the relevant ZIP codes and a search radius (some small towns share parishes)
-- [ ] Scrape CatholicIndex.org city/search pages to get all church URLs per community
+- [x] For each community, determine the relevant ZIP codes and a search radius (some small towns share parishes)
+- [x] Scrape CatholicIndex.org city/search pages to get all church URLs per community
 - [ ] Cross-reference with DiscoverMass.com to catch any gaps
 - [ ] Cross-reference with Diocese of Columbus parish list for completeness
-- [ ] Build a master church list CSV with all address/contact fields
+- [x] Build a master church list CSV with all address/contact fields
 - [ ] Manual QA: verify no major parishes are missing
 
-**Known challenge:** City listing pages on CatholicIndex may require JS rendering for church links. Alternatives:
-- Use CatholicIndex search endpoint (inspect with Chrome DevTools / Claude in Chrome)
-- Use DiscoverMass.com's predictable URL slug pattern
-- Fall back to zip code-based search
+**Results (2026-02-20):**
+- **16/16 communities scraped successfully**
+- **79 unique churches found** within 25-mile radius
+- 4 communities had their own CatholicIndex city page (Canal Winchester, Groveport, Hilliard, Grove City)
+- 12 communities used Columbus as a fallback (smaller towns/townships/CDPs without their own page)
+- Master church list saved to `data/churches/master_church_list.csv`
+- Per-community JSON files saved to `data/churches/{community_name}.json`
 
-### Phase 2: Mass Time Scraper (Recurring Schedules)
-**Goal:** Scrape and parse weekly recurring mass times for every church in the master list.  
+**Key technical finding:** CatholicIndex is a **Next.js App Router** app. All data is embedded as React Server Component (RSC) flight payloads in the HTML — no HTML parsing needed. We extract JSON directly from `self.__next_f.push()` calls. This is much more reliable than parsing rendered HTML.
+
+**Known challenge (RESOLVED):** City listing pages on CatholicIndex do NOT use traditional HTML links for church data. Instead:
+- Data is embedded in RSC flight payloads as JSON (`initialChurches` array)
+- Individual church pages have full schedule data in `data.services` object
+- No need for BeautifulSoup HTML parsing — pure JSON extraction
+- Small communities without CatholicIndex pages use Columbus as fallback with caching
+
+### Phase 2: Mass Time Scraper (Recurring Schedules) — IN PROGRESS
+**Goal:** Scrape and parse weekly recurring mass times for every church in the master list.
 **Start here:** Unit tests (Improvement 1) and file logging (Improvement 2).
 
-- [ ] Build HTML parser for CatholicIndex individual church pages (BeautifulSoup or similar)
-- [ ] **Write unit tests alongside each parser function** (see Improvement 1)
-- [ ] **Add logging to all scraper functions** (see Improvement 2)
-- [ ] Parse mass times by day of week
-- [ ] Parse confession times — **fix range format bug** (e.g., "3:00pm-3:45pm" should be start/end, not two separate times)
-- [ ] Parse adoration hours
-- [ ] Parse monthly services (First Friday, First Saturday, etc.)
-- [ ] Parse any date-specific special events listed
-- [ ] Store all data in structured JSON/CSV
+- [x] Build RSC data extractor for CatholicIndex pages (replaces HTML parser — see Phase 1 findings)
+- [x] **Write unit tests alongside each parser function** (22 tests passing — see Improvement 1)
+- [x] **Add logging to all scraper functions** (console + file logging — see Improvement 2)
+- [x] Parse mass times by day of week (extracted from `data.services.Mass` via RSC)
+- [x] Parse confession times with start/end time ranges (no range bug — data arrives pre-structured)
+- [x] Parse adoration hours (extracted from `data.services.Adoration`)
+- [x] Parse monthly services (First Friday, etc. — `pattern` field in service records)
+- [x] Parse date-specific special events (Holy Days — `eventDate` field)
+- [x] Store all data in structured JSON/CSV
 - [ ] Build DiscoverMass.com parser as fallback
-- [ ] Add `last_updated` tracking per church (CatholicIndex shows schedule update dates)
+- [x] Add `last_updated` tracking per church (CatholicIndex `updatedAt` field in church detail)
+- [ ] Build `run_scrape_details.py` to fetch full schedules for all 79 churches
 
 ### Phase 3: Date Generation Layer
 **Goal:** Convert recurring day-of-week schedules into specific dated listings for newspaper publication.
@@ -272,15 +284,17 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 
 | Component | Tool | Notes |
 |-----------|------|-------|
-| Scraping | Python (`requests` + `BeautifulSoup4`) | Primary for server-rendered pages |
-| JS-rendered pages (if needed) | Playwright or Puppeteer | For MassTimes.org or stubborn sites |
-| Address parsing | Custom regex parser (from POC) | |
-| Data storage (Phase 1–4) | JSON + CSV flat files | 15 communities, ~50 parishes |
+| Scraping | Python (`requests`) | Fetches pages; no BeautifulSoup needed (data is JSON in RSC payload) |
+| Data extraction | Custom RSC extractor (`src/parsers/rsc_extractor.py`) | Parses Next.js React Server Component flight data |
+| JS-rendered pages (if needed) | Playwright or Puppeteer | For MassTimes.org or stubborn sites (not needed for CatholicIndex) |
+| Data storage (Phase 1–4) | JSON + CSV flat files | 16 communities, 79 parishes discovered |
 | Data storage (Phase 5+) | PostgreSQL | ~17,000 parishes nationally |
 | Geographic reference data | Census Bureau, USPS ZIP files | City/ZIP to parish mapping |
 | Scheduling | Cron job or GitHub Actions | Weekly incremental, monthly full |
 | Orchestration | Claude Code | |
-| Rate limiting | Custom (respect robots.txt, 1-2 req/sec) | Critical for national-scale scraping |
+| Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | With exponential backoff on retries, no retry on 404s |
+| Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output |
+| Testing | `pytest` (25 tests passing) | RSC extractor + config + smoke tests |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
 
 ## Coding Standards — Junior Developer Friendly
@@ -440,10 +454,10 @@ These improvements make the project more robust, easier to maintain, and accessi
 
 ---
 
-1. **Confession time range parsing:** "3:00pm-3:45pm" is being split into two separate times instead of a start/end range. Fix: detect dash-separated time ranges before splitting.
-2. **CSV comma conflicts:** Fields containing commas (like `address_raw`) break column alignment in spreadsheet viewers. Fix: either drop `address_raw` (redundant) or use pipe/tab delimiters. **Status: Fixed in POC v2.**
-3. **Mass time delimiter:** Use semicolons (`;`) instead of commas to separate multiple times within a single cell. **Status: Fixed in POC v2.**
-4. **Church discovery for small communities:** Need zip-code or radius-based search, not just city name matching.
+1. **Confession time range parsing:** ~~"3:00pm-3:45pm" is being split into two separate times instead of a start/end range.~~ **Status: NOT A BUG.** CatholicIndex RSC data provides confession times pre-structured with separate `timeStart` and `timeEnd` fields. No parsing needed.
+2. **CSV comma conflicts:** Fields containing commas (like `address_raw`) break column alignment in spreadsheet viewers. Fix: either drop `address_raw` (redundant) or use pipe/tab delimiters. **Status: Fixed in POC v2.** Our CSV output uses `utf-8-sig` encoding and proper `csv.DictWriter` which handles commas in fields correctly.
+3. **Mass time delimiter:** Use semicolons (`;`) instead of commas to separate multiple times within a single cell. **Status: Fixed in POC v2.** Also used for `serving_communities` field in master CSV.
+4. **Church discovery for small communities:** ~~Need zip-code or radius-based search, not just city name matching.~~ **Status: RESOLVED.** Small communities without CatholicIndex city pages now use a `fallback_city` setting (Columbus) with caching to avoid redundant requests.
 
 ---
 
@@ -459,9 +473,10 @@ These improvements make the project more robust, easier to maintain, and accessi
 
 ## Next Steps (Immediate)
 
-1. **Use Claude in Chrome** to inspect CatholicIndex.org's network requests and find their search/API endpoint structure
-2. **Map all 15 Ohio communities** to their serving parishes (church discovery)
-3. **Refine the scraper** — fix confession parsing, add date generation
-4. **Generate a sample newspaper-ready output** for one publication week across all 15 communities
-5. **Review with editorial team** for format/layout preferences
-6. **Design the PostgreSQL schema** early — even if Phase 1–4 uses flat files, having the schema ready avoids rework when scaling to Ohio statewide and then nationally
+1. ~~**Use Claude in Chrome** to inspect CatholicIndex.org's network requests and find their search/API endpoint structure~~ **DONE (2026-02-20)** — Found that CatholicIndex is a Next.js App Router app with all data in RSC flight payloads
+2. ~~**Map all 16 Ohio communities** to their serving parishes (church discovery)~~ **DONE (2026-02-20)** — 79 unique churches found across all 16 communities
+3. **Build `run_scrape_details.py`** — Fetch full weekly schedules for all 79 churches from their individual CatholicIndex pages
+4. **Build the date generation layer** (Phase 3) — Convert recurring schedules to specific dated listings for newspaper publication
+5. **Generate a sample newspaper-ready output** for one publication week across all 16 communities
+6. **Review with editorial team** for format/layout preferences
+7. **Design the PostgreSQL schema** early — even if Phase 1–4 uses flat files, having the schema ready avoids rework when scaling to Ohio statewide and then nationally

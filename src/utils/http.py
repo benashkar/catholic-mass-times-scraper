@@ -119,6 +119,14 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
 
         except requests.exceptions.HTTPError as e:
             # The server returned an error code (404, 500, etc.)
+            status_code = response.status_code if response is not None else None
+
+            # Don't retry 404 errors — the page simply doesn't exist.
+            # Retrying won't help and just wastes time and server resources.
+            if status_code == 404:
+                logger.warning(f"HTTP 404 (page not found): {url}")
+                return None
+
             logger.warning(
                 f"HTTP error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}"
             )
