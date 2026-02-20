@@ -1,0 +1,18 @@
+[project]
+name = "catholic-mass-times-scraper"
+version = "0.1.0"
+description = "Automated Catholic mass times scraper for CR Community News"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+# --- Pytest Configuration ---
+# This tells pytest where to find tests and how to run them.
+# Run tests with:  pytest
+# Run with detail:  pytest -v
+# Run with coverage:  pytest --cov=src
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.coverage.run]
+# Which source directories to measure code coverage for
+source = ["src"]

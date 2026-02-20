@@ -1,0 +1,56 @@
+# ============================================================================
+# Catholic Mass Times Scraper — Git Ignore Rules
+# ============================================================================
+# This file tells Git which files/folders to NOT track.
+# Anything listed here stays on your local machine only.
+# ============================================================================
+
+# --- Environment & Secrets ---
+# NEVER commit these — they contain passwords, API keys, etc.
+.env
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# --- Virtual Environment ---
+# The venv folder contains installed packages — each developer creates their own
+venv/
+.venv/
+env/
+ENV/
+
+# --- Logs ---
+# Log files are generated locally and can get very large
+logs/*.log
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Data (large files) ---
+# Scraped data files can be large; keep them local
+# Remove these lines if you want to track data in git
+# data/output/*.csv
+# data/output/*.json
+
+# --- Docker ---
+# docker-compose.override.yml
+
+# --- OS files ---
+nul
+desktop.ini

@@ -1,0 +1,29 @@
+# ============================================================================
+# Catholic Mass Times Scraper — Python Dependencies
+# ============================================================================
+# Install all dependencies with:   pip install -r requirements.txt
+# Install in a virtual environment: python -m venv venv && venv\Scripts\activate && pip install -r requirements.txt
+# ============================================================================
+
+# --- Web Scraping ---
+requests==2.32.*          # Makes HTTP requests to fetch web pages
+beautifulsoup4==4.12.*    # Parses HTML to extract data from web pages
+lxml>=5.3                 # Fast HTML/XML parser (used as BeautifulSoup's backend)
+
+# --- Data Handling ---
+pandas>=2.2               # Data manipulation and CSV/Excel export
+
+# --- Configuration ---
+python-dotenv==1.0.*      # Loads settings from .env files so secrets stay out of code
+
+# --- Testing ---
+pytest==8.3.*             # Test framework — run tests with: pytest
+pytest-cov==6.0.*         # Measures how much of the code is covered by tests
+
+# --- Logging ---
+# Python's built-in `logging` module is used (no extra package needed)
+
+# --- Future / Phase 5+ ---
+# psycopg2-binary==2.9.*  # PostgreSQL database driver (uncomment when moving to DB)
+# flask==3.1.*            # Web dashboard (uncomment for Improvement 3)
+# playwright==1.49.*      # Headless browser for JS-rendered sites (uncomment if needed for MassTimes.org)
