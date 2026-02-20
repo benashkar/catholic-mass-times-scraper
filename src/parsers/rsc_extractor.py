@@ -76,17 +76,26 @@ def extract_rsc_chunks(html: str) -> list[str]:
         logger.warning("No RSC data chunks found in HTML")
         return []
 
-    # Unescape the JSON string escaping used in the JavaScript
-    # The data is double-escaped: once for the JSON string, once for the JS string
+    # Unescape the JavaScript string encoding.
+    # The RSC data is inside a JS string literal: push([1, "...escaped content..."])
+    # We use json.loads to properly decode the JS string escaping, which handles
+    # all escape sequences correctly: \", \\, \n, \t, \uXXXX, etc.
     decoded_chunks = []
     for match in matches:
-        # Replace escaped characters
-        decoded = match.replace('\\"', '"')
-        decoded = decoded.replace('\\n', '\n')
-        decoded = decoded.replace('\\\\', '\\')
-        decoded = decoded.replace('\\/', '/')
-        decoded = decoded.replace('\\u0026', '&')
-        decoded_chunks.append(decoded)
+        try:
+            # Wrap in quotes so json.loads treats it as a JSON string to decode
+            decoded = json.loads(f'"{match}"')
+            decoded_chunks.append(decoded)
+        except json.JSONDecodeError:
+            # Fallback: manual unescaping for chunks that aren't valid JSON strings
+            # (some chunks contain raw data that breaks json.loads)
+            decoded = match.replace('\\"', '"')
+            decoded = decoded.replace('\\n', '\n')
+            decoded = decoded.replace('\\/', '/')
+            decoded = decoded.replace('\\u0026', '&')
+            # WARNING: \\  must be replaced last to avoid double-processing
+            decoded = decoded.replace('\\\\', '\\')
+            decoded_chunks.append(decoded)
 
     logger.debug(f"Extracted {len(decoded_chunks)} RSC chunks from HTML")
     return decoded_chunks
