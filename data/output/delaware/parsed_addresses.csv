@@ -1,0 +1,314 @@
+﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
+us-pa-ardmore-st-colman-80fb1d02,St. Colman,11,,Simpson,Rd,,,,11 Simpson Rd,Ardmore,PA,19003,2812,40.00614735,-75.28801834,(610) 642-0545
+us-pa-aston-neumann-university-sacred-heart-chapel-d2d49e29,Neumann University-Sacred Heart Chapel,1,,Neumann,Dr,,,,1 Neumann Dr,Aston,PA,19014,,39.8751271,-75.44281423,(610) 358-4202
+us-pa-aston-st-joseph-fb4a6aec,St. Joseph,3255,,Concord,Rd,,,,3255 Concord Rd,Aston,PA,19014,,39.86567234,-75.41958529,(610) 497-3340
+us-pa-avondale-mision-santa-maria-7430a3dc,Mision Santa Maria,29,,Gap Newport,Pike,,,,29 Gap Newport Pike,Avondale,PA,19311,,39.8208329,-75.7762741,+1-610-268-3365
+us-pa-avondale-st-gabriel-of-the-sorrowful-mother-2169570e,St. Gabriel of the Sorrowful Mother,8910,,Gap-Newport,Pike,,,,8910 Gap-Newport Pike,Avondale,PA,19311,,39.81018585,-75.75774908,(610) 268-0296
+us-pa-avondale-st-rocco-23ce0668,St. Rocco,333,,Sunny Dell,Rd,,,,333 Sunny Dell Rd,Avondale,PA,19311,,39.8008878,-75.74221754,(610) 268-3365
+us-pa-bala-cynwyd-st-mattthias-322099f4,St. Matthias,128,,Bryn Mawr,Ave,,,,128 Bryn Mawr Ave,Bala-Cynwyd,PA,19004,,40.00360931,-75.2347698,(610) 664-0207
+us-nj-barrington-st-francis-de-sales-2043b2b1,St. Francis,199,,Wilmont,Ave,,,,199 Wilmont Ave,Barrington,NJ,08007,,39.86755152,-75.05569458,516-244-9153
+us-de-bear-st-elizabeth-ann-seton-roman-catholic-church-49e3f305,St Elizabeth Ann Seton Roman Catholic Church,345,,Bear Christiana,Rd,,,,345 Bear Christiana Rd,Bear,DE,19701,,39.6506891,-75.654357,+1-302-322-6430
+us-de-bear-st-elizabeth-ann-seton-6a860f8a,St. Elizabeth Ann Seton,345,,Bear- Christiana,Rd,,,,345 Bear- Christiana Rd,Bear,DE,19701,,39.65116882,-75.6555481,(302) 322-6430
+us-nj-bellmawr-church-of-mary-mother-of-the-church-7ff7c4f3,"Mary, Mother of the Church",20,,Braisington,Ave,,,,20 Braisington Ave,Bellmawr,NJ,08031,,39.8666875,-75.0753125,18569310204
+us-nj-bellmawr-st-joachim-2777183f,St. Joachim,601,W,Browning,Rd,,,,601 W Browning Rd,Bellmawr,NJ,08031,1840,39.87324738,-75.10363731,(856) 931-6307
+us-md-berlin-st-john-neumann-d28bb50c,St. John Neumann,11211,,Beauchamp,Rd,,,,11211 Beauchamp Rd,Berlin,MD,21811,,38.388588,-75.18456,(410) 208-2956
+us-pa-berwyn-st-monica-be9be999,St. Monica,635,,First,Ave,,,,635 First Ave,Berwyn,PA,19312,,40.04597711,-75.44038085,(610) 644-0110
+us-de-bethany-beach-st-ann-85398478,St. Ann,691,,Garfield,Pkwy,,,,691 Garfield Pkwy,Bethany Beach,DE,19930,,38.53985537,-75.06761824,(302) 539-6449
+us-nj-blackwood-our-lady-of-hope-st-jude-efb44e90,Our Lady of Hope (St. Jude),402,S,Black Horse,Pike,,,,402 S Black Horse Pike,Blackwood,NJ,08012,,39.79500227,-75.06339545,(856) 228-4331
+us-nj-blackwood-our-lady-of-hope-parish-st-agnes-10a0ebbd,Our Lady of Hope Parish (St. Agnes),701,,Little Gloucester,Rd,,,,701 Little Gloucester Rd,Blackwood,NJ,08012,,39.81282168,-75.04888435,(856) 228-4331
+us-pa-boothwyn-st-john-fisher-1be958cb,St. John Fisher,4225,,Chichester,Ave,,,,4225 Chichester Ave,Boothwyn,PA,19061,,39.8465576,-75.44668,(610) 485-0441
+us-pa-bridgeport-saint-john-the-baptist-ordinariate-of-the-chair-of-st-peter-406ff676,Our Lady of Mount Carmel (Ordinariate of the Chair of St. Peter),502,,Ford,St,,,,502 Ford St,Bridgeport,PA,19405,,40.10327006,-75.34232275,6104554458
+us-pa-bridgeport-sacred-heart-722e5808,Sacred Heart,120,,Jefferson,St,,,,120 Jefferson St,Bridgeport,PA,19405,,40.10263773,-75.33068335,(610) 275-1750
+us-pa-bridgeport-sts-peter-and-paul-ukrainian-9e8b3903,Sts. Peter and Paul Ukrainian Catholic Church,519,,Union,Ave,,,,519 Union Ave,Bridgeport,PA,19405,,40.10053322,-75.33962982,(610) 272-7035
+us-nj-bridgeton-the-parish-of-the-holy-crossimmaculate-conception-church-1e699527,Immaculate Conception,312,,Pearl,St,N,,,312 Pearl St N,Bridgeton,NJ,08302,,39.43760186,-75.22781188,(856) 455-2323
+us-nj-bridgeton-the-parish-of-the-holy-crossst-teresa-of-avila-church-e8b52fa3,St. Teresa of Avila,46,,Central,Ave,,,,46 Central Ave,Bridgeton,NJ,08302,,39.4290639,-75.24857,(856) 455-2323
+us-pa-brookhaven-our-lady-of-charity-17345a73,Our Lady of Charity,231,,Upland,Rd,,,,231 Upland Rd,Brookhaven,PA,19015,,39.86365079,-75.38129473,(610) 872-6192
+us-pa-broomall-st-pius-x-8da2c207,St. Pius X,220,,Lawrence,Rd,,,,220 Lawrence Rd,Broomall,PA,19008,,39.9708486,-75.34542439,(610) 353-4880
+us-pa-bryn-mawr-bryn-mawr-college-newman-f0461323,Bryn Mawr College -  NEWMAN,816,,New Gulph,Rd,,,,816 New Gulph Rd,Bryn Mawr,PA,19010,,40.02880656,-75.31347871,(610) 526-5000
+us-pa-bryn-mawr-our-mother-of-good-counsel-7fb27a76,Our Mother of Good Counsel,31,,Pennswood,Rd,,,,31 Pennswood Rd,Bryn Mawr,PA,19010,,40.01877094,-75.30996162,(610) 525-0147
+us-pa-bryn-mawr-st-john-neumann-3c413d96,St. John Neumann,380,,Highland La,,,,,380 Highland La,Bryn Mawr,PA,19010,,40.0039439,-75.33809356,(610) 525-3100
+us-nj-camden-immaculate-conception-fb5c7927,Cathedral of the Immaculate Conception,642,,Market,St,,,,642 Market St,Camden,NJ,08102,1183,39.94500396,-75.11865044,(856) 964-1580
+us-nj-camden-holy-name-42b10812,Holy Name,509,,State,St,,,,509 State St,Camden,NJ,08102,,39.9528249,-75.11830662,(856) 365-1001
+us-nj-camden-our-lady-of-mount-carmel-and-fatima-1eb561ef,Our Lady of Mount Carmel And Fatima,832,S,4th,St,,,,832 S 4th St,Camden,NJ,08103,,39.93553303,-75.1225633,(856) 964-1580
+us-nj-camden-sacred-heart-af87df14,Sacred Heart,1739,,Ferry,Ave,,,,1739 Ferry Ave,Camden,NJ,08104,,39.92235029,-75.12021726,(856) 966-6700
+us-nj-camden-sacred-heart-catholic-church-dd3c8ff7,Sacred Heart Catholic Church,1739,,Ferry,Ave,,,,1739 Ferry Ave,Camden,NJ,08104,,39.9223181,-75.1202646,+1-856-966-6700
+us-nj-camden-shrine-of-our-ladys-perpetual-rosary-ad64fefc,Shrine of Our Lady’s Perpetual Rosary,1500,,Haddon,Ave,,,,1500 Haddon Ave,Camden,NJ,08103,,39.9279375,-75.0968125,
+us-nj-camden-st-anthony-of-padua-b5e0433d,St. Anthony of Padua,2818,,River,Ave,,,,2818 River Ave,Camden,NJ,08105,,39.95648963,-75.09194106,(856) 963-5884
+us-nj-camden-st-bartholomew-sacred-heart-parish-46e9137c,St. Bartholomew,751,,Kaighns,Ave,,,,751 Kaighns Ave,Camden,NJ,08103,,39.93157973,-75.11401108,(856) 365-0573
+us-nj-camden-st-joan-of-arc-sacred-heart-parish-b5d042c8,St. Joan of Arc/ Sacred Heart Parish/,3107,,Alabama,Rd,,,,3107 Alabama Rd,Camden,NJ,08104,,39.90470364,-75.10170694,(856) 916-9076
+us-nj-camden-st-joseph-polish-apostolate-08880b08,St. Joseph,1010,,Liberty,St,,,,1010 Liberty St,Camden,NJ,08104,,39.93029796,-75.11001509,(856) 963-1285
+us-nj-camden-st-joseph-pro-cathedral-85adffcc,St. Joseph Pro-Cathedral,2907,,Federal,St,,,,2907 Federal St,Camden,NJ,08105,,39.94709468,-75.08381853,(856) 964-2776
+us-nj-cape-may-church-of-our-lady-star-of-the-sea-7fa475bc,Our Lady Star of the Sea,525,,Washington,St,,,,525 Washington St,Cape May,NJ,08204,,38.9333125,-74.9219375,16098845312
+us-nj-cape-may-our-lady-star-of-the-sea-see-also-the-summer-chapel-st-agnes-949b378e,Our Lady Star of the Sea,520,,Lafayette,St,,,,520 Lafayette St,Cape May,NJ,08204,,38.93355986,-74.9221257,(609) 884-5312
+us-nj-cape-may-point-st-agnes-summer-chapel-for-our-lady-star-of-the-sea-c689361b,St. Agnes (summer chapel for Our Lady Star of the Sea),501,,Cape,Ave,,,,501 Cape Ave,Cape May Point,NJ,08204,,38.93849979,-74.96605787,(609) 884-5312
+us-nj-carneys-point-corpus-christist-gabriel-the-archangel-parish-446fd20f,St Gabriel the Arch Angel Parish,369,,Georgetown,Rd,,,,369 Georgetown Rd,Carneys Point,NJ,08069,,39.7109154,-75.46276651,(856) 299-3833
+us-nj-cedarville-st-michael-the-parish-of-the-holy-cross-cc39bfc7,St. Michael,367,,Main,St,,,,367 Main St,Cedarville,NJ,08311,,39.33138679,-75.19867793,(856) 455-2323
+us-pa-chadds-ford-st-cornelius-3c81e618,St. Cornelius,160,,Ridge,Rd,,,,160 Ridge Rd,Chadds Ford,PA,19317,,39.86469529,-75.5574598,(610) 459-2502
+us-md-chesapeake-city-saint-basil-ukrainian-9bedb1f0,St. Basil (Ukrainian),231,,Basil,Ave,,,,231 Basil Ave,Chesapeake City,MD,21915,1106,39.51867704,-75.82277596,(302) 762-5511
+us-md-chesapeake-city-st-rose-of-lima-8996a357,St. Rose of Lima,301,,Lock,St,,,,301 Lock St,Chesapeake City,MD,21915,,39.5312156,-75.8101849,(302) 378-5800
+us-pa-chester-st-hedwig-f82b773f,St. Hedwig,2623,W,4th,St,,,,2623 W 4th St,Chester,PA,19013,,39.83286252,-75.3905654,(610) 623-0409
+us-pa-chester-st-katharine-drexel-06199476,St. Katharine Drexel,1920,,Providence,Ave,,,,1920 Providence Ave,Chester,PA,19013,5695,39.86458999,-75.36156349,(610) 872-3731
+us-pa-chester-springs-st-elizabeth-7cce6424,St. Elizabeth,100,,Saint Elizabeth,Dr,,,,100 Saint Elizabeth Dr,Chester Springs,PA,19425,,40.08905972,-75.6908098,610-321-1200
+us-de-claymont-holy-rosary-4c79ea03,Holy Rosary,3200,,Philadelphia,Pike,,,,3200 Philadelphia Pike,Claymont,DE,19703,,39.7976952,-75.46274,(302) 798-2904
+us-nj-clayton-saint-catherine-of-sienaparish-of-saint-michael-the-archangel-44449282,St. Michael The Archangel,700,N,Delsea,Dr,,,,700 N Delsea Dr,Clayton,NJ,08312,1114,39.66386988,-75.09376018,(856) 881-9155
+us-pa-clifton-heights-sacred-heart-6fca93a6,Sacred Heart,316,E,Broadway,Ave,,,,316 E Broadway Ave,Clifton Heights,PA,19018,,39.93027678,-75.28923536,(610) 623-0409
+us-pa-clifton-heights-saints-peter-and-paul-ukrainian-cc936c54,Saints Peter and Paul [Ukrainian],100,S,Penn,St,,,,100 S Penn St,Clifton Heights,PA,19018,,39.92952789,-75.2931783,(610) 626-9495
+us-pa-coatesville-our-lady-of-the-rosary-1b5dac55,Our Lady of the Rosary,80,S,17th,Ave,,,,80 S 17th Ave,Coatesville,PA,19320,,39.98425557,-75.79102655,(610) 384-1415
+us-pa-coatesville-st-joseph-37aba217,St. Joseph,404,,Charles,St,,,,404 Charles St,Coatesville,PA,19320,,39.97886844,-75.83473682,(610) 384-0360
+us-pa-coatesville-saint-mary-641213bb,St. Mary ,88,,Gap,Rd,,,,88 Gap Rd,Coatesville,PA,19320,,39.9834,-75.8231,(610) 933-2819
+us-pa-coatesville-st-peter-96d1f3d4,St. Peter,2835,,Manor,Rd,,,,2835 Manor Rd,Coatesville,PA,19320,,40.03977203,-75.81236267,(610) 380-9045
+us-pa-collingdale-st-joseph-b8baa20e,St. Joseph,500,,Woodlawn,Ave,,,,500 Woodlawn Ave,Collingdale,PA,19023,,39.91315903,-75.28368282,(610) 583-4530
+us-nj-collingswood-st-john-saint-teresa-of-calcutta-parish-76cd45df,St. John  (St. Teresa of Calcutta Parish),809,,Park,Ave,,,,809 Park Ave,Collingswood,NJ,08108,,39.91310463,-75.06657684,(856) 858-0298
+us-md-conowingo-chapel-of-st-patrick-72863b5a,Chapel of St. Patrick,237,,Pleasant Grove,Rd,,,,237 Pleasant Grove Rd,Conowingo,MD,21918,,39.7160625,-76.2019375,14106426534
+us-md-conowingo-st-patrick-cc879c41,St. Patrick,287,,Pleasant Grove,Rd,,,,287 Pleasant Grove Rd,Conowingo,MD,21918,,39.71820667,-76.20106749,(410) 642-6534
+us-pa-conshohocken-church-of-st-mary-3f9651a6,St. Mary,,,W Elm St & Oak,St,,,,W Elm St & Oak St,Conshohocken,PA,19428,,40.0739375,-75.3090625,16108280260
+us-pa-conshohocken-st-mary-all-masses-in-latin-195d750d,St. Mary (all masses in Latin),140,W,Hector,St,,,,140 W Hector St,Conshohocken,PA,19428,,40.07458374,-75.30877392,(610) 717-3972
+us-pa-conshohocken-st-matthew-510b19cb,St. Matthew,219,,Fayette,St,,,,219 Fayette St,Conshohocken,PA,19428,,40.07503494,-75.30437183,(610) 828-0424
+us-pa-conshohocken-church-of-sts-cosmas-and-damian-592f9369,Sts. Cosmas and Damian,,,5th Ave & Maple,St,,,,5th Ave & Maple St,Conshohocken,PA,19428,,40.0785625,-75.3056875,16108280101
+us-md-cordova-st-joseph-dddc8a17,St. Joseph,13209,,Church,Ln,,,,13209 Church Ln,Cordova,MD,21625,,38.91006975,-76.01345029,(410) 822-2344
+us-pa-darby-blessed-virgin-mary-032755ae,Blessed Virgin Mary,1101,,Main,St,,,,1101 Main St,Darby,PA,19023,1407,39.92178345,-75.26394653,(610) 583-2128
+us-de-delaware-city-st-paul-725aba44,St. Paul,209,,Washington,St,,,,209 Washington St,Delaware City,DE,19706,,39.57632951,-75.59241975,(302) 834-4321
+us-md-delmar-holy-redeemer-church-st-francis-de-sales-holy-redeemer-parish-40193ff3,Holy Redeemer (St. Francis de Sales & Holy Redeemer parish),501,E,Chestnut,St,,,,501 E Chestnut St,Delmar,MD,21875,,38.45337797,-75.57280328,(410) 742-6443
+us-md-denton-st-elizabeth-of-hungary-1edb812a,St. Elizabeth,106,,So First,St,,,,106 So First St,Denton,MD,21629,,38.88535309,-75.83502197,(410) 634-2253
+us-nj-deptford-st-john-vianney-church-infant-jesus-parish-a0b88a85,St. John Vianney,2901,,Good Intent,Rd,,,,2901 Good Intent Rd,Deptford,NJ,08096,4457,39.80528127,-75.08229023,(856) 848-0047
+us-pa-doe-run-st-malachi-98e17a4e,St. Malachy,76,,St Malachy,Rd,,,,76 St Malachy Rd,Doe Run,PA,19330,,39.89693951,-75.85015248,(610) 857-3510
+us-de-dover-holy-cross-0a0f4ddc,Holy Cross,631,S,State,St,,,,631 S State St,Dover,DE,19901,,39.15052022,-75.52127726,(302) 674-5787
+us-de-dover-afb-community-of-our-lady-of-perpetual-help-e7e02daf,Community of Our Lady of Perpetual Help,436,,AW/HC 419 12th,St,,,,436 AW/HC 419 12th St,Dover AFB,DE,19902,,39.1246875,-75.4798125,13026776340
+us-de-dover-afb-our-lady-of-perpetual-help-dacc5af7,Our Lady of Perpetual Help,436,,AW/HC 419 12th,St,,,,436 AW/HC 419 12th St,Dover Afb,DE,19902,,39.11714245,-75.48559236,302-677-3932
+us-pa-downingtown-st-joseph-f6d2d957,St. Joseph,332,,Manor,Ave,,,,332 Manor Ave,Downingtown,PA,19335,,40.00843551,-75.71558475,(610) 269-8294
+us-pa-drexel-hill-st-andrew-the-apostle-75485f1d,St. Andrew,3500,,School,Ln,,,,3500 School Ln,Drexel Hill,PA,19026,,39.9490852,-75.2981,(610) 259-1169
+us-pa-drexel-hill-st-bernadette-of-lourdes-e12a3089,St. Bernadette,1035,,Turner,Ave,,,,1035 Turner Ave,Drexel Hill,PA,19026,,39.95927206,-75.30357404,(610) 789-7676
+us-pa-drexel-hill-st-charles-borromeo-54f54b4b,St. Charles Borromeo,3422,,Dennison,Ave,,,,3422 Dennison Ave,Drexel Hill,PA,19026,,39.93611656,-75.28854918,(610) 623-3800
+us-pa-drexel-hill-st-dorothy-1d4400b2,St. Dorothy,4910,,Township Line,Rd,,,,4910 Township Line Rd,Drexel Hill,PA,19026,,39.95652915,-75.32003212,(610) 789-7788/7338
+us-pa-east-lansdowne-church-of-st-cyril-of-alexandria-6072390a,St. Cyril of Alexandria,,,Penn,Blvd,,,,Penn Blvd,East Lansdowne,PA,19050,,39.9446875,-75.2605625,16106235160
+us-pa-eddystone-st-rose-of-lima-7633d27e,St. Rose of Lima,1901,,Chester,Pike,,,,1901 Chester Pike,Eddystone,PA,19022,,39.86575951,-75.34345853,(610) 876-6170
+us-md-elkton-immaculate-conception-8db3158b,Immaculate Conception,454,,Bow St,Ext,,,,454 Bow St Extension,Elkton,MD,21921,,39.61506076,-75.83063133,(410) 398-1100
+us-de-elsmere-corpus-christi-a3304f9f,Holy Family,905,,New,Rd,,,,905 New Rd,Elsmere,DE,19805,,39.7403641,-75.5969,(302) 994-2922
+us-pa-essington-church-of-st-margaret-mary-alacoque-36e70589,St. Margaret Mary Alacoque,,,Wanamaker Ave & Industrial,Hwy,,,,Wanamaker Ave & Industrial Hwy,Essington,PA,19029,,39.8674375,-75.3009375,16105219177
+us-pa-exton-ss-philip-and-james-0a9f1547,Sts. Philip and James,723,E,Lincoln,Hwy,,,,723 E Lincoln Hwy,Exton,PA,19341,,40.03052228,-75.60791086,(610) 363-6536
+us-de-frankford-church-of-our-lady-of-guadalupe-93506694,Our Lady of Guadalupe,35318,,Church,Rd,,,,35318 Church Rd,Frankford,DE,35318,,38.5115625,-75.1176875,13025396449
+us-de-frankford-our-lady-of-guadalupe-05c58c21,Our Lady of Guadalupe,35318,,Church,Rd,,,,35318 Church Rd,Frankford,DE,19945,,38.51201,-75.152916,(302) 539-6449
+us-md-galena-st-dennis-church-224ae49d,St Dennis Church,153,N,Main,St,,,,153 N Main St,Galena,MD,21635,,39.3461502,-75.8792727,+1-410-648-5145
+us-md-galena-st-dennis-84f1a9db,St. Dennis,153,N,Main,St,,,,153 N Main St,Galena,MD,21635,,39.34262466,-75.87963104,(410) 648-5145
+us-de-georgetown-st-michael-the-archangel-e5427d38,St. Michael the Archangel,202,,Edward,St,,,,202 Edward St,Georgetown,DE,19947,1108,38.691465,-75.3916324,(302)856-6451
+us-nj-gibbstown-st-michael-st-clare-of-assisi-parish-73893dbe,St. Michael,320,,Memorial,Ave,,,,320 Memorial Ave,Gibbstown,NJ,08027,,39.82246889,-75.28399752,(856) 467-0037
+us-pa-gladwyne-st-john-vianney-69b8f03e,St. John Baptist Vianney,350,,Conshohocken State,Rd,,,,350 Conshohocken State Rd,Gladwyne,PA,19035,,40.03898361,-75.27993846,(610) 642-0938
+us-nj-glassboro-rowan-university-newman-center-4247428e,Newman House at Rowan University,1,,Redmond,Ave,,,,1 Redmond Ave,Glassboro,NJ,08028,,39.70607874,-75.11514857,(856) 885-2444
+us-nj-glassboro-our-lady-of-lourdes-mary-mother-of-mercy-parish-0f0c5dfd,Our Lady of Lourdes,500,,Greentree,Rd,,,,500 Greentree Rd,Glassboro,NJ,08028,,39.71857721,-75.10441425,(856) 881-0909
+us-nj-glassboro-st-bridget-university-parish-7382cb4a,St. Bridget University Parish,125,,Church,St,,,,125 Church St,Glassboro,NJ,08028,,39.70238059,-75.11544309,(856) 881-2753
+us-pa-glen-mills-st-thomas-the-apostle-1efcd705,St. Thomas The Apostle Church,430,,Valleybrook,Rd,,,,430 Valleybrook Rd,Glen Mills,PA,19342,,39.89034629,-75.47399525,(610) 459-2224
+us-pa-glenolden-st-george-4af2a42f,St. George,22,E,Cooke,Ave,,,,22 E Cooke Ave,Glenolden,PA,19036,,39.901346,-75.28572018,(610) 237-1633
+us-nj-gloucester-city-st-mary-4f8179c8,St. Mary,420,,Monmouth,St,,,,420 Monmouth St,Gloucester City,NJ,08030,,39.89666175,-75.121308,(856) 456-0052
+us-de-greenville-st-joseph-on-the-brandywine-1fc08b15,St. Joseph on the Brandywine,10,,Old Church,Rd,,,,10 Old Church Rd,Greenville,DE,19807,,39.77188381,-75.58768124,(302) 658-7017
+us-nj-haddon-heights-st-rose-of-lima-2e82a05c,St. Rose of Lima,300,,Kings,Hwy,,Ste,B,300 Kings Hwy Ste B,Haddon Heights,NJ,08035,,39.88698212,-75.05837554,(856) 547-0564
+us-nj-haddon-township-st-vincent-pallotti-st-joseph-the-worker-parish-20991dd3,St. Vincent Pallotti,901,,Hopkins,Rd,,Ste,A,901 Hopkins Rd Ste A,Haddon Township,NJ,08033,,39.89833726,-75.06250441,856-858-1313
+us-nj-haddon-township-church-of-st-vincent-pallotti-38a26340,St. Vincent Pallotti,901,,Hopkins,Rd,,,,901 Hopkins Rd,Haddon Township,NJ,08033,,39.8984375,-75.0620625,18568581313
+us-de-harrington-st-bernadette-st-john-st-bernadette-parish-436c170d,St. Bernadette,109,,Dixon,St,,,,109 Dixon St,Harrington,DE,19952,,38.9260941,-75.57037,(302) 398-8269
+us-de-harrington-church-of-st-bernadette-cc7eb746,St. Bernadette,109,,Dixon,St,,,,109 Dixon St,Harrington,DE,19952,,38.9256875,-75.5704375,13023988269
+us-pa-havertown-church-of-the-annunciation-of-the-blessed-virgin-mary-fc8b90fe,Annunciation of the Blessed Virgin Mary,401,,Brookline,Blvd,,,,401 Brookline Blvd,Havertown,PA,19083,,39.9824375,-75.2953125,16104491613
+us-pa-havertown-annunciation-bvm-40de6c1d,Annunciation of the Blessed Virgin Mary,401,,Brookline,Blvd,,,,401 Brookline Blvd,Havertown,PA,19083,,39.98240135,-75.29469732,(610) 449-1613
+us-pa-havertown-sacred-heart-3ff4b6ba,Sacred Heart,105,,Wilson,Ave,,,,105 Wilson Ave,Havertown,PA,19083,,39.9730625,-75.31190252,(610) 449-3000
+us-pa-havertown-st-denis-8ce76cef,St. Denis,2401,,Saint Denis,Ln,,,,2401 Saint Denis Ln,Havertown,PA,19083,,39.99166317,-75.30427464,(610) 446-0200
+us-md-havre-de-grace-st-patrick-83d51fd5,St. Patrick,615,,Congress,Ave,,,,615 Congress Ave,Havre De Grace,MD,21078,,39.54793574,-76.09368641,(410) 939-2525
+us-de-hockessin-st-mary-of-the-assumption-c36a0649,St. Mary of the Assumption,7200,,Lancaster Pk,,,,,7200 Lancaster Pk,Hockessin,DE,19707,,39.78378,-75.68464,(302) 239-7100
+us-pa-kennett-square-st-patrick-636eb7bd,St. Patrick,212,,Meredith,St,,,,212 Meredith St,Kennett Square,PA,19348,,39.8448677,-75.7147751,(610) 444-4364
+us-pa-king-of-prussia-mother-of-divine-providence-b246fed6,Mother of Divine Providence Church,333,,Allendale,Rd,,,,333 Allendale Rd,King Of Prussia,PA,19406,,40.09357516,-75.38869687,(610) 265-4178
+us-pa-lafayette-hill-st-philip-neri-c8d42cf2,St. Philip Neri,437,,Ridge,Pike,,,,437 Ridge Pike,Lafayette Hill,PA,19444,,40.08834436,-75.26052008,(610) 834-1975
+us-pa-lansdowne-st-philomena-0887f94e,St. Philomena,41,E,Baltimore,Ave,,,,41 E Baltimore Ave,Lansdowne,PA,19050,,39.93934508,-75.27048797,(610) 622-2420
+us-pa-lenni-st-francis-de-sales-8f87839e,St. Francis de Sales,35,,New,Rd,,,,35 New Rd,Lenni,PA,19052,,39.89133455,-75.44593208,(610) 459-2203
+us-de-lewes-st-jude-the-apostle-78454a26,St. Jude the Apostle,152,,Tulip,Dr,,,,152 Tulip Dr,Lewes,DE,19958,,38.7500052,-75.18031201,(302) 644-7300
+us-pa-linwood-church-of-the-holy-saviour-3b0a6151,Holy Saviour,452,,,,,,,452,Linwood,PA,19061,,39.8250625,-75.4198125,16104852520
+us-pa-malvern-st-patrick-8495703b,St. Patrick,131,,Channing,Ave,,,,131 Channing Ave,Malvern,PA,19355,,40.03533533,-75.51293468,(610) 647-2345
+us-nj-mantua-incarnation-d5969161,Incarnation,240,,Main,St,,,,240 Main St,Mantua,NJ,08051,,39.78800337,-75.17159873,(856) 468-1314
+us-pa-marcus-hook-church-of-the-immaculate-conception-cd823381,Immaculate Conception,21,W,8th,St,,,,21 W 8th St,Marcus Hook,PA,19061,,39.8174375,-75.4169375,16104851026
+us-md-marydel-immaculate-conception-490aef31,Immaculate Conception Church,522,,Main,St,,,,522 Main St,Marydel,MD,21649,,39.11411372,-75.74910492,(410) 482-7687
+us-pa-media-nativity-of-the-blessed-virgin-mary-ebd58b8f,Nativity of the Blessed Virgin Mary,30,E,Franklin,St,,,,30 E Franklin St,Media,PA,19063,,39.91592764,-75.3882879,(610) 566-0185
+us-pa-media-st-mary-magdalen-807f8072,St. Mary Magdalen,2400,N,Providence,Rd,,,,2400 N Providence Rd,Media,PA,19063,,39.94637944,-75.40822506,(610) 566-8821
+us-de-middletown-st-joseph-bafc8d79,St. Joseph,319,E,Main,St,,,,319 E Main St,Middletown,DE,19709,,39.45095218,-75.70483015,(302) 378-5800
+us-de-milford-st-john-the-apostle-71a770df,St. John the Apostle,506,,Seabury,Ave,,,,506 Seabury Ave,Milford,DE,19963,,38.90368,-75.431694,(302) 422-5123
+us-de-millsboro-mary-mother-of-peace-35c41c56,Mary Mother of Peace Church,30839,,Mount Joy,Rd,,,,30839 Mount Joy Rd,Millsboro,DE,19966,,38.6157341,-75.2027359,(302)856-6451
+us-pa-milmont-our-lady-of-peace-efec3bbc,Our Lady of Peace ,208,,Milmont,Ave,,,,208 Milmont Ave,Milmont,PA,19033,,39.88845163,-75.34696854,(610) 532-8081
+us-pa-milmont-park-our-lady-of-peace-dcbd2883,Our Lady of Peace,208,,Milmont,Ave,,,,208 Milmont Ave,Milmont Park,PA,19033,,39.88163132,-75.33542729,(610) 532-8081
+us-pa-morton-our-lady-of-perpetual-help-18a3a1cb,Our Lady of Perpetual Help,2130,,Franklin,Ave,,,,2130 Franklin Ave,Morton,PA,19070,,39.90772864,-75.32220688,(610) 543-1046
+us-nj-mount-ephraim-church-of-the-sacred-heart-542a649a,Sacred Heart,7,W,Kings,Hwy,,,,7 W Kings Hwy,Mount Ephraim,NJ,08059,,39.8814375,-75.0869375,18569311441
+us-nj-mullica-hill-the-catholic-community-of-the-holy-spirit-mullica-hill-596baded,The Catholic Community of the Holy Spirit,17,,Earlington,Ave,,,,17 Earlington Ave,Mullica Hill,NJ,08062,,39.74086913,-75.22101131,(856) 478-2294
+us-pa-narberth-st-margaret-4bdd5e0c,St. Margaret,208,N,Narberth,Ave,,,,208 N Narberth Ave,Narberth,PA,19072,,40.00768893,-75.26129506,(610) 664-3770
+us-nj-national-park-st-matthews-church-holy-angels-parish-86546a5b,St. Matthew,,,4th St & Monument Aves,,,,,4th St & Monument Aves,National Park,NJ,08063,,39.86964993,-75.18310466,(856) 845-0123
+us-de-new-castle-holy-spirit-966a48db,Holy Spirit,12,,Winder,Rd,,,,12 Winder Rd,New Castle,DE,19720,,39.6979446,-75.55533,(302) 328-2335
+us-de-new-castle-our-lady-of-fatima-202362fc,Our Lady of Fatima,801,N,duPont,Blvd,,,,801 N duPont Blvd,New Castle,DE,19720,,39.6868935,-75.58562,(302) 328-3431
+us-de-new-castle-st-peter-the-apostle-fb5d3d35,St. Peter the Apostle,521,,Harmony,St,,,,521 Harmony St (5th & Harmony),New Castle,DE,19720,,39.66207123,-75.56443787,(302) 328-2335
+us-de-newark-holy-family-59feaffb,Holy Family,15,,Gender,Rd,,,,15 Gender Rd,Newark,DE,19713,,39.6638949,-75.717651,(302) 368-4665
+us-de-newark-holy-family-catholic-church-96156801,Holy Family Catholic Church,15,,Gender,Rd,,,,15 Gender Rd,Newark,DE,19713,,39.6646113,-75.7187184,+1-302-368-4665
+us-de-newark-st-john-the-baptist-db4dfc62,St. John the Baptist,,,E Main & N Chapel Sts,,,,,E Main & N Chapel Sts,Newark,DE,19711,,39.68389513,-75.74535907,(302) 731-2200
+us-de-newark-holy-angels-319014e0,St. John the Baptist–Holy Angels,82,,Possum Park,Rd,,,,82 Possum Park Rd,Newark,DE,19711,,39.69929189,-75.72258126,(302) 731-2200
+us-de-newark-st-margaret-of-scotland-1c9f065f,St. Margaret of Scotland,2431,,Frazer,Rd,,,,2431 Frazer Rd,Newark,DE,19702,,39.60455217,-75.77280314,(302) 834-0225
+us-de-newark-the-newman-center-st-thomas-more-oratory-4a0d0234,The Newman Center @ St. Thomas More Oratory,45,,Lovett,Ave,,,,45 Lovett Ave,Newark,DE,19711,,39.67904,-75.74768,(302) 368-4728
+us-pa-newtown-square-st-anastasia-f245ae11,St. Anastasia,3301,W,Chester,Pike,,,,3301 W Chester Pike,Newtown Square,PA,19073,,39.98547587,-75.38302517,(610) 356-1613
+us-pa-newtown-square-saint-sharbel-maronite-4030dc32,St. Sharbel (Maronite),3679,,Providence,Rd,,,,3679 Providence Rd,Newtown Square,PA,19073,,39.96833924,-75.44076486,(610) 353-5952
+us-pa-norristown-holy-saviour-59fc7bd8,Holy Saviour,407,E,Main,St,,,,407 E Main St,Norristown,PA,19401,,40.11186803,-75.33631099,(610) 275-0958
+us-pa-norristown-our-lady-of-mount-carmel-ed3e2c7e,Our Lady of Mount Carmel,454,,Fairfield,Rd,,,,454 Fairfield Rd,Norristown,PA,19401,,40.11019646,-75.31958143,(610) 275-0958
+us-pa-norristown-st-teresa-of-avila-c7ad733e,St. Teresa of Avila,1260,S,Trooper,Rd,,,,1260 S Trooper Rd,Norristown,PA,19403,,40.1135877,-75.41793503,(610) 666-5820
+us-pa-norristown-st-teresa-of-avila-roman-catholic-church-3b3c8c59,St. Teresa of Avila Roman Catholic Church,1260,S,Trooper,Rd,,,,1260 S Trooper Rd,Norristown,PA,19403,,40.1135875,-75.4179127,+1-610-666-5820
+us-nj-north-cape-may-st-john-of-god-parish-of-saint-john-neumann-2cc512a3,St. John of God,680,,Town Bank,Rd,,,,680 Town Bank Rd,North Cape May,NJ,08204,4413,38.97483786,-74.92933202,(609) 884-1656
+us-md-north-east-st-jude-catholic-church-2f27c1df,St. Jude Catholic Church,928,,Turkey Point,Rd,,,,928 Turkey Point Rd,North East,MD,21901,,39.5882913,-75.9414383,+1-410-398-1100
+us-md-northeast-st-jude-7100ab6f,St. Jude,928,,Turkey Pt,Rd,,,,928 Turkey Pt Rd,Northeast,MD,21901,,39.58693695,-75.94204712,(410) 398-1100
+us-pa-norwood-st-gabriel-b3946573,St. Gabriel,233,,Mohawk,Ave,,,,233 Mohawk Ave,Norwood,PA,19074,,39.8896973,-75.29747609,(610) 586-1225
+us-nj-oaklyn-st-aloysius-st-joseph-the-worker-parish-f695c1cc,St. Aloysius,37,W,Haddon,Ave,,,,37 W Haddon Ave,Oaklyn,NJ,08033,,39.9040556,-75.08098699,(856) 858-1313
+us-md-ocean-city-church-of-the-holy-savior-f1fad0cf,Holy Savior,,,17th St & N Philadelphia,Ave,,,,17th St & N Philadelphia Ave,Ocean City,MD,21842,,38.3479375,-75.0794375,14102890652
+us-md-ocean-city-holy-savior-st-mary-holy-savior-parish-2743d900,Holy Savior (St. Mary & Holy Savior Parish),1705,N,Philadelphia,Ave,,,,1705 N Philadelphia Ave,Ocean City,MD,21842,,38.347139,-75.079405,(410) 289-0652
+us-md-ocean-city-st-andrew-9f85f69b,St. Andrew,14401,,Sinepuxent,Ave,,,,14401 Sinepuxent Ave,Ocean City,MD,21842,,38.4494774,-75.05420831,(410) 250-0300
+us-md-ocean-city-st-luke-bb48708e,St. Luke,9903,,Coastal,Hwy,,,,9903 Coastal Hwy,Ocean City,MD,21842,,38.41244125,-75.0594101,(410) 250-0300
+us-md-ocean-city-st-mary-star-of-the-sea-st-mary-holy-savior-parish-3c854e87,St. Mary Star of the Sea (St. Mary & Holy Savior Parish),208,S,Baltimore,Ave,,,,208 S Baltimore Ave,Ocean City,MD,21842,,38.33047104,-75.08679199,(410) 289-0652
+us-pa-oxford-sacred-heart-468cc7d0,Sacred Heart,203,,Church,Rd,,,,203 Church Rd,Oxford,PA,19363,,39.79299349,-75.97842107,(610) 932-5040
+us-pa-paoli-daylesford-abbey-fc3693f4,Daylesford Abbey,220,S,Valley,Rd,,,,220 S Valley Rd,Paoli,PA,19301,,40.03024167,-75.48397303,(610) 647-2530
+us-pa-paoli-st-norbert-9a82563a,St. Norbert,6,,Greenlawn,Rd,,,,6 Greenlawn Rd,Paoli,PA,19301,,40.03748559,-75.47285566,(610) 644-1655
+us-pa-parkesburg-our-lady-of-consolation-deb99424,Our Lady of Consolation,603,W,2nd,Ave,,,,603 W 2nd Ave,Parkesburg,PA,19365,,39.95715639,-75.92305946,(610) 857-3510
+us-nj-pennsville-church-of-the-queen-of-the-apostles-37145fca,Queen of the Apostles,391,S,Broadway,,,,,391 S Broadway,Pennsville,NJ,08070,,39.6346875,-75.5140625,18566785400
+us-md-perryville-good-shepherd-f19e5e6a,Good Shepherd,831,,Aiken,Ave,,,,831 Aiken Ave,Perryville,MD,21903,2738,39.56821876,-76.07076228,(410) 642-6534
+us-pa-philadelphia-annunciation-bvm-c0683607,Annunciation BVM Church,1511,S,10th,St,,,,1511 S 10th St,Philadelphia,PA,19147,,39.93056281,-75.16092348,(215) 334-0159
+us-pa-philadelphia-sts-peter-and-paul-cathedral-d6544b27,Cathedral Basilica of Saints Peter and Paul,,,18th St and Benjamin Franklin,Pkwy,,,,18th St and Benjamin Franklin Pkwy,Philadelphia,PA,19103,,39.9576215,-75.16858816,(215) 561-1313
+us-pa-philadelphia-cathedral-of-the-immaculate-conception-ukrainian-1d3c19d0,Cathedral of the Immaculate Conception,830,N,Franklin,,,,,830 N Franklin,Philadelphia,PA,19123,,39.9663963,-75.15044,(215) 922-2845
+us-pa-philadelphia-divine-love-466c2f90,Chapel of Divine Love (Holy Spirit Adoration Sisters),2212,,Green,St,,,,2212 Green St,Philadelphia,PA,19130,3197,39.96528,-75.17483,(215) 567-0123
+us-pa-philadelphia-christ-the-king-ukrainian-catholic-church-b70561fb,Christ the King Ukrainian Catholic Church,1629,W,Cayuga,St,,,,1629 W Cayuga St,Philadelphia,PA,19140,,40.0207168,-75.1532281,+1-215-455-2416
+us-pa-philadelphia-divine-mercy-27f1012c,Divine Mercy,6667,,Chester,Ave,,,,6667 Chester Ave,Philadelphia,PA,19142,,39.92750403,-75.24071667,(215) 727-8300
+us-pa-philadelphia-epiphany-of-our-lord-91b8576a,Epiphany of Our Lord Church,1121,,Jackson,St,,,,1121 Jackson St,Philadelphia,PA,19148,,39.92271559,-75.16501892,(215) 334-1035
+us-pa-philadelphia-holy-family-5a1f43bb,Holy Family,234,,Hermitage,St,,,,234 Hermitage St,Philadelphia,PA,19127,,40.03291984,-75.22814434,(215) 482-0450
+us-pa-philadelphia-holy-ghost-byzantine-catholic-church-bbc1c938,Holy Ghost Byzantine Catholic Church,2310,S,24th,St,,,,2310 S 24th St,Philadelphia,PA,19145,,39.92388916,-75.18733978,
+us-pa-philadelphia-holy-name-of-jesus-07926ac7,Holy Name of Jesus,701,E,Gaul,St,,,,701 E Gaul St,Philadelphia,PA,19125,,39.97573491,-75.12770102,(215) 739-3960
+us-pa-philadelphia-holy-redeemer-2f129277,Holy Redeemer,915,,Vine,St,,,,915 Vine St,Philadelphia,PA,19107,,39.95744017,-75.15480572,(215) 922-0999
+us-pa-philadelphia-st-richard-of-chichester-2b76de9d,Holy Spirit,3010,S,18th,St,,,,3010 S 18th St,Philadelphia,PA,19145,,39.90904545,-75.18021069,(215) 468-4777
+us-pa-philadelphia-immaculate-heart-of-mary-9e0a704f,Immaculate Heart of Mary,819,,Cathedral,Rd,,,,819 Cathedral Rd,Philadelphia,PA,19128,,40.0645092,-75.23560495,(215) 483-1000
+us-pa-philadelphia-monastery-of-the-visitation-e1435090,Monastery of the Visitation,5820,,City,Ave,,,,5820 City Ave,Philadelphia,PA,19131,,39.9923125,-75.2431875,12154735888
+us-pa-philadelphia-mother-of-divine-grace-f4e53ab1,Mother of Divine Grace,2612,E,Monmouth,St,,,,2612 E Monmouth St,Philadelphia,PA,19134,,39.98114051,-75.11040162,(215) 426-7325
+us-pa-philadelphia-st-peter-the-apostle-33bf33c8,National Shrine of St. John Neumann,1019,N,Fifth,St,,,,1019 N Fifth St,Philadelphia,PA,19123,,39.96990572,-75.14485462,(215) 627-2386
+us-pa-philadelphia-old-st-josephs-6eda8e6d,Old St. Joseph's,321,,Willings Alley,,,,,321 Willings Alley,Philadelphia,PA,19106,,39.94662928,-75.14747095,(215) 923-1733
+us-pa-philadelphia-old-st-mary-081ccb02,Old St. Mary,252,S,4th,St,,,,252 S 4th St,Philadelphia,PA,19106,,39.94568872,-75.14857841,(215) 923-7930
+us-pa-philadelphia-our-lady-of-lourdes-74446808,Our Lady of Lourdes,6301,,Woodbine,Ave,,,,6301 Woodbine Ave,Philadelphia,PA,19151,,39.98580535,-75.24801373,(215) 473-1669
+us-pa-philadelphia-our-lady-of-mount-carmel-ecf832fe,Our Lady of Mount Carmel,2319,S,Third,St,,,,2319 S Third St,Philadelphia,PA,19148,,39.91915922,-75.15186679,(215) 334-7766
+us-pa-philadelphia-church-of-our-lady-of-the-blessed-sacrament-bdbf522e,Our Lady of the Blessed Sacrament,345,N,63rd,St,,,,345 N 63rd St,Philadelphia,PA,19139,,39.9685625,-75.2454375,12154766511
+us-pa-philadelphia-sacred-heart-of-jesus-ee5484fd,Sacred Heart of Jesus Church,1412,S,3rd,St,,,,1412 S 3rd St,Philadelphia,PA,19147,,39.93027577,-75.15034091,(215) 465-4050
+us-pa-philadelphia-st-martin-de-porres-2309fbc9,St Martin de Porres Church,2340,W,Lehigh,Ave,,,,2340 W Lehigh Ave,Philadelphia,PA,19132,,39.99572184,-75.1702292,(215) 228-8330
+us-pa-philadelphia-st-richard-of-chichester-1c4a2b11,St Richard's Rectory,3010,S,18th,St,,,,3010 S 18th St,Philadelphia,PA,19145,,39.91358871,-75.17853296,(215) 468-4777
+us-pa-philadelphia-st-agatha-st-james-b70a49e3,St. Agatha–St. James,111,S,38th,St,,,,111 S 38th St,Philadelphia,PA,19104,,39.95485603,-75.19815254,(267) 787-5000
+us-pa-philadelphia-st-agnes-st-john-nepomucene-ddff4af2,St. Agnes–St. John Nepomucene,319,,Brown,St,,,,319 Brown St,Philadelphia,PA,19123,,39.96382114,-75.14420182,(215) 561-1313
+us-pa-philadelphia-st-andrew-d59f95a7,St. Andrew,,,19th St & Wallace,St,,,,19th St & Wallace St,Philadelphia,PA,19130,,39.96632455,-75.16901368,215-561-1313
+us-pa-philadelphia-st-anne-0eec5dab,St. Anne,2328,E,Lehigh,Ave,,,,2328 E Lehigh Ave,Philadelphia,PA,19125,,39.98229398,-75.11866087,(215) 739-4590
+us-pa-philadelphia-st-augustine-370888e6,St. Augustine,243,N,Lawrence,St,,,,243 N Lawrence St,Philadelphia,PA,19106,,39.95551857,-75.1463158,(215) 627-1838
+us-pa-philadelphia-st-barbara-7414ba78,St. Barbara,5359,,Lebanon,Ave,,,,5359 Lebanon Ave,Philadelphia,PA,19131,,39.98779017,-75.23190546,(215) 473-1044
+us-pa-philadelphia-st-barnabas-eb2f6241,St. Barnabas,6300,,Buist,Ave,,,,6300 Buist Ave,Philadelphia,PA,19142,,39.92236733,-75.22661817,(215) 726-1119
+us-pa-philadelphia-st-bridget-55f20d7c,St. Bridget,3669,,Midvale,Ave,,,,3669 Midvale Ave,Philadelphia,PA,19129,,40.01078376,-75.19352447,(215) 844-4126
+us-pa-philadelphia-st-charles-borromeo-e48d0a63,St. Charles Borromeo,902,S,20th,St,,,,902 S 20th St,Philadelphia,PA,19146,,39.94112396,-75.17604065,(215) 735-0600
+us-pa-philadelphia-st-cyprian-b4888c60,St. Cyprian,525,S,63rd,St,,,,525 S 63rd St,Philadelphia,PA,19143,,39.95362113,-75.24828271,(215) 747-3250
+us-pa-philadelphia-church-of-st-donato-5641b47f,St. Donato,,,65th St & Callowhill,St,,,,65th St & Callowhill St,Philadelphia,PA,19151,,39.9694375,-75.2494375,12157474131
+us-pa-philadelphia-st-edmond-010137e8,St. Edmond,2130,S,21st,St,,,,2130 S 21st St,Philadelphia,PA,19145,,39.9257449,-75.18145251,(215) 334-3755
+us-pa-philadelphia-st-francis-xavier-7d07cbe6,St. Francis Xavier,2319,,Green,St,,,,2319 Green St,Philadelphia,PA,19130,,39.96607107,-75.17675042,(215) 765-4568
+us-pa-philadelphia-st-francis-de-sales-589fad94,St. Francis de Sales,4625,,Springfield,Ave,,,,4625 Springfield Ave,Philadelphia,PA,19143,,39.94735098,-75.21528149,(215) 222-5819
+us-pa-philadelphia-st-gabriel-93f443de,St. Gabriel,2917,,Dickinson,St,,,,2917 Dickinson St,Philadelphia,PA,19146,,39.9352415,-75.19302022,(215) 463-4060
+us-pa-philadelphia-st-hugh-of-cluny-776febee,St. Hugh of Cluny,145,W,Tioga,St,,,,145 W Tioga St,Philadelphia,PA,19140,,40.003845,-75.129441,(215) 634-1800
+us-pa-philadelphia-st-ignatius-of-loyola-6e1e1c99,St. Ignatius of Loyola,636,N,43rd,St,,,,636 N 43rd St,Philadelphia,PA,19104,,39.96388661,-75.20952028,(215) 386-5065
+us-pa-philadelphia-st-john-the-baptist-a4a7386f,St. John the Baptist ,119,,Rector,St,,,,119 Rector St,Philadelphia,PA,19127,,40.02496605,-75.22011854,(215) 482-4600
+us-pa-philadelphia-st-john-the-evangelist-e49095c8,St. John the Evangelist Church,21,S,13th,St,,,,21 S 13th St,Philadelphia,PA,19107,,39.95117594,-75.16140169,(215) 563-4145
+us-pa-philadelphia-st-josaphat-st-john-the-baptist-parish-557ae61d,St. Josaphat Church (St. John the Baptist Parish),124,,Cotton,St,,,,124 Cotton St,Philadelphia,PA,19127,,40.02627622,-75.22145414,215.482.4600
+us-pa-philadelphia-church-of-st-laurentius-3909e2e0,St. Laurentius,,,Memphis St & E Berks,St,,,,Memphis St & E Berks St,Philadelphia,PA,19125,,39.9768125,-75.1293125,12157391776
+us-pa-philadelphia-church-of-st-madeleine-sophie-ebd6e26a,St. Madeleine Sophie,,,Greene St & Upsal,St,,,,Greene St & Upsal St,Philadelphia,PA,19119,,40.0420625,-75.1894375,12154382921
+us-pa-philadelphia-st-malachy-8b5b9101,St. Malachy,1429,N,11th,St,,,,1429 N 11th St,Philadelphia,PA,19122,,39.97440694,-75.15296745,(215) 763-1305
+us-pa-philadelphia-saint-maron-maronite-120e0017,St. Maron [Maronite],1013,,Ellsworth,St,,,,1013 Ellsworth St,Philadelphia,PA,19147,,39.93574384,-75.16040274,(215) 389-2000
+us-pa-philadelphia-st-mary-magdalen-de-pazzi-7af52f25,St. Mary Magdalen de Pazzi,714,,Montrose,St,,,,714 Montrose St,Philadelphia,PA,19147,,39.93750968,-75.15572459,(215) 923-0355
+us-pa-philadelphia-st-michael-083c8ca5,St. Michael,1445,N,2nd,St,,,,1445 N 2nd St,Philadelphia,PA,19122,,39.973526,-75.13848,(215) 739-2358
+us-pa-philadelphia-st-monica-88bdd553,St. Monica,2422,S,17th,St,,,,2422 S 17th St,Philadelphia,PA,19145,,39.9207683,-75.17561035,(215) 334-4170
+us-pa-philadelphia-st-nicholas-ukrainian-catholic-church-183fc9f3,St. Nicholas Ukrainian Catholic Church,871,N,24th,St,,,,871 N 24th St,Philadelphia,PA,19130,,39.97201777,-75.17632862,(267) 237 6037
+us-pa-philadelphia-st-nicholas-of-tolentine-80c12f8d,St. Nicholas of Tolentine Church,910,,Watkins,St,,,,910 Watkins St,Philadelphia,PA,19148,,39.92773055,-75.16059794,(215) 463-1326
+us-pa-philadelphia-st-patrick-dbd9b2c1,St. Patrick,242,,S.20th,St,,,,242 S.20th St,Philadelphia,PA,19103,,39.9490051,-75.17431,(215) 735-9900
+us-pa-philadelphia-st-paul-21796ca9,St. Paul,808,S,Hutchinson,St,,,,808 S Hutchinson St,Philadelphia,PA,19147,,39.93922,-75.15878,(215) 923-0355
+us-pa-philadelphia-st-philip-neri-3139d950,St. Philip Neri,218,,Queen,St,,,,218 Queen St,Philadelphia,PA,19147,,39.93692547,-75.14754987,(215) 468-1922
+us-pa-philadelphia-st-stanislaus-st-philip-neri-parish-6f2b187a,St. Stanislaus Church (St. Philip Neri Parish),240,,Fitzwater,St,,,,240 Fitzwater St,Philadelphia,PA,19147,,39.93861973,-75.14755226,(215) 468-1922
+us-pa-philadelphia-st-thomas-aquinas-858c263e,St. Thomas Aquinas,1719,,Morris Sts,,,,,1719 Morris Sts,Philadelphia,PA,19145,,39.93020532,-75.17360669,(215) 334-2312
+us-pa-philadelphia-st-veronica-6678e3be,St. Veronica,,,6th and Tioga Sts,,,,,6th and Tioga Sts,Philadelphia,PA,19140,,40.00469438,-75.13905519,(215) 228-4878
+us-pa-philadelphia-st-vincent-de-paul-bb033015,St. Vincent de Paul,109,E,Price,St,,,,109 E Price St,Philadelphia,PA,19144,,40.03796207,-75.17442983,(215) 438-2925
+us-pa-philadelphia-stella-maris-60a127b5,Stella Maris,2901,S,10th,St,,,,2901 S 10th St,Philadelphia,PA,19148,,39.91253309,-75.1631286,(215) 465-2336
+us-pa-philadelphia-temple-university-newman-center-55cd28e7,Temple University Newman Center,2129,N,Broad,St,,,,2129 N Broad St,Philadelphia,PA,19122,,39.98559753,-75.15609752,(215) 232-3779
+us-pa-philadelphia-national-shrine-of-saint-rita-of-cascia-a5dde687,The National Shrine of St. Rita of Cascia,1166,S,Broad,St,,,,1166 S Broad St,Philadelphia,PA,19146,,39.93644663,-75.16740829,(215) 546-8333
+us-pa-philadelphia-visitation-bvm-f2269ac2,Visitation of the Child Jesus,2646,,Kensington,Ave,,,,2646 Kensington Ave,Philadelphia,PA,19125,,39.99011543,-75.12685692,(215) 634-1133
+us-pa-phoenixville-st-ann-78e5b7fc,St. Ann,502,S,Main,St,,,,502 S Main St,Phoenixville,PA,19460,,40.12735645,-75.51439446,(610) 933-3732
+us-pa-phoenixville-st-basil-the-great-c38c8593,St. Basil the Great,2340,,Kimberton,Rd,,,,2340 Kimberton Rd,Phoenixville,PA,19460,,40.12941094,-75.56265166,(610) 933-2110
+us-nj-pitman-our-lady-queen-of-peace-mary-mother-of-mercy-parish-39a9d50e,Our Lady Queen of Peace,161,,Pitman,Ave,,,,161 Pitman Ave,Pitman,NJ,08071,,39.73289459,-75.12526664,(856) 881-0909
+us-md-port-deposit-st-teresa-8be123cd,St. Teresa,162,N,Main,St,,,,162 N Main St,Port Deposit,MD,21904,,39.60972026,-76.12042687,(410) 642-6534
+us-pa-primos-st-eugene-13462a2b,St. Eugene,200,S,Oak,Ave,,,,200 S Oak Ave,Primos,PA,19018,,39.92448304,-75.3008877,(610) 626-2866
+us-de-rehoboth-beach-st-edmond-8da98deb,St. Edmond,409,,King Charles,Ave,,,,409 King Charles Ave,Rehoboth Beach,DE,19971,,38.7129,-75.07864,(302) 227-4550
+us-md-ridgely-st-benedict-33872f89,St. Benedict,408,,Central,Ave,,,,408 Central Ave,Ridgely,MD,21660,,38.94419098,-75.88136292,(410) 634-2253
+us-pa-ridley-park-st-madeline-5d69c1e6,St. Madeline,400,,Morton,Ave,,,,400 Morton Ave,Ridley Park,PA,19078,,39.88217529,-75.32399142,(610) 532-6880
+us-md-rising-sun-st-agnes-ddf7907d,St. Agnes,150,S,Queen,St,,,,150 S Queen St,Rising Sun,MD,21911,,39.694778,-76.0613743,(410) 642-6534
+us-md-rising-sun-st-agnes-catholic-church-e8756e42,St. Agnes Catholic Church,150,S,Queen,St,,,,150 S Queen St,Rising Sun,MD,21911,,39.6957231,-76.0619912,+1-410-658-9422
+us-pa-rosemont-rosemont-chapel-st-thomas-of-villanova-parish-1ede750a,Rosemont Chapel  (St. Thomas of Villanova Parish),1229,E,Lancaster,Ave,,,,1229 E Lancaster Ave,Rosemont,PA,19010,,40.02651754,-75.32761865,(610) 525-4801
+us-nj-runnemede-st-maria-goretti-holy-child-parish-c9319541,St. Maria Goretti,321,,Orchard,Ave,,,,321 Orchard Ave,Runnemede,NJ,08078,,39.85156111,-75.08020145,(856) 939-1681
+us-nj-runnemede-st-teresa-of-the-infant-jesus-holy-child-parish-28341c1c,St. Teresa Of The Infant Jesus Roman Catholic Church,13,E,Evesham,Rd,,,,13 E Evesham Rd,Runnemede,NJ,08078,,39.84456125,-75.07090908,(856) 939-1681
+us-nj-salem-st-gabriel-the-archangel-parishst-marys-church-2491ceed,St. Mary,25,,Oak,St,,,,25 Oak St,Salem,NJ,08079,,39.57109215,-75.47128898,(856) 299-3833
+us-md-salisbury-st-francis-de-sales-st-francis-de-sales-holy-redeemer-parish-62671c4c,St. Francis de Sales (St Francis de Sales & Holy Redeemer parish),535,,Riverside,Dr,,,,535 Riverside Dr,Salisbury,MD,21801,,38.36074709,-75.60723424,(410) 742-6443
+us-de-seaford-our-lady-of-lourdes-913a5edf,Our Lady of Lourdes,528,E,Stein,Hwy,,,,528 E Stein Hwy,Seaford,DE,19973,,38.64841,-75.61049,(302) 629-3591
+us-pa-secane-our-lady-of-fatima-d192ffc8,Our Lady of Fatima,1,,Fatima,Dr,,,,1 Fatima Dr,Secane,PA,19018,,39.90679688,-75.30567545,(610) 532-5800
+us-md-secretary-our-lady-of-good-counsel-dfd661c9,Our Lady of Good Counsel Church,115,,Main,St,,,,115 Main St,Secretary,MD,21664,,38.6097,-75.9496,(410) 943-4300
+us-md-secretary-our-lady-of-good-counsel-church-12b36bdf,Our Lady of Good Counsel Church,115,,Main,St,,,,115 Main St,Secretary,MD,21664,,38.6100242,-75.9508192,+1-410-943-4300
+us-nj-sewell-church-of-the-holy-family-52906def,Holy Family,226,,Hurffville,Rd,,,,226 Hurffville Rd,Sewell,NJ,08080,,39.7617201,-75.074706,(856) 228-1616
+us-pa-sharon-hill-church-of-the-holy-spirit-c16a1dad,Holy Spirit,,,Sharon Ave & School,St,,,,Sharon Ave & School St,Sharon Hill,PA,19079,,39.9063125,-75.2716875,16105832220
+us-de-skyline-ridge-resurrection-830b4f6e,Resurrection,3000,,Videre,Dr,,,,3000 Videre Dr,Skyline Ridge,DE,19808,,39.720059,-75.694996,(302) 368-0146
+us-de-smyrna-st-polycarp-52a40abd,St. Polycarp,55,,Ransom,Ln,,,,55 Ransom Ln,Smyrna,DE,19977,1617,39.29467288,-75.60978487,(302) 653-8279
+us-pa-springfield-holy-cross-bc0d361b,Holy Cross,651,E,Springfield,Rd,,,,651 E Springfield Rd,Springfield,PA,19064,,39.9311759,-75.31123777,(610) 626-3321
+us-pa-springfield-saint-francis-of-assisi-parish-ee5e1b4b,Saint Francis of Assisi Parish,136,,Saxer,Ave,,,,136 Saxer Ave,Springfield,PA,19064,,39.9290672,-75.334027,+1-610-543-0848
+us-pa-springfield-st-francis-of-assisi-dd1b33ed,St. Francis of Assisi Parish,136,,Saxer,Ave,,,,136 Saxer Ave,Springfield,PA,19064,,39.92918772,-75.33400679,(610) 543-0848
+us-pa-springfield-st-kevin-0a4c1da2,St. Kevin,200,W,Sproul,Rd,,,,200 W Sproul Rd,Springfield,PA,19064,,39.92376837,-75.34890938,(610) 544-8777
+us-pa-strafford-our-lady-of-the-assumption-5b9e7d8a,Our Lady of the Assumption Parish,35,,Old Eagle School,Rd,,,,35 Old Eagle School Rd,Strafford,PA,19087,,40.04713812,-75.40370372,(610) 688-1178
+us-pa-swarthmore-church-of-notre-dame-de-lourdes-00e11b20,Notre Dame de Lourdes,1000,,Fairview,Rd,,,,1000 Fairview Rd,Swarthmore,PA,19081,,39.8883125,-75.3473125,16105441270
+us-nj-swedesboro-st-joseph-st-clare-of-assisi-parish-45528aed,St. Clare of Assisi Parish,140,,Broad,St,,,,140 Broad St,Swedesboro,NJ,08085,,39.75133163,-75.30993944,(856) 467-0037
+us-nj-turnersville-saints-peter-and-paul-c917ec32,Sts. Peter and Paul,362,,Ganttown,Rd,,,,362 Ganttown Rd,Turnersville,NJ,08012,,39.74325986,-75.06541337,(856) 589-3366
+us-pa-upper-darby-church-of-st-alice-b2671f4e,St. Alice,,,Copley Rd & Walnut,St,,,,Copley Rd & Walnut St,Upper Darby,PA,19082,,39.9571875,-75.2619375,16103521431
+us-pa-upper-darby-st-laurence-95b537b6,St. Laurence,8245,W,Chester,Pike,,,,8245 W Chester Pike,Upper Darby,PA,19082,,39.96678036,-75.28001683,(610) 449-0600
+us-pa-villanova-st-thomas-of-villanova-72cc2776,St. Thomas of Villanova,800,E,Lancaster,Ave,,,,800 E Lancaster Ave,Villanova,PA,19085,,40.03572672,-75.34338451,(610) 525-4801
+us-nj-villas-st-raymond-catholic-church-parish-of-st-john-neumann-7943d8f0,St. Raymond,800,,Bayshore,Rd,,,,800 Bayshore Rd,Villas,NJ,08251,,39.03173338,-74.93446658,609-884-1656
+us-pa-wallingford-st-john-chrysostom-0c3e112b,St. John Chrysostom,617,S,Providence,Rd,,,,617 S Providence Rd,Wallingford,PA,19086,,39.88369949,-75.36689763,(610) 874-3418
+us-md-warwick-saint-francis-xavier-church-816be7fd,Saint Francis Xavier Church,1649,,Bohemia Church,Rd,,,,1649 Bohemia Church Road,Warwick,MD,21912,,39.437228,-75.80458,+1-302-545-2126
+us-md-warwick-st-francis-xavier-0b851f4c,St. Francis Xavier,1640,,Bohemia Church,Rd,,,,1640 Bohemia Church Rd,Warwick,MD,21912,,39.41787,-75.779205,(302) 378-5800
+us-pa-wayne-st-katharine-of-siena-808a33c0,St Katharine of Siena,104,S,Aberdeen,Ave,,,,104 S Aberdeen Ave,Wayne,PA,19087,,40.04287043,-75.38153958,(610) 688-4584
+us-pa-wayne-st-isaac-jogues-037c9b22,St. Isaac Jogues,50,W,Walker,Rd,,,,50 W Walker Rd,Wayne,PA,19087,,40.07380246,-75.44154596,(610) 687-3366
+us-pa-west-chester-st-agnes-08a2b523,St. Agnes,233,W,Gay,St,,,,233 W Gay St,West Chester,PA,19380,,39.95939968,-75.60881472,(610) 692-2990
+us-pa-west-chester-st-maximilian-kolbe-8c734dc5,St. Maximilian Kolbe,15,E,Pleasant Grove,Rd,,,,15 E Pleasant Grove Rd,West Chester,PA,19382,,39.92875073,-75.5819804,(610) 399-6936
+us-pa-west-chester-ss-peter-and-paul-8fbb4944,Sts. Peter and Paul,1325,E,Boot,Rd,,,,1325 E Boot Rd,West Chester,PA,19380,,40.00136333,-75.57433796,(610) 692-2216
+us-pa-west-chester-ss-simon-and-jude-64bfc269,Sts. Simon and Jude,8,,Cavanaugh,Ct,,,,8 Cavanaugh Ct,West Chester,PA,19382,,39.96500328,-75.52205248,(610) 696-3624
+us-pa-west-chester-west-chester-university-newman-center-0eeb99f0,West Chester University Newman Center,409,,Trinity,Dr,,,,409 Trinity Dr,West Chester,PA,19382,,39.946349,-75.602075,(610) 436-0891
+us-nj-west-collingswood-most-precious-blood-c533cf9d,Most Precious Blood,445,,White Horse,Pike,,,,445 White Horse Pike,West Collingswood,NJ,08107,,39.91332929,-75.08481514,(856) 854-0364
+us-pa-west-conshohocken-church-of-st-gertrude-22eb5e69,St. Gertrude,200,,Bullock,Ave,,,,200 Bullock Ave & Merion Ave,West Conshohocken,PA,19428,,40.0714375,-75.3153125,16108280268
+us-pa-west-grove-assumption-bvm-589ec4c6,Assumption B.V.M.,300,,State,Rd,,,,300 State Rd,West Grove,PA,19390,,39.81641496,-75.818048,(610) 869-2722
+us-nj-wildwood-st-ann-notre-dame-de-la-mer-parish-fd7f3a37,St. Ann,2901,,Atlantic,Ave,,,,2901 Atlantic Ave,Wildwood,NJ,08260,4943,38.9907047,-74.80870913,(609) 522-2709
+us-nj-wildwood-crest-assumption-of-the-blessed-virgin-mary-notre-dame-de-la-mer-parish-f46db598,Assumption,7110,,Seaview,Ave,,,,7110 Seaview Ave,Wildwood Crest,NJ,08260,,38.97100801,-74.8367743,(609) 522-2709
+us-de-wilmington-cathedral-of-st-peter-ffde9b2a,Cathedral of St. Peter,500,N,W,St,,,,500 N W St,Wilmington,DE,19801,,39.74275653,-75.55328011,(302) 652–0743
+us-de-wilmington-church-of-christ-our-king-75f62a1e,Christ Our King,,,28th St & Madison,St,,,,28th St & Madison St,Wilmington,DE,19802,,39.7603125,-75.5375625,13027624140
+us-de-wilmington-holy-child-d704c60e,Corpus Christi,2500,,Naamans,Rd,,,,2500 Naamans Rd,Wilmington,DE,19810,,39.8257523,-75.51545,(302) 475-6486
+us-de-wilmington-immaculate-heart-of-mary-9441fc4f,Immaculate Heart of Mary,4701,,Weldin,Rd,,,,4701 Weldin Rd,Wilmington,DE,19803,,39.78270791,-75.51958586,(302) 764-0357
+us-de-wilmington-immaculate-heart-of-mary-roman-catholic-church-df91bd91,Immaculate Heart of Mary Roman Catholic Church,4701,,Weldin,Rd,,,,4701 Weldin Rd,Wilmington,DE,19803,,39.7819079,-75.5191595,+1-302-764-0357
+us-de-wilmington-sacred-heart-oratory-9bc63fe1,Sacred Heart Oratory,917,N,Madison,St,,,,917 N Madison St,Wilmington,DE,19801,,39.74802,-75.5545654,(302) 428-3658
+us-de-wilmington-st-ann-9c0449dd,St. Ann,2013,,Gilpin,Ave,,,,2013 Gilpin Ave,Wilmington,DE,19806,,39.7616577,-75.56438,(302) 654-5519
+us-de-wilmington-st-anthony-of-padua-31646d36,St. Anthony of Padua,901,N,Dupont,St,,,,901 N Dupont St,Wilmington,DE,19805,,39.752964,-75.5671,(302) 421-3700
+us-de-wilmington-st-catherine-of-siena-eb4fd0a0,St. Catherine of Siena,2503,,Centerville,Rd,,,,2503 Centerville Rd,Wilmington,DE,19808,,39.7502652,-75.62432,(302) 633-4900
+us-de-wilmington-st-catherine-of-siena-roman-catholic-church-5875110f,St. Catherine of Siena Roman Catholic Church,2503,,Centerville,Rd,,,,2503 Centerville Rd,Wilmington,DE,19808,,39.7494213,-75.6258097,+1-302-633-4900
+us-de-wilmington-st-elizabeth-d498e745,St. Elizabeth,809,S,Broom,St,,,,809 S Broom St,Wilmington,DE,19805,,39.73874444,-75.57298072,(302) 652-3626
+us-de-wilmington-st-hedwig-537a9aef,St. Hedwig,408,S,Harrison,St,,,,408 S Harrison St,Wilmington,DE,19805,,39.74060555,-75.56604114,(302) 594-1400
+us-de-wilmington-st-helena-efcd2322,St. Helena,602,,Philadelphia,Pike,,,,602 Philadelphia Pike,Wilmington,DE,19809,,39.7685738,-75.50225,(302) 764-0325
+us-de-wilmington-st-john-the-beloved-cbea8983,St. John the Beloved,907,,Milltown,Rd,,,,907 Milltown Rd,Wilmington,DE,19808,,39.735467,-75.657751,(302) 999-0211
+us-de-wilmington-st-joseph-848db885,St. Joseph,1012,N,French,St,,,,1012 N French St,Wilmington,DE,19801,,39.74527246,-75.54572172,(302) 658-4535
+us-de-wilmington-st-joseph-on-the-brandywine-roman-catholic-church-52e0dd4e,St. Joseph on the Brandywine Roman Catholic Church,10,,Old Church,Rd,,,,10 Old Church Rd,Wilmington,DE,19807,,39.7721416,-75.5893161,+1-302-658-7017
+us-de-wilmington-st-joseph-the-worker-chapel-at-jesus-house-d9ab8a42,St. Joseph the Worker Chapel at Jesus House,2501,,Milltown,Rd,,,,2501 Milltown Rd,Wilmington,DE,19808,,39.7158051,-75.67347,(302) 995-6859
+us-de-wilmington-st-mary-magdalen-d2c84187,St. Mary Magdalen,7,,Sharpley,Rd,,,,7 Sharpley Rd,Wilmington,DE,19803,,39.79409495,-75.54881573,(302) 652-6800
+us-de-wilmington-st-mary-of-the-immaculate-conception-b1bab1f1,St. Mary of the Immaculate Conception,600,E,6th,St,,,,600 E 6th St,Wilmington,DE,19801,,39.7391595,-75.54409838,(302) 652-0743
+us-de-wilmington-st-matthew-040a8b9c,St. Matthew,901,E,Newport,Pike,,,,901 E Newport Pike,Wilmington,DE,19804,,39.72161685,-75.59593325,(302) 655-5830
+us-de-wilmington-saint-nicholas-ukrainian-e2aae520,St. Nicholas (Ukrainian),800,,Lea,Blvd,,,,800 Lea Blvd,Wilmington,DE,19802,2530,39.76929827,-75.53235149,(302) 762-5511
+us-de-wilmington-st-nicholas-ukrainian-catholic-church-356905b0,St. Nicholas Ukrainian Catholic Church,800,W,Lea,Blvd,,,,800 W Lea Blvd,Wilmington,DE,19802,,39.7692802,-75.5324376,+1-302-762-5511
+us-de-wilmington-st-patrick-f433d320,St. Patrick,1414,,King,St,,,,1414 King St,Wilmington,DE,19801,,39.74894587,-75.54423738,(302) 652-0743
+us-de-wilmington-st-paul-76dfd233,St. Paul,1010,W,4th,St,,,,1010 W 4th St,Wilmington,DE,19805,,39.7442322,-75.56129,(302) 655-6596
+us-de-wilmington-st-thomas-the-apostle-b84d3549,St. Thomas the Apostle,301,N,Bancroft,Pkwy,,,,301 N Bancroft Pkwy,Wilmington,DE,19805,,39.74935944,-75.57424714,(302) 658-5131
+us-nj-woodbury-st-patrick-holy-angels-parish-96d17fad,St. Patrick Holy Angels Parish,86,,Cooper,St,,,,86 Cooper St,Woodbury,NJ,08096,,39.83691546,-75.15030088,(856) 845-0123
+us-nj-woodbury-heights-st-margaret-infant-jesus-parish-575a0a01,St. Margaret (Infant Jesus Parish),845,,Third,St,,,,845 Third St,Woodbury Heights,NJ,08097,,39.81352429,-75.15740824,(856) 848-0047
+us-pa-wynnewood-chapel-of-st-martin-ace77ad1,Chapel of St. Martin,,,Wynnewood Pennsylvania 19096,,,,,Wynnewood Pennsylvania 19096,Wynnewood,PA,19096,,39.9911875,-75.2549375,
+us-pa-wynnewood-chapel-of-the-immaculate-conception-67ddc7cb,Chapel of the Immaculate Conception,,,Wynnewood Pennsylvania 19096,,,,,Wynnewood Pennsylvania 19096,Wynnewood,PA,19096,,39.9939375,-75.2579375,
+us-pa-wynnewood-presentation-blessed-virgin-mary-78647bbf,Presentation of the Blessed Virgin Mary,204,,Haverford,Rd,,,,204 Haverford Rd,Wynnewood,PA,19096,,39.98577543,-75.27644432,(610) 642-8341
+us-pa-wynnewood-st-charles-borromeo-seminary-599c0361,St. Charles Borromeo Seminary,100,E,Winnewood,Rd,,,,100 E Winnewood Rd,Wynnewood,PA,19096,,39.9920625,-75.2559375,16106673394
+us-pa-wynnewood-saint-mark-armenian-90bd9a11,St. Mark (Armenian),400,,Haverford,Rd,,,,400 Haverford Rd,Wynnewood,PA,19096,,39.989837,-75.280127,(610) 896-7789
+us-pa-yeadon-church-of-st-louis-7945f6ee,St. Louis,,,W Cobbs Creek,Pkwy,,,,W Cobbs Creek Pkwy,Yeadon,PA,19050,,39.9340625,-75.2451875,16106230553
