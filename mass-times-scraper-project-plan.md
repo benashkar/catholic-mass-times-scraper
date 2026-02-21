@@ -232,10 +232,39 @@ Maps CatholicIndex raw values to normalized DB codes:
 - `data/output/{state}/dated_services.csv` — actual calendar dates for next 2 weeks
 - `data/output/{state}/church_details.jsonl` — raw JSON per church (incremental)
 
-**Rollout Plan:**
-- [x] Ohio (1,077 cities) — RUNNING FIRST
-- [ ] Texas (1,775 cities)
-- [ ] All remaining 48 states + DC
+**Address Parser (`src/parsers/address_parser.py`):**
+- Token-based street address parser (NOT single regex — handles edge cases better)
+- Segments: street_number, pre_direction, street_name, street_suffix, post_direction, unit_type, unit_number
+- Handles: route addresses (State Rt, County Rd, US Hwy, OH-46), "N St" ambiguity, Via prefix, St=Saint vs Street, post-directionals
+- CLI: `python run_parse_addresses.py ohio texas` or `python run_parse_addresses.py all`
+- Output: `data/output/{state}/parsed_addresses.csv`
+- 43 tests in `tests/test_address_parser.py`
+
+**Batch Runner (`run_all_states.py`):**
+- Runs all remaining states sequentially: scrape → parse addresses → git commit
+- Skips states that already have `church_details.jsonl`
+- Resume-safe: just re-run if interrupted
+
+**Rollout Progress (2026-02-21):**
+- [x] Ohio (1,077 cities) — 1,239 churches, 13,771 services
+- [x] Texas (1,480 cities) — 1,597 churches, 19,954 services
+- [x] Alabama (584 cities) — 248 churches, 2,903 services
+- [x] Alaska — committed
+- [x] Arizona — committed
+- [x] Arkansas — committed
+- [x] California — committed
+- [x] Colorado — committed
+- [x] Connecticut — committed
+- [x] Delaware — committed
+- [x] Georgia — committed
+- [x] Hawaii — committed
+- [x] Idaho — committed
+- [x] Illinois — committed
+- [x] Indiana — committed
+- [x] Iowa — committed
+- [ ] Kansas — IN PROGRESS (batch running)
+- [ ] Kentucky through Wyoming — pending (batch will continue automatically)
+- [ ] DC, Florida — need re-run (discovery completed but detail phase had issues)
 - [ ] National summary statistics + coverage report
 
 **City Counts by State (top 10):**
@@ -293,7 +322,8 @@ Maps CatholicIndex raw values to normalized DB codes:
 | Data storage (Phase 5+) | PostgreSQL | Schema ready at `database/schema.sql` — 11 lookup + 8 entity tables |
 | Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | Exponential backoff on retries, no retry on 404s |
 | Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output to `logs/scrape_YYYY-MM-DD.log` |
-| Testing | `pytest` (66 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) |
+| Address parser | `src/parsers/address_parser.py` | Token-based street segmentation (43 tests) |
+| Testing | `pytest` (109 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) + address parser (43) |
 | US city data | 29,880 cities across 52 states | Source: github.com/kelvins/US-Cities-Database |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
 | Scheduling (future) | Cron job or GitHub Actions | Weekly incremental, monthly full |
@@ -325,7 +355,8 @@ church scrapes/
 │   │   └── catholic_index.py              # CatholicIndex scraper (discover + detail, all 50 states)
 │   ├── parsers/
 │   │   ├── __init__.py
-│   │   └── rsc_extractor.py               # RSC flight payload JSON extractor
+│   │   ├── rsc_extractor.py               # RSC flight payload JSON extractor
+│   │   └── address_parser.py              # Token-based street address segmentation
 │   ├── etl/
 │   │   ├── __init__.py
 │   │   ├── transformers.py                # Value mappings: CatholicIndex → DB codes
@@ -341,7 +372,8 @@ church scrapes/
 │   ├── fixtures/                          # Sample HTML/JSON for unit tests
 │   ├── test_smoke.py                      # 3 config/import smoke tests
 │   ├── test_rsc_extractor.py              # 22 RSC extractor tests
-│   └── test_transformers.py               # 41 ETL transformer tests
+│   ├── test_transformers.py               # 41 ETL transformer tests
+│   └── test_address_parser.py             # 43 address parser tests
 │
 ├── data/
 │   ├── city_lists/
@@ -362,14 +394,17 @@ church scrapes/
 │       └── {state}/                       # Statewide output (created per state)
 │           ├── all_services.csv
 │           ├── dated_services.csv
-│           └── church_details.jsonl
+│           ├── church_details.jsonl
+│           └── parsed_addresses.csv       # Segmented address fields (address parser)
 │
 ├── logs/                                  # Auto-generated log files (scrape_YYYY-MM-DD.log)
 │
 ├── run_discovery.py                       # Phase 1: discover churches for 16 target communities
 ├── run_scrape_all.py                      # Phase 2: full scrape of all 79 discovered churches
 ├── run_scrape_sample.py                   # Dev tool: sample scrape of 10 churches
-└── run_statewide.py                       # Phase 5: statewide runner (any/all US states)
+├── run_statewide.py                       # Phase 5: statewide runner (any/all US states)
+├── run_parse_addresses.py                 # Address parser CLI: parse JSONL → segmented CSV
+└── run_all_states.py                      # Batch runner: scrape + parse + commit for all remaining states
 ```
 
 ---
@@ -437,6 +472,23 @@ These inform the lookup table contents in the database schema:
 | `1569b54` | Update project plan with complete findings, schema docs, and pastor data research | 2026-02-20 |
 | `f63a0dd` | Add full scrape of all 79 churches with dated service output | 2026-02-21 |
 | `7b741bc` | Add statewide scraping infrastructure for all US cities | 2026-02-21 |
+| `357736d` | Update project plan for nationwide statewide expansion | 2026-02-21 |
+| `f7c545f` | Add Ohio statewide scrape results: 1,239 churches, 13,771 services | 2026-02-21 |
+| `d467a8d` | Add address parser with segmented street fields and Ohio parsed CSV | 2026-02-21 |
+| `d81f0c4` | Add Texas statewide scrape: 1,597 churches, 19,954 services | 2026-02-21 |
+| `aad8dd0` | Add Alabama statewide scrape: 248 churches, 2,903 services | 2026-02-21 |
+| `fdb9597` | Add Arkansas statewide scrape | 2026-02-21 |
+| `c154004` | Add California statewide scrape | 2026-02-21 |
+| `75b8231` | Add Colorado statewide scrape | 2026-02-21 |
+| `ac7924e` | Add Connecticut statewide scrape | 2026-02-21 |
+| `b9f7b76` | Add Delaware statewide scrape | 2026-02-21 |
+| `64f78be` | Add Georgia statewide scrape | 2026-02-21 |
+| `3a5e294` | Add Hawaii statewide scrape | 2026-02-21 |
+| `a4b415c` | Add Idaho statewide scrape | 2026-02-21 |
+| `39bf11e` | Add Illinois statewide scrape | 2026-02-21 |
+| `164313e` | Add Indiana statewide scrape | 2026-02-21 |
+| `124d504` | Add Iowa statewide scrape | 2026-02-21 |
+| *(batch continues...)* | Kansas through Wyoming running via `run_all_states.py` | 2026-02-21 |
 
 ---
 
@@ -451,14 +503,54 @@ These inform the lookup table contents in the database schema:
 
 ---
 
+## How to Resume / Re-Run
+
+### If the batch was interrupted (machine crash, etc.)
+```bash
+# The batch runner skips already-completed states automatically:
+python run_all_states.py
+
+# Or run individual states manually:
+python run_statewide.py kansas
+python run_parse_addresses.py kansas
+git add data/churches/kansas/ data/output/kansas/
+git commit -m "Add Kansas statewide scrape"
+```
+
+### Re-run states that had issues (DC, Florida, Alaska, Arizona)
+```bash
+# Delete their incomplete data first, then re-run:
+rm -rf data/churches/florida data/output/florida
+python run_statewide.py florida
+python run_parse_addresses.py florida
+```
+
+### Parse addresses for all completed states at once
+```bash
+python run_parse_addresses.py all
+```
+
+### Weekly refresh (once all states are complete)
+```bash
+# Re-scrape all states with fresh data:
+python run_all_states.py
+# Or individual states:
+python run_statewide.py ohio
+python run_parse_addresses.py ohio
+```
+
+---
+
 ## Next Steps (Immediate)
 
-1. **Run Ohio statewide scrape** — `python run_statewide.py ohio` (1,077 cities, ~30 min discovery + ~20 min detail)
-2. **Run Texas statewide scrape** — `python run_statewide.py texas` (1,775 cities)
-3. **Run remaining 48 states** — `python run_statewide.py <state>` for each, or batch all at once
-4. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
-5. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
-6. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
-7. **Set up weekly automation** — Cron job or GitHub Actions to re-scrape all states weekly
-8. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
-9. **Generate sample newspaper-ready output** for one publication week and review with editorial team
+1. **~~Run Ohio statewide scrape~~** ✅ DONE — 1,239 churches, 13,771 services
+2. **~~Run Texas statewide scrape~~** ✅ DONE — 1,597 churches, 19,954 services
+3. **~~Build address parser~~** ✅ DONE — token-based parser with 43 tests
+4. **Finish remaining states** — `run_all_states.py` is running (16/51 done, batch continues automatically)
+5. **Re-run failed states** — DC, Florida, Alaska, Arizona need re-run after batch completes
+6. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
+7. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
+8. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
+9. **Set up weekly automation** — Cron job or GitHub Actions to re-scrape all states weekly
+10. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
+11. **Generate sample newspaper-ready output** for one publication week and review with editorial team
