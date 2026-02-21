@@ -1,0 +1,931 @@
+﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
+us-mn-ada-st-joseph-9ef93d23,St. Joseph,405,E,Thorpe,Ave,,,,405 E Thorpe Ave,Ada,MN,56510,1699,47.29653203,-96.5072042,(218) 784-4131
+us-mn-adams-sacred-heart-c8bb45ff,Sacred Heart,412,,Main,St,,,,412 Main St,Adams,MN,55909,,43.56549633,-92.72029374,507-582-3120 
+us-mn-adrian-st-adrian-02ebd169,St. Adrian,512,,Maine,Ave,,,,512 Maine Ave,Adrian,MN,56110,,43.63135553,-95.93285772,(507) 483-2317
+us-mn-aitkin-st-james-69410b0e,St. James,299,,Red Oak,Dr,,,,299 Red Oak Dr,Aitkin,MN,56431,,46.51573045,-93.71472996,(218) 927-6581
+us-mn-albany-seven-dolors-d8b6f9f8,Seven Dolors,151,,- 2nd,St,S,,,151 - 2nd St S,Albany,MN,56307,0277,45.62849088,-94.5655402,(320) 845-2705
+us-mn-albany-st-anthony-18947967,St. Anthony,24326,,Trobec,St,,,,24326 Trobec St,Albany,MN,56307,,45.68633731,-94.61108426,(320) 845-2416
+us-mn-albert-lea-st-theodore-607d51fb,St. Theodore,315,E,Clark,St,,,,315 E Clark St,Albert Lea,MN,56007,,43.65019964,-93.365505,(507) 373-0603
+us-mn-albertville-church-of-st-albert-5b28b88d,St. Albert,,,"57th St NE , 55301-0127",,,,,"57th St NE , 55301-0127",Albertville,MN,11400,,45.2351875,-93.6635625,17634972474
+us-mn-albertville-st-albert-d7b3a583,St. Albert,11400,,57th,St,NE,,,11400 57th St NE,Albertville,MN,55301,,45.23489414,-93.65644591,763-497-2474
+us-mn-alexandria-st-mary-2139edbc,St. Mary,420,,Irving,St,,,,420 Irving St,Alexandria,MN,56308,,45.8879996,-95.37516061,(320) 763-5781
+us-wi-alma-st-lawrence-21decc2e,St. Lawrence,206,S,2nd,St,,,,206 S 2nd St,Alma,WI,54610,,44.3219646,-91.91449,(608) 687-8418
+us-wi-alma-church-of-st-lawrence-f5afeb93,St. Lawrence,206,S,2nd,St,,,,206 S 2nd St,Alma,WI,54610,,44.3168125,-91.9119375,16086873496
+us-ia-alta-vista-st-bernard-d38e6f3a,St. Bernard,116,E,Washington,St,,,,116 E Washington St,Alta Vista,IA,50603,,43.19967256,-92.4146734,(641) 393-2520
+us-wi-amery-st-joseph-catholic-church-f2e63c2b,St. Joseph Catholic Church,1050,N,Keller,Ave,,,,1050 N Keller Ave,Amery,WI,54001,,45.32450183,-92.35890704,(715) 268-7717
+us-mn-angus-holy-trinity-e160a20c,Holy Trinity,37639,,140th,St,NW,,,37639 140th St NW,Angus,MN,56762,,48.07866218,-96.86040556,(218) 745-5853
+us-mn-annandale-st-ignatius-d5a2de11,St. Ignatius,35,,Birch,St,E,,,35 Birch St E,Annandale,MN,55302,,45.26462984,-94.12354974,320-274-8828
+us-mn-anoka-st-stephens-catholic-church-ca1d3ffb,St. Stephen's Catholic Church,525,,Jackson,St,,,,525 Jackson St,Anoka,MN,55303,,45.19917543,-93.38298387,763-421-2471
+us-mn-appleton-st-john-06212d14,St. John,350,,Edquist,St,S,,,350 Edquist St S,Appleton,MN,56208,,45.19597954,-96.01216329,320-842-4271
+us-wi-arcadia-holy-family-b2bd9a7f,Holy Family,223,,Maple,St,,,,223 Maple St,Arcadia,WI,54612,,44.24888992,-91.49397278,(608) 323-7116
+us-nd-argusville-st-william-3e851ca1,St. William,107,,Drake,Ave,,,,107 Drake Ave,Argusville,ND,58005,,47.05063975,-96.93419932,(701) 484-5211
+us-mn-argyle-st-rose-of-lima-02924867,St. Rose of Lima,501,W,3rd,St,,,,501 W 3rd St,Argyle,MN,56713,0277,48.33290694,-96.82593486,(218) 437-6341
+us-wi-arkansaw-st-joseph-5d4cd710,St. Joseph,,,W7805 County Rd Z,,,,,W7805 County Rd Z,Arkansaw,WI,54721,,44.629,-92.0629,(715) 285-5200
+us-wi-arkansaw-church-of-st-joseph-31af02aa,St. Joseph,7805,,County Rd Z,,,,,7805 County Rd Z,Arkansaw,WI,54721,,44.6541875,-92.0443125,17152855313
+us-mn-arlington-st-mary-4fe1237c,St. Mary,504,,7th,Ave,NW,,,504 7th Ave NW,Arlington,MN,55307,,44.6118483,-94.08516385,(507) 964-5413
+us-ia-armstrong-st-mary-34a0e933,St. Mary,404,,5th,Ave,,,,404 5th Ave,Armstrong,IA,50514,,43.39958785,-94.48243637,(712) 864-3160
+us-ia-ashton-st-mary-23945896,St. Mary,643,,6th,St,,,,643 6th St,Ashton,IA,51232,,43.31566851,-95.79292086,(712) 754-2739
+us-mn-aurora-our-lady-of-hope-83a9b728,Holy Rosary,16,W,5th,Ave,N,,,16 W 5th Ave N,Aurora,MN,55705,,47.531896,-92.23875428,(218) 229-3210
+us-sd-aurora-church-of-st-william-abbot-e472125f,St. William Abbot,304,,Broadway,St,,,,304 Broadway St,Aurora,SD,57002,,44.2856875,-96.6873125,16059972610
+us-mn-austin-queen-of-angels-1b473784,Queen of Angels,1001,E,Oakland,Ave,,,,1001 E Oakland Ave,Austin,MN,55912,,43.66682186,-92.96312337,(507) 433-1888
+us-mn-austin-st-augustine-church-feb963c5,St Augustine Church,405,,4th,St,NW,,,405 4th St NW,Austin,MN,55912,,43.6697189,-92.9800949,+1-814-435-2303
+us-mn-austin-st-augustine-ddbe43a6,St. Augustine,405,,4th,St,NW,,,405 4th St NW,Austin,MN,55912,,43.66980211,-92.98008835,(507) 437-4537
+us-mn-austin-st-edward-7b78a495,St. Edward,2000,,Oakland,Ave,W,,,2000 Oakland Ave W,Austin,MN,55912,1599,43.6671528,-93.0011549,(507) 437-4537
+us-mn-avon-immaculate-conception-dd43cee3,Immaculate Conception,37186,,County Rd 9,,,,,37186 County Rd 9,Avon,MN,56310,,45.66174337,-94.47488216,(320) 228-0105
+us-mn-avon-st-benedict-ff3ccdd5,St. Benedict,212,,First,St,SW,,,212 First St SW,Avon,MN,56310,0098,45.60845659,-94.45356168,(320) 250-5618
+us-mn-babbitt-st-pius-x-aa19f47c,St. Pius X,15,,Ash,Blvd,,,,15 Ash Blvd,Babbitt,MN,55706,,47.7092298,-91.95035303,(218) 827-2291 or (218) 365-4017
+us-mn-badger-st-mary-3e815692,St. Mary,504,N,Main,St,,,,504 N Main St,Badger,MN,56714,,48.78496382,-96.01055163,(218) 463-2441
+us-mn-bagley-st-joseph-2b6dd17d,St. Joseph,215,,Central,St,W,,,215 Central St W,Bagley,MN,56621,,47.52223743,-95.40276522,(218) 694-6416
+us-mn-ball-club-st-joseph-5461965e,St. Joseph,51061,,Wolf,Dr,,,,51061 Wolf Dr,Ball Club,MN,56636,,47.32044237,-93.92419128,(218) 246-8582
+us-wi-balsam-lake-our-lady-of-the-lakes-5ff8e51e,Our Lady of the Lakes,507,W,Main,St,,,,507 W Main St,Balsam Lake,WI,54810,,45.45282931,-92.46068192,(715) 405-2253
+us-ia-bancroft-church-of-st-john-the-baptist-f35ef6e9,St. John the Baptist,204,S,Summit,Ave,,,,204 S Summit Ave,Bancroft,IA,50517,,43.2901875,-94.2161875,15158852462
+us-ia-bancroft-st-john-the-baptist-divine-mercy-parish-c7cd3a31,St. John the Baptist - Divine Mercy Parish,204,S,Summitt,Ave,,,,204 S Summitt Ave,Bancroft,IA,50517,,43.29126333,-94.21634229,(515) 295-3435
+us-wi-bangor-church-of-st-mary-9175a0e1,St. Mary,303,,16th,Ave,S,,,303 16th Ave S,Bangor,WI,54614,,43.8906875,-90.9890625,16087860610
+us-mn-barnesville-assumption-71278784,Assumption,307,,Front,St,N,,,307 Front St N,Barnesville,MN,56514,,46.65611411,-96.42061238,(218) 354-7320
+us-mn-battle-lake-our-lady-of-the-lake-934d1738,Our Lady of the Lake,407,,Lake,Ave,N,,,407 Lake Ave N,Battle Lake,MN,56515,0671,46.28615446,-95.7154048,(218) 864-5619
+us-mn-baudette-sacred-heart-b84ca18e,Sacred Heart,104,,1st,St,W,,,104 1st St W,Baudette,MN,56623,,48.71165872,-94.60067332,(218) 634-2689
+us-mn-bayport-st-charles-fa088904,St. Charles,409,,Third,St,N,,,409 Third St N,Bayport,MN,55003,1061,45.019973,-92.779883,651-439-4511
+us-mn-beardsley-church-of-st-mary-62e440b3,St. Mary,510,S,Forest,St,,,,510 S Forest St,Beardsley,MN,56211,,45.5543125,-96.7110625,13202656916
+us-mn-beaulieu-st-joseph-aa54e160,St. Joseph,2312,,222nd,Ave,,,,2312 222nd Ave,Beaulieu,MN,56557,,47.30821672,-95.79784639,(218) 935-2503
+us-mn-becker-mary-of-the-visitation-becker-site-4d2c010e,Mary of the Visitation (Becker site),12100,,Sherburne,Ave,,,,12100 Sherburne Ave,Becker,MN,55309,0426,45.39521145,-93.87117102,(763) 447-3339
+us-mn-belgrade-st-francis-de-sales-6eeefbe0,St. Francis de Sales,541,,Martin,Ave,,,,541 Martin Ave,Belgrade,MN,56312,0069,45.45155532,-95.00326614,(320) 254-8218
+us-mn-belle-plaine-our-lady-of-the-prairie-30bdb840,Our Lady of the Prairie,200,E,Church,St,,,,200 E Church St,Belle Plaine,MN,56011,,44.62424565,-93.7664392,952-873-6564
+us-mn-belle-plaine-st-john-assumption-0be445df,St. John–Assumption,26523,,200th,St,,,,26523 200th St (Faxon Twsp.),Belle Plaine,MN,56011,,44.66715866,-93.79918257,507-248-3550
+us-mn-bellechester-st-mary-353dd415,St. Mary,221,,Chester,Ave,,,,221 Chester Ave,Bellechester,MN,55027,,44.3686086,-92.5147437,651-923-4472
+us-mn-bellingham-st-josephs-catholic-church-29ffef53,St. Joseph's Catholic Church,1271,,340th,St,,,,1271 340th St,Bellingham,MN,56212,,45.1542218,-96.4012339,+1-320-839-2772
+us-mn-bemidji-bemidji-state-university-3b261dc8,Bemidji State University,1701,,Birch,Ln,,,,1701 Birch Ln,Bemidji,MN,56601,,47.4855625,-94.8753125,12184444762
+us-mn-bemidji-st-philip-a7444dc5,St. Philip,702,,Beltrami,Ave,NW,,,702 Beltrami Ave NW,Bemidji,MN,56601,,47.47481562,-94.88028106,(218) 444-4262
+us-mn-benson-st-francis-72d1cb6a,St. Francis,508,,13th,St,N,,,508 13th St N,Benson,MN,56215,1228,45.31834512,-95.59791255,(320) 842-4271
+us-mn-beroun-st-joseph-mission-6aeeceec,St. Joseph Mission,19390,,Praha,Ave,,,,19390 Praha Ave,Beroun,MN,55063,,45.90910007,-92.95532467,(320) 629-2935
+us-mn-bertha-st-joseph-36dddafe,St. Joseph,201,,Cherry,St,,,,201 Cherry St,Bertha,MN,56437,0158,46.27145557,-95.06400727,(218) 631-1593
+us-mn-big-elbow-lake-st-frances-cabrini-5fef84f6,St. Frances Cabrini,,,Mn 113 and Becker Co 35,,,,,Mn 113 and Becker Co 35,Big Elbow Lake,MN,56589,,47.14707531,-95.56007854,218-473-2101
+us-mn-big-lake-mary-of-the-visitation-5bc663f7,Mary of the Visitation,440,,Lake,St,N,,,440 Lake St N,Big Lake,MN,55309,0100,45.33624072,-93.74499796,(763) 447-3339
+us-wi-big-river-church-of-the-nativity-of-the-blessed-virgin-mary-05ed226b,Nativity of the Blessed Virgin Mary,10137,,570th,Ave,,,,10137 570th Ave,Big River,WI,54022,,44.7463125,-92.6413125,17154255806
+us-sd-big-stone-city-st-charles-1eaae544,St. Charles,106,,3rd,Ave,,,,106 3rd Ave,Big Stone City,SD,57216,0068,45.29675785,-96.46593945,(605) 862-8485
+us-mn-bigfork-our-lady-of-the-snows-26d03b95,Our Lady of the Snows,320,,Golf Course,Ln,,,,320 Golf Course Ln,Bigfork,MN,56628,,47.74433364,-93.64579988,(218) 743-3255
+us-mn-bird-island-st-mary-0a8a1033,St. Mary,220,S,10th,St,,,,220 S 10th St,Bird Island,MN,55310,0500,44.76623637,-94.89958576,(320) 365-3593
+us-mn-biwabik-church-of-st-john-94b14c19,St. John,,,6th Ave S,,,,,6th Ave S,Biwabik,MN,55708,,47.5325625,-92.3403125,12188656774
+us-mn-blackduck-st-ann-c70dcc32,St. Ann,388,,First,St,NE,,,388 First St NE,Blackduck,MN,56630,,47.73399251,-94.54644303,(218)647-8300
+us-mn-blaine-st-timothy-82e81b1e,St. Timothy,707,,89th,Ave,NE,,,707 89th Ave NE,Blaine,MN,55434,,45.13251087,-93.25282087,763-784-1329
+us-mn-blooming-prairie-st-columbanus-church-a52d6c77,St Columbanus Church,114,,Main,St,E,,,114 Main St E,Blooming Prairie,MN,55917,,43.8670746,-93.055132,+1-507-583-2784
+us-mn-blooming-prairie-st-columbanus-892f43f3,St. Columbanus,114,E,Main,St,,,,114 E Main St,Blooming Prairie,MN,55917,,43.86689637,-93.05522487,(507) 583-2784
+us-mn-bloomington-church-of-saint-bonaventure-bef6bffa,Church of Saint Bonaventure,901,E,90th,St,,,,901 E 90th St,Bloomington,MN,55420,,44.8398487,-93.261531,+1-952-854-4733
+us-mn-bloomington-nativity-of-mary-6e61e073,Nativity of the Blessed Virgin Mary,9900,,Lyndale,Ave,S,,,9900 Lyndale Ave S,Bloomington,MN,55420,,44.82336735,-93.29028515,952-881-8671
+us-mn-bloomington-saint-bonaventure-5d1625e6,St. Bonaventure,901,E,90th,St,,,,901 E 90th St,Bloomington,MN,55420,,44.83984814,-93.26128335,952-854-4733
+us-mn-bloomington-st-edward-16c04fa8,St. Edward,9401,,Nesbitt,Ave,S,,,9401 Nesbitt Ave S,Bloomington,MN,55437,,44.83227828,-93.35791642,952-835-7101
+us-mn-blue-earth-sts-peter-and-paul-cc05d07b,Sts. Peter and Paul,214,S,Holland,St,,,,214 S Holland St,Blue Earth,MN,56013,,43.63668974,-94.10726695,(507) 526-5626
+us-mn-bluffton-st-john-the-baptist-1c56f4c6,St. John the Baptist,310,,Main,St,,,,310 Main St,Bluffton,MN,56518,,46.46919622,-95.23164163,(218) 631-1593
+us-mn-bowlus-st-edward-aad7b157,St. Edward,8550,,MN-238,,,,,8550 MN-238,Bowlus,MN,56314,,45.83404471,-94.48284504,(320) 573-2132
+us-mn-bowlus-st-stanislaus-kostka-f78ab6cb,St. Stanislaus Kostka,428,,Main,St,,,,428 Main St,Bowlus,MN,56314,0008,45.82246544,-94.40935893,(320) 393-2725
+us-mn-braham-ss-peter-and-paul-1c21cb99,Sts. Peter and Paul,1050,,Southview,Ave,,,,1050 Southview Ave,Braham,MN,55006,,45.71327241,-93.18114239,(320) 396-3105
+us-mn-brainerd-all-saints-ceb291c8,All Saints,16898,,Carlson Lake,Rd,,,,16898 Carlson Lake Rd,Brainerd,MN,56401,,46.39483433,-94.29263703,(218) 822-4040
+us-mn-brainerd-st-andrew-c3277744,St. Andrew,1108,,Willow,St,,,,1108 Willow St,Brainerd,MN,56401,,46.34492387,-94.19212488,(218) 829-1340
+us-mn-brainerd-st-francis-52fdd1cb,St. Francis,404,,9th,St,,,,404 9th St,Brainerd,MN,56401,,46.36053042,-94.19572875,(218) 822-4040
+us-mn-brandon-our-lady-seven-dolors-catholic-church-90d4c0c2,Our Lady Seven Dolors Catholic Church,16920,,County Rd 7,,NW,,,16920 County Rd 7 NW,Brandon,MN,56315,,46.0680854,-95.5617347,+1-320-876-2240
+us-sd-brandon-risen-savior-parish-a9609894,Risen Savior,301,N,Splitrock,Blvd,,,,301 N Splitrock Blvd,Brandon,SD,57005,,43.59787598,-96.57359934,605-582-6902
+us-mn-brandon-st-ann-814ea9cb,St. Ann,402,,Nelson,Ave,N,,,402 Nelson Ave N,Brandon,MN,56315,0256,45.96604022,-95.59389679,(320) 834-5095
+us-mn-breckenridge-st-mary-of-the-presentation-2fae93b2,St. Mary of the Presentation,221,,4th,St,N,,,221 4th St N,Breckenridge,MN,56520,1496,46.26555098,-96.58966676,(218) 643-5173
+us-mn-brewster-sacred-heart-792006ba,Sacred Heart,516,,10th,St,,,,516 10th St,Brewster,MN,56119,,43.69583454,-95.46514476,(507) 842-5584
+us-sd-brookings-sd-state-university-pope-pius-xii-newman-center-abe1c54b,"SD State University, Pope Pius XII Newman Center",1321,,8th,St,,,,1321 8th St,Brookings,SD,57007,7019,44.31445286,-96.78229166,(605) 692-9461
+us-sd-brookings-st-thomas-more-97c0abaa,St. Thomas More,1700,,8th,St,S,,,1700 8th St S,Brookings,SD,57006,,44.29645538,-96.77671814,(605) 692-4361
+us-mn-brooklyn-center-st-alphonsus-cb183986,St. Alphonsus,7025,,Halifax,Ave,N,,,7025 Halifax Ave N,Brooklyn Center,MN,55429,,45.08258694,-93.33430876,763-561-5100
+us-mn-brooklyn-park-st-gerard-majella-e7f00065,St. Gerard Majella,9600,,Regent,Ave,N,,,9600 Regent Ave N,Brooklyn Park,MN,55443,,45.12961375,-93.34477081,763-424-8770
+us-mn-brooklyn-park-st-vincent-de-paul-52dfe928,St. Vincent de Paul,9100,,93rd,Ave,N,,,9100 93rd Ave N,Brooklyn Park,MN,55445,,45.12415318,-93.39905668,763-425-2210
+us-mn-brooks-st-joseph-4a700f88,St. Joseph,305,,Minnesota,Ave,,,,305 Minnesota Ave,Brooks,MN,56715,,47.8141525,-96.00353634,(218) 253-2188
+us-mn-brooten-st-donatus-3fd96970,St. Donatus,301,,Eastern,Ave,,,,301 Eastern Ave,Brooten,MN,56316,,45.49867982,-95.12188269,320-254-8218
+us-mn-browerville-christ-the-king-feeb7f5f,Parish of Christ the King,720,,Main,St,N,,,720 Main St N,Browerville,MN,56438,,46.08674103,-94.86776314,(320) 594-2291
+us-mn-browns-valley-st-anthony-21d2c2fd,St. Anthony,112,,2nd,St,S,,,112 2nd St S,Browns Valley,MN,56219,0359,45.59386733,-96.83067778,320-695-2621
+us-mn-brownsdale-church-of-our-lady-of-loretto-34c074ab,Our Lady of Loretto,404,W,Main,St,,,,404 W Main St,Brownsdale,MN,55918,,43.7411875,-92.8738125,15074331888
+us-mn-brownsville-st-patrick-a58614dd,St. Patrick,604,,Adams,St,,,,604 Adams St,Brownsville,MN,55919,,43.69522402,-91.27924565,(507) 482-6818
+us-mn-buckman-st-michael-9009209d,St. Michael,,,?9251 Hwy 25,,,,,?9251 Hwy 25,Buckman,MN,56364,,45.89689097,-94.09456222,(320) 468-6033
+us-mn-buffalo-st-francis-xavier-1a716756,St. Francis Xavier,300,,1st,Ave,NW,,,300 1st Ave NW,Buffalo,MN,55313,,45.17592951,-93.87806275,763-684-0075
+us-ia-buffalo-center-st-patrick-d475bbd1,St. Patrick,115,,5th,Ave,NW,,,115 5th Ave N.W,Buffalo Center,IA,50424,,43.39036838,-93.9478638,(641) 562-2620
+us-mn-buhl-our-lady-of-the-sacred-heart-7fc27c0c,Our Lady of the Sacred Heart,118,,Pennsylvania,Ave,,,,118 Pennsylvania Ave,Buhl,MN,55713,,47.49335256,-92.77979421,(218) 254-5703
+us-mn-burnsville-mary-mother-of-the-church-2c437860,"Mary, Mother of the Church",3333,,Cliff,Rd,E,,,3333 Cliff Rd E,Burnsville,MN,55337,,44.7891508,-93.22989035,952-890-0045
+us-mn-burnsville-risen-savior-0e830e1d,Risen Savior,1501,E,County,Rd,,,,1501 E County Rd 42,Burnsville,MN,55306,,44.73251718,-93.25518291,952-431-5222
+us-mn-butler-holy-cross-0685b356,Holy Cross,54216,,Co,Hwy,,,,54216 Co Hwy 148,Butler,MN,56567,,46.68716225,-95.35861513,(218) 385-2201
+us-mn-byron-christ-the-king-ded5fd83,Christ the King,202,,4th,St,NW,,,202 4th St NW,Byron,MN,55920,,44.03229595,-92.64910425,(507) 775-6455
+us-mn-caledonia-st-mary-729ed078,St. Mary,513,S,Pine,St,,,,513 S Pine St,Caledonia,MN,55921,,43.63095652,-91.4948903,(507) 725-3804
+us-mn-callaway-assumption-4dc656bf,Assumption,206,,Dakota,St,,,,206 Dakota St,Callaway,MN,56521,,46.98159138,-95.90493718,(218) 375-3571
+us-ia-calmar-st-aloysius-85f3ba27,St. Aloysius,304,S,Maryville,St,,,,304 S Maryville St,Calmar,IA,52132,,43.18014247,-91.86490066,(563) 562-3045
+us-mn-cambridge-christ-the-king-9fd27f56,Christ the King,305,,Fern,St,N,,,305 Fern St N,Cambridge,MN,55008,1096,45.57526026,-93.23373067,(763) 689-1221
+us-mn-canby-church-of-saint-peter-639c3b99,St. Peter,307,,4th,St,W,,,307 4th St W,Canby,MN,56220,,44.71309878,-96.27530999,507-223-7304
+us-mn-cannon-falls-st-pius-v-57016408,St. Pius V,410,,Colvill,St,W,,,410 Colvill St W,Cannon Falls,MN,55009,0367,44.50512916,-92.90616428,507-263-2578
+us-mn-canton-assumption-of-the-blessed-virgin-mary-02c67aa1,Assumption,207,N,May,,,,,207 N May,Canton,MN,55922,,43.53118283,-91.93277277,(507) 867-3922
+us-mn-carlos-st-nicholas-856d6705,St. Nicholas,9473,,Co Rd 3,,NE,,,9473 Co Rd 3 NE,Carlos,MN,56319,9998,45.99241191,-95.22391591,320-852-7041
+us-mn-carlton-st-francis-bc837ceb,St. Francis,31,,County Rd 1,,,,,31 County Rd 1,Carlton,MN,55718,,46.65306776,-92.41916417,(218) 384-4563
+us-mn-carver-st-nicholas-48c55049,St. Nicholas,412,W,4th,St,,,,412 W 4th St,Carver,MN,55315,,44.76223568,-93.62878902,952-227-4000
+us-mn-cass-lake-st-charles-eb06ece5,St. Charles,308,,Central,Ave,NW,,,308 Central Ave NW,Cass Lake,MN,56633,,47.38071264,-94.60342968,(218) 246-8582 
+us-nd-casselton-st-leo-9be76eba,St. Leo,211,,Langer,Ave,N,,,211 Langer Ave N,Casselton,ND,58012,,46.90285001,-97.21051317,(701) 347-4609
+us-mn-centerville-st-genevieve-6980ca19,St. Genevieve,1683,,Sorel,St,,,,1683 Sorel St,Centerville,MN,55038,,45.16354995,-93.05796067,651-429-7937
+us-mn-centerville-st-john-the-baptist-campus-of-st-genevieve-bb3c9450,St. John the Baptist Campus of St. Genevieve,1683,,Sorel,St,,,,1683 Sorel St,Centerville,MN,55038,,45.157907,-92.9933889,651-429-7937
+us-mn-chanhassen-st-hubert-425e27b1,St. Hubert,8201,,Main,St,,,,8201 Main St,Chanhassen,MN,55317,,44.85507079,-93.53179237,952-934-9106
+us-mn-chaska-guardian-angels-01d5c581,Guardian Angels,215,W,2nd,St,,,,215 W 2nd St,Chaska,MN,55318,,44.78509383,-93.60275201,952-227-4000
+us-mn-chaska-guardian-angels-catholic-church-bd7c6144,Guardian Angels Catholic Church,215,W,2nd,St,,,,215 W 2nd St,Chaska,MN,55318,,44.7851596,-93.602783,+1-952-227-4000
+us-mn-chatfield-st-mary-701620db,St. Mary,405,,Bench,St,SW,,,405 Bench St SW,Chatfield,MN,55923,,43.84327439,-92.18893135,(507) 867-3922
+us-mn-chisholm-st-joseph-ec7df5fe,St. Joseph,113,,4th,St,SW,,,113 4th St SW,Chisholm,MN,55719,,47.48507827,-92.88109454,(218) 254-5703 or (218) 421-3365 (Rectory)
+us-mn-chokio-st-mary-f6afa669,St. Mary,401,,4th,St,W,,,401 4th St W,Chokio,MN,56221,0187,45.57254773,-96.18080989,(320) 324-2680
+us-mn-clara-city-st-clara-df637285,St. Clara,414,N,Main,,,,,414 N Main,Clara City,MN,56222,,44.95884735,-95.36962729,320-235-0118
+us-mn-claremont-st-francis-de-sales-c830ba55,St. Francis de Sales,326,,2nd,St,,,,326 2nd St,Claremont,MN,55927,,44.04589536,-93.00110432,(507) 374-6830
+us-mn-clarissa-st-joseph-3fbe50d1,St. Joseph,105,,John,St,S,,,105 John St S,Clarissa,MN,56440,,46.12806972,-94.9500813,218-756-2205
+us-wi-clear-lake-st-john-the-baptist-173c3364,St. John,811,,4th,St,,,,811 4th St,Clear Lake,WI,54005,,45.24631401,-92.27305135,(715) 265-7133
+us-mn-clear-lake-st-marcus-67de0291,St. Marcus,8701,,Main,Ave,,,,8701 Main Ave,Clear Lake,MN,55319,,45.44324568,-94.00036077,(320) 743-2481
+us-sd-clear-lake-saint-mary-parish-d915f3f9,St. Mary,408,,3rd,St,W,,,408 3rd St W,Clear Lake,SD,57226,,44.7563716,-96.68499827,605-874-2080
+us-sd-clear-lake-st-mary-catholic-church-804c65e7,St. Mary Catholic Church,408,,3rd Str,,,,,408 3rd Str,Clear Lake,SD,57226,,45.4076576,-96.85934,605-874-2080
+us-mn-clearwater-st-luke-d3c6f470,St. Luke,17545,,Huber,Ave,NW,,,17545 Huber Ave NW,Clearwater,MN,55320,,45.4068671,-94.0566999,+1-320-558-2124
+us-mn-clements-st-joseph-oratory-d7b5cdac,Oratory of St. Joseph,130,,Ash,St,,,,130 Ash St,Clements,MN,56224,1063,44.38101122,-95.05602775,Morgan 507-249-3192 Sleepy Eye 507-794-4171
+us-mn-cleveland-nativity-catholic-church-9b9892ff,Nativity of Mary,200,W,Main,St,,,,200 W Main St,Cleveland,MN,56017,0187,44.32307635,-93.84301448,507-243-3166
+us-mn-clontarf-st-malachy-c1666b90,St. Malachy,300,,Armagh,St,SW,,,300 Armagh St SW,Clontarf,MN,56226,0218,45.37403835,-95.67942353,(320) 842-4271
+us-mn-cloquet-holy-family-mission-35b014a1,Holy Family,280,,Reservation,Rd,,,,280 Reservation Rd,Cloquet,MN,55720,,46.74702397,-92.49107703,(218) 879-6793
+us-mn-cloquet-queen-of-peace-c3cd39ab,Queen of Peace,102,,4th,St,,,,102 4th St,Cloquet,MN,55720,,46.71941458,-92.45902506,(218) 879-6793
+us-mn-cohasset-st-augustine-catholic-church-3edb44da,St. Augustine Catholic Church,601,NW,2nd,Ave,,,,601 NW 2nd Ave,Cohasset,MN,55721,,47.26652855,-93.62274887,(218) 326-2843
+us-mn-cold-spring-st-boniface-2afffc8b,St. Boniface,501,,Main,St,,,,501 Main St,Cold Spring,MN,56320,2396,45.45618772,-94.43111174,(320) 204-1111
+us-mn-coleraine-mary-immaculate-d053f0b6,Mary Immaculate,10,,Corey,St,,,,10 Corey St (US-169),Coleraine,MN,55722,,47.28908382,-93.42127252,(218) 885-1126
+us-mn-collegeville-chapel-of-stella-maris-4b7996b1,Chapel of Stella Maris,,,Collegeville Minnesota 56374,,,,,Collegeville Minnesota 56374,Collegeville,MN,56374,,45.5720625,-94.3881875,
+us-mn-collegeville-society-of-st-bede-the-venerable-7a824f9f,Society of St. Bede the Venerable,2900,,Abbey Plaza,,,,,2900 Abbey Plaza,Collegeville,MN,56374,,45.5804375,-94.3921875,
+us-mn-collegeville-st-john-the-baptist-02ed37c3,St. John the Baptist,14241,,Fruit Farm,Rd,,,,14241 Fruit Farm Rd,Collegeville,MN,56374,,45.58382361,-94.40231895,(320) 363-2569
+us-mn-collegeville-saint-johns-abbey-c2362ca7,St. John's Abbey,2900,,Abbey Plaza,,,,,2900 Abbey Plaza,Collegeville,MN,56321,,45.57997104,-94.39220638,(320) 363-2011
+us-mn-collegeville-st-johns-university-school-of-theology-9e3a35d4,St. John’s University School of Theology,31802,,County Rd 159,,,,,31802 County Rd 159,Collegeville,MN,31802,,45.5804375,-94.3921875,13203632622
+us-sd-colman-st-peter-e41d19ea,St. Peter,200,N,Allen,Ave,,,,200 N Allen Ave,Colman,SD,57017,0240,43.98348874,-96.80861337,605-428-3990
+us-mn-cologne-st-bernards-catholic-church-8f3d0d63,St Bernards Catholic Church,210,,Church,St,E,,,210 Church St E,Cologne,MN,55322,,44.7741667,-93.78,+1-952-466-2031
+us-mn-cologne-st-bernard-75bdd587,St. Bernard,212,,Church,St,E,,,212 Church St E,Cologne,MN,55322,,44.7742564,-93.78009947,952-856-1051
+us-mn-columbia-heights-immaculate-conception-07417883,Immaculate Conception,4030,,Jackson,St,NE,,,4030 Jackson St NE,Columbia Heights,MN,55421,,45.04186942,-93.25096606,763-788-9062
+us-mn-comfrey-st-paul-d300a816,St. Paul,209,N,Field,St,,,,209 N Field St,Comfrey,MN,56019,,44.11165393,-94.90616439,(507) 877-2361
+us-mn-cook-st-mary-8dba7abc,St. Mary,124,,5th,St,SE,,,124 5th St SE,Cook,MN,55723,,47.85210326,-92.67946406,(218) 666-5334
+us-mn-coon-rapids-the-church-of-the-epiphany-d0b3022e,The Church of the Epiphany,1900,,111th,Ave,NW,,,1900 111th Ave NW,Coon Rapids,MN,55433,,45.1708358,-93.3163763,+1-763-755-1020
+us-mn-coon-rapids-the-church-of-the-epiphany-817362ee,The Church of the Epiphany,1900,,111th,Ave,NW,,,1900 111th Ave NW,Coon Rapids,MN,55433,4298,45.16982647,-93.31427702,763-755-1020
+us-wi-coon-valley-st-mary-d972539d,St. Mary,900,,Central,Ave,,,,900 Central Ave,Coon Valley,WI,54623,,43.70221151,-91.00853834,(608) 452-3841
+us-mn-corcoran-st-thomas-the-apostle-4837e926,St. Thomas the Apostle,20000,,County Rd 10,,,,,20000 County Rd 10,Corcoran,MN,55340,,45.09469544,-93.54485138,763-420-2385
+us-mn-cottage-grove-st-rita-005cd136,St. Rita,8694,,80th,St,S,,,8694 80th St S,Cottage Grove,MN,55016,,44.8340314,-92.93178332,651-459-4596
+us-mn-cottonwood-st-mary-d6ebd471,St. Mary,255,W,4th,St,S,,,255 W 4th St S,Cottonwood,MN,56229,,44.60540088,-95.67770464,(507) 423-5220
+us-mn-cottonwood-st-marys-catholic-church-04e456d3,St. Mary’s Catholic Church,249,E,4th,St,,,,249 E 4th St,Cottonwood,MN,56229,,44.6054404,-95.6778299,+1-507-423-5220
+us-ia-cresco-notre-dame-c3de60c2,Notre Dame,223,,2nd,Ave,E,,,223 2nd Ave E,Cresco,IA,52136,,43.37301744,-92.11311767,(563) 547-3565
+us-mn-cromwell-immaculate-conception-5c921a27,Immaculate Conception,5944,,,Hwy,,,,5944 Hwy 210,Cromwell,MN,55726,,46.67917694,-92.92246686,(218) 476-2367 or (218) 476-1617 (Rectory)
+us-mn-crookston-cathedral-of-the-immaculate-conception-1e274c45,Cathedral of the Immaculate Conception,702,,Summit,Ave,,,,702 Summit Ave,Crookston,MN,56716,2736,47.77538725,-96.58979911,(218) 281-1735
+us-mn-crookston-mount-st-benedict-monastery-c394ab64,Mount St. Benedict Monastery,620,E,Summit,Ave,,,,620 E Summit Ave,Crookston,MN,56716,,47.7738125,-96.5908125,12182813441
+us-mn-crosby-st-joseph-ab8e1eaf,St. Joseph,617,,Poplar,St,,,,617 Poplar St,Crosby,MN,56441,,46.47817982,-93.96503465,(218) 546-6559
+us-mn-crosslake-immaculate-heart-20ffdfc6,Immaculate Heart,35208,,Co Rd 37,,,,,35208 Co Rd 37,Crosslake,MN,56442,,46.66472247,-94.10037694,(218) 692-3731
+us-mn-crystal-st-raphael-6f635e40,St. Raphael,7301,,Bass Lake,Rd,,,,7301 Bass Lake Rd,Crystal,MN,55428,,45.05415038,-93.37522069,763-537-8401
+us-mn-currie-immaculate-heart-of-mary-dba2c80d,Immaculate Heart of Mary Parish,501,,Mill,St,,,,501 Mill St,Currie,MN,56123,,44.06677607,-95.66635006,(507) 763-3545
+us-mn-dakota-holy-cross-03b82a66,Holy Cross,180,,Washington,St,,,,180 Washington St,Dakota,MN,55925,,43.91168349,-91.3588705,(507) 895-4720
+us-mn-danvers-visitation-oratory-2be12385,Catholic Church of the Visitation,201,,Washington,Ave,,,,201 Washington Ave,Danvers,MN,56231,,45.28314105,-95.748925,(320) 842-4271
+us-mn-darwin-st-johns-d509444f,St. John,106,N,4th,St,,,,106 N 4th St,Darwin,MN,55324,6016,45.09484099,-94.40521644,(320) 693-9496
+us-mn-dawson-st-james-fd6d0570,St. James,1012,,Locust,St,,,,1012 Locust St,Dawson,MN,56232,,44.93176088,-96.06077528,320-269-5954
+us-mn-dayton-st-john-the-baptist-1099b8b1,St. John the Baptist,18380,,Columbus,St,,,,18380 Columbus St,Dayton,MN,55327,,45.24247992,-93.51480987,763-428-2828
+us-mn-de-graff-st-bridget-9a2337a4,St. Bridget,501,S,3rd,St,,,,501 S 3rd St,De Graff,MN,56271,,45.259136,-95.46877275,(320) 842-4271
+us-ia-decorah-st-benedict-6b2843cd,St. Benedict,307,W,Main,St,,,,307 W Main St,Decorah,IA,52101,,43.3031783,-91.78884822,(563) 382-9631
+us-mn-deephaven-st-therese-f8df7b95,St. Therese,18323,,Minnetonka,Blvd,,,,18323 Minnetonka Blvd,Deephaven,MN,55391,,44.94003633,-93.51142583,952-473-4422
+us-mn-deer-river-st-mary-c558455c,St. Mary,15,,1st,Ave,NE,,,15 1st Ave NE,Deer River,MN,56636,,47.33401549,-93.79354977,(218) 246-8582
+us-mn-deerfield-church-of-corpus-christi-c6fd3efe,Corpus Christi,12,,,,,,,12,Deerfield,MN,55049,,44.1674375,-93.3834375,15074516353
+us-mn-deerwood-church-of-st-joseph-f6b0802c,St. Joseph,23753,,Forest,St,,,,23753 Forest St,Deerwood,MN,23753,,46.4744375,-93.9000625,12185466559
+us-mn-delano-st-mary-of-czestochowa-b3288c98,St. Mary of Czestochowa,1867,,95th,St,SE,,,1867 95th St SE,Delano,MN,55328,,45.0138066,-93.85134281,952-955-1139
+us-mn-delano-the-church-of-st-maximilian-kolbe-st-joseph-campus-9c273930,The Church of St. Maximilian Kolbe ~ St. Joseph Campus,401,,River,St,N,,,401 River St N PO Box 470,Delano,MN,55328,,45.04474806,-93.78968885,763-972-2077
+us-mn-delano-church-of-st-maximilian-kolbe-st-peter-campus-4cb55502,The Church of St. Maximilian Kolbe-St Peter Campus,217,,2nd,St,S,,,217 2nd St S,Delano,MN,55328,,45.03863088,-93.78817722,763-972-2077
+us-sd-dell-rapids-st-mary-56a080dc,St. Mary,606,,8th,St,,,,606 8th St,Dell Rapids,SD,57022,1398,43.82753016,-96.70718014,(605) 428-3990
+us-mn-dent-sacred-heart-a02d1674,Sacred Heart,36963,,State Hwy 108,,,,,36963 State Hwy 108,Dent,MN,56528,0068,46.55711746,-95.7208271,(218) 758-2700
+us-mn-detroit-lakes-holy-rosary-catholic-community-b5db6d69,Holy Rosary,1043,,Lake,Ave,,,,1043 Lake Ave,Detroit Lakes,MN,56501,,46.81480748,-95.84648041,(218) 847-1393
+us-mn-detroit-lakes-church-of-the-holy-rosary-721644ed,Holy Rosary,1043,,Lake,Ave,,,,1043 Lake Ave,Detroit Lakes,MN,56501,,46.8145625,-95.8468125,12188471393
+us-mn-detroit-lakes-st-mary-of-the-lakes-f4b8958d,St. Mary of the Lakes,20996,,County,Hwy,,,,20996 County Hwy 20 Detroit Lakes,Detroit Lakes,MN,56501,,46.71705708,-95.96075201,(218) 439-3937
+us-mn-dilworth-st-elizabeth-24dd747d,St. Elizabeth,207,N,Main,St,,,,207 N Main St,Dilworth,MN,56529,,46.87904207,-96.7027905,(218) 287-2705
+us-wi-dodge-sacred-heart-1a5a8588,Most Sacred Heart,,,N20555 Co Rd G,,,,,N20555 Co Rd G,Dodge,WI,54625,,44.1346805,-91.52041474,(608) 539-3704
+us-mn-dodge-center-st-john-baptist-de-la-salle-a09b6eef,St. John Baptist de La Salle,20,,2nd,St,NE,,,20 2nd St NE,Dodge Center,MN,55927,,44.03003088,-92.85355382,(507) 374-6830
+us-ia-dorchester-st-mary-2460dce2,St. Mary,594,,Waterloo Creek,Dr,,,,594 Waterloo Creek Dr,Dorchester,IA,52140,,43.47111019,-91.51131411,(563) 497-3332
+us-nd-drayton-st-edward-a7f6c1d9,St. Edward,211,N,Main,St,,,,211 N Main St,Drayton,ND,58225,,48.56388644,-97.17727667,(701) 454-6171 
+us-mn-duluth-cathedral-of-our-lady-of-the-rosary-300edf8f,Cathedral of Our Lady of the Rosary,2801,E,4th,St,,,,2801 E 4th St,Duluth,MN,55812,,46.81648787,-92.06823414,(218) 728-3646
+us-mn-duluth-holy-family-f2cec950,Holy Family,2430,W,3rd,St,,,,2430 W 3rd St,Duluth,MN,55806,,46.76535556,-92.13168516,(218) 722-4445
+us-mn-duluth-our-lady-queen-of-peace-chapel-college-of-st-scholastica-b5a3c7a2,Our Lady Queen of Peace Chapel (College of St. Scholastica),1200,,Kenwood,Ave,,,,1200 Kenwood Ave,Duluth,MN,55811,,46.81534028,-92.10624388,(218) 723-5933
+us-mn-duluth-church-of-our-lady-of-mercy-41876101,Our Lady of Mercy,2002,,,Ave,,,,2002 Ave,Duluth,MN,55802,,46.7628125,-92.0826875,12187223078
+us-mn-duluth-st-mary-star-of-the-sea-00bec7bf,St Mary Star of the Sea,325,E,3rd,St,,,,325 E 3rd St,Duluth,MN,55805,,46.79280074,-92.09690463,(218) 722-3078
+us-mn-duluth-st-benedict-4265a4b5,St. Benedict,1419,,St Benedict,St,,,,1419 St Benedict St,Duluth,MN,55811,,46.82330748,-92.10181155,(218) 724-4828
+us-mn-duluth-st-elizabeth-6ffa96cb,St. Elizabeth,614,,99th,Ave,W,,,614 99th Ave W,Duluth,MN,55808,,46.6629944,-92.2246993,(218) 624-0125
+us-mn-duluth-st-james-6834af86,St. James,721,N,57th,Ave,W,,,721 N 57th Ave W,Duluth,MN,55807,,46.74403417,-92.16946546,(218) 624-0125
+us-mn-duluth-st-john-the-evangelist-515f4e0f,St. John the Evangelist,4230,,St Johns,Ave,,,,4230 St Johns Ave,Duluth,MN,55803,,46.85232434,-92.0805622,(218) 724-6332
+us-mn-duluth-st-joseph-fe01b710,St. Joseph,151,W,Linden,St,,,,151 W Linden St,Duluth,MN,55811,,46.80225619,-92.1388179,(218) 481-7161
+us-mn-duluth-st-joseph-gnesen-3e8568eb,St. Joseph,6110,,Church,Rd,,,,6110 Church Rd,Duluth,MN,55803,,46.95328226,-92.1325078,(218) 525-1902
+us-mn-duluth-st-lawrence-953c2584,St. Lawrence,2410,,Morris Thomas,Rd,,,,2410 Morris Thomas Rd,Duluth,MN,55811,,46.77842019,-92.15618657,(218) 722-2259
+us-mn-duluth-church-of-st-margaret-mary-f8f0ed7b,St. Margaret Mary,1467,,88th,Ave,W,,,1467 88th Ave W,Duluth,MN,55808,,46.6849375,-92.2110625,12186262379
+us-mn-duluth-st-michael-89a7db0c,St. Michael,4901,E,Superior,St,,,,4901 E Superior St,Duluth,MN,55804,,46.83215676,-92.02516246,(218) 525-1902
+us-mn-duluth-st-raphael-4446cfa4,St. Raphael,5779,,Seville,Rd,,,,5779 Seville Rd,Duluth,MN,55811,,46.85157334,-92.28763806,(218) 729-7537
+us-mn-duluth-university-of-mn-duluth-7130f4fd,University of Minnesota Duluth,421,W,St Marie,St,,,,421 W St Marie St,Duluth,MN,55812,,46.82234449,-92.08199324,(218) 728-3757
+us-wi-durand-holy-rosary-4e9f5d21,Holy Rosary,,,N6235 County Rd V,,,,,N6235 County Rd V,Durand,WI,54736,,44.6343248,-91.87314115,(715) 672-5640
+us-wi-durand-st-marys-assumption-c505cdc5,St. Mary’s Assumption,911,W,Prospect,St,,,,911 W Prospect St,Durand,WI,54736,,44.622444,-91.972545,(715) 672-5640
+us-mn-eagan-st-john-neumann-a5569f56,St. John Neumann,4030,,Pilot Knob,Rd,,,,4030 Pilot Knob Rd,Eagan,MN,55122,,44.81047417,-93.16569114,651-454-2079
+us-mn-eagan-st-thomas-becket-312b415b,St. Thomas Becket,4455,S,Robert,Trl,,,,4455 S Robert Trail,Eagan,MN,55123,,44.79476986,-93.10919387,(651) 683-9808
+us-mn-east-chain-holy-family-73405f1d,Holy Family,2481,,50th,St,,,,2481 50th St,East Chain,MN,56031,,43.55771711,-94.3704686,(507) 235-5535
+us-mn-east-grand-forks-sacred-heart-6bc320d4,Sacred Heart,200,,3rd,St,NW,,,200 3rd St NW,East Grand Forks,MN,56721,,47.92787407,-97.02278644,(218) 773-0877
+us-mn-east-gull-lake-st-thomas-of-the-pines-chapel-c3fcb066,St. Thomas of the Pines Church,11266,,Pine Beach Peninsula,Rd,,,,11266 Pine Beach Peninsula Rd,East Gull Lake,MN,56401,,46.39169029,-94.38089765,(218) 822-4040
+us-mn-easton-our-lady-of-mount-carmel-334e62f6,Our Lady of Mount Carmel,27,,Main,St,,,,27 Main St,Easton,MN,56025,,43.76303504,-93.90098333,(507) 787-2303
+us-wi-eau-galle-church-of-st-henry-4cabdebf,St. Henry,460,,County Rd D,,,,,460 County Rd D,Eau Galle,WI,54737,,44.6969375,-92.0203125,17152834448
+us-wi-eau-galle-st-henry-66c99501,St. Henry,,,N460 County Rd D,,,,,N460 County Rd D,Eau Galle,WI,54737,,44.69421,-92.0118256,(715) 283-4448
+us-mn-eden-prairie-pax-christi-16b64a23,Pax Christi,12100,,Pioneer,Trl,,,,12100 Pioneer Trail,Eden Prairie,MN,55347,,44.83055955,-93.43072142,952-941-3150
+us-mn-eden-valley-assumption-ba231190,Assumption,464,,State,St,N,,,464 State St N,Eden Valley,MN,55329,,45.32695319,-94.54604962,(320) 453-2788
+us-mn-edina-our-lady-of-grace-1680c127,Our Lady of Grace,5071,,Eden,Ave,,,,5071 Eden Ave,Edina,MN,55436,2364,44.90685818,-93.35239933,(952) 929-3317
+us-mn-edina-st-patricks-catholic-church-7f8d8d32,St. Patrick,6820,,St Patrick's,Ln,,,,6820 St Patrick's Ln,Edina,MN,55439,,44.87919858,-93.38084017,952-941-3164
+us-mn-elba-church-of-st-aloysius-48efe58c,St. Aloysius,150,N,Main,St,,,,150 N Main St,Elba,MN,55910,,44.0920625,-92.0171875,15079323295
+us-mn-elbow-lake-st-olaf-17482c4a,St. Olaf,518,,Division,St,E,,,518 Division St E,Elbow Lake,MN,56531,4420,45.99251386,-95.96945982,(218) 685-5372
+us-mn-elizabeth-st-elizabeth-04f88ab8,St. Elizabeth,706,W,Pleasant,Ave,,,,706 W Pleasant Ave,Elizabeth,MN,56533,9998,46.38083621,-96.13700208,(218) 736-5230
+us-mn-elk-river-church-of-saint-andrew-6d48117e,Church of Saint Andrew,566,,4th,St,NW,,,566 4th St NW,Elk River,MN,55330,,45.3061891,-93.5652476,+1-763-441-1483
+us-mn-elk-river-saint-andrew-catholic-church-b0544244,St. Andrew,566,,4th,St,NW,,,566 4th St NW,Elk River,MN,55330,1496,45.30639151,-93.56396519,(763) 441-1483
+us-mn-elko-new-market-st-nicholas-eb197684,St. Nicholas,51,,Church,St,,,,51 Church St,Elko New Market,MN,55054,0009,44.57242692,-93.35036971,(952) 461-2403
+us-sd-elkton-our-lady-of-good-counsel-parish-44f6fe92,Our Lady of Good Counsel Parish,202,W,7th,St,,,,202 W 7th St,Elkton,SD,57026,0337,44.23084185,-96.483122,605-997-2610
+us-mn-ellendale-church-of-st-aidan-e6d8e9fc,St. Aidan,,,5th Ave W,,,,,5th Ave W,Ellendale,MN,56026,,43.8730625,-93.3016875,15074658217
+us-wi-ellsworth-st-francis-catholic-church-870f8439,St Francis Catholic Church,231,W,Woodworth,St,,,,231 W Woodworth St,Ellsworth,WI,54011,,44.7282473,-92.480928,+1-715-273-4774
+us-wi-ellsworth-st-francis-of-assisi-4809a537,St. Francis of Assisi,231,W,Woodworth,St,,,,231 W Woodworth St,Ellsworth,WI,54011,,44.72910457,-92.4816836,(715) 273-4774
+us-mn-ellsworth-church-of-st-mary-c3fac1b2,St. Mary,204,N,Broadway,St,,,,204 N Broadway St,Ellsworth,MN,56129,,43.5224375,-96.0180625,15072838502
+us-ia-elma-immaculate-conception-d1f596a1,Immaculate Conception,207,,7th,St,,,,207 7th St,Elma,IA,50628,,43.35822383,-92.55167948,(641) 393-2520
+us-ia-elma-church-of-the-immaculate-conception-594dc994,Immaculate Conception,207,,7th,St,,,,207 7th St,Elma,IA,50628,,43.2453125,-92.4434375,16413932520
+us-wi-elmwood-sacred-heart-cb1fc544,Sacred Heart,,,S105 Sabin,Ave,,,,S105 Sabin Ave,Elmwood,WI,54767,,44.845337,-92.237314,(715) 778-5519
+us-mn-elrosa-ss-peter-and-paul-d30c4fb0,Sts. Peter and Paul,302,,State,St,,,,302 State St,Elrosa,MN,56325,,45.56182927,-94.94678125,320-254-8218
+us-mn-ely-st-anthony-f1b75159,St. Anthony,231,E,Camp,St,,,,231 E Camp St,Ely,MN,55731,,47.90418093,-91.86276975,(218) 827-2291 or (218) 365-4017
+us-mn-elysian-st-andrew-47380988,St. Andrew,305,,Park,Ave,NE,,,305 Park Ave NE,Elysian,MN,56028,,44.19927705,-93.67028676,507-267-4928
+us-mn-emily-st-emily-62dc6397,St. Emily,39922,,Lake,St,,,,39922 Lake St,Emily,MN,56447,,46.72984256,-93.95642804,(218) 763-2101
+us-wi-erin-st-patrick-495bee47,St. Patrick,1880,,County Rd G,,,,,1880 County Rd G,Erin,WI,54017,,45.07962553,-92.42101741,(715) 246-5596
+us-ia-estherville-st-patrick-35e7bc87,St. Patrick,903,,Central,Ave,,,,903 Central Ave,Estherville,IA,51334,,43.40218532,-94.83246227,(712) 362-5851
+us-wi-ettrick-st-bridget-65d082bd,St. Bridget,22650,,Washington,St,,,,22650 Washington St,Ettrick,WI,54627,,44.1667312,-91.267148,(608) 525-3811
+us-mn-euclid-st-mary-d50aeb29,St. Mary,13439,,US Hwy 75,,SW,,,13439 US Hwy 75 SW,Euclid,MN,56722,,47.97186983,-96.63863355,(218) 745-4511
+us-mn-eveleth-resurrection-1b31ed39,Resurrection,301,,Adams,Ave,,,,301 Adams Ave,Eveleth,MN,55734,,47.46264329,-92.53822943,(218) 744-3277
+us-mn-excelsior-st-john-the-baptist-bee78329,St. John the Baptist,680,,Mill,St,,,,680 Mill St,Excelsior,MN,55331,,44.8964495,-93.55839449,952-474-8868
+us-mn-eyota-holy-redeemer-839a8e72,Holy Redeemer,22,,2nd,St,SE,,,22 2nd St SE,Eyota,MN,55934,,43.98712574,-92.22882253,(507) 932-3294
+us-mn-fairfax-st-andrew-b102a7aa,St. Andrew,15,SE,1st,St,,,,15 SE 1st St P.O Box C,Fairfax,MN,55332,,44.52802989,-94.71988619,(507) 426-7739
+us-mn-fairmont-st-john-vianney-9962a058,St. John Vianney,901,S,Prairie,Ave,,,,901 S Prairie Ave,Fairmont,MN,56031,,43.6441781,-94.45619252,(507) 235-5535
+us-nd-fairmount-st-anthonys-church-2fa89062,St Anthony’s Church,203,N,2nd,St,,,,203 N 2nd St,Fairmount,ND,58030,,46.0568829,-96.602521,+1-701-474-5518
+us-nd-fairmount-st-anthony-5c3b4b58,St. Anthony,299,,2nd,St,N,,,299 2nd St N,Fairmount,ND,58030,,46.05688924,-96.60250722,(701) 242-7327
+us-nd-fargo-saint-mary-33dd5b33,Cathedral of St. Mary,604,,Broadway,,N,,,604 Broadway N,Fargo,ND,58102,,46.88242786,-96.78845652,(701) 235-4289
+us-nd-fargo-holy-spirit-6ef1930f,Holy Spirit,1420,,7th,St,N,,,1420 7th St N,Fargo,ND,58102,,46.89637005,-96.7895111,(701) 232-5900
+us-nd-fargo-church-of-the-nativity-74ed9c3f,Nativity,1825,,11th,St,S,,,1825 11th St S,Fargo,ND,58103,4915,46.85110482,-96.79765436,(701) 232-2414
+us-nd-fargo-shanley-high-school-3e3bb1d7,Shanley High School,5600,,25th,St,S,,,5600 25th St S,Fargo,ND,58104,,46.7984255,-96.8174722,+1-701-893-3200
+us-nd-fargo-st-anthony-of-padua-fb6e7be6,St. Anthony of Padua,710,,10th,St,S,,,710 10th St S,Fargo,ND,58103,,46.86713736,-96.79420553,(701) 237-6063
+us-nd-fargo-st-pauls-newman-center-ndsu-campus-fargo-59f001fc,St. Paul's Newman Center,1141,,University,Dr,N,,,1141 University Dr N,Fargo,ND,58102,,46.89003149,-96.797714,(701) 235-0142
+us-nd-fargo-sts-anne-joachim-b6de2f3b,Sts. Anne and Joachim,5202,,25th,St,S,,,5202 25th St S,Fargo,ND,58104,,46.80259817,-96.81729796,(701) 235-5757
+us-mn-faribault-divine-mercy-1be1632b,Divine Mercy,139,,Mercy,Dr,,,,139 Mercy Dr,Faribault,MN,55021,,44.25933575,-93.2695637,507-334-7706
+us-mn-farmington-st-michael-26e15fae,St. Michael,22120,,Denmark,Ave,,,,22120 Denmark Ave,Farmington,MN,55024,,44.62962999,-93.15589781,651-463-3360
+us-mn-federal-dam-church-of-the-sacred-heart-a9d6d478,Sacred Heart,,,Birch,St,,,,Birch St,Federal Dam,MN,56636,,47.2448125,-94.2166875,12182468582
+us-mn-fergus-falls-our-lady-of-victory-a6723f0c,Our Lady of Victory,207,N,Vine,St,,,,207 N Vine St,Fergus Falls,MN,56537,2041,46.28525168,-96.08067659,(218) 736-2429
+us-mn-fertile-church-of-st-joseph-765e56c3,St. Joseph,205,,Elm,St,SE,,,205 Elm St SE,Fertile,MN,56540,,47.5326875,-96.2756875,12189456649
+us-mn-fertile-st-joseph-9b08bb11,St. Joseph,10480,,438th,Ave,SW,,,10480 438th Ave SW,Fertile,MN,56540,,47.53059084,-96.26924815,(218)945-6649
+us-mn-fisher-st-francis-5e79af19,St. Francis,302,,Park,Ave,,,,302 Park Ave,Fisher,MN,56723,,47.79789715,-96.79980227,(218) 891-2249
+us-sd-flandreau-saints-simon-and-jude-2414e95c,Sts. Simon and Jude,105,S,Bates,St,,,,105 S Bates St,Flandreau,SD,57028,1809,44.04798903,-96.5890394,(605) 997-2610
+us-mn-flensburg-sacred-heart-58239292,Sacred Heart,18,,Pine,St,,,,18 Pine St,Flensburg,MN,56328,0020,45.95557872,-94.52948502,(320) 632-8243
+us-mn-floodwood-st-louis-6e7bef06,St. Louis,105,E,4th,Ave,,,,105 E 4th Ave,Floodwood,MN,55736,,46.92990251,-92.91427349,(218) 476-2367 or (218) 476-1617 (Rectory)
+us-mn-foley-st-elizabeth-of-hungary-ecbea775,St. Elizabeth of Hungary,16454,,125th,Ave,NE,,,16454 125th Ave NE,Foley,MN,56329,,45.80792271,-93.90547473,(320) 355-2454
+us-mn-foley-st-john-1960ca50,St. John,621,,Dewey,St,,,,621 Dewey St,Foley,MN,56329,0337,45.66630484,-93.90703022,(320) 968-7913
+us-mn-foley-st-joseph-a48cd06e,St. Joseph,33009,,Nature,Rd,,,,33009 Nature Rd,Foley,MN,56329,,45.83898774,-93.96900604,(320) 387-2255
+us-mn-foley-st-lawrence-5c6017d5,St. Lawrence,10915,,Duelm,Rd,NE,,,10915 Duelm Rd NE,Foley,MN,56329,9516,45.57241445,-93.93588866,(320) 968-7502
+us-mn-forest-city-church-of-st-gertrude-3a74874c,St. Gertrude,,,"650th Ave , 55355",,,,,"650th Ave , 55355",Forest City,MN,31608,,45.2050625,-94.4595625,13206937801
+us-mn-forest-lake-church-of-st-peter-f0216db0,Church of St. Peter,1250,S,Shore,Dr,,,,1250 S Shore Dr,Forest Lake,MN,55025,,45.2660606,-92.9738548,+1-651-982-2200
+us-mn-forest-lake-st-peter-6611b0d4,St. Peter,1250,S,Shore,Dr,,,,1250 S Shore Dr,Forest Lake,MN,55025,,45.26581927,-92.97436752,651-982-2200
+us-mn-foreston-st-louis-bertrand-fb9f361f,St. Louis Bertrand,187,,1st,St,S,,,187 1st St S,Foreston,MN,56330,0128,45.73297406,-93.71297176,(320) 294-5460
+us-mn-fort-ripley-st-mathias-29884a39,St. Mathias,4529,,County Rd 121,,,,,4529 County Rd 121,Fort Ripley,MN,56449,,46.22074481,-94.25171454,(218) 829-1340
+us-mn-fosston-st-mary-5a48ae3a,St. Mary,725,,Sixth,St,NE,,,725 Sixth St NE,Fosston,MN,56542,,47.58024036,-95.738808,(218) 435-6484
+us-wi-fountain-city-immaculate-conception-6c892146,Immaculate Conception,2,N,Hill,St,,,,2 N Hill St,Fountain City,WI,54629,,44.1319078,-91.7187627,(608) 687-3496
+us-wi-fountain-city-st-marys-immaculate-conception-catholic-church-56db998d,St Mary's Immaculate Conception Catholic Church,2,N,Hill,St,,,,2 N Hill St,Fountain City,WI,54629,,44.1316084,-91.716227,+1-608-626-2621
+us-wi-foxboro-st-william-d31ab255,St. William,3095,E,County,Rd,,,,3095 E County Rd B,Foxboro,WI,54836,,46.53590771,-92.14652741,715-394-7919
+us-mn-franklin-sacred-heart-e55facb7,Sacred Heart,551,,2nd,Ave,E,,,551 2nd Ave E,Franklin,MN,55333,,44.53003159,-94.87774511,(507) 557-2759
+us-mn-frazee-sacred-heart-5b355573,Sacred Heart,202,W,Maple,Ave,,,,202 W Maple Ave,Frazee,MN,56544,,46.72760404,-95.7039302,(218) 334-4221
+us-wi-frederic-st-dominic-74713bbb,St. Dominic,103,W,Birch,St,,,,103 W Birch St,Frederic,WI,54837,,45.66270174,-92.46670508,(715) 327-8119
+us-mn-freeport-sacred-heart-49fb5243,Sacred Heart,106,,3rd,Ave,NE,,,106 3rd Ave NE,Freeport,MN,56331,,45.66290537,-94.68641899,(320) 836-2191
+us-mn-freeport-st-francis-of-assisi-b8ec9ff0,St. Francis of Assisi,44055,,State Hwy 238,,,,,44055 State Hwy 238 (Saint Francis),Freeport,MN,56331,,45.76060051,-94.58630537,(320) 573-2132
+us-mn-fridley-st-william-a960b256,St. William,6120,,5th,St,NE,,,6120 5th St NE,Fridley,MN,55432,,45.07961697,-93.26188164,763-571-5600
+us-mn-fulda-st-gabriel-eb20b589,St. Gabriel,309,SW,Lake,Ave,,,,309 SW Lake Ave,Fulda,MN,56131,,43.86687119,-95.60114717,(507) 425-2369
+us-wi-galesville-st-marys-catholic-church-0d526ccf,St Mary's Catholic Church,20344,W,Ridge,Ave,,,,20344 W Ridge Ave,Galesville,WI,54630,,44.0840754,-91.3584547,+1-608-534-6652
+us-wi-galesville-st-mary-29691cf9,St. Mary,20344,W,Ridge,Ave,,,,20344 W Ridge Ave,Galesville,WI,54630,,44.08360814,-91.35675686,(608) 534-6652
+us-sd-garretson-st-rose-of-lima-e796139f,St. Rose of Lima,520,,Center,Ave,,,,520 Center Ave,Garretson,SD,57030,0393,43.71604349,-96.50078158,(605) 594-3750
+us-mn-garrison-our-lady-of-fatima-10b0ee91,Our Lady of Fatima,27332,,Central,St,,,,27332 Central St,Garrison,MN,56450,,46.2945593,-93.82602239,(218) 546-6559
+us-sd-gary-church-of-st-peter-da886e9d,St. Peter,612,,Herrick,St,,,,612 Herrick St,Gary,SD,57237,,44.7880625,-96.4598125,16058742080
+us-mn-gaylord-st-michael-2f03ffe5,St. Michael,362,,5th,St,,,,362 5th St,Gaylord,MN,55334,,44.55540022,-94.22185719,(507) 964-5413
+us-mn-geneva-church-of-st-mary-bfbc683a,St. Mary,,,850th & 310th,St,,,,850th & 310th St,Geneva,MN,56026,,43.8049375,-93.1701875,15074658217
+us-wi-genoa-st-charles-borromeo-fd38b7b3,St. Charles Borromeo,707,,Eagle,St,,,,707 Eagle St,Genoa,WI,54632,,43.5748024,-91.2248,(608) 689-2642
+us-wi-genoa-st-charles-borromeo-catholic-church-291e457c,St. Charles Borromeo Catholic Church,703,,Walnut,St,,,,703 Walnut St,Genoa,WI,54632,,43.5732462,-91.2252687,+1-608-689-2642
+us-mn-gentilly-st-peter-de81e0b1,St. Peter,25823,,185th,Ave,SW,,,25823 185th Ave SW,Gentilly,MN,56716,,47.7923789,-96.44834746,(218) 281-1688
+us-mn-georgetown-st-john-35a18ebc,St. John the Baptist,127,,Main,St,,,,127 Main St,Georgetown,MN,56546,,47.07909852,-96.79583565,(218) 233-3934
+us-mn-ghent-st-eloi-e4471cce,St. Eloi,306,W,McQuestion,,,,,306 W McQuestion,Ghent,MN,56239,,44.51637104,-95.8953466,507-428-3285
+us-mn-gibbon-st-willibrord-e7790d6a,St Willibrord's,1032,,Ash,Ave,,,,1032 Ash Ave P.O Box 436,Gibbon,MN,55335,,44.53304018,-94.52814389,(507) 426-7739
+us-mn-gilbert-st-joseph-80d69001,St. Joseph,515,,Summit,St,N,,,515 Summit St N,Gilbert,MN,55741,,47.48430249,-92.47393186,(218) 744-3277
+us-mn-gilman-ss-peter-and-paul-989c060c,Sts. Peter and Paul,10495,,Golden Spike,Rd,NE,,,10495 Golden Spike Rd NE,Gilman,MN,56329,,45.7368245,-93.94449674,(320) 387-2255
+us-mn-glencoe-saint-pius-x-42c30f6f,St. Pius X,1014,,Knight,Ave,,,,1014 Knight Ave,Glencoe,MN,55336,2300,44.76963502,-94.14742321,(320) 864-5162
+us-mn-glenwood-sacred-heart-33bd4b44,Sacred Heart,105,N,Franklin,St,,,,105 N Franklin St,Glenwood,MN,56334,1122,45.65180386,-95.39021952,(320) 634-3813
+us-mn-golden-valley-good-shepherd-63f79c15,Good Shepherd,145,,Jersey,Ave,S,,,145 Jersey Ave S,Golden Valley,MN,55426,1527,44.97750105,-93.36676763,(763) 544-0416
+us-mn-golden-valley-st-margaret-mary-church-d9d54e3d,St. Margaret Mary,2323,,Zenith,Ave,N,,,2323 Zenith Ave N,Golden Valley,MN,55422,,45.00110049,-93.32172125,763-588-9466
+us-mn-good-thunder-st-joseph-ffbed034,St. Joseph,130,N,Ewing,St,,,,130 N Ewing St,Good Thunder,MN,56037,,44.00565675,-94.07004482,(507) 524-3127
+us-mn-goodhue-holy-trinity-4aec1906,Holy Trinity,211,,4th,St,N,,,211 4th St N,Goodhue,MN,55027,,44.40131244,-92.62704495,651-923-4472
+us-mn-goodhue-st-columbkill-da089ce9,St. Columbkill,36483,,Co 47,Blvd,,,,36483 Co 47 Blvd,Goodhue,MN,55027,,44.42037876,-92.70187495,651-923-4472
+us-mn-goodridge-st-ann-0ddf71b0,St. Ann,202,S,Osmund,Ave,,,,202 S Osmund Ave,Goodridge,MN,56725,,48.1423456,-95.80755898,(218) 796-5844
+us-mn-graceville-holy-rosary-4163cd2c,Holy Rosary,511,,Studdart,Ave,,,,511 Studdart Ave,Graceville,MN,56240,,45.56771401,-96.43765934,320-748-7313
+us-nd-grafton-st-john-the-evangelist-0d500e54,St. John the Evangelist,1515,,Western,Ave,,,,1515 Western Ave,Grafton,ND,58237,,48.40802168,-97.41655905,(701) 352-1648
+us-nd-grand-forks-holy-family-c580a556,Holy Family,1018,,18th,Ave,S,,,1018 18th Ave S,Grand Forks,ND,58201,,47.90346981,-97.04071009,(701) 746-1454
+us-nd-grand-forks-st-thomas-aquinas-newman-center-6fd27120,St Thomas Aquinas Newman Center,410,,Cambridge,St,,,,410 Cambridge St,Grand Forks,ND,58203,,47.92391203,-97.07032583,(701) 402-3806
+us-nd-grand-forks-st-mary-28d7417f,St. Mary,216,,Belmont,Rd,,,,216 Belmont Rd,Grand Forks,ND,58201,4620,47.91967761,-97.02878993,(701) 775-9318
+us-nd-grand-forks-st-michael-4ba8a923,St. Michael,524,,5th,Ave,N,,,524 5th Ave N,Grand Forks,ND,58203,,47.92672426,-97.03943029,(701) 772-2624
+us-mn-grand-marais-st-john-d92b4964,St. John,10,E,5th,St,,,,10 E 5th St,Grand Marais,MN,55604,,47.75524379,-90.33277308,(218) 387-1409
+us-mn-grand-meadow-st-finbarr-4a17f730,St. Finbarr,504,,1st,St,SW,,,504 1st St S.W,Grand Meadow,MN,55936,,43.70041012,-92.57391926,(507) 346-7565
+us-mn-grand-portage-holy-rosary-mission-05eeb2a5,Holy Rosary Mission,43,,Upper,Rd,,,,43 Upper Rd (Co Rd 17),Grand Portage,MN,55605,,47.96616232,-89.68298033,(218) 387-1409
+us-mn-grand-rapids-church-of-st-joseph-1fb86b7d,St. Joseph,315,SW,21st,St,,,,315 SW 21st St,Grand Rapids,MN,55744,,47.2110625,-93.5363125,12183262843
+us-mn-grand-rapids-st-joseph-catholic-church-908e9331,St. Joseph Catholic Church,315,SW,21st,St,,,,315 SW 21st St,Grand Rapids,MN,55744,,47.21086975,-93.53548455,(218) 326-2843
+us-mn-granite-falls-st-andrew-00cc6b80,St. Andrew,450,,11th,Ave,,,,450 11th Ave,Granite Falls,MN,56241,,44.80805757,-95.54514894,320-269-5954
+us-wi-grantsburg-immaculate-conception-e6341897,Immaculate Conception,411,,State Rd 70,,,,,411 State Rd 70,Grantsburg,WI,54840,,45.77241791,-92.67677042,(715) 327-8119
+us-mn-green-isle-st-brendan-4b92f3d5,St. Brendan,221,,McGrann,St,S,,,221 McGrann St S,Green Isle,MN,55338,0085,44.67805249,-94.00279999,(763)772-8386
+us-mn-green-valley-church-of-st-clotilde-58b4b73d,St. Clotilde,3272,,270th,Ave,,,,3272 270th Ave,Green Valley,MN,56258,,44.5258125,-95.7560625,15075322841
+us-mn-greenbush-blessed-sacrament-0402d30b,Blessed Sacrament,342,,4th,St,S,,,342 4th St S,Greenbush,MN,56726,,48.69748459,-96.18371985,(218) 782-2467
+us-mn-greenbush-blessed-sacrament-offices-721198e1,Blessed Sacrament Offices,300-348,,4th,St,S,,,300-348 4th St S,Greenbush,MN,56726,,48.6969596,-96.1835288,+1-218-782-2467
+us-mn-greenwald-st-andrew-cd6bceae,St. Andrew,211,,2nd,Ave,N,,,211 2nd Ave N,Greenwald,MN,56335,,45.60301921,-94.85856612,(320) 987-3160
+us-mn-grey-eagle-st-joseph-a6e78e7c,St. Joseph,118,,Minnesota,St,W,,,118 Minnesota St W,Grey Eagle,MN,56336,0366,45.82609881,-94.75065005,(320) 285-2545
+us-mn-grove-city-church-of-our-lady-of-manannah-979656b9,Our Lady,57482,,CSAH 3,,,,,57482 CSAH 3,Grove City,MN,56243,,45.25212734,-94.6144893,(320)693-8900
+us-mn-grygla-st-clement-066c608f,St. Clement,130,N,Marshall,Ave,,,,130 N Marshall Ave,Grygla,MN,56727,,48.30171178,-95.61545601,(218) 796-5844
+us-mn-hackensack-sacred-heart-mission-ce18ec78,Sacred Heart,230,,,Hwy,,,,230 Hwy 371 (2nd St.),Hackensack,MN,56452,,46.93344679,-94.52064434,(218) 547-1054 or (218) 656-0535 (Emergencies)
+us-mn-hallock-st-patrick-480d2fea,St. Patrick,170,S,5th,St,,,,170 S 5th St,Hallock,MN,56728,,48.77148133,-96.94310405,(218) 843-2323
+us-mn-halstad-holy-family-314acfa0,Holy Family,307,,5th,Ave,E,,,307 5th Ave E,Halstad,MN,56548,0051,47.35085683,-96.81767139,218-784-4131
+us-mn-ham-lake-church-of-st-paul-d2cfa77a,St. Paul,1740,,Bunker Lake,Blvd,NE,,,1740 Bunker Lake Blvd NE,Ham Lake,MN,55304,,45.21697996,-93.22561364,763-757-6910
+us-mn-hamel-st-anne-62737612,St. Anne,200,,Hamel,Rd,,,,200 Hamel Rd,Hamel,MN,55340,,45.04119333,-93.52665484,763-478-6644
+us-wi-hammond-st-marys-of-the-immaculate-conception-6ad0f88f,Immaculate Conception,1265,,Ridgeway,St,,,,1265 Ridgeway St,Hammond,WI,54015,0018,44.97371798,-92.43879483,(715) 796-2244
+us-mn-hampton-st-mathias-ec52425f,St. Mathias,23315,,Northfield,Blvd,,,,23315 Northfield Blvd,Hampton,MN,55031,9667,44.61155982,-93.00235881,(651) 437-9030
+us-nd-hankinson-st-philip-50696c22,St. Philip,612,,Main,Ave,S,,,612 Main Ave S,Hankinson,ND,58041,,46.06554448,-96.90045377,(701) 242-7327
+us-ia-hanover-st-mary-d3631fbc,St. Mary,2096,,,Hwy,,,,2096 Hwy 76,Hanover,IA,52140,,43.36959464,-91.52480867,(563) 568-3671
+us-mn-harding-holy-cross-36705443,Holy Cross,29482,,243rd,St,,,,29482 243rd St,Harding,MN,56364,9411,46.1143292,-94.0408267,(320) 360-9720
+us-mn-harmony-nativity-of-the-blessed-virgin-mary-f13ee51a,Nativity of the Blessed Virgin Mary,640,,1st,Ave,SW,,,640 1st Ave S.W,Harmony,MN,55939,,43.54791671,-92.01083869,
+us-mn-hastings-st-elizabeth-ann-seton-f9ee9e6b,St. Elizabeth Ann Seton,2035,W,15th,St,,,,2035 W 15th St,Hastings,MN,55033,,44.73053332,-92.89566933,651-437-4254
+us-mn-hastings-st-joseph-5d2aaf9b,St. Joseph,23955,,Nicolai,Ave,E,,,23955 Nicolai Ave E,Hastings,MN,55033,9650,44.60096758,-92.81335188,(651) 437-3526
+us-mn-hawley-st-andrew-1832dedb,St. Andrew,1418,,Main,St,,,,1418 Main St,Hawley,MN,56549,,46.87817738,-96.33226788,(218) 483-4264
+us-mn-hayfield-sacred-heart-59a46438,Sacred Heart,210,,2nd,St,NE,,,210 2nd St NE,Hayfield,MN,55940,,43.89257956,-92.84523678,(507) 477-2256
+us-mn-hector-st-john-7fd751a6,St. John,301,,Cedar,Ave,E,,,301 Cedar Ave E,Hector,MN,55342,0295,44.7457,-94.7265,(320) 848-6437
+us-mn-hector-church-of-st-john-cbf6dfa1,St. John,301,,Cedar,Ave,E,,,301 Cedar Ave E,Hector,MN,55342,,44.7431875,-94.7118125,13208486437
+us-mn-heidelberg-st-scholastica-5cc7bd2d,St. Scholastica,31525,,181st,Ave,,,,31525 181st Ave,Heidelberg,MN,56071,,44.49313191,-93.6260195,952-758-3225
+us-mn-henderson-st-joseph-a852005e,St. Joseph,213,S,6th,St,,,,213 S 6th St,Henderson,MN,56044,0427,44.52594589,-93.90838623,(507) 248-3550
+us-mn-henning-st-edward-47070457,St. Edward,201,,Douglas,Ave,,,,201 Douglas Ave,Henning,MN,56551,,46.32540147,-95.45159365,(218) 583-2490
+us-mn-herman-st-charles-a42fb4cc,St. Charles,61,,Berlin,Ave,S,,,61 Berlin Ave S,Herman,MN,56248,,45.80490674,-96.13845224,(320) 677-2433
+us-mn-heron-lake-sacred-heart-81585bbe,Sacred Heart,321,,9th,St,,,,321 9th St,Heron Lake,MN,56137,,43.79449508,-95.31706469,(507) 793-2357
+us-mn-hibbing-blessed-sacrament-2713b138,Blessed Sacrament,2310,E,7th,Ave,,,,2310 E 7th Ave,Hibbing,MN,55746,,47.4232206,-92.9332251,(218) 262-5541
+us-mn-hibbing-church-of-the-immaculate-conception-cb5a1d7d,Immaculate Conception,1928,,5th,Ave,E,,,1928 5th Ave E,Hibbing,MN,55746,,47.4284375,-92.9364375,
+us-mn-hillman-church-of-the-holy-family-5b4be397,Holy Family,1182,,County Rd 8,,,,,1182 County Rd 8,Hillman,MN,56338,,46.1734375,-93.8815625,12189276581
+us-mn-hillman-st-rita-bc0f680a,St. Rita,16691,,371st,Ave,,,,16691 371st Ave,Hillman,MN,56338,9802,46.00275122,-93.89198814,(320) 277-3807
+us-nd-hillsboro-st-rose-of-lima-69005f5b,St. Rose of Lima,503,,3rd,St,SE,,,503 3rd St SE,Hillsboro,ND,58045,,47.39807392,-97.05608169,(701) 636-4541
+us-mn-hinckley-st-patrick-fcdb9799,St. Patrick,203,,Lawler,Ave,S,,,203 Lawler Ave S,Hinckley,MN,55037,,46.01419848,-92.94086767,(320) 384-6313
+us-mn-hokah-st-peter-10d06fa4,St. Peter,34,,Main,St,,,,34 Main St,Hokah,MN,55941,,43.76082187,-91.34453839,(507) 894-4375
+us-mn-holdingford-church-of-all-saints-a4658789,All Saints,250,,Cedar,St,,,,250 Cedar St,Holdingford,MN,56340,,45.7290625,-94.4724375,13207462449
+us-mn-holdingford-all-saints-st-hedwig-campus-66a1664f,All Saints,250,,Cedar,St,,,,250 Cedar St,Holdingford,MN,56340,,45.7293309,-94.4722149,(320) 228-0105
+us-mn-holdingford-church-of-st-mary-cfa70738,St. Mary,311,,River,St,,,,311 River St,Holdingford,MN,56340,,45.7313125,-94.4719375,
+us-mn-holdingford-all-saints-st-marys-campus-1e084552,St. Mary,311,,River,St,W,,,311 River St W,Holdingford,MN,56340,0308,45.73160494,-94.47184484,(320) 228-0105
+us-wi-holmen-st-elizabeth-catholic-church-1ca8a238,St Elizabeth Catholic Church,515,N,Main,St,,,,515 N Main St,Holmen,WI,54636,,43.9694585,-91.2614901,+1-608-526-4424
+us-wi-holmen-st-elizabeth-ann-seton-d5b23fd3,St. Elizabeth Ann Seton,515,N,Main,St,,,,515 N Main St,Holmen,WI,54636,,43.9682609,-91.2609266,(608) 526-4424
+us-mn-hopkins-st-gabriel-the-archangel-catholic-church-569d3b43,St Gabriel the Archangel Catholic Church,1310,,Mainstreet,,,,,1310 Mainstreet,Hopkins,MN,55343,,44.9242605,-93.4168188,+1-952-935-5536
+us-mn-hopkins-st-gabriel-the-archangel-catholic-church-bde1d252,St. Joseph,1310,,Mainstreet,,,,,1310 Mainstreet,Hopkins,MN,55343,,44.92392294,-93.41675277,952-935-5536
+us-nd-horace-st-benedict-2d52ca6c,St. Benedict ,8547,,Front,St,,,,8547 Front St,Horace,ND,58047,0061,46.76398533,-96.89679256,(701) 588-4288 
+us-nd-horace-st-benedict-catholic-church-12989e36,St. Benedict Catholic Church,8547,,Front,St,,,,8547 Front St,Horace,ND,58047,,46.7639229,-96.8955022,+1-701-588-4288
+us-mn-houston-church-of-st-mary-022e6cb3,St. Mary,202,S,Sheridan,St,,,,202 S Sheridan St,Houston,MN,55943,,43.7619375,-91.5658125,15078642257
+us-mn-hoyt-lakes-church-of-the-queen-of-peace-ba95b6d2,Queen of Peace,513,,Hampshire,Dr,,,,513 Hampshire Dr,Hoyt Lakes,MN,55750,,47.5195625,-92.1339375,12182252867
+us-wi-hudson-st-patrick-317bcc65,St. Patrick,1500,,Vine,St,,,,1500 Vine St,Hudson,WI,54016,1882,44.97725719,-92.73578,(715) 381-5120
+us-nd-hunter-st-agnes-8f46a0bb,St. Agnes,102,,1st,St,E,,,102 1st St E,Hunter,ND,58048,,47.18836245,-97.21583517,(701) 783-3234
+us-mn-hutchinson-st-anastasia-9dcfdcf8,St. Anastasia,460,,Lake,St,SW,,,460 Lake St SW,Hutchinson,MN,55350,2349,44.88630426,-94.38667329,(320) 587-6507
+us-wi-independence-saints-peter-and-paul-b4ec3aa7,Sts. Peter and Paul,36028,,Osseo,Rd,,,,36028 Osseo Rd,Independence,WI,54747,,44.365448,-91.42253876,(715) 985-2227
+us-mn-international-falls-st-thomas-aquinas-333b6227,St. Thomas,415,,9th,Ave,W,,,415 9th Ave W,International Falls,MN,56649,,48.60152021,-93.41256849,(218) 283-3293
+us-mn-inver-grove-heights-st-patrick-1e8f79f0,St. Patrick,3535,,72nd,St,E,,,3535 72nd St E,Inver Grove Heights,MN,55076,,44.84512505,-93.03373396,651-455-6624
+us-mn-iona-st-columba-625452c5,St. Columba,451,,McDonnell,Ave,,,,451 McDonnell Ave,Iona,MN,56141,,43.91426386,-95.78298753,(507) 836-8030
+us-mn-isanti-st-elizabeth-ann-seton-711fb972,St. Elizabeth Ann Seton,207,,Whiskey,Rd,NW,,,207 Whiskey Rd NW,Isanti,MN,55040,,45.4921761,-93.2599,(763) 444-4035
+us-mn-ivanhoe-ss-peter-and-paul-b0c08e10,Sts. Peter and Paul,111,N,Sherwood,St,,,,111 N Sherwood St,Ivanhoe,MN,56142,,44.46094926,-96.24984629,(507) 694-1402
+us-mn-jackson-good-shepherd-eb2238e9,Good Shepherd,311,,Sverdrup,Ave,S,,,311 Sverdrup Ave S,Jackson,MN,56143,,43.6204647,-94.99669735,(507) 847-2504
+us-mn-jacobs-prairie-st-james-1364868b,St. James,25042,,Co Rd 2,,,,,25042 Co Rd 2,Jacobs Prairie,MN,56320,,45.48520815,-94.39496738,(320) 204-1111
+us-mn-janesville-st-ann-0af2f73a,St. Ann,313,W,2nd,St,,,,313 W 2nd St,Janesville,MN,56048,,44.1169167,-93.71151,(507) 234-6244
+us-mn-jasper-church-of-st-joseph-d5216924,St. Joseph,415,,2nd,St,E,,,415 2nd St E,Jasper,MN,56144,1212,43.8506875,-96.3925625,15078253152
+us-mn-jessenland-st-thomas-6a846b45,Oratory of St. Thomas,31624,,Scenic Byway,Rd,,,,31624 Scenic Byway Rd,Jessenland,MN,56044,,44.59895894,-93.90020549,507.964.5413
+us-mn-johnsburg-st-john-the-baptist-99070145,St. John,10343,,640th,Ave,,,,10343 640th Ave,Johnsburg,MN,55909,,43.505673,-92.76889884,(507) 582-3120
+us-mn-jordan-st-patrick-catholic-church-of-cedar-lake-township-ba2b3dbe,St Patrick Catholic Church of Cedar Lake Township,24425,,Old,Hwy,,,,24425 Old Hwy 13 Blvd,Jordan,MN,55352,,44.5952507,-93.5018301,+1-952-492-6276
+us-mn-jordan-st-john-the-baptist-460b118c,St. John the Baptist,313,E,2nd,St,,,,313 E 2nd St,Jordan,MN,55352,,44.6675762,-93.62563015,952-492-2640
+us-mn-jordan-st-patrick-de776677,St. Patrick,24425,,Old,Hwy,,,,24425 Old Hwy 13 Blvd,Jordan,MN,55352,,44.59521973,-93.50228288,952-492-6276
+us-mn-karlstad-st-edward-the-confessor-0fc74611,St. Edward,119,,Harding,St,S,,,119 Harding St S,Karlstad,MN,56732,,48.57871497,-96.51455259,(218) 782-2467
+us-mn-kasson-holy-family-86761073,Holy Family,1904,N,Mantorville,Ave,,,,1904 N Mantorville Ave,Kasson,MN,55944,,44.04674371,-92.74686667,(507) 775-6455
+us-mn-kelliher-st-patrick-14fe5914,St. Patrick,131,,Fifth,St,NE,,,131 Fifth St NE,Kelliher,MN,56650,,47.94515974,-94.44812522,(218) 647-8300
+us-mn-kellogg-immaculate-conception-3d031c02,Immaculate Conception Church,22032,,County Rd #18,,,,,22032 County Rd #18,Kellogg,MN,55945,,44.26578269,-92.11038314,(507)534-3321
+us-mn-kellogg-st-agnes-1c4fd4a6,St. Agnes,125,,Belvidere,Ave,W,,,125 Belvidere Ave W,Kellogg,MN,55981,,44.30729586,-92.00079218,(651) 565-3931
+us-mn-kensington-our-lady-of-the-runestone-2537b114,Our Lady of the Runestone,11,,Runestone,Dr,,,,11 Runestone Dr,Kensington,MN,56343,,45.77564835,-95.69167188,(320) 965-2596
+us-mn-kent-st-thomas-652d9613,St. Thomas,115,,Harris,St,,,,115 Harris St,Kent,MN,56553,0022,46.43716162,-96.68260851,(218) 557-8312
+us-mn-kenyon-st-michael-62c959ac,St. Michael,108,,Bullis,St,,,,108 Bullis St,Kenyon,MN,55946,,44.27244647,-92.99093069,507-789-6120
+us-mn-kilkenny-st-canice-316adf5b,St. Canice,183,W,Maple,St,,,,183 W Maple St,Kilkenny,MN,56052,,44.31169723,-93.57525373,(507) 364-7981
+us-mn-kimball-holy-cross-9716417a,Holy Cross,10651,,Co,Hwy,,,,10651 Co Hwy 8,Kimball,MN,55353,9722,45.3995908,-94.33017439,(320) 252-1799
+us-mn-kimball-st-anne-18283093,St. Anne,441,,Hazel,Ave,E,,,441 Hazel Ave E,Kimball,MN,55353,,45.31354603,-94.294439,(320) 398-2211
+us-nd-kindred-st-maurice-f9411db1,St. Maurice,5315,,165th,Ave,SE,,,5315 165th Ave SE,Kindred,ND,58051,,46.64292647,-97.01168071,(701) 428-3094 
+us-mn-la-crescent-crucifixion-e3c1535f,Crucifixion,423,S,2nd,St,,,,423 S 2nd St,La Crescent,MN,55947,,43.82699119,-91.30718725,(507) 895-4720
+us-wi-la-crosse-blessed-sacrament-f140c7dd,Blessed Sacrament,130,,Losey,Blvd,S,,,130 Losey Blvd S,La Crosse,WI,54601,,43.81021314,-91.21910098,(608) 782-2953
+us-wi-la-crosse-st-joseph-the-workman-40edeb6d,Cathedral of St. Joseph the Workman,530,,Main,St,,,,530 Main St,La Crosse,WI,54601,,43.8114128,-91.24856,(608) 782-0322
+us-wi-la-crosse-holy-trinity-29a886db,Holy Trinity,1333,,13th,St,S,,,1333 13th St S,La Crosse,WI,54601,,43.79690095,-91.23682022,(608) 782-2028
+us-wi-la-crosse-mary-mother-of-the-church-0ea7d0de,"Mary, Mother of the Church Parish",2006,,Weston,St,,,,2006 Weston St,La Crosse,WI,54601,,43.79056168,-91.22676849,(608) 788-5483
+us-wi-la-crosse-san-damiano-chapel-of-viterbo-university-9016fa05,San Damiano Chapel of Viterbo University,900,,Viterbo,Dr,,,,900 Viterbo Dr,La Crosse,WI,54601,,43.80328369,-91.24291229,(608) 796-3805
+us-wi-la-crosse-our-lady-of-guadalupe-2c93bbd6,Shrine of Our Lady of Guadalupe,5250,,Justin,Rd,,,,5250 Justin Rd,La Crosse,WI,54601,,43.7544906,-91.17990988,(877) 799-4059
+us-wi-la-crosse-st-james-the-less-cf061e37,St. James the Less,1032,,Caledonia,St,,,,1032 Caledonia St,La Crosse,WI,54603,,43.8394432,-91.2464,(608) 782-7557
+us-wi-la-crosse-st-joseph-ridge-f535b04d,St. Joseph,,,W2601 WI-33,,,,,W2601 WI-33,La Crosse,WI,54601,,43.78692173,-91.03607544,(715) 495-2338
+us-wi-la-crosse-roncalli-newman-06c8e6a7,University of Wisconsin–La Crosse,1732,,State,St,,,,1732 State St,La Crosse,WI,54601,,43.81253512,-91.22963536,(608) 860-6001
+us-mn-lafayette-st-gregory-the-great-fca416de,St. Gregory the Great,440,,6th,St,,,,440 6th St,Lafayette,MN,56054,,44.4460575,-94.3967799,(507) 228-8298
+us-mn-lake-benton-st-genevieve-f634fbf3,St. Genevieve,119,S,Sherman,St,,,,119 S Sherman St,Lake Benton,MN,56149,0348,44.25934552,-96.29054579,(507) 247-3464
+us-mn-lake-city-st-mary-of-the-lake-a7da033c,St. Mary of the Lake,419,W,Lyon,Ave,,,,419 W Lyon Ave,Lake City,MN,55041,,44.44646206,-92.26954132,(651) 345-4134
+us-mn-lake-crystal-holy-family-2589bfff,Holy Family,211,N,Hunt,St,,,,211 N Hunt St,Lake Crystal,MN,56055,,44.10837074,-94.22183492,(507) 388-3766
+us-mn-lake-elmo-carmelite-monastery-of-blessed-virgin-mary-60f1abf6,Carmelite Monastery of Blessed Virgin Mary,8249,,de Montreville,Trl,,,,8249 de Montreville Trail,Lake Elmo,MN,55042,9545,45.0225625,-92.9344375,
+us-mn-lake-henry-st-margaret-c3780364,St. Margaret,23189,,State Hwy 4,,,,,23189 State Hwy 4,Lake Henry,MN,56362,,45.45936455,-94.79676533,320-243-4413 
+us-mn-lake-itasca-st-catherine-8369897b,St. Catherine,16859,N,Entrance,Dr,,,,16859 N Entrance Dr,Lake Itasca,MN,56676,,47.2516665,-95.21268652,(218) 266-3312 or (218) 266-3604
+us-mn-lake-lillian-church-of-st-thomas-more-e81cd83e,St. Thomas More,781,,2nd,St,E,,,781 2nd St E,Lake Lillian,MN,56253,,44.9414375,-94.8770625,13203826424
+us-ia-lake-mills-st-patrick-25bc36d7,St. Patrick,406,S,Grant,St,,,,406 S Grant St,Lake Mills,IA,50450,,43.41607976,-93.53148949,(641) 592-0022
+us-mn-lake-park-st-francis-xavier-03189f7e,St. Francis Xavier,2066,,2nd,St,,,,2066 2nd St,Lake Park,MN,56554,,46.88019772,-96.09570274,(218) 238-6639
+us-mn-lake-st-croix-beach-st-francis-of-assisi-290d8cb3,St. Francis of Assisi,16770,,13th,St,S,,,16770 13th St S,Lake St. Croix Beach,MN,55043,,44.92967874,-92.76658303,651-436-7817
+us-mn-lake-wilson-st-mary-5f1a4f50,St. Mary,320,,Paul,Ave,,,,320 Paul Ave,Lake Wilson,MN,56151,,43.99479324,-95.95158076,(507) 836-8030
+us-mn-lakefield-st-joseph-1fe478fe,St. Joseph,410,,Broadway,Ave,,,,410 Broadway Ave,Lakefield,MN,56150,,43.67623405,-95.16896693,(507) 662-5819
+us-mn-lakeville-all-saints-4a94fa77,All Saints,19795,,Holyoke,Ave,,,,19795 Holyoke Ave,Lakeville,MN,55044,,44.66165591,-93.24538281,952-469-4481
+us-mn-lamberton-st-joseph-466e6e12,St. Joseph,400,W,2nd,Ave,,,,400 W 2nd Ave,Lamberton,MN,56152,0458,44.23059281,-95.2684032,(507) 752-7269
+us-mn-lancaster-holy-rosary-6f381ff4,Holy Rosary,3843,,290th,Ave,,,,3843 290th Ave,Lancaster,MN,56735,,48.95515754,-96.8211265,(218) 843-2323
+us-mn-lancaster-holy-rosary-church-fbbaee56,Holy Rosary Church,3843,,290th,Ave,,,,3843 290th Avenue,Lancaster,MN,56735,,48.9549828,-96.8206012,+1-218-843-2323
+us-mn-lanesboro-st-patrick-c7a52a48,St. Patrick,200,,Ridgeview,Ln,,,,200 Ridgeview Ln,Lanesboro,MN,55949,,43.71956967,-91.97387604,(507) 867-3922
+us-ia-lansing-immaculate-conception-2a448980,Immaculate Conception,648,,Main,St,,,,648 Main St,Lansing,IA,52151,,43.36189638,-91.22309587,(563) 538-4171
+us-mn-laporte-st-theodore-of-tarsus-catholic-church-dbe6a635,St Theodore of Tarsus Catholic Church,580,,Co,Hwy,,,,580 Co Hwy 39,Laporte,MN,56461,,47.2168145,-94.7593097,+1-218-652-4005
+us-mn-laporte-st-theodore-2e62b73b,St. Theodore,580,,County 39,,NW,,,580 County 39 NW,Laporte,MN,56461,,47.21689621,-94.75923848,218) 652 -4005
+us-ia-larchwood-st-mary-f74a04e0,St. Mary,1030,,Blaine,Ave,,,,1030 Blaine Ave,Larchwood,IA,51241,,43.45385738,-96.42800668,712.477.2273
+us-mn-lastrup-st-john-nepomuk-28552b2a,St. John Nepomuk,28520,,Church,St,,,,28520 Church St,Lastrup,MN,56344,,46.03805672,-94.06059393,(320) 468 2111
+us-mn-le-center-st-mary-213d243c,St. Mary,165,N,Waterville,Ave,,,,165 N Waterville Ave,Le Center,MN,56057,,44.39161317,-93.72931586,507-357-6633
+us-mn-le-roy-st-patrick-d0b2b259,St. Patrick,436,W,Main,St,,,,436 W Main St,Le Roy,MN,55951,,43.51426939,-92.51236157,(507) 346-7565
+us-mn-le-sueur-st-anne-5115cc2f,St. Anne,217,N,3rd,St,,,,217 N 3rd St,Le Sueur,MN,56058,,44.46203521,-93.91022134,507-665-3811
+us-ia-ledyard-sacred-heart-divine-mercy-parish-cdc0c08c,Sacred Heart,205,,Logan,St,,,,205 Logan St,Ledyard,IA,50556,,43.41894279,-94.16005253,515-885-2462 or 515-295-3435
+us-mn-lewiston-st-rose-of-lima-2737b2a1,St. Rose of Lima,180,S,Fremont,St,,,,180 S Fremont St,Lewiston,MN,55952,,43.97998358,-91.86861737,(507) 523-2428
+us-mn-lindstrom-st-bridget-of-sweden-2a35ce1d,St. Bridget of Sweden,13060,,Lake,Blvd,,,,13060 Lake Blvd,Lindstrom,MN,55045,,45.39073957,-92.8424724,651-257-2474
+us-mn-lino-lakes-st-joseph-of-the-lakes-088445bf,St. Joseph of the Lakes,171,,Elm,St,,,,171 Elm St,Lino Lakes,MN,55014,,45.16894718,-93.13427827,651.784.3015
+us-mn-lismore-st-anthony-5e0418f2,St. Anthony,310,S,3rd,Ave,,,,310 S 3rd Ave,Lismore,MN,56155,,43.74767426,-95.94783861,(507) 483-2317
+us-mn-litchfield-st-philip-be68fa34,St. Philip,821,E,Fifth,St,,,,821 E Fifth St,Litchfield,MN,55355,,45.13239349,-94.51095359,(320) 693-3313
+us-mn-litomysl-holy-trinity-c40f8eb5,Holy Trinity,9946,SE,24th,Ave,,,,9946 SE 24th Ave,Litomysl,MN,55060,,43.94786149,-93.18637342,507-583-2784
+us-mn-little-canada-st-john-the-evangelist-of-little-canada-57ec129e,St. John the Evangelist of Little Canada,380,E,Little Canada,Rd,,,,380 E Little Canada Rd,Little Canada,MN,55117,1699,45.02093471,-93.08466558,(651) 484-2708
+us-mn-little-falls-holy-family-catholic-church-e5ec18c6,Holy Family,18777,,Riverwood,Dr,,,,18777 Riverwood Dr,Little Falls,MN,56345,6477,46.03397751,-94.33839417,320-632-5720
+us-mn-little-falls-our-lady-of-lourdes-a7194dd3,Our Lady of Lourdes,208,W,Broadway,,,,,208 W Broadway,Little Falls,MN,56345,,45.97749803,-94.37251353,(320) 632-8243
+us-mn-little-falls-st-mary-822d1e11,St. Mary,305,,4th,St,SE,,,305 4th St SE,Little Falls,MN,56345,,45.9731204,-94.3577645,(320)-632-5640
+us-mn-little-falls-st-stanislaus-90837a25,St. Stanislaus,9406,,Church,Cir,,,,9406 Church Cir,Little Falls,MN,56345,,45.92231965,-94.46536493,(320)-632-6930
+us-mn-littlefork-st-columban-mission-23a17fc1,St. Columban,1017,,4th,Ave,,,,1017 4th Ave,Littlefork,MN,56653,,48.39620231,-93.55358362,(218) 283-3293
+us-mn-long-lake-church-of-st-george-b1bed957,St. George,133,N,Brown,Rd,,,,133 N Brown Rd,Long Lake,MN,55356,,44.98102978,-93.57456353,952-473-1247
+us-mn-long-prairie-st-mary-of-mount-carmel-b8806e04,St. Mary of Mount Carmel,409,,Central,Ave,,,,409 Central Ave,Long Prairie,MN,56347,1398,45.97384011,-94.85851464,320-732-2635
+us-mn-longville-st-edward-454c9abd,St. Edward,4905,,State Hwy 84,,,,,4905 State Hwy 84,Longville,MN,56655,,46.98186549,-94.21012479,(218) 363-2799 or (320) 400-3536 (Emergencies)
+us-mn-lonsdale-immaculate-conception-a8de40e2,Immaculate Conception,116,,Alabama,St,SE,,,116 Alabama St SE,Lonsdale,MN,55046,,44.47986083,-93.42539527,(507) 744-2829
+us-mn-loretto-ss-peter-and-paul-5886dccc,Ss. Peter and Paul,150,,Railway,St,E,,,150 Railway St E P.O Box 96,Loretto,MN,55357,0096,45.05392429,-93.63368919,(763) 479-0535
+us-ia-lourdes-our-lady-of-lourdes-2d91f800,Our Lady of Lourdes,14068,,175th,St,,,,14068 175th St,Lourdes,IA,50628,,43.26196112,-92.29846517,(641) 393-2520
+us-mn-lowry-st-john-nepomuk-8ccfa600,St. John Nepomuk,25890,,110th,St,,,,25890 110th St,Lowry,MN,56349,,45.74518625,-95.46749878, 320-283-5273
+us-mn-lucan-church-of-our-lady-of-victory-bd68879d,Our Lady of Victory,303,,3rd,St,,,,303 3rd St,Lucan,MN,56255,,44.4088125,-95.4099375,15077472231
+us-mn-luverne-st-catherine-e188ba10,St. Catherine,203,E,Brown,,,,,203 E Brown,Luverne,MN,56156,,43.65751578,-96.20743017,(507) 283-8502
+us-mn-luxemburg-st-wendelin-4a78ba10,St. Wendelin,22714,,State Hwy 15,,,,,22714 State Hwy 15,Luxemburg,MN,56301,9208,45.45326192,-94.24439526,(320) 252-1799
+us-mn-lyle-queen-of-peace-b263b5ff,Queen of Peace,303,,3rd,St,,,,303 3rd St,Lyle,MN,55953,,43.50384863,-92.94068094,(507)582-3120
+us-mn-mabel-st-olaf-9a95aa71,St. Olaf,114,N,Locust,,,,,114 N Locust,Mabel,MN,55954,,43.52138952,-91.76711408,(507) 725-3804
+us-mn-madelia-st-mary-e62ce907,St. Mary,19,,Crosby,Ave,NE,,,19 Crosby Ave N.E,Madelia,MN,56062,,44.05159031,-94.41156559,(507) 642-8305
+us-mn-madison-st-michael-b5bb7bbd,St. Michael,412,W,3rd,St,,,,412 W 3rd St,Madison,MN,56256,,45.01139563,-96.19046348,320-598-3690
+us-mn-madison-lake-all-saints-88398099,All Saints,601,,4th,St,,,,601 4th St,Madison Lake,MN,56063,,44.20303987,-93.81229722,(507) 243-3319
+us-mn-madison-lake-immaculate-conception-11e7b54d,Immaculate Conception,27528,,Patrick,St,,,,27528 Patrick St,Madison Lake,MN,56063,,44.24050068,-93.81827404,(507) 243-3166
+us-mn-madison-lake-immaculate-conception-catholic-church-3adf67ca,Immaculate Conception Catholic Church,27528,,Patrick,St,,,,27528 Patrick Street,Madison Lake,MN,56063,,44.2403823,-93.8182676,+1-507-243-3166
+us-mn-mahnomen-st-michael-a86dc8f4,St. Michael,501,S,Main,St,,,,501 S Main St,Mahnomen,MN,56557,9701,47.31101486,-95.9689651,(218) 935-2503
+us-mn-mahtomedi-st-jude-of-the-lake-1de31d50,St. Jude of the Lake,700,,Mahtomedi,Ave,,,,700 Mahtomedi Ave,Mahtomedi,MN,55115,,45.06373311,-92.9571676,(651) 426-3245
+us-mn-mankato-st-john-the-baptist-9ef3100f,St. John the Baptist,632,S,Broad,St,,,,632 S Broad St,Mankato,MN,56001,,44.16086903,-94.00564724,(507) 625-3131
+us-mn-mankato-st-joseph-the-worker-8e95176d,St. Joseph the Worker,423,W,7th,St,,,,423 W 7th St,Mankato,MN,56001,,44.15580908,-94.02355016,(507) 388-3766
+us-mn-mankato-st-thomas-more-newman-center-5e736f04,St. Thomas More Newman Center,1502,,Warren,St,,,,1502 Warren St,Mankato,MN,56001,,44.14746155,-93.99383947,(507) 387-4154
+us-mn-mankato-ss-peter-and-paul-68f8d2e8,Sts. Peter and Paul,105,N,5th,St,,,,105 N 5th St,Mankato,MN,56001,,44.16527785,-93.99670044,(507) 388-2995
+us-ia-manly-sacred-heart-52fd9481,Sacred Heart,410,N,Broadway,,,,,410 N Broadway,Manly,IA,50456,,43.29053026,-93.20141912,(641) 454-2586
+us-nd-mantador-sts-peter-paul-c167c572,Sts. Peter and Paul,609,,Cnty,Rd,,,,609 Cnty Rd 25,Mantador,ND,58058,,46.16761093,-96.98171177,(701) 274-8259
+us-nd-manvel-st-timothy-77728780,St. Timothy,1207,,Oldham,Ave,,,,1207 Oldham Ave,Manvel,ND,58256,,48.06734737,-97.1757943,(701) 696-2219
+us-mn-maple-grove-st-joseph-the-worker-644be194,St. Joseph the Worker,7180,,Hemlock,Ln,,,,7180 Hemlock Ln,Maple Grove,MN,55369,5597,45.08503026,-93.43015812,(763) 425-6505
+us-mn-maple-lake-st-timothy-f8702f12,St. Timothy,8,,Oak,Ave,N,,,8 Oak Ave N,Maple Lake,MN,55358,2457,45.22993088,-94.0011673,(320) 963-3726
+us-mn-mapleton-st-teresa-1931f46a,St. Teresa,102,,Central,Ave,N,,,102 Central Ave N,Mapleton,MN,56065,,43.92803544,-93.95882945,(507) 524-3127
+us-mn-maplewood-presentation-of-the-blessed-virgin-mary-69cde62c,Presentation of the Blessed Virgin Mary,1725,,Kennard,St,,,,1725 Kennard St,Maplewood,MN,55109,4699,44.99267172,-93.03111611,(651) 777-8116
+us-mn-maplewood-st-jerome-195d4bec,St. Jerome,380,,Roselawn,Ave,E,,,380 Roselawn Ave E,Maplewood,MN,55117,2097,44.99883722,-93.0844107,(651) 771-1209
+us-mn-marshall-holy-redeemer-e07c4c99,Holy Redeemer,503,W,Lyon,St,,,,503 W Lyon St,Marshall,MN,56258,1390,44.45032443,-95.7916658,(507) 532-5711
+us-mn-marshall-the-catholic-church-of-the-holy-redeemer-6efbccf1,The Catholic Church of the Holy Redeemer,503,W,Lyon,St,,,,503 W Lyon St,Marshall,MN,56258,,44.4501828,-95.7919805,+1-507-532-5711
+us-mn-mazeppa-sts-peter-and-paul-eb7cf347,Sts. Peter and Paul,222,,1st,Ave,S,,,222 1st Ave S,Mazeppa,MN,55956,,44.26950433,-92.54626639,(507) 843-3885
+us-mn-mc-grath-our-lady-of-fatima-chapel-7475dd03,Our Lady of Fatima,102,S,State,Hwy,,,,102 S State Hwy 65,Mc Grath,MN,56350,,46.23950052,-93.27383363,(218) 927-6581 
+us-mn-mcgregor-holy-family-3f800e45,Holy Family,429,S,Maddy,St,,,,429 S Maddy St,McGregor,MN,55760,,46.60658335,-93.30845117,(218) 927-6581
+us-mn-meadowlands-st-mary-mission-d3f133af,St. Mary,9999,,,Hwy,,,,9999 Hwy 133,Meadowlands,MN,55765,,47.06983721,-92.7335983,(218) 476-2367 or (218) 476-1617 (Rectory)
+us-mn-medford-christ-the-king-60542368,Christ the King,205,,2nd,Ave,NW,,,205 2nd Ave NW,Medford,MN,55049,,44.17543983,-93.2486178,507-451-4845
+us-mn-medina-holy-name-of-jesus-77dafcaa,Holy Name of Jesus,155,,County Rd 24,,,,,155 County Rd 24,Medina,MN,55391,,45.01392121,-93.52520153,763-473-7901
+us-mn-melrose-st-john-the-baptist-e5e30233,St. John the Baptist,20,,,Hwy,,,,20 Hwy 4 - Meire Grove,Melrose,MN,56352,1427,45.62956491,-94.86930941,(320) 987-3205
+us-wi-melrose-st-kevin-d45b1c25,St. Kevin,813,N,Washington,St,,,,813 N Washington St,Melrose,WI,54642,,44.13779379,-90.99602067,(608) 488-3001
+us-mn-melrose-st-mary-5c97ee1d,St. Mary,755,,Kraft,Dr,SE,,,755 Kraft Dr SE,Melrose,MN,56352,1427,45.66959349,-94.80310618,(320) 256-4207
+us-mn-menahga-assumption-of-our-lady-739c5e40,Assumption of Our Lady,113,,Aspen,Ave,NW,,,113 Aspen Ave NW,Menahga,MN,56464,,46.75510661,-95.09914111,(218) 894-2296
+us-mn-mendota-st-peter-3cae0b92,St. Peter,1405,,,Hwy,,,,1405 Hwy 13,Mendota,MN,55150,0679,44.88579948,-93.16855917,(651) 452-4550
+us-mn-mendota-heights-holy-family-maronite-6acd888b,Holy Family (Maronite),1960,,Lexington,Ave,S,,,1960 Lexington Ave S,Mendota Heights,MN,55118,,44.885272,-93.146291,(651) 291-1116
+us-mn-mentor-church-of-st-lawrence-ae28f898,St. Lawrence,,,"336th St SE , 56736",,,,,"336th St SE , 56736",Mentor,MN,16180,,47.6986875,-96.1394375,12186378178
+us-mn-mentor-st-lawrence-6aa7217e,St. Lawrence,16180,,336th,St,SE,,,16180 336th St SE,Mentor,MN,56736,,47.67949956,-96.13293529,(218) 637-8178
+us-mn-middle-river-st-joseph-91f0956f,St. Joseph,530,,2nd,St,N,,,530 2nd St N,Middle River,MN,56737,,48.44022868,-96.16512309,(218) 782-2467
+us-mn-milaca-st-mary-af1b6e84,St. Mary,645,,3rd,Ave,SE,,,645 3rd Ave SE,Milaca,MN,56353,1233,45.74804515,-93.64656312,(320) 983-3255
+us-sd-milbank-st-lawrence-9487cc37,St. Lawrence,113,S,6th,St,,,,113 S 6th St,Milbank,SD,57252,2007,45.22131675,-96.62941814,(605) 432-9122
+us-ia-milford-st-joseph-d6ac907b,St. Joseph,1305,,Okoboji,Ave,,,,1305 Okoboji Ave,Milford,IA,51351,,43.32851427,-95.15048853,(712) 338-2274
+us-mn-millerville-our-lady-of-seven-dolors-f6d17fd6,Our Lady of Seven Dolors,16921,,County Rd 7,,NW,,,16921 County Rd 7 NW,Millerville,MN,56315,,46.06827642,-95.56175062,(320) 876-2240
+us-mn-millville-st-patricks-catholic-church-bd9e3a02,St. Patrick's Catholic Church,30932,,MN-60,,,,,30932 MN-60,Millville,MN,55957,,44.3009339,-92.2865874,+1-651-345-4134
+us-mn-milroy-st-michaels-church-d5f81c83,St Michaels Church,200,,Euclid,St,,,,200 Euclid St,Milroy,MN,56263,,44.4163177,-95.5530632,+1-507-336-2505
+us-mn-milroy-st-michael-f5bf03d6,St. Michael,200,,Euclid,St,,,,200 Euclid St,Milroy,MN,56263,0117,44.41638203,-95.55313098,(507) 336-2505
+us-mn-minneapolis-church-of-all-saints-ea1f4eca,All Saints,435,,4th,St,NE,,,435 4th St NE,Minneapolis,MN,55413,,44.99407931,-93.25824402,(612) 379-4996
+us-mn-minneapolis-annunciation-bbe3da9f,Annunciation,509,W,54th,St,,,,509 W 54th St,Minneapolis,MN,55419,,44.9048424,-93.2857056,(612) 824-0787
+us-mn-minneapolis-ascension-b70c4e54,Ascension,1723,,Bryant,Ave,N,,,1723 Bryant Ave N,Minneapolis,MN,55411,3297,44.99729294,-93.2915508,(612) 529-9684
+us-mn-minneapolis-the-basilica-of-saint-mary-87d92ec1,Basilica of St. Mary,1600,,Hennepin,Ave,,,,1600 Hennepin Ave,Minneapolis,MN,55403,0010,44.9730568,-93.28628,(612) 333-1381
+us-mn-minneapolis-incarnation-sagrado-corazon-de-jesus-d2a18140,Chaplaincy of Sagrado Corazon de Jesus,3817,,Pleasant,Ave,S,,,3817 Pleasant Ave S,Minneapolis,MN,55409,,44.93382987,-93.28284542,612-822-2101
+us-mn-minneapolis-christ-the-king-0695c5c6,Christ the King,5029,,Zenith,Ave,S,,,5029 Zenith Ave S,Minneapolis,MN,55410,2195,44.91107992,-93.32103489,(612) 920-5030
+us-mn-minneapolis-church-of-gichitwaa-kateri-c5964282,Gichitwaa Kateri,3045,,Park,Ave,,,,3045 Park Ave,Minneapolis,MN,55407,1517,44.9464375,-93.2654375,16128247606
+us-mn-minneapolis-holy-cross-4d017ebf,Holy Cross,1621,,University,Ave,NE,,,1621 University Ave NE,Minneapolis,MN,55413,1297,45.00513295,-93.26260734,612-930-0860
+us-mn-minneapolis-holy-name-109d6d12,Holy Name,3637,,11th,Ave,S,,,3637 11th Ave S,Minneapolis,MN,55407,2694,44.93686438,-93.25845926,(612) 724-5465
+us-mn-minneapolis-church-of-the-holy-rosary-e678d749,Holy Rosary,2424,,18th,Ave,S,,,2424 18th Ave S,Minneapolis,MN,55404,4006,44.9589375,-93.2489375,16127243651
+us-mn-minneapolis-holy-rosary-santo-rosario-5b5d59f2,Holy Rosary,2424,,18th S,Ave,,,,2424 18th S Ave,Minneapolis,MN,55404,,44.95860007,-93.2490168,(612) 767-2430
+us-mn-minneapolis-our-lady-of-lourdes-1ffd73ae,Our Lady of Lourdes,1,,Lourdes,Pl,,,,1 Lourdes Pl,Minneapolis,MN,55414,1062,44.98679619,-93.25752492,(612) 379-2259
+us-mn-minneapolis-our-lady-of-mount-carmel-7e73572b,Our Lady of Mount Carmel,701,,Fillmore,St,NE,,,701 Fillmore St NE,Minneapolis,MN,55413,,44.9971034,-93.24196741,(612) 623-4019
+us-mn-minneapolis-our-lady-of-peace-48d52a07,Our Lady of Peace,5426,,12th,Ave,S,,,5426 12th Ave S,Minneapolis,MN,55417,2599,44.90464651,-93.25823864,(612) 824-3455
+us-mn-minneapolis-church-of-our-lady-of-victory-8263b23f,Our Lady of Victory,5155,,Emerson,Ave,N,,,5155 Emerson Ave N,Minneapolis,MN,55430,3414,45.0486875,-93.2964375,16125297788
+us-mn-minneapolis-st-albert-the-great-a9994036,St. Albert the Great,3204,E,29th,St,,,,3204 E 29th St,Minneapolis,MN,55406,1619,44.95046867,-93.22533858,(612) 724-3643
+us-mn-minneapolis-st-anne-st-joseph-hien-a4d7b86a,St. Anne–St. Joseph Hien,2627,,Queen,Ave,N,,,2627 Queen Ave N,Minneapolis,MN,55411,1792,45.006752,-93.30978,(612) 529-0503
+us-mn-minneapolis-st-anthony-of-padua-45f7776e,St. Anthony of Padua,813,,Main,St,NE,,,813 Main St NE,Minneapolis,MN,55413,,44.99656,-93.2649841,612-930-0860
+us-mn-minneapolis-church-of-st-austin-18e8349f,St. Austin,4050,,Upton,Ave,N,,,4050 Upton Ave N,Minneapolis,MN,55412,1506,45.0293125,-93.3136875,
+us-mn-minneapolis-st-boniface-catholic-church-ed432303,St. Boniface Catholic Church,629,,2nd,St,NE,,,629 2nd St NE,Minneapolis,MN,55413,1905,44.99520548,-93.26245994,(612) 379-2761
+us-mn-minneapolis-church-of-st-bridget-of-minneapolis-2ba50a85,St. Bridget,3811,,Emerson,Ave,N,,,3811 Emerson Ave N,Minneapolis,MN,55412,,45.02442555,-93.2947745,(612) 529-7779
+us-mn-minneapolis-church-of-st-bridget-98549898,St. Bridget,3811,,Emerson,Ave,N,,,3811 Emerson Ave N,Minneapolis,MN,55412,2038,45.0240625,-93.2948125,16125297779
+us-mn-minneapolis-st-charles-borromeo-00d3ddd2,St. Charles Borromeo,2739,,Stinson,Blvd,NE,,,2739 Stinson Blvd NE,Minneapolis,MN,55418,,45.01866336,-93.22582645,612-781-6529
+us-mn-minneapolis-st-clement-a6a51c3e,St. Clement,901,,24th,Ave,NE,,,901 24th Ave NE,Minneapolis,MN,55418,,45.01243,-93.24877,612-930-0860
+us-mn-minneapolis-st-constantine-ukrainian-4d281838,St. Constantine (Ukrainian),515,,University,Ave,NE,,,515 University Ave NE,Minneapolis,MN,55413,,44.99438805,-93.26000032,(612) 379-2394
+us-mn-minneapolis-st-frances-cabrini-e4ad47dc,St. Frances Cabrini,1500,,Franklin,Ave,SE,,,1500 Franklin Ave SE,Minneapolis,MN,55414,3697,44.96441272,-93.21740279,(612) 339-3023
+us-mn-minneapolis-st-hedwig-3fa316d4,St. Hedwig,129,,29th,Ave,NE,,,129 29th Ave NE,Minneapolis,MN,55418,,45.020784,-93.2713179,612-930-0860
+us-mn-minneapolis-st-helena-e8e4d6cd,St. Helena,3201,E,43rd,St,,,,3201 E 43rd St,Minneapolis,MN,55406,3873,44.92464812,-93.22519571,(612) 729-7344
+us-mn-minneapolis-st-joan-of-arc-4e0f3260,St. Joan of Arc,4537,,3rd,Ave,S,,,4537 3rd Ave S,Minneapolis,MN,55419,,44.9210041,-93.27181262,(612) 823-8205
+us-mn-minneapolis-saint-john-the-baptist-byzantine-catholic-church-67cc1a2d,St. John the Baptist Byzantine Catholic Church,2215,,3rd,St,NE,,,2215 3rd St NE,Minneapolis,MN,55418,,45.01026,-93.26430106,(612) 789-6252
+us-mn-minneapolis-church-of-st-lawrence-fa7a8931,St. Lawrence,1203,,5th,St,SE,,,1203 5th St SE,Minneapolis,MN,55414,2030,44.9826875,-93.2374375,16123317941
+us-mn-minneapolis-st-lawrence-catholic-church-newman-center-u-of-minn-f74e0119,St. Lawrence,1203,,5th,St,SE,,,1203 5th St S.E,Minneapolis,MN,55414,,44.9828705,-93.23679519,(612) 331-7941
+us-mn-minneapolis-st-leonard-of-port-maurice-8b10ccdf,St. Leonard of Port Maurice,3949,,Clinton,Ave,S,,,3949 Clinton Ave S,Minneapolis,MN,55409,,44.93074982,-93.27112626,(612) 825-5811
+us-mn-minneapolis-saint-maron-maronite-ae09078a,St. Maron [Maronite],600,,University,Ave,NE,,,600 University Ave NE,Minneapolis,MN,55413,1917,44.994497,-93.261281,(612) 379-2758
+us-mn-minneapolis-st-olaf-e962ca24,St. Olaf,215,S,8th,St,,,,215 S 8th St,Minneapolis,MN,55402,2803,44.97435923,-93.2700549,(612) 332-7471
+us-mn-minneapolis-church-of-saint-stephen-holy-rosary-8610628f,St. Stephen,2211,,Clinton,Ave,S,,,2211 Clinton Ave S,Minneapolis,MN,55404,,44.96046378,-93.27135721,(612) 767-2430
+us-mn-minneapolis-st-thomas-the-apostle-5a06b9fc,St. Thomas the Apostle,2914,W,44th,St,,,,2914 W 44th St,Minneapolis,MN,55410,,44.92395429,-93.31679171,(612) 922-0041
+us-mn-minneapolis-ss-cyril-and-methodius-bcfd731a,Sts. Cyril and Methodius,1301,,2nd,St,NE,,,1301 2nd St NE,Minneapolis,MN,55413,1131,45.0010884,-93.26562333,(612) 379-9736
+us-mn-minneapolis-va-medical-center-0c2fa421,VA Medical Center,,,One Veterans,Dr,,,,One Veterans Dr,Minneapolis,MN,55417,,44.90259352,-93.2050406,612-725-2027
+us-mn-minneiska-st-mary-9f6a9750,St. Mary,498,,Bennett,Ave,,,,498 Bennett Ave,Minneiska,MN,55910,,44.196525,-91.874118,(507) 689-2351
+us-mn-minneota-st-edward-441cffe0,St. Edward,401,N,Adams,St,,,,401 N Adams St,Minneota,MN,56264,,44.56449709,-95.98796783,(507) 872-6346
+us-mn-minnesota-city-st-paul-c37d956e,St. Paul,132,,Anderson,St,,,,132 Anderson St,Minnesota City,MN,55959,,44.09381829,-91.75272705,(507) 689-2351
+us-mn-minnesota-lake-st-john-the-baptist-8b747b59,St. John the Baptist,100,,Park,St,N,,,100 Park St N,Minnesota Lake,MN,56068,,43.84095104,-93.83124234,(507) 462-3636
+us-mn-minnetonka-immaculate-heart-of-mary-c5728f6f,Immaculate Heart of Mary,13505,,Excelsior,Blvd,,,,13505 Excelsior Blvd,Minnetonka,MN,55345,4999,44.912254,-93.45103,(952) 935-1432
+us-nd-minto-sacred-heart-0854cd66,Sacred Heart,629,,3rd,St,,,,629 3rd St,Minto,ND,58261,,48.28992698,-97.37329105,(701) 248-3589
+us-nd-minto-st-stanislaus-8347484f,St. Stanislaus,6098,,Country,Rd,,,,6098 Country Rd 4,Minto,ND,58261,,48.29510277,-97.2540611,(701) 248-3589
+us-wi-mondovi-sacred-heart-of-jesus-4407a9ec,Sacred Heart of Jesus,453,W,Hudson,St,,,,453 W Hudson St,Mondovi,WI,54755,,44.566687,-91.6765897,(715) 672-5640
+us-mn-montevideo-st-joseph-29e28ccf,St. Joseph,512,,Black Oak,Ave,,,,512 Black Oak Ave,Montevideo,MN,56265,,44.94871415,-95.71948997,(320) 269-5954
+us-mn-montgomery-most-holy-redeemer-b56dd1ba,Most Holy Redeemer,206,,Vine,Ave,W,,,206 Vine Ave W,Montgomery,MN,56069,1063,44.4391275,-93.58321178,(507) 364-7981
+us-mn-monticello-church-of-saint-henry-ebfbc4ca,St. Henry,1001,E,7th,St,,,,1001 E 7th St,Monticello,MN,55362,,45.29630576,-93.78186897,(763) 295-2402
+us-nd-mooreton-st-anthony-5425f954,St. Anthony,200,,Mooreton,Ave,N,,,200 Mooreton Ave N,Mooreton,ND,58061,,46.27062041,-96.87575379,(701) 274-8259 
+us-mn-moorhead-st-francis-de-sales-2f5f6fa0,St. Francis de Sales,601,,15th,Ave,N,,,601 15th Ave N,Moorhead,MN,56560,,46.89008458,-96.76891247,(218) 233-4780
+us-mn-moorhead-st-joseph-5ef9e670,St. Joseph,218,S,10th,St,,,,218 S 10th St,Moorhead,MN,56560,,46.87255211,-96.76422126,(218) 236-5066
+us-mn-moose-lake-holy-angels-9056646e,Holy Angels,60,,Hartman,Dr,,,,60 Hartman Dr,Moose Lake,MN,55767,,46.44080145,-92.76910563,(218) 485-8214
+us-mn-mora-st-mary-6dd92515,St. Mary,201,E,Forest,,,,,201 E Forest,Mora,MN,55051,1598,45.87534908,-93.2951231,(320) 679-1593
+us-mn-morgan-st-michael-29f8be21,St. Michael,510,W,3rd,St,,,,510 W 3rd St / P.O Box 459,Morgan,MN,56266,0459,44.41782383,-94.926505,(507) 249-3192
+us-mn-morris-assumption-of-mary-ff833d28,Assumption,207,E,3rd,St,,,,207 E 3rd St,Morris,MN,56267,,45.58653765,-95.90897169,(320) 589-3003
+us-mn-morton-st-john-d0435b61,St. John,331,W,3rd,St,,,,331 W 3rd St,Morton,MN,56270,0088,44.5517732,-94.98722515,(507) 697-6120
+us-mn-motley-st-michael-574c9394,St. Michael,280,,1st,Ave,S,,,280 1st Ave S,Motley,MN,56466,,46.33479367,-94.64463649,(218) 894-2296
+us-mn-mound-our-lady-of-the-lake-fc758345,Our Lady of the Lake,2385,,Commerce,Blvd,,,,2385 Commerce Blvd,Mound,MN,55364,,44.93531479,-93.66713169,(952) 472-8200
+us-mn-mount-iron-church-of-the-sacred-heart-d5be09ef,Sacred Heart,8861,,Main,St,,,,8861 Main St,Mount Iron,MN,55792,,47.5325625,-92.6199375,12187416344
+us-mn-murdock-sacred-heart-f7ffeee4,Sacred Heart,201,,Orleans,,,,,201 Orleans,Murdock,MN,56271,0009,45.22585545,-95.39572663,(320) 875-2451
+us-mn-nashwauk-st-cecilia-ef3064a6,St. Cecilia,326,,2nd,St,,,,326 2nd St,Nashwauk,MN,55769,,47.37701759,-93.16682836,(218) 885-1126
+us-mn-nassau-church-of-st-james-67ac25be,St. James,,,4th St & 3rd,Ave,,,,4th St & 3rd Ave,Nassau,MN,56257,,45.0673125,-96.4396875,13208392772
+us-mn-naytahwaush-st-anne-6c8a625f,St. Anne,204,,County Rd 4,,,,,204 County Rd 4,Naytahwaush,MN,56566,,47.26482494,-95.6267086,(218) 473-2101
+us-mn-nebish-st-john-8e293dfa,St. John,27867,,Irvine,Ave,NE,,,27867 Irvine Ave NE,Nebish,MN,56667,,47.77180791,-94.85046035,(218) 647-8300
+us-mn-nevis-our-lady-of-the-pines-a9e58d76,Our Lady of the Pines,205,,Main,St,,,,205 Main St,Nevis,MN,56467,,46.96429248,-94.84454432,(218) 652-4005
+us-ia-new-albin-st-joseph-2154ce3f,St. Joseph,154,,3rd NE,St,,,,154 3rd NE St,New Albin,IA,52160,,43.49439931,-91.28598432,(563) 538-4171
+us-mn-new-brighton-st-john-the-baptist-8ad5bcae,St. John the Baptist,835,,2nd,Ave,NW,,,835 2nd Ave NW,New Brighton,MN,55112,,45.06357187,-93.18888117,651-633-8333
+us-ia-new-haven-st-peter-38101688,St. Peter,2985,,360th,St,,,,2985 360th St,New Haven,IA,50461,,43.28460318,-92.64232898,(641) 393-2520
+us-mn-new-hope-st-joseph-catholic-community-4f0958dc,St. Joseph Catholic Community,8701,,36th,Ave,N,,,8701 36th Ave N,New Hope,MN,55427,1769,45.020682,-93.39152659,(763) 544-3352
+us-mn-new-munich-immaculate-conception-18f5a3a5,Immaculate Conception,650,,Main,St,,,,650 Main St,New Munich,MN,56356,,45.63196818,-94.7531568,(320)236-2143
+us-mn-new-prague-st-wenceslaus-catholic-church-e359db6c,St. Wenceslaus Catholic Church,215,,Main,St,E,,,215 Main St E,New Prague,MN,56071,,44.54414738,-93.57420037,9527583225
+us-mn-new-richland-all-saints-b2401b49,All Saints,307,SW,1st,St,,,,307 SW 1st St,New Richland,MN,56072,,43.89293317,-93.49694843,(507)835-1222
+us-wi-new-richmond-immaculate-conception-c7032018,Immaculate Conception,151,S,Washington,Ave,,,,151 S Washington Ave,New Richmond,WI,54017,,45.12164869,-92.54448108,(715) 246-4652
+us-mn-new-trier-st-mary-5ba03206,St. Mary,8433,,239th,St,,,,8433 239th St,New Trier,MN,55031,,44.60328878,-92.9354786,(651) 437-5520
+us-mn-new-ulm-cathedral-of-the-holy-trinity-8228cacd,Cathedral of the Holy Trinity,605,N,State,St,,,,605 N State St,New Ulm,MN,56073,,44.3181787,-94.46801611,(507) 354-4158
+us-mn-new-ulm-stgeorge-ece56985,St. George,63105,,Fort,Rd,,,,63105 Fort Rd,New Ulm,MN,56073,,44.38919666,-94.53280723,507-233-7729
+us-mn-new-ulm-st-john-the-baptist-b2f59b5d,St. John the Baptist,18241,,First,Ave,,,,18241 First Ave,New Ulm,MN,56073,,44.22842175,-94.43504679,(507) 233-7729
+us-mn-new-ulm-st-mary-c3b4807e,St. Mary,417,S,Minnesota,St,,,,417 S Minnesota St,New Ulm,MN,56073,,44.30876583,-94.45428818,507-233-7729
+us-mn-nicollet-st-paul-8f6c2300,St. Paul,411,,5th,St,,,,411 5th St,Nicollet,MN,56074,,44.2738402,-94.19193327,(507) 232-3857
+us-mn-nisswa-church-of-st-christopher-91c551d2,St. Christopher,25574,,Church,St,,,,25574 Church St,Nisswa,MN,25574,,46.5228125,-94.2869375,12189632766
+us-mn-nisswa-st-christopher-our-lady-of-the-lakes-parish-2cbfc46c,St. Christopher,25574,,Church,St,,,,25574 Church St,Nisswa,MN,56468,,46.52314281,-94.28643605,(218) 568-4760
+us-mn-north-branch-st-gregory-the-great-b8ce84b4,St Gregory the Great,38725,,Forest,Blvd,,,,38725 Forest Blvd,North Branch,MN,55056,0609,45.50982481,-92.97976686,(651) 674-4056
+us-mn-north-mankato-holy-rosary-a1da80fe,Holy Rosary,525,,Grant,Ave,,,,525 Grant Ave,North Mankato,MN,56003,,44.17247507,-94.01604061,(507) 387-6501
+us-mn-north-prairie-holy-cross-6c9ed5e9,Holy Cross,14891,,Gable,Rd,,,,14891 Gable Rd,North Prairie,MN,56373,,45.80027642,-94.34965458,(320) 584-5484
+us-mn-north-saint-paul-st-peter-ac19efbe,St. Peter,2600,,Margaret,St,N,,,2600 Margaret St N,North Saint Paul,MN,55109,,45.01956181,-92.99173219,(651) 777-8304
+us-mn-northfield-annunciation-2d3be01b,Annunciation,4996,,Hazelwood,Ave,,,,4996 Hazelwood Ave,Northfield,MN,55057,,44.51541685,-93.28723645,952-652-2625
+us-mn-northfield-st-dominic-4fa7cd31,St. Dominic,104,,Linden,St,N,,,104 Linden St N,Northfield,MN,55057,,44.45960398,-93.16442962,507-645-8816
+us-mn-northome-st-michael-7ccd96cc,St. Michael,12026,,Lake,St,,,,12026 Lake St,Northome,MN,56661,,47.87331682,-94.27695285,(218) 743-3255
+us-mn-norwood-young-america-ascension-b4dd9336,Ascension,323,,Reform,St,N,,,323 Reform St N,Norwood Young America,MN,55368,,44.77114696,-93.93015852,952-467-3351
+us-mn-oak-grove-st-patrick-e843669b,St. Patrick,19921,,Nightingale,St,NW,,,19921 Nightingale St NW,Oak Grove,MN,55011,,45.33191583,-93.31590697,763-753-2011
+us-mn-oak-grove-st-patrick-catholic-church-92a37b19,St. Patrick Catholic Church,19921,,Nightingale,St,NW,,,19921 Nightingale St NW,Oak Grove,MN,55011,,45.3317652,-93.3155222,+1-763-753-2011
+us-mn-oakdale-guardian-angels-3d621e81,Guardian Angels,8260,,4th,St,N,,,8260 4th St N,Oakdale,MN,55128,,44.94978394,-92.93857627,651-738-2223
+us-mn-oakdale-guardian-angels-catholic-church-be41262c,Guardian Angels Catholic Church,8260,,4th,St,N,,,8260 4th St N,Oakdale,MN,55128,,44.9497734,-92.9392225,+1-651-738-2223
+us-mn-oakdale-transfiguration-6af80d5d,Transfiguration,6133,,15th,St,N,,,6133 15th St N,Oakdale,MN,55128,,44.96977737,-92.98291688,651-738-2646
+us-nd-oakwood-sacred-heart-40b50bad,Sacred Heart ,,,County Rd 11 and County Rd 4,,,,,County Rd 11 and County Rd 4,Oakwood,ND,58237,,48.42688982,-97.29484981,(701) 352-1648
+us-mn-ogema-most-holy-redeemer-23f4c2b8,Most Holy Redeemer,106,,Ontario,St,,,,106 Ontario St,Ogema,MN,56569,,47.10098676,-95.92332557,(218) 983-3261
+us-mn-ogema-church-of-the-most-holy-redeemer-8faf9327,Most Holy Redeemer,,,Ogema Minnesota 56569,,,,,Ogema Minnesota 56569,Ogema,MN,56569,,47.10875,-95.92375,12189833261
+us-mn-ogilvie-st-kathryn-ca3c2766,St. Kathryn,318,,Hill,Ave,,,,318 Hill Ave,Ogilvie,MN,56358,,45.82442613,-93.42441702,(320) 679-1593
+us-mn-oklee-st-francis-xavier-3364c240,St Francis Xavier,301,,Governor,St,,,,301 Governor St,Oklee,MN,56742,,47.83851186,-95.85609754,(218) 796-5844
+us-mn-olivia-st-aloysius-36b50a3e,St. Aloysius,302,S,10th,St,,,,302 S 10th St,Olivia,MN,56277,1288,44.77410823,-94.99118786,(320) 523-2030
+us-wi-onalaska-st-patrick-67ca96cc,St. Patrick,1031,,Main,St,,,,1031 Main St,Onalaska,WI,54650,,43.88532,-91.22313,(608) 783-5535
+us-mn-onamia-holy-cross-d9fa7f4b,National Shrine of St. Odilia,102,,Crosier,Dr,N,,,102 Crosier Dr N,Onamia,MN,56359,,46.07390444,-93.66090207,(320) 532-3122
+us-mn-opole-our-lady-of-mount-carmel-99e8ebe2,Our Lady of Mount Carmel,42942,,125th,Ave,,,,42942 125th Ave,Opole,MN,56340,,45.74591592,-94.3685372,(320) 393-2725
+us-mn-orr-holy-cross-7714a4b0,Holy Cross,10696,,Shady Grove,Ln,,,,10696 Shady Grove Ln,Orr,MN,55771,,48.04951021,-92.82918966,(218) 666-5334
+us-mn-ortonville-st-john-db4134dc,St John,421,,Madison,Ave,,,,421 Madison Ave,Ortonville,MN,56278,,45.30810374,-96.4436952,(320) 839-2772
+us-ia-osage-sacred-heart-1f9fee3a,Sacred Heart,1204,,State,St,,,,1204 State St,Osage,IA,50461,,43.28327314,-92.80228055,(641) 732-4342
+us-mn-osakis-immaculate-conception-940ba1b0,Immaculate Conception,306,W,Oak,St,,,,306 W Oak St,Osakis,MN,56360,,45.86638875,-95.15800928,(320) 859-2390
+us-wi-osceola-assumption-of-the-blessed-virgin-mary-eaf0dc24,Assumption of the Blessed Virgin Mary,265,,State Hwy 35,,,,,265 State Hwy 35 ,Osceola,WI,54020,,45.24732108,-92.69804003,(715) 247-3310
+us-wi-osceola-st-joseph-catholic-church-8bf5b98f,St Joseph Catholic Church,255,,10th,Ave,,,,255 10th Ave,Osceola,WI,54020,,45.3295703,-92.6947664,+1-715-247-3310
+us-wi-osceola-st-joseph-c9cf8021,St. Joseph,255,,10th,Ave,,,,255 10th Ave,Osceola,WI,54020,0399,45.32962069,-92.69476006,(715) 294-2243
+us-mn-oslo-st-joseph-7b33b576,St. Joseph,515,,Main,St,,,,515 Main St,Oslo,MN,56744,,48.19743903,-97.13311831,(218) 695-2641 or 218-745-4511
+us-mn-owatonna-sacred-heart-4e848947,Sacred Heart,810,S,Cedar,Ave,,,,810 S Cedar Ave,Owatonna,MN,55060,,44.07715468,-93.22682332,(507) 451-1588
+us-mn-owatonna-st-joseph-c60fc25f,St. Joseph,512,S,Elm,Ave,,,,512 S Elm Ave,Owatonna,MN,55060,,44.08024217,-93.22380441,(507) 451-4845
+us-mn-park-rapids-st-mary-6abc8ebb,St. Mary,55744,,Cty,Hwy,,,,55744 Cty Hwy 44,Park Rapids,MN,56470,,47.05168843,-95.21616856,218-732-4046 
+us-mn-park-rapids-st-peter-the-apostle-6c286344,St. Peter,305,,5th,St,,,,305 5th St,Park Rapids,MN,56470,,46.91844511,-95.0620655,(218) 732-5142
+us-mn-parkers-prairie-st-william-a9de9d83,St. William,209,W,Soo,St,,,,209 W Soo St,Parkers Prairie,MN,56361,9998,46.15315149,-95.3313205,(218) 338-2761
+us-mn-paynesville-st-louis-df1201bf,St. Louis,505,,Burr,St,,,,505 Burr St,Paynesville,MN,56362,0039,45.37705077,-94.72384649,(320) 243-4413
+us-mn-pelican-rapids-st-leonard-of-port-mauritius-a4e715b7,St. Leonard of Port Mauritius,36,,1st,Ave,NE,,,36 1st Ave NE,Pelican Rapids,MN,56572,,46.57099595,-96.08213766,(218) 863-5161
+us-nd-pembina-assumption-of-the-blessed-virgin-9c1a5ad5,Assumption,143,,Hayden,St,,,,143 Hayden St,Pembina,ND,58271,,48.97016961,-97.24164441,(701) 825-6266
+us-mn-pennington-st-charles-a813c5c2,St. Charles,2500,,Scenic,Hwy,NE,,,2500 Scenic Hwy NE,Pennington,MN,56663,,47.4869775,-94.47962159,(218) 444-4262
+us-mn-pequot-lakes-church-of-st-alice-a30546cc,St. Alice,30904,,Old,Hwy,,,,30904 Old Hwy 371,Pequot Lakes,MN,30904,,46.6021875,-94.3098125,12185684760
+us-mn-pequot-lakes-st-alice-our-lady-of-the-lakes-parish-77a0a5a8,St. Alice [Our Lady of the Lakes Parish],30950,,Rasmussen,Rd,,,,30950 Rasmussen Rd,Pequot Lakes,MN,56472,,46.60165683,-94.30924401,(218) 568-4760
+us-mn-perham-st-henry-d2eb6e2c,St. Henry,234,,2nd Ave.SW,,,,,234 2nd Ave.SW,Perham,MN,56573,,46.59394345,-95.5755337,(218) 346-4240
+us-mn-perham-st-lawrence-cb8e8660,St. Lawrence,46404,,County,Hwy,,,,46404 County Hwy 14,Perham,MN,56573,,46.51320417,-95.52532911,(218) 346-7729
+us-mn-pierz-st-joseph-d66768d4,St. Joseph,68,,Main,St,,,,68 Main St,Pierz,MN,56364,,45.98000821,-94.10349424,(320) 468-6033
+us-mn-pine-city-immaculate-conception-ba996488,Immaculate Conception,535,,8th,St,SW,,,535 8th St SW,Pine City,MN,55063,,45.8236153,-92.9736808,(320) 629-2935
+us-mn-pine-island-st-michael-b6bd0b7f,St. Michael,451,,5th,St,SW,,,451 5th St SW,Pine Island,MN,55963,,44.19781104,-92.6532919,507-356-4280
+us-mn-pine-river-our-lady-of-lourdes-our-lady-of-the-lakes-parish-6edf0175,Our Lady of Lourdes [Our Lady of the Lakes Parish],203,,2nd,St,N,,,203 2nd St N,Pine River,MN,56474,,46.72005682,-94.40494491,(218) 568-4760
+us-mn-pipestone-st-leo-2ee6e161,St. Leo,415,,Hiawatha,Ave,S,,,415 Hiawatha Ave S,Pipestone,MN,56164,,43.99685678,-96.31733556,(507) 825-3152
+us-mn-plainview-st-joachim-57ae292c,St. Joachim,900,W,Broadway,,,,,900 W Broadway,Plainview,MN,55964,,44.16516759,-92.17899291,(507) 534-3321
+us-wi-plum-city-st-john-the-baptist-1c8c6053,St. John the Baptist,212,,Church,Rd,,,,212 Church Rd,Plum City,WI,54761,,44.62778292,-92.19281464,(715) 647-2901
+us-mn-plymouth-st-mary-of-the-lake-catholic-church-2f8fa9d7,St Mary of the Lake Catholic Church,105,,Forestview,Ln,N,,,105 Forestview Ln N,Plymouth,MN,55441,,44.9801918,-93.4300214,+1-763-545-1443
+us-mn-plymouth-st-joseph-historic-little-church-de217f51,St. Joseph Historic Little Church,13015,,Rockford,Rd,,,,13015 Rockford Rd,Plymouth,MN,55441,,45.02766507,-93.44519834,763-544-3352
+us-mn-plymouth-st-mary-of-the-lake-82c9419d,St. Mary of the Lake,105,,Forestview,Ln,N,,,105 Forestview Ln N,Plymouth,MN,55441,,44.97929349,-93.43035187,763-545-1443
+us-ia-plymouth-rock-oratory-of-st-agnes-25b9519c,Oratory of St. Agnes,2875,,County Rd A18,,,,,2875 County Rd A18,Plymouth Rock,IA,52101,,43.4571875,-91.9634375,
+us-mn-ponsford-st-theodore-e42c3467,St. Theodore,48525,,Becker County 124,,,,,48525 Becker County 124 (Pow Wow Drive),Ponsford,MN,56575,,46.97773233,-95.38417531,(218) 983-3261
+us-wi-prescott-st-joseph-8e383e6f,St. Joseph,269,,Dakota,St,S,,,269 Dakota St S,Prescott,WI,54021,,44.74707101,-92.79807181,(715) 262-5310
+us-mn-preston-st-columban-3003bcce,St. Columban,408,NW,Preston,St,,,,408 NW Preston St,Preston,MN,55965,,43.67103277,-92.08646625,(507) 867-3922
+us-mn-princeton-christ-our-light-0c601676,Christ Our Light,11700,,293rd,Ave,NW,,,11700 293rd Ave NW,Princeton,MN,55371,,45.5035226,-93.56408878,(763) 389-2115
+us-mn-princeton-christ-our-light-catholic-parish-7584d230,Christ Our Light Catholic Parish,11700,,293rd,Ave,NW,,,11700 293rd Ave NW,Princeton,MN,55371,,45.5043473,-93.5645743,+1-763-389-2115
+us-mn-prior-lake-st-catherine-56b1ac00,St. Catherine,4500,,220th,St,E,,,4500 220th St E,Prior Lake,MN,55352,,44.63074712,-93.42919199,9524926276
+us-mn-prior-lake-st-michael-catholic-church-68a584e2,St. Michael,16400,,Duluth,Ave,SE,,,16400 Duluth Ave SE,Prior Lake,MN,55372,,44.7123508,-93.42987181,952-447-2491
+us-mn-proctor-st-rose-f94f8a7a,St. Rose,2,,6th,Ave,,,,2 6th Ave,Proctor,MN,55810,,46.74181261,-92.22980367,(218) 729-7537 or (218) 624-0007
+us-ia-protivin-holy-trinity-7ced0183,Holy Trinity,124,N,Main,St,,,,124 N Main St,Protivin,IA,52163,,43.21844967,-92.09132549,(563) 569-8259
+us-mn-ramsey-st-katharine-drexel-dbcf6067,St. Katharine Drexel,7633,,161st,Ave,NW,,,7633 161st Ave NW,Ramsey,MN,55303,,45.23066869,-93.44856237,(763)323-4424
+us-mn-ramsey-st-katharine-drexel-catholic-church-d96d8a18,St. Katharine Drexel Catholic Church,7633,,161st,Ave,NW,,,7633 161st Ave NW,Ramsey,MN,55303,,45.2632255,-93.4612355,+1-763-323-4424
+us-mn-randall-st-james-1d3657b2,St. James,403,E,Minnesota,Ave,,,,403 E Minnesota Ave,Randall,MN,56475,0225,46.09042601,-94.49351665,(320) 632-6930
+us-mn-red-lake-st-mary-6a963e92,St. Mary,15341,,St Mary's Mission,Rd,,,,15341 St Mary's Mission Rd,Red Lake,MN,56671,,47.87421764,-95.03116729,(218) 679-3615
+us-mn-red-lake-falls-st-joseph-a7cd36ee,St. Joseph,112,,Edward,Ave,NW,,,112 Edward Ave NW,Red Lake Falls,MN,56750,,47.88354145,-96.27524638,(218) 253-2188
+us-mn-red-wing-st-joseph-f1f58765,St. Joseph,435,W,7th,St,,,,435 W 7th St,Red Wing,MN,55066,,44.56158353,-92.53020374,651-388-1133
+us-mn-redwood-falls-st-catherine-92700049,St. Catherine,900,E,Flynn,St,,,,900 E Flynn St,Redwood Falls,MN,56283,0383,44.53366076,-95.10603317,(507) 644-2278
+us-mn-remer-st-paul-mission-1e3ab2a3,St. Paul,101,,3rd,Ave,SE,,,101 3rd Ave SE,Remer,MN,56672,,47.05510523,-93.9135593,(218) 363-2799 or (320) 400-3536 (Emergencies)
+us-mn-renville-holy-redeemer-4b6a92a9,Holy Redeemer,106,,3rd,St,SE,,,106 3rd St SE,Renville,MN,56284,0401,44.7889729,-95.20864872,320-365-3593
+us-sd-revillo-annunciation-f66aff31,Annunciation,301,W,5th,St,,,,301 W 5th St,Revillo,SD,57259,,45.0175302,-96.5728419,605-862-8485
+us-nd-reynolds-our-lady-of-perpetual-help-54aea88b,Our Lady of Perpetual Help,424,,5th,Ave,,,,424 5th Ave,Reynolds,ND,58275,,47.6729712,-97.10686275,(701) 847-3096
+us-mn-rice-immaculate-conception-ea5f3ae3,Immaculate Conception Church,130,,- 1st,Ave,NE,,,130 - 1st Ave NE,Rice,MN,56367,0189,45.75487188,-94.21972781,(320) 393-2725
+us-ia-riceville-church-of-the-immaculate-conception-3b382298,Immaculate Conception,211,E,Main,St,,,,211 E Main St,Riceville,IA,50466,,43.3635625,-92.5501875,16413932520
+us-mn-richfield-assumption-004410e6,Assumption,305,E,77th,St,,,,305 E 77th St,Richfield,MN,55423,,44.8634529,-93.27324,612-866-5019
+us-mn-richfield-st-peter-66638458,St. Peter,6730,,Nicollet,Ave,S,,,6730 Nicollet Ave S,Richfield,MN,55423,,44.880956,-93.279415,612-866-5089
+us-mn-richfield-st-richard-4268b514,St. Richard,7540,,Penn,Ave,S,,,7540 Penn Ave S,Richfield,MN,55423,,44.86603138,-93.31026125,612-869-2426
+us-mn-richmond-ss-peter-and-paul-2d08e467,Sts. Peter and Paul,110,,Central,Ave,NE,,,110 Central Ave NE,Richmond,MN,56368,,45.45547951,-94.51794695,(320) 204-1111
+us-ia-ridgeway-oratory-of-st-bridget-80a46083,Oratory of St. Bridget,3094,,253rd,Ave,,,,3094 253rd Ave,Ridgeway,IA,52165,,43.3851875,-91.8993125,
+us-wi-river-falls-nativity-of-the-blessed-virgin-mary-da6fb4e0,Nativity of the Blessed Virgin Mary ,,,W10137 570th,Ave,,,,W10137 570th Ave,River Falls,WI,54022,,44.858921,-92.5792482,(715) 629-0154
+us-wi-river-falls-st-bridget-9f1d8216,St. Bridget,211,E,Division,St,,,,211 E Division St,River Falls,WI,54022,,44.8631705,-92.6212757,(715) 425-1870
+us-wi-river-falls-st-thomas-more-newman-center-de23c2e3,St. Thomas  More Newman Center,423,E,Cascade,Ave,,,,423 E Cascade Ave,River Falls,WI,54022,,44.8545876,-92.62121,715-425-7234
+us-mn-robbinsdale-sacred-heart-a1f2d96f,Sacred Heart,4087,W,Broadway,,,,,4087 W Broadway,Robbinsdale,MN,55422,,45.02901248,-93.33776053,763-537-4561
+us-mn-rochester-chapel-of-our-lady-of-lourdes-7f4de355,Chapel of Our Lady of Lourdes,1001,,14th,St,NW,,,1001 14th St NW,Rochester,MN,55901,,44.0405625,-92.4808125,15072827441
+us-mn-rochester-co-cathedral-of-st-john-the-evangelist-ba439a8c,Co-Cathedral of St. John the Evangelist,11,,4th,Ave,SW,,,11 4th Ave SW,Rochester,MN,55902,,44.0230109,-92.4685609,(507) 288-7372
+us-mn-rochester-holy-spirit-37ff4fff,Holy Spirit,5455,,50th,Ave,NW,,,5455 50th Ave NW,Rochester,MN,55901,,44.0768548,-92.54026766,(507) 280-0638
+us-mn-rochester-pax-christi-28162ca5,Pax Christi,4135,,18th,Ave,NW,,,4135 18th Ave NW,Rochester,MN,55901,,44.06571586,-92.48982647,(507) 282-8542
+us-mn-rochester-church-of-the-resurrection-7dbe2e9f,Resurrection,1600,,11th,Ave,SE,,,1600 11th Ave SE,Rochester,MN,55904,,44.00018181,-92.44534612,(507) 288-5528
+us-mn-rochester-st-bridget-catholic-church-6aa8f3ee,St Bridget Catholic Church,2123,,County Rd 16,,SE,,,2123 County Rd 16 SE,Rochester,MN,55904,,43.923377,-92.4359211,+1-507-533-8257
+us-mn-rochester-st-francis-of-assisi-7a01a98d,St. Francis of Assisi,1114,,3rd,St,SE,,,1114 3rd St SE,Rochester,MN,55904,,44.0206677,-92.44831684,(507) 288-7313
+us-mn-rochester-st-pius-x-efb40bde,St. Pius X,1315,,12th,Ave,NW,,,1315 12th Ave NW,Rochester,MN,55901,,44.03542612,-92.48091878,(507) 288-8238
+us-ia-rock-rapids-holy-name-2e46fb24,Holy Name,1108,S,Carroll,,,,,1108 S Carroll,Rock Rapids,IA,51246,2060,43.41937458,-96.17193674,(712) 472-3248
+us-wi-rockland-st-peter-catholic-church-middle-ridge-8a6b0eaa,St Peter Catholic Church (Middle Ridge),,,W697 WI-33,,,,,W697 WI-33,Rockland,WI,54653,,43.7969818,-90.9403467,+1-608-486-2180
+us-wi-rockland-st-peter-5904e9a7,St. Peter,,,W695 State Rd 33,,,,,W695 State Rd 33,Rockland,WI,54653,,43.7959317,-90.9249768,(608) 452-4680
+us-mn-rockville-mary-of-the-immaculate-conception-7e35cd9b,Mary of the Immaculate Conception,113,,Broadway,St,W,,,113 Broadway St W,Rockville,MN,56369,0007,45.47160258,-94.33995509,(320) 204-1111
+us-mn-rogers-mary-queen-of-peace-5760d9a3,Mary Queen of Peace Catholic Church,21304,,Church,Ave,,,,21304 Church Ave,Rogers,MN,55374,,45.18914328,-93.55043315,763-428-2585
+us-mn-rogers-oratory-of-st-walburga-f8932e7d,St. Walburga,12020,,Fletcher,Ln,,,,12020 Fletcher Ln,Rogers,MN,55374,,45.17265416,-93.54163675,763-428-2585
+us-mn-rollingstone-holy-trinity-fb7aff05,Holy Trinity,87,,Main,St,,,,87 Main St,Rollingstone,MN,55969,,44.09769779,-91.81889227,(507) 689-2351
+us-mn-roscoe-st-agnes-158a15b8,St. Agnes,100,,Lillie,Ave,,,,100 Lillie Ave,Roscoe,MN,56371,,45.4335419,-94.63699593,320-243-4413 
+us-mn-rose-creek-st-peter-7ac093e9,St. Peter,302,,Maple,St,SW,,,302 Maple St S.W,Rose Creek,MN,55970,,43.60193771,-92.8337982,(507)582-3120
+us-mn-roseau-sacred-heart-5fe9ec9c,Sacred Heart,403,,Main,Ave,N,,,403 Main Ave N,Roseau,MN,56751,,48.84989853,-95.76314338,(218) 463-2441
+us-mn-roseau-st-philip-bcf2eea9,St. Philip,403,,Main,Ave,N,,,403 Main Ave N,Roseau,MN,56751,,48.71890622,-95.60869347,(218) 463-2441
+us-mn-rosemount-st-agatha-f88c1b55,St. Agatha,3700,,160th,St,E,,,3700 160th St E,Rosemount,MN,55068,,44.71700473,-93.03175258,651-437-7498
+us-mn-rosemount-st-joseph-7e178387,St. Joseph,13900,,Biscayne,Ave,W,,,13900 Biscayne Ave W,Rosemount,MN,55068,,44.74792954,-93.11422341,651-423-4402
+us-mn-rosen-st-joseph-3ae70103,St. Joseph,1281,,340th,St,,,,1281 340th St,Rosen,MN,56212,,45.15372613,-96.40179494,(320) 839-2772
+us-mn-roseville-corpus-christi-6fecf5e1,Corpus Christi,2131,,Fairview,Ave,N,,,2131 Fairview Ave N,Roseville,MN,55113,,45.00497538,-93.17839941,651-846-9212
+us-mn-roseville-st-rose-of-lima-34c0bb59,St. Rose of Lima,2048,,Hamline,Ave,N,,,2048 Hamline Ave N,Roseville,MN,55113,,45.00415379,-93.15629096,651-645-9389
+us-sd-rosholt-st-john-the-baptist-a7a25de7,St. John the Baptist,218,W,Dakota,St,,,,218 W Dakota St,Rosholt,SD,57260,,45.86289805,-96.73590851,(605) 809-5621
+us-mn-royalton-holy-trinity-9ebaff36,Holy Trinity,216-,,2nd,St,N,,,216- 2nd St N,Royalton,MN,56373,0258,45.83305587,-94.2920105,320-393-2725
+us-mn-rush-city-sacred-heart-b24abf12,Sacred Heart,415,W,5th,St,,,,415 W 5th St,Rush City,MN,55069,,45.68460984,-92.96797124,320-358-4370
+us-mn-rushford-st-joseph-4ea06bcb,St. Joseph,111,N,Mill,St,,,,111 N Mill St,Rushford,MN,55971,,43.81082385,-91.75344904,(507) 523-2428
+us-mn-sabin-st-cecilia-2575bbb0,St. Cecilia,20,,Holloway,Ave,N,,,20 Holloway Ave N,Sabin,MN,56580,,46.77708684,-96.65109123,(218) 354-7320
+us-mn-saginaw-church-of-st-phillip-neri-d24a4920,St. Phillip Neri,4904,,Independence,Rd,,,,4904 Independence Rd,Saginaw,MN,55810,,46.8661875,-92.4700625,
+us-mn-saint-augusta-st-mary-help-of-christians-0a276140,St. Mary Help of Christians,24588,,County Rd 7,,,,,24588 County Rd 7,Saint Augusta,MN,56301,8779,45.47948281,-94.15331447,(320) 252-1799
+us-mn-saint-bonifacius-st-boniface-0094a11f,St. Boniface,4025,,Main,St,,,,4025 Main St,Saint Bonifacius,MN,55375,0068,44.90508551,-93.74770978,952-446-1054
+us-mn-saint-charles-st-charles-borromeo-6e97992f,St. Charles Borromeo,1900,E,6th,St,,,,1900 E 6th St,Saint Charles,MN,55972,,43.9720614,-92.03105679,(507) 932-3294
+us-mn-saint-clair-immaculate-conception-6f017bc1,Immaculate Conception,101,,Church,St,,,,101 Church St,Saint Clair,MN,56080,,44.07982793,-93.8589282,(507) 243-3319
+us-mn-saint-cloud-christ-church-newman-center-1e0a38b9,Christ Church Newman Center,396,,First,Ave,S,,,396 First Ave S,Saint Cloud,MN,56301,4412,45.55605,-94.14872,(320) 251-3260
+us-mn-saint-cloud-holy-spirit-98e0942d,Holy Spirit,2405,,Walden,Way,,,,2405 Walden Way,Saint Cloud,MN,56301,,45.5216713,-94.17919922,(320) 251-3764
+us-mn-saint-cloud-st-john-cantius-d1ac3b64,St John Cantius',1515,N,3rd,St,,,,1515 N 3rd St,Saint Cloud,MN,56303,,45.55897713,-94.17306792,(320) 251-4455
+us-mn-saint-cloud-st-anthony-of-padua-8af83826,St. Anthony of Padua,2405,,1st,St,N,,,2405 1st St N,Saint Cloud,MN,56303,,45.55522824,-94.18710525,(320) 251-5966
+us-mn-saint-cloud-st-augustine-315fbe82,St. Augustine,442,,2nd,St,SE,,,442 2nd St SE,Saint Cloud,MN,56304,,45.56413769,-94.14924073,(320) 251-8335
+us-mn-saint-cloud-st-cloud-hospital-chapel-331409f6,St. Cloud Hospital Chapel,1400,,6th,Ave,N,,,1400 6th Ave N,Saint Cloud,MN,56303,,45.57546454,-94.16955192,320-255-5725
+us-mn-saint-cloud-st-marys-cathedral-fe142524,St. Mary's Cathedral,25,,8th,Ave,S,,,25 8th Ave S,Saint Cloud,MN,56301,,45.55892135,-94.16130212,(320) 251-1840
+us-mn-saint-cloud-st-michael-feb23ef9,St. Michael,1036,,Co Rd 4,,,,,1036 Co Rd 4,Saint Cloud,MN,56303,,45.57806525,-94.23533115,(320) 251-6923
+us-mn-saint-cloud-st-paul-2ab7fb42,St. Paul,1125,,11th,Ave,N,,,1125 11th Ave N,Saint Cloud,MN,56303,,45.56948582,-94.17512271,(320) 251-4831
+us-mn-saint-cloud-st-peter-b617aae8,St. Peter,930,N,31st,Ave,,,,930 N 31st Ave,Saint Cloud,MN,56303,,45.56841893,-94.19520575,320-251-4831
+us-mn-saint-henry-st-henry-a8b362d7,St. Henry,38807,,261st,Ave,,,,38807 261st Ave,Saint Henry,MN,56057,,44.38662683,-93.78812251,507-357-6633
+us-mn-saint-james-st-james-764b7b22,St. James,707,,4th,St,S,,,707 4th St S,Saint James,MN,56081,,43.97849469,-94.62930532,(507) 375-3542
+us-mn-saint-joseph-college-of-st-benedict-sacred-heart-chapel-5b888a62,College of St. Benedict (Sacred Heart Chapel),37,S,College,Ave,,,,37 S College Ave,Saint Joseph,MN,56374,2099,45.56311749,-94.31840193,320-363-5603
+us-mn-saint-joseph-sacred-heart-saint-benedicts-monastery-bca96820,Sacred Heart (St. Benedict’s Monastery),104,,Chapel,Ln,,,,104 Chapel Ln,Saint Joseph,MN,56374,,45.5634941,-94.3206642,(320) 363-7100
+us-mn-saint-joseph-st-joseph-40a900fd,St. Joseph,12,W,Minnesota,St,,,,12 W Minnesota St,Saint Joseph,MN,56374,,45.56390098,-94.31887304,(320) 363-7505
+us-mn-saint-kilian-st-kilian-oratory-36dfdf42,St. Kilian,14034,,Emerald,Ave,,,,14034 Emerald Ave,Saint Kilian,MN,56158,,43.78983235,-95.86959582,(507) 483-2317
+us-mn-saint-louis-park-holy-family-3cde485a,Holy Family,5900,W,Lake,St,,,,5900 W Lake St,Saint Louis Park,MN,55416,,44.94618895,-93.35480361,(952) 929-0113
+us-mn-saint-martin-st-martin-258f0248,St. Martin,119,,Maine,St,,,,119 Maine St,Saint Martin,MN,56376,0290,45.501144,-94.66703551,(320) 548-3550
+us-mn-saint-michael-st-michael-82dd31c9,St. Michael,11300,,Frankfort,Pkwy,NE,,,11300 Frankfort Pkwy NE,Saint Michael,MN,55376,,45.21500022,-93.65834549,763-497-2745
+us-mn-saint-nicholas-st-nicholas-cfb447b2,St. Nicholas,15862,,Co Rd 165,,,,,15862 Co Rd 165,Saint Nicholas,MN,55389,,45.38159726,-94.435687,(320) 764-7345
+us-mn-saint-paul-albertus-magnus-chapel-e2e1523c,Albertus Magnus Chapel,2115,,Summit,Ave,,,,2115 Summit Ave,Saint Paul,MN,55105,,44.94193038,-93.1871316,651-962-5000
+us-mn-saint-paul-assumption-ab130716,Assumption,51,,7th,St,W,,,51 7th St W,Saint Paul,MN,55102,,44.94769104,-93.09922211,651-224-7536
+us-mn-saint-paul-cathedral-of-saint-paul-national-shrine-of-the-apostle-paul-3c313b5f,Cathedral of St. Paul,239,,Selby,Ave,,,,239 Selby Ave,Saint Paul,MN,55102,,44.94674398,-93.10911735,651-228-1766
+us-mn-saint-paul-chapel-of-st-thomas-aquinas-university-of-st-thomas-1fe83599,Chapel of St. Thomas Aquinas  - University of St. Thomas,2115,,Summit,Ave,,,,2115 Summit Ave,Saint Paul,MN,55105,,44.94456274,-93.18818651,(651) 962-6560
+us-mn-saint-paul-holy-childhood-e5875a90,Holy Childhood,1435,,Midway,Pkwy,,,,1435 Midway Pkwy,Saint Paul,MN,55108,,44.98150743,-93.16151729,651-489-8825
+us-mn-saint-paul-holy-spirit-catholic-church-d9b46f13,Holy Spirit Catholic Church,515,S,Albert,St,,,,515 S Albert St,Saint Paul,MN,55116,,44.92645156,-93.15901237,651-698-3353
+us-mn-saint-paul-lumen-christi-catholic-community-874cb68f,Lumen Christi Catholic Community,2055,,Bohland,Ave,,,,2055 Bohland Ave,Saint Paul,MN,55116,,44.91659201,-93.18681242,651-698-5581
+us-mn-saint-paul-maternity-of-the-blessed-virgin-462210e8,Maternity of the Blessed Virgin,1414,N,Dale,St,,,,1414 N Dale St,Saint Paul,MN,55117,,44.98356345,-93.12517358,651-489-8825
+us-mn-saint-paul-nativity-of-our-lord-a5f6402f,Nativity of Our Lord,1938,,Stanford,Ave,,,,1938 Stanford Ave,Saint Paul,MN,55105,,44.93236812,-93.18185626,651-696-5401
+us-mn-saint-paul-our-lady-of-guadalupe-3b0a8aa6,Our Lady of Guadalupe,401,,Concord,St,,,,401 Concord St,Saint Paul,MN,55107,,44.92747646,-93.06849122,651-228-0506
+us-mn-saint-paul-our-lady-of-victory-chapel-st-kates-c1c79732,Our Lady of Victory Chapel - St. Kate's,2004,,Randolph,Ave,,,,2004 Randolph Ave,Saint Paul,MN,55105,,44.92534117,-93.18427461,(651) 690-6724
+us-mn-saint-paul-sacred-heart-9c15ab08,Sacred Heart,840,E,6th,St,,,,840 E 6th St,Saint Paul,MN,55106,4584,44.96015892,-93.06519109,(651) 776-2741
+us-mn-saint-paul-st-adalbert-61a7a719,St. Adalbert,265,,Charles,Ave,,,,265 Charles Ave,Saint Paul,MN,55103,2093,44.95792048,-93.11083516,(651) 228-9002
+us-mn-saint-paul-st-agnes-0634efb5,St. Agnes,535,,Thomas,Ave,,,,535 Thomas Ave,Saint Paul,MN,55103,,44.95966671,-93.12354523,(651) 925-8800
+us-mn-saint-paul-st-alphonsa-syro-malabar-catholic-church-32fb327a,St. Alphonsa Syro-Malabar Catholic Church,651,,Virginia,St,,,,651 Virginia St,Saint Paul,MN,55103,,44.86601376,-93.30988069,
+us-mn-saint-paul-st-alphonsa-syro-malabar-dd03ca81,St. Alphonsa [Syro-Malabar],651,,Virginia,St,,,,651 Virginia St,Saint Paul,MN,55103,,44.96122249,-93.11510589,(612) 547-6111
+us-mn-saint-paul-st-andrew-kim-0ed54230,St. Andrew Kim,1435,,Midway,Pkwy,,,,1435 Midway Pkwy,Saint Paul,MN,55108,,44.98150181,-93.1612963,(651) 644-1605
+us-mn-saint-paul-church-of-st-bernard-c6f2f8ec,St. Bernard,187,W,Geranium,Ave,,,,187 W Geranium Ave,Saint Paul,MN,55117,4491,44.97588015,-93.10764647,651-488-6733
+us-mn-saint-paul-st-casimir-8178b4f4,St. Casimir,934,,Geranium,Ave,E,,,934 Geranium Ave E,Saint Paul,MN,55106,2694,44.9752623,-93.06108905,(651) 774-0365
+us-mn-saint-paul-st-columba-48addcdf,St. Columba,1327,,Lafond,Ave,,,,1327 Lafond Ave,Saint Paul,MN,55104,2035,44.96037305,-93.15554449,(651) 645-9179
+us-mn-saint-paul-st-francis-de-sales-afed7435,St. Francis de Sales,650,,Palace,Ave,,,,650 Palace Ave,Saint Paul,MN,55102,,44.92889095,-93.12773165,651-228-1169
+us-mn-saint-paul-saint-john-vianney-college-seminary-chapel-a77490f3,St. John Vianney College Seminary,2115,,Summit,Ave,,,,2115 Summit Ave,Saint Paul,MN,55105,,44.94585758,-93.18924406,(651) 358-3368
+us-mn-saint-paul-st-louis-king-of-france-682ac634,"St. Louis, King of France",506,,Cedar,St,,,,506 Cedar St,Saint Paul,MN,55101,,44.950135,-93.096423,(651) 224-3379
+us-mn-saint-paul-church-of-st-mark-0ed31320,St. Mark,2001,,Dayton,Ave,,,,2001 Dayton Ave,Saint Paul,MN,55104,,44.94764112,-93.18442393,651-645-5717
+us-mn-saint-paul-st-mary-759edfbf,St. Mary,267,,8th,St,E,,,267 8th St E,Saint Paul,MN,55101,,44.95223653,-93.08842641,(651) 222-2619
+us-mn-saint-paul-st-marys-chapel-the-saint-paul-seminary-2979c904,St. Mary’s Chapel - The St. Paul Seminary,2260,,Summit,Ave,,,,2260 Summit Ave,Saint Paul,MN,55105,,44.94073915,-93.19592358,(651) 962-5050
+us-mn-saint-paul-st-matthew-9fc18869,St. Matthew,510,,Hall,Ave,,,,510 Hall Ave,Saint Paul,MN,55107,,44.93082572,-93.08644639,651-224-9793
+us-mn-saint-paul-st-pascal-baylon-8560b646,St. Pascal Baylon,1757,,Conway,St,,,,1757 Conway St,Saint Paul,MN,55106,5999,44.95630917,-93.0264744,(651) 774-1585
+us-mn-saint-paul-st-patrick-3b956d0b,St. Patrick,1095,,DeSoto,St,,,,1095 DeSoto St,Saint Paul,MN,55130,3793,44.97410633,-93.08162886,(651) 774-8675
+us-mn-saint-paul-st-peter-claver-d2e593e3,St. Peter Claver,369,,Oxford,St,N,,,369 Oxford St N,Saint Paul,MN,55104,4782,44.95233369,-93.1445079,(651) 646-1797
+us-mn-saint-paul-st-stanislaus-0803e871,St. Stanislaus,398,,Superior,St,,,,398 Superior St,Saint Paul,MN,55102,2925,44.93565262,-93.11660066,(651) 292-0303
+us-mn-saint-paul-st-thomas-more-catholic-church-8c5edc21,St. Thomas More,1079,,Summit,Ave,,,,1079 Summit Ave,Saint Paul,MN,55105,3004,44.9418564,-93.14608,651-227-7669
+us-mn-saint-paul-blessed-sacrament-20583a08,St. Thomas the Apostle,2119,,Stillwater,Ave,E,,,2119 Stillwater Ave E,Saint Paul,MN,55119,,44.96930862,-93.01102647,651-738-0677
+us-mn-saint-paul-st-cecilia-5ac8b1b6,The Church of St. Cecilia,2357,,Bayless,Pl,,,,2357 Bayless Pl,Saint Paul,MN,55114,1198,44.96885983,-93.20026984,(651) 644-4502
+us-mn-saint-paul-park-st-thomas-aquinas-f83af47c,St. Thomas Aquinas,920,,Holley,Ave,,,,920 Holley Ave,Saint Paul Park,MN,55071,,44.84087506,-92.98651458,651-459-2131
+us-mn-saint-peter-church-of-st-peter-a0558e9a,St. Peter,1801,W,Broadway,Ave,,,,1801 W Broadway Ave,Saint Peter,MN,56082,0522,44.3316788,-93.97645533,(507) 931-1628
+us-mn-saint-rosa-st-rose-of-lima-8ad15149,St. Rose of Lima,28905,,Co Rd 17,,,,,28905 Co Rd 17 (Saint Rosa),Saint Rosa,MN,56331,9610,45.73027401,-94.71534154,(320) 836-2143
+us-mn-saint-stephen-st-stephen-7ab019c8,St. Stephen,103,,Central,Ave,S,,,103 Central Ave S,Saint Stephen,MN,56375,9605,45.70153426,-94.27492237,(320) 251-1520
+us-mn-saint-wendel-st-columbkille-b51e8a61,St. Columbkille,12536,,Co Rd 4,,,,,12536 Co Rd 4,Saint Wendel,MN,56310,,45.6665231,-94.36723946,(320) 228-0105
+us-mn-sanborn-st-thomas-oratory-29198cc8,Oratory of St. Thomas,301,E,Winona,St,,,,301 E Winona St,Sanborn,MN,56085,,44.20889974,-95.12528474,507-752-7269
+us-mn-sandstone-st-luke-a173a311,St. Luke,122,,Commercial,Ave,N,,,122 Commercial Ave N,Sandstone,MN,55072,,46.12939143,-92.86720175,(320) 245-5175
+us-mn-sartell-st-francis-xavier-de52671c,St. Francis Xavier,219,,2nd,St,N,,,219 2nd St N,Sartell,MN,56377,,45.62112237,-94.20862122,(320) 252-1363
+us-mn-sauk-centre-our-lady-of-the-angels-65274d1e,Our Lady of the Angels,207,,7th.Street So,,,,,207 7th.Street So,Sauk Centre,MN,56378,,45.73202629,-94.94742805,(320) 352-3502
+us-mn-sauk-centre-st-paul-1f06bbd1,St. Paul,304,,Sinclair Lewis,Ave,,,,304 Sinclair Lewis Ave,Sauk Centre,MN,56378,1343,45.73767334,-94.94938426,(320) 352-2196
+us-mn-sauk-rapids-annunciation-ff64bd3e,Annunciation,9965,,Mayhew Lake,Rd,NE,,,9965 Mayhew Lake Rd NE,Sauk Rapids,MN,56379,,45.7130554,-94.11137668,(320) 393-1729
+us-mn-sauk-rapids-church-of-poor-clare-monastery-c664d491,Poor Clare Monastery,421,,4th,St,S,,,421 4th St S,Sauk Rapids,MN,56397,,45.5874375,-94.1585625,13202513556
+us-mn-sauk-rapids-sacred-heart-33128b35,Sacred Heart,2875,,10th,Ave,NE,,,2875 10th Ave NE,Sauk Rapids,MN,56379,,45.60908585,-94.14502525,(320) 251-8115
+us-mn-sauk-rapids-st-patrick-cf0217d6,St. Patrick,7286,,Duelm,Rd,NE,,,7286 Duelm Rd NE,Sauk Rapids,MN,56379,,45.5830078,-94.0101242,(320) 252-2069
+us-mn-savage-st-john-the-baptist-c33c27f9,St. John the Baptist,4625,W,125th,St,,,,4625 W 125th St,Savage,MN,55378,,44.77594368,-93.33780308,952-890-9465
+us-mn-sawyer-sts-mary-and-joseph-8829deda,Sts. Mary and Joseph Log Church,1225,,Mission,Rd,,,,1225 Mission Rd,Sawyer,MN,55780,,46.68391339,-92.63694111,(218) 384-4563 or (218) 878-1146
+us-mn-seaforth-st-mary-ecd85c2a,St. Mary,305,,Oak,St,,,,305 Oak St,Seaforth,MN,56287,,44.47755432,-95.32944489,(507) 984-5411
+us-mn-sebeka-st-hubert-86547e04,St. Hubert,22008,,County Rd 23,,,,,22008 County Rd 23,Sebeka,MN,56477,,46.5431131,-95.00972595,(218) 894-2296
+us-mn-shafer-st-francis-xavier-e665c3d8,St. Francis Xavier,25267,,Redwing,Ave,,,,25267 Redwing Ave,Shafer,MN,55074,,45.31493155,-92.75309996,651-465-7345
+us-mn-shakopee-marystown-catholic-church-0503d284,Marystown Catholic Church,15850,,Marystown,Rd,,,,15850 Marystown Rd,Shakopee,MN,55379,,44.7201616,-93.541863,+1-952-445-1319
+us-mn-shakopee-ss-joachim-and-anne-marystown-church-329240ae,Ss. Joachim and Anne (Marystown Church),15850,,Marystown,Rd,,,,15850 Marystown Rd,Shakopee,MN,55379,,44.72018856,-93.54186437,952-445-1319
+us-mn-shakopee-ss-joachim-and-anne-shakopee-area-catholic-school-d6a8cee9,Ss. Joachim and Anne (Shakopee Area Catholic School),2700,,17th,Ave,E,,,2700 17th Ave E,Shakopee,MN,55379,,44.77099457,-93.48568297,952-445-1319
+us-mn-shakopee-ss-joachim-and-anne-st-mark-church-062d3e9a,St. Mark,350,,Atwood,St,S,,,350 Atwood St S,Shakopee,MN,55379,1238,44.79532496,-93.52904367,952-445-1319
+us-mn-shakopee-ss-joachim-and-anne-st-mary-church-b48984b7,St. Mary,535,,Lewis,St,S,,,535 Lewis St S,Shakopee,MN,55379,,44.79449045,-93.52397991,(952) 445-1319
+us-mn-sherburn-st-luke-88a289a2,St. Luke,303,S,Lake,St,,,,303 S Lake St,Sherburn,MN,56171,,43.64992004,-94.72371546,(507) 764-7831
+us-mn-shieldsville-st-patrick-648cdcdd,St. Patrick,7525,,Dodd,Rd,,,,7525 Dodd Rd,Shieldsville,MN,55021,,44.36433634,-93.41343379,507-334-6002
+us-mn-shoreview-st-odilia-abd9b55a,St. Odilia,3495,,Victoria,St,N,,,3495 Victoria St N,Shoreview,MN,55126,,45.04738312,-93.13399474,651-484-6681
+us-mn-shoreview-st-odilia-catholic-church-57406978,St. Odilia Catholic Church,3495,,Victoria,St,N,,,3495 Victoria St N,Shoreview,MN,55126,,45.0471143,-93.1339905,+1-651-484-6681
+us-ia-sibley-st-andrew-f88b58d5,St. Andrew,708,,8th,St,,,,708 8th St,Sibley,IA,51249,1750,43.40026484,-95.74456538,(712) 324-0160
+us-mn-silver-bay-st-mary-0a6e19f7,St. Mary,57,,Horn,Blvd,,,,57 Horn Blvd,Silver Bay,MN,55614,,47.29091533,-91.28409684,(218) 226-3100
+us-mn-silver-lake-church-of-the-holy-family-ae599c62,Holy Family,700,,Main,St,W,,,700 Main St W,Silver Lake,MN,55381,,44.90323121,-94.20272358,(320) 327-2356
+us-mn-silver-lake-holy-family-catholic-church-43a3ba44,Holy Family Catholic Church,700,,Main,St,W,,,700 Main St W,Silver Lake,MN,55381,,44.903338,-94.2026805,+1-320-327-2356
+us-mn-simpson-st-bridget-8b89fedf,St. Bridget,2123,,County Rd 16,,SE,,,2123 County Rd 16 SE,Simpson,MN,55904,,43.9234291,-92.43601705,(507) 533-8257
+us-sd-sioux-falls-st-therese-a6a1a78d,St. Therese,901,N,Tahoe,Trl,,,,901 N Tahoe Trail,Sioux Falls,SD,57110,,43.55716499,-96.66591167,605-336-8808
+us-sd-sisseton-saint-peters-catholic-church-d45fb933,Saint Peter's Catholic Church,525,,Chestnut,St,E,,,525 Chestnut St E,Sisseton,SD,57262,,45.6676746,-97.0442345,+1-605-698-7414
+us-sd-sisseton-st-kateri-tekakawitha-9aedf550,St. Kateri Tekakwitha,619,,Main,Ave,,,,619 Main Ave,Sisseton,SD,57262,,45.66539102,-97.05116272,605-698-7414
+us-sd-sisseton-st-peter-8eaf6be9,St. Peter,525,E,Chestnut,St,,,,525 E Chestnut St,Sisseton,SD,57262,1428,45.66756954,-97.03903298,(605) 698-7414
+us-mn-slayton-st-ann-fccc2b2d,St. Ann,2747,,29th,St,,,,2747 29th St,Slayton,MN,56172,,43.9844941,-95.75293601,(507) 836-8030
+us-mn-sleepy-eye-japanese-martyrs-56dc384a,Japanese Martyrs,30881,,County Rd 24,,,,, 30881 County Rd 24,Sleepy Eye,MN,56085,,44.22166451,-94.80379391,(507) 794-6974
+us-mn-sleepy-eye-st-mary-help-of-christians-249b9dbc,"St. Mary, Help of Christians",636,,1st,Ave,N,,,636 1st Ave N,Sleepy Eye,MN,56085,1004,44.30366658,-94.72318876,(507) 794-4171
+us-wi-somerset-st-anne-b9644c9a,St. Anne,141,,Church Hill,Rd,,,,141 Church Hill Rd,Somerset,WI,54025,,45.12762068,-92.67295921,(715) 247-3310
+us-wi-somerset-st-anne-catholic-church-52c92194,St. Anne Catholic Church,141,,Church Hill,Rd,,,,141 Church Hill Rd,Somerset,WI,54025,,45.1276935,-92.6730144,+1-715-247-3310
+us-mn-south-saint-paul-holy-trinity-af9ccb9b,Holy Trinity,749,,6th,Ave,S,,,749 6th Ave S,South Saint Paul,MN,55075,,44.87829819,-93.0408212,651-455-1302
+us-mn-south-saint-paul-st-augustine-fd2ffe97,St. Augustine,408,,3rd,St,N,,,408 3rd St N,South Saint Paul,MN,55075,,44.89382629,-93.03874259,651-455-1302
+us-mn-south-saint-paul-st-john-vianney-22a66490,St. John Vianney,840-19th,,,Ave,N,,,840-19th Ave N,South Saint Paul,MN,55075,,44.90475256,-93.05713221,651-451-1863
+us-mn-spicer-our-lady-of-the-lakes-2fff7a6a,Our Lady of the Lakes,6680,,153rd,Ave,NE,,,6680 153rd Ave NE,Spicer,MN,56288,,45.27196662,-94.9533942,"320-235-0118 (St. Mary’s, Willmar)"
+us-ia-spillville-st-wenceslaus-4faac163,St. Wenceslaus,207,,Church,St,,,,207 Church St,Spillville,IA,52168,,43.20583213,-91.95406447,(563) 562-3045
+us-ia-spirit-lake-st-mary-0d6e6d95,St. Mary,1005,,Hill,Ave,,,,1005 Hill Ave,Spirit Lake,IA,51360,,43.42978675,-95.101344,(712) 336-1742
+us-mn-spring-hill-st-michael-1afb73b3,St. Michael,102,,St Michael,Ave,N,,,102 St Michael Ave N,Spring Hill,MN,56352,,45.52443737,-94.82781028,(320) 987-3618
+us-wi-spring-valley-sacred-heart-3e15c92b,Sacred Heart,,,S105 Sabin,Ave,,,,S105 Sabin Ave,Spring Valley,WI,54740,,44.7789069,-92.1467909,(715) 778-5519
+us-wi-spring-valley-sacred-heart-of-jesus-catholic-church-8a53796a,Sacred Heart of Jesus Catholic Church,,,S105 Sabin,Ave,,,,S105 Sabin Ave,Spring Valley,WI,54767,,44.8464725,-92.2376777,+1-715-778-5519
+us-mn-spring-valley-st-ignatius-8ae5433f,St. Ignatius,213,W,Franklin,St,,,,213 W Franklin St,Spring Valley,MN,55975,,43.68362005,-92.39270524,(507) 346-7565
+us-mn-springfield-st-raphael-ac3e0a98,St. Raphael,20,W,Van Dusen,,,,,20 W Van Dusen,Springfield,MN,56087,1396,44.24112175,-94.97724201,(507) 723-4137
+us-mn-squaw-lake-st-catherine-ad8b1208,St. Catherine,52265,,State Hwy 46,,,,,52265 State Hwy 46,Squaw Lake,MN,56681,,47.63397172,-94.13756663,(218) 743-3255
+us-mn-st-joseph-st-john-the-baptist-parish-83cae177,St John the Baptist Parish,14241,,Fruit Farm,Rd,,,,14241 Fruit Farm Rd,St Joseph,MN,56374,,45.5835347,-94.4018919,+1-320-363-2569
+us-mn-st-leo-church-of-st-leo-2ef1fc59,St. Leo,202,W,Church,St,,,,202 W Church St,St. Leo,MN,56264,,44.7170625,-96.0540625,15072242289
+us-mn-st-leo-st-leo-church-a42e1950,St. Leo Church,202,W,Church,St,,,,202 W Church St,St. Leo,MN,56264,,44.71734,-96.05332,507-223-7304
+us-mn-st-paul-cathedral-of-st-paul-2036e7a4,Cathedral of St. Paul,239,,Selby,Ave,,,,239 Selby Ave,St. Paul,MN,55102,1891,44.9469375,-93.1085625,16512281766
+us-mn-st-paul-chapel-of-st-mary-3047712d,Chapel of St. Mary,,,St Paul Minnesota 55105,,,,,St Paul Minnesota 55105,St. Paul,MN,55105,,44.9409375,-93.1963125,
+us-mn-st-paul-church-of-st-michael-7f97fed1,St. Michael,337,,Hurley,St,E,,,337 Hurley St E,St. Paul,MN,55118,1605,44.9185625,-93.0709375,16514572334
+us-mn-st-paul-st-paul-seminary-school-of-divinity-d763380d,St. Paul Seminary School of Divinity,,,St Paul Minnesota 55104,,,,,St Paul Minnesota 55104,St. Paul,MN,55104,,44.9401875,-93.1964375,
+us-ia-stacyville-visitation-afc57cfa,Visitation,601,N,Broad,St,,,,601 N Broad St,Stacyville,IA,50476,,43.44142551,-92.78173088,(641) 732-4342
+us-ia-stacyville-visitation-catholic-church-c6cd1364,Visitation Catholic Church,604,N,Broad,St,,,,604 N Broad St,Stacyville,IA,50476,,43.4414755,-92.7817572,+1-641-710-2403
+us-mn-staples-sacred-heart-2c2afc83,Sacred Heart,310,,4th,St,NE,,,310 4th St NE,Staples,MN,56479,,46.35693409,-94.79456313,(218) 894-2296
+us-mn-stephen-st-stephen-a83d85bf,St. Stephen,515,,5th,St,,,,515 5th St,Stephen,MN,56757,,48.44947168,-96.87791454,(218) 478-2231
+us-mn-stewart-st-boniface-70467ca0,St. Boniface,551,,Main,St,,,,551 Main St,Stewart,MN,55385,0202,44.72473061,-94.4840453,(320) 562-2344
+us-mn-stewartville-st-bernard-606c2576,St. Bernard,116,,4th,Ave,SE,,,116 4th Ave SE,Stewartville,MN,55976,,43.85502186,-92.48182925,(507) 533-8257
+us-mn-stillwater-st-marys-church-b47605a2,St. Mary,423,S,5th,St,,,,423 S 5th St,Stillwater,MN,55082,,45.05210889,-92.80989467,651-439-1270
+us-mn-stillwater-st-michael-3615d215,St. Michael,611,S,3rd,St,,,,611 S 3rd St,Stillwater,MN,55082,4908,45.05111976,-92.80600023,(651) 439-4400
+us-mn-strandquist-assumption-d080d801,Assumption,26932,,390th S.t,,NW,,,26932 390th S.t NW,Strandquist,MN,56758,,48.44242435,-96.62723658,(218) 478-3578
+us-mn-sturgeon-lake-st-isidore-mission-d7010127,St. Isidore,9010,,Main,St,,,,9010 Main St,Sturgeon Lake,MN,55783,,46.3824167,-92.82030563,(218) 372-3284
+us-wi-superior-the-cathedral-of-christ-the-king-83eeaeb5,Cathedral of Christ the King,1410,,Baxter,Ave,,,,1410 Baxter Ave,Superior,WI,54880,1728,46.72127,-92.09418,(715) 392-8511
+us-wi-superior-holy-assumption-ec6703d4,Holy Assumption,5601,,Tower,Ave,,,,5601 Tower Ave,Superior,WI,54880,,46.6719449,-92.10481828,(715) 394-7919
+us-wi-superior-st-anthony-12582c29,St. Anthony,4315,E,3rd,St,,,,4315 E 3rd St,Superior,WI,54880,,46.68430103,-92.0200698,(715) 398-3261
+us-wi-superior-st-francis-xavier-7d4675fa,St. Francis Xavier,2316,E,4th,St,,,,2316 E 4th St,Superior,WI,54880,,46.70352716,-92.04740704,(715) 398-7174
+us-mn-swanville-st-john-the-baptist-3f669f14,St. John the Baptist,22,,1st,St,,,,22 1st St,Swanville,MN,56382,0068,45.91667782,-94.6426574,(320) 547-2920
+us-mn-taylors-falls-st-joseph-b7252630,St. Joseph,490,,Bench,St,,,,490 Bench St,Taylors Falls,MN,55084,,45.4047287,-92.6526944,651-465-7345
+us-mn-thief-river-falls-st-bernard-36970055,St. Bernard,105,,Knight Ave.N,,,,,105 Knight Ave.N,Thief River Falls,MN,56701,,48.11782547,-96.1837435,(218) 681-3571
+us-nd-thompson-st-jude-1a36f776,St. Jude,329,,Broadway,St,,,,329 Broadway St,Thompson,ND,58278,,47.77368859,-97.10777939,(701) 599-2574
+us-mn-tintah-st-gall-5cc93870,St. Gall,110,,Minnesota,Ave,,,,110 Minnesota Ave,Tintah,MN,56583,,46.00940678,-96.31933896,218-369-2188
+us-mn-tower-st-martin-f7f66f74,St. Martin,108,N,3rd,St,,,,108 N 3rd St,Tower,MN,55790,,47.80699832,-92.26700586,(218) 753-4310
+us-mn-tracy-st-mary-0ab7e5e8,St. Mary,249,,6th,St,,,,249 6th St,Tracy,MN,56175,1114,44.23582658,-95.62327096,(507) 629-4075
+us-wi-trempealeau-st-bartholomew-catholic-church-1b6c17c5,St Bartholomew Catholic Church,11646,,South,St,,,,11646 South St,Trempealeau,WI,54661,,44.0078976,-91.439167,+1-608-534-6652
+us-wi-trempealeau-st-bartholomew-4de175c8,St. Bartholomew,11646,,S,St,,,,11646 S St,Trempealeau,WI,54661,,44.00480336,-91.44104663,(608) 534-6652
+us-mn-truman-church-of-st-katherine-6ba8d7d7,St. Katherine,518,E,2nd,St,S,,,518 E 2nd St S,Truman,MN,56088,,43.8259375,-94.4285625,15076428305
+us-wi-turtle-lake-st-anns-catholic-church-f7a62dba,St Ann's Catholic Church,320,,Pine,St,S,,,320 Pine St S,Turtle Lake,WI,54889,,45.3929602,-92.1439539,+1-715-822-2948
+us-wi-turtle-lake-st-ann-ba19c934,St. Ann,320,,Pine,St,,,,320 Pine St,Turtle Lake,WI,54889,,45.39293868,-92.14388914,(715) 822-2948
+us-mn-twin-valley-st-william-025f05d1,St. William,500,,Lincoln,Ave,,,,500 Lincoln Ave ,Twin Valley,MN,56584,,47.26282611,-96.26572465,(218) 784-4131
+us-mn-two-harbors-holy-spirit-47a696c9,Holy Spirit,227,,3rd,St,,,,227 3rd St,Two Harbors,MN,55616,,47.02151785,-91.66564479,(218) 834-4659
+us-mn-tyler-st-dionysius-175c6b86,St. Dionysius,203,,Linwood,St,,,,203 Linwood St,Tyler,MN,56178,0310,44.27865719,-96.13163297,(507) 247-3464
+us-mn-underwood-st-james-62b1ef23,St. James,32009,,County,Hwy,,,,32009 County Hwy 74,Underwood,MN,56586,,46.41607593,-95.8224459,612-840-6289
+us-mn-union-hill-st-john-the-evangalist-0f4d6e43,St. John the Evangelist,20087,,Hub,Dr,,,,20087 Hub Dr,Union Hill,MN,56071,,44.54362805,-93.6665247,952-758-3225
+us-mn-upsala-st-mary-7b0e1601,St. Mary,308,S,Main,St,,,,308 S Main St,Upsala,MN,56384,,45.80591539,-94.5725399,(320) 573-2132
+us-mn-urbank-sacred-heart-62dc981f,Sacred Heart,60,,Central,Ave,,,,60 Central Ave,Urbank,MN,56361,,46.12356531,-95.51145113,218-864-5619 
+us-mn-vermillion-st-john-the-baptist-26948b4d,St. John the Baptist,106,,Main,St,W,,,106 Main St W,Vermillion,MN,55085,,44.67378567,-92.96710364,651-437-9030
+us-mn-vermillion-st-john-the-baptist-catholic-church-617b5c9d,St. John the Baptist Catholic Church,106,,Main,St,W,,,106 Main St W,Vermillion,MN,55085,,44.6737596,-92.9671127,+1-651-437-9030
+us-mn-verndale-st-frederick-097e6df1,St. Frederick,20,NW,N Brown,St,,,,20 NW N Brown St,Verndale,MN,56481,0252,46.39858576,-95.01398855,(218) 894-2296
+us-mn-vernon-center-st-matthew-5372e266,St. Matthew,200,,Kendall,St,,,,200 Kendall St,Vernon Center,MN,56090,,43.96064848,-94.16702199,(507) 524-3127
+us-nd-veseleyville-st-luke-506902fe,St. Luke,14207,,63rd,St,NE,,,14207 63rd St NE,Veseleyville,ND,58237,,48.325393,-97.556741,(701) 352-0026
+us-mn-veseli-most-holy-trinity-15e938ab,Most Holy Trinity Parish,4939,,Washington,,N,,,4939 Washington N,Veseli,MN,55046,,44.515626,-93.459973,507-744-2823
+us-mn-victoria-st-victoria-fd7d328d,St. Victoria,8228,,Victoria,Dr,,,,8228 Victoria Dr,Victoria,MN,55386,,44.85471979,-93.6618871,952-443-2661
+us-mn-villard-st-bartholomew-aac36005,St. Bartholomew,451,,Lincoln,Ave,,,,451 Lincoln Ave,Villard,MN,56385,,45.71272846,-95.26770401,(320) 634-3813
+us-mn-vineland-st-therese-little-flower-1ce806b5,St. Therese of Vineland,43600,,,Hwy,,,,43600 Hwy 169,Vineland,MN,56359,,46.1780187,-93.75717783,(320) 532-3601
+us-mn-virginia-holy-spirit-b2413dd0,Holy Spirit,309,,3rd,St,S,,,309 3rd St S,Virginia,MN,55792,,47.52064747,-92.53535388,(218) 741-6344
+us-mn-virginia-church-of-the-sacred-heart-5d808b89,Sacred Heart,603,,12th,St,N,,,603 12th St N,Virginia,MN,55792,,47.5335625,-92.5425625,12187416344
+us-wi-viroqua-annunciation-of-the-blessed-virgin-mary-c8716c43,Annunciation of the Blessed Virgin Mary,400,,Congress,Ave,,,,400 Congress Ave,Viroqua,WI,54665,,43.55948318,-90.89809738,(608) 637-7711
+us-mn-wabasha-st-felix-9c2b70f3,St. Felix,117,,3rd,St,W,,,117 3rd St W,Wabasha,MN,55981,,44.38178406,-92.03386885,(651) 565-3931
+us-mn-wabasso-st-anne-13439e6e,St. Anne,950,,N,St,,,,950 N St,Wabasso,MN,56293,0239,44.40288052,-95.25417876,(507) 342-5190
+us-mn-waconia-st-joseph-eb0cfc73,St. Joseph,41,E,First,St,,,,41 E First St,Waconia,MN,55387,,44.84956092,-93.78580921,952-442-2384
+us-mn-wadena-st-ann-20ba9695,St. Ann,514,,1st,St,SE,,,514 1st St SE,Wadena,MN,56482,1803,46.4366449,-95.1379623,(218) 631-1593
+us-mn-wahkon-sacred-heart-444336e4,Sacred Heart,225,E,2nd,St,,,,225 E 2nd St,Wahkon,MN,56386,,46.11891251,-93.5191021,(320) 495-3324
+us-nd-wahpeton-st-john-the-evangelist-4ad18ad3,St. John,115,,2nd,St,N,,,115 2nd St N,Wahpeton,ND,58075,,46.26435455,-96.60341457,(701) 642-6982
+us-mn-waite-park-st-joseph-92e53627,St. Joseph,106,N,7th,Ave,,,,106 N 7th Ave,Waite Park,MN,56387,,45.55560132,-94.22529147,(320) 251-5231 or 320-251-6923
+us-mn-waldorf-st-joseph-98e68826,St. Joseph,225,,3rd,Ave,,,,225 3rd Ave ,Waldorf,MN,56091,,43.93631726,-93.69453773,(507)524-3127
+us-mn-walker-st-agnes-8aef7d77,St. Agnes,210,,Division,St,,,,210 Division St,Walker,MN,56484,,47.10000724,-94.57633039,(218) 547-1054 or (218) 656-0535 (Emergencies)
+us-mn-walnut-grove-church-of-st-paul-3c920605,St. Paul,600,,3rd,St,,,,600 3rd St,Walnut Grove,MN,56180,,44.2208125,-95.4650625,15078592164
+us-mn-wanda-st-mathias-c1d5a1f4,St. Mathias,308,,St Mathias,Blvd,,,,308 St Mathias Blvd,Wanda,MN,56294,0308,44.3145831,-95.21533012,(507) 342-5190
+us-mn-warren-sts-peter-and-paul-77ca4cc3,Sts. Peter and Paul,208,N,7th,,,,,208 N 7th,Warren,MN,56762,,48.19722679,-96.76161619,(218) 745-4511
+us-mn-warroad-st-mary-e79d609c,St. Mary,511,,Cedar,Ave,,,,511 Cedar Ave,Warroad,MN,56763,,48.91096172,-95.33185616,(218) 386-1178
+us-mn-waseca-sacred-heart-00cd43a6,Sacred Heart,111,,4th,St,NW,,,111 4th St NW,Waseca,MN,56093,,44.07794889,-93.512122,(507) 835-1222
+us-mn-watertown-immaculate-conception-d32884fc,Immaculate Conception,109,,Angel,Ave,NW,,,109 Angel Ave NW,Watertown,MN,55388,,44.96498838,-93.84909438,952-955-1458
+us-mn-waterville-holy-trinity-catholic-church-a0822be7,Holy Trinity Catholic Church,506,,Common,St,,,,506 Common St,Waterville,MN,56096,,44.21586214,-93.56312149,507-362-4311
+us-mn-watkins-st-anthony-6e0ec223,St. Anthony,201,,Central,Ave,S,,,201 Central Ave S,Watkins,MN,55389,0439,45.3139767,-94.40928507,(320) 764-2755
+us-mn-waubun-st-ann-3f52b223,St. Ann,1112,,3rd,St,,,,1112 3rd St,Waubun,MN,56589,,47.18177842,-95.93890516,(218) 473-2101
+us-ia-waukon-oratory-of-st-mary-f24625a9,Oratory of St. Mary,1831,,Lycurgus,Rd,,,,1831 Lycurgus Rd,Waukon,IA,52172,,43.3318125,-91.4243125,
+us-ia-waukon-st-patrick-a133f241,St. Patrick,109,,Second,St,SW,,,109 Second St SW,Waukon,IA,52172,,43.26778812,-91.47894437,(563) 568-3671
+us-wi-waumandee-st-boniface-1efee0e9,St. Boniface,,,S2022 County Rd U,,,,,S2022 County Rd U,Waumandee,WI,54622,,44.30124664,-91.70631409,(608) 626-2611
+us-mn-waverly-st-mary-d2cad32c,St. Mary,303,N,6th,St,,,,303 N 6th St,Waverly,MN,55390,,45.067452,-93.97063315,(763) 726-7300
+us-mn-wayzata-st-therese-of-deephaven-45f19201,St Therese of Deephaven,18325,,Minnetonka,Blvd,,,,18325 Minnetonka Blvd,Wayzata,MN,55391,,44.9398766,-93.5113217,+1-952-473-4422
+us-mn-wayzata-st-bartholomew-0f3b1ef3,St. Bartholomew,630,E,Wayzata,Blvd,,,,630 E Wayzata Blvd,Wayzata,MN,55391,1743,44.97179504,-93.51103133,(952) 473-6601
+us-mn-wells-st-casimir-2bde1c83,St. Casimir,320,,2nd,Ave,SW,,,320 2nd Ave SW,Wells,MN,56097,,43.74188107,-93.72873262,(507) 553-5391
+us-mn-west-albany-st-patrick-953d6f70,St. Patrick,30932,,Minnesota,Hwy,,,,30932 Minnesota Hwy 60,West Albany,MN,55956,,44.30163292,-92.28774881,(651) 345-4134
+us-nd-west-fargo-blessed-sacrament-d9dd384d,Blessed Sacrament,210,,5th,Ave,W,,,210 5th Ave W,West Fargo,ND,58078,,46.87211994,-96.90258694,(701) 282-3321
+us-nd-west-fargo-church-of-the-holy-cross-90d8f98b,Holy Cross,1420,,16th,St,E,,,1420 16th St E,West Fargo,ND,58078,,46.8601875,-96.8741875,17012827217
+us-nd-west-fargo-holy-cross-a39a76df,Holy Cross,2711,,7th,St,E,,,2711 7th St E,West Fargo,ND,58078,,46.83952378,-96.88760965,(701) 282-7217
+us-mn-west-saint-paul-church-of-saint-joseph-2e982124,St. Joseph,1154,,Seminole,Ave,,,,1154 Seminole Ave,West Saint Paul,MN,55118,,44.9114669,-93.0991872,651-457-2781
+us-wi-west-salem-st-teresa-of-kolkata-a42506c3,St. Leo the Great,210,,Hamlin,St,W,,,210 Hamlin St W,West Salem,WI,54669,,43.90441744,-91.08357146,(608) 786-0610
+us-mn-west-union-st-alexius-c6ad4e3e,St. Alexius,11,,Oak,St,,,,11 Oak St,West Union,MN,56389,9998,45.79808197,-95.08479324,(320) 352-2563
+us-mn-westbrook-st-anthony-d9f75584,St. Anthony,1153,,1st,Ave,,,,1153 1st Ave,Westbrook,MN,56183,,44.04817392,-95.43620785,(507) 836-8030
+us-mn-wheaton-ave-maria-2dfa0247,Ave Maria,201,,9th,St,S,,,201 9th St S,Wheaton,MN,56296,1745,45.80263982,-96.49530585,(320) 563-4421
+us-sd-white-st-paul-the-apostle-2e57307b,St. Paul,102,W,5th,,,,,102 W 5th,White,SD,57276,,44.43285892,-96.64641361,605-692-4361
+us-mn-white-bear-lake-st-mary-of-the-lake-42a50307,St. Mary of the Lake,,,Church: 4741 Bald Eagle Ave./Office: 4690 Bald Eagle,Ave,,,,Church: 4741 Bald Eagle Ave./Office: 4690 Bald Eagle Ave,White Bear Lake,MN,55110,,45.08495242,-93.01580002,651-429-7771
+us-mn-white-bear-lake-st-pius-x-dd7d4638,St. Pius X,3878,,Highland,Ave,,,,3878 Highland Ave,White Bear Lake,MN,55110,,45.05842,-93.01939,651-429-5337
+us-mn-white-earth-st-benedict-7c4a50a5,St. Benedict,36352,,County,Hwy,,,,36352 County Hwy 21,White Earth,MN,56569,,47.09842529,-95.84317276,(218) 983-3261
+us-mn-williams-st-joseph-d9887226,St. Joseph,400,,Park,Ave,NW,,,400 Park Ave NW,Williams,MN,56686,,48.77041334,-94.95113974,(218) 386-1178
+us-mn-willmar-st-mary-5a8879dd,St. Mary,713,,12th,St,SW,,,713 12th St SW,Willmar,MN,56201,,45.11485943,-95.05776293,320-235-0118
+us-mn-willow-river-st-mary-6a8e046a,St. Mary,8118,,Lake,St,,,,8118 Lake St,Willow River,MN,55795,,46.31779803,-92.83504417,(218) 372-3284
+us-mn-wilmont-our-lady-of-good-counsel-3d94bff2,Our Lady of Good Counsel,605,,4th,Ave,,,,605 4th Ave,Wilmont,MN,56185,,43.76123969,-95.82773333,(507) 483-2317
+us-mn-wilno-st-john-cantius-3c2178dd,St. John Cantius,3069,,Kowno,St,,,,3069 Kowno St,Wilno,MN,56142,,44.49899278,-96.23248093,(507) 694-1402
+us-mn-wilton-sacred-heart-28b98adb,Sacred Heart,135,,3rd,St,NW,,,135 3rd St NW,Wilton,MN,56687,,47.50623641,-95.00340921,218-679-3615
+us-mn-windom-st-francis-xavier-6fe2939f,St. Francis Xavier,532,,17th,St,,,,532 17th St,Windom,MN,56101,,43.87432836,-95.11938621,(507)831-1985
+us-mn-winnebago-st-mary-085e9cbc,St. Mary,32,,1st,St,NE,,,32 1st St NE,Winnebago,MN,56098,,43.76858356,-94.16400167,(507) 526-5626
+us-mn-winona-st-stanislaus-kostka-800cad47,Basilica of St. Stanislaus Kostka,625,E,4th,St,,,,625 E 4th St,Winona,MN,55987,,44.04709561,-91.62216942,(507) 452-5430
+us-mn-winona-sacred-heart-35798534,Cathedral of the Sacred Heart,360,,Main,St,,,,360 Main St,Winona,MN,55987,,44.0484937,-91.6397443,(507) 452-4770
+us-mn-winona-st-casimir-3a0018ec,St. Casimir,626,W,Broadway,,,,,626 W Broadway,Winona,MN,55987,,44.05327823,-91.65439583,(507) 452-4770
+us-mn-winona-st-john-nepomucene-bbc735a5,St. John Nepomucene Church,558,E,Broadway,,,,,558 E Broadway,Winona,MN,55987,,44.04582685,-91.62444698,(507) 425-5430
+us-mn-winona-st-mary-7ab7158d,St. Mary,1303,W,Broadway,St,,,,1303 W Broadway St,Winona,MN,55987,,44.05285676,-91.67233432,(507) 452-5656
+us-mn-winona-st-marys-university-of-minnesota-d6d5df2e,St. Mary's University of Minnesota,700,,,Ter,,,,700 Ter Heights,Winona,MN,55987,,44.04597844,-91.6972796,(507) 457-1817
+us-mn-winona-st-thomas-aquinas-newman-center-4573f8d9,St. Thomas Aquinas Newman Center,475,,Huff,St,,,,475 Huff St,Winona,MN,55987,,44.04779615,-91.64681303,(507) 452-2781
+us-mn-winsted-holy-trinity-2b719d9c,Holy Trinity,110,,Winsted,Ave,W,,,110 Winsted Ave W,Winsted,MN,55395,,44.96496565,-94.04699745,(320) 485-5631
+us-mn-winthrop-st-francis-de-sales-ac63f03d,St. Francis de Sales,510,N,Brown P.O Box 447,,,,,510 N Brown P.O Box 447,Winthrop,MN,55396,,44.54498364,-94.37121018,(507) 426-7739
+us-mn-woodbury-church-of-st-ambrose-of-woodbury-8fed4512,St. Ambrose of Woodbury,4125,,,Dr,,,,4125 Dr,Woodbury,MN,55129,9627,44.8893125,-92.9015625,16517683030
+us-mn-woodbury-saint-ambrose-catholic-community-9e9c44d7,St. Ambrose of Woodbury,4125,,Woodbury,Dr,,,,4125 Woodbury Dr,Woodbury,MN,55129,,44.88906579,-92.90184143,651-768-3030
+us-mn-woodstock-church-of-st-martin-d4425589,St. Martin,101,,Smith,St,N,,,101 Smith St N,Woodstock,MN,56186,1075,44.0084375,-96.0964375,15078253152
+us-mn-worthington-st-mary-1ee1b471,St. Mary,1215,,7th,Ave,,,,1215 7th Ave,Worthington,MN,56187,,43.62458846,-95.59725726,(507) 376-6005
+us-nd-wyndmere-st-john-the-baptist-fa59f995,St. John the Baptist,630,,6th,St,,,,630 6th St,Wyndmere,ND,58081,,46.26400391,-97.13374952,(701) 439-2200 
+us-mn-zumbrota-st-paul-8790bb65,St. Paul,749,S,Main,St,,,,749 S Main St,Zumbrota,MN,55992,,44.29025133,-92.66883394,(507) 732-5324
