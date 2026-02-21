@@ -4,9 +4,10 @@
 
 **Project:** Automated Catholic Mass Times Scraper for CR Community News
 **Owner:** Ben Ashkar (Healthy Analytics)
-**Scope:** Scrape, parse, and publish weekly Catholic mass times — starting with 16 Ohio communities, scaling to all US cities
+**Scope:** Scrape, parse, and publish weekly Catholic mass times for every city in the United States
 **Final Output:** Date-specific mass time listings for newspaper publication (story + table format)
-**Long-Term Vision:** A comprehensive, continuously updated database of Catholic mass times for every parish in the United States, powering CR Community News editions in any market
+**Long-Term Vision:** A comprehensive, continuously updated database of Catholic mass times for every parish in the United States (~17,000 parishes across 29,880 cities), powering CR Community News editions in any market
+**Schedule:** Weekly automated scrape (manual trigger for now, automated via cron/GitHub Actions in Phase 4)
 **GitHub:** https://github.com/benashkar/catholic-mass-times-scraper
 
 ---
@@ -154,7 +155,7 @@ Maps CatholicIndex raw values to normalized DB codes:
 
 **Key technical finding:** CatholicIndex is a **Next.js App Router** app. All data is embedded as React Server Component (RSC) flight payloads in the HTML — no HTML parsing needed. We extract JSON directly from `self.__next_f.push()` calls. This is much more reliable than parsing rendered HTML.
 
-### Phase 2: Mass Time Scraper (Recurring Schedules) — IN PROGRESS
+### Phase 2: Mass Time Scraper (Recurring Schedules) ✅ COMPLETE
 **Goal:** Scrape and parse weekly recurring mass times for every church in the master list.
 
 - [x] Build RSC data extractor for CatholicIndex pages (`src/parsers/rsc_extractor.py`)
@@ -170,30 +171,28 @@ Maps CatholicIndex raw values to normalized DB codes:
 - [x] Sample scrape: 10/10 churches near Grove City — all successful with full schedule data
 - [x] **Design PostgreSQL schema** — maximally normalized with 11 lookup tables (done early, ahead of Phase 5)
 - [x] **Build ETL transformers** — `src/etl/transformers.py` with complete value mappings + 41 tests
+- [x] **Full scrape of all 79 churches** — 79/79 success, 1,203 services, 1,774 dated instances
 - [ ] Build DiscoverMass.com parser as fallback
-- [ ] Build `run_scrape_details.py` to fetch full schedules for all 79 churches
 - [ ] Investigate pastor/clergy data sources (see "Pastor/Clergy Data Sources" section above)
 
-### Phase 3: Date Generation Layer
+**Full Scrape Results (2026-02-20):**
+- 79/79 churches scraped successfully (0 failures)
+- 1,203 total service rows (masses, confessions, adoration, devotions, etc.)
+- 1,774 dated service instances (next 2 weeks with day-of-week → actual dates)
+- Output: `data/output/all_services.csv`, `data/output/dated_services.csv`, `data/output/all_churches_detail.json`
+
+### Phase 3: Date Generation Layer ✅ COMPLETE
 **Goal:** Convert recurring day-of-week schedules into specific dated listings for newspaper publication.
 
-- [ ] Input: publication date range (e.g., "March 7–13, 2026")
-- [ ] Map each recurring schedule entry to actual calendar dates in the window
-- [ ] Include Saturday vigil masses (map to the following Sunday's listing or keep separate — editorial decision)
-- [ ] Flag upcoming Holy Days of Obligation within the date range
-- [ ] Generate two output formats:
-  - **Table format:** Structured CSV/spreadsheet for newspaper layout
-  - **Story format:** Narrative text block for article-style listing
-
-**Example table output:**
-```
-Church                         | Date              | Day       | Time
-Our Lady of Perpetual Help     | Sat, Mar 7, 2026  | Saturday  | 4:00 PM (Vigil)
-Our Lady of Perpetual Help     | Sun, Mar 8, 2026  | Sunday    | 8:30 AM
-Our Lady of Perpetual Help     | Sun, Mar 8, 2026  | Sunday    | 10:30 AM
-St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
-...
-```
+- [x] Map each recurring schedule entry to actual calendar dates (next 2 weeks)
+- [x] Handle weekly recurrence (Mon–Sun day codes → actual dates)
+- [x] Handle monthly patterns (First Friday, First Saturday, First Sunday, Thursday before First Friday)
+- [x] Handle one-time events with specific dates (eventDate field)
+- [x] Generate dated CSV with actual calendar dates
+- [x] Extract CSV generation logic into shared module (`src/etl/csv_generator.py`)
+- [ ] Input: custom publication date range (currently hardcoded to next 2 weeks)
+- [ ] Story format output (narrative text block for article-style listing)
+- [ ] Flag Holy Days of Obligation within date range
 
 ### Phase 4: Scheduling & Automation
 **Goal:** Run the scraper on a recurring schedule and detect changes.
@@ -206,45 +205,59 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 - [ ] Slack/email alerts for scrape failures and anomalies
 - [ ] Store scrape history via `scrape_log` table
 
-### Phase 5: Ohio Statewide Expansion
-**Goal:** Expand coverage to all Catholic parishes across Ohio.
+### Phase 5: Nationwide Statewide Expansion — IN PROGRESS
+**Goal:** Run the scraper against every city in every US state, building comprehensive parish coverage.
 
-- [ ] Compile master list of all Ohio cities/towns/CDPs
-- [ ] Map all Ohio ZIP codes to their serving parishes
-- [ ] Run scraper against all Ohio communities using CatholicIndex state-level pages
-- [ ] Cross-reference with all 6 Ohio dioceses: Columbus, Cincinnati, Cleveland, Toledo, Youngstown, Steubenville
-- [ ] Validate coverage against the Official Catholic Directory (OCD)
-- [ ] Migrate from flat files to PostgreSQL (schema already designed)
-- [ ] Optimize scraper performance for larger runs
+**Infrastructure (COMPLETE):**
+- [x] Download complete US city list — 29,880 cities across 52 states/territories (`data/city_lists/us_cities.csv`)
+- [x] Build `run_statewide.py` — CLI runner with resume capability, progress tracking, ETA display
+- [x] Extract shared CSV generation into `src/etl/csv_generator.py`
+- [x] Expand `_city_to_slug()` state map to all 50 states + DC
+- [x] Add crash-safe JSONL incremental saves + progress JSON files
+- [x] Verified CatholicIndex works for non-Ohio states (Texas/Houston confirmed: 200+ masses)
 
-### Phase 6: National Expansion — Region by Region
-**Goal:** Scale to all ~17,000 Catholic parishes in the United States.
+**Statewide Runner (`run_statewide.py`) Features:**
+- CLI: `python run_statewide.py ohio texas --resume --limit 10`
+- Discovery phase: queries every city in a state via CatholicIndex city pages
+- Detail phase: scrapes full schedules for all discovered churches
+- Resume: tracks completed cities/churches in progress JSON files
+- JSONL: saves each church detail incrementally (crash-safe)
+- 404 tolerance: most small towns return 404 (no CatholicIndex page) — that's expected
+- ETA display: shows estimated time remaining during long runs
+- Flags: `--resume`, `--limit N`, `--discovery-only`, `--detail-only`
 
-**Sub-phase 6a: Data Architecture for National Scale**
-- [x] Design PostgreSQL schema (done in Phase 2, ready for national scale)
-- [ ] Add geographic hierarchy: state → diocese → deanery → parish
-- [ ] Integrate USPS city/ZIP reference data
-- [ ] Build incremental scrape logic (based on CatholicIndex `updatedAt` field)
-- [ ] Add pastor/clergy data integration (from chosen data source)
+**Output per state:**
+- `data/churches/{state}/master_church_list.csv` — deduplicated church list
+- `data/output/{state}/all_services.csv` — one row per service
+- `data/output/{state}/dated_services.csv` — actual calendar dates for next 2 weeks
+- `data/output/{state}/church_details.jsonl` — raw JSON per church (incremental)
 
-**Sub-phase 6b: Diocese-by-Diocese Rollout**
-- [ ] Compile master list of all 196 US dioceses/archdioceses
-- [ ] Prioritize by CR Community News expansion markets
-- [ ] For each diocese: scrape CatholicIndex, cross-reference DiscoverMass + diocesan directory
-- [ ] Track coverage: % of known parishes scraped per diocese/state
+**Rollout Plan:**
+- [x] Ohio (1,077 cities) — RUNNING FIRST
+- [ ] Texas (1,775 cities)
+- [ ] All remaining 48 states + DC
+- [ ] National summary statistics + coverage report
 
-**Sub-phase 6c: Data Quality & Enrichment**
-- [ ] Parishes with no mass times listed
-- [ ] Stale schedules (no update in 6+ months)
+**City Counts by State (top 10):**
+| State | Cities | State | Cities |
+|-------|--------|-------|--------|
+| PA | 2,579 | OH | 1,077 |
+| TX | 1,775 | IL | 1,310 |
+| NY | 1,556 | NJ | 862 |
+| CA | 1,253 | MN | 872 |
+| FL | 876 | WI | 734 |
+
+### Phase 6: Data Quality & Enrichment
+**Goal:** Ensure comprehensive, accurate coverage.
+
+- [ ] Cross-reference with all 196 US dioceses/archdioceses
+- [ ] Identify parishes with no mass times listed
+- [ ] Flag stale schedules (no update in 6+ months)
 - [ ] Duplicate parish detection
 - [ ] Google Places API for address verification
 - [ ] Confidence score per parish
-
-**Sub-phase 6d: Automation at Scale**
-- [ ] Full refresh monthly, incremental weekly
-- [ ] Change detection alerts
+- [ ] Add pastor/clergy data integration (from chosen data source)
 - [ ] Coverage dashboard by state/diocese
-- [ ] API for CR Community News market-specific pulls
 
 ### Phase 7: Ongoing Maintenance & Future Enhancements
 - [ ] Monitor source sites for structural changes
@@ -281,6 +294,7 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 | Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | Exponential backoff on retries, no retry on 404s |
 | Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output to `logs/scrape_YYYY-MM-DD.log` |
 | Testing | `pytest` (66 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) |
+| US city data | 29,880 cities across 52 states | Source: github.com/kelvins/US-Cities-Database |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
 | Scheduling (future) | Cron job or GitHub Actions | Weekly incremental, monthly full |
 | Version control | Git + GitHub | https://github.com/benashkar/catholic-mass-times-scraper |
@@ -299,7 +313,7 @@ church scrapes/
 │
 ├── config/
 │   ├── __init__.py
-│   └── settings.py                        # Central config: paths, URLs, 16 target communities
+│   └── settings.py                        # Central config: paths, URLs, target communities, statewide settings
 │
 ├── database/
 │   └── schema.sql                         # PostgreSQL schema (11 lookup + 8 entity tables + 4 views)
@@ -308,13 +322,14 @@ church scrapes/
 │   ├── __init__.py
 │   ├── scrapers/
 │   │   ├── __init__.py
-│   │   └── catholic_index.py              # CatholicIndex scraper (discover + detail)
+│   │   └── catholic_index.py              # CatholicIndex scraper (discover + detail, all 50 states)
 │   ├── parsers/
 │   │   ├── __init__.py
 │   │   └── rsc_extractor.py               # RSC flight payload JSON extractor
 │   ├── etl/
 │   │   ├── __init__.py
-│   │   └── transformers.py                # Value mappings: CatholicIndex → DB codes
+│   │   ├── transformers.py                # Value mappings: CatholicIndex → DB codes
+│   │   └── csv_generator.py               # Shared CSV generation (services + dated services)
 │   └── utils/
 │       ├── __init__.py
 │       ├── logger.py                      # Dual-output logging (console + file)
@@ -329,18 +344,32 @@ church scrapes/
 │   └── test_transformers.py               # 41 ETL transformer tests
 │
 ├── data/
+│   ├── city_lists/
+│   │   ├── us_cities.csv                  # 29,880 US cities (all states) — source data
+│   │   └── ohio_cities.csv                # 1,077 Ohio cities (filtered subset)
 │   ├── churches/
-│   │   ├── master_church_list.csv         # 79 unique churches (Phase 1 output)
+│   │   ├── master_church_list.csv         # 79 unique churches (Phase 1 — 16 communities)
 │   │   ├── canal_winchester.json          # Per-community church lists (16 files)
-│   │   ├── groveport.json
-│   │   └── ... (14 more)
+│   │   ├── {state}/                       # Statewide church lists (created per state)
+│   │   │   ├── master_church_list.csv
+│   │   │   ├── discovery_progress.json
+│   │   │   └── detail_progress.json
+│   │   └── ...
 │   └── output/
-│       └── grove_city_sample.json         # Full schedule data for 10 churches (sample)
+│       ├── all_services.csv               # 1,203 service rows (Phase 2 — 79 churches)
+│       ├── all_churches_detail.json        # Raw JSON (Phase 2 — 79 churches)
+│       ├── dated_services.csv             # 1,774 dated instances (Phase 3 — next 2 weeks)
+│       └── {state}/                       # Statewide output (created per state)
+│           ├── all_services.csv
+│           ├── dated_services.csv
+│           └── church_details.jsonl
 │
 ├── logs/                                  # Auto-generated log files (scrape_YYYY-MM-DD.log)
 │
-├── run_discovery.py                       # Phase 1: discover churches for all 16 communities
-└── run_scrape_sample.py                   # Phase 2: sample scrape of 10 churches near a community
+├── run_discovery.py                       # Phase 1: discover churches for 16 target communities
+├── run_scrape_all.py                      # Phase 2: full scrape of all 79 discovered churches
+├── run_scrape_sample.py                   # Dev tool: sample scrape of 10 churches
+└── run_statewide.py                       # Phase 5: statewide runner (any/all US states)
 ```
 
 ---
@@ -405,6 +434,9 @@ These inform the lookup table contents in the database schema:
 | `6b127df` | Add Phase 1 church discovery: 79 churches found across 16 Ohio communities | 2026-02-20 |
 | `4a09b29` | Fix RSC extractor JSON decoding and add sample scrape script | 2026-02-20 |
 | `8e0f117` | Add maximally normalized PostgreSQL schema and ETL transformers | 2026-02-20 |
+| `1569b54` | Update project plan with complete findings, schema docs, and pastor data research | 2026-02-20 |
+| `f63a0dd` | Add full scrape of all 79 churches with dated service output | 2026-02-21 |
+| `7b741bc` | Add statewide scraping infrastructure for all US cities | 2026-02-21 |
 
 ---
 
@@ -421,10 +453,12 @@ These inform the lookup table contents in the database schema:
 
 ## Next Steps (Immediate)
 
-1. **Build `run_scrape_details.py`** — Fetch full weekly schedules for all 79 churches from their individual CatholicIndex pages
-2. **Build the date generation layer** (Phase 3) — Convert recurring schedules to specific dated newspaper listings
-3. **Generate a sample newspaper-ready output** for one publication week across all 16 communities
-4. **Review with editorial team** for format/layout preferences
-5. **Choose a pastor/clergy data source** — Decision needed on whether to purchase CatholicParishDirectory.com or scrape individual parish websites
-6. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
-7. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
+1. **Run Ohio statewide scrape** — `python run_statewide.py ohio` (1,077 cities, ~30 min discovery + ~20 min detail)
+2. **Run Texas statewide scrape** — `python run_statewide.py texas` (1,775 cities)
+3. **Run remaining 48 states** — `python run_statewide.py <state>` for each, or batch all at once
+4. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
+5. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
+6. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
+7. **Set up weekly automation** — Cron job or GitHub Actions to re-scrape all states weekly
+8. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
+9. **Generate sample newspaper-ready output** for one publication week and review with editorial team
