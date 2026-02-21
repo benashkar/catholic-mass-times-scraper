@@ -131,6 +131,17 @@ TARGET_COMMUNITIES = [
 ]
 
 # ---------------------------------------------------------------------------
+# Statewide Scraping Configuration
+# ---------------------------------------------------------------------------
+
+# Directory containing city list CSV files (one per state or us_cities.csv)
+CITY_LISTS_DIR = DATA_DIR / "city_lists"
+
+# How often to save progress to disk during long scrape runs.
+# Lower = safer (less data lost on crash) but more I/O overhead.
+PROGRESS_SAVE_INTERVAL = 25  # Save every N cities or churches
+
+# ---------------------------------------------------------------------------
 # Logging Settings
 # ---------------------------------------------------------------------------
 
