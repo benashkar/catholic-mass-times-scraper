@@ -1,0 +1,1113 @@
+﻿Church,Address,Phone,Category,Day,Time Start,Time End,Service Name,Schedule Type,Language,Location,Pattern,Event Date,Time Relation,Reference Service,Notes
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,"Annunciation Catholic Church, Chapel, Waimea",,,,,chapel
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Wed,12:00 PM,,Mass,specific_weekday,English,"Annunciation Catholic Church, Waimea",,,,,
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,"Annunciation Catholic Church, Chapel, Waimea",,,,,chapel
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Fri,12:00 PM,,Mass,specific_weekday,English,"Annunciation Catholic Church, Waimea",,,,,
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Sat,5:00 PM,,Mass,saturday,English,Annunciation Church in Waimea,,,,,vigil
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Mass,Sun,8:00 AM,,Mass,sunday,English,"Annunciation Catholic Church, Waimea",,,,,
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Confession,Sat,4:00 PM,4:30 PM,Confession,other,English,"Annunciation Catholic Church Chapel, Waimea",,,,,or by appointment; chapel
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Confession,Sat,4:00 PM,,Confession,saturday,English,Annunciation Church in Waimea,,,,,
+Annunciation,"65-1235 Kawaihae Rd, Waimea, Hawaii 96743",(808) 887-1220,Adoration,Fri,11:00 AM,11:30 AM,Adoration,other,English,"Annunciation Catholic Church, Waimea",,,,,
+Ascension,"69-1789 Puako Beach Rd, Puako, Hawaii 96743",(808) 887-1220,Mass,Sun,10:00 AM,,Mass,sunday,English,"Ascension Mission, Puako",,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Mon,7:00 AM,,Mass,specific_weekday,english,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Tue,7:00 AM,,Mass,specific_weekday,english,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Wed,6:30 PM,,Mass,specific_weekday,english,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Thu,7:00 AM,,Mass,specific_weekday,english,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Sat,5:00 PM,,Mass,saturday,english,Blessed Sacrament Church,,,,,vigil; Vigil
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Mass,Sun,7:00 AM,,Mass,sunday,english,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Confession,Wed,5:30 PM,6:00 PM,Confession,specific_weekday,English,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Confession,Sat,4:00 PM,4:30 PM,Confession,saturday,English,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Confession,Sun,9:15 AM,9:45 AM,Confession,sunday,English,Blessed Sacrament Church,,,,,
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Devotions,Wed,5:30 PM,,Holy Hour and Benediction,specific_weekday,English,Blessed Sacrament Church,,,,,exposition; benediction
+Blessed Sacrament,"2124 Pauoa Rd, Honolulu, Hawaii 96813-1568",(808) 531-6980,Sacraments,Fri,7:00 AM,,Communion Service,specific_weekday,english,Blessed Sacrament Church,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Mon,12:00 PM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Mon,6:30 AM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Tue,12:00 PM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Tue,6:30 AM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Wed,12:00 PM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Wed,6:30 AM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Thu,12:00 PM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Thu,6:30 AM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Fri,12:00 PM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Fri,6:30 AM,,Mass,weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sat,12:00 PM,,Mass,saturday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sat,5:00 PM,,Mass,saturday,English,Kamiano Center,,,,,vigil
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sat,7:00 AM,,Mass,saturday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sun,10:00 AM,,Mass,sunday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sun,12:00 PM,,Mass,sunday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sun,5:00 PM,,Mass,sunday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Mass,Sun,8:00 AM,,Mass,sunday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Confession,Wed,10:00 AM,11:00 AM,Confession,specific_weekday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Confession,Sat,4:00 PM,4:45 PM,Confession,saturday,English,Kamiano Center,,,,,
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Confession,,10:00 AM,11:00 AM,Confession,special_event,English,Kamiano Center,,2026-02-21,,,Confession; note: resume to normal schedule
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Adoration,Sat,7:30 AM,,Adoration,saturday,English,Kamiano Center,,,,,note: resumes October 2025 concluding the 07:00 Mass
+Cathedral Basilica of Our Lady of Peace,"1184 Bishop St, Honolulu, Hawaii 96813-2838",(808) 536-7036,Devotions,Sat,7:30 AM,,Benediction,saturday,English,Kamiano Center,,,,,note: resumes October 2025 concluding the 07:00 Mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sun,12:00 PM,,Mass,sunday,spanish,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sun,6:00 AM,,Mass,sunday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sun,6:00 PM,,Mass,sunday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,Sun,8:00 AM,,Mass,sunday,English,,,,,,livestream
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,,6:00 AM,,Mass,monthly,English,,first_friday_(recurring),,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,,6:00 PM,,Healing Mass,special_event,English,,,2026-01-21,,,Healing Mass; Bring your Family & Friends
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,,6:00 PM,,Healing Mass,monthly,English,,third_wednesday,,,,3rd; beginning in August
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Mass,,7:30 PM,,Visayan Mass,monthly,English,,first_sunday,,,,First of the Month
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Confession,Sat,3:30 PM,4:00 PM,Confessions,saturday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Adoration,,12:00 PM,6:00 PM,Adoration of the Blessed Sacrament,monthly,English,,first_friday_(recurring),,,,exposition; adoration
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Mon,6:30 AM,,Rosary,specific_weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Mon,TBD,,Divine Mercy Chaplet,weekday,English,,,,,,after morning mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Tue,6:30 AM,,Rosary,specific_weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Tue,TBD,,Divine Mercy Chaplet,weekday,English,,,,,,after morning mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Wed,TBD,,Divine Mercy Chaplet,weekday,English,,,,,,after morning mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Thu,TBD,,Divine Mercy Chaplet,weekday,English,,,,,,after morning mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Fri,6:30 AM,,Rosary,specific_weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,Fri,TBD,,Divine Mercy Chaplet,weekday,English,,,,,,after morning mass
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,,12:00 PM,6:00 PM,Holy Hour for Vocations,monthly,English,,first_friday_(recurring),,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Devotions,,6:30 PM,,Santo Nino Novenas,parish_event,English,,,,,,Nightly novenas; Beginning Friday; January 9th through the 17th; the daily Santo Nino Novenas will begin
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Other,Wed,6:30 AM,,Our Lady of Perpetual Help,specific_weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Other,Thu,6:30 AM,,Our Lady of La Salette,specific_weekday,English,,,,,,
+Christ the King,"20 W Wakea Ave, Kahului, Hawaii 96732",(808) 877-6098,Sacraments,,7:00 PM,,Baptism Classes,monthly,English,parish hall,thursday,,,,Thursday (before First Friday); 1st and 2nd Thursday of every month
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Mon,5:30 PM,,Vietnamese Mass,specific_weekday,vietnamese,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Mon,6:30 AM,,Mass,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Tue,5:30 PM,,Vietnamese Mass,specific_weekday,vietnamese,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Tue,6:30 AM,,Mass,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Wed,6:30 AM,,Mass,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Thu,5:30 PM,,Vietnamese Mass,specific_weekday,vietnamese,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Thu,6:30 AM,,Mass,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sat,5:00 PM,,Vigil Mass,saturday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,vigil
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sat,7:00 PM,,Vietnamese Vigil Mass,saturday,vietnamese,Co-Cathedral of St Theresa of the Child Jesus,,,,,vigil
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sat,8:00 AM,,Mass,saturday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sun,10:30 AM,,Mass,sunday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sun,3:30 PM,,Vietnamese Mass,sunday,vietnamese,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sun,6:00 PM,,Mass,sunday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sun,6:30 AM,,Mass,sunday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Mass,Sun,8:30 AM,,Mass,sunday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Confession,Wed,6:00 PM,,"Holy Hour, Benediction of the Blessed Sacrament & Confession",specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Confession,Wed,6:15 PM,,Confessions,specific_weekday,English,Co-Cathedral of St Theresa of the Child Jesus,,,,,
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Confession,,6:00 PM,,"Holy Hour, Benediction of the Blessed Sacrament & Confession",monthly,English,Co-Cathedral of St Theresa of the Child Jesus,first_wednesday,,,,first wednesday of the month with Bishop
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Confession,,6:15 PM,,Confessions,monthly,English,Co-Cathedral of St Theresa of the Child Jesus,first_wednesday,,,,first wednesday of the month with Bishop
+Co-Cathedral of St. Theresa,"712 N School St, Honolulu, Hawaii 96817",(808) 521-1700,Other,Sat,3:00 PM,,Practices,other,English,,,,,,every; choir; children
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Sun,6:45 AM,,Mass,sunday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Mass,Sun,9:45 AM,,Mass,sunday,English,,,,,,
+Holy Cross,"2-2370 Kaumualii Hwy, Kalaheo, Hawaii 96741",(808) 332-8011,Confession,Sat,4:00 PM,,Reconciliation,saturday,English,,,,,,Also by appointment
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Mon,8:00 AM,,Mass,weekday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Tue,8:00 AM,,Mass,weekday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Wed,8:00 AM,,Mass,weekday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Thu,8:00 AM,,Mass,weekday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Fri,8:00 AM,,Mass,weekday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Sat,5:00 PM,,Mass,saturday,English,Holy Family,,,,,vigil
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Sun,11:00 AM,,Mass,sunday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Sun,7:00 PM,,Mass,sunday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Mass,Sun,8:30 AM,,Mass,sunday,english,Holy Family,,,,,
+Holy Family,"830 Main St, Honolulu, Hawaii 96818-4413",(808) 422-1135,Confession,Sat,3:30 PM,4:30 PM,Confessions,saturday,English,Holy Family,,,,,
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,Holy Rosary Parish Church Maui,,,,,except Tuesday - Fr. Jose's day off
+Holy Rosary,"96-3143 Pikake St, Pahala, Hawaii 96777",(808) 928-8208,Mass,Tue,8:00 AM,,Mass,specific_weekday,English,Holy Rosary - Pahala,,,,,
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,Holy Rosary Parish Church Maui,,,,,except Tuesday - Fr. Jose's day off
+Holy Rosary,"96-3143 Pikake St, Pahala, Hawaii 96777",(808) 928-8208,Mass,Wed,8:00 AM,,Mass,specific_weekday,English,Holy Rosary - Pahala,,,,,
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,Holy Rosary Parish Church Maui,,,,,except Tuesday - Fr. Jose's day off
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,Holy Rosary Parish Church Maui,,,,,except Tuesday - Fr. Jose's day off
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Sat,5:00 PM,,Mass,saturday,English,Holy Rosary Parish Church Maui,,,,,
+Holy Rosary,"96-3143 Pikake St, Pahala, Hawaii 96777",(808) 928-8208,Mass,Sat,7:00 PM,,Mass,saturday,English,Holy Rosary - Pahala,,,,,vigil
+Holy Rosary,"96-3143 Pikake St, Pahala, Hawaii 96777",(808) 928-8208,Mass,Sun,8:00 AM,,Mass,sunday,English,Holy Rosary - Pahala,,,,,
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,Sun,8:00 AM,,Mass,sunday,English,Holy Rosary Parish Church Maui,,,,,
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,,5:00 PM,,Mass,monthly,English,,first_wednesday,,,,1st; with Rosary Prayer Group and Adoration of the Eucharist
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Mass,,5:00 PM,,Mass,monthly,English,,first_friday_(recurring),,,,with Rosary Prayer Group and Adoration of the Eucharist
+Holy Rosary,"96-3143 Pikake St, Pahala, Hawaii 96777",(808) 928-8208,Confession,Sat,6:15 PM,7:00 PM,Reconciliation / Confession,other,English,,,,,,or by appointment
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Confession,,TBD,,Confession,parish_event,English,,,,,,By appointment only; contact office or Father Jose for an appointment
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Adoration,,5:00 PM,,Adoration of the Eucharist,monthly,English,,first_friday_(recurring),,,,with Rosary Prayer Group and Mass
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Adoration,,5:00 PM,,Adoration of the Eucharist,monthly,English,,first_wednesday,,,,1st; with Rosary Prayer Group and Mass
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Devotions,,5:00 PM,,Rosary Prayer Group,monthly,English,,first_wednesday,,,,1st; with Mass and Adoration of the Eucharist
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Devotions,,5:00 PM,,Rosary Prayer Group,monthly,English,,first_friday_(recurring),,,,with Mass and Adoration of the Eucharist
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Community,,9:00 AM,,Centennial Committee meeting,special_event,English,,,2026-01-18,,,Centennial Committee meeting; after 8AM mass
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Other,,10:00 AM,,Opening of the 1926 time capsule,special_event,English,,,2026-02-02,,,Opening of the 1926 time capsule; Everyone is invited
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Other,,6:00 PM,,Centennial Celebration Inaugural Dinner,special_event,English,,,2026-02-14,,,Centennial Celebration Inaugural Dinner; after the 5:00PM Saturday Mass
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Other,,8:00 AM,,"Agape, potluck after the",special_event,English,,,2026-01-25,,,"Agape, potluck after the"
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Other,,8:00 AM,,"Agape, potluck",parish_event,English,,,,,,after the Mass
+Holy Rosary,"954 Baldwin Ave, Paia, Hawaii 96779-9605",(808) 579-9551,Other,,TBD,,Homebound Communion,parish_event,English,,,,,,by appointment; contact office or Father Jose for an appointment
+Holy Trinity,"5919 Kalanianaole Hwy, Honolulu, Hawaii 96821",(808) 396-0551,Mass,Sat,4:30 PM,,Mass,saturday,english,Holy Trinity,,,,,vigil
+Holy Trinity,"5919 Kalanianaole Hwy, Honolulu, Hawaii 96821",(808) 396-0551,Mass,Sun,10:30 AM,,Mass,sunday,english,,,,,,
+Holy Trinity,"5919 Kalanianaole Hwy, Honolulu, Hawaii 96821",(808) 396-0551,Mass,Sun,8:00 AM,,Mass,sunday,english,,,,,,
+Holy Trinity,"5919 Kalanianaole Hwy, Honolulu, Hawaii 96821",(808) 396-0551,Other,,6:00 PM,,Ash Wednesday,special_event,English,,,2026-02-18,,,Ash Wednesday; Ashes will be distributed during the Mass
+Holy Trinity,"5919 Kalanianaole Hwy, Honolulu, Hawaii 96821",(808) 396-0551,Other,,9:00 AM,,Ash Wednesday,special_event,English,,,2026-02-18,,,Ash Wednesday; Ashes will be distributed during the Mass
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Mon,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Tue,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Wed,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Sun,4:30 PM,,Mass,sunday,English,,,,,,livestream
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,livestream
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,livestream
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,10:00 AM,,Christmas Day Mass,special_event,English,,,2025-12-25,,,Christmas Day Mass
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,5:00 AM,,Misa de Gallo,special_event,English,,,2025-12-16,,,Misa de Gallo; 9 days of Novena Masses; no 07:00 Mass in these days including Sunday; December 21
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,6:00 PM,,Christmas Eve Mass,special_event,English,,,2025-12-24,,,Christmas Eve Mass; Children's Mass
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,8:00 AM,,Christmas Day Mass,special_event,English,,,2025-12-25,,,Christmas Day Mass
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,8:00 AM,,Mass,special_event,English,,,2026-01-01,,,Mass; Solemnity of Mary
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Mass,,8:30 AM,2:30 PM,Mass Intentions,special_event,English,,,2025-10-04,,,Mass Intentions
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Mass,,TBD,,Midnight Mass,special_event,English,,,2025-12-24,,,Midnight Mass TIME_TBD
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Confession,Sat,4:00 PM,4:30 PM,Sacrament of Reconciliation,saturday,English,,,,,,or by appointment
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Confession,Sat,4:00 PM,,Reconciliation,saturday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Adoration,,6:15 AM,,Adoration of the Blessed Sacrament,monthly,English,ICC Church,first_friday_(recurring),,,,exposition
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Devotions,Mon,6:30 AM,,Rosary,weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Devotions,Tue,6:30 AM,,Rosary,weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Devotions,Wed,6:30 AM,,Rosary,weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Devotions,Thu,6:30 AM,,Rosary,weekday,English,,,,,,
+Immaculate Conception,"4453 Kapaia Rd, Lihue, Hawaii 96766",(808) 245-2432,Devotions,Fri,6:30 AM,,Rosary,weekday,English,,,,,,
+Immaculate Conception,"91-1298 Renton Rd, Ewa Beach, Hawaii 96706-1913",(808) 681-3701,Other,,6:00 PM,8:00 PM,NIGHT OF WORSHIP,special_event,English,,,2025-10-03,,,NIGHT OF WORSHIP
+Immaculate Heart of Mary Parish,"27-186 Kaapoko Homestead Rd, Papa'ikou, Hawaii 96781-0186",(808) 964-1240,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,
+Immaculate Heart of Mary Parish,"27-186 Kaapoko Homestead Rd, Papa'ikou, Hawaii 96781-0186",(808) 964-1240,Mass,Sun,8:00 AM,,Mass,sunday,English,,,,,,
+Immaculate Heart of Mary Parish,"27-186 Kaapoko Homestead Rd, Papa'ikou, Hawaii 96781-0186",(808) 964-1240,Confession,Sat,4:00 PM,4:30 PM,Reconciliation,saturday,English,,,,,,or by appointment
+Immaculate Heart of Mary Parish,"27-186 Kaapoko Homestead Rd, Papa'ikou, Hawaii 96781-0186",(808) 964-1240,Other,,5:00 PM,,Eucharistic Devotion,monthly,English,,first_friday_(recurring),,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Mass,Tue,11:30 AM,12:00 PM,Mass,specific_weekday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Mass,Wed,11:30 AM,12:00 PM,Mass,specific_weekday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Mass,Thu,11:30 AM,12:00 PM,Mass,specific_weekday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Mass,Sun,5:00 PM,,Mass,sunday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Mass,Sun,9:30 AM,,Mass,sunday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Confession,Sun,4:00 PM,4:45 PM,Reconciliation,specific_weekday,English,Base Chapel,,,,,
+MCBH Chapel,"Bldg 6677 2702 Cushman Ave, Kailua, Hawaii 96734",808-496-5138,Education,Sun,8:15 AM,9:15 AM,CCD,other,English,,,,,,family; pre K – 7th and Confirmation
+Malia Puka O Kalani,"326 Desha Ave, Hilo, Hawaii 96720",(808) 935-9338,Mass,Sat,5:15 PM,,Mass,saturday,English,,,,,,
+Malia Puka O Kalani,"326 Desha Ave, Hilo, Hawaii 96720",(808) 935-9338,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+Malia Puka O Kalani,"326 Desha Ave, Hilo, Hawaii 96720",(808) 935-9338,Confession,Sat,4:30 PM,5:00 PM,Reconciliation / Confession,saturday,English,,,,,,or by appointment
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Mon,7:00 AM,,Mass,weekday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Tue,6:00 PM,,Mass,specific_weekday,spanish,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Tue,6:00 PM,,Mass,weekday,spanish,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Tue,7:00 AM,,Mass,weekday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Wed,7:00 AM,,Mass,weekday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Thu,7:00 AM,,Mass,weekday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Fri,7:00 AM,,Mass,weekday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Sat,5:30 PM,,Mass,saturday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Sat,7:00 AM,,Mass,saturday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Sun,10:30 AM,,Mass,sunday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Sun,7:00 AM,,Mass,sunday,English,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Mass,Sun,7:00 PM,,Mass,sunday,spanish,Maria Lanakila Church,,,,,
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Confession,Sat,4:30 PM,,Confessions,saturday,English,Maria Lanakila Church,,,,,note: or by appointment
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Memorial Day,special_event,English,,,2026-05-25,,,Memorial Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Juneteenth,special_event,English,,,2026-06-19,,,Juneteenth; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Independence Day,special_event,English,,,2026-07-04,,,Independence Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Admissions Day,special_event,English,; replaces_regular: false,,2026-08-15,,,Admissions Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Labor Day,special_event,English,,,2026-09-01,,,Labor Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Veteran's Day,special_event,English,,,2026-11-11,,,Veteran's Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Thanksgiving Day,special_event,English,,,2026-11-26,,,Thanksgiving Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Day after Thanksgiving,special_event,English,,,2026-11-27,,,Day after Thanksgiving; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Christmas Eve,special_event,English,,,2026-12-24,,,Christmas Eve; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,Christmas Day,special_event,English,; replaces_regular: false,,2026-12-25,,,Christmas Day; check bulletin; note: Office Closed
+Maria Lanakila,"712 Wainee, Lahaina, Hawaii 96761",(808) 661-0552,Other,,TBD,,New Year's Eve,special_event,English,,,2026-12-31,,,New Year's Eve; check bulletin; note: Office Closed
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Mon,5:30 PM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Mon,6:30 AM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Tue,5:30 PM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Tue,6:30 AM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Wed,5:30 PM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Wed,6:30 AM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Thu,5:30 PM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Thu,6:30 AM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Fri,5:30 PM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Fri,6:30 AM,,Mass,weekday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sat,5:30 PM,,Mass,saturday,english,,,,,,vigil
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sat,7:30 AM,,Mass,saturday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sun,10:15 AM,,Mass,sunday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sun,11:45 AM,,Mass,sunday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sun,5:30 PM,,Mass,sunday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sun,6:30 AM,,Mass,sunday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,Sun,8:15 AM,,Mass,sunday,english,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,,5:30 PM,,Mass,special_event,english,,,2026-02-18,,,Mass
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,,6:30 AM,,Mass,special_event,english,,,2026-02-18,,,Mass
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,,7:30 AM,,Mass,special_event,English,,,2026-02-16,,,Only one Mass - Parish Office is closed
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,,7:30 AM,,Mass,monthly,english,,first_saturday_(recurring),,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Mass,,8:00 AM,,Mass,special_event,english,,,2026-02-18,,,Mass; With School children
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Confession,,5:00 PM,5:20 PM,Confession,daily,English,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Adoration,Sat,4:00 PM,5:00 PM,Adoration,saturday,English,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Adoration,Sun,4:00 PM,5:00 PM,Adoration,sunday,English,,,,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Devotions,,6:15 PM,,Stations of the Cross,special_event,English,,,2026-02-20,,,Stations of the Cross
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Devotions,,6:15 PM,,Stations of the Cross,parish_event,English,,,,,,from Feb 20 through Good Friday
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Other,,6:15 PM,,Parish Lenten Penitential Service,special_event,English,,,2026-03-03,,,Parish Lenten Penitential Service
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Other,,6:30 AM,11:30 AM,KOC Pancake Breakfast,parish_event,English,,,2026-03-08,,,
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Other,,6:30 AM,,KOC Pancake Breakfast,special_event,English,,,2026-03-08,,,KOC Pancake Breakfast
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Other,,6:30 PM,,Devotion,monthly,english,,first_friday_(recurring),,,,note: Devotion to Jesus Christ; King of All Nations includes Adoration; Prayers; Brief Talks; exposition
+"Mary, Star of the Sea","4470 Aliikoa St, Honolulu, Hawaii 96821",(808) 734-0396,Sacraments,,7:30 AM,,Anointing of the Sick,monthly,English,,first_saturday_(recurring),,,,note: celebrated during the 7:30AM Mass
+Mission of St. John the Baptist,"81-6402 Hawai?i Belt Rd, Kealakekua, Hawaii 96750",+18083282227,Mass,,10:00 AM,,Christmas Mass,special_event,English,St. Benedict Catholic Church,,2025-12-25,,,Christmas Mass
+Mission of St. Paul,"79-7234 St Paul's Rd, Honalo, Hawaii 96740",808-326-7771,Other,,12:00 PM,,Español,other,spanish,,,,,,recurring
+Mission of St. Peter by the Sea,"78-6684 Alii Dr Hawaii Hawaii, Kailua-Kona, Hawaii, 96740",18083267771,Confession,Sat,TBD,,Confessions,other,English,,,,before,Mass,Saturday before Mass; before Mass; note: by appointment 808-326-7771
+Mission of St. Peter by the Sea,"78-6684 Alii Dr Hawaii Hawaii, Kailua-Kona, Hawaii, 96740",18083267771,Confession,Sun,TBD,,Confessions,other,English,,,,before,Mass,Sunday before Mass; before Mass; ≥20 min; note: by appointment 808-326-7771
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Mon,12:00 PM,,Mass,weekday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Tue,12:00 PM,,Mass,weekday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,If the priest is not available; it will be a communion service if there is a Deacon available
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Wed,12:00 PM,,Mass,weekday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,If the priest is not available; it will be a communion service if there is a Deacon available
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Thu,12:00 PM,,Mass,weekday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,If the priest is not available; it will be a communion service if there is a Deacon available
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Fri,12:00 PM,,Mass,weekday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,If the priest is not available; it will be a communion service if there is a Deacon available
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Sat,7:00 AM,,Mass,saturday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Sun,10:00 AM,,Mass,sunday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Sun,7:00 AM,,Mass,sunday,English,Our Lady of Seven Sorrows,,,,,
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,Sun,9:00 AM,,Mass,sunday,English,St. Damien,,,,,
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Mass,,11:00 AM,,Mass,monthly,English,St. Vincent Ferrer,first_sunday,,,,Potluck lunch following this mass every first Sunday of the month
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Confession,Sat,4:00 PM,4:30 PM,Confessions,specific_weekday,English,St. Damien,,,,,
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Adoration,Sat,7:00 AM,,Adoration,saturday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream; exposition
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Devotions,Sat,7:00 AM,,Benediction,saturday,English,Cathedral of Basilica of Our Lady of Peace,,,,,livestream; benediction
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Education,Wed,3:30 PM,,Faith Formation Class,specific_weekday,English,St. Damien Church,,,,,
+Mission of St. Philomena,"Kalaupapa National Historic Park, Kalaupapa, Hawaii 96742",808-553-5220,Other,Thu,5:30 PM,,Classes,specific_weekday,English,,,,,,may be virtual; youth
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Mass,Sun,9:00 AM,,Mass,sunday,english,Mission of Sts. Peter and Paul,,,,,
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Mass,,5:00 PM,,Ash Wednesday Mass,special_event,English,Mission of Sts. Peter and Paul,,2026-02-18,,,Ash Wednesday Mass
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Mass,,7:00 AM,,Sacred Hearts Mass,monthly,English,,fourth_sunday,,,,4th
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Mass,,7:00 AM,,Filipino Catholic Club Mass,monthly,English,,third_sunday,,,,3rd
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Mass,,7:00 AM,,Healing Mass,monthly,English,,last_saturday,,,,Last
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Confession,Sun,8:30 AM,,Reconciliation,sunday,English,,,,,,
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Adoration,Fri,7:15 AM,8:00 AM,Benediction/Exposition of the Blessed Sacrament,specific_weekday,English,,,,,,exposition; benediction
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Devotions,Thu,6:30 PM,8:00 PM,Public Holy Hour,specific_weekday,English,,,,,,exposition
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Devotions,Fri,6:30 PM,,Stations of the Cross,specific_weekday,English,,,,,,note: occurring Feb 20; 27
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Education,Wed,3:00 PM,,Bible Study,specific_weekday,English,,,,,,
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Community,,6:30 PM,,Knights of Columbus Officers Meeting,monthly,English,,first_tuesday,,,,1st
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Community,,6:30 PM,,Knights of Columbus Meeting,monthly,English,,second_tuesday,,,,2nd
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Community,,8:00 AM,,Filipino Catholic Club Monthly Meeting,monthly,English,,second_sunday,,,,2nd
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Other,,5:30 PM,6:30 PM,Children Hula Class,parish_event,English,,,,,,
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Other,,6:30 PM,7:30 PM,Adult Hula Class,parish_event,English,,,,,,
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Other,,8:30 AM,10:30 AM,Community Outreach,monthly,English,,second_monday,,,,2nd; 4th
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Sacraments,Sun,8:30 AM,,Teen Confirmation,sunday,English,Mission of Sts. Peter and Paul,,,,,youth
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Sacraments,,6:30 PM,7:30 PM,Baptismal prep classes,monthly,English,,third_wednesday,,,,3rd; check bulletin for time
+Mission of Sts. Peter and Paul,"59-810 Kamehameha Hwy Oahu Hawaii, Haleiwa, Oahu, 96712",18086374040,Sacraments,,9:00 AM,,Infant Baptisms,monthly,English,,fourth_sunday,,,,4th; note: during Mass at Mission of Sts. Peter and Paul
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,location not specified
+Mission of the Holy Ghost,"4300 Lower Kula Rd, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,,12:00 PM,,Confessions,monthly,English,,last_sunday,,,,last Sunday of every month; note: before Sunday Mass or by appointment
+Mission of the Holy Rosary,"73-4179 Mamalahoa Hwy Hawaii Hawaii, Kailua-Kona, Hawaii, 96740",18083267771,Mass,Sun,12:00 PM,,Mass,sunday,spanish,,,,,,
+Mission of the Immaculate Conception,"76-5960 Mamalahoa Hwy, Holualoa, Hawaii 96725",808-326-7771,Mass,Mon,5:00 PM,,Mass,specific_weekday,English,"Immaculate Conception, Hōlualoa, HI",,,,,
+Mission of the Immaculate Conception,"76-5960 Mamalahoa Hwy, Holualoa, Hawaii 96725",808-326-7771,Mass,Tue,5:00 PM,,Mass,specific_weekday,English,"Immaculate Conception, Hōlualoa, HI",,,,,
+Mission of the Immaculate Conception,"76-5960 Mamalahoa Hwy, Holualoa, Hawaii 96725",808-326-7771,Mass,Wed,6:00 PM,,Mass,specific_weekday,spanish,"Immaculate Conception, Hōlualoa, HI",,,,,
+Mission of the Immaculate Conception,"76-5960 Mamalahoa Hwy, Holualoa, Hawaii 96725",808-326-7771,Mass,Thu,5:00 PM,,Mass,specific_weekday,English,"Immaculate Conception, Hōlualoa, HI",,,,,
+Mission of the Immaculate Conception,"76-5960 Mamalahoa Hwy, Holualoa, Hawaii 96725",808-326-7771,Mass,Fri,5:00 PM,,Mass,specific_weekday,English,"Immaculate Conception, Hōlualoa, HI",,,,,
+Mission of the Sacred Hearts,"550 Office Rd, Kapalua, Hawaii 96761",808-661-0552,Mass,Sat,3:30 PM,,Mass,saturday,English,Sacred Hearts Mission Church,,,,,
+Mission of the Sacred Hearts,"550 Office Rd, Kapalua, Hawaii 96761",808-661-0552,Mass,Sat,4:00 PM,,Mass,saturday,english,Sacred Hearts Mission Church,,,,,
+Mission of the Sacred Hearts,"550 Office Rd, Kapalua, Hawaii 96761",808-661-0552,Mass,Sun,7:00 AM,,Mass,sunday,english,Sacred Hearts Mission Church,,,,,
+Mission of the Sacred Hearts,"550 Office Rd, Kapalua, Hawaii 96761",808-661-0552,Mass,Sun,8:45 AM,,Mass,sunday,english,Sacred Hearts Mission Church,,,,,
+Mission of the Sacred Hearts,"550 Office Rd, Kapalua, Hawaii 96761",808-661-0552,Confession,Sat,3:30 PM,,Confessions,saturday,English,Sacred Hearts Mission Church,,,,,or by appointment
+Mystical Rose Oratory,"3140 Waialae Ave, Honolulu, Hawaii 96816",(808) 738-5887,Mass,Sun,10:00 AM,,Mass,sunday,English,Mystical Rose Oratory,,,,,livestream
+Mystical Rose Oratory,"3140 Waialae Ave, Honolulu, Hawaii 96816",(808) 738-5887,Mass,Sun,6:00 PM,,Student Mass,sunday,English,Mystical Rose Oratory,,,,,note: Only when classes are in session; beginning August 24; 2025
+Mystical Rose Oratory,"3140 Waialae Ave, Honolulu, Hawaii 96816",(808) 738-5887,Mass,,6:00 PM,,Student Mass,special_event,English,Mystical Rose Oratory,,2025-08-24,,,Student Mass; Only when classes are in session; beginning August 24; 2025
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Mon,12:10 PM,,Mass,specific_weekday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Tue,12:10 PM,,Mass,specific_weekday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Wed,12:10 PM,,Mass,specific_weekday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Thu,12:10 PM,,Mass,specific_weekday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Sun,11:00 AM,,Mass,sunday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,Student-led Mass
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Mass,,12:10 PM,,Mass,weekday,English,,,,,,
+Newman Center/Holy Spirit,"1941 E W Rd, Honolulu, Hawaii 96822",(808) 988-6222,Confession,Sat,3:45 PM,4:30 PM,Sacrament of Reconciliations,saturday,English,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Wed,7:00 PM,,Mass,specific_weekday,spanish,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,11:30 AM,,Mass,sunday,English,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,1:30 PM,,Mass,sunday,spanish,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,7:30 AM,,Mass,sunday,English,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,,7:00 AM,,Mass,monthly,English,Adoration Chapel,first_saturday_(recurring),,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Mass,,7:00 PM,,Mass,monthly,English,Adoration Chapel,first_friday_(recurring),,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,Mon,6:30 AM,6:50 AM,Confessions,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,Wed,6:00 PM,6:45 PM,Confessions,specific_weekday,spanish,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,Wed,6:30 AM,6:50 AM,Confessions,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,Fri,6:30 AM,6:50 AM,Confessions,specific_weekday,English,Adoration Chapel,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Confession,Sun,4:30 PM,5:00 PM,Confessions,sunday,English,,,,,,
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,Mon,8:00 AM,7:00 PM,Eucharistic Adoration,other,English,Adoration Chapel,,,,,all day until Mass; Mon
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,Tue,8:00 AM,7:00 PM,Eucharistic Adoration,other,English,Adoration Chapel,,,,,all day until Mass; Tue
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,Wed,8:00 AM,7:00 PM,Eucharistic Adoration,other,English,Adoration Chapel,,,,,all day until Mass; Wed
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,Thu,8:00 AM,7:00 PM,Eucharistic Adoration,other,English,Adoration Chapel,,,,,all day until Mass; Thu
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,Fri,8:00 AM,7:00 PM,Eucharistic Adoration,other,English,Adoration Chapel,,,,,all day until Mass; Fri
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Adoration,,7:00 PM,,Adoration,monthly,English,Adoration Chapel,thursday_(before_first_friday),,,,Thursday (before First Friday); exposition; benediction
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Other,,7:00 AM,,Immaculate Conception,special_event,English,Adoration Chapel,,2025-12-08,,,Immaculate Conception
+Our Lady Queen of Angels,"9177 Kula Hwy, Kula, Hawaii 96790-9464",(808) 878-1261,Other,,7:00 PM,,Immaculate Conception,special_event,English,Adoration Chapel,,2025-12-08,,,Immaculate Conception
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Mon,6:30 AM,,Mass,weekday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Tue,6:30 AM,,Mass,weekday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Wed,6:30 AM,,Mass,weekday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Thu,6:30 AM,,Mass,weekday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Fri,6:30 AM,,Mass,weekday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sat,5:00 PM,,Mass,saturday,english,Our Lady Of Good Counsel,,,,,fulfills Sunday Obligation
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sat,7:00 AM,,Mass,saturday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sun,11:00 AM,,Mass,sunday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sun,5:00 PM,,Mass,sunday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sun,6:30 AM,,Mass,sunday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Mass,Sun,8:30 AM,,Mass,sunday,english,Our Lady Of Good Counsel,,,,,
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Confession,Sat,4:00 PM,5:00 PM,Confession,saturday,English,Our Lady Of Good Counsel,,,,,UNLESS NOTED IN BULLETIN
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Adoration,,12:00 AM,,Perpetual Adoration,daily,English,Our Lady Of Good Counsel  455-3012 to schedule a Holy Hour),,,,,TIME_TBD; Perpetual Adoration OPEN 24 HOURS A DAY; 7 DAYS A WEEK. Call Parish Office (808
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Adoration,,7:00 PM,,Adoration,monthly,English,Our Lady Of Good Counsel,first_friday_(recurring),,,,The first hour starts at 7pm. Adoration will continue overnight until 630am
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Education,,7:00 PM,,RCIA Sessions,special_event,English,Our Lady Of Good Counsel,,2026-02-03,,,RCIA Sessions
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Education,,7:00 PM,,RCIA Sessions,special_event,English,Our Lady Of Good Counsel,,2026-02-10,,,RCIA Sessions
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Education,,7:00 PM,,RCIA Sessions,parish_event,English,Our Lady Of Good Counsel,,,,,recurring
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Other,,6:00 PM,,Charismatic Group,special_event,English,Our Lady Of Good Counsel,,2026-02-04,,,Charismatic Group
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Other,,6:00 PM,,Charismatic Group,parish_event,English,Our Lady Of Good Counsel,,,,,recurring
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Other,,8:30 AM,,Outreach,special_event,English,Our Lady Of Good Counsel,,2026-02-04,,,Outreach
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Other,,8:30 AM,,Outreach,special_event,English,Our Lady Of Good Counsel,,2026-02-11,,,Outreach
+Our Lady of Good Counsel,"1525 Waimano Home Rd, Pearl City, Hawaii 96782",(808) 455-3012,Other,,8:30 AM,,Outreach,parish_event,English,Our Lady Of Good Counsel,,,,,recurring
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Sat,5:30 PM,,Mass - Vigil,saturday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,vigil
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Sun,6:30 AM,,Mass,sunday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Mass,Sun,9:00 AM,,Mass,sunday,English,"45-5028 Plumeria Road, Honokaa, HI 96727",,,,,
+Our Lady of Lourdes,"45-5028 Plumeria St, Honokaa, Hawaii 96727",(808) 775-9591,Confession,,TBD,,Reconciliation / Confession Schedule,other,English,,,,,,"Anytime by request, or by appointment; Anytime by request; or by appointment"
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Tue,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Wed,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Thu,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Sat,5:00 PM,,Vigil Mass,saturday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Sat,7:00 AM,,Mass,saturday,English,,,,,,Mass offered to Mother Mary
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,Sun,7:30 AM,,Mass,sunday,English,,,,,,
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,,TBD,,No weekday Masses,special_event,English,,,2026-01-01,,,No weekday Masses
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Mass,,TBD,,No weekday Masses,special_event,English,,,2026-01-31,,,No weekday Masses; until February
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Confession,Sat,4:00 PM,,Confession,other,English,,,,,,or by an appointment made with the parish office secretary
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Adoration,,9:00 AM,9:00 PM,Eucharist Adoration,monthly,English,,first_friday_(recurring),,,,All are invited
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Adoration,,TBD,,No once a month Eucharistic Adorations,special_event,English,,,2026-01-01,,,No once a month Eucharistic Adorations
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Adoration,,TBD,,No once a month Eucharistic Adorations,special_event,English,,,2026-01-31,,,No once a month Eucharistic Adorations; until February
+Our Lady of Mount Carmel,"48-422 Kamehameha Hwy, Kaneohe, Hawaii 96744",(808) 312-4157,Adoration,,TBD,,Eucharist Adoration,other,English,,,,,,Call the parish office or sign up at the entrance of the Church an hour you would like to spend with the Lord!
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Mon,8:15 AM,,Mass,weekday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Tue,8:15 AM,,Mass,weekday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Wed,8:15 AM,,Mass,weekday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Thu,8:15 AM,,Mass,weekday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Fri,8:15 AM,,Mass,weekday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Sat,5:00 PM,,Mass,saturday,English,olph,,,,,vigil
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Sun,11:00 AM,,Mass,sunday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Sun,5:00 PM,,Mass,sunday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Sun,7:00 AM,,Mass,sunday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Mass,Sun,9:00 AM,,Mass,sunday,English,olph,,,,,
+Our Lady of Perpetual Help,"91-1010 N Rd, Ewa Beach, Hawaii 96706-2731",(808) 689-8681,Confession,Sat,4:00 PM,4:30 PM,Reconciliation / Confession,saturday,English,olph,,,,,Also by appointment
+Our Lady of Seven Sorrows,"8011 Kamehameha V Hwy, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Sun,7:00 AM,,Mass,sunday,English,Our Lady of Seven Sorrows,,,,,East End
+Our Lady of Seven Sorrows,"8011 Kamehameha V Hwy, Kaunakakai, Hawaii 96748",808-553-5220,Education,Thu,5:30 PM,,Youth Ministry Class,specific_weekday,English,,,,,,may be virtual
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Sat,5:00 PM,,Mass,saturday,English,OUR LADY OF SORROWS CHURCH,,,,,vigil
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Sun,7:00 AM,,Mass,sunday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Mass,Sun,9:00 AM,,Mass,sunday,English,OUR LADY OF SORROWS CHURCH,,,,,livestream
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Confession,Sat,4:00 PM,4:45 PM,Confession,saturday,English,OUR LADY OF SORROWS CHURCH,,,,,or by appointment
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Education,Wed,6:30 PM,8:30 PM,Youth Ministry,other,English,Parish Hall,,,,,youth
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Community,,TBD,,OLS Food Pantry distribution,special_event,English,,,2026-01-31,,,OLS Food Pantry distribution; LAST Saturday of the Month
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Community,,TBD,,OLS Food Pantry distribution,monthly,English,,last_saturday,,,,LAST of every month
+Our Lady of Sorrows,"1403 A California Ave, Wahiawa, Hawaii 96786",(808) 621-5109,Sacraments,Mon,7:00 AM,,Communion Service,specific_weekday,English,OUR LADY OF SORROWS CHURCH,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Mon,7:00 AM,,Mass,weekday,english,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Tue,7:00 AM,,Mass,weekday,english,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Wed,7:00 AM,,Mass,weekday,english,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Thu,7:00 AM,,Mass,weekday,english,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Fri,7:00 AM,,Mass,weekday,english,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Sat,6:00 PM,,Mass,saturday,English,,,,,,vigil
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Sun,6:30 AM,,Mass,sunday,English,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+Our Lady of the Mount,"1614 Monte St, Honolulu, Hawaii 96819-3733",(808) 845-0828,Mass,,6:00 PM,,Ilocano Mass,monthly,English,,third_sunday,,,,3rd; ilocano
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Tue,6:30 AM,,Mass,specific_weekday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Wed,6:30 AM,,Mass,specific_weekday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Thu,6:30 AM,,Mass,specific_weekday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Fri,6:30 AM,,Mass,specific_weekday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Sat,5:00 PM,,Mass,saturday,English,Resurrection of the Lord Catholic Church,,,,,vigil
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Sun,5:00 PM,,Mass,sunday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Sun,7:30 AM,,Mass,sunday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,Sun,9:30 AM,,Mass,sunday,English,Resurrection of the Lord Catholic Church,,,,,livestream
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,,6:30 AM,,First Friday Mass/Benediction,special_event,English,,,2026-03-06,,,First Friday Mass/Benediction
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Mass,,6:30 AM,7:30 AM,Mass/Benediction,monthly,English,,first_friday_(recurring),,,,tags: benediction
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Confession,Sat,4:30 PM,,Confession,saturday,English,Near the Columbarium,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Confession,,4:30 PM,,Confession,special_event,English,Near the Columbarium,,2026-02-21,,,Confession
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Confession,,4:30 PM,,Confession,special_event,English,Near the Columbarium,,2026-02-28,,,Confession
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Sacraments,Mon,6:30 AM,,Communion Service,specific_weekday,English,Resurrection of the Lord Catholic Church,,,,,
+Resurrection of the Lord,"94-1260 Lumikula St, Waipahu, Hawaii 96797",(808) 676-4700,Sacraments,,6:00 PM,,Anointing of the Sick,special_event,English,,,2026-02-21,,,Anointing of the Sick; note: Sacrament of Healing after the 5 PM Mass
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Mon,11:00 AM,,Mass,specific_weekday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Mon,6:30 AM,,Mass,weekday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Mon,7:00 AM,,Mass,weekday,english,Hawi,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Mon,7:30 AM,,Mass,specific_weekday,English,,,,,,after 07:00 Rosary
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Tue,6:30 AM,,Mass,weekday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Tue,7:00 AM,,Mass,weekday,english,Hawi,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Tue,7:30 AM,,Mass,specific_weekday,English,,,,,,after 07:00 Rosary
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Wed,11:00 AM,,Mass,specific_weekday,English,,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Wed,5:00 PM,,Mass,specific_weekday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Wed,6:30 AM,,Mass,weekday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Wed,7:00 AM,,Mass,weekday,english,Hawi,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Thu,6:30 AM,,Mass,weekday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Thu,7:00 AM,,Mass,weekday,english,Hawi,,,,,
+Sacred Heart,"95-5558 Mamalahoa Hwy, Naalehu, Hawaii 96772",(808) 928-8208,Mass,Thu,7:30 AM,,Mass,specific_weekday,English,Sacred Heart - Naalehu,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Thu,7:30 AM,,Mass,specific_weekday,English,,,,,,after 07:00 Rosary
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Thu,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Fri,6:30 AM,,Mass,weekday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Fri,7:00 AM,,Mass,weekday,english,Hawi,,,,,
+Sacred Heart,"95-5558 Mamalahoa Hwy, Naalehu, Hawaii 96772",(808) 928-8208,Mass,Fri,7:30 AM,,Mass,specific_weekday,English,Sacred Heart - Naalehu,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Fri,7:30 AM,,Mass,specific_weekday,English,,,,,,after 07:00 Rosary
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,,,,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Sat,4:00 PM,,Mass,saturday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Sat,5:00 PM,,Mass,saturday,English,Hawi,,,,,tags: vigil
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Sacred Heart,"95-5558 Mamalahoa Hwy, Naalehu, Hawaii 96772",(808) 928-8208,Mass,Sat,5:00 PM,,Mass,saturday,English,Sacred Heart - Naalehu,,,,,vigil
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Sat,5:30 PM,,Mass,saturday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sat,6:30 AM,,Mass,saturday,English,,,,,,
+Sacred Heart,"95-5558 Mamalahoa Hwy, Naalehu, Hawaii 96772",(808) 928-8208,Mass,Sun,10:00 AM,,Mass,sunday,English,Sacred Heart - Naalehu,,,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sun,11:00 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,contemporary music
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Sun,7:00 AM,,Mass,sunday,english,Hawi,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,Sun,7:30 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Sun,7:30 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Mass,Sun,9:30 AM,,Mass,sunday,english,Hawi,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,,8:00 AM,,Holy Mass,monthly,English,Kalapana/Star of The Sea,first_friday_(recurring),,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Mass,,8:00 AM,,Mass,monthly,English,,first_friday_(recurring),,,,
+Sacred Heart,"95-5558 Mamalahoa Hwy, Naalehu, Hawaii 96772",(808) 928-8208,Confession,Sat,4:00 PM,4:45 PM,Confessions,saturday,English,Sacred Heart - Naalehu,,,,,or by appointment
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Confession,Sat,4:00 PM,4:45 PM,Reconciliation,saturday,English,,,,,,
+Sacred Heart,"55-3374 Akoni Pule Hwy, Hawi, Hawaii 96719",(808) 889-6436,Confession,Sat,4:30 PM,,Confession,saturday,English,Hawi,,,,,note: Also by appointment
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Confession,,7:00 PM,8:00 PM,Reconciliation / Confession,monthly,English,,second_thursday,,,,every second
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Confession,,9:00 AM,10:00 AM,Reconciliation / Confession,parish_event,English,,,,,,or by appointment
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Confession,,TBD,,Confessions,other,English,,,,,,by appointment or 45 minutes before Holy Mass
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Adoration,Thu,5:00 PM,6:00 PM,Silent Adoration,specific_weekday,English,,,,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Adoration,Fri,7:00 AM,12:00 PM,Adoration and Benediction,specific_weekday,English,,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Devotions,Wed,5:00 PM,,OLPH Novena,specific_weekday,English,,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Devotions,Wed,5:00 PM,,Chaplet of Divine Mercy,specific_weekday,English,,,,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Devotions,Wed,5:00 PM,,Rosary,specific_weekday,English,,,,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Devotions,,4:00 PM,,Holy Hour,monthly,English,Kalapana/Star of The Sea,first_friday_(recurring),,,,
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Devotions,,4:00 PM,,Holy Hour,monthly,English,,first_friday_(recurring),,,,
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Devotions,,6:30 AM,,Holy Hour/Benediction,monthly,English,,first_friday_(recurring),,,,mass to follow
+Sacred Heart,"85-786 Old Government Rd, Waianae, Hawaii 96792-2454",(808) 696-3773,Devotions,,7:00 AM,,Rosary,monthly,English,,first_saturday_(recurring),,,,mass to follow
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Devotions,,8:00 AM,,Holy Hour,monthly,English,,first_friday_(recurring),,,,
+Sacred Heart,"1701 Wilder Ave, Honolulu, Hawaii 96822",(808) 973-2211,Education,,10:00 AM,10:50 AM,Religious Education,other,English,,,,,,when in session
+Sacred Heart,"15-3003 Pahoa Village Rd, Pahoa, Hawaii 96778",(808) 965-8202,Other,,4:00 PM,,STAR OF THE SEA,monthly,English,,first_friday,,,,First
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Wed,5:00 PM,,Mass,specific_weekday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Sat,5:00 PM,,Mass,saturday,English,Sacred Hearts Parish,,,,,vigil
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Sat,7:00 AM,,Mass,saturday,English,Sacred Hearts Parish,,,,,note: times may change during Christmas & Lent seasons
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Sun,10:00 AM,,Mass,sunday,English,Sacred Hearts Parish,,,,,
+Sacred Hearts of Jesus and Mary,"815 Fraser Ave, Lanai City, Hawaii 96763",(808) 565-6837,Mass,Sun,7:00 AM,,Mass,sunday,English,Sacred Hearts Parish,,,,,
+Sacred Hearts of Jesus and Mary,"9496 Kaumualii Hwy Kauai Hawaii, Waimea, Kauai, 96796",18083371548,Mass,Sun,7:00 AM,,Mass,sunday,English,"Sacred Hearts of Jesus & Mary Church, Waimea",,,,,
+Sacred Hearts of Jesus and Mary,"9496 Kaumualii Hwy Kauai Hawaii, Waimea, Kauai, 96796",18083371548,Confession,,TBD,,Confession,other,English,,,,before,Mass,Before all Masses or by appointment.
+Sacred Hearts of Jesus and Mary,"9496 Kaumualii Hwy Kauai Hawaii, Waimea, Kauai, 96796",18083371548,Devotions,,6:00 PM,7:00 PM,Holy Hour,monthly,English,,first_friday_(recurring),,,,
+Sacred Hearts of Jesus and Mary,"9496 Kaumualii Hwy Kauai Hawaii, Waimea, Kauai, 96796",18083371548,Other,,8:00 AM,,Devotion,monthly,English,Sacred Hearts,first_saturday_(recurring),,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Mon,7:00 AM,,Mass,weekday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Tue,6:30 AM,7:30 AM,Mass,specific_weekday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Tue,7:00 AM,,Mass,weekday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Wed,6:30 AM,7:30 AM,Mass,specific_weekday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Wed,7:00 AM,,Mass,weekday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Wed,9:00 AM,,Mass,specific_weekday,English,Hale Makua Nursing Home,,,,,4th; Wailuku
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Thu,6:30 AM,7:30 AM,Mass,specific_weekday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Thu,7:00 AM,,Mass,weekday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Fri,6:30 AM,7:30 AM,Mass,specific_weekday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Fri,7:00 AM,,Mass,weekday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Sat,5:00 PM,6:00 PM,Mass,saturday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sat,6:00 PM,,Mass,saturday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sat,6:00 PM,,Mass,saturday,English,,,,,,tags: vigil
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sat,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sat,7:00 AM,,Mass,saturday,english,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sun,11:30 AM,,Mass,sunday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sun,11:30 AM,,Mass,sunday,english,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sun,5:00 PM,,Mass,sunday,english,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sun,7:00 AM,,Mass,sunday,english,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Mass,Sun,8:30 AM,9:30 AM,Mass,sunday,English,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,Sun,8:45 AM,,Mass,sunday,English,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Mass,Sun,8:45 AM,,Mass,sunday,english,,,,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Mass,,TBD,,Funeral Masses,parish_event,English,,,,,,247-3092 EXT 114); For a deceased loved one; please contact Mrs. Ku'ulei Halemano at (808
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Confession,Sat,4:00 PM,,Confession,saturday,English,,,,,,Also by appointment
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Confession,Sat,4:00 PM,,Confession,saturday,english,,,,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Confession,Sat,4:00 PM,,Confession,other,English,,,,,,note: Also by appointment
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Confession,Sat,4:30 PM,,Confession,saturday,English,,,,,,
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Confession,,TBD,,Confession,other,English,,,,,,after every weekday mass; by appointment
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Adoration,,6:00 AM,,Exposition of the Blessed Sacrament,monthly,English,,first_friday_(recurring),,,,
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Adoration,,7:00 AM,6:00 PM,Adoration,monthly,English,,first_friday_(recurring),,,,following the 7am Mass until the Holy Hour and Benediction at 6pm.
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Adoration,,7:30 AM,6:00 PM,Adoration,monthly,English,,first_friday_(recurring),,,,starts following 07:00 Mass; tags: exposition
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Devotions,,5:00 PM,6:00 PM,Holy Hour,monthly,english,,first_friday_(recurring),,,,note: until Benediction at 18:00
+St. Ann,"46-125 Haiku Rd, Kaneohe, Hawaii 96744-4049",(808) 247-3092,Devotions,,6:00 PM,,Benediction,monthly,English,,first_friday_(recurring),,,,
+St. Ann,"46-129 Haiku Rd Oahu Hawaii, Kaneohe, Oahu, 96744-4049",18082473092,Devotions,,6:00 PM,,Benediction,monthly,English,,first_friday_(recurring),,,,tags: benediction
+St. Ann,"40 Kuhinia St, Wailuku, Hawaii 96793-9216",(808) 244-3284,Other,,TBD,,Sacraments,other,English,,,,,,by appointment; Baptism; Marriage; Anointing of the Sick; Funerals
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Mon,6:30 AM,,Daily Mass,weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Tue,6:30 AM,,Daily Mass,weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Wed,6:30 AM,,Daily Mass,weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Thu,6:30 AM,,Daily Mass,weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Fri,6:30 AM,,Daily Mass,weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Sat,6:00 PM,,Saturday Vigil,saturday,English,,,,,,vigil
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Sat,7:00 AM,,Weekend Mass,saturday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Sun,10:30 AM,,Weekend Mass,sunday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Sun,6:30 AM,,Weekend Mass,sunday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,Sun,8:30 AM,,Weekend Mass,sunday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,,5:00 PM,,Weekend Mass,monthly,english,,fourth_sunday,,,,4th
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,,5:00 PM,,Weekend Mass,monthly,English,,fifth_sunday,,,,5th Sunday - No 5:00 pm Mass; 1st; ilocano; 2nd; tagalog; 3rd; visayan
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Mass,,6:00 PM,,Mass,monthly,English,,first_friday_(recurring),,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Confession,,TBD,,Reconciliation / Confession,parish_event,English,,,,,,Call to make an appointment
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Adoration,,6:00 PM,,Adoration,monthly,English,,first_friday_(recurring),,,,follows Mass
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Other,Wed,6:00 PM,,Our Lady of Perpetual Help,specific_weekday,English,,,,,,
+St. Anthony Church - Kalihi-Kai,"640 Puuhale Rd, Honolulu, Hawaii 96819-3304",808-845-3255,Other,,TBD,,Parish Advent Penance Service,parish_event,English,,,,,,check bulletin
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Mon,6:30 AM,,Mass,specific_weekday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Tue,6:30 AM,,Mass,specific_weekday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Thu,6:30 AM,,Mass,specific_weekday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Fri,7:50 AM,,Mass,specific_weekday,english,,,,,,note: School Mass. When there is no school Mass due to holidays; Mass is at 06:30.
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Sat,5:00 PM,,Mass,saturday,english,,,,,,vigil
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Sat,6:30 AM,,Mass,specific_weekday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Sun,11:00 AM,,Mass,sunday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Sun,7:00 AM,,Mass,sunday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,Sun,9:00 AM,,Mass,sunday,english,,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,,6:00 PM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,,6:30 AM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Mass,,8:00 AM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass; note: with the school
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Confession,Sat,4:00 PM,4:30 PM,Confession,saturday,English,Blessed Sacrament Chapel,,,,,
+St. Anthony of Padua,"148A Makawao St, Kailua, Hawaii 96734",(808) 266-2222,Other,,7:30 AM,12:30 PM,Blood Drive at St Anthony,parish_event,English,Parish Hall,,2026-02-15,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Sat,7:00 AM,,Mass,saturday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Confession,Sat,3:30 PM,4:30 PM,Confessions,saturday,English,,,,,,note: or by appointment at the parish office
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Confession,,5:00 PM,7:00 PM,Adoration & Confessions,monthly,English,,friday,,,,1st and 3rd; exposition; benediction
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Adoration,,6:00 PM,7:00 PM,Adoration & Benediction,monthly,English,,wednesday,,,,note: 2nd and 4th Wednesdays of the month; exposition; benediction
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Adoration,,7:30 AM,8:30 AM,Adoration & Benediction,monthly,English,,first_friday,,,,note: 1st Friday Devotions; exposition; benediction
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Devotions,Wed,7:30 AM,,Novena to Our Lady of Perpetual Help,specific_weekday,English,,,,,,
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Devotions,Sun,3:00 PM,,Divine Mercy,sunday,English,Chapel,,,,,chapel
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Devotions,,TBD,,Evening Prayer with Anointing of the Sick,monthly,English,,last_thursday,,,,Last of odd months TIME_TBD; check bulletin; note: Jan; Mar; May; Jul; Sep; Nov
+St. Anthony of Padua Church,"1627 Mill St, Wailuku, Hawaii 96793",(808) 244-4148,Private,,6:00 AM,6:00 PM,Blessed Sacrament Chapel Open,daily,English,Chapel,,,,,chapel
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Tue,7:00 AM,,Mass,specific_weekday,english,St. Augustine By the Sea,,,,,note: Entrance via the Brown Gate in the parking lot
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Wed,7:00 AM,,Mass,specific_weekday,english,St. Augustine By the Sea,,,,,note: Entrance via the Brown Gate in the parking lot
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Thu,7:00 AM,,Mass,specific_weekday,english,St. Augustine By the Sea,,,,,note: Entrance via the Brown Gate in the parking lot
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Fri,7:00 AM,,Mass,specific_weekday,english,St. Augustine By the Sea,,,,,note: Entrance via the Brown Gate in the parking lot
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sat,5:00 PM,,Mass,saturday,english,St. Augustine By the Sea,,,,,vigil
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sat,7:00 AM,,Mass,saturday,english,St. Augustine By the Sea,,,,,note: Entrance via the Brown Gate in the parking lot
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sun,10:00 AM,,Mass,sunday,english,St. Augustine By the Sea,,,,,
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sun,5:00 PM,,Mass,sunday,english,St. Augustine By the Sea,,,,,
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sun,6:00 AM,,Mass,sunday,english,St. Augustine By the Sea,,,,,
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,Sun,8:00 AM,,Mass,sunday,english,St. Augustine By the Sea,,,,,
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,,5:00 PM,,Mass,special_event,english,St. Augustine By the Sea,,2026-02-18,,,Mass
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Mass,,7:00 AM,,Mass,special_event,english,St. Augustine By the Sea,,2026-02-18,,,Mass
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Confession,Sat,3:00 PM,3:45 PM,Confession,saturday,English,St. Augustine By the Sea,,,,,note: Located outside the main doors of the Church on Ohua Avenue
+St. Augustine by the Sea,"130 Ohua Ave, Honolulu, Hawaii 96815",(808) 923-7024,Devotions,Mon,7:00 AM,,Communion Prayer Service,specific_weekday,english,St. Augustine By the Sea,,,,,
+St. Benedict,"84-5140 Painted Church Rd, Captain Cook, Hawaii 96704",(808) 328-2227,Mass,,TBD,,Mass Intentions,other,English,,,,,,check bulletin; note: check bulletin for times
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Mon,7:00 AM,,Mass,weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Tue,7:00 AM,,Mass,weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Wed,7:00 AM,,Mass,weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Thu,7:00 AM,,Mass,weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Fri,7:00 AM,,Mass,weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Sat,5:00 PM,,Mass,saturday,English,"St. Catherine, Kapaa",,,,,vigil
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Sat,7:00 AM,,Mass,saturday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Sun,5:00 PM,,Mass,sunday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Sun,7:30 AM,,Mass,sunday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,Sun,9:30 AM,,Mass,sunday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,,6:00 PM,,Ash Wednesday Mass,special_event,English,St. Catherine,,2026-02-18,,,Ash Wednesday Mass
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Mass,,7:00 AM,,Ash Wednesday Mass,special_event,English,St. Catherine,,2026-02-18,,,Ash Wednesday Mass
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Mon,TBD,,Confessions,other,English,,,,before,Mass,before every Mass; check bulletin
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Tue,TBD,,Confessions,other,English,,,,before,Mass,before every Mass; check bulletin
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Wed,5:30 PM,6:30 PM,Confessions,specific_weekday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Wed,TBD,,Confessions,other,English,,,,before,Mass,before every Mass; check bulletin
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Thu,TBD,,Confessions,other,English,,,,before,Mass,before every Mass; check bulletin
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Fri,TBD,,Confessions,other,English,,,,before,Mass,before every Mass; check bulletin
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Confession,Sat,8:00 AM,9:00 AM,Confessions,saturday,English,"St. Catherine, Kapaa",,,,,
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Adoration,Wed,5:30 PM,6:30 PM,Adoration,specific_weekday,English,"St. Catherine, Kapaa",,,,,exposition
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Adoration,,7:00 AM,12:00 PM,Adoration,monthly,English,"St. Catherine, Kapaa",first_friday_(recurring),,,,exposition
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Devotions,,12:00 PM,,Benediction,monthly,English,"St. Catherine, Kapaa",first_friday_(recurring),,,,benediction
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Devotions,,6:00 PM,,Stations of the Cross,special_event,English,St. Catherine Church,,2026-02-20,,,Stations of the Cross
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Devotions,,6:00 PM,,Stations of the Cross,special_event,English,St. Catherine Church,,2026-02-27,,,Stations of the Cross
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Devotions,,6:00 PM,,Stations of the Cross,parish_event,English,St. Catherine Church,,,,,Every during Lent
+St. Catherine,"5021-A Kawaihau Rd, Kapaa, Hawaii 96746",(808) 822-7900,Other,,5:30 PM,,Fat Tuesday Burning of the Palms,special_event,English,Coyle Hall,,2026-02-17,,,Fat Tuesday Burning of the Palms
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,note: If the priest is not available; it will be a communion service if there is a Deacon available.
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,note: If the priest is not available; it will be a communion service if there is a Deacon available.
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,note: If the priest is not available; it will be a communion service if there is a Deacon available.
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,St. Damien Church,,,,,note: If the priest is not available; it will be a communion service if there is a Deacon available.
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,Sun,9:00 AM,,Mass,sunday,English,St. Damien,,,,,
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,,6:00 PM,,Mass,special_event,English,St. Damien,,2026-02-18,,,Mass; ashes distributed
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,,6:00 PM,,Holy Thursday Mass,special_event,English,St. Damien,,2026-04-02,,,Holy Thursday Mass
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,,7:00 AM,,Mass,special_event,English,St. Damien,,2026-02-18,,,Mass; ashes distributed
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,,7:00 PM,,Holy Saturday Vigil Mass,special_event,English,St. Damien,,2026-04-04,,,Holy Saturday Vigil Mass
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Mass,,9:00 AM,,Easter Sunday Mass,special_event,English,St. Damien,,2026-04-05,,,Easter Sunday Mass
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Confession,Sat,4:00 PM,4:30 PM,Confessions,specific_weekday,English,St. Damien,,,,,
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Devotions,Fri,5:30 PM,,Stations of the Cross,other,English,St. Damien,,,,,
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Other,,6:00 PM,,Penance Service,special_event,English,St. Damien,,2026-03-17,,,Penance Service
+St. Damien of Molokai Church,"115 Ala Malama St, Kaunakakai, Hawaii 96748",808-553-5220,Other,,6:00 PM,,Good Friday Service,special_event,English,St. Damien,,2026-04-03,,,Good Friday Service
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Mon,12:00 PM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Tue,12:00 PM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Wed,12:00 PM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Thu,12:00 PM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Fri,12:00 PM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sat,7:00 AM,,Mass,saturday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sun,12:00 PM,,Mass,sunday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sun,6:00 AM,,Mass,sunday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,Sun,8:00 AM,,Mass,sunday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,10:00 AM,,Funeral Mass,special_event,English,,,2026-02-17,,,Funeral Mass
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,12:00 PM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,2:00 PM,,Chuukese Mass,monthly,English,,sunday,,,,Every 1st & 3rd
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,6:30 PM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,7:00 AM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,7:00 AM,,Healing Mass & Adoration,other,English,,,,,,exposition
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Mass,,8:30 AM,,Ash Wednesday Mass,special_event,English,,,2026-02-18,,,Ash Wednesday Mass
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Confession,Sat,9:00 AM,,Reconciliation,saturday,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Adoration,Thu,7:30 AM,12:00 PM,Adoration,specific_weekday,English,,,,,,exposition; benediction
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Devotions,,6:30 PM,,Family Rosary,special_event,English,,,2026-02-17,,,Family Rosary
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Devotions,,6:30 PM,,Stations of the Cross,special_event,English,,,2026-02-20,,,Stations of the Cross
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Education,,8:30 AM,10:00 AM,Religious Education,parish_event,English,,,,,,
+St. Elizabeth,"99-312 Moanalua Rd, Aiea, Hawaii 96701-3632",(808) 487-2414,Other,,5:00 PM,8:00 PM,Life Teen and EDGE,parish_event,English,,,,,,
+St. Francis,"115 Ala Malama St, Kalaupapa, Hawaii 96742",(808) 567-6238,Other,Thu,5:30 PM,,Classes,specific_weekday,English,,,,,,may be virtual; every Thursday thereafter through the end of the school year
+St. Gabriel ,"115 Wailua Rd, Keanae, Hawaii 96708",(808)-575-2601,Mass,,11:00 AM,,Mass,monthly,English,"St. Gabriel Mission, Wailuanui",sunday,,,,1st & 3rd
+St. Gabriel ,"115 Wailua Rd, Keanae, Hawaii 96708",(808)-575-2601,Confession,Sun,TBD,,Confession,other,English,St. Gabriel,,,before,Mass,Sunday before Mass; check bulletin; note: before Sunday Mass
+St. Gabriel ,"115 Wailua Rd, Keanae, Hawaii 96708",(808)-575-2601,Devotions,Fri,3:00 PM,,Divine Mercy Prayer,specific_weekday,English,,,,,,
+St. George,"41-1323 Kalanianaole Hwy, Waimanalo, Hawaii 96795-1215",(808) 259-7188,Sacraments,Sun,TBD,,Baptism,other,English,,,,after,Mass,last of the month after Mass
+St. George,"41-1323 Kalanianaole Hwy, Waimanalo, Hawaii 96795-1215",(808) 259-7188,Sacraments,,7:00 PM,8:00 PM,Baptism Instruction Classes,monthly,English,Mary's Haven room,wednesday,,,,"first, second of every other month"
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Mass,Sat,5:00 PM,,Mass,saturday,English,Church,,,,,vigil; Vigil
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Mass,Sun,10:00 AM,,Mass,sunday,English,Church,,,,,
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Mass,Sun,8:00 AM,,Mass,sunday,English,Church,,,,,
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Mass,,8:30 AM,,Mass,monthly,English,Church,first_friday_(recurring),,,,
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Confession,,TBD,,Confessions,other,English,,,,,,by appointment
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Adoration,,6:30 PM,,Exposition of the Blessed Sacrament,monthly,English,Chapel,thursday_(before_first_friday),,,,Thursday (before First Friday); exposition
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Adoration,,9:00 AM,,Adoration of the Blessed Sacrament,monthly,English,Chapel,first_friday_(recurring),,,,exposition
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Devotions,,5:30 PM,,Benediction,monthly,English,Chapel,first_friday_(recurring),,,,benediction
+St. James the Less,"Hwy 37 Kula HW, Kula, Hawaii 96790",(808) 878-1261,Devotions,,7:30 PM,,Benediction,monthly,English,Chapel,thursday_(before_first_friday),,,,Thursday (before First Friday); benediction
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Mon,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Tue,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Wed,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Thu,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,St. Jude; Mililani; HI; vigil
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sat,8:00 AM,,Mass,specific_weekday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sun,11:00 AM,,Mass,sunday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sun,6:00 PM,,Mass,sunday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,St. Jude; Mililani; HI
+St. John Apostle and Evangelist,"95-370 Kuahelani Ave, Mililani, Hawaii 96789",(808) 623-3332,Confession,Sat,3:30 PM,4:30 PM,Reconciliation / Confession,saturday,English,,,,,,St. Jude; Mililani; HI; Also by appointment
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Mass,Mon,8:00 AM,,Mass,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Mass,Tue,8:00 AM,,Mass,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Mass,Wed,8:00 AM,,Mass,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Mass,Thu,8:00 AM,,Mass,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Mass,Fri,8:00 AM,,Mass,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Confession,Sat,8:30 AM,9:30 AM,Reconciliation,saturday,English,Church's Confessional Room,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Confession,Sat,8:30 AM,9:00 AM,Reconciliation,saturday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Adoration,Wed,7:00 PM,,Adoration of the Blessed Sacrament,specific_weekday,English,Church,,,,,
+St. John Vianney,"920 Keolu Dr, Kailua, Hawaii 96734",(808) 262-8317,Adoration,,8:30 AM,,Adoration of the Blessed Sacrament,monthly,English,Church,first_saturday_(recurring),,,,following daily Mass at 8 a.m.
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Tue,7:00 AM,,Mass,specific_weekday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Wed,7:00 AM,,Mass,specific_weekday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Thu,7:00 AM,,Mass,specific_weekday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Fri,7:00 AM,,Mass,specific_weekday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Sat,5:00 PM,,Mass,saturday,english,,,,,,vigil
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Sat,7:00 PM,,Mass,saturday,english,,,,,,Neocatechumenal Way
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Sun,11:30 AM,,Mass,sunday,spanish,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Sun,7:00 AM,,Mass,sunday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,Sun,9:00 AM,,Mass,sunday,english,,,,,,
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,,4:00 PM,,Mass,monthly,polish,,first_sunday,,,,First of the Month
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,,6:00 PM,,Mass,monthly,English,,first_friday_(recurring),,,,Ilokano
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Mass,,9:00 AM,,Mass,monthly,English,,first_sunday,,,,First of the Month; Samoan
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Confession,Sat,4:00 PM,4:30 PM,Confessions,saturday,English,,,,,,available by appointment
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Confession,Sun,11:00 AM,11:20 AM,Confessions,sunday,English,,,,,,available by appointment
+St. John the Baptist,"2324 Omilo Ln, Honolulu, Hawaii 96819",(808) 845-0984,Other,,7:00 AM,10:00 AM,KofC Monthly Ground Clean up,parish_event,English,,,2026-01-17,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Mon,6:30 AM,,Mass,weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Tue,6:30 AM,,Mass,weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Wed,6:30 AM,,Mass,weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Thu,6:30 AM,,Mass,weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Fri,6:30 AM,,Mass,weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sat,6:00 PM,,Vigil Mass,saturday,English,,,,,,vigil
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sat,7:00 AM,,Mass,saturday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sat,7:00 AM,,Mass,saturday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sun,11:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,12:00 PM,,Mass,sunday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,6:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,7:00 PM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,Sun,8:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,,3:00 PM,,Mass,monthly,English,,third_sunday,,,,Third of the Month; tagalog; Last of the Month; ilocano
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,,6:30 PM,,Healing Mass,monthly,English,,second_tuesday,,,,Second; Praise & Worship starts at 18:00
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,,6:30 PM,,First Friday Mass,monthly,English,,first_friday_(recurring),,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Mass,,7:00 AM,,Mass,monthly,English,,first_saturday_(recurring),,,,
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Confession,Wed,5:00 PM,6:00 PM,Confession,specific_weekday,English,,,,,,Please check the calendar for changes.
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Confession,Sat,4:00 PM,,Confessions,saturday,English,,,,,,note: By appointment only after 4:00 p.m at the rectory
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Confession,Sat,4:00 PM,4:30 PM,Confessions,saturday,English,,,,,,
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Confession,,TBD,,Confessions,specific_weekday,English,,,,,,Weekdays; check bulletin; note: Call 572-7652 to schedule your appointment
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Adoration,Thu,5:30 PM,6:30 PM,Holy Hour / Adoration of the Blessed Sacrament,specific_weekday,English,,,,,,exposition
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Adoration,Fri,7:30 AM,8:30 AM,Holy Hour / Adoration of the Blessed Sacrament,specific_weekday,English,,,,,,note: After the 7AM Mass; exposition
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Adoration,,5:00 PM,6:30 PM,Eucharistic Adoration of the Blessed Sacrament,monthly,English,,first_thursday,,,,First; exposition
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Adoration,,5:00 PM,,Eucharistic Adoration,monthly,English,,first_friday_(recurring),,,,exposition; Holy Hour
+St. Joseph,"94-675 Farrington Hwy, Waipahu, Hawaii 96797",(808) 677-4276,Devotions,Wed,6:30 PM,,Novena,specific_weekday,English,,,,,,followed by Mass
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Other,,8:00 AM,12:00 PM,Thrift Shop,monthly,English,,saturday,,,,"1st, 3rd"
+St. Joseph,"1294 Makawao Ave, Makawao, Hawaii 96768",(808) 572-7652,Other,,8:00 AM,12:00 PM,Thrift Shop,parish_event,English,,,,,,
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Confession,Sat,10:00 AM,11:00 AM,Reconciliation / Confession,saturday,English,,,,,,
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Mon,4:00 PM,5:00 PM,Adoration,specific_weekday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Tue,4:00 PM,5:00 PM,Adoration,specific_weekday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Wed,4:00 PM,5:00 PM,Adoration,specific_weekday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Thu,4:00 PM,5:00 PM,Adoration,specific_weekday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Fri,4:00 PM,5:00 PM,Adoration,specific_weekday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Sat,3:00 PM,3:30 PM,Adoration,saturday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Adoration,Sun,4:00 PM,4:30 PM,Adoration,sunday,English,,,,,,adoration
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Mon,5:00 PM,,Evening Prayer & Benediction,specific_weekday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Tue,5:00 PM,,Evening Prayer & Benediction,specific_weekday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Wed,5:00 PM,,Evening Prayer & Benediction,specific_weekday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Thu,5:00 PM,,Evening Prayer & Benediction,specific_weekday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Fri,5:00 PM,,Evening Prayer & Benediction,specific_weekday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Sat,3:30 PM,,Evening Prayer & Benediction,saturday,English,,,,,,benediction
+St. Joseph Parish,"P.O Box 2915, Hilo, Hawaii 96720-2915",(808) 935-1465,Devotions,Sun,4:30 PM,,Evening Prayer & Benediction,sunday,English,,,,,,benediction
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Mon,8:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Tue,8:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Wed,7:00 PM,,Mass,specific_weekday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Thu,8:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Fri,8:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Sat,5:00 PM,,Mass,saturday,english,,,,,,vigil
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Sun,11:00 AM,,Mass,sunday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Sun,5:00 PM,,Mass,sunday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Sun,7:00 AM,,Mass,sunday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,Sun,9:00 AM,,Mass,sunday,english,,,,,,
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,,7:00 PM,7:30 PM,Evening Mass,special_event,English,,,2026-02-04,,,Evening Mass
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,,8:00 AM,8:30 AM,Daily Mass,special_event,English,,,2026-02-02,,,Daily Mass
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,,8:00 AM,8:30 AM,Daily Mass,special_event,English,,,2026-02-03,,,Daily Mass
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Mass,,8:00 AM,,Mass,monthly,english,,first_saturday_(recurring),,,,Healing Mass
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Confession,Sat,3:45 PM,4:45 PM,Confessions,saturday,English,,,,,,Or By Appointment
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Adoration,Wed,6:00 PM,,Adoration,other,English,,,,,,Followed by Novena to Our Lady of Perpetual Help; adoration; exposition
+St. Jude,"92-455 Makakilo Dr, Kapolei, Hawaii 96707",(808) 672-8669,Community,,1:30 PM,3:30 PM,Food Pantry,special_event,English,,,2026-02-03,,,Food Pantry; Registration starts at 1 pm. Requirements: Drivers License or State ID for adults. Children ages 3 to 17 years- Medical Card or Birth Certificate. Registration is required yearly. All clients must provide their own grocery bags; boxes; and/or carts. Distribution is 1:30-3:30 pm
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Mon,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Tue,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Wed,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Thu,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Fri,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Sat,5:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Mass,,8:00 AM,,Mass,monthly,English,,first_friday,,,,Only every 1st Fri of the Month
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Confession,Sat,4:00 PM,4:30 PM,Reconciliation / Confession,other,English,,,,,,or by appointment
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Devotions,,5:00 PM,,Holy Hour,monthly,English,,first_friday_(recurring),,,,
+St. Mary,"5000 Hana Hwy, Hana, Hawaii 96713",(808) 248-8030,Sacraments,,8:00 AM,,Anointing of the Sick & Elderly,monthly,English,,first_friday_(recurring),,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Mon,7:00 AM,,Mass,weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Tue,7:00 AM,,Mass,weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Wed,7:00 AM,,Mass,weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Wed,8:10 AM,,Mass,specific_weekday,English,St. Michael,,,,,School Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Thu,7:00 AM,,Mass,weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Fri,7:00 AM,,Mass,weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Sat,5:00 PM,,Mass,saturday,english,St. Michael,,,,,vigil
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Sun,11:00 AM,,Mass,sunday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,Sun,7:00 AM,,Mass,sunday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,5:00 PM,,Vigil Mass,special_event,English,St. Michael,,2026-01-10,,,Vigil Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,5:00 PM,,Vigil Mass,special_event,English,St. Michael,,2026-01-17,,,Vigil Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,5:00 PM,,Vigil Mass,special_event,English,St. Michael,,2026-01-24,,,Vigil Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,5:00 PM,,Vigil Mass,special_event,English,St. Michael,,2026-01-31,,,Vigil Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,7:00 AM,,Filipino Catholic Club Mass,special_event,English,,,2026-01-18,,,Filipino Catholic Club Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Mass,,7:00 AM,,Healing Mass,special_event,English,,,2026-01-24,,,Healing Mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Confession,Sat,4:00 PM,4:30 PM,Confession,saturday,English,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Confession,,4:00 PM,,Reconciliation,special_event,English,St. Michael,,2026-01-10,,,Reconciliation
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Confession,,4:00 PM,,Reconciliation,special_event,English,St. Michael,,2026-01-17,,,Reconciliation
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Confession,,4:00 PM,,Reconciliation,special_event,English,St. Michael,,2026-01-24,,,Reconciliation
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Confession,,4:00 PM,,Reconciliation,special_event,English,St. Michael,,2026-01-31,,,Reconciliation
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Devotions,Mon,7:00 AM,,Communion Prayer Service,specific_weekday,english,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Education,,3:00 PM,,Bible Study,parish_event,English,St. Michael,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Community,,6:30 PM,,Knights of Columbus Meeting,special_event,English,,,2026-01-13,,,Knights of Columbus Meeting
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Community,,8:00 AM,,Filipino Catholic Club Monthly Meeting,special_event,English,,,2026-01-11,,,Filipino Catholic Club Monthly Meeting
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Other,,5:30 PM,6:30 PM,Children Hula Class,parish_event,English,,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Other,,6:30 PM,7:30 PM,Adult Hula Class,parish_event,English,,,,,,
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Sacraments,Sun,11:00 AM,,Confirmation Classes,other,English,St. Michael,,,,,TIME_TBD; youth
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Sacraments,,11:00 AM,,Infant Baptism,monthly,English,,fourth_sunday,,,,4th –TIME_TBD; in mass
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Sacraments,,12:00 AM,,Baptismal prep classes,monthly,English,,third_wednesday,,,,3rd –TIME_TBD
+St. Michael,"67-390 Goodale Ave, Waialua, Hawaii 96791",(808) 637-4040,Sacraments,,9:00 AM,,Infant Baptism,monthly,English,,fourth_sunday,,,,4th –TIME_TBD; in mass
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Mon,12:00 PM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Mon,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Tue,12:00 PM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Wed,12:00 PM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Thu,12:00 PM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sat,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sun,11:00 AM,,Mass,sunday,spanish,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sun,4:00 PM,,Mass,sunday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sun,6:00 PM,,Mass,sunday,spanish,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Confession,Sat,9:00 AM,9:30 AM,Confession,saturday,English,,,,,,Also by appointment
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Adoration,Fri,7:30 AM,,Adoration,specific_weekday,English,,,,,,immediately following 7am Mass
+St. Michael the Archangel,"P.O Box 5007, Kailua-Kona, Hawaii 96740-5007",(808) 326-7771,Devotions,Fri,12:00 PM,,Benediction,specific_weekday,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Mass,Mon,7:00 AM,7:45 AM,Mass,specific_weekday,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Mass,Wed,7:00 AM,7:45 AM,Mass,specific_weekday,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Mass,Thu,7:00 AM,7:45 AM,Mass,specific_weekday,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Mass,Fri,7:00 AM,7:45 AM,Mass,specific_weekday,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Devotions,,6:00 PM,6:30 PM,Stations of the Cross,parish_event,English,,,,,,
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Other,,6:00 PM,,Ash Wednesday,special_event,English,,,2026-02-18,,,note: Ash Wednesday: 6:00 PM
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Other,,7:00 AM,,Ash Wednesday,special_event,English,,,2026-02-18,,,note: Ash Wednesday: 7:00 AM
+St. Patrick,"1124 7th Ave, Honolulu, Hawaii 96816",(808) 732-5565,Other,,8:00 AM,,Ash Wednesday,special_event,English,; replaces_regular: false),,2026-02-18,,,note: Ash Wednesday: 8:00 AM (School
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Mon,7:15 AM,,Mass,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Tue,7:15 AM,,Mass,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Wed,6:00 PM,,Mass,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Thu,7:15 AM,,Mass,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Fri,7:15 AM,,Mass,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Sat,8:00 AM,,Mass,saturday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Sun,11:00 AM,,Mass,sunday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,Sun,9:00 AM,,Mass,sunday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Mass,,6:00 PM,,HEALING MASS- Anointing of the Sick,monthly,English,,last_wednesday,,,,Last of the Month; Call the Rectory for Individual Anointing
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Confession,,8:30 AM,9:00 AM,SACRAMENT OF RECONCILIATION,parish_event,English,,,,,,following Mass; Also in the Rectory by Appointment
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Adoration,,6:00 PM,7:00 PM,Eucharistic Adoration,monthly,English,,third_thursday,,,,Every 3rd; with confession
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Adoration,,7:00 PM,,Eucharistic Adoration,monthly,English,,third_thursday,,,,Thursday (before First Friday); Every 3rd Thursday
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Adoration,,TBD,,Exposition of the Blessed Sacrament & Benediction,other,English,,,,after,Mass,following Mass
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Mon,6:45 AM,,HOLY ROSARY,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Tue,6:45 AM,,HOLY ROSARY,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Wed,5:45 PM,,LADY OF PERPETUAL HELP NOVENA,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Thu,6:45 AM,,HOLY ROSARY,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Fri,6:45 AM,,HOLY ROSARY,specific_weekday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,Sat,7:30 AM,,HOLY ROSARY,saturday,English,,,,,,
+St. Philomena,"3300 Ala Laulani St, Honolulu, Hawaii 96818-2837",(808) 839-1876,Devotions,,3:00 PM,,Divine Mercy Chaplet,monthly,English,,first_friday_(recurring),,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Mon,7:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Tue,7:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Wed,7:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Thu,7:30 AM,,Mass,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Sat,4:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Sat,7:30 AM,,Mass,saturday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Sun,11:30 AM,,Mass,sunday,English,,,,,,livestream
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,Sun,8:30 AM,,Mass,sunday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Mass,,7:30 AM,,Mass,monthly,English,,first_friday_(recurring),,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Confession,Mon,TBD,,Confessions,specific_weekday,English,,,,,,By appointment only
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Confession,Tue,TBD,,Confessions,specific_weekday,English,,,,,,By appointment only
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Confession,Wed,TBD,,Confessions,specific_weekday,English,,,,,,By appointment only
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Confession,Thu,TBD,,Confessions,specific_weekday,English,,,,,,By appointment only
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Confession,Sat,3:00 PM,3:30 PM,Confessions,saturday,English,,,,,,before 4pm Mass
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Adoration,,8:00 AM,,Adoration,monthly,English,,first_friday_(recurring),,,,exposition
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Devotions,Mon,7:00 AM,,Rosary,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Devotions,Tue,7:00 AM,,Rosary,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Devotions,Wed,7:00 AM,,Rosary,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Devotions,Thu,7:00 AM,,Rosary,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Devotions,,8:00 AM,,Benediction,monthly,English,,first_friday_(recurring),,,,benediction
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Education,,12:30 PM,1:30 PM,OCIA,other,English,,,,,,Weekly; after the 11:30 a.m. Mass
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Community,Tue,10:00 AM,11:30 AM,Food Pantry,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Community,Fri,10:00 AM,11:30 AM,Food Pantry,specific_weekday,English,,,,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Other,Sat,7:30 AM,,Devotion,saturday,English,,,,,,Saturday For the Virgin Mary
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Other,,7:30 AM,,Devotion,monthly,English,,first_saturday_(recurring),,,,
+St. Pius X,"2821 Lowrey Ave, Honolulu, Hawaii 96822",(808) 988-3308,Other,,7:30 AM,,Devotion,monthly,English,,first_wednesday,,,,First Wednesday Devotion
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Mon,7:00 AM,,Mass,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Tue,7:00 AM,,Mass,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Wed,7:00 AM,,Mass,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Thu,7:00 AM,,Mass,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Fri,7:00 AM,,Mass,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Sat,5:00 PM,,Mass,saturday,English,New Church,,,,,vigil
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Sat,8:00 AM,,Mass,saturday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Sun,7:00 AM,,Mass,sunday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,Sun,9:30 AM,,Mass,sunday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,4:40 PM,,Palm Sunday Vigil,special_event,English,Old Church,,2026-03-28,,,Palm Sunday Vigil; note: Solemn Procession from the Old Church to the New Church
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,6:00 PM,,Holy Tuesday Mass,special_event,English,Historic Church,,2026-03-31,,,Holy Tuesday Mass
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,6:00 PM,,Holy Wednesday Mass,special_event,English,Historic Church,,2026-04-01,,,Holy Wednesday Mass; note: followed by the anointing of the sick
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,7:00 AM,,Holy Monday Mass,special_event,English,Historic Church,,2026-03-30,,,Holy Monday Mass
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,7:30 PM,,Easter Vigil,special_event,English,New Church,,2026-04-04,,,Easter Vigil
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Mass,,8:00 AM,,Healing Mass,monthly,English,Historic Church,first_saturday_(recurring),,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Mon,TBD,,Confessions,weekday,English,,,,,,check bulletin; note: Call the office to schedule a Confession on a weekday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Tue,TBD,,Confessions,weekday,English,,,,,,check bulletin; note: Call the office to schedule a Confession on a weekday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Wed,TBD,,Confessions,weekday,English,,,,,,check bulletin; note: Call the office to schedule a Confession on a weekday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Thu,TBD,,Confessions,weekday,English,,,,,,check bulletin; note: Call the office to schedule a Confession on a weekday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Fri,TBD,,Confessions,weekday,English,,,,,,check bulletin; note: Call the office to schedule a Confession on a weekday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Confession,Sat,4:30 PM,,Confessions,saturday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Mon,6:30 AM,,Rosary,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Tue,6:30 AM,,Rosary,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Wed,6:30 AM,,Rosary,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Wed,7:30 AM,,Novena to Our Lady of Perpetual Help,specific_weekday,English,Historic Church,,,,,note: after 07:00am Mass
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Thu,6:30 AM,,Rosary,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Fri,6:30 AM,,Rosary,weekday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Sat,4:30 PM,,Rosary,saturday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Sat,7:30 AM,,Rosary,saturday,English,Historic Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Sun,6:30 AM,,Rosary,sunday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,Sun,9:00 AM,,Rosary,sunday,English,New Church,,,,,
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,,2:00 PM,,Good Friday Communal Stations of the Cross,special_event,English,New Church,,2026-04-03,,,Good Friday Communal Stations of the Cross
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Devotions,,8:00 AM,,Good Friday Communal Stations of the Cross,special_event,English,New Church,,2026-04-03,,,Good Friday Communal Stations of the Cross
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,3:00 PM,,Good Friday Liturgy of the Word,special_event,English,New Church,,2026-04-03,,,Good Friday Liturgy of the Word; note: Veneration of the Cross and Communion Service
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,6:00 PM,,Ash Wednesday,special_event,English,New Church,,2026-02-18,,,Ash Wednesday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,6:00 PM,,Holy Thursday,special_event,English,New Church,,2026-04-02,,,Holy Thursday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,7:00 AM,,Ash Wednesday,special_event,English,New Church,,2026-02-18,,,Ash Wednesday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,7:00 AM,,Palm Sunday,special_event,English,New Church,,2026-03-29,,,Palm Sunday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,7:00 AM,,Easter Sunday,special_event,English,New Church,,2026-04-05,,,Easter Sunday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,9:30 AM,,Palm Sunday,special_event,English,New Church,,2026-03-29,,,Palm Sunday
+St. Raphael,"3011 Hapa Rd, Koloa, Hawaii 96756",(808) 742-1955,Other,,9:30 AM,,Easter Sunday,special_event,English,New Church,,2026-04-05,,,Easter Sunday
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Mon,8:00 AM,,Mass,weekday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Tue,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Tue,8:00 AM,,Mass,weekday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Wed,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Wed,8:00 AM,,Mass,weekday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Thu,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Thu,8:00 AM,,Mass,weekday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Fri,7:00 AM,,Mass,specific_weekday,English,,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Fri,8:00 AM,,Mass,weekday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,Vigil
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Sat,5:00 PM,,Mass,saturday,English,Saint Rita - Nanakuli,,,,,vigil
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Sun,5:00 PM,,Mass,sunday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Sun,7:00 AM,,Mass,sunday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Mass,Sun,8:30 AM,,Mass,sunday,English,,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Mass,Sun,9:00 AM,,Mass,sunday,English,Saint Rita - Nanakuli,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Confession,Sat,3:30 PM,4:00 PM,Reconciliation,saturday,English,St. Rita,,,,,
+St. Rita,"89-318 Farrington Hwy, Nanakuli, Hawaii 96792-4104",(808) 668-7833,Confession,Sat,4:00 PM,4:45 PM,Reconciliation,saturday,English,Saint Rita - Nanakuli,,,,,Also by appointment
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Devotions,Fri,3:00 PM,,Divine Mercy Prayer,specific_weekday,English,,,,,,
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Devotions,Sat,4:30 PM,,Pray the Rosary,saturday,English,,,,,,before Mass
+St. Rita,"655 Haiku Rd, Haiku, Hawaii 96708",(808) 575-2601,Devotions,Sun,8:00 AM,,Pray the Rosary,sunday,English,,,,,,before Mass
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Tue,9:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Wed,9:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Thu,9:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Fri,9:00 AM,,Mass,specific_weekday,english,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Sun,10:00 AM,,Mass,sunday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,Sun,8:00 AM,,Mass,sunday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Mass,,5:00 PM,,Healing Mass,monthly,English,,first_saturday_(recurring),,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Confession,Tue,TBD,,Reconciliation,other,English,,,,,,Every; Also by appointment
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Confession,Wed,8:15 AM,8:45 AM,Reconciliation,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Confession,Thu,TBD,,Reconciliation,other,English,,,,,,Every; Also by appointment
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Confession,Sat,4:15 PM,4:45 PM,Reconciliation,saturday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Confession,,7:15 AM,7:45 AM,Reconciliation,monthly,English,,first_friday_(recurring),,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Adoration,,7:00 PM,8:00 PM,Family Adoration,monthly,English,,first_friday_(recurring),,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Tue,8:30 AM,,Rosary,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Wed,8:30 AM,,Rosary,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Thu,8:30 AM,,Rosary,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Fri,8:30 AM,,Rosary,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Fri,9:30 AM,,Divine Mercy,specific_weekday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Devotions,Sun,6:45 AM,,Rosary,sunday,English,,,,,,
+St. Roch,"56-350 Kamehameha Hwy, Kahuku, Hawaii 96731",(808) 293-5026,Other,,4:15 PM,,Charismatic Praise and Worship,monthly,English,,first_saturday_(recurring),,,,
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Mass,Sat,4:00 PM,,Vigil Mass,saturday,English,Main Church,,,,,vigil
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Mass,Sun,10:00 AM,,Mass,sunday,English,Main Church,,,,,
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Mass,Sun,7:30 AM,,Mass,sunday,English,Main Church,,,,,
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Mass,,8:00 AM,,Mass,monthly,English,,first_wednesday,,,,First
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Mass,,8:00 AM,,Mass,monthly,English,,first_friday_(recurring),,,,
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Confession,Sat,3:00 PM,3:30 PM,Confession,saturday,English,Main Church,,,,,
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Confession,Sat,4:00 PM,,Confession,saturday,English,Main Church,,,,,prior to our Vigil Mass
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Confession,,TBD,,Confession,monthly,English,Main Church,thursday_(before_first_friday),,,,Thursday (before First Friday); by appointment
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Adoration,Wed,8:00 AM,,ADORATION of The Blessed Sacrament,other,English,,,,,,after the Daily Mass until 09:00; exposition
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Adoration,,9:00 AM,6:00 PM,ADORATION of The Blessed Sacrament,monthly,English,,first_wednesday,,,,First; exposition; benediction
+St. Stephen,"2747 Pali Hwy, Honolulu, Hawaii 96817-1430",(808) 595-3105,Adoration,,TBD,,ADORATION of The Blessed Sacrament,other,English,,,,after,Mass,after the Mass
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Mass,Wed,5:30 PM,,Mass,specific_weekday,English,"St. Sylvester, Kilauea",,,,,
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Mass,Sat,5:00 PM,,Mass,saturday,English,"St. Sylvester, Kilauea",,,,,Vigil
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Mass,Sun,7:00 AM,,Mass,sunday,English,"St. Sylvester, Kilauea",,,,,
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Mass,,6:00 AM,,Mass,special_event,English,St. Sylvester,,2025-12-08,,,Mass; Holy Day of Obligation -Feast of Immaculate Conception; Sr. Rachel & Sr. Lucy will renew their vows followed by a light refreshments
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Confession,Sat,4:00 PM,4:30 PM,Confession,specific_weekday,English,"St. Sylvester, Kilauea",,,,,
+St. Sylvester,"2390 Kolo Rd, Kilauea, Hawaii 96754",(808) 822-7900,Adoration,,7:00 AM,,Adoration of the Blessed Sacrament,special_event,English,,,2025-12-05,,,Adoration of the Blessed Sacrament; Monthly First Friday of Adoration of the Blessed Sacrment with Benediction at 12 noon; after 07:00 mass
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Mass,Mon,5:30 PM,,Mass,specific_weekday,English,St. Theresa Church,,,,,
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Mass,Mon,6:30 AM,,Mass,specific_weekday,English,"St. Theresa Church, Kekaha",,,,,"Mon, Tue, Wed, Thu; Novena before Monday Mass; subject to change"
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Mon,7:00 AM,,Mass,weekday,English,,,,,,
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Mass,Tue,5:30 PM,,Mass,specific_weekday,English,St. Theresa Church,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Tue,7:00 AM,,Mass,weekday,English,,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Wed,7:00 AM,,Mass,weekday,English,,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Thu,7:00 AM,,Mass,weekday,English,,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Fri,6:30 PM,,Mass,specific_weekday,spanish,,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Fri,7:00 AM,,Mass,weekday,English,,,,,,
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Mass,Fri,8:10 AM,,Mass,specific_weekday,English,"St. Theresa Church, Kekaha",,,,,School Mass
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Mass,Sat,5:00 PM,,Mass,saturday,English,"St. Theresa Church, Kekaha",,,,,vigil
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Sat,5:00 PM,,Mass,saturday,English,,,,,,vigil
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Mass,Sat,5:30 PM,,Mass,saturday,English,St. Theresa Church,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Sat,7:00 PM,,Mass,saturday,spanish,,,,,,
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Mass,Sun,10:00 AM,,Mass,sunday,English,St. Theresa Church,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Sun,5:00 PM,,Mass,sunday,English,,,,,,
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Sun,7:00 AM,,Mass,sunday,English,,,,,,
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Mass,Sun,8:30 AM,,Mass,sunday,English,"St. Theresa Church, Kekaha",,,,,Rosary 07:45
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Mass,Sun,9:30 AM,,Mass,sunday,English,,,,,,
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Mass,,5:30 PM,,Ash Wednesday Mass,special_event,English,St. Theresa Church,,2026-02-18,,,Ash Wednesday Mass
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Confession,Sat,3:30 PM,4:00 PM,Reconciliation,other,English,,,,,,or by appointment
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Confession,Sat,4:45 PM,5:00 PM,Confession,saturday,English,St. Theresa's,,,,,
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Confession,Sat,5:00 PM,5:30 PM,Confessions,saturday,English,St. Theresa Church,,,,,or by appointment
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Confession,,TBD,,Confession,other,English,,,,before,Mass,Before all Masses or by appointment
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Confession,,TBD,,Confession,parish_event,English,,,,,,by appointment only at this time; call the parish office to schedule an appt. at 808-337-1548
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Adoration,Tue,6:00 PM,,Adoration,specific_weekday,English,St. Theresa Church,,,,,exposition
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Adoration,,6:00 PM,7:00 PM,Exposition/Adoration of the Blessed Sacrament closing with Benediction,other,English,St. Theresa Church,,,,,weekly; time subject to change; exposition; adoration; benediction
+St. Theresa,"25 W Lipoa St, Kihei, Hawaii 96753",(808) 879-4844,Adoration,,TBD,,Adoration & Benediction,monthly,English,,first_friday_(recurring),,,,following the morning Mass
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Devotions,Sun,11:00 AM,,Divine Mercy Chaplet,sunday,English,St. Theresa Church,,,,,
+St. Theresa,"8343 Kaumualii Hwy, Kekaha, Hawaii 96752",(808) 337-1548 ,Devotions,,6:00 PM,7:00 PM,Holy Hour,monthly,English,St. Theresa Church,first_friday_(recurring),,,,exposition; adoration; benediction
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Community,,10:00 AM,11:00 AM,Liturgical/ Stewardship Meeting,parish_event,English,St. Theresa Church,,2026-02-07,,,
+St. Theresa,"18-1355 Volcano Hwy, Mountain View, Hawaii 96771",(808) 968-6233,Community,,10:00 AM,11:00 AM,PPC Meeting,parish_event,English,St. Theresa Church,,2026-02-14,,,
+St. Vincent Ferrer,"274 Maunaloa Rd, Maunaloa, Hawaii 96770",808-553-5220,Mass,Sun,11:00 AM,,Mass,sunday,English,St. Vincent Ferrer,,,,,Maunaloa
+St. Vincent Ferrer,"274 Maunaloa Rd, Maunaloa, Hawaii 96770",808-553-5220,Other,,11:00 AM,,Potluck lunch,other,English,St. Vincent Ferrer; You are welcome to join whether or not you have a dish to bring!),,,,,(following Mass; following 11:00 Mass @ St. Vincent Ferrer; You are welcome to join whether or not you have a dish to bring!
+St. William,"5292 Kuhio Hwy, Hanalei, Hawaii 96714",(808) 822-7900,Mass,Sun,9:00 AM,,Mass,sunday,English,"St. William, Hanalei",,,,,
+St. William,"5292 Kuhio Hwy, Hanalei, Hawaii 96714",(808) 822-7900,Mass,,9:00 AM,,Ash Wednesday Mass,special_event,English,"St. William, Hanalei",,2026-02-18,,,Ash Wednesday Mass
+St. William,"5292 Kuhio Hwy, Hanalei, Hawaii 96714",(808) 822-7900,Other,,5:30 PM,,Fat Tuesday Burning of the Palms,special_event,English,Coyle Hall,,2026-02-17,,,Fat Tuesday Burning of the Palms
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Mon,11:45 AM,,Mass,weekday,English,Schofield Barracks Soldiers' Chapel,,,,,note: except Training and Federal Holidays
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Mon,11:45 AM,,Mass,specific_weekday,English,Schofield Barracks Soldiers' Chapel,,,,,
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Tue,11:45 AM,,Mass,specific_weekday,English,Schofield Barracks Soldiers' Chapel,,,,,
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Tue,11:45 AM,,Mass,weekday,English,Schofield Barracks Soldiers' Chapel,,,,,note: except Training and Federal Holidays
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Wed,11:45 AM,,Mass,weekday,English,Schofield Barracks Soldiers' Chapel,,,,,note: except Training and Federal Holidays
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Wed,9:00 AM,,Mass,specific_weekday,English,Schofield Barracks MPC,,,,,
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Thu,11:45 AM,,Mass,specific_weekday,English,Schofield Barracks Soldiers' Chapel,,,,,
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Thu,11:45 AM,,Mass,weekday,English,Schofield Barracks Soldiers' Chapel,,,,,note: except Training and Federal Holidays
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Fri,11:45 AM,,Mass,weekday,English,Schofield Barracks Soldiers' Chapel,,,,,note: except Training and Federal Holidays
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Fri,11:45 AM,,Mass,specific_weekday,English,Schofield Barracks Soldiers' Chapel,,,,,
+Sts. Damien & Marianne Military Catholic Community,"791 McCornack Rd, Schofield Barracks, Hawaii 96786",(808) 655-1444,Mass,Sun,10:30 AM,,Mass,sunday,English,Schofield Barracks MPC,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Mon,12:00 PM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Mon,7:00 AM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Tue,12:00 PM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Tue,7:00 AM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Wed,12:00 PM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Wed,7:00 AM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Thu,12:00 PM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Thu,7:00 AM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Fri,12:00 PM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Fri,7:00 AM,,Mass,weekday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Sat,5:00 PM,,Mass,saturday,english,,,,,,vigil
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Sun,11:00 AM,,Mass,sunday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Sun,6:00 PM,,Mass,sunday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Sun,7:00 AM,,Mass,sunday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,Sun,9:00 AM,,Mass,sunday,english,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,,12:00 PM,,Mass,monthly,English,,first_saturday_(recurring),,,,note: until Lent
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Mass,,6:00 PM,,Mass,monthly,English,,first_friday_(recurring),,,,note: until Lent
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Confession,Fri,10:15 AM,11:30 AM,Confession,specific_weekday,English,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Confession,Sat,3:00 PM,4:00 PM,Confession,saturday,English,,,,,,
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Confession,,11:15 AM,,Confession,monthly,English,,first_saturday_(recurring),,,,note: until Lent
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Confession,,5:15 PM,,Confession,monthly,English,,first_friday_(recurring),,,,note: until Lent
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Adoration,Fri,7:30 AM,11:45 AM,Adoration,specific_weekday,English,,,,,,exposition
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Other,,12:00 PM,,Ash Wednesday,special_event,english,,,2026-02-18,,,Ash Wednesday
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Other,,6:00 PM,,Ash Wednesday,special_event,english,,,2026-02-18,,,Ash Wednesday
+Sts. Peter and Paul,"800 Kaheka St, Honolulu, Hawaii 96814",(808) 941-0675,Other,,7:00 AM,,Ash Wednesday,special_event,english,,,2026-02-18,,,Ash Wednesday
+Tripler Army Medical Center,"1 Jarrett White Rd, Honolulu, Hawaii 96859",(808) 433-5727,Mass,Mon,12:00 PM,,Mass,specific_weekday,English,,,,,,
+Tripler Army Medical Center,"1 Jarrett White Rd, Honolulu, Hawaii 96859",(808) 433-5727,Mass,Tue,12:00 PM,,Mass,specific_weekday,English,,,,,,
+Tripler Army Medical Center,"1 Jarrett White Rd, Honolulu, Hawaii 96859",(808) 433-5727,Mass,Wed,12:00 PM,,Mass,specific_weekday,English,,,,,,
+Tripler Army Medical Center,"1 Jarrett White Rd, Honolulu, Hawaii 96859",(808) 433-5727,Mass,Thu,12:00 PM,,Mass,specific_weekday,English,,,,,,
+Tripler Army Medical Center,"1 Jarrett White Rd, Honolulu, Hawaii 96859",(808) 433-5727,Other,Sun,9:00 AM,,General Protestant,sunday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Mon,5:30 PM,,Mass,specific_weekday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Tue,5:30 PM,,Mass,specific_weekday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Thu,5:30 PM,,Mass,specific_weekday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Fri,7:00 PM,,Mass,specific_weekday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Sat,7:00 PM,,Mass,saturday,English,,,,,,vigil
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Mass,Sun,3:30 PM,,Mass,sunday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Confession,Fri,6:00 PM,6:45 PM,Confession,specific_weekday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Confession,Sat,6:00 PM,6:50 PM,Confession,saturday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Confession,Sun,2:30 PM,3:20 PM,Confession,sunday,English,,,,,,
+Vietnamese Holy Martyrs,"712 N School St, Honolulu, Hawaii 96817",+18085360046,Adoration,Fri,6:00 PM,7:00 PM,Adoration,specific_weekday,English,,,,,,
