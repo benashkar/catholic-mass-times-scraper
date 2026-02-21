@@ -2,125 +2,133 @@
 
 ## Project Overview
 
-**Project:** Automated Catholic Mass Times Scraper for CR Community News  
-**Owner:** Ben Ashkar (Healthy Analytics)  
-**Scope:** Scrape, parse, and publish weekly Catholic mass times — starting with 15 Ohio communities, scaling to all US cities  
-**Final Output:** Date-specific mass time listings for newspaper publication (story + table format)  
+**Project:** Automated Catholic Mass Times Scraper for CR Community News
+**Owner:** Ben Ashkar (Healthy Analytics)
+**Scope:** Scrape, parse, and publish weekly Catholic mass times — starting with 16 Ohio communities, scaling to all US cities
+**Final Output:** Date-specific mass time listings for newspaper publication (story + table format)
 **Long-Term Vision:** A comprehensive, continuously updated database of Catholic mass times for every parish in the United States, powering CR Community News editions in any market
+**GitHub:** https://github.com/benashkar/catholic-mass-times-scraper
 
 ---
 
 ## Target Communities
 
-| # | Community | County/Area |
-|---|-----------|-------------|
-| 1 | Canal Winchester | Franklin |
-| 2 | Obetz | Franklin |
-| 3 | Hamilton Township | Franklin |
-| 4 | Lithopolis | Fairfield |
-| 5 | Lockbourne | Franklin |
-| 6 | Groveport | Franklin |
-| 7 | Madison Township | Franklin |
-| 8 | West Columbus | Franklin |
-| 9 | Lincoln Village | Franklin |
-| 10 | Prairie Township | Franklin |
-| 11 | Westgate | Franklin |
-| 12 | Galloway | Franklin |
-| 13 | Hilliard | Franklin |
-| 14 | Grove City | Franklin |
-| 15 | Urbancrest | Franklin |
-| 16 | Commercial Point | Pickaway |
+| # | Community | County/Area | CatholicIndex Page? | Fallback City |
+|---|-----------|-------------|---------------------|---------------|
+| 1 | Canal Winchester | Franklin | Yes | — |
+| 2 | Groveport | Franklin | Yes | — |
+| 3 | Hilliard | Franklin | Yes | — |
+| 4 | Grove City | Franklin | Yes | — |
+| 5 | Obetz | Franklin | No | Columbus |
+| 6 | Hamilton Township | Franklin | No | Columbus |
+| 7 | Lithopolis | Fairfield | No | Columbus |
+| 8 | Lockbourne | Franklin | No | Columbus |
+| 9 | Madison Township | Franklin | No | Columbus |
+| 10 | West Columbus | Franklin | No | Columbus |
+| 11 | Lincoln Village | Franklin | No | Columbus |
+| 12 | Prairie Township | Franklin | No | Columbus |
+| 13 | Westgate | Franklin | No | Columbus |
+| 14 | Galloway | Franklin | No | Columbus |
+| 15 | Urbancrest | Franklin | No | Columbus |
+| 16 | Commercial Point | Pickaway | No | Columbus |
 
-> **Note:** Many smaller communities (Obetz, Lockbourne, Urbancrest, Lincoln Village, Westgate) may not have their own Catholic church. The scraper needs to search by zip code or radius to find nearest serving parishes.
+> **Note:** 4 communities have their own CatholicIndex city page. The other 12 use the Columbus page as fallback, with response caching so Columbus is only fetched once.
 
 ---
 
 ## Data Sources (Priority Order)
 
-### Tier 1: CatholicIndex.org (Primary)
-- **Why:** Server-side rendered HTML — mass times are directly in page source (no JS rendering needed)
+### Tier 1: CatholicIndex.org (Primary) — ACTIVE
+- **Architecture:** Next.js App Router application (NOT server-side rendered HTML as originally assumed)
+- **Data delivery:** All data embedded as JSON inside React Server Component (RSC) flight payloads in `self.__next_f.push()` script tags — no HTML parsing needed
 - **Coverage:** 20,000+ parishes, updated weekly with automatic change detection
-- **Data available:** Church name, address, phone, website, day-by-day mass times, confession times, adoration hours, special events, monthly services
-- **URL pattern:** `catholicindex.org/churches/us-oh-{city}-{church-name}-{hash}`
-- **City pages:** `catholicindex.org/mass-times/{city}-ohio`
-- **Search page:** `catholicindex.org/search`
-- **Limitations:** City listing pages may use some JS rendering for church URLs; individual church pages are fully server-rendered
+- **Data available:** Church name, address, phone, website, livestream URL, day-by-day mass times, confession times, adoration hours, devotions, special events, monthly services, community insights (user reviews)
+- **Data NOT available:** Pastor/clergy names, photos, staff directories
+- **URL patterns:**
+  - City pages: `catholicindex.org/mass-times/{city}-{state}` → contains `initialChurches` array
+  - Church detail: `catholicindex.org/churches/{slug}` → contains `data.church` + `data.services` + `communityInsights`
+  - Search: `catholicindex.org/search`
+- **Key data structures:**
+  - City page: `initialChurches[]` with slug, name, street, city, stateRegion, lat/lng, phone, website, massCount, confessionCount, adorationCount, upcomingMasses, hasPerpetualAdoration
+  - Church detail: `data.services` object organized by category (Mass[], Confession[], Adoration[], Devotions[], Education[], Community[], Other[])
+  - Each service record: serviceId, category, scheduleType, dayOfWeek, timeStart, timeEnd, displayName, language, location, eventDate, pattern, timeRelation, referenceService, offsetMinutes, notes
 
 ### Tier 2: DiscoverMass.com (Backup / Cross-Reference)
-- **Why:** Also server-side rendered HTML; partners with MassTimes.org for data
-- **URL pattern:** `discovermass.com/church/{slug}-{city}-{state}/`
+- **Status:** Not yet integrated. CatholicIndex coverage has been sufficient for Phase 1.
 - **Data available:** Mass times, confession, adoration, directions
-- **Limitations:** Slightly less actively maintained than CatholicIndex
+- **Data NOT available:** Pastor/clergy names
 
 ### Tier 3: MassTimes.org (Largest DB, Harder to Scrape)
-- **Coverage:** 117,000 churches worldwide — most comprehensive
-- **Problem:** Entirely JavaScript-rendered (AngularJS SPA). Requires headless browser (Playwright/Puppeteer) or reverse-engineering internal API endpoints
+- **Coverage:** 117,000+ churches worldwide — most comprehensive
+- **Problem:** Entirely JavaScript-rendered (AngularJS SPA). Requires headless browser.
 - **Use case:** Only if Tiers 1 and 2 have gaps
+
+### Pastor/Clergy Data Sources (NOT YET INTEGRATED)
+- **CatholicIndex:** Does NOT have structured clergy data. Only mention of priests is in free-text `communityInsights` (user reviews) — unreliable.
+- **DiscoverMass:** Does NOT have clergy data.
+- **Diocese of Columbus (columbuscatholic.org):** Parish directory has name/address/phone only. Priest assignment announcements have structured data but are published as news articles, not a queryable API.
+- **CatholicParishDirectory.com:** COMMERCIAL product — has pastor names + emails in Excel, updated weekly. Best structured source.
+- **CatholicData.org:** API-based provider covering 17,600+ parishes. Another commercial option.
+- **Individual parish websites:** Each has its own format — significant scraping effort per site.
+- **Decision needed:** Choose a clergy data source for the `clergy` and `clergy_assignment` tables.
 
 ### Not Recommended
 - **MassTime.us** — JS-rendered, smaller database
 - **Diocese of Columbus (columbuscatholic.org)** — No centralized mass times; links to individual parish sites only
-- **CatholicDirectory.com** — Less structured data
+- **CatholicDirectory.com** — Less structured data, connection issues encountered
 
 ---
 
-## Data Schema
+## Data Schema — PostgreSQL (Maximally Normalized)
 
-### Church Record
+> **Design philosophy:** Maximum normalization. Every field that can be a lookup table, enum, or boolean IS one. No free-text strings where structured data exists. Schema lives at `database/schema.sql`.
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `church_name` | Parish name | Our Lady of Perpetual Help |
-| `church_type` | Rite/type | Roman Catholic |
-| `rite` | Liturgical rite | Latin |
-| `diocese` | Diocese name | Diocese of Columbus |
-| `street_number` | House/building number | 3730 |
-| `street_direction_prefix` | Directional prefix (N, S, E, W) | |
-| `street_name` | Street name | Broadway |
-| `street_type` | Street type (Rd, Ave, St, etc.) | |
-| `street_direction_suffix` | Directional suffix | NW |
-| `city` | City | Grove City |
-| `state` | State abbreviation | OH |
-| `zip_code` | ZIP code | 43123 |
-| `latitude` | Latitude | 39.8812 |
-| `longitude` | Longitude | -83.0868 |
-| `phone` | Phone number | (614) 875-3322 |
-| `website` | Parish website URL | |
-| `source_url` | URL scraped from | |
-| `last_scraped` | Timestamp of last scrape | 2026-02-20T12:00:00Z |
+### Lookup Tables (11 tables — no raw strings!)
 
-### Mass Time Record
+| Table | Purpose | PK Type | Example Values |
+|-------|---------|---------|----------------|
+| `lk_state` | US states | CHAR(2) | OH, PA, IN |
+| `lk_diocese` | Catholic dioceses | SERIAL | Diocese of Columbus |
+| `lk_service_category` | Service types (7) | VARCHAR(20) | mass, confession, adoration, devotions, education, community, other |
+| `lk_schedule_type` | Recurrence types (8) | VARCHAR(20) | sunday, saturday, weekday, specific_weekday, monthly, special_event, parish_event, other |
+| `lk_language` | Service languages (8) | VARCHAR(20) | en, es, la, bi, vi, ko, pl, pt |
+| `lk_day_of_week` | Days with sort + is_weekend | CHAR(3) | Mon (1), Tue (2), ..., Sun (7) |
+| `lk_recurrence_pattern` | Monthly patterns (6) | VARCHAR(50) | first_friday, first_saturday, first_sunday, thursday_before_first_friday |
+| `lk_time_relation` | Relative timing (2) | VARCHAR(10) | before, after |
+| `lk_clergy_role` | Priest/deacon roles (7) | VARCHAR(30) | pastor, parochial_vicar, deacon, administrator |
+| `lk_note_tag` | Structured note tags (16) | VARCHAR(30) | vigil, by_appointment, 24_hours, school_mass, holy_day, bilingual, exposition, etc. |
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `church_name` | FK to church | Our Lady of Perpetual Help |
-| `day_of_week` | Recurring day | Saturday |
-| `time` | Mass time | 4:00 PM |
-| `mass_type` | Type (Vigil, Regular, Holy Day, etc.) | Vigil |
-| `language` | Language if noted | English |
-| `is_recurring` | Weekly recurring vs. one-time | true |
-| `specific_date` | For special events only | null |
-| `notes` | Any qualifiers | |
+### Core Entity Tables (8 tables)
 
-### Confession Time Record
+| Table | Purpose | Key Fields |
+|-------|---------|------------|
+| `community` | 16 target communities | name, county, state_code, zip_codes, fallback_city, lat/lng, is_active |
+| `church` | 79 churches | slug (natural key), name, address, lat/lng, phone, website, diocese_id, has_perpetual_adoration, has_livestream, schedule_updated_at, community_insights |
+| `church_community` | Many-to-many junction | church_id, community_id, distance_miles |
+| `clergy` | Priests/deacons (NOT YET POPULATED) | prefix, first_name, last_name, suffix, is_active |
+| `clergy_assignment` | Clergy-to-church assignments | clergy_id, church_id, role_code, effective_date, end_date, is_current |
+| `service` | All services (masses, confessions, etc.) | church_id, source_service_id, category_code, schedule_type_code, day_code, time_start/end, event_date, language_code, pattern_code, relation_code, display_name, notes_raw |
+| `service_note_tag` | Parsed tags from notes (M2M) | service_id, tag_code |
+| `scrape_log` | Audit trail of scrape runs | scrape_type, started_at, status, churches_scraped, errors |
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `church_name` | FK to church | Our Lady of Perpetual Help |
-| `day_of_week` | Day | Saturday |
-| `start_time` | Start | 3:00 PM |
-| `end_time` | End | 3:45 PM |
-| `notes` | Qualifiers | Or by appointment |
+### Convenience Views (4 views)
 
-### Special Event Record
+| View | Purpose |
+|------|---------|
+| `v_sunday_masses` | All active Sunday masses with church details — the newspaper listing query |
+| `v_weekly_schedule` | Full weekly schedule organized by church → day → time |
+| `v_confession_times` | All active confession times with relative-time support |
+| `v_church_summary` | Dashboard: all churches with computed service counts |
 
-| Field | Description | Example |
-|-------|-------------|---------|
-| `church_name` | FK to church | Our Lady of Perpetual Help |
-| `event_date` | Specific date | 2026-04-03 |
-| `event_name` | Event | Good Friday Service |
-| `time` | Time | 3:00 PM |
-| `description` | Details | Passion of the Lord |
+### ETL Transformer Module (`src/etl/transformers.py`)
+
+Maps CatholicIndex raw values to normalized DB codes:
+- `CATEGORY_MAP`: "Mass" → "mass", "Confession" → "confession", etc.
+- `LANGUAGE_MAP`: "spanish" → "es", "latin" → "la", "bilingual" → "bi", etc.
+- `PATTERN_MAP`: "first_friday_(recurring)" → "first_friday", etc.
+- `STATE_MAP`: "Ohio" → "OH" (all 50 states + DC)
+- `parse_note_tags()`: Regex-based extraction of 16 structured tags from free-text notes
+- `transform_church()`, `transform_service()`, `transform_community()`: Full dict-to-DB-row transformers
 
 ---
 
@@ -129,7 +137,7 @@
 ### Phase 1: Church Discovery & Mapping ✅ COMPLETE
 **Goal:** Build a complete list of Catholic churches serving each of the 16 communities.
 
-- [x] For each community, determine the relevant ZIP codes and a search radius (some small towns share parishes)
+- [x] For each community, determine the relevant ZIP codes and a search radius
 - [x] Scrape CatholicIndex.org city/search pages to get all church URLs per community
 - [ ] Cross-reference with DiscoverMass.com to catch any gaps
 - [ ] Cross-reference with Diocese of Columbus parish list for completeness
@@ -146,28 +154,25 @@
 
 **Key technical finding:** CatholicIndex is a **Next.js App Router** app. All data is embedded as React Server Component (RSC) flight payloads in the HTML — no HTML parsing needed. We extract JSON directly from `self.__next_f.push()` calls. This is much more reliable than parsing rendered HTML.
 
-**Known challenge (RESOLVED):** City listing pages on CatholicIndex do NOT use traditional HTML links for church data. Instead:
-- Data is embedded in RSC flight payloads as JSON (`initialChurches` array)
-- Individual church pages have full schedule data in `data.services` object
-- No need for BeautifulSoup HTML parsing — pure JSON extraction
-- Small communities without CatholicIndex pages use Columbus as fallback with caching
-
 ### Phase 2: Mass Time Scraper (Recurring Schedules) — IN PROGRESS
 **Goal:** Scrape and parse weekly recurring mass times for every church in the master list.
-**Start here:** Unit tests (Improvement 1) and file logging (Improvement 2).
 
-- [x] Build RSC data extractor for CatholicIndex pages (replaces HTML parser — see Phase 1 findings)
-- [x] **Write unit tests alongside each parser function** (22 tests passing — see Improvement 1)
-- [x] **Add logging to all scraper functions** (console + file logging — see Improvement 2)
+- [x] Build RSC data extractor for CatholicIndex pages (`src/parsers/rsc_extractor.py`)
+- [x] Write unit tests alongside each parser function (22 tests passing)
+- [x] Add logging to all scraper functions (console + file logging)
 - [x] Parse mass times by day of week (extracted from `data.services.Mass` via RSC)
-- [x] Parse confession times with start/end time ranges (no range bug — data arrives pre-structured)
+- [x] Parse confession times with start/end time ranges (data arrives pre-structured)
 - [x] Parse adoration hours (extracted from `data.services.Adoration`)
 - [x] Parse monthly services (First Friday, etc. — `pattern` field in service records)
 - [x] Parse date-specific special events (Holy Days — `eventDate` field)
 - [x] Store all data in structured JSON/CSV
+- [x] Add `last_updated` tracking per church (CatholicIndex `updatedAt` field)
+- [x] Sample scrape: 10/10 churches near Grove City — all successful with full schedule data
+- [x] **Design PostgreSQL schema** — maximally normalized with 11 lookup tables (done early, ahead of Phase 5)
+- [x] **Build ETL transformers** — `src/etl/transformers.py` with complete value mappings + 41 tests
 - [ ] Build DiscoverMass.com parser as fallback
-- [x] Add `last_updated` tracking per church (CatholicIndex `updatedAt` field in church detail)
 - [ ] Build `run_scrape_details.py` to fetch full schedules for all 79 churches
+- [ ] Investigate pastor/clergy data sources (see "Pastor/Clergy Data Sources" section above)
 
 ### Phase 3: Date Generation Layer
 **Goal:** Convert recurring day-of-week schedules into specific dated listings for newspaper publication.
@@ -191,78 +196,60 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 ```
 
 ### Phase 4: Scheduling & Automation
-**Goal:** Run the scraper on a recurring schedule and detect changes.  
-**Start here:** Dockerization (Improvement 5) and Slack/email alerts (Improvement 4).
+**Goal:** Run the scraper on a recurring schedule and detect changes.
 
-- [ ] **Dockerize the project** before setting up scheduling (see Improvement 5)
-- [ ] **Standard mode (weekly):** Run Sunday night or Monday morning; scrape all recurring schedules; generate date-specific listings for the upcoming publication window
-- [ ] **Change detection:** Compare current scrape to previous; flag any churches that updated their schedule
-- [ ] **Special events mode:** Pull any date-specific events from CatholicIndex "Special Events" section
-- [ ] **Holy Day alerts:** Flag upcoming Holy Days of Obligation and major liturgical events (Holy Week, Christmas, Ash Wednesday) so editorial team can follow up with parishes for special schedules
-- [ ] **Set up Slack/email alerts** for scrape failures and anomalies (see Improvement 4)
-- [ ] Store scrape history for audit trail
+- [ ] Dockerize the project
+- [ ] Weekly automated scrape: run Sunday night / Monday morning
+- [ ] Change detection: compare current scrape to previous; flag schedule changes
+- [ ] Special events mode: pull date-specific events from CatholicIndex
+- [ ] Holy Day alerts: flag upcoming Holy Days so editorial can follow up with parishes
+- [ ] Slack/email alerts for scrape failures and anomalies
+- [ ] Store scrape history via `scrape_log` table
 
 ### Phase 5: Ohio Statewide Expansion
-**Goal:** Expand coverage to all Catholic parishes across Ohio.  
-**Start here:** Web dashboard (Improvement 3) — useful once data exceeds what CSVs can handle comfortably.
+**Goal:** Expand coverage to all Catholic parishes across Ohio.
 
-- [ ] Compile a master list of all Ohio cities/towns/CDPs (Census Bureau data or USPS city list)
+- [ ] Compile master list of all Ohio cities/towns/CDPs
 - [ ] Map all Ohio ZIP codes to their serving parishes
-- [ ] Run the scraper against all Ohio communities using CatholicIndex state-level pages
-- [ ] Cross-reference with Diocese directories (Ohio has 6 dioceses: Columbus, Cincinnati, Cleveland, Toledo, Youngstown, Steubenville)
-- [ ] Validate coverage: compare total parish count against the Official Catholic Directory (OCD) for Ohio
-- [ ] Optimize scraper performance for larger runs (batching, rate limiting, caching)
-- [ ] Move from flat files to PostgreSQL for storage at this scale
+- [ ] Run scraper against all Ohio communities using CatholicIndex state-level pages
+- [ ] Cross-reference with all 6 Ohio dioceses: Columbus, Cincinnati, Cleveland, Toledo, Youngstown, Steubenville
+- [ ] Validate coverage against the Official Catholic Directory (OCD)
+- [ ] Migrate from flat files to PostgreSQL (schema already designed)
+- [ ] Optimize scraper performance for larger runs
 
 ### Phase 6: National Expansion — Region by Region
 **Goal:** Scale to all ~17,000 Catholic parishes in the United States.
 
 **Sub-phase 6a: Data Architecture for National Scale**
-- [ ] Design PostgreSQL schema to handle ~17,000 parishes, ~50,000+ mass time records
+- [x] Design PostgreSQL schema (done in Phase 2, ready for national scale)
 - [ ] Add geographic hierarchy: state → diocese → deanery → parish
-- [ ] Integrate USPS city/ZIP reference data for comprehensive city-to-parish mapping
-- [ ] Build incremental scrape logic (only re-scrape churches whose schedules may have changed, based on CatholicIndex's `last_updated` field)
-- [ ] Implement rate limiting and polite scraping (respect robots.txt, add delays, rotate user agents if needed)
+- [ ] Integrate USPS city/ZIP reference data
+- [ ] Build incremental scrape logic (based on CatholicIndex `updatedAt` field)
+- [ ] Add pastor/clergy data integration (from chosen data source)
 
 **Sub-phase 6b: Diocese-by-Diocese Rollout**
-- [ ] Compile master list of all 196 US dioceses/archdioceses and their geographic boundaries
-- [ ] Prioritize rollout order (e.g., by CR Community News expansion markets, or by diocese size)
-- [ ] For each diocese:
-  - Scrape CatholicIndex for all parishes in the diocese's territory
-  - Cross-reference with DiscoverMass.com for gaps
-  - Cross-reference with the diocese's own parish directory (most dioceses publish one online)
-  - Validate parish count against OCD or CARA (Center for Applied Research in the Apostolate) data
-- [ ] Track coverage metrics: % of known parishes scraped per diocese, per state
+- [ ] Compile master list of all 196 US dioceses/archdioceses
+- [ ] Prioritize by CR Community News expansion markets
+- [ ] For each diocese: scrape CatholicIndex, cross-reference DiscoverMass + diocesan directory
+- [ ] Track coverage: % of known parishes scraped per diocese/state
 
 **Sub-phase 6c: Data Quality & Enrichment**
-- [ ] Build automated data quality checks:
-  - Parishes with no mass times listed
-  - Parishes with suspiciously outdated schedules (no update in 6+ months)
-  - Duplicate parish detection (same church listed under slightly different names/addresses)
-- [ ] Enrich with additional data sources:
-  - USCCB (US Conference of Catholic Bishops) parish data
-  - Google Places API for address verification and coordinates
-  - Individual diocese websites for parishes missing from aggregators
-- [ ] Build a "confidence score" per parish (how recently verified, how many sources agree)
+- [ ] Parishes with no mass times listed
+- [ ] Stale schedules (no update in 6+ months)
+- [ ] Duplicate parish detection
+- [ ] Google Places API for address verification
+- [ ] Confidence score per parish
 
 **Sub-phase 6d: Automation at Scale**
-- [ ] Scheduled national scrape: full refresh monthly, incremental weekly
-- [ ] Change detection alerts: flag parishes that update their schedules
-- [ ] Dashboard or report showing coverage stats by state/diocese
-- [ ] API or export system so any CR Community News edition can pull mass times for its market
+- [ ] Full refresh monthly, incremental weekly
+- [ ] Change detection alerts
+- [ ] Coverage dashboard by state/diocese
+- [ ] API for CR Community News market-specific pulls
 
 ### Phase 7: Ongoing Maintenance & Future Enhancements
-**Goal:** Keep the national database accurate and explore additional features.
-
-- [ ] Monitor source sites for structural changes (HTML layout changes that break parsers)
-- [ ] Add support for additional data sources as they emerge
-- [ ] Consider contributing back to open data efforts (Parish.io, OpenCatholic)
-- [ ] Potential enhancements:
-  - Other denominations beyond Catholic (Protestant, Orthodox, etc.)
-  - Bilingual/multilingual mass filtering
-  - Mobile-friendly web lookup for readers
-  - Integration with parish bulletin scraping for Holy Day / special event schedules
-  - Mapping/geospatial features (nearest parish finder)
+- [ ] Monitor source sites for structural changes
+- [ ] Add new data sources as they emerge
+- [ ] Potential: other denominations, mobile-friendly web lookup, parish bulletin scraping
 
 ---
 
@@ -284,18 +271,79 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 
 | Component | Tool | Notes |
 |-----------|------|-------|
-| Scraping | Python (`requests`) | Fetches pages; no BeautifulSoup needed (data is JSON in RSC payload) |
-| Data extraction | Custom RSC extractor (`src/parsers/rsc_extractor.py`) | Parses Next.js React Server Component flight data |
-| JS-rendered pages (if needed) | Playwright or Puppeteer | For MassTimes.org or stubborn sites (not needed for CatholicIndex) |
-| Data storage (Phase 1–4) | JSON + CSV flat files | 16 communities, 79 parishes discovered |
-| Data storage (Phase 5+) | PostgreSQL | ~17,000 parishes nationally |
-| Geographic reference data | Census Bureau, USPS ZIP files | City/ZIP to parish mapping |
-| Scheduling | Cron job or GitHub Actions | Weekly incremental, monthly full |
-| Orchestration | Claude Code | |
-| Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | With exponential backoff on retries, no retry on 404s |
-| Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output |
-| Testing | `pytest` (25 tests passing) | RSC extractor + config + smoke tests |
+| Language | Python 3.14 | Running on Windows |
+| Scraping | `requests` library | Fetches raw HTML containing RSC payloads |
+| Data extraction | Custom RSC extractor (`src/parsers/rsc_extractor.py`) | Parses Next.js React Server Component flight data via `json.loads()` |
+| ETL transformers | `src/etl/transformers.py` | Maps CatholicIndex values → normalized DB codes (41 tests) |
+| JS-rendered pages (if needed) | Playwright | For MassTimes.org or stubborn sites (not needed for CatholicIndex) |
+| Data storage (Phase 1–4) | JSON + CSV flat files | 16 communities, 79 parishes discovered, 10 detailed schedules |
+| Data storage (Phase 5+) | PostgreSQL | Schema ready at `database/schema.sql` — 11 lookup + 8 entity tables |
+| Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | Exponential backoff on retries, no retry on 404s |
+| Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output to `logs/scrape_YYYY-MM-DD.log` |
+| Testing | `pytest` (66 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
+| Scheduling (future) | Cron job or GitHub Actions | Weekly incremental, monthly full |
+| Version control | Git + GitHub | https://github.com/benashkar/catholic-mass-times-scraper |
+
+---
+
+## File Structure
+
+```
+church scrapes/
+├── mass-times-scraper-project-plan.md    # This file — master project plan
+├── requirements.txt                       # Python dependencies
+├── pyproject.toml                         # pytest config
+├── .env.example                           # Environment variable template
+├── .gitignore
+│
+├── config/
+│   ├── __init__.py
+│   └── settings.py                        # Central config: paths, URLs, 16 target communities
+│
+├── database/
+│   └── schema.sql                         # PostgreSQL schema (11 lookup + 8 entity tables + 4 views)
+│
+├── src/
+│   ├── __init__.py
+│   ├── scrapers/
+│   │   ├── __init__.py
+│   │   └── catholic_index.py              # CatholicIndex scraper (discover + detail)
+│   ├── parsers/
+│   │   ├── __init__.py
+│   │   └── rsc_extractor.py               # RSC flight payload JSON extractor
+│   ├── etl/
+│   │   ├── __init__.py
+│   │   └── transformers.py                # Value mappings: CatholicIndex → DB codes
+│   └── utils/
+│       ├── __init__.py
+│       ├── logger.py                      # Dual-output logging (console + file)
+│       ├── http.py                        # HTTP wrapper with rate limiting + retries
+│       └── file_io.py                     # CSV/JSON read/write helpers
+│
+├── tests/
+│   ├── __init__.py
+│   ├── fixtures/                          # Sample HTML/JSON for unit tests
+│   ├── test_smoke.py                      # 3 config/import smoke tests
+│   ├── test_rsc_extractor.py              # 22 RSC extractor tests
+│   └── test_transformers.py               # 41 ETL transformer tests
+│
+├── data/
+│   ├── churches/
+│   │   ├── master_church_list.csv         # 79 unique churches (Phase 1 output)
+│   │   ├── canal_winchester.json          # Per-community church lists (16 files)
+│   │   ├── groveport.json
+│   │   └── ... (14 more)
+│   └── output/
+│       └── grove_city_sample.json         # Full schedule data for 10 churches (sample)
+│
+├── logs/                                  # Auto-generated log files (scrape_YYYY-MM-DD.log)
+│
+├── run_discovery.py                       # Phase 1: discover churches for all 16 communities
+└── run_scrape_sample.py                   # Phase 2: sample scrape of 10 churches near a community
+```
+
+---
 
 ## Coding Standards — Junior Developer Friendly
 
@@ -305,178 +353,78 @@ St. John XXIII                 | Sat, Mar 7, 2026  | Saturday  | 5:00 PM (Vigil)
 
 - **Every file** must start with a module-level docstring explaining what the file does, what inputs it expects, and what outputs it produces
 - **Every function** must have a docstring explaining: what it does, what each parameter means, what it returns, and an example usage where helpful
-- **Every non-obvious line or block** must have an inline comment explaining *why* it does what it does, not just *what* it does
-- **Complex logic** (regex, parsing, data transformations) must have step-by-step comments walking through the logic
+- **Every non-obvious line or block** must have an inline comment explaining *why* it does what it does
+- **Complex logic** (regex, parsing, data transformations) must have step-by-step comments
 - Use **descriptive variable names** — `church_address_parts` not `cap`, `mass_time_str` not `mts`
-- Include **"WHY" comments** for any design decisions — e.g., `# We use semicolons here instead of commas because commas break CSV column alignment`
-- Add **WARNING comments** for common pitfalls — e.g., `# WARNING: This URL pattern changes if CatholicIndex redesigns their site`
-
-### Code Example — What Good Looks Like
-
-```python
-"""
-scrape_church_page.py
-
-Scrapes a single church page from CatholicIndex.org and extracts
-mass times, confession times, and address information.
-
-Input:  A CatholicIndex church page URL (string)
-Output: A dictionary containing church details and schedule data
-
-Usage:
-    python scrape_church_page.py https://catholicindex.org/churches/us-oh-grove-city-...
-"""
-
-def parse_confession_time_range(time_string: str) -> dict:
-    """
-    Parse a confession time range string into start and end times.
-
-    CatholicIndex lists confession times as ranges like "3:00pm-3:45pm".
-    This function splits that into separate start and end time values.
-
-    Args:
-        time_string: A time range string, e.g., "3:00pm-3:45pm"
-
-    Returns:
-        A dictionary with 'start_time' and 'end_time' keys.
-        Example: {'start_time': '3:00 PM', 'end_time': '3:45 PM'}
-
-    Raises:
-        ValueError: If the time string doesn't contain a valid range.
-    """
-    # Split on the dash to get start and end times
-    # WARNING: Some entries use an en-dash (–) instead of a hyphen (-)
-    # so we check for both characters
-    ...
-```
+- Include **"WHY" comments** for design decisions
+- Add **WARNING comments** for common pitfalls
 
 ### File & Folder Naming
-- Use **snake_case** for all Python files: `scrape_churches.py`, `parse_address.py`
-- Group related files into folders with a `README.md` in each explaining the folder's purpose
+- Use **snake_case** for all Python files
+- Group related files into folders
 - Keep a top-level `CONTRIBUTING.md` with setup instructions and development workflow
 
 ---
 
-## Additional Improvements (Build Incrementally Across Phases)
+## Unique Data Values Found (from 10-church sample scrape)
 
-These improvements make the project more robust, easier to maintain, and accessible to a junior developer working independently. Each one can be tackled as a standalone task.
+These inform the lookup table contents in the database schema:
 
-### Improvement 1: Unit Tests
-**Why:** Lets the junior dev test parsing and transformation functions without running the full scraper (no network calls, no waiting).
-**When:** Start in Phase 2 alongside the parser code.
-
-- [ ] Use `pytest` as the test framework (simpler than `unittest` for beginners)
-- [ ] Create a `tests/` folder with one test file per module (e.g., `test_parse_address.py`, `test_parse_mass_times.py`, `test_parse_confession.py`)
-- [ ] Write tests for:
-  - Address parser: known good addresses, edge cases (directional prefixes/suffixes, long street names, PO Boxes)
-  - Mass time parser: single times, multiple times, vigil masses, different day formats
-  - Confession time range parser: hyphen ranges, en-dash ranges, single times, "by appointment" text
-  - Date generation: correct mapping of day-of-week to specific dates, edge cases around month boundaries
-- [ ] Include **sample HTML fixtures** — save real HTML snippets from CatholicIndex/DiscoverMass into `tests/fixtures/` so tests can parse them without hitting the live site
-- [ ] Add a `make test` or `pytest` command to the README so any developer can run tests immediately
-- [ ] Target: 80%+ code coverage on parser/transformation functions (don't need to test the network scraping itself)
-
-### Improvement 2: Logging to Files
-**Why:** When a weekly scrape runs at 2 AM and something breaks, logs are the only way to figure out what happened.
-**When:** Start in Phase 2, require for Phase 4 (automation).
-
-- [ ] Use Python's built-in `logging` module (not `print` statements)
-- [ ] Configure two log outputs:
-  - **Console:** INFO level and above (so the dev can watch progress in real time)
-  - **File:** DEBUG level, written to `logs/scrape_YYYY-MM-DD.log` (full detail for troubleshooting)
-- [ ] Log the following events:
-  - Scrape start/end with timestamp and city name
-  - Each church page fetched (URL, HTTP status code, response time)
-  - Parse successes and failures per church
-  - Any data that couldn't be parsed (log the raw text so we can fix the parser)
-  - Summary at end: "Scraped 47 churches, 45 successful, 2 failed"
-- [ ] Rotate log files (keep last 30 days, delete older ones)
-- [ ] Add a `# HOW TO READ THESE LOGS` section at the top of the logging config file
-
-### Improvement 3: Simple Web Dashboard
-**Why:** Lets the junior dev (and the editorial team) view scraped data without writing SQL queries or opening CSV files.
-**When:** Phase 4 or Phase 5 — once there's enough data to make it worthwhile.
-
-- [ ] Use **Flask** (lightweight, beginner-friendly — the team already has Flask experience from the Medicaid project)
-- [ ] Pages to build:
-  - **Home:** Summary stats (total churches, last scrape date, next scheduled scrape)
-  - **Churches list:** Searchable/filterable table of all churches with city, type, last updated
-  - **Church detail:** Individual church page showing all mass times, confession, contact info
-  - **Scrape log:** View recent scrape runs, successes/failures
-  - **Export:** Button to download current data as CSV for the newspaper
-- [ ] Use a simple CSS framework (Bootstrap or Pico CSS) — no React needed
-- [ ] Include `README.md` with screenshots showing what each page looks like
-- [ ] Deploy to Render.com (consistent with existing infrastructure)
-
-### Improvement 4: Slack/Email Alerts
-**Why:** If the weekly scrape fails at 2 AM Sunday, the team needs to know Monday morning — not when the newspaper deadline hits.
-**When:** Phase 4 (automation).
-
-- [ ] Start with **email alerts** (simpler, no external dependencies):
-  - Use Python's `smtplib` with Gmail or the team's email provider
-  - Send alert on: scrape failure, scrape completing with errors (>10% failure rate), source site structure change detected
-  - Include: what failed, error message, link to log file
-- [ ] Optional: Add **Slack webhook** integration:
-  - Post to a `#mass-times-scraper` channel
-  - Color-coded: green for success, yellow for warnings, red for failures
-  - Include summary stats in the message
-- [ ] All alert configuration in a single `config.py` or `.env` file (no hardcoded emails/webhooks in code)
-
-### Improvement 5: Dockerize the Project
-**Why:** "It works on my machine" is the #1 junior developer problem. Docker eliminates environment setup issues entirely.
-**When:** Phase 3 or Phase 4 — once the core scraper is stable.
-
-- [ ] Create a `Dockerfile` with:
-  - Python 3.11+ base image
-  - All pip dependencies installed from `requirements.txt`
-  - Playwright browsers pre-installed (if needed for Tier 3 scraping)
-  - Working directory and entry points configured
-- [ ] Create a `docker-compose.yml` with:
-  - Scraper service
-  - PostgreSQL database (for Phase 5+)
-  - Flask dashboard (for Improvement 3)
-  - Volumes for persistent data and logs
-- [ ] Add extensive comments in both Docker files explaining every line
-- [ ] README section: "Getting Started with Docker" — step by step:
-  1. Install Docker Desktop
-  2. Clone the repo
-  3. Run `docker-compose up`
-  4. Open `localhost:5000` for dashboard
-- [ ] Include a `Makefile` with common commands:
-  ```
-  make build        # Build Docker containers
-  make up           # Start everything
-  make scrape       # Run a one-time scrape
-  make test         # Run unit tests
-  make logs         # View recent logs
-  make shell        # Open a bash shell in the container
-  ```
+| Field | Count | Values |
+|-------|-------|--------|
+| **categories** | 7 | Mass, Confession, Adoration, Devotions, Other, Education, Community |
+| **scheduleTypes** | 8 | sunday, saturday, weekday, specific_weekday, monthly, special_event, parish_event, other |
+| **languages** | 4+null | english, spanish, bilingual, latin (null = English default) |
+| **daysOfWeek** | 7+null | Mon, Tue, Wed, Thu, Fri, Sat, Sun (null for special events) |
+| **patterns** | 5 | first_friday_(recurring), first_saturday_(recurring), first_sunday, thursday_(before_first_friday), null |
+| **timeRelations** | 2+null | before, after (null for absolute-time services) |
+| **referenceServices** | 1+null | Mass (null for absolute-time services) |
+| **locations** | 8 | Church, Church Hall, Holy Family Church, Saint Aloysius Church, St. Mary, St. Mary Magdalene, school gym, null |
+| **displayNames** | 32 | Free-text — too variable for enum (Holy Mass, Vigil, Rosary & Divine Mercy Chaplet, etc.) |
+| **notes** | 37 unique | Free-text — parsed into structured tags via `parse_note_tags()` |
+| **offsetMinutes** | 1+null | 30 (only non-null value seen so far) |
 
 ---
 
-1. **Confession time range parsing:** ~~"3:00pm-3:45pm" is being split into two separate times instead of a start/end range.~~ **Status: NOT A BUG.** CatholicIndex RSC data provides confession times pre-structured with separate `timeStart` and `timeEnd` fields. No parsing needed.
-2. **CSV comma conflicts:** Fields containing commas (like `address_raw`) break column alignment in spreadsheet viewers. Fix: either drop `address_raw` (redundant) or use pipe/tab delimiters. **Status: Fixed in POC v2.** Our CSV output uses `utf-8-sig` encoding and proper `csv.DictWriter` which handles commas in fields correctly.
-3. **Mass time delimiter:** Use semicolons (`;`) instead of commas to separate multiple times within a single cell. **Status: Fixed in POC v2.** Also used for `serving_communities` field in master CSV.
-4. **Church discovery for small communities:** ~~Need zip-code or radius-based search, not just city name matching.~~ **Status: RESOLVED.** Small communities without CatholicIndex city pages now use a `fallback_city` setting (Columbus) with caching to avoid redundant requests.
+## Known Issues & Fixes (Historical)
+
+1. **Python 3.14 pandas build failure:** `pandas==2.2.*` couldn't build on Python 3.14 (meson/Visual Studio issue). **Fixed:** Relaxed version constraints to `pandas>=2.2` and `lxml>=5.3`.
+2. **12/16 communities 404'd on CatholicIndex:** Small towns don't have city pages. **Fixed:** Added `fallback_city: "Columbus"` to config with response caching in `run_discovery.py`.
+3. **404 retries wasted time:** Each 404 was retried 3x with exponential backoff. **Fixed:** Early return for 404 status codes in `http.py` (404 is permanent, not transient).
+4. **"Invalid \escape" JSON parsing on church details:** Manual string replacement missed escape sequences in community insights text. **Fixed:** Using `json.loads(f'"{match}"')` for proper JS string unescaping with manual fallback.
+5. **TypeError on None values in formatting:** `.get('dayOfWeek', '?')` returns None (not '?') when key exists with None value. **Fixed:** Changed to `.get('dayOfWeek') or '?'` pattern.
+6. **Confession time range parsing (non-bug):** Originally assumed "3:00pm-3:45pm" needed parsing. CatholicIndex RSC data provides confession times pre-structured with separate `timeStart` and `timeEnd` fields.
+
+---
+
+## Git Commit History
+
+| Commit | Message | Date |
+|--------|---------|------|
+| `554a30b` | Initial project scaffolding for Catholic Mass Times Scraper | 2026-02-20 |
+| `6b127df` | Add Phase 1 church discovery: 79 churches found across 16 Ohio communities | 2026-02-20 |
+| `4a09b29` | Fix RSC extractor JSON decoding and add sample scrape script | 2026-02-20 |
+| `8e0f117` | Add maximally normalized PostgreSQL schema and ETL transformers | 2026-02-20 |
 
 ---
 
 ## Editorial Considerations
 
-- **Holy Week / Christmas / Holy Days:** These special schedules are published by individual parishes 2–4 weeks before the event, not in the aggregator sites. The scraper should flag these dates so the editorial team can contact parish offices or scrape parish bulletin pages directly.
-- **Language masses:** Some parishes offer masses in Spanish, Vietnamese, etc. Include language field in output.
-- **Disclaimer:** "Mass times are subject to change. Please verify with your parish before attending." — standard disclaimer for the newspaper listing.
-- **Frequency decision needed:** Does the newspaper publish mass times every issue, or just monthly? This affects the date range for the generation layer.
-- **Grouping decision needed:** Group by church (all of St. Mary's times together) or by date (everything happening Saturday March 7th)?
+- **Holy Week / Christmas / Holy Days:** Special schedules published by parishes 2–4 weeks before events. Scraper flags these dates so editorial can follow up.
+- **Language masses:** Some parishes offer masses in Spanish, Vietnamese, etc. Language field included in schema and output.
+- **Pastor/clergy attribution:** Not yet available from CatholicIndex. Schema includes `clergy` + `clergy_assignment` tables for when data source is chosen.
+- **Disclaimer:** "Mass times are subject to change. Please verify with your parish before attending."
+- **Frequency decision needed:** Does the newspaper publish mass times every issue, or just monthly?
+- **Grouping decision needed:** Group by church or by date?
 
 ---
 
 ## Next Steps (Immediate)
 
-1. ~~**Use Claude in Chrome** to inspect CatholicIndex.org's network requests and find their search/API endpoint structure~~ **DONE (2026-02-20)** — Found that CatholicIndex is a Next.js App Router app with all data in RSC flight payloads
-2. ~~**Map all 16 Ohio communities** to their serving parishes (church discovery)~~ **DONE (2026-02-20)** — 79 unique churches found across all 16 communities
-3. **Build `run_scrape_details.py`** — Fetch full weekly schedules for all 79 churches from their individual CatholicIndex pages
-4. **Build the date generation layer** (Phase 3) — Convert recurring schedules to specific dated listings for newspaper publication
-5. **Generate a sample newspaper-ready output** for one publication week across all 16 communities
-6. **Review with editorial team** for format/layout preferences
-7. **Design the PostgreSQL schema** early — even if Phase 1–4 uses flat files, having the schema ready avoids rework when scaling to Ohio statewide and then nationally
+1. **Build `run_scrape_details.py`** — Fetch full weekly schedules for all 79 churches from their individual CatholicIndex pages
+2. **Build the date generation layer** (Phase 3) — Convert recurring schedules to specific dated newspaper listings
+3. **Generate a sample newspaper-ready output** for one publication week across all 16 communities
+4. **Review with editorial team** for format/layout preferences
+5. **Choose a pastor/clergy data source** — Decision needed on whether to purchase CatholicParishDirectory.com or scrape individual parish websites
+6. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
+7. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
