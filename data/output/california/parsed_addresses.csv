@@ -51,7 +51,6 @@ us-ca-atascadero-st-williams-54a2976e,St. William,6410,,Santa Lucia,Rd,,,,6410 S
 us-ca-atwater-st-anthony-8062a948,St. Anthony,1801,,Winton,Way,,,,1801 Winton Way,Atwater,CA,95301,,37.35612561,-120.61425218,(209) 358-5743
 us-ca-auburn-st-joseph-720f6eb7,St. Joseph,1162,,Lincoln,Way,,,,1162 Lincoln Way,Auburn,CA,95603,,38.89834162,-121.0736664,(530) 885-2956
 us-ca-auburn-st-teresa-of-avila-83ac3494,St. Teresa of Avila,11610,,Atwood,Rd,,,,11610 Atwood Rd,Auburn,CA,95603,,38.9335583,-121.100354,+1-530-889-2254
-us-ca-auburn-st-teresa-of-avila-e2aad9da,St. Teresa of Avila,11600,,Atwood,Rd,,,,11600 Atwood Rd,Auburn,CA,95603,,38.93378816,-121.10046892,(530) 889-2254
 us-ca-avalon-st-catherine-of-alexandria-bae63b3d,St. Catherine of Alexandria,800,,Beacon,St,,,,800 Beacon St,Avalon,CA,90704,0735,33.3409405,-118.32531272,(310) 510-0192
 us-ca-avenal-st-joseph-5c431353,St. Joseph,500,,Kern,St,,,,500 Kern St,Avenal,CA,93204,,36.00038503,-120.13115349,(559) 386-9523
 us-ca-azusa-st-frances-of-rome-catholic-church-5444111c,St. Frances of Rome Church,501,E,Foothill,Blvd,,,,501 E Foothill Blvd,Azusa,CA,91702,0637,34.13400245,-117.90186246,(626) 969-1829
@@ -102,7 +101,6 @@ us-ca-bloomington-st-charles-borromeo-roman-3ac70ead,St. Charles Borromeo,11342,
 us-ca-blue-lake-st-joseph-7fd2189b,St. Joseph,340,,Greenwood,Dr,,,,340 Greenwood Dr,Blue Lake,CA,95525,,40.88347007,-123.99114195,707-822-7696
 us-ca-blythe-st-joan-of-arc-98be3928,St. Joan of Arc,875,E,Chanslor,Way,,,,875 E Chanslor Way,Blythe,CA,92225,,33.61837412,-114.58774214,(760) 922-3261
 us-ca-bolinas-st-mary-magdalene-87c74525,St. Mary Magdalene,16,,Horseshoe Hill,Rd,,,,16 Horseshoe Hill Rd,Bolinas,CA,94924,,37.9205326,-122.69350095,+14156631139
-us-or-bonanza-st-frances-cabrini-f0324cc6,St. Francis Cabrini,31400,,,Hwy,,,,31400 Hwy 70,Bonanza,OR,97633,,42.19858296,-121.40855944,(541) 798-5823
 us-ca-bonita-corpus-christi-e990abd1,Corpus Christi,450,,Corral Canyon,Rd,,,,450 Corral Canyon Rd,Bonita,CA,91902,,32.65885574,-116.99799746,(619) 482-3954
 us-ca-boron-st-joseph-67493d58,St. Joseph,12456,,Boron,Ave,,,,12456 Boron Ave,Boron,CA,93516,,35.00523287,-117.64945105,(760) 373-2256
 us-ca-borrego-springs-st-richard-7103d95c,St. Richard,611,,Church,Ln,,,,611 Church Ln,Borrego Springs,CA,92004,1128,33.25138057,-116.37935293,(760) 767-5701
@@ -114,11 +112,8 @@ us-ca-brawley-st-margaret-mary-05cb8841,St. Margaret Mary,620,S,Cesar Chavez,St,
 us-ca-brea-st-angela-merici-fcff5286,St. Angela Merici,585,S,Walnut,Ave,,,,585 S Walnut Ave,Brea,CA,92821,5325,33.910578,-117.905313,(714) 529-1821
 us-ca-brentwood-immaculate-heart-of-mary-194e6f9c,Immaculate Heart of Mary Church,500,,Fairview,Ave,,,,500 Fairview Ave,Brentwood,CA,94513,,37.93354033,-121.72248757,(925) 634-4154
 us-ca-bridgeport-infant-of-prague-mission-d982c96d,Infant of Prague,74936,,US-395,,,,,74936 US-395,Bridgeport,CA,93517,,38.23626509,-119.22321541,760-934-6276
-us-or-brookings-star-of-the-sea-52e981e3,Star of the Sea,820,,Old County,Rd,,,,820 Old County Rd,Brookings,OR,97415,,42.061387,-124.27568612,(541) 469-2313
 us-ca-buena-park-st-pius-v-9b4620eb,St. Pius V,7691,,Orangethorpe,Ave,,,,7691 Orangethorpe Ave,Buena Park,CA,90621,,33.85944666,-117.99934056,(714) 522-2193
 us-ca-buhach-immaculate-conception-4f0ace3f,Immaculate Conception,2988,N,Buhach,Rd,,,,2988 N Buhach Rd,Buhach,CA,95301,,37.33135623,-120.57693066,(209) 358-5743
-us-az-bullhead-city-st-margaret-mary-catholic-church-2d0d2526,St Margaret Mary Catholic Church,1691,N,Oatman,Rd,,,,1691 N Oatman Rd,Bullhead City,AZ,86442,,35.0963433,-114.5924358,+1-928-758-7117
-us-az-bullhead-city-st-margaret-mary-alacoque-becf7324,St. Margaret Mary,1691,N,Oatman,Rd,,,,1691 N Oatman Rd,Bullhead City,AZ,86442,,35.09498988,-114.59145431,(928) 758-7117
 us-ca-burbank-st-finbar-e242f3b7,St. Finbar,2010,W,Olive,Ave,,,,2010 W Olive Ave,Burbank,CA,91506,2642,34.16416168,-118.32579803,(818) 846-6251
 us-ca-burbank-st-francis-xavier-b6540ddc,St. Francis Xavier Church,3801,,Scott,Rd,,,,3801 Scott Rd,Burbank,CA,91504,1799,34.21032865,-118.33704608,(818) 504-4400
 us-ca-burbank-st-robert-bellarmine-c0c56dbf,St. Robert Bellarmine Church,143,N,Fifth,St,,,,143 N Fifth St,Burbank,CA,91501,2178,34.1846924,-118.305794,(818) 846-3443
@@ -155,8 +150,6 @@ us-ca-carmichael-our-lady-of-the-rosary-maronite-bfc3a67d,Our Lady of the Rosary
 us-ca-carmichael-st-john-the-evangelist-0c768e37,St. John the Evangelist,5751,,Locust,Ave,,,,5751 Locust Ave,Carmichael,CA,95608,,38.64281028,-121.33019873,(916) 483-8454
 us-ca-carpinteria-st-joseph-b04342bc,St. Joseph,1532,,Linden,Ave,,,,1532 Linden Ave,Carpinteria,CA,93013,1450,34.40558741,-119.51479197,(805) 684-2181
 us-ca-carson-st-philomena-catholic-church-ceaa78c9,St. Philomena Church,21900,S,Main,St,,,,21900 S Main St,Carson,CA,90745,2998,33.82904335,-118.27567795,(310) 835-7161 ext. 0
-us-nv-carson-city-corpus-christi-ce75d507,Corpus Christi,3597,N,Sunridge,Dr,,,,3597 N Sunridge Dr,Carson City,NV,89705,,39.09841128,-119.76623773, 775-267-3200
-us-nv-carson-city-st-teresa-of-avila-13fbc55f,St. Teresa of Avila,3000,N,Lompa,Ln,,,,3000 N Lompa Ln,Carson City,NV,89706,,39.1862959,-119.74331218,(775) 882-1968
 us-ca-caruthers-our-lady-of-the-assumption-98a9b647,Our Lady of the Assumption,13540,S,Henderson,Rd,,,,13540 S Henderson Rd,Caruthers,CA,93609,,36.53918623,-119.82799856,(559) 485-3870
 us-ca-castro-valley-our-lady-of-grace-4aa29050,Our Lady of Grace,3433,,Somerset,Ave,,,,3433 Somerset Ave,Castro Valley,CA,94546,,37.7012895,-122.08308403,(510) 537-0806
 us-ca-castro-valley-transfiguration-8e792930,Transfiguration,4000,E,Castro Valley,Blvd,,,,4000 E Castro Valley Blvd,Castro Valley,CA,94552,,37.69710555,-122.05185458,(510) 538-7941
@@ -375,12 +368,10 @@ us-ca-fullerton-st-mary-1515b02b,St. Mary,400,W,Commonwealth,Ave,,,,400 W Common
 us-ca-fullerton-st-philip-benizi-36b3aee0,St. Philip Benizi,235,S,Pine,Dr,,,,235 S Pine Dr,Fullerton,CA,92833,,33.8667946,-117.966675,(714) 871-3610
 us-ca-galt-st-christopher-a4c4f7dc,St. Christopher,950,S,Lincoln,Way,,,,950 S Lincoln Way,Galt,CA,95632,,38.24446191,-121.29801765,(209) 745-1389
 us-ca-garberville-our-lady-of-the-redwoods-eec39ebc,Our Lady of the Redwoods,515,,Maple,St,,,,515 Maple St,Garberville,CA,99542,,40.10009052,-123.79193507,707-923-7864
-us-ca-garden-grove-christ-cathedral-113bc404,Christ Cathedral,13280,,Chapman,Ave,,,,13280 Chapman Ave,Garden Grove,CA,92840,,33.78739024,-117.89890753,(714) 971-2141
 us-ca-garden-grove-christ-cathedral-79cae776,Christ Cathedral,12141,,Lewis,St,,,,12141 Lewis St,Garden Grove,CA,92840,,33.7874947,-117.89893,+1-714-971-2141
 us-ca-garden-grove-st-columban-2736a357,St. Columban,10801,,Stanford,Ave,,,,10801 Stanford Ave,Garden Grove,CA,92840,,33.77836437,-117.94490916,(714) 534-1174
 us-ca-gardena-maria-regina-catholic-church-a52655a9,Maria Regina Catholic Church,2150,W,135th,St,,,,2150 W 135th St,Gardena,CA,90249,,33.90857617,-118.31759374,(310) 323-0030
 us-ca-gardena-st-anthony-of-padua-48f932e6,St. Anthony of Padua,1050,W,163rd,St,,,,1050 W 163rd St,Gardena,CA,90247,,33.88357671,-118.29320408,(310) 327-5830
-us-nv-gardnerville-st-gall-119c42a9,St. Gall,1343,,Centerville,,,,,1343 Centerville,Gardnerville,NV,89410,9746,38.93530066,-119.7502768,(775) 782-2852
 us-ca-georgetown-st-james-d6b31578,St. James,2831,,Harkness,St,,,,2831 Harkness St,Georgetown,CA,95634,,38.90592394,-120.8328818,(530) 622-0373
 us-ca-gilroy-st-mary-parish-gilroy-00d5bd5c,"St. Mary Parish, Gilroy",11,,1st,St,,,,11 1st St,Gilroy,CA,95020,,37.01471887,-121.5732095,408-847-5151
 us-ca-glendale-holy-family-catholic-church-ea7f772c,Holy Family Catholic Church,500,S,Louise,St,,,,500 S Louise St,Glendale,CA,91205,,34.14116552,-118.2528375,(818) 247-2222
@@ -447,7 +438,6 @@ us-ca-huntington-park-st-matthias-f6410930,St. Matthias,3095,E,Florence,Ave,,,,3
 us-ca-huron-st-frances-cabrini-f56cf9ee,St. Frances Cabrini,36986,,Los Angeles,St,,,,36986 Los Angeles St,Huron,CA,93234,,36.19611549,-120.10435391,(559) 945-2507
 us-ca-idyllwild-queen-of-angels-8e086cf0,Queen of Angels,54525,,N,Cir,,,,54525 N Circle Dr,Idyllwild,CA,92549,1106,33.74762503,-116.70976486,(951) 659-2708
 us-ca-imperial-st-anthony-of-padua-26a6fb9e,St. Anthony of Padua,210,W,7th,St,,,,210 W 7th St,Imperial,CA,92251,,32.84581765,-115.5719934,(760) 355-1347
-us-nv-incline-village-st-francis-of-assisi-de31b3cf,St. Francis of Assisi,701,,Mount Rose,Hwy,,,,701 Mount Rose Hwy,Incline Village,NV,89451,,39.25429411,-119.96760269,(775) 831-0490 
 us-ca-independence-st-vivian-a726d144,St. Vivian,331,N,Edwards,St,,,,331 N Edwards St,Independence,CA,93526,,36.80470724,-118.20132878,(760) 876-4350
 us-ca-indio-our-lady-of-perpetual-help-24d4dd7d,Our Lady of Perpetual Help,45299,,Deglet Noor St at Bliss,Ave,,,,45299 Deglet Noor St at Bliss Ave,Indio,CA,92201,,33.71952728,-116.22362822,(760) 347-3507
 us-ca-inglewood-st-john-chrysostom-catholic-church-22448040,St John Chrysostom Church,546,E,Florence,Ave,,,,546 E Florence Ave,Inglewood,CA,90301,1497,33.96913384,-118.34749079,(310) 677-2736
@@ -474,8 +464,6 @@ us-ca-king-city-saint-john-the-baptist-0446abe0,St. John the Baptist,504,N,Third
 us-ca-kings-beach-our-lady-of-the-lake-0442d989,Our Lady of the Lake,8263,,Steelhead,Ave,,,,8263 Steelhead Ave,Kings Beach,CA,96143,,39.24043976,-120.02718893,(530) 587-3595
 us-ca-kingsburg-holy-family-581f8b5c,Holy Family,1275,,Smith,St,,,,1275 Smith St,Kingsburg,CA,93631,,36.51307183,-119.54950481,(559) 897-5953
 us-ca-klamath-sts-robert-and-anne-mission-church-e134fb46,St Robert and St Anne Mission,110,,Klamath Mills,Rd,,,,(near) 110 Klamath Mills Rd,Klamath,CA,95548,,41.52413419,-124.03362415,707-465-1762
-us-or-klamath-falls-sacred-heart-7092efd0,Sacred Heart,815,,High,St,,,,815 High St,Klamath Falls,OR,97601,,42.22810154,-121.78357129,(541) 884-4566
-us-or-klamath-falls-st-pius-x-6e276955,St. Pius X,4880,,Bristol,Ave,,,,4880 Bristol Ave,Klamath Falls,OR,97603,,42.18877,-121.729355,(541) 884-4242
 us-ca-knights-landing-st-paul-d45649a1,St. Paul,513,,Locust,St,,,,513 Locust St,Knights Landing,CA,95645,,38.79915654,-121.72108257,(530) 735-6478
 us-ca-la-canada-st-bede-the-venerable-8a1bbf68,St. Bede the Venerable Church,215,,Foothill,Blvd,,,,215 Foothill Blvd,La Canada,CA,91011,3754,34.19710922,-118.18302155,(818) 949-4300
 us-ca-la-crescenta-church-of-st-james-the-less-703aaabb,St. James the Less,4625,,Dunsmore,Ave,,,,4625 Dunsmore Ave,La Crescenta,CA,91214,1899,34.2383125,-118.2581875,18182483442
@@ -483,7 +471,6 @@ us-ca-la-crescenta-st-james-the-less-holy-redeemer-st-james-the-less-parish-7426
 us-ca-la-grange-st-louis-mission-47214770,St. Louis,30201,,Floto,St,,,,30201 Floto St,La Grange,CA,95329,,37.66281546,-120.4615286,209-883-4310
 us-ca-la-habra-our-lady-of-guadalupe-add86269,Our Lady of Guadalupe,900,W,La Habra,Blvd,,,,900 W La Habra Blvd,La Habra,CA,90631,,33.93127737,-117.95673571,(562) 691-0533
 us-ca-la-honda-our-lady-of-refuge-b5641e7b,Our Lady of Refuge,146,,Sears Ranch,Rd,,,,146 Sears Ranch Rd,La Honda,CA,94020,,37.32182962,-122.27644092,(650) 747-9555
-us-ca-la-honda-our-lady-of-refuge-00a07bd0,Our Lady of Refuge,146,,Sears Ranch,Rd,,,,146 Sears Ranch Rd,La Honda,CA,94020,,37.3214659,-122.2763212,+1-650-747-9555
 us-ca-la-jolla-all-hallows-a5939129,All Hallows,6602,,La Jolla Scenic,Dr,S,,,6602 La Jolla Scenic Dr S,La Jolla,CA,92037,,32.83456392,-117.24936537,(858) 459-2975
 us-ca-la-jolla-mary-star-of-the-sea-28249a02,"Mary, Star of the Sea",7669,,Girard,Ave,,,,7669 Girard Ave,La Jolla,CA,92037,,32.84389436,-117.27316788,(858) 454-2631
 us-ca-la-mesa-st-martin-of-tours-cd20c97e,St. Martin of Tours,7710,,El Cajon,Blvd,,,,7710 El Cajon Blvd,La Mesa,CA,91942,,32.76902442,-117.03130275,(619) 465-5334
@@ -491,7 +478,6 @@ us-ca-la-mirada-beatitudes-of-our-lord-catholic-church-77f35924,Beatitudes of Ou
 us-ca-la-mirada-st-paul-of-the-cross-catholic-church-e6baa3b7,St Paul of the Cross Catholic Church,14020,,Foster,Rd,,,,14020 Foster Rd,La Mirada,CA,90638,,33.90938817,-118.03211164,(562) 921-2914
 us-ca-la-puente-st-joseph-catholic-church-cca30ff1,St. Joseph Catholic Church,550,N,Glendora,Ave,,,,550 N Glendora Ave,La Puente,CA,91744,,34.02778186,-117.9503587,(626) 336-2001
 us-ca-la-puente-st-louis-of-france-catholic-church-6b13efc9,St. Louis of France Catholic Church,13935,E,Temple,Ave,,,,13935 E Temple Ave,La Puente,CA,91746,2098,34.04874369,-117.97856748,(626) 918-8314
-us-ca-la-puente-st-louis-of-france-catholic-church-4c45cca7,St. Louis of France Catholic Church,13935,E,Temple,Ave,,,,13935 E Temple Ave,La Puente,CA,91746,,34.04886,-117.9784319,+1-626-918-6210
 us-ca-la-quinta-st-francis-of-assisi-b07f026e,St. Francis of Assisi,47225,,Washington,St,,,,47225 Washington St,La Quinta,CA,92253,,33.70628097,-116.29564732,(760) 564-1255
 us-ca-ladera-ranch-holy-trinity-fca81228,Holy Trinity,1600,,Corporate,Dr,,,,1600 Corporate Dr,Ladera Ranch,CA,92694,,33.55592045,-117.62875851,(949) 218-3131
 us-ca-lafayette-st-perpetua-d028b67b,St. Perpetua,3454,,Hamlin,Rd,,,,3454 Hamlin Rd,Lafayette,CA,94549,,37.88117852,-122.11335517,(925) 283-0272
@@ -514,7 +500,6 @@ us-ca-lancaster-st-junipero-serra-parish-814cf47e,St. Junipero Serra Parish,4212
 us-ca-larkspur-st-patrick-fc82c45a,St. Patrick,114,,King,St,,,,114 King St,Larkspur,CA,94939,,37.93439398,-122.53588001,(415) 924-0600
 us-ca-lathrop-our-lady-of-guadalupe-990e0869,Our Lady of Guadalupe,16200,,Cambridge,Dr,,,,16200 Cambridge Dr,Lathrop,CA,95330,,37.81440188,-121.28282989,(209) 858-4466
 us-ca-laton-our-lady-of-fatima-e3203332,Shrine of Our Lady of Fatima,20855,,Fatima,Ave,,,,20855 Fatima Ave,Laton,CA,93242,,36.43379516,-119.69106658,(559) 923-4935
-us-nv-laughlin-st-john-the-baptist-f44dad17,St. John the Baptist,3055,,El Mirage,Way,,,,3055 El Mirage Way,Laughlin,NV,89029,,35.14186229,-114.62849379,(702) 298-0440
 us-ca-le-grand-our-lady-of-lourdes-a62688cc,Our Lady of Lourdes,13145,,Le Grand,Rd,,,,13145 Le Grand Rd,Le Grand,CA,95333,,37.22817003,-120.25030365,(209) 382-0459
 us-ca-lee-vining-our-savior-of-the-mountains-mission-aaa1bf10,Our Savior of the Mountains Mission,85,,Mono Lake,Ave,,,,85 Mono Lake Ave,Lee Vining,CA,93541,,37.9576572,-119.12153887,760-934-6276
 us-ca-lemon-grove-st-john-of-the-cross-ffe157dc,St. John of the Cross,8086,,Broadway,Ave,,,,8086 Broadway Ave,Lemon Grove,CA,91945,,32.74436346,-117.02331936,(619) 466-3209
@@ -593,7 +578,6 @@ us-ca-los-angeles-church-of-our-lady-queen-of-angels-db4657c6,Our Lady Queen of 
 us-ca-los-angeles-our-lady-queen-of-the-angels-nuestra-señora-reina-de-los-angeles-la-placita-d3e32914,Our Lady Queen of Angels,535,N,Main,St,,,,535 N Main St,Los Angeles,CA,90012,,34.05707,-118.239578,(213) 629-3101
 us-ca-los-angeles-our-lady-queen-of-martyrs-armenian-e1b8452b,Our Lady Queen of Martyrs (Armenian),1339,,Pleasant,Ave,,,,1339 Pleasant Ave,Los Angeles,CA,90033,,34.05168229,-118.22198621,(323) 261-9898
 us-ca-los-angeles-our-lady-of-guadalupe-888656ee,Our Lady of Guadalupe,4509,,Mercury,Ave,,,,4509 Mercury Ave,Los Angeles,CA,90032,,34.08615038,-118.19025546,(323) 225-4201
-us-ca-los-angeles-our-lady-of-guadalupe-81b540c0,Our Lady of Guadalupe Church,4018,E,Hammel,St,,,,4018 E Hammel St,Los Angeles,CA,90063,,34.04209852,-118.17950249,(323) 261-8051
 us-ca-los-angeles-our-lady-of-guadalupe-sanctuary-a06c3d9d,Our Lady of Guadalupe Sanctuary,4100,E,2nd,St,,,,4100 E 2nd St,Los Angeles,CA,90063,,34.03398,-118.177521,(323) 261-4365
 us-ca-los-angeles-our-lady-of-loretto-6d4c9875,Our Lady of Loretto,250,N,Union,Ave,,,,250 N Union Ave,Los Angeles,CA,90026,5435,34.06672263,-118.26416731,(213) 483-3013
 us-ca-los-angeles-our-lady-of-lourdes-1e9b7dd6,Our Lady of Lourdes,3772,E,3rd,St,,,,3772 E 3rd St,Los Angeles,CA,90063,2408,34.03292235,-118.18694414,(323) 526-3800
@@ -717,7 +701,6 @@ us-ca-merced-our-lady-of-mercy-st-patrick-parish-3f9577f2,Our Lady of Mercy Chur
 us-ca-merced-sacred-heart-63cac050,Sacred Heart,562,W,13th,St,,,,562 W 13th St,Merced,CA,95341,,37.29742079,-120.48719352,(209) 383-6604
 us-ca-merced-st-patrick-cafaf61a,St. Patrick,671,E,Yosemite,Ave,,,,671 E Yosemite Ave,Merced,CA,95340,,37.33301136,-120.46343563,(209) 383-3924
 us-ca-meridian-little-shrine-our-lady-of-sorrows-256585d6,Little Shrine Our Lady of Sorrows,,,Sycamore Slough,Rd,,,,Sycamore Slough Rd,Meridian,CA,95957,,39.1155973,-121.9374765,+1-530-458-4170
-us-or-merrill-st-augustine-6e0dfe92,St. Augustine,905,E,Front,St,,,,905 E Front St,Merrill,OR,97633,,42.02375867,-121.59110385,(541) 798-5823
 us-ca-middletown-st-joseph-bef95e8a,St. Joseph,21396,,State Hwy 175,,,,,21396 State Hwy 175,Middletown,CA,95461,,38.75325589,-122.61591488,(707) 987-3676
 us-ca-mill-valley-our-lady-of-mount-carmel-4a55878c,Our Lady of Mount Carmel,3,,Oakdale,Ave,,,,3 Oakdale Ave,Mill Valley,CA,94941,,37.90764493,-122.54630101,(415) 388-4190
 us-ca-millbrae-our-lady-of-lebanon-maronite-17e0cf42,Our Lady of Lebanon (Maronite),600,,El Camino Real,,,,,600 El Camino Real,Millbrae,CA,94030,,37.60400109,-122.39345922,(650) 741-6342
@@ -864,7 +847,6 @@ us-ca-pacifica-st-peter-b6d39d13,St. Peter,700,,Oddstad,Blvd,,,,700 Oddstad Blvd
 us-ca-pacoima-guardian-angel-f4bae1aa,Guardian Angel,12307,,Terra Bella,St,,,,12307 Terra Bella St,Pacoima,CA,91331,,34.27163054,-118.40137528,818-485-5207
 us-ca-pacoima-guardian-angel-chapel-80d4a12e,Guardian Angel,10886,,Lehigh,Ave,,,,10886 Lehigh Ave,Pacoima,CA,91331,,34.26816626,-118.41534362,818-485-5207
 us-ca-pacoima-mary-immaculate-4395bea7,Mary Immaculate,10390,,Remick,Ave,,,,10390 Remick Ave,Pacoima,CA,91331,3658,34.25912571,-118.43498945,(818) 899-0278
-us-nv-pahrump-our-lady-of-the-valley-22e73f64,Our Lady of the Valley,781,E,Gamebird,,,,,781 E Gamebird,Pahrump,NV,89048,,36.1603549,-115.99707752,(775) 727-4044
 us-ca-pala-st-antonio-de-pala-56966093,Mission San Antonio de Pala,11798,,Pala Mission,Rd,,,,11798 Pala Mission Rd,Pala,CA,92059,,33.3656973,-117.0745182,(760) 742-3317
 us-ca-palm-desert-christ-of-the-desert-chapel-3d5fb4a0,Christ of the Desert Chapel,73441,,Fred Waring,Dr,,,,73441 Fred Waring Dr,Palm Desert,CA,92260,,33.72851,-116.3827133,+1-760-346-0089
 us-ca-palm-desert-sacred-heart-c3455169,Sacred Heart,43775,,Deep Canyon,Rd,,,,43775 Deep Canyon Rd,Palm Desert,CA,92260,3164,33.73055905,-116.36539514,(760) 346-6502
@@ -929,11 +911,9 @@ us-ca-porterville-st-anne-b2980ddc,St. Anne,378,N,F,St,,,,378 N F St,Porterville
 us-ca-portola-holy-family-91cb6827,Holy Family,108,,Taylor,Ave,,,,108 Taylor Ave,Portola,CA,96122,,39.80810203,-120.46605099,(530) 832-5006
 us-ca-portola-valley-our-lady-of-the-wayside-573a762a,Our Lady of the Wayside,930,,Portola,Rd,,,,930 Portola Rd,Portola Valley,CA,94028,,37.38413323,-122.23364155,(650) 854-5976
 us-ca-portola-valley-woodside-priory-0060ac90,Woodside Priory,302,,Portola,Rd,,,,302 Portola Rd,Portola Valley,CA,94028,,37.3761875,-122.2130625,
-us-az-poston-st-kateri-tekakwitha-mission-3b8da3e4,St. Kateri Tekakwitha Mission,29070,,Mohave,Rd,,,,29070 Mohave Rd,Poston,AZ,85371,,33.91082309,-114.43938001,(928) 669-2502
 us-ca-poway-st-gabriel-13503e10,St. Gabriel,13734,,Twin Peaks,Rd,,,,13734 Twin Peaks Rd,Poway,CA,92064,,32.98045,-117.03413619,(858) 748-5348
 us-ca-poway-st-michael-830567a2,St. Michael,15546,,Pomerado,Rd,,,,15546 Pomerado Rd,Poway,CA,92064,,32.99548018,-117.0592618,(858) 487-4755
 us-ca-princeton-st-joseph-9dbc2383,St. Joseph,,,First and Center Streets,,,,,First and Center Streets,Princeton,CA,95932,,39.40290303,-122.01242784,(530) 458-4170
-us-az-quartzsite-our-lady-queen-of-peace-mission-cc932750,Our Lady Queen of Peace Mission,5005,E,Mockingbird,Rd,,,,5005 E Mockingbird Rd,Quartzsite,AZ,85346,,33.66831165,-114.18604613,928-669-2502
 us-ca-quincy-st-john-2b195c10,St. John,170,,Lawrence,St,,,,170 Lawrence St,Quincy,CA,95971,,39.93740294,-120.94188523,(530) 283-0890
 us-ca-ramona-immaculate-heart-of-mary-76006640,Immaculate Heart of Mary Church,537,,E,St,,,,537 E Street,Ramona,CA,92065,,33.04406145,-116.86077931,(760) 789-0583
 us-ca-rancho-bernardo-mission-of-mar-addai-chaldean-fe10e4f0,Mission of Mar Addai (Chaldean),17252,,Bernardo Center,Dr,,,,17252 Bernardo Center Dr,Rancho Bernardo,CA,17252,,33.0268125,-117.0764375,
@@ -960,14 +940,6 @@ us-ca-redwood-city-st-pius-8b0d34cb,St. Pius,1100,,Woodside,Rd,,,,1100 Woodside 
 us-ca-redwood-valley-holy-transfiguration-monastery-monks-of-mount-tabor-fe843bc4,Holy Transfiguration Monastery - Monks of Mount Tabor,17001,,Tomki,Rd,,,,17001 Tomki Rd,Redwood Valley,CA,95470,,39.3746836,-123.2336757,+1-707-485-8959
 us-ca-redwood-valley-holy-transfiguration-monastery-ukrainian-eed396bd,Monastery of the Holy Transfiguration (Ukrainian),17001,,Tomki,Rd,,,,17001 Tomki Rd,Redwood Valley,CA,95470,,39.37378479,-123.2327073,+17074858959
 us-ca-reedley-st-anthony-of-padua-df89cf9c,St. Anthony of Padua,1060,,F,St,,,,1060 F Street,Reedley,CA,93654,,36.60549962,-119.44767515,(559) 638-2012
-us-nv-reno-oratory-of-st-joseph-35c46842,Oratory of St Joseph,5450,,Equity,Ave,,,,5450 Equity Ave,Reno,NV,89502,,39.50965251,-119.749058,(775) 849-7764
-us-nv-reno-our-lady-of-the-snows-2c17c3fd,Our Lady of the Snows,1138,,Wright,St,,,,1138 Wright St,Reno,NV,89509,,39.51359172,-119.81594749,(775) 323-6894
-us-nv-reno-st-albert-the-great-768d0161,St. Albert the Great,1250,,Wyoming,Ave,,,,1250 Wyoming Ave,Reno,NV,89503,,39.5365902,-119.84589694,(775) 747-0722
-us-nv-reno-st-michael-7c7e0d8a,St. Michael,14075,,Mt Vida,St,,,,14075 Mt Vida St,Reno,NV,89506,,39.65562809,-119.87481921,(775) 972-7462
-us-nv-reno-st-rose-of-lima-1f13e643,St. Rose of Lima,100,,Bishop Manogue,Dr,,,,100 Bishop Manogue Dr,Reno,NV,89511,4809,39.42316059,-119.76244831,(775) 851-1874
-us-nv-reno-st-therese-of-the-little-flower-41ed5fe9,St. Therese Church of the Little Flower,875,E,Plumb,Ln,,,,875 E Plumb Ln,Reno,NV,89502,,39.50635749,-119.79010174,(775) 322-2255
-us-nv-reno-st-thomas-aquinas-cathedral-8ea46e2f,St. Thomas Aquinas Cathedral,310,W,Second,St,,,,310 W Second St,Reno,NV,89503,5398,39.52596936,-119.81764177,(775) 329-2571
-us-nv-reno-our-lady-of-wisdom-1cb1e9eb,University Catholic Community of Our Lady of Wisdom,1101,N,Virginia,St,,,,1101 N Virginia St,Reno,NV,89503,,39.53843282,-119.81719107,(775) 322-4336
 us-ca-reseda-st-catherine-of-siena-f3bfe7e5,St. Catherine of Siena,18115,,Sherman,Way,,,,18115 Sherman Way,Reseda,CA,91335,4598,34.2017474,-118.52815152,(818) 343-2110
 us-ca-rialto-st-catherine-of-siena-254a033a,St. Catherine of Siena Church,339,N,Sycamore,Ave,,,,339 N Sycamore Ave,Rialto,CA,92376,,34.1054951,-117.36568888,(909) 875-1360
 us-ca-rialto-st-thomas-more-75348bf4,St. Thomas More,222,E,Easton,St,,,,222 E Easton St,Rialto,CA,92376,,34.13497908,-117.36697269,(909) 421-7030
@@ -984,7 +956,6 @@ us-ca-riverdale-st-ann-93b91c52,St. Ann,3047,W,Mt Whitney,Ave,,,,3047 W Mt Whitn
 us-ca-riverside-divine-word-seminary-stone-mansion-chapel-b0f2e5ef,Divine Word Seminary (stone mansion chapel),11316,,Cypress,Ave,,,,11316 Cypress Ave,Riverside,CA,92505,,33.93605296,-117.50389469,951-689-4858
 us-ca-riverside-our-lady-of-guadalupe-2c617de8,Mission of Our Lady of Guadalupe,2518,,Hall,Ave,,,,2518 Hall Ave,Riverside,CA,92509,,34.01117733,-117.38770315,(951) 684-6864
 us-ca-riverside-mission-of-st-hormizdah-chaldean-a457b086,Mission of St. Hormizdah (Chaldean),4824,,Jones,Ave,,,,4824 Jones Ave,Riverside,CA,92570,,33.9251875,-117.4779375,19517801593
-us-ca-riverside-our-lady-of-guadalupe-c61aa350,Our Lady of Guadalupe Shrine,2858,,9th,St,,,,2858 9th St,Riverside,CA,92507,,33.97600959,-117.36521145,(951) 684-0279
 us-ca-riverside-our-lady-of-perpetual-help-4b865982,Our Lady of Perpetual Help Church,5250,,Central,Ave,,,,5250 Central Ave,Riverside,CA,92504,,33.95306267,-117.41837984,(909) 689-8921
 us-ca-riverside-queen-of-angels-a676bc6d,Queen of Angels,4824,,Jones,Ave,,,,4824 Jones Ave,Riverside,CA,92505,,33.92545715,-117.47806193,(951) 689-3674
 us-ca-riverside-sacred-heart-church-08c740ae,Sacred Heart,9935,,Mission,Blvd,,,,9935 Mission Blvd,Riverside,CA,92509,,34.01413761,-117.50193768,(951) 685-5058
@@ -1165,7 +1136,6 @@ us-ca-san-francisco-st-thomas-the-apostle-fa03c8ca,St. Thomas Apostle,3835,,Balb
 us-ca-san-francisco-st-thomas-more-4d152895,St. Thomas More,1300,,Junipero Serra,Blvd,,,,1300 Junipero Serra Blvd,San Francisco,CA,94132,,37.71188564,-122.47282121,(415) 452-9634
 us-ca-san-francisco-st-vincent-de-paul-7e71924f,St. Vincent de Paul,2320,,Green,St,,,,2320 Green St,San Francisco,CA,94123,,37.79619747,-122.4372214,(415) 922-1010
 us-ca-san-francisco-star-of-the-sea-53e67a23,Star of the Sea,4420,,Geary,Blvd,,,,4420 Geary Blvd,San Francisco,CA,94118,,37.78119156,-122.46668707,(415) 751-0450
-us-ca-san-francisco-church-of-the-visitacion-33f6433c,Visitacion,655,,Sunnydale,Ave,,,,655 Sunnydale Ave,San Francisco,CA,94134,,37.70973454,-122.40879222,(415) 494-5517
 us-ca-san-francisco-church-of-the-visitacion-6a87cad7,Visitacion,655,,Sunnydale,Ave,,,,655 Sunnydale Ave,San Francisco,CA,94134,,37.70968331,-122.40889299,(415) 494-5517
 us-ca-san-gabriel-mission-church-of-san-gabriel-9818f2bd,Mission Church of San Gabriel,428,S,Mission,Dr,,,,428 S Mission Dr,San Gabriel,CA,91776,1201,34.0974375,-118.1064375,16264573035
 us-ca-san-gabriel-san-gabriel-mission-church-90003682,Mission San Gabriel Arcángel,425,S,Junipero Serra,Dr,,,,425 S Junipero Serra Dr,San Gabriel,CA,91776,,34.09704237,-118.10659056,(626) 457-3035
@@ -1216,7 +1186,6 @@ us-ca-san-leandro-st-felicitas-9fd9576e,St Felicitas,1662,,Manor,Blvd,,,,1662 Ma
 us-ca-san-leandro-st-leander-66fa2ceb,St. Leander,550,W,Estudillo,Ave,,,,550 W Estudillo Ave,San Leandro,CA,94577,,37.7236849,-122.16013565,(510) 895-5631
 us-ca-san-lorenzo-st-john-the-baptist-28a9da6e,St. John the Baptist,264,E,Lewelling,Blvd,,,,264 E Lewelling Blvd,San Lorenzo,CA,94580,,37.68686626,-122.11797685,(510) 351-5050
 us-ca-san-lucas-saint-lukes-mission-83171dc1,Mission of St. Luke,,,Corner of Main and Rosa Streets,,,,,Corner of Main and Rosa Streets,San Lucas,CA,93954,,36.12875036,-121.01774925,(831) 385-3377
-us-az-san-luis-st-jude-thaddeus-san-judas-tadeo-13435ef4,St. Jude Thaddeus (San Judas Tadeo),984,N,Main,St,,,,984 N Main St,San Luis,AZ,85349,,32.49603676,-114.78497624,(928) 627-8011
 us-ca-san-luis-obispo-ca-polytechnic-institute-newman-center-45298379,Chapel of Our Lady of Mercy,1472,,Foothill,Blvd,,,,1472 Foothill Blvd,San Luis Obispo,CA,93405,1416,35.29762503,-120.66070369,(805) 543-4105
 us-ca-san-luis-obispo-old-mission-san-luis-obispo-de-tolosa-7662193f,Mission San Luis Obispo de Tolosa,751,,Palm,St,,,,751 Palm St,San Luis Obispo,CA,93401,,35.28094485,-120.66476872,(805) 781-8220
 us-ca-san-luis-obispo-monastery-of-the-risen-christ-de4af725,Monastery of the Risen Christ,2308,,O'Connor,Way,,,,2308 O'Connor Way,San Luis Obispo,CA,93405,,35.3130625,-120.7350625,18055441810
@@ -1244,7 +1213,6 @@ us-ca-san-ramon-st-joan-of-arc-e1b6a838,St. Joan of Arc,2601,,San Ramon Valley,B
 us-ca-san-ysidro-our-lady-of-mount-carmel-2a18ed89,Our Lady of Mount Carmel,2020,,Alaquinas,Dr,,,,2020 Alaquinas Dr,San Ysidro,CA,92173,,32.56004404,-117.0445587,(619) 428-1415
 us-nv-sandy-valley-st-catherine-of-siena-mission-church-fbb7ab0b,Mission of St. Catherine of Siena,47,,Pearl,Ave,,,,47 Pearl Ave,Sandy Valley,NV,89019,,35.81291338,-115.63783055,(702) 510-1254
 us-ca-sanger-st-mary-a5ef2e35,St. Mary,12050,E,N,Ave,,,,12050 E N Ave,Sanger,CA,93657,,36.69401629,-119.57311018,(559) 875-2025
-us-ca-sanger-st-mary-1a3de8dd,St. Mary,828,,O,St,,,,828 O Street,Sanger,CA,93657,,36.70382046,-119.55792172,(559) 875-2025
 us-ca-santa-ana-christ-our-savior-f93b2113,Christ Our Savior,2002,W,Alton,Ave,,,,2002 W Alton Ave,Santa Ana,CA,92704,,33.7031364,-117.89666,(714) 444-1500
 us-ca-santa-ana-immaculate-heart-of-mary-7132555b,Immaculate Heart of Mary,1100,S,Center,St,,,,1100 S Center St,Santa Ana,CA,92704,,33.73421711,-117.898514,(714) 751-5335
 us-ca-santa-ana-our-lady-of-guadalupe-spanish-76bbf5ed,Our Lady of Guadalupe,541,E,Central,Ave,,,,541 E Central Ave,Santa Ana,CA,92707,,33.7143059,-117.859962,(714) 540-0902
@@ -1331,13 +1299,11 @@ us-ca-simi-valley-saints-peter-and-paul-maronite-c3aaac19,Saints Peter and Paul 
 us-ca-simi-valley-st-peter-claver-e82d1eeb,St. Peter Claver,2380,,Stow,St,,,,2380 Stow St,Simi Valley,CA,93063,3525,34.27864749,-118.68189312,(805) 526-6499
 us-ca-simi-valley-st-rose-of-lima-b7bc9947,St. Rose of Lima,1305,,Royal,Ave,,,,1305 Royal Ave,Simi Valley,CA,93065,3330,34.26494007,-118.77401454,(805) 526-1732
 us-ca-sisquoc-san-ramon-catholic-chapel-84c99a8e,San Ramon Catholic Chapel,,,Foxen Canyon,Rd,,,,Foxen Canyon Rd,Sisquoc,CA,93454,,34.84790183,-120.24108934,(805) 937-4555
-us-nv-smith-valley-st-john-the-baptist-d5da80d6,Mission of St. John the Baptist,,,11Highway 338 Smith,,,,,11Highway 338 Smith,Smith Valley,NV,89430,,38.78685677,-119.32995558,775-465-2220
 us-ca-solana-beach-st-james-92c0222b,St. James,625,S,Nardo,Ave,,,,625 S Nardo Ave,Solana Beach,CA,92075,,32.9835129,-117.26339,(858) 755-2545
 us-ca-solana-beach-st-leo-31488adf,St. Leo,936,,Genevieve,St,,,,936 Genevieve St,Solana Beach,CA,92075,,32.9896374,-117.25691352,(858) 755-2545
 us-ca-soledad-mission-nuestra-senora-de-la-soledad-feec0898,Mission of Nuestra Señora de la Soledad,36641,,Fort Romie,Rd,,,,36641 Fort Romie Rd,Soledad,CA,93960,,36.40479048,-121.35578017,(831) 678-2586
 us-ca-soledad-our-lady-of-solitude-981bd011,Our Lady of Solitude Church,235,,Main,St,,,,235 Main St,Soledad,CA,93960,,36.42850572,-121.32830656,(831) 678-2731 or (831) 296-4252
 us-ca-solvang-old-mission-santa-ines-08b8235e,Mission Santa Inés,1760,,Mission,Dr,,,,1760 Mission Dr,Solvang,CA,93464,,34.59472984,-120.13643872,(805) 688-4815
-us-az-somerton-immaculate-heart-of-mary-da4f0709,Immaculate Heart of Mary,310,W,Spring,St,,,,310 W Spring St,Somerton,AZ,85350,,32.59776242,-114.71215538,(928) 627-2918
 us-ca-sonoma-hanna-center-5dda6f45,Hanna Center,17000,,Arnold,Dr,,,,17000 Arnold Dr,Sonoma,CA,65476,,38.31943927,-122.50396418,707-996-6767
 us-ca-sonoma-st-francis-solano-2afd8c2a,St. Francis Solano,469,,Third,St,W,,,469 Third St W,Sonoma,CA,95476,,38.29270581,-122.46375374,707-996-6759
 us-ca-sonoma-st-leo-the-great-b54851d7,St. Leo the Great,601,W,Agua Caliente,Rd,,,,601 W Agua Caliente Rd,Sonoma,CA,95476,,38.32338289,-122.4959004,707-996-8422
@@ -1465,7 +1431,6 @@ us-ca-vernon-holy-angels-church-of-the-deaf-5d737b83,Holy Angels Church of the D
 us-ca-victorville-holy-innocents-catholic-church-e479899a,Holy Innocents Catholic Church,13230,,El Evado,Rd,,,,13230 El Evado Rd,Victorville,CA,92392,,34.4907102,-117.34778357,(760) 955-3010
 us-ca-victorville-st-joan-of-arc-catholic-church-32ba1dd0,St Joan of Arc-Catholic Church,15512,,6th,St,,,,15512 6th St,Victorville,CA,92395,3200,34.53475947,-117.2965607,(760) 245-7674
 us-ca-vina-new-clairvaux-abbey-68a9a3e2,New Clairvaux Abbey,,,"7th St , 96092-0080",,,,,"7th St , 96092-0080",Vina,CA,26240,,39.9381875,-122.0638125,
-us-nv-virginia-city-st-mary-in-the-mountains-f46ed6d2,St. Mary In the Mountains,111,S,E,St,,,,111 S E Street,Virginia City,NV,89440,,39.30907321,-119.64866912,(775) 847-9099
 us-ca-visalia-holy-family-good-shepherd-parish-4b4a3eab,Holy Family,1908,,N,Ct,,,,1908 N Court St,Visalia,CA,93291,,36.34669113,-119.29221633,(559) 734-9522
 us-ca-visalia-st-mary-good-shepherd-parish-f547e098,Nativity of the Blessed Virgin Mary,608,N,Church,St,,,,608 N Church St,Visalia,CA,93291,,36.33563329,-119.29092065,(559) 734-9522
 us-ca-visalia-st-charles-borromeo-good-shepherd-parish-7b3ee23b,St. Charles Borromeo,5049,,Caldwell,Ave,,,,5049 Caldwell Ave,Visalia,CA,93277,,36.29749908,-119.3481195,(559) 734-9522
@@ -1502,7 +1467,6 @@ us-ca-wheatland-st-daniel-a3d6102b,St. Daniel,214,,Main,St,,,,214 Main St,Wheatl
 us-ca-whitehorn-our-lady-of-redwoods-abbey-a8a7e916,Our Lady of Redwoods Abbey,18104,,Briceland-Thorn,Rd,,,,18104 Briceland-Thorn Rd,Whitehorn,CA,18104,,39.9999375,-123.9304375,
 us-ca-whittier-st-bruno-catholic-church-2f227305,St Bruno Catholic Church,15740,,Citrustree,Rd,,,,15740 Citrustree Rd,Whittier,CA,90603,2498,33.93762716,-117.99449825,(562) 947-5637
 us-ca-whittier-st-mary-of-the-assumption-catholic-church-8bd9db6d,St Mary of the Assumption Catholic Church,7215,,Newlin,Ave,,,,7215 Newlin Ave,Whittier,CA,90602,,33.97683793,-118.04137564,(562) 698-0107
-us-ca-whittier-st-mary-of-the-assumption-catholic-church-147cb9ef,St Mary of the Assumption Catholic Church,7215,,Newlin,Ave,,,,7215 Newlin Ave,Whittier,CA,90602,,33.975771,-118.0414976,+1-562-698-0107
 us-ca-whittier-st-gregory-the-great-catholic-church-ae10fdeb,St. Gregory the Great Catholic Church,13935,,Telegraph,Rd,,,,13935 Telegraph Rd,Whittier,CA,90604,,33.93267498,-118.03476274,(562) 941-0115
 us-ca-wildomar-st-frances-of-rome-cd8d38e5,St. Frances of Rome,21591,,Lemon,St,,,,21591 Lemon St,Wildomar,CA,92595,,33.6331673,-117.28228556,(951) 674-6881
 us-ca-williams-annunciation-edd01c68,Annunciation,617,,8th,St,,,,617 8th St,Williams,CA,95987,,39.15284736,-122.14974976,(530) 473-2432
@@ -1536,9 +1500,4 @@ us-ca-yreka-st-joseph-52d90afa,St. Joseph,312,,Fourth,St,,,,312 Fourth St,Yreka,
 us-ca-yuba-city-st-isidore-ee67079c,St. Isidore,222,,Clark,Ave,,,,222 Clark Ave,Yuba City,CA,95991,,39.12308696,-121.62537718,(530) 673-1573
 us-ca-yucaipa-st-frances-xavier-cabrini-76c3a717,St. Frances Xavier Cabrini,12687,,California,St,,,,12687 California St,Yucaipa,CA,92399,,34.02311717,-117.03826373,(909) 797-2533
 us-ca-yucca-valley-st-mary-of-the-valley-e040c325,St Mary of the Valley,7495,,Church,St,,,,7495 Church St,Yucca Valley,CA,92284,,34.11533203,-116.43549573,(760) 365-2287
-us-az-yuma-immaculate-conception-784a4b48,Immaculate Conception,505,,S,Ave,,,,505 S Ave B,Yuma,AZ,85364,,32.71686604,-114.65011239,(928) 782-7516
-us-az-yuma-church-of-our-lady-of-guadalupe-22510b91,Our Lady of Guadalupe,417,,15th,Ave,,,,417 15th Ave,Yuma,AZ,85364,,32.7193125,-114.6379375,
-us-az-yuma-st-francis-of-assisi-357ef551,St. Francis of Assisi,1815,S,8th,Ave,,,,1815 S 8th Ave,Yuma,AZ,85364,,32.69407068,-114.62860767,(928) 782-1875
-us-az-yuma-st-john-neuman-ebad2510,St. John Neumann,11545,E,40th,St,,,,11545 E 40th St,Yuma,AZ,85367,,32.6549969,-114.43675073,(928) 342-3544
 us-ca-zamora-st-agnes-35ae288f,St. Agnes,9865,,Main,St,,,,9865 Main St,Zamora,CA,95698,,38.79635154,-121.88188339,(530) 735-6478
-us-nv-zephyr-cove-our-lady-of-tahoe-87a2ea21,Our Lady of Tahoe,1,,Elks Point,Rd,,,,1 Elks Point Rd,Zephyr Cove,NV,89448,,38.98252966,-119.94560146,(775) 588-2080

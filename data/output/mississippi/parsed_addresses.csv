@@ -1,17 +1,12 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
 us-ms-aberdeen-st-francis-of-assisi-33ed8a79,St. Francis of Assisi,102,S,James,St,,,,102 S James St,Aberdeen,MS,39730,,33.82533011,-88.54617644,(662) 369-2897
-us-la-abita-springs-comunidad-nuestra-señora-de-guadalupe-0f571d3a,Comunidad Nuestra Señora de Guadalupe,,,NEW LOCATION!,,,,,NEW LOCATION!,Abita Springs,LA,70433,,30.41322874,-90.08341979,(985) 502-0087
-us-la-abita-springs-st-jane-de-chantal-3dfeb2dd,St. Jane de Chantal,72040,,Maple,St,,,,72040 Maple St,Abita Springs,LA,70420,,30.4791185,-90.0373475,(985) 892-1439
 us-ms-amory-st-helen-6305d5af,St. Helen,401,,8th,Ave,S,,,401 8th Ave S,Amory,MS,38821,,33.97912189,-88.48011615,(662) 256-8392
 us-ms-anguilla-our-mother-of-mercy-82780713,Mission of Our Mother of Mercy,119,,Jefferson,St,,,,119 Jefferson St,Anguilla,MS,38721,,32.97623091,-90.83015503, (662) 686-7352
-us-tn-bartlett-catholic-church-of-the-nativity-7efaa0e5,Nativity,5955,,St Elmo,Rd,,,,5955 St Elmo Rd,Bartlett,TN,38135,1516,35.230419,-89.864142,(901) 382-2504
-us-tn-bartlett-st-ann-43df716d,St. Ann,6529,,Stage,Rd,,,,6529 Stage Rd,Bartlett,TN,38134,,35.20378517,-89.84561806,(901) 373-6011
 us-ms-bassfield-st-peter-cc92ecf0,St. Peter,4135,,,Hwy,,,,4135 Hwy 42,Bassfield,MS,39421,,31.49491328,-89.74450637,601-943-6688
 us-ms-batesville-st-mary-8f194a0f,St. Mary,120,,,Hwy,,,,120 Hwy 35 N,Batesville,MS,38606,,34.32916236,-89.93897042,(662) 563-2273
 us-ms-bay-saint-louis-our-lady-of-the-gulf-catholic-church-43b72589,Our Lady of the Gulf Catholic Church,228,S,Beach,Blvd,,,,228 S Beach Blvd,Bay Saint Louis,MS,39520,,30.30797544,-89.32793277,(228) 467-6509
 us-ms-bay-saint-louis-st-ann-a3360586,St. Ann,5858,,Lower Bay,Rd,,,,5858 Lower Bay Rd,Bay Saint Louis,MS,39520,,30.27550191,-89.4235841,(228) 467-5128
 us-ms-bay-saint-louis-st-rose-de-lima-4f7c1b38,St. Rose de Lima,301,S,Necaise,Ave,,,,301 S Necaise Ave,Bay Saint Louis,MS,39520,,30.31102182,-89.33604554,(228) 467-7347
-us-al-bayou-la-batre-st-margaret-8ef1713e,St. Margaret,13790,S,Wintzell,Ave,,,,13790 S Wintzell Ave,Bayou La Batre,AL,36509,,30.4042319,-88.24811786,(251) 824-2415
 us-ms-belzoni-all-saints-f8428bfe,All Saints,200,,Bowles,St,,,,200 Bowles St,Belzoni,MS,39038,3602,33.17899664,-90.48689669,(662) 247-1408
 us-ms-biloxi-blessed-francis-xavier-seelos-54c9d0ac,Blessed Francis Xavier Seelos,360,,Lameuse,St,,,,360 Lameuse St,Biloxi,MS,39530,,30.40638656,-88.88689504,(228) 435-4281
 us-ms-biloxi-nativity-of-the-blessed-virgin-mary-cathedral-7cbb5f8c,Cathedral of the Nativity of the Blessed Virgin Mary,870,,Howard,Ave,,,,870 Howard Ave,Biloxi,MS,39530,,30.39717018,-88.8912034,(228) 374-1717
@@ -22,11 +17,9 @@ us-ms-biloxi-st-mary-dd24babe,St. Mary,8343,,Woolmarket,Rd,,,,8343 Woolmarket Rd
 us-ms-biloxi-st-michael-c89d00de,St. Michael,177,,First,St,,,,177 First St,Biloxi,MS,39530,,30.39307508,-88.86221504,(228) 435-5578
 us-ms-biloxi-st-michael-catholic-church-99c646a6,St. Michael Catholic Church,177,,1st,St,,,,177 1st St,Biloxi,MS,39530,,30.393119,-88.8621935,+1-228-435-5578
 us-ms-biloxi-vietnamese-martyrs-522eae55,Vietnamese Martyrs,171,,Oak,St,,,,171 Oak St,Biloxi,MS,39530,,30.39680258,-88.86841648,(228)374-1116
-us-la-bogalusa-annunciation-f5111608,Annunciation,517,,,Ave,,,,517 Ave B,Bogalusa,LA,70427,3711,30.77694619,-89.86687238,(985) 732-4280
 us-ms-booneville-st-francis-of-assisi-99d7b59c,St. Francis of Assisi,721,N,College,St,,,,721 N College St,Booneville,MS,38829,,34.66464547,-88.56019919,(662) 728-7509
 us-ms-brookhaven-st-francis-of-assisi-38b966f8,St. Francis of Assisi,227,E,Cherokee,St,,,,227 E Cherokee St,Brookhaven,MS,39601,,31.57789366,-90.44017325,(601) 833-1799
 us-ms-bruce-church-of-st-luke-the-evangelist-15764447,St. Luke the Evangelist,209,W,Calhoun,St,,,,209 W Calhoun St,Bruce,MS,38915,0230,33.9908125,-89.3508125,16629834600
-us-la-bush-st-michael-the-archangel-e539598f,St. Michael the Archangel Mission,81349,,LA-41,,,,,81349 LA-41,Bush,LA,70431,,30.6079235,-89.88791,985-892-1439
 us-ms-camden-sacred-heart-115842e6,Sacred Heart,1493,,,Hwy,,,,1493 Hwy 17,Camden,MS,39045,,32.74095098,-89.82186958,(662) 468-2354
 us-ms-canton-holy-child-jesus-463f1a2f,Holy Child Jesus,315,,Garrett,St,,,,315 Garrett St,Canton,MS,39046,0366,32.60789,-90.0368958,(601) 859-2957
 us-ms-canton-holy-child-jesus-church-211b76f6,Holy Child Jesus Church,315,,Garrett,St,,,,315 Garrett St,Canton,MS,39046,,32.6085609,-90.0381285,+1-601-859-2957
@@ -35,39 +28,25 @@ us-ms-canton-sacred-heart-catholic-church-7964bfef,Sacred Heart Catholic Church,
 us-ms-carthage-st-anne-8b6678fd,St. Anne,207,,Red Dog,Rd,,,,207 Red Dog Rd,Carthage,MS,39051,,32.74816677,-89.53683188,(601) 267-7190
 us-ms-charleston-st-john-9ce66425,St. John,304,W,Cypress,St,,,,304 W Cypress St,Charleston,MS,38921,,34.00509429,-90.06097671,(662) 647-3170
 us-ms-choctaw-st-therese-c4308717,St. Therese,10110,,BIA,Rd,,,,10110 BIA Rd 2213,Choctaw,MS,39350,,32.78010605,-89.22335699,(601) 656-2880 
-us-al-citronelle-st-thomas-aquinas-d9a1decf,St Thomas Aquinas Church,8025,E,State,St,,,,8025 E State St,Citronelle,AL,36522,,31.09037319,-88.23293513,(251) 866-7505
 us-ms-clarksdale-immaculate-conception-14f203fe,Immaculate Conception,510,,Ritchie,Ave,,,,510 Ritchie Ave,Clarksdale,MS,38614,,34.20144846,-90.55349924,(662) 624-4029
 us-ms-clarksdale-st-elizabeth-9c0e0b33,St. Elizabeth,130,,Florence,Ave,,,,130 Florence Ave,Clarksdale,MS,38614,,34.20946586,-90.57128236,(662) 624-4301
 us-ms-cleveland-our-lady-of-victories-beda9a64,Our Lady of Victories,215,,Bishop,Rd,,,,215 Bishop Rd,Cleveland,MS,38732,,33.74504917,-90.7445054,(662) 846-6273
 us-ms-clinton-holy-savior-a6c96025,Holy Savior,714,,Lindale,St,,,,714 Lindale St,Clinton,MS,39056,,32.34520004,-90.30362583,(601) 924-6344
-us-la-clinton-our-lady-of-the-assumption-e7b31b48,Our Lady of the Assumption,11444,,Church,St,,,,11444 Church St,Clinton,LA,70722,,30.86819515,-91.01641662,(225) 654-5778
-us-al-coden-st-rose-of-lima-c0b55bc9,St. Rose of Lima,2951,,Durette,Ave,,,,2951 Durette Ave (Mon Louis),Coden,AL,36523,,30.43897077,-88.10859896,(251) 973-2592
-us-tn-collierville-the-incarnation-0d34f4b1,Incarnation,360,,Bray Station,Rd,,,,360 Bray Station Rd,Collierville,TN,38017,,35.05071973,-89.70450319,(901) 853-7468 
 us-ms-columbia-holy-trinity-f789a605,Holy Trinity,1429,N,Park,Ave,,,,1429 N Park Ave,Columbia,MS,39429,9803,31.26786131,-89.82403366,(601) 736-3136
 us-ms-columbus-annunciation-60deeef6,Annunciation,808,,College,St,,,,808 College St,Columbus,MS,39701,,33.49407773,-88.42377661,(662) 328-2927
 us-ms-conehatta-st-catherine-a52037d1,Mission of St. Catherine,9857,,,Hwy,,,,9857 Hwy 489,Conehatta,MS,39057,,32.4576717,-89.262079,(601) 656-2880
-us-tn-cordova-st-francis-of-assisi-df57be32,St. Francis of Assisi,8151,,Chimneyrock,Blvd,,,,8151 Chimneyrock Blvd,Cordova,TN,38016,,35.18125744,-89.7908642,(901) 756-1213
 us-ms-corinth-st-james-the-less-3095da69,St. James the Less,3189,N,Harper,Rd,,,,3189 N Harper Rd,Corinth,MS,38834,,34.95144009,-88.49705596,(662) 331-5184
-us-tn-counce-our-lady-of-the-lake-be1000b3,Mission of Our Lady of the Lake,10645,,,Hwy,,,,10645 Hwy 57,Counce,TN,38326,,35.02357363,-88.23714876,(731) 925-4852
-us-la-covington-most-holy-trinity-78d48f92,Most Holy Trinity,501,,Holy Trinity,Dr,,,,501 Holy Trinity Dr,Covington,LA,70433,,30.41193434,-90.07344818,(985) 892-0642
-us-la-covington-our-lady-of-mount-carmel-6c07705c,Our Lady of Mount Carmel,4465,N,Causeway,Blvd,,,,4465 N Causeway Blvd,Covington,LA,70433,,30.41326575,-90.08318736,(985) 502-2006
-us-la-covington-st-benedict-7d720471,St. Benedict,20370,,Smith,Rd,,,,20370 Smith Rd,Covington,LA,70435,,30.53360814,-90.06330895,(985) 892-5202
-us-la-covington-st-peter-f3e2bb00,St. Peter,125,E,19th,Ave,,,,125 E 19th Ave,Covington,LA,70433,,30.47370422,-90.10158536,(985) 892-2422
 us-ms-cranfield-st-john-the-baptist-a0a17c0f,St. John the Baptist,260,,Cranfield,Rd,,,,260 Cranfield Rd,Cranfield,MS,39661,,31.51575956,-91.22196278,(601) 445-5700
 us-ms-crystal-springs-st-john-83a3461a,St. John,221,E,Georgetown,St,,,,221 E Georgetown St,Crystal Springs,MS,39059,,31.98676707,-90.35456325,(601) 892-1717
 us-ms-diberville-sacred-heart-9bcd684d,Sacred Heart,10446,,LeMoyne,Blvd,,,,10446 LeMoyne Blvd,D'Iberville,MS,39540,,30.43652922,-88.88641688,(228) 392-4526
 us-ms-fayette-st-anne-ffe83a71,St. Anne,89,,Harriston,Rd,,,,89 Harriston Rd,Fayette,MS,39069,,31.71503949,-91.0580866,(601) 431-8059
-us-la-ferriday-st-patrick-e8f1328f,St. Patrick,601,,Florida,Ave,,,,601 Florida Ave,Ferriday,LA,71334,,31.63221427,-91.55791201,(318) 757-3834
 us-ms-flowood-st-paul-93d88f83,St. Paul,5971,,,Hwy,,,,5971 Hwy 25,Flowood,MS,39232,,32.36513462,-89.98596157,(601) 992-9547
 us-ms-forest-church-of-st-michael-bb31bd6c,St. Michael,1352,E,3rd,St,,,,1352 E 3rd St,Forest,MS,39074,0388,32.3631875,-89.4514375,16014691916
 us-ms-forest-st-michael-e3dae60c,St. Michael,1352,E,Third,St,,,,1352 E Third St,Forest,MS,39074,,32.364974,-89.47782,(601) 469-1916
-us-la-franklinton-holy-family-18256b73,Holy Family,1220,,14th,Ave,,,,1220 14th Ave,Franklinton,LA,70438,,30.84524764,-90.14877839,(985) 839-4040
 us-ms-fulton-christ-the-king-307db4a9,Mission of Christ the King,100,E,Main,,,,,100 E Main,Fulton,MS,38843,,34.27383628,-88.40744265,(662) 862-2239
 us-ms-gautier-st-mary-ff01398a,St. Mary,809,,De La Pointe,Dr,,,,809 De La Pointe Dr,Gautier,MS,39553,,30.38747526,-88.62262341,(228) 497-2364
-us-tn-germantown-our-lady-of-perpetual-help-60d9a1bf,Our Lady of Perpetual Help,8151,,Poplar,Ave,,,,8151 Poplar Ave,Germantown,TN,38138,,35.08401233,-89.79274927,(901) 754-1204
 us-ms-gloster-holy-family-38a0934b,Mission of the Holy Family,242,E,Main,St,,,,242 E Main St,Gloster,MS,39638,0548,31.1971789,-91.01931469,(601) 225-4171
 us-ms-gluckstadt-st-joseph-8c83b2ef,St. Joseph,127,,Church,Rd,,,,127 Church Rd,Gluckstadt,MS,39110,,32.51800395,-90.10728836,(601) 856-2054
-us-al-grand-bay-st-john-the-baptist-1ddbe166,St. John the Baptist,2450,,,Hwy,,,,2450 Hwy 188,Grand Bay,AL,36541,,30.47475344,-88.33564526,(251) 865-6902
 us-ms-greenville-sacred-heart-b8d0574e,Sacred Heart,560,E,Gloster,St,,,,560 E Gloster St,Greenville,MS,38701,3836,33.4091483,-91.04293364,(662) 332-0891
 us-ms-greenville-st-joseph-65f4b623,St. Joseph,412,,Main,St,,,,412 Main St,Greenville,MS,38701,,33.4103305,-91.06165164,(662) 335-5251
 us-ms-greenwood-immaculate-heart-of-mary-14980148,Immaculate Heart of Mary,511,W,Washington,St,,,,511 W Washington St,Greenwood,MS,38930,,33.51844259,-90.1867174,(662) 453-3980
@@ -85,13 +64,9 @@ us-ms-hattiesburg-sacred-heart-3d1319a7,Sacred Heart,313,,Walnut,St,,,,313 Walnu
 us-ms-hattiesburg-st-fabian-fa13ae89,St. Fabian,9,,St Fabian,Way,,,,9 St Fabian Way,Hattiesburg,MS,39402,,31.2966115,-89.47083986,601-467-5620
 us-ms-hattiesburg-st-thomas-aquinas-a466ca98,St. Thomas Aquinas Newman Center,3117,W,4th,St,,,,3117 W 4th St,Hattiesburg,MS,39401,,31.33275409,-89.33667639,(601) 264-5192
 us-ms-hazlehurst-st-martin-of-tours-c7b3faf9,St. Martin of Tours,113,E,Conway,St,,,,113 E Conway St,Hazlehurst,MS,39059,,31.8634036,-90.39244162,(601) 892-1717
-us-ar-helena-st-mary-c3c2ff12,St. Mary,123,,Columbia,St,,,,123 Columbia St,Helena,AR,72342,,34.52292011,-90.59198499,(870) 338-6990
 us-ms-hernando-holy-spirit-ac36cfc7,Holy Spirit,545,E,Commerce,St,,,,545 E Commerce St,Hernando,MS,38632,,34.82349859,-89.98022289,(662) 429-7851
-us-al-heron-bay-st-michael-mission-ff454ee4,Mission of St. Michael,15872,,Heron Bay,Loop,,,,15872 Heron Bay Loop Rd E (Coden),Heron Bay,AL,36523,,30.35702027,-88.12985886,(251) 973-2096
 us-ms-hollandale-immaculate-conception-720e79ab,Immaculate Conception,,,Hwy 12,,,,,Hwy 12,Hollandale,MS,38748,,33.1678875,-90.83561014,(662) 686-7352
 us-ms-holly-springs-st-joseph-be3c8c15,St. Joseph,305,E,Van Dorn,Ave,,,,305 E Van Dorn Ave,Holly Springs,MS,38635,,34.76614227,-89.44281462,(662) 252-3138
-us-ar-horseshoe-lake-church-of-st-mary-of-the-lake-cbc9f4bb,St. Mary of the Lake,626,,Horseshoe,Cir,,,,626 Horseshoe Cir,Horseshoe Lake,AR,72348,,34.91375,-90.30625,18703386990
-us-ar-horseshoe-lake-st-mary-of-the-lake-mission-c3106567,St. Mary of the Lake Mission,626,,Horseshoe,Cir,,,,626 Horseshoe Cir,Horseshoe Lake,AR,72348,,34.94703521,-90.32866103,(870) 733-1212
 us-ms-houston-immaculate-heart-of-mary-296273dd,Immaculate Heart of Mary,818,N,Jackson,St,,,,818 N Jackson St,Houston,MS,38851,,33.90877028,-89.00279376,(662) 456-5450
 us-ms-indianola-church-of-the-immaculate-conception-30eb5914,Immaculate Conception,700,N,Sunflower,Ave,,,,700 N Sunflower Ave,Indianola,MS,38751,0944,33.4600625,-90.6458125,16628874659
 us-ms-indianola-immaculate-conception-d8dac4d1,Immaculate Conception,702,,Sunflower,Ave,,,,702 Sunflower Ave Ext / HWY-448,Indianola,MS,38751,,33.46918405,-90.64203513,(662) 887-4659
@@ -101,19 +76,12 @@ us-ms-jackson-st-peter-the-apostle-2f3f95cb,Cathedral of St. Peter the Apostle,1
 us-ms-jackson-christ-the-king-e95a172c,Christ the King,2303,,John R Lynch,St,,,,2303 John R Lynch St,Jackson,MS,39209,,32.29729548,-90.22046304,(601) 948-8867
 us-ms-jackson-holy-family-63668840,Holy Family,820,,Forest,Ave,,,,820 Forest Ave,Jackson,MS,39206,,32.37070105,-90.18912517,(601) 362-1888
 us-ms-jackson-holy-ghost-245540d5,Holy Ghost,1151,,Cloister,St,,,,1151 Cloister St,Jackson,MS,39202,2296,32.31407438,-90.18745205,(601) 353-1339
-us-la-jackson-our-lady-of-perpetual-help-eadd57b3,Mission of Our Lady of Perpetual Help,3147,,Church,St,,,,3147 Church St,Jackson,LA,70748,,30.83809564,-91.21629256,(225) 635-3630
 us-ms-jackson-st-richard-cb3d0be8,St. Richard,1242,,Lynnwood,Dr,,,,1242 Lynnwood Dr,Jackson,MS,39206,,32.35308829,-90.15664929,(601) 366-2335
 us-ms-jackson-st-richard-catholic-church-bad80a69,St. Richard Catholic Church,1242,,Lynwood,Dr,,,,1242 Lynwood Dr,Jackson,MS,39206,,32.3528915,-90.1566417,+1-601-366-2335
-us-ms-jackson-st-therese-6606ed11,St. Therese,329,W,McDowell,Rd,,,,329 W McDowell Rd,Jackson,MS,39284,,33.05780247,-89.58137669,(601)-372-4481
 us-ms-jackson-st-therese-e40af06e,St. Therese,329,W,McDowell,Rd,,,,329 W McDowell Rd,Jackson,MS,39204,,32.26767558,-90.22288966,(601) 372-4481
 us-ms-keesler-air-force-base-our-lady-of-the-rosary-3907354e,Our Lady of the Rosary,,,Bldg 7402 Ploesti,Dr,,,,Bldg 7402 Ploesti Dr,Keesler Air Force Base,MS,39534,,30.3989061,-88.92539875,228-377-4859
 us-ms-kiln-annunciation-b5d56851,Annunciation,5370,,Kiln-Delisle,Rd,,,,5370 Kiln-Delisle Rd,Kiln,MS,39556,,30.40589298,-89.41994312,(228) 255-1800
 us-ms-kosciusko-st-thereses-catholic-church-da0c3f9a,St. Therese's Catholic Church,108,,Bell,St,,,,108 Bell St,Kosciusko,MS,39090,,33.0594216,-89.5813442,+1-662-289-1193
-us-la-lacombe-sacred-heart-of-jesus-515b129e,Sacred Heart,28088,,Main,St,,,,28088 Main St,Lacombe,LA,70445,,30.31037712,-89.93637627,(985) 882-5229
-us-la-lacombe-st-john-of-the-cross-a5f03031,St. John of the Cross,61030,,Brier Lake,Dr,,,,61030 Brier Lake Dr,Lacombe,LA,70445,,30.31759834,-89.8916626,(985) 882-3779
-us-la-lake-providence-st-patricks-rectory-b39e343a,St Patrick's Rectory,207,,Scarborough,St,,,,207 Scarborough St,Lake Providence,LA,71254,,32.8028348,-91.1716526,+1-318-559-1276
-us-la-lake-providence-st-patrick-5323de50,St. Patrick,207,,Scarborough,St,,,,207 Scarborough St,Lake Providence,LA,71254,0351,32.80430106,-91.17138473,(318) 559-2876
-us-ar-lake-village-our-lady-of-the-lake-c9722a06,Our Lady of the Lake,314,S,Lake Shore,Dr,,,,314 S Lake Shore Dr,Lake Village,AR,71653,,33.32945503,-91.28230667,(870) 265-5439
 us-ms-latimer-christ-the-king-b8ce22f2,Mission of Christ the King,10601,,Daisy Vestry,Rd,,,,10601 Daisy Vestry Rd,Latimer,MS,39565,,30.49503357,-88.86764933,(228) 283-5252
 us-ms-laurel-immaculate-conception-a81fcfe5,Immaculate Conception Church,833,W,Sixth,St,,,,833 W Sixth St,Laurel,MS,39440,3436,31.69614689,-89.13662608,(601) 426-3473
 us-ms-leakesville-holy-trinity-62eb2af9,Mission of the Holy Trinity,911,,Jackson,Ave,,,,911 Jackson Ave,Leakesville,MS,39451,,31.15453063,-88.56107822,(601) 528-1393
@@ -128,43 +96,8 @@ us-ms-madison-st-francis-of-assisi-7bafe46c,St. Francis of Assisi,4000,W,Tidewat
 us-ms-magee-ststephen-9b54d710,St. Stephen,594,,Simpson,Hwy,,,,594 Simpson Hwy 149,Magee,MS,39111,,31.87902376,-89.74512167,(601) 849-3237
 us-ms-magnolia-saint-james-7aa07f37,St. James,125,E,Bay,St,,,,125 E Bay St,Magnolia,MS,39652,,31.14422728,-90.46087244,(601) 684- 5648
 us-ms-mccomb-st-alphonsus-04a43681,St. Alphonsus,501,,Delaware,Ave,,,,501 Delaware Ave,McComb,MS,39648,,31.24476467,-90.45667127,(601) 684-5648
-us-tn-memphis-ascension-ff3cd5c4,Ascension,3680,,Ramill,Rd,,,,3680 Ramill Rd,Memphis,TN,38128,,35.22634723,-89.92491027,(901) 372-1364
-us-tn-memphis-blessed-sacrament-79edcd17,Blessed Sacrament,2564,,Hale,Ave,,,,2564 Hale Ave,Memphis,TN,38112,,35.14362149,-89.97452339,(901) 276-1412
-us-tn-memphis-immaculate-conception-8e68bb02,Cathedral of the Immaculate Conception,1669,,Central,Ave,,,,1669 Central Ave,Memphis,TN,38104,,35.1259875,-90.0051735,(901) 725-2700
-us-tn-memphis-catholic-student-center-um-da1c28ef,Catholic Student Center -UM,3625,,Mynders,Ave,,,,3625 Mynders Ave,Memphis,TN,38111,,35.11731325,-89.94162735,(901) 323-3051
-us-tn-memphis-christian-brothers-university-cde0c4a3,Christian Brothers University,650,,E,Pkwy,S,,,650 E Pkwy S,Memphis,TN,38104,,35.1283444,-89.9801431,+1-901-321-3000
-us-tn-memphis-de-la-salle-chapel-christian-brothers-univ-2b7a1a6d,De La Salle Chapel (Christian Brothers Univ.),2455,,Avery,Ave,,,,2455 Avery Ave,Memphis,TN,38112,,35.127376,-89.982297,(901) 321-3487
-us-tn-memphis-church-of-the-holy-names-of-jesus-and-mary-e7fb1717,Holy Names of Jesus and Mary,697,,Keel,Ave,,,,697 Keel Ave,Memphis,TN,38107,,35.1615625,-90.0348125,19015259870
-us-tn-memphis-holy-rosary-fa520754,Holy Rosary,4851,,Park,Ave,,,,4851 Park Ave,Memphis,TN,38117,,35.10641234,-89.90030223,(901) 767-6949
-us-tn-memphis-holy-spirit-f53a72e8,Holy Spirit,2300,,Hickory Crest,Dr,,,,2300 Hickory Crest Dr,Memphis,TN,38119,,35.08613108,-89.83288676,(901) 754-7146
-us-tn-memphis-memphis-va-medical-center-390dccab,Memphis VA Medical Center,116,N,Pauline,St,,,,116 N Pauline St,Memphis,TN,38105,,35.14365062,-90.02717441,"800-636-8262, ext. 17326"
-us-tn-memphis-st-peter-abfd7b89,National Shrine of St. Martin de Porres,190,,Adams,Ave,,,,190 Adams Ave,Memphis,TN,38103,,35.1477051,-90.04866,(901) 527-8282
-us-tn-memphis-our-lady-of-sorrows-921e8012,Our Lady of Sorrows,3700,,Thomas,St,,,,3700 Thomas St,Memphis,TN,38127,,35.2262316,-90.02175116,(901) 353-1530
-us-tn-memphis-resurrection-4dfabbc3,Resurrection,5475,,Newberry,Ave,,,,5475 Newberry Ave,Memphis,TN,38115,,35.05314931,-89.8812175,(901) 794-8970
-us-tn-memphis-sacred-heart-4d72ce5c,Sacred Heart,1324,,Jefferson,Ave,,,,1324 Jefferson Ave,Memphis,TN,38104,,35.14195719,-90.01622518,(901) 726-1891
-us-tn-memphis-st-theresa-the-little-flower-102ddd36,St Therese-Little Flower,1644,,Jackson,Ave,,,,1644 Jackson Ave,Memphis,TN,38107,,35.1607751,-90.00273813,(901) 276-1412
-us-tn-memphis-st-anne-d97a0d38,St. Anne,706,S,Highland,St,,,,706 S Highland St,Memphis,TN,38111,,35.11278835,-89.94544443,(901) 323-3817
-us-tn-memphis-st-augustine-8da000cc,St. Augustine,1169,,Kerr,Ave,,,,1169 Kerr Ave,Memphis,TN,38106,,35.10608773,-90.02385394,(901) 774-2297
-us-tn-memphis-st-brigid-d3998fcd,St. Brigid,7801,,Lowrance,Rd,,,,7801 Lowrance Rd,Memphis,TN,38125,,35.03402336,-89.80322023,(901) 758-0128
-us-tn-memphis-st-james-1be74d62,St. James,4180,,Leroy,Ave,,,,4180 Leroy Ave,Memphis,TN,38108,,35.1762408,-89.92121446,(901) 767-8672
-us-tn-memphis-st-john-the-evangelist-df473d57,St. John,2742,,Lamar,Ave,,,,2742 Lamar Ave,Memphis,TN,38114,,35.09739503,-89.9715686,(901) 480-7055
-us-tn-memphis-st-joseph-348a380c,St. Joseph,3825,,Neely,Rd,,,,3825 Neely Rd,Memphis,TN,38109,,35.04356499,-90.05807472,(901) 396-9996
-us-tn-memphis-st-louis-9aa21af0,St. Louis,203,S,White Station,Rd,,,,203 S White Station Rd,Memphis,TN,38117,,35.12520487,-89.88787152,(901) 255-1950
-us-tn-memphis-st-mary-1c0106f2,St. Mary,155,,Market,St,,,,155 Market St,Memphis,TN,38105,,35.15135606,-90.04772722,(901) 522-9420
-us-tn-memphis-st-michael-6c38168b,St. Michael,3863,,Summer,Ave,,,,3863 Summer Ave,Memphis,TN,38122,,35.1487491,-89.93246853,(901) 323-0896
-us-tn-memphis-st-patrick-1eef790e,St. Patrick,287,S,Fourth,St,,,,287 S Fourth St,Memphis,TN,38126,,35.13701,-90.05004,(901) 527-2542
-us-tn-memphis-st-paul-the-apostle-72abdf69,St. Paul the Apostle,1425,E,Shelby,Dr,,,,1425 E Shelby Dr,Memphis,TN,38116,,35.02027638,-90.01541024,(901) 346-2380
 us-ms-meridian-st-joseph-6bf69e05,St. Joseph,1914,,18th,Ave,,,,1914 18th Ave,Meridian,MS,39301,,32.37732191,-88.69679,(601) 693-1321
 us-ms-meridian-st-patrick-2cb5b81c,St. Patrick,2601,,Davis,St,,,,2601 Davis St,Meridian,MS,39302,,32.36330751,-88.70477108,(601) 693-1321
-us-al-mobile-corpus-christi-parish-85f6f0ae,Corpus Christi,6300,,McKenna,Dr,,,,6300 McKenna Dr,Mobile,AL,36608,,30.68166144,-88.18814731,(251) 342-1852
-us-al-mobile-corpus-christi-catholic-church-e0e35dfc,Corpus Christi Catholic Church,6300,,McKenna,Dr,,,,6300 McKenna Dr,Mobile,AL,36608,,30.682002,-88.1871283,+1-251-342-1852
-us-al-mobile-holy-family-f9aa58df,Holy Family,1400,,Joyce,Rd,,,,1400 Joyce Rd,Mobile,AL,36618,,30.71643495,-88.15892655,(251) 344-0271
-us-al-mobile-our-savior-6aeaa87b,Our Savior,1801,,Cody,Rd,,,,1801 Cody Rd,Mobile,AL,36695,,30.65184379,-88.20673615,(251) 633-6762
-us-al-mobile-sacred-heart-of-jesus-univ-of-south-alabama-279e6e51,Sacred Heart of Jesus (Univ. of South Alabama),6051,,Old Shell,Rd,,,,6051 Old Shell Rd,Mobile,AL,36608,,30.68954209,-88.18238318,(251) 343-3662
-us-al-mobile-st-dominic-ab6e286b,St. Dominic,4156,,Burma,Rd,,,,4156 Burma Rd,Mobile,AL,36693,,30.64072208,-88.14631481,(251) 661-5130
-us-al-mobile-st-ignatius-2ffbd7ff,St. Ignatius,3704,,Spring Hill,Ave,,,,3704 Spring Hill Ave,Mobile,AL,36608,,30.70589779,-88.13915759,(251) 342-9221
-us-al-mobile-st-joseph-chapel-b798bf3a,St. Joseph Chapel,,,Loras,Ct,,,,Loras Ct,Mobile,AL,36608,,30.6937645,-88.1371581,+1-251-380-3495
-us-al-mobile-st-vincent-de-paul-12023d7f,St. Vincent de Paul,4980,,St Vincent,Dr,,,,4980 St Vincent Dr,Mobile,AL,36619,,30.58628601,-88.19556567,(251) 661-3908
 us-ms-monticello-mission-of-st-lawrence-67553993,Mission of St. Lawrence,831,,F E Sellers,Hwy,,,,831 F E Sellers Hwy,Monticello,MS,39654,,31.5449375,-90.1080625,16015878017
 us-ms-monticello-st-lawrence-6975df92,St. Lawrence,831,,Fe Sellers,Hwy,,,,831 Fe Sellers Hwy,Monticello,MS,39654,,31.54573293,-90.10791916,601-943-6688
 us-ms-moss-point-st-ann-63fec39d,Mission of St. Ann,21424,,,Hwy,,,,21424 Hwy 613,Moss Point,MS,39555,,30.65441787,-88.49138298,(228) 588-0599
@@ -173,9 +106,6 @@ us-ms-natchez-assumption-of-the-blessed-virgin-mary-a30f9f4f,Assumption of the B
 us-ms-natchez-holy-family-82892239,Holy Family,16,,Orange,Ave,,,,16 Orange Ave,Natchez,MS,39120,3647,31.55787976,-91.39715546,(601) 445-5700
 us-ms-natchez-st-mary-90592c29,St. Mary Basilica,105,S,Union,St,,,,105 S Union St,Natchez,MS,39120,,31.55871881,-91.40145946,(601) 445-5616
 us-ms-new-albany-st-francis-of-assisi-716f5f36,St. Francis of Assisi,650,,,Hwy,,,,650 Hwy 15 S,New Albany,MS,38652,,34.45919085,-89.01146405,(662) 534-4654
-us-la-new-orleans-mary-queen-of-vietnam-459ec8da,Mary Queen of Vietnam,5069,,Willowbrook,Dr,,,,5069 Willowbrook Dr,New Orleans,LA,70129,,30.04059205,-89.91898084,(504) 254-5560
-us-la-new-orleans-st-nicholas-of-myra-0fa65180,St. Nicholas Of Myra,21420,,Chef Menteur,Hwy,,,,21420 Chef Menteur Hwy,New Orleans,LA,70129,,30.07425695,-89.79521942,(504) 242-8669
-us-la-new-orleans-st-nicholas-of-myra-mission-church-d913d0e2,St. Nicholas Of Myra Mission Church,21420,,Chef Menteur,Hwy,,,,21420 Chef Menteur Hwy,New Orleans,LA,70129,,30.0742616,-89.795204,+1-504-662-5339
 us-ms-newton-st-anne-a0b82067,St. Anne,608,,Decatur,St,,,,608 Decatur St,Newton,MS,39345,2320,32.32694216,-89.15622962,(601) 469-1916
 us-ms-ocean-springs-st-alphonsus-afd7fa41,St. Alphonsus,502,,Jackson,Ave,,,,502 Jackson Ave,Ocean Springs,MS,39564,,30.4096473,-88.82966271,(228) 875-5419
 us-ms-ocean-springs-st-elizabeth-seton-aab19671,St. Elizabeth Seton,4900,,Riley,Rd,,,,4900 Riley Rd,Ocean Springs,MS,39564,5902,30.41237325,-88.74865294,(228) 875-0654
@@ -191,7 +121,6 @@ us-ms-pass-christian-sacred-heart-6a16d813,Sacred Heart,14595,,Vidalia,Rd,,,,145
 us-ms-pass-christian-st-paul-49f55c0a,St. Paul,,,E Scenic,Dr,,,,E Scenic Dr,Pass Christian,MS,39571,,30.31547765,-89.24502621,228.452.4686
 us-ms-paulding-st-michael-228c3314,St. Michael,1823,,MS-503,,,,,1823 MS-503,Paulding,MS,39348,,32.03298805,-89.03955953,(601) 469-1916
 us-ms-pearl-st-jude-c7b8a8cf,St. Jude,399,,Barrow,St,,,,399 Barrow St,Pearl,MS,39208,,32.26994896,-90.12244192,(601) 939-3181
-us-la-pearl-river-sts-peter-and-paul-356694dd,Sts. Peter and Paul,66192,,St Mary,Dr,,,,66192 St Mary Dr,Pearl River,LA,70452,,30.38636857,-89.7576323,(985) 863-7935
 us-ms-pearlington-st-joseph-chapel-61468c7a,Chapel of St. Joseph,5383,,MS-604,,,,,5383 MS-604,Pearlington,MS,39572,,30.25034845,-89.61426671,228-467-5128
 us-ms-perkinston-st-matthew-the-apostle-c44ce02c,St. Matthew the Apostle,27074,,St Matthew Church,Rd,,,,27074 St Matthew Church Rd,Perkinston,MS,39573,,30.56902458,-89.41765251,(228) 255-7720
 us-ms-philadelphia-holy-cross-172fe383,Holy Cross,406,,Wilson,St,,,,406 Wilson St,Philadelphia,MS,39350,2906,32.7760292,-89.11068277,(601) 656-1841
@@ -204,30 +133,17 @@ us-ms-poplarville-st-joseph-catholic-church-fa2804bd,St Joseph Catholic Church,1
 us-ms-port-gibson-st-joseph-6dbe71c0,St. Joseph,411,,Coffee,St,,,,411 Coffee St,Port Gibson,MS,39150,,31.95684173,-90.98311357,(601) 437-5790
 us-ms-prentiss-mission-of-st-mary-689a131a,Mission of St. Mary,,,3rd,St,,,,3rd St,Prentiss,MS,39474,,31.6066875,-89.8713125,16017925798
 us-ms-raymond-immaculate-conception-f7b3997a,Immaculate Conception,232,E,Main,St,,,,232 E Main St,Raymond,MS,39154,,32.25744976,-90.42135487,(601) 924-6344
-us-al-reform-st-robert-bellarmine-75974dc5,St. Robert Bellarmine,407,,,Hwy,,,,407 Hwy 17 S,Reform,AL,35481,,33.38214126,-88.01378894,205-758-5672
-us-al-reform-st-robert-bellarmine-catholic-church-4daec068,St. Robert Bellarmine Catholic Church,415,,4th,Ave,SE,,,415 4th Ave SE,Reform,AL,35481,,33.3754557,-88.0204419,+1-205-375-2638
 us-ms-ripley-st-matthew-bc6a3f41,St. Matthew,15710,,,Hwy,,,,15710 Hwy 15 N,Ripley,MS,38663,,34.77911069,-88.92572854,(662) 993-8862
 us-ms-robinsonville-good-shepherd-fe0cf9dc,Good Shepherd,1329,,Casino Center,Dr,,,,1329 Casino Center Dr Extension,Robinsonville,MS,38664,,34.82506929,-90.27504444,662-357-0250 
 us-ms-rosedale-church-of-the-sacred-heart-b5a939cf,Sacred Heart,113,,Railroad,St,,,,113 Railroad St,Rosedale,MS,38769,0307,33.8523125,-91.0248125,16628467136
-us-la-saint-francisville-our-lady-of-mount-carmel-9737e99c,Our Lady of Mount Carmel,11485,,Ferdinand,St,,,,11485 Ferdinand St,Saint Francisville,LA,70775,,30.77487829,-91.39002322,(225) 635-3630 
-us-la-saint-joseph-st-joseph-0dd97fad,St. Joseph,919,,Plank,Rd,,,,919 Plank Rd (Hwy 128),Saint Joseph,LA,71366,,31.92291649,-91.23968793,(318) 766-3565
 us-ms-sardis-st-john-the-baptist-b45528c1,St. John the Baptist,110,N,Main,St,,,,110 N Main St,Sardis,MS,38666,,34.43812527,-89.91597338,(662) 563-2273
-us-tn-savannah-st-mary-e1c304bc,St. Mary,2315,,Pickwick,St,,,,2315 Pickwick St,Savannah,TN,38372,,35.194094,-88.24255574,(731) 925-4852
-us-tn-selmer-st-jude-the-apostle-08f26262,St. Jude,1318,E,Poplar,Ave,,,,1318 E Poplar Ave,Selmer,TN,38375,,35.16889404,-88.5563485,(731) 645-4188
-us-al-semmes-holy-name-of-jesus-9e84e48b,Holy Name of Jesus,2275,,Snow,Rd,N,,,2275 Snow Rd N,Semmes,AL,36575,,30.73739058,-88.27719962,(251) 649-4794
 us-ms-senatobia-st-gregory-the-great-08341b6a,St. Gregory the Great,705,,Strayhorn,St,,,,705 Strayhorn St,Senatobia,MS,38668,,34.62039148,-89.97564545,(662) 342-1073
 us-ms-senatobia-st-gregory-the-great-catholic-church-9e2ec082,St. Gregory the Great Catholic Church,705,,Strayhorn,St,,,,705 Strayhorn St,Senatobia,MS,38668,,34.6195977,-89.9760508,+1-662-562-5318
 us-ms-shaw-st-francis-of-assisi-561b466f,St. Francis of Assisi,301,,Dean,Blvd,,,,301 Dean Blvd,Shaw,MS,38773,,33.59993215,-90.77062039,(662) 754-5561
 us-ms-shelby-st-mary-69e942d2,St. Mary,900,,Martin Luther King,St,,,,900 Martin Luther King St,Shelby,MS,38774,,33.95081797,-90.76326073,(662) 398-7964
-us-la-slidell-our-lady-of-lourdes-d42b9f19,Our Lady of Lourdes,400,,Westchester,Pl,,,,400 Westchester Pl,Slidell,LA,70458,,30.24907785,-89.78617952,(985) 643-4137
-us-la-slidell-st-genevieve-a34f56a5,St. Genevieve,58203,,,Hwy,,,,58203 Hwy 433,Slidell,LA,70460,3121,30.26859283,-89.84571838,(985) 643-3832
-us-la-slidell-st-luke-the-evangelist-536113c5,St. Luke the Evangelist,910,,Cross Gates,Blvd,,,,910 Cross Gates Blvd,Slidell,LA,70461,,30.2911663,-89.73115,(985) 641-6429
-us-la-slidell-st-margaret-mary-839be6fb,St. Margaret Mary,1050,,Robert,Blvd,,,,1050 Robert Blvd,Slidell,LA,70458,,30.2900486,-89.76982,(985) 643-6124
 us-ms-southaven-christ-the-king-ad381536,Christ the King,785,,Church,Rd,W,,,785 Church Rd W,Southaven,MS,38671,,34.9319375,-90.00312936,(662) 342-1073
 us-ms-southaven-christ-the-king-catholic-church-fe94a4b8,Christ the King Catholic Church,785,,Church,Rd,W,,,785 Church Rd W,Southaven,MS,38671,,34.9319695,-90.0031329,+1-662-342-1073
 us-ms-starkville-st-joseph-200f2405,St. Joseph,607,,University,Dr,,,,607 University Dr,Starkville,MS,39759,,33.46192365,-88.80350438,(662) 323-2257
-us-la-tallulah-st-edward-the-confessor-789de0d8,St. Edward,204,E,Bayou,Dr,,,,204 E Bayou Dr,Tallulah,LA,71282,,32.40782121,-91.18241895,(318) 574-1677
-us-al-theodore-st-philip-neri-169d31d1,St. Philip Neri,9101,,Dauphin Island,Pkwy,,,,9101 Dauphin Island Pkwy (Belle Fontaine),Theodore,AL,36582,,30.501802,-88.11045484,(251) 973-2096
 us-ms-tupelo-st-james-the-greater-5c2423a9,St. James,845,,Lakeshire,Dr,,,,845 Lakeshire Dr,Tupelo,MS,38804,,34.28696968,-88.71524708,(662) 842-4881
 us-ms-tylertown-st-paul-the-apostle-73fc0487,Mission of St. Paul,702,,Union,Rd,,,,702 Union Rd,Tylertown,MS,39667,,31.12453621,-90.140882,601-876-6422
 us-ms-vancleave-christ-the-king-catholic-church-c59bd769,Christ The King Catholic Church,10601,,Daisy Vestry,Rd,,,,10601 Daisy Vestry Rd,Vancleave,MS,39565,,30.4946308,-88.8676223,+1-228-283-5252
@@ -235,12 +151,8 @@ us-ms-vancleave-holy-spirit-01855005,Holy Spirit,6705,,Jim Ramsey,Rd,,,,6705 Jim
 us-ms-vicksburg-st-mary-bf42ac70,St. Mary,1512,,Main,St,,,,1512 Main St,Vicksburg,MS,39183,2652,32.35269406,-90.87155318,(601) 636-0115
 us-ms-vicksburg-st-michael-3f6a1ec3,St. Michael,100,,Saint Michael,Pl,,,,100 Saint Michael Pl,Vicksburg,MS,39180,,32.28500955,-90.87042665,(601) 636-3445
 us-ms-vicksburg-st-paul-bca65805,St. Paul,713,,Crawford,St,,,,713 Crawford St,Vicksburg,MS,39180,3223,32.34925578,-90.88141066,(601) 636-0140
-us-la-vidalia-our-lady-of-lourdes-50951759,Our Lady of Lourdes,503,,Texas,St,,,,503 Texas St,Vidalia,LA,71373,,31.56865686,-91.42909542,(318) 336-5450
-us-la-waterproof-mission-of-st-francis-of-assisi-9a3eb968,Mission of St. Francis of Assisi,141,,Main,Rd,,,,141 Main Rd,Waterproof,LA,71375,,31.8066875,-91.3811875,
-us-la-waterproof-st-francis-of-assisi-96923e77,St. Francis of Assisi,142,,Main,St,,,,142 Main St,Waterproof,LA,71366,,31.80984122,-91.37537602,(318) 766-3565
 us-ms-waveland-st-clare-6885d822,St. Clare,236,S,Beach,Blvd,,,,236 S Beach Blvd,Waveland,MS,39576,4001,30.27867102,-89.37468548,(228) 467-9275
 us-ms-waynesboro-st-bernadette-b9354324,St. Bernadette,401,,Mississippi,Dr,,,,401 Mississippi Dr,Waynesboro,MS,39367,2811,31.67285443,-88.63897455,(601) 735-9420
-us-ar-west-memphis-st-michael-33d8c9dc,St. Michael,411,,Missouri,St,,,,411 Missouri St,West Memphis,AR,72301,,35.15119704,-90.18431548,(870) 733-1212
 us-ms-west-point-immaculate-conception-8b4f469f,Immaculate Conception,26707,E,Main,St,,,,26707 E Main St,West Point,MS,39773,,33.60742785,-88.64441574,(662) 494-3486
 us-ms-wiggins-st-francis-xavier-7462ad7f,St. Francis Xavier,1026,E,Central,Ave,,,,1026 E Central Ave,Wiggins,MS,39577,0566,30.84773983,-89.12356429,(601) 528-1393
 us-ms-winona-sacred-heart-bb71ceaf,Sacred Heart,304,,Jones,St,,,,304 Jones St,Winona,MS,38967,2238,33.48446827,-89.72995419,

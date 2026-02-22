@@ -1,19 +1,13 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
 us-nd-alcide-church-of-st-anthony-647ff947,St. Anthony,5,,miles W on,Hwy,,,,5 miles W on Hwy 5,Alcide,ND,58316,,48.80625,-99.85625,17014775601
-us-nd-alexander-our-lady-of-consolation-e4e23683,Our Lady of Consolation,704,,Delaney,St,,,,704 Delaney St,Alexander,ND,58831,,47.84187056,-103.63953865,(701) 842-3505
 us-nd-alexander-our-lady-of-consolation-7938d8af,Our Lady of Consolation,704,,Delaney,St,,,,704 Delaney St,Alexander,ND,58831,,47.8418493,-103.639703,+1-701-842-3791
 us-nd-almont-st-mary-queen-of-peace-816479c4,St. Mary Queen of Peace,302,,Margaret,St,,,,302 Margaret St,Almont,ND,58520,,46.72677691,-101.50745687,(701) 843-7061
 us-nd-anamoose-st-francis-xavier-3fbe69ed,St. Francis Xavier,605,,1st,St,W,,,605 1st St W,Anamoose,ND,58710,,47.88174673,-100.24329794,(701) 465-3780
 us-nd-aneta-sacred-heart-c970b81c,Sacred Heart,307,,Lippert,St,,,,307 Lippert St,Aneta,ND,58212,,47.68182431,-97.98529754,(701) 797-2624
 us-nd-aneta-sacred-heart-parish-35bf78cf,Sacred Heart Parish,307,,1st,St,,,,307 1st St,Aneta,ND,58212,,47.6780384,-97.9854251,+1-701-797-2624
-us-mn-angus-holy-trinity-e160a20c,Holy Trinity,37639,,140th,St,NW,,,37639 140th St NW,Angus,MN,56762,,48.07866218,-96.86040556,(218) 745-5853
 us-nd-argusville-st-william-3e851ca1,St. William,107,,Drake,Ave,,,,107 Drake Ave,Argusville,ND,58005,,47.05063975,-96.93419932,(701) 484-5211
-us-mn-argyle-st-rose-of-lima-02924867,St. Rose of Lima,501,W,3rd,St,,,,501 W 3rd St,Argyle,MN,56713,0277,48.33290694,-96.82593486,(218) 437-6341
 us-nd-ashley-st-david-62b76009,St. David,601,,2nd,Ave,NE,,,601 2nd Ave NE,Ashley,ND,58413,,46.03968016,-99.36859117,(701) 452-2970
-us-mt-bainville-sacred-heart-1e47901c,Sacred Heart,314,,Clinton,St,,,,314 Clinton St,Bainville,MT,59212,,48.14023241,-104.22153746,(406) 768-3305
-us-mt-baker-st-john-the-evangelist-d09cfd82,St. John the Evangelist,210,W,Center,Ave,,,,210 W Center Ave,Baker,MT,59313,,46.35774546,-104.27875269,917-525-3420
 us-nd-balta-st-therese-little-flower-9b621276,St. Therese Little Flower ,301,,Main,St,N,,,301 Main St N,Balta,ND,58313,,48.16791241,-100.03771499,(701) 776-6388 
-us-mn-barnesville-assumption-71278784,Assumption,307,,Front,St,N,,,307 Front St N,Barnesville,MN,56514,,46.65611411,-96.42061238,(218) 354-7320
 us-nd-beach-st-john-the-baptist-42d5376c,St. John the Baptist,162,,2nd,Ave,SE,,,162 2nd Ave SE,Beach,ND,58621,,46.91303705,-104.00314072,(701) 872-4153
 us-nd-bechyne-sts-peter-and-paul-93c4dcef,Sts. Peter and Paul,11951,,County Rd 19,,,,,11951 County Rd 19,Bechyne,ND,58250,,48.25348913,-98.04319662,(701) 284-6060
 us-nd-belcourt-church-of-st-ann-554fbb71,St. Ann,5,,St Ann's,Rd,,,,5 St Ann's Rd,Belcourt,ND,58316,,48.8396875,-99.7554375,17014775601
@@ -35,11 +29,8 @@ us-nd-bottineau-st-mark-26c12087,St. Mark,322,,Sinclair,St,,,,322 Sinclair St,Bo
 us-nd-bowbells-st-joseph-f5888ca7,St. Joseph,102,,3rd,St,NW,,,102 3rd St NW,Bowbells,ND,58721,,48.80523507,-102.24469825,(701) 385-4311 
 us-nd-bowman-st-charles-98635098,St. Charles,204,,1st,Ave,SW,,,204 1st Ave SW,Bowman,ND,58623,,46.17971937,-103.39688584,(701) 523-5292 
 us-nd-braddock-st-katherine-bcb3fd65,St. Katherine,200,,1st,Ave,N,,,200 1st Ave N,Braddock,ND,58524,,46.56540326,-100.08980806,(701) 254-4588 
-us-mn-breckenridge-st-mary-of-the-presentation-2fae93b2,St. Mary of the Presentation,221,,4th,St,N,,,221 4th St N,Breckenridge,MN,56520,1496,46.26555098,-96.58966676,(218) 643-5173
-us-sd-britton-st-john-de-britto-036d6436,St. John de Britto,812,,8th,St,,,,812 8th St,Britton,SD,57430,,45.79050046,-97.75323836,(605) 448-5379
 us-nd-buchanan-st-margaret-mary-76460004,St. Margaret Mary,410,,Main,St,,,,410 Main St,Buchanan,ND,58420,,47.06156978,-98.82850099,(701) 252-0119
 us-nd-buffalo-st-thomas-0d9c85ba,St. Thomas,401,,3rd,St,N,,,401 3rd St N,Buffalo,ND,58011,,46.92184376,-97.54910801,(701) 347-4609
-us-sd-bullhead-st-aloysius-a10cf516,St. Aloysius,404,,Tatanka,St,,,,404 Tatanka St,Bullhead,SD,57261,,45.76673893,-101.07862803,(605) 823-4401
 us-nd-cando-sacred-heart-dce702ec,Sacred Heart,310,,3rd,Ave,,,,310 3rd Ave,Cando,ND,58324,,48.49169511,-99.20691662,(701) 968-3462
 us-nd-cannon-ball-st-elizabeth-47a68882,St. Elizabeth ,7166,S,Big Lake,Rd,,,,7166 S Big Lake Rd,Cannon Ball,ND,58528,,46.38818157,-100.59002004,(701) 854-3473
 us-nd-carrington-sacred-heart-1c5493e7,Sacred Heart,663,,1st,St,S,,,663 1st St S,Carrington,ND,58421,,47.44865788,-99.1211223,(701) 652-2519
@@ -49,9 +40,6 @@ us-nd-cavalier-st-brigid-of-ireland-0121ca57,St. Brigid of Ireland,107,W,1st,Ave
 us-nd-cayuga-sts-peter-and-paul-2b57843c,Sts. Peter and Paul,229,,Franklin,Ave,W,,,229 Franklin Ave W,Cayuga,ND,58013,,46.07401686,-97.38715153,(701) 538-4604 
 us-nd-center-st-martin-of-tours-080fc30d,St. Martin,322,,2nd,St,E,,,322 2nd St E,Center,ND,58530,,47.11762706,-101.29604652,(701) 794-3601
 us-nd-cooperstown-st-george-7a5e761b,St. George,808,,Foster,Ave,NW,,,808 Foster Ave NW,Cooperstown,ND,58425,,47.44757261,-98.12511384,(701) 797-2624
-us-sd-cox-church-of-st-agnes-944b69c6,St. Agnes,,,Rd,,,,,Rd,Cox,SD,57755,,45.9065625,-103.5021875,
-us-mn-crookston-cathedral-of-the-immaculate-conception-1e274c45,Cathedral of the Immaculate Conception,702,,Summit,Ave,,,,702 Summit Ave,Crookston,MN,56716,2736,47.77538725,-96.58979911,(218) 281-1735
-us-mn-crookston-mount-st-benedict-monastery-c394ab64,Mount St. Benedict Monastery,620,E,Summit,Ave,,,,620 E Summit Ave,Crookston,MN,56716,,47.7738125,-96.5908125,12182813441
 us-nd-crosby-st-patrick-357c9c82,St. Patrick,205,,1st,St,NW,,,205 1st St NW,Crosby,ND,58730,,48.91455511,-103.29671902,(701) 965-6537
 us-nd-crystal-st-patrick-61cd3077,St. Patrick,,,4th St & Garfield,Ave,,,,4th St & Garfield Ave,Crystal,ND,58222,,48.59568003,-97.66998353,(701) 265-8877
 us-nd-dazey-st-mary-catholic-church-239bd0bd,St Mary Catholic Church,1610,,115th,Ave,SE,,,1610 115th Ave SE,Dazey,ND,58429,,47.1780494,-98.0615623,+1-701-435-2310
@@ -65,23 +53,17 @@ us-nd-dickinson-queen-of-peace-catholic-church-15624d85,Queen of Peace Catholic 
 us-nd-dickinson-st-joseph-87dafe53,St. Joseph,240,E,Broadway,St,,,,240 E Broadway St,Dickinson,ND,58601,,46.87583198,-102.78581309,(701) 483-2223
 us-nd-dickinson-st-patrick-a542067e,St. Patrick,229,,3rd,Ave,W,,,229 3rd Ave W,Dickinson,ND,58601,,46.88126859,-102.79038525,(701) 483-6700
 us-nd-dickinson-st-wenceslaus-b92eb44e,St. Wenceslaus,525,E,3rd,St,E,,,525 E 3rd St E,Dickinson,ND,58601,,46.8822364,-102.77782754,(701) 225-3972
-us-mn-dilworth-st-elizabeth-24dd747d,St. Elizabeth,207,N,Main,St,,,,207 N Main St,Dilworth,MN,56529,,46.87904207,-96.7027905,(218) 287-2705
 us-nd-donnybrook-church-of-st-anthony-aec54516,St. Anthony,52,,,,,,,52,Donnybrook,ND,58734,,48.5081875,-101.8859375,17013854311
 us-nd-drake-st-margaret-mary-ac9a8741,St. Margaret Mary,605,,Main,St,,,,605 Main St,Drake,ND,58736,,47.92755399,-100.37239868,(701) 465-3780
 us-nd-drayton-st-edward-a7f6c1d9,St. Edward,211,N,Main,St,,,,211 N Main St,Drayton,ND,58225,,48.56388644,-97.17727667,(701) 454-6171 
 us-nd-dunseith-st-michael-the-archangel-b194f868,St. Michael the Archangel,112,,1st,St,NW,,,112 1st St NW,Dunseith,ND,58329,,48.81486993,-100.06296216,(701)244-5738 
-us-mn-east-grand-forks-sacred-heart-6bc320d4,Sacred Heart,200,,3rd,St,NW,,,200 3rd St NW,East Grand Forks,MN,56721,,47.92787407,-97.02278644,(218) 773-0877
 us-nd-edgeley-transfiguration-b20101ae,Transfiguration,205,,Main,St,,,,205 Main St,Edgeley,ND,58433,,46.35763863,-98.71165551,(701) 493-2387
-us-mn-elizabeth-st-elizabeth-04f88ab8,St. Elizabeth,706,W,Pleasant,Ave,,,,706 W Pleasant Ave,Elizabeth,MN,56533,9998,46.38083621,-96.13700208,(218) 736-5230
 us-nd-ellendale-st-helena-45c66a02,St. Helena,421,,2nd,St,N,,,421 2nd St N,Ellendale,ND,58436,,46.00374721,-98.5222801,(701) 349-3297
 us-nd-enderlin-st-patrick-c4b7cc5c,St. Patrick,302,,Bluff,St,,,,302 Bluff St,Enderlin,ND,58027,,46.62275053,-97.60431526,(701) 437-2791
 us-nd-esmond-st-boniface-5484c939,St. Boniface,108,,Alta,Ave,N,,,108 Alta Ave N,Esmond,ND,58332,,48.03447203,-99.76043805,(701) 249-8360
-us-mn-euclid-st-mary-d50aeb29,St. Mary,13439,,US Hwy 75,,SW,,,13439 US Hwy 75 SW,Euclid,MN,56722,,47.97186983,-96.63863355,(218) 745-4511
-us-sd-eureka-st-joseph-catholic-church-af9c8ba1,St. Joseph Catholic Church of McPherson County,602,,2nd,St,,,,602 2nd St,Eureka,SD,57437,,45.7704866,-99.61338043,605-284-5190
 us-nd-fairfield-st-demetrius-ukranian-c308b4c6,St. Demetrius (Ukranian),2123,,,Hwy,,,,2123 Hwy 85 SW,Fairfield,ND,58622,,47.107774,-103.203159,480-292-3381
 us-nd-fairmount-st-anthonys-church-2fa89062,St Anthony’s Church,203,N,2nd,St,,,,203 N 2nd St,Fairmount,ND,58030,,46.0568829,-96.602521,+1-701-474-5518
 us-nd-fairmount-st-anthony-5c3b4b58,St. Anthony,299,,2nd,St,N,,,299 2nd St N,Fairmount,ND,58030,,46.05688924,-96.60250722,(701) 242-7327
-us-mt-fairview-st-catherine-edaee8f1,St. Catherine,317,W,7th,St,,,,317 W 7th St,Fairview,MT,59221,,47.85051049,-104.04725389,(406) 433-2510 or (406) 433-1068 (Rectory)
 us-nd-fargo-saint-mary-33dd5b33,Cathedral of St. Mary,604,,Broadway,,N,,,604 Broadway N,Fargo,ND,58102,,46.88242786,-96.78845652,(701) 235-4289
 us-nd-fargo-holy-spirit-6ef1930f,Holy Spirit,1420,,7th,St,N,,,1420 7th St N,Fargo,ND,58102,,46.89637005,-96.7895111,(701) 232-5900
 us-nd-fargo-church-of-the-nativity-74ed9c3f,Nativity,1825,,11th,St,S,,,1825 11th St S,Fargo,ND,58103,4915,46.85110482,-96.79765436,(701) 232-2414
@@ -92,7 +74,6 @@ us-nd-fargo-sts-anne-joachim-b6de2f3b,Sts. Anne and Joachim,5202,,25th,St,S,,,52
 us-nd-fessenden-st-augustine-1c6a2e8e,St. Augustine,105,,7th,Ave,S,,,105 7th Ave S,Fessenden,ND,58438,,47.64709901,-99.62793902,(701) 547-3430
 us-nd-fingal-holy-trinity-c448ac20,Holy Trinity,419,,1st,Ave,,,,419 1st Ave,Fingal,ND,58031,,46.76456015,-97.78760361,(701) 437-2791 
 us-nd-finley-st-olaf-b175b158,St. Olaf,100,,Taft,St,,,,100 Taft St,Finley,ND,58230,,47.51444207,-97.83280431,(701) 797-2624
-us-mn-fisher-st-francis-5e79af19,St. Francis,302,,Park,Ave,,,,302 Park Ave,Fisher,MN,56723,,47.79789715,-96.79980227,(218) 891-2249
 us-nd-flasher-st-lawrence-d49ca89c,St. Lawrence,104,,5th,Ave,E,,,104 5th Ave E,Flasher,ND,58535,,46.45777835,-101.23040475,(701) 597-3228
 us-nd-forman-st-mary-0b968344,St. Mary,484,,4th,St,SW,,,484 4th St SW,Forman,ND,58032,,46.10291684,-97.63723114,(701) 724-3319
 us-nd-fort-totten-seven-dolors-223cccc5,Seven Dolors Mission,213,,Dakotah,Rd,,,,213 Dakotah Rd,Fort Totten,ND,58335,,47.97887232,-98.99569682,(701) 766-4314
@@ -101,7 +82,6 @@ us-nd-foxholm-st-mary-c99e7209,St. Mary,17901,,128th,Ave,NW,,,17901 128th Ave NW
 us-nd-fullerton-st-patrick-8d9a35d0,St. Patrick,207,,Monroe,St,N,,,207 Monroe St N,Fullerton,ND,58441,,46.16482627,-98.42734967,(701) 349-3297
 us-nd-garrison-st-nicholas-64a07cc1,St. Nicholas,235,,2nd,St,NE,,,235 2nd St NE,Garrison,ND,58540,,47.65369808,-101.41457316,(701) 463-2327 
 us-nd-geneseo-st-martin-of-tours-9199e505,St. Martin of Tours,413,,Main,St,,,,413 Main St,Geneseo,ND,58053,,46.07445388,-97.28063533,(701) 538-4604 
-us-mn-georgetown-st-john-35a18ebc,St. John the Baptist,127,,Main,St,,,,127 Main St,Georgetown,MN,56546,,47.07909852,-96.79583565,(218) 233-3934
 us-nd-gladstone-st-thomas-the-apostle-1252c08b,St. Thomas the Apostle,351,,Cliff,St,,,,351 Cliff St,Gladstone,ND,58630,,46.85941718,-102.56566968,(701) 974-3569
 us-nd-glen-ullin-st-clement-5ddc3d32,Oratory of St. Clement,6781,,Co Rd 140,,,,,6781 Co Rd 140,Glen Ullin,ND,58631,,46.9424479,-101.88363679,(701) 425-0794
 us-nd-glen-ullin-sacred-heart-abd81840,Sacred Heart,203,,Ash,Ave,E,,,203 Ash Ave E,Glen Ullin,ND,58631,,46.81434663,-101.82806242,(701) 348-3527 
@@ -116,15 +96,11 @@ us-nd-grenora-st-boniface-418d8d7b,St. Boniface,300,,E,St,,,,300 E St,Grenora,ND
 us-nd-gwinner-st-vincent-ca377661,St. Vincent,302,,,Hwy,,,,302 Hwy 13 E,Gwinner,ND,58040,,46.22516502,-97.65759792,(701) 683-4620
 us-nd-hague-st-mary-7c331e00,St. Mary,210,S,4th,St,,,,210 S 4th St,Hague,ND,58542,,46.02712356,-99.99965743,(701) 336-7172
 us-nd-halliday-st-paul-1b687285,St. Paul,31,,3rd,Ave,NE,,,31 3rd Ave NE,Halliday,ND,58636,,47.35518809,-102.33340858,(701) 764-5357
-us-mn-hallock-st-patrick-480d2fea,St. Patrick,170,S,5th,St,,,,170 S 5th St,Hallock,MN,56728,,48.77148133,-96.94310405,(218) 843-2323
-us-mn-halstad-holy-family-314acfa0,Holy Family,307,,5th,Ave,E,,,307 5th Ave E,Halstad,MN,56548,0051,47.35085683,-96.81767139,218-784-4131
 us-nd-hankinson-st-philip-50696c22,St. Philip,612,,Main,Ave,S,,,612 Main Ave S,Hankinson,ND,58041,,46.06554448,-96.90045377,(701) 242-7327
 us-nd-harvey-st-cecilia-b962a7a6,St. Cecilia,413,E,Brewster,St,,,,413 E Brewster St,Harvey,ND,58341,,47.76713536,-99.93111145,(701) 324-2144
-us-mn-hawley-st-andrew-1832dedb,St. Andrew,1418,,Main,St,,,,1418 Main St,Hawley,MN,56549,,46.87817738,-96.33226788,(218) 483-4264
 us-nd-hazelton-st-paul-65d8518c,St. Paul,372,,Harold,St,,,,372 Harold St,Hazelton,ND,58544,,46.4815198,-100.27782354,(701) 254-4588 
 us-nd-hazen-st-martin-1053b5e4,St. Martin,101,,3rd,Ave,SW,,,101 3rd Ave SW,Hazen,ND,58545,,47.293222,-101.62804875,(701) 748-2121 
 us-nd-hebron-st-ann-783f0f24,St. Ann,204,S,Park,St,,,,204 S Park St,Hebron,ND,58638,0012,46.89938701,-102.04455101,(701) 878-4658 
-us-sd-herreid-st-michael-95377e08,St. Michael,106,,2nd,Ave,W,,,106 2nd Ave W,Herreid,SD,57632,0037,45.83504381,-100.0702747,(605) 437-2614
 us-nd-hettinger-holy-trinity-e3ca72e0,Holy Trinity,405,,3rd,St,N,,,405 3rd St N,Hettinger,ND,58639,,46.00427504,-102.64005915,(701) 567-2772
 us-nd-hillsboro-st-rose-of-lima-69005f5b,St. Rose of Lima,503,,3rd,St,SE,,,503 3rd St SE,Hillsboro,ND,58045,,47.39807392,-97.05608169,(701) 636-4541
 us-nd-hope-st-agatha-bb312c26,St. Agatha,604,,Steele,Ave,,,,604 Steele Ave,Hope,ND,58046,,47.32203921,-97.71618696,(701) 845-3713 
@@ -136,25 +112,19 @@ us-nd-hurdsfield-church-of-st-patrick-87857015,St. Patrick,12,,3rd,St,W,,,12 3rd
 us-nd-jamestown-st-james-basilica-dd0b5769,St. James Basilica,622,,1st,Ave,S,,,622 1st Ave S,Jamestown,ND,58401,,46.90277878,-98.70886981,(701) 252-0119
 us-nd-jessie-st-lawrence-387d231b,St. Lawrence,105,,Dewey,St,,,,105 Dewey St,Jessie,ND,58452,,47.54345237,-98.23696912,(701) 797-2624
 us-nd-karlsruhe-sts-peter-and-paul-f6d5afc1,Sts. Peter and Paul,500,N,Main,St,,,,500 N Main St,Karlsruhe,ND,58744,,48.09412654,-100.61695727,(701) 338-2663
-us-sd-kenel-assumption-of-the-blessed-virgin-mary-1e164c32,Assumption Of The Blessed Virgin Mary,,,,,,,,(1/2 mile S of town on Hwy 1806),Kenel,SD,57648,,45.85118255,-100.45991625,(605) 823-4401
 us-nd-kenmare-st-agnes-45faa062,St. Agnes,409,E,Division,St,,,,409 E Division St,Kenmare,ND,58746,,48.67202495,-102.07558247,(701) 385-4311 
 us-nd-kensal-st-john-1cdb072a,St. John,407,,Pleasant,St,,,,407 Pleasant St,Kensal,ND,58455,,47.30175819,-98.7318687,(701) 652-2519
-us-mn-kent-st-thomas-652d9613,St. Thomas,115,,Harris,St,,,,115 Harris St,Kent,MN,56553,0022,46.43716162,-96.68260851,(218) 557-8312
 us-nd-killdeer-st-joseph-cdf2e03f,St. Joseph,52,,3rd,Ave,NW,,,52 3rd Ave NW,Killdeer,ND,58640,,47.515763,-102.258974,(701) 764-5357
-us-nd-killdeer-st-joseph-705ab069,St. Joseph,152,,3rd,Ave,NW,,,152 3rd Ave NW,Killdeer,ND,58640,,47.36957586,-102.75685918,(701) 764-5357
 us-nd-kindred-st-maurice-f9411db1,St. Maurice,5315,,165th,Ave,SE,,,5315 165th Ave SE,Kindred,ND,58051,,46.64292647,-97.01168071,(701) 428-3094 
 us-nd-knox-st-mary-6d6f224e,St. Mary,129,S,Morgan,St,,,,129 S Morgan St,Knox,ND,58343,,48.34118916,-99.69097935,(701) 776-6388
 us-nd-lamoure-holy-rosary-a31fa0f6,Holy Rosary,209,,1st,St,SE,,,209 1st St SE,LaMoure,ND,58458,,46.35553534,-98.29284747,(701) 883-5987
 us-nd-lakota-st-mary-of-the-assumption-78c5dace,St. Mary of the Assumption,109,,E,Ave,E,,,109 E Avenue E,Lakota,ND,58344,,48.04424094,-98.34300602,(701) 247-2584
-us-mn-lancaster-holy-rosary-6f381ff4,Holy Rosary,3843,,290th,Ave,,,,3843 290th Ave,Lancaster,MN,56735,,48.95515754,-96.8211265,(218) 843-2323
-us-mn-lancaster-holy-rosary-church-fbbaee56,Holy Rosary Church,3843,,290th,Ave,,,,3843 290th Avenue,Lancaster,MN,56735,,48.9549828,-96.8206012,+1-218-843-2323
 us-nd-langdon-st-alphonsus-ee6a642d,St. Alphonsus,1010,,3rd,St,,,,1010 3rd St,Langdon,ND,58249,,48.76238638,-98.3685672,(701) 256-5966
 us-nd-lankin-st-joseph-c28131bd,St. Joseph,506,,4th,Ave,,,,506 4th Ave,Lankin,ND,58250,,48.3140083,-97.91850136,(701) 284-6060
 us-nd-lansford-st-john-45cb268e,St. John,680,,3rd,Ave,,,,680 3rd Ave,Lansford,ND,58750,,48.62641231,-101.37714707,(701) 756-6601
 us-nd-larimore-st-stephen-475dd843,St. Stephen,311,W,Front,St,,,,311 W Front St,Larimore,ND,58251,,47.90480277,-97.62827606,(701) 343-2377
 us-nd-leeds-st-vincent-de-paul-7d6e7a36,St. Vincent de Paul,315,,Central,Ave,,,,315 Central Ave,Leeds,ND,58346,,48.28755436,-99.44078813,(701) 968-3462
 us-nd-lefor-st-elizabeth-398410eb,St. Elizabeth,5043,,100D,Ave,SW,,,5043 100D Ave SW,Lefor,ND,58641,,46.68166705,-102.56395869,(701) 579-4312
-us-sd-lemmon-st-mary-8df18e47,St. Mary,410,,2nd,Ave,W,,,410 2nd Ave W,Lemmon,SD,57638,0210,45.94022837,-102.16173192,(605) 374-3767
 us-nd-lidgerwood-st-boniface-14a699d4,St. Boniface,230,,1st,St,NW,,,230 1st St NW,Lidgerwood,ND,58053,,46.07699842,-97.15583598,(701) 538-4604 
 us-nd-linton-st-anthony-909d61b7,St. Anthony,613,N,Broadway,St,,,,613 N Broadway St,Linton,ND,58552,,46.27216023,-100.23255354,(701) 254-4588
 us-nd-linton-st-michael-e0fd8d00,St. Michael,2155,,76th,St,SE,,,2155 76th St SE,Linton,ND,58552,,46.31253708,-99.96958289,(701) 336-7172 
@@ -171,10 +141,8 @@ us-nd-manvel-st-timothy-77728780,St. Timothy,1207,,Oldham,Ave,,,,1207 Oldham Ave
 us-nd-marmarth-st-mary-e02e711b,St. Mary,30,,5th,St,SW,,,30 5th St SW,Marmarth,ND,58643,,46.292056,-103.92017,(701) 523-5292 
 us-nd-max-immaculate-conception-6c2c6799,Immaculate Conception,410,,Jacobson,Ave,,,,410 Jacobson Ave,Max,ND,58759,,47.82274414,-101.29534045,(701) 463-2327 
 us-nd-mayville-our-lady-of-peace-deaf38ae,Our Lady of Peace,846,,5th,St,SE,,,846 5th St SE,Mayville,ND,58257,,47.49660586,-97.31358853,(701) 788-3234
-us-sd-mc-laughlin-st-bernard-76dc6752,St Bernard,406,,1st,Ave,E,,,406 1st Ave E,Mc Laughlin,SD,57642,0539,45.81178596,-100.80909271,(605) 823-4401 
 us-nd-mcclusky-holy-family-85b4eaf2,Holy Family,409,,,Ave,,,,409 Ave B E,McClusky,ND,58463,,47.48470486,-100.43786348,(701) 465-3780
 us-nd-mchenry-sts-peter-and-paul-88302316,Sts. Peter and Paul,391,,Conn,St,,,,391 Conn St,McHenry,ND,58464,,47.57682666,-98.58723514,(701) 947-5325
-us-sd-mcintosh-st-bonaventure-2a023c54,St. Bonaventure,140,,1st,Ave,W,,,140 1st Ave W,McIntosh,SD,57641,0320,45.92193732,-101.35145227,(605) 273-4334          
 us-nd-medina-st-mary-7e7c914e,St. Mary,105,,3rd,Ave,SE,,,105 3rd Ave SE,Medina,ND,58467,,46.89304862,-99.29742606,(701) 475-2333
 us-nd-medora-st-mary-34a1c7f8,St. Mary,305,,4th,St,,,,305 4th St,Medora,ND,58645,,46.91457755,-103.5228085,(701) 575-4295
 us-nd-menoken-st-hildegard-3bbbef2c,St. Hildegard,17200,,,Hwy,,,,17200 Hwy 10,Menoken,ND,58558,,46.82339391,-100.51964605,(701) 673-3177
@@ -190,8 +158,6 @@ us-nd-minto-sacred-heart-0854cd66,Sacred Heart,629,,3rd,St,,,,629 3rd St,Minto,N
 us-nd-minto-st-stanislaus-8347484f,St. Stanislaus,6098,,Country,Rd,,,,6098 Country Rd 4,Minto,ND,58261,,48.29510277,-97.2540611,(701) 248-3589
 us-nd-mohall-st-jerome-0f88fe7d,St. Jerome,303,E,Main,St,,,,303 E Main St (Hwy 5),Mohall,ND,58761,,48.76374871,-101.50786266,(701) 756-6601
 us-nd-mooreton-st-anthony-5425f954,St. Anthony,200,,Mooreton,Ave,N,,,200 Mooreton Ave N,Mooreton,ND,58061,,46.27062041,-96.87575379,(701) 274-8259 
-us-mn-moorhead-st-francis-de-sales-2f5f6fa0,St. Francis de Sales,601,,15th,Ave,N,,,601 15th Ave N,Moorhead,MN,56560,,46.89008458,-96.76891247,(218) 233-4780
-us-mn-moorhead-st-joseph-5ef9e670,St. Joseph,218,S,10th,St,,,,218 S 10th St,Moorhead,MN,56560,,46.87255211,-96.76422126,(218) 236-5066
 us-nd-mott-st-vincent-de-paul-b3ab7057,St. Vincent de Paul,408,,Iowa,Ave,,,,408 Iowa Ave,Mott,ND,58646,,46.37498381,-102.32267841,(701) 824-2651
 us-nd-munich-st-mary-2e75db3c,St. Mary,607,,Main,St,,,,607 Main St,Munich,ND,58352,,48.66826769,-98.83475061,(701) 682-5178
 us-nd-napoleon-st-philip-neri-c23de20f,St. Philip Neri,401,,Broadway,,,,,401 Broadway,Napoleon,ND,58561,,46.50445488,-99.76862254,(701) 754-2860
@@ -210,7 +176,6 @@ us-nd-oakes-st-charles-borromeo-e178c64b,St. Charles Borromeo,410,,7th,St,N,,,41
 us-nd-oakwood-sacred-heart-40b50bad,Sacred Heart ,,,County Rd 11 and County Rd 4,,,,,County Rd 11 and County Rd 4,Oakwood,ND,58237,,48.42688982,-97.29484981,(701) 352-1648
 us-nd-oberon-st-jerome-cdf321c4,St. Jerome,3971,,69th,Ave,NE,,,3971 69th Ave NE (3971 BIA Rd 26),Oberon,ND,58357,,47.98847363,-99.09967597,(701) 766-4314
 us-nd-oriska-st-bernard-of-clairvaux-cdc2eb4d,St. Bernard of Clairvaux,606,,5th,St,,,,606 5th St,Oriska,ND,58063,,46.93024903,-97.79067994,(701) 845-3713 
-us-mn-oslo-st-joseph-7b33b576,St. Joseph,515,,Main,St,,,,515 Main St,Oslo,MN,56744,,48.19743903,-97.13311831,(218) 695-2641 or 218-745-4511
 us-nd-park-river-st-mary-0d41b8ad,St. Mary,505,,Park,St,E,,,505 Park St E,Park River,ND,58270,,48.39848762,-97.73677871,(701) 284-6165
 us-nd-parshall-st-bridget-e1cc1bd4,St. Bridget,12,,1st,Ave,NE,,,12 1st Ave NE,Parshall,ND,58770,,47.95565628,-102.13246131,(701) 862-3484
 us-nd-pembina-assumption-of-the-blessed-virgin-9c1a5ad5,Assumption,143,,Hayden,St,,,,143 Hayden St,Pembina,ND,58271,,48.97016961,-97.24164441,(701) 825-6266
@@ -220,11 +185,8 @@ us-nd-plaza-sacred-heart-e25e1e26,Sacred Heart,,,Corner of 4th Ave and Reserve,S
 us-nd-porcupine-st-james-522d3e6d,St. James ,3483,,94th,Ave,,,,3483 94th Ave,Porcupine,ND,58569,,46.22153026,-101.10816583,(701) 854-3473
 us-nd-portal-st-john-the-baptist-ff20feb5,St. John the Baptist,201,,1st,Ave,,,,201 1st Ave,Portal,ND,58772,,48.9970877,-102.5520672,(701) 965-6537
 us-nd-powers-lake-st-james-4b838158,St. James,400,,Main,St,,,,400 Main St,Powers Lake,ND,58773,,48.56371548,-102.64583399,(701) 464-5012 
-us-nd-raleigh-st-gertrude-the-great-24deb42d,St. Gertrude,7785,,St Gertrude,Ave,,,,7785 St Gertrude Ave,Raleigh,ND,58564,,46.283394,-101.33299,(701) 597-3228 
 us-nd-raleigh-st-gertrude-the-great-71c4a6aa,St. Gertrude the Great,7785,,St Gertrude,Ave,,,,7785 St Gertrude Ave,Raleigh,ND,58564,,46.2833977,-101.3330603,+1-701-597-3228
-us-sd-ralph-st-isidore-780778b9,St. Isidore,,,Hwy 734 & Wagner,Rd,,,,Hwy 734 & Wagner Rd,Ralph,SD,57650,,45.77654099,-103.06525245,(605) 244-5546
 us-nd-ray-st-michael-b2f42ef4,St. Michael,216,,W,St,,,,216 W St,Ray,ND,58849,,48.34489211,-103.16840031,(701) 664-2445
-us-nd-reeder-sacred-heart-546f5aaa,Sacred Heart,402,,3rd,Ave,E,,,402 3rd Ave E,Reeder,ND,58649,,46.10873972,-102.94038488,(701) 567-2772 
 us-nd-reeder-sacred-heart-5e5d3e0d,Sacred Heart,402,,3rd,Ave,E,,,402 3rd Ave E,Reeder,ND,58649,,46.1087233,-102.9402342,
 us-nd-regent-st-henry-f83a95a2,St. Henry,150,W,5th,St,,,,150 W 5th St,Regent,ND,58650,,46.420778,-102.562456,(701) 824-2651
 us-nd-reynolds-our-lady-of-perpetual-help-54aea88b,Our Lady of Perpetual Help,424,,5th,Ave,,,,424 5th Ave,Reynolds,ND,58275,,47.6729712,-97.10686275,(701) 847-3096
@@ -235,9 +197,7 @@ us-nd-richardton-st-stephen-393cab51,St. Stephen,5137,,88th,Ave,SW,,,5137 88th A
 us-nd-rock-lake-immaculate-heart-of-mary-c3ff41aa,Immaculate Heart of Mary,54,,Eller,Ave,,,,54 Eller Ave,Rock Lake,ND,58365,,48.78728765,-99.2478217,(701) 477-5277
 us-nd-rolette-sacred-heart-daee6f22,Sacred Heart,505,,Main,St,,,,505 Main St,Rolette,ND,58366,,48.66425497,-99.84515932,(701) 246-3449
 us-nd-rolla-st-joachim-afb250d4,St. Joachim,210,,2nd,St,NE,,,210 2nd St NE,Rolla,ND,58367,,48.86195762,-99.61582536,(701) 477-5277
-us-sd-rosholt-st-john-the-baptist-a7a25de7,St. John the Baptist,218,W,Dakota,St,,,,218 W Dakota St,Rosholt,SD,57260,,45.86289805,-96.73590851,(605) 809-5621
 us-nd-rugby-st-therese-little-flower-1dad82f5,St. Therese the Little Flower,218,,3rd,St,SE,,,218 3rd St SE,Rugby,ND,58368,,48.36753737,-99.99276224,(701) 776-5327
-us-mn-sabin-st-cecilia-2575bbb0,St. Cecilia,20,,Holloway,Ave,N,,,20 Holloway Ave N,Sabin,MN,56580,,46.77708684,-96.65109123,(218) 354-7320
 us-nd-saint-anthony-st-anthony-fd530af4,St. Anthony,2362,,County Rd 136,,,,,2362 County Rd 136,Saint Anthony,ND,58566,,46.61725837,-100.91234481,(701) 663- 1660
 us-nd-saint-john-st-john-the-baptist-db4eb150,St. John,107,,Saint Ann,St,,,,107 Saint Ann St,Saint John,ND,58369,,48.9455027,-99.70775351,(701) 477-3081
 us-nd-saint-michael-st-michael-1b8c5bdb,St. Michael Indian Catholic Mission,136,,1st,St,,,,136 1st St,Saint Michael,ND,58370,,47.98387514,-98.87175432,(701) 766-4151
@@ -254,18 +214,15 @@ us-nd-stanley-queen-of-the-most-holy-rosary-fcc9c940,Queen of the Most Holy Rosa
 us-nd-starkweather-assumption-of-the-bvm-ab54a56d,Assumption of the B.V.M. ,502,,Main,St,,,,502 Main St,Starkweather,ND,58377,,48.45156445,-98.87546968,(701) 682-5178
 us-nd-starkweather-church-of-the-assumption-of-the-blessed-virgin-mary-f3696c95,Assumption of the Blessed Virgin Mary,502,,Main,St,,,,502 Main St,Starkweather,ND,58377,,48.4520625,-98.8749375,17016825178
 us-nd-steele-st-francis-de-sales-4d0a5aad,St. Francis de Sales,318,,2nd,St,SW,,,318 2nd St SW,Steele,ND,58482,,46.85281401,-99.91970902,(701) 475-2333
-us-mn-stephen-st-stephen-a83d85bf,St. Stephen,515,,5th,St,,,,515 5th St,Stephen,MN,56757,,48.44947168,-96.87791454,(218) 478-2231
 us-nd-strasburg-sts-peter-and-paul-aac2a329,Sts. Peter and Paul,503,N,2nd,St,,,,503 N 2nd St,Strasburg,ND,58573,0322,46.1362172,-100.16179323,(701) 336-7172
 us-nd-sykeston-st-elizabeth-17637868,St. Elizabeth,130,,Anson,Ave,NE,,,130 Anson Ave NE,Sykeston,ND,58486,,47.46608053,-99.39794782,(701) 652-2519
 us-nd-tappen-st-paul-002dc0e7,St. Paul,218,,1st,St,NE,,,218 1st St NE,Tappen,ND,58487,,46.87613388,-99.63422893,(701) 475-2333
 us-nd-thompson-st-jude-1a36f776,St. Jude,329,,Broadway,St,,,,329 Broadway St,Thompson,ND,58278,,47.77368859,-97.10777939,(701) 599-2574
-us-mn-tintah-st-gall-5cc93870,St. Gall,110,,Minnesota,Ave,,,,110 Minnesota Ave,Tintah,MN,56583,,46.00940678,-96.31933896,218-369-2188
 us-nd-tioga-st-thomas-the-apostle-807170b7,St. Thomas the Apostle,213,,Gilbertson,St,N,,,213 Gilbertson St N,Tioga,ND,58852,,48.39641374,-102.93160098,(701) 664-2445
 us-nd-tokio-christ-the-king-403f59d6,Christ the King,134,,2nd,St,,,,134 2nd St,Tokio,ND,58379,,47.9234759,-98.81648888,(701) 766-4314
 us-nd-tolna-st-joseph-4865052e,St. Joseph,220,,Main,St,,,,220 Main St,Tolna,ND,58380,,47.82804764,-98.43961709,(701) 247-2594
 us-nd-towner-st-cecilia-9a22a154,St. Cecilia,503,,1st,St,SW,,,503 1st St SW,Towner,ND,58788,,48.34235494,-100.40646813,(701) 537-5133
 us-nd-trenton-st-john-the-baptist-31369920,St. John the Baptist,205,,2nd,St,,,,205 2nd St,Trenton,ND,58853,,48.0711951,-103.8385021,+1-701-842-3791
-us-nd-trenton-st-john-the-baptist-e7d757a9,St. John the Baptist,205,,2nd,St,,,,205 2nd St,Trenton,ND,58853,,48.07119546,-103.83851384,(701) 572-6731 
 us-nd-turtle-lake-st-catherine-3026a25d,St. Catherine,401,,Main,St,,,,401 Main St,Turtle Lake,ND,58575,,47.51857389,-100.88981491,(701) 448-9289 
 us-nd-underwood-st-bonaventure-f12e9f98,St. Bonaventure,503,,Grant,Ave,,,,503 Grant Ave,Underwood,ND,58576,,47.4538024,-101.14103519,(701) 442-5229 
 us-nd-valley-city-maryvale-retreat-center-71bca6d2,Maryvale Retreat Center,,,Valley City N Dakota 58072,,,,,Valley City N Dakota 58072,Valley City,ND,58072,,46.9533125,-98.0200625,
@@ -278,18 +235,13 @@ us-nd-wahpeton-st-john-the-evangelist-4ad18ad3,St. John,115,,2nd,St,N,,,115 2nd 
 us-nd-wales-church-of-st-michael-10ae6351,St. Michael,221,,2nd,Ave,,,,221 2nd Ave,Wales,ND,58281,,48.9714375,-98.6910625,17012565966
 us-nd-wales-st-michael-50bd54cc,St. Michael ,221,,2nd,Ave,,,,221 2nd Ave,Wales,ND,58281,,48.89335807,-98.60231059,(701) 256-5966
 us-nd-walhalla-st-boniface-fbb46b74,St. Boniface,801,,Central,Ave,,,,801 Central Ave,Walhalla,ND,58282,,48.9216652,-97.9177246,(701) 549-2729
-us-mn-warren-sts-peter-and-paul-77ca4cc3,Sts. Peter and Paul,208,N,7th,,,,,208 N 7th,Warren,MN,56762,,48.19722679,-96.76161619,(218) 745-4511
 us-nd-washburn-st-edwin-50db0e30,St. Edwin,906,,Northgate,Rd,,,,906 Northgate Rd,Washburn,ND,58577,,47.29427958,-101.03073997,(701) 462-3340 
 us-nd-watford-city-epiphany-0302bf02,Epiphany,112,,6th,Ave,NE,,,112 6th Ave NE,Watford City,ND,58854,,47.8073225,-103.28278059,(701) 842-3505
 us-nd-west-fargo-blessed-sacrament-d9dd384d,Blessed Sacrament,210,,5th,Ave,W,,,210 5th Ave W,West Fargo,ND,58078,,46.87211994,-96.90258694,(701) 282-3321
 us-nd-west-fargo-church-of-the-holy-cross-90d8f98b,Holy Cross,1420,,16th,St,E,,,1420 16th St E,West Fargo,ND,58078,,46.8601875,-96.8741875,17012827217
 us-nd-west-fargo-holy-cross-a39a76df,Holy Cross,2711,,7th,St,E,,,2711 7th St E,West Fargo,ND,58078,,46.83952378,-96.88760965,(701) 282-7217
 us-nd-westhope-st-andrew-6025a660,St. Andrew ,260,,1st,Ave,E,,,260 1st Ave E,Westhope,ND,58793,,48.90916593,-101.01657916,(701) 228-3164 
-us-sd-westport-sacred-heart-b31cd3b1,Sacred Heart,11,N,2nd,Ave,,,,11 N 2nd Ave,Westport,SD,57481,,45.64967979,-98.49812482,605-226-3713
-us-mn-wheaton-ave-maria-2dfa0247,Ave Maria,201,,9th,St,S,,,201 9th St S,Wheaton,MN,56296,1745,45.80263982,-96.49530585,(320) 563-4421
 us-nd-white-shield-sacred-heart-67c98ffb,Sacred Heart,,,1st Ave E & 61st Ave NW,,,,,1st Ave E & 61st Ave NW,White Shield,ND,58540,,47.66037323,-101.84408956,(701) 463-2327
-us-mt-wibaux-st-peter-ffd69617,St. Peter,312,,1st,Ave,SW,,,312 1st Ave SW,Wibaux,MT,59353,,46.98681851,-104.19167841,(406) 796-2215
-us-mt-wibaux-st-philip-b10822a7,St. Philip,61,,Lamesteer,Rd,,,,61 Lamesteer Rd,Wibaux,MT,59353,,46.8218901,-104.14482096,(406) 796-8188
 us-nd-williston-st-joseph-0fb1c53f,St. Joseph,106,,6th,St,W,,,106 6th St W,Williston,ND,58801,,48.14949892,-103.6244809,(701) 572-6731 
 us-nd-willow-city-notre-dame-des-victoires-8994a56a,Notre Dame des Victoires,215,,1st,St,,,,215 1st St,Willow City,ND,58384,,48.60714918,-100.29722802,(701) 246-3449
 us-nd-wilton-sacred-heart-d9a94f05,Sacred Heart,212,,4th,St,N,,,212 4th St N,Wilton,ND,58579,,47.15960804,-100.78813682,(701) 734-8131

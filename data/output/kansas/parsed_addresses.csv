@@ -1,15 +1,11 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
 us-ks-abilene-st-andrew-5fb454a2,St. Andrew,311,S,Buckeye,Ave,,,,311 S Buckeye Ave,Abilene,KS,67410,,38.91265673,-97.21427424,(785) 263-1570
 us-ks-aleppo-church-of-st-mary-010917d8,St. Mary,25741,W,13th,St,N,,,25741 W 13th St N,Aleppo,KS,25741,,37.7066875,-97.6405625,13165312662
-us-ne-alexandria-st-mary-59d36082,St. Mary,511,,Amanda,St,,,,511 Amanda St,Alexandria,NE,68303,,40.24741589,-97.39126462,(402) 729-2058
 us-ks-alma-holy-family-498b6a2f,Holy Family,,,1st and Kansas,,,,,1st and Kansas,Alma,KS,66401,,39.01092825,-96.29143238,(785) 636-5547
-us-ne-alma-st-joseph-7957d756,St. Joseph,810,,4th,St,,,,810 4th St,Alma,NE,68920,,40.1015575,-99.36449009,(308) 928-2575
-us-ok-alva-sacred-heart-75fb1d86,Sacred Heart,627,,12th,St,,,,627 12th St,Alva,OK,73717,,36.80194224,-98.67681638,(580) 327-0339
 us-ks-andale-st-joseph-1106a6ed,St. Joseph,318,,Rush,Ave,,,,318 Rush Ave,Andale,KS,67001,,37.79407572,-97.63002232,(316) 444-2196
 us-ks-andover-st-vincent-de-paul-a1d05ef6,St. Vincent de Paul,123,N,Andover,Rd,,,,123 N Andover Rd,Andover,KS,67002,,37.6873487,-97.13615765,(316) 733-1423
 us-ks-angelus-st-paul-mission-6494a81b,St. Paul,12001,S,,Rd,,,,12001 S Road 130 W,Angelus,KS,67748,,39.19103376,-100.68478882,(785) 671-3828
 us-ks-antonino-our-lady-help-of-christians-mission-212e1761,Our Lady Help of Christians,695,,210th,Ave,,,,695 210th Ave,Antonino,KS,67601,,38.78353697,-99.39325345,(785) 735-9456
-us-ne-arago-church-of-st-mary-82798fd2,St. Mary,6,,,,,,,6,Arago,NE,68431,,40.13125,-95.46375,14022454731
 us-ks-arkansas-city-sacred-heart-612b6ca3,Sacred Heart,320,S,B,St,,,,320 S B Street,Arkansas City,KS,67005,2729,37.05970017,-97.03617831,(620) 442-0566
 us-ks-arma-st-joseph-b6a70847,St. Joseph,100,S,Eighth,St,,,,100 S Eighth St,Arma,KS,66712,,37.54239898,-94.70841503,(620)347-4525
 us-ks-ashland-saint-joseph-f1575391,St. Joseph,512,,Cedar,St,,,,512 Cedar St,Ashland,KS,67831,,37.190997,-99.76436466,(620) 635-2338
@@ -27,10 +23,6 @@ us-ks-aurora-st-peter-3f114535,St. Peter,112,,Kansas,Ave,,,,112 Kansas Ave,Auror
 us-ks-axtell-st-michael-1987ae56,St. Michael,504,,Sixth,St,,,,504 Sixth St,Axtell,KS,66403,,39.87490551,-96.25623815,(785) 736-2220
 us-ks-baileyville-sacred-heart-6fa91ba6,Sacred Heart,357,N,Third,St,,,,357 N Third St,Baileyville,KS,66404,,39.84464608,-96.18580923,(785) 336-6464
 us-ks-baldwin-annunciation-acf6e9d7,Annunciation,740,N,6th,St,,,,740 N 6th St,Baldwin,KS,66006,,38.790238,-95.184912,(785) 594-3700
-us-ne-barneston-st-joseph-ad9e31a7,St. Joseph,406,,Wyatt,St,,,,406 Wyatt St,Barneston,NE,68309,,40.05043047,-96.57164735,(402) 645-3160
-us-ok-bartlesville-holy-cross-chapel-0f71f8c4,Holy Cross Chapel,715,S,Johnstone,Ave,,,,715 S Johnstone Ave,Bartlesville,OK,74003,,36.75245497,-95.93861008,9186053550
-us-ok-bartlesville-st-james-f9f2a809,St. James,5500,,Douglas,Ln,,,,5500 Douglas Ln,Bartlesville,OK,74006,5907,36.73384539,-95.91578148,(918) 335-0844
-us-ok-bartlesville-st-john-before-the-latin-gate-dc4aa87a,St. John Before the Latin Gate Catholic Church,715,S,Johnstone,Ave,,,,715 S Johnstone Ave,Bartlesville,OK,74003,,36.7460284,-95.97894434,(918) 336-4353
 us-ks-basehor-holy-angels-4d233f1d,Holy Angels,15408,,Leavenworth,Rd,,,,15408 Leavenworth Rd,Basehor,KS,66007,,39.14430963,-94.93568644,(913) 724-1665
 us-ks-baxter-springs-st-joseph-b12f6124,St. Joseph,324,E,12th,St,,,,324 E 12th St,Baxter Springs,KS,66713,,37.02419272,-94.73202825,(620) 429-2639
 us-ks-beardsley-st-john-nepomucene-85944bba,St. John Nepomucene,,,Co Rd Y & Rd 12,,,,,Co Rd Y & Rd 12 (Atwood),Beardsley,KS,67730,,39.91439816,-101.20518029,(785) 626-3335 or (785) 332-2680
@@ -38,31 +30,22 @@ us-ks-beattie-st-malachy-793b1433,St. Malachy,1008,,Main,St,,,,1008 Main St,Beat
 us-ks-belleville-st-edward-e5000ddd,St. Edward,1827,,Q,St,,,,1827 Q St,Belleville,KS,66935,,39.82317258,-97.6259398,(785) 527-5559
 us-ks-beloit-st-john-the-baptist-194f9fa6,St. John the Baptist,701,,E,Ct,,,,701 E Court St,Beloit,KS,67420,,39.45834154,-98.10244764,(785) 738-2851
 us-ks-belpre-saint-bernard-e9630c0c,St. Bernard,203,,Hudson,St,,,,203 Hudson St,Belpre,KS,67519,,37.94943209,-99.09727576,(620) 285-2035
-us-mo-belton-st-sabina-22a744bd,St. Sabina,700,,Trevis,Ave,,,,700 Trevis Ave ,Belton,MO,64012,,38.81704044,-94.55166578,(816) 331-4713
 us-ks-bendena-st-benedict-a64ab787,St. Benedict,684,,St Benedicts,Rd,,,,684 St Benedicts Rd,Bendena,KS,66008,,39.71877059,-95.23132313,785-359-6725
-us-ne-benkelman-st-joseph-b50f30bf,St. Joseph,819,,Cheyenne,St,,,,819 Cheyenne St,Benkelman,NE,69021,,40.05194083,-101.53727514,(308) 423-2329
 us-ks-bird-city-st-joseph-2eb85757,St. Joseph,203,N,Bird,Ave,,,,203 N Bird Ave,Bird City,KS,67731,,39.75404877,-101.5323025,(785) 332-2680 or (785) 626-3335
-us-ok-blackwell-st-joseph-9d602955,St. Joseph,315,W,Blackwell,Ave,,,,315 W Blackwell Ave,Blackwell,OK,74631,,36.80342228,-97.28640395,(580) 363-2096
 us-ks-blaine-st-columbkille-3401430a,St. Columbkille,13311,,,Hwy,,,,13311 Hwy 16,Blaine,KS,66549,,39.50046503,-96.404521,(785) 292-4462
 us-ks-blue-rapids-st-elizabeth-3e11297d,St Monica St Elizabeth Church,1007,,E,Ave,,,,1007 E Ave,Blue Rapids,KS,66411,,39.67593389,-96.65498974,(785) 292-4462
-us-mo-blue-springs-st-john-lalande-b87d61ae,St. John LaLande,805,NW,R.D Mize,Rd,,,,805 NW R.D Mize Rd,Blue Springs,MO,64015,,39.02464114,-94.27406685,816-229-3378
-us-mo-blue-springs-st-robert-bellarmine-863ea09b,St. Robert Bellarmine,4313,SW,State Rt 7,,,,,4313 SW State Rt 7,Blue Springs,MO,64015,,38.97831906,-94.2755161,816-229-5168
 us-ks-brookville-st-joseph-mission-c88253af,St. Joseph,110,W,3rd,St,,,,110 W 3rd St,Brookville,KS,67425,,38.77506117,-97.86747816,(785) 472-3136
 us-ks-brookville-st-joseph-catholic-church-d3c4f140,St. Joseph Catholic Church,110,W,3rd,St,,,,110 W 3rd St,Brookville,KS,67425,,38.7750609,-97.8674624,+1-785-823-7221
 us-ks-bucyrus-queen-of-the-holy-rosary-e13a1074,Queen of the Holy Rosary,22779,,Metcalf,Rd,,,,22779 Metcalf Rd,Bucyrus,KS,66013,,38.71505177,-94.66640074,(913) 533-2462
-us-ne-burchard-sacred-heart-6febdba3,Sacred Heart,405,,Gage,St,,,,405 Gage St,Burchard,NE,68323,,40.15016476,-96.34734035,(402) 869-2256
 us-ks-burlington-st-francis-xavier-0846ba45,St. Francis Xavier,214,,Juaniatta,St,,,,214 Juaniatta St,Burlington,KS,66839,,38.19765642,-95.73682494,(620) 364-5671
 us-ks-bushton-holy-name-of-jesus-4070175b,Holy Name of Jesus,296,,3rd,Rd,,,,296 3rd Rd,Bushton,KS,67427,,38.49291378,-98.44294341,(620) 257-3503
 us-ks-caldwell-st-martin-of-tours-8d2c106f,St. Martin of Tours,430,N,Main,,,,,430 N Main,Caldwell,KS,67022,,37.03807142,-97.60659443,(620) 8456733
 us-ks-caney-sacred-heart-aa253c1a,Sacred Heart,301,N,Hooker,,,,,301 N Hooker,Caney,KS,67333,,37.01431291,-95.93097401,(620) 647-3577
-us-mo-carthage-congregation-of-the-mother-of-the-redeemer-e5fa1779,Congregation of the Mother of the Redeemer,1900,,Grand,Ave,,,,1900 Grand Ave,Carthage,MO,64836,,37.1564392,-94.3094626,+1-417-358-7787
-us-mo-carthage-st-anns-catholic-church-33db9bb2,St. Ann,908,,Clinton,St,,,,908 Clinton St,Carthage,MO,64836,,37.17116835,-94.30733887,(417) 358-1841
 us-ks-catharine-st-catherine-f1642892,St. Catherine,1674,,St Catherine,St,,,,1674 St Catherine St,Catharine,KS,67627,,38.92729266,-99.21675875,(785) 650-1746 
 us-ks-cawker-city-sts-peter-and-paul-4facd64c,Sts. Peter and Paul,612,,12th,St,,,,612 12th St,Cawker City,KS,67430,,39.50508858,-98.43058918,+1 785-346-5582
 us-ks-chanute-st-patrick-efd495e7,St. Patrick,424,S,Central,,,,,424 S Central,Chanute,KS,66720,,37.67792905,-95.44746085,(620) 431-3165
 us-ks-chapman-st-michael-46f69f74,St. Michael,210,E,6th,St,,,,210 E 6th St,Chapman,KS,67431,,38.97252586,-97.01726402,(785) 922-6509 or (785) 263-1570
 us-ks-cheney-st-rose-c8bfac4b,St. Rose of Lima,4812,NE,150,Ave,,,,4812 NE 150 Ave,Cheney,KS,67025,,37.71709397,-97.84462085,(316) 500-1940
-us-ok-cherokee-st-cornelius-d1b4b551,St. Cornelius,404,S,Massachusetts,Ave,,,,404 S Massachusetts Ave,Cherokee,OK,73728,,36.7545418,-98.35287204,(580) 327-0339
 us-ks-cherryvale-st-francis-xavier-ce3d6e3f,St. Francis Xavier,202,S,Liberty,St,,,,202 S Liberty St,Cherryvale,KS,67335,,37.26770932,-95.55592425,(620) 336-2599
 us-ks-claflin-immaculate-conception-4fe989bd,Immaculate Conception,310,N,Main,St,,,,310 N Main St,Claflin,KS,67525,,38.52478075,-98.53333447,(620) 587-3628
 us-ks-clay-center-sts-peter-and-paul-98178696,Sts. Peter and Paul,730,,,Ct,,,,730 Ct St,Clay Center,KS,67432,,39.37699618,-97.12111491,(785) 632-5011 or (785)820-1303 (Emergency Only)
@@ -84,17 +67,14 @@ us-ks-cuba-st-isidore-a15973b2,St. Isidore,603,,Linden,St,,,,603 Linden St,Cuba,
 us-ks-cunningham-sacred-heart-b798f3a7,Sacred Heart,404,E,1st,St,,,,404 E 1st St,Cunningham,KS,67035,,37.64528,-98.4287,(620) 246-5370
 us-ks-cunningham-sacred-heart-catholic-church-525c2bf8,Sacred Heart Catholic Church,404,E,First,St,,,,404 E First St,Cunningham,KS,67035,,37.6463121,-98.4282381,+1-620-246-5370
 us-ks-damar-st-joseph-2dfb31a3,St. Joseph,107,,Oak,St,,,,107 Oak St,Damar,KS,67632,,39.31838868,-99.58685394,(785) 839-4343 or (785) 421-2535
-us-ne-dawson-st-mary-6f5eebdc,St. Mary,312,,4th,St,,,,312 4th St,Dawson,NE,68337,,40.13096605,-95.83155881,(402) 855-3595
 us-ks-deerfield-christ-the-king-0743db90,Christ the King,812,,Main,St,,,,812 Main St,Deerfield,KS,67838,,37.98261857,-101.13417342,(620) 426-7444
 us-ks-derby-st-mary-10f72ea6,St. Mary,2300,E,Meadowlark,Rd,,,,2300 E Meadowlark Rd,Derby,KS,67037,,37.56451646,-97.23403357,(316) 788-5525
-us-ok-dewey-our-lady-of-guadalupe-2d67ade1,Our Lady of Guadalupe,400,W,9th,St,,,,400 W 9th St,Dewey,OK,74029,2104,36.80022587,-95.94583857,(918) 534-3420
 us-ks-dighton-saint-theresa-96457171,St. Theresa,322,S,1st,St,,,,322 S 1st St,Dighton,KS,67839,,38.47936194,-100.46798282,(620) 397-5357
 us-ks-dodge-city-cathedral-of-our-lady-of-guadalupe-c72328af,Cathedral of Our Lady of Guadalupe,3231,N,14th,Ave,,,,3231 N 14th Ave,Dodge City,KS,67801,,37.79367879,-100.03468804,(620) 225-4802
 us-ks-dorrance-st-joseph-ae66cc94,St. Joseph,1011,,Lincoln,Ave,,,,1011 Lincoln Ave,Dorrance,KS,67634,,38.85046911,-98.58884373,(785) 658-3361 
 us-ks-downs-st-mary-00b471c9,St. Mary,1312,,Prentiss,St,,,,1312 Prentiss St,Downs,KS,67437,,39.50855814,-98.53789846,(785) 346-5582
 us-ks-easton-christs-peace-house-of-prayer-9af2c551,Christ's Peace House of Prayer,22131,,Meagher,Rd,,,,22131 Meagher Rd,Easton,KS,66020,,39.32430552,-95.09160519,(913) 773-8255
 us-ks-easton-st-lawrence-catholic-rectory-f978f499,St Lawrence Catholic Rectory,211,W,Riley,St,,,,211 W Riley St,Easton,KS,66020,,39.3447427,-95.1171078,+1-913-773-5712
-us-mo-easton-st-joseph-77147efa,St. Joseph,107,S,N Shortridge,,,,,107 S N Shortridge,Easton,MO,64434,,39.723067,-94.639861,816-294-6972
 us-ks-easton-st-lawrence-40a1037a,St. Lawrence,211,W,Riley,St,,,,211 W Riley St,Easton,KS,66020,,39.3448758,-95.115968,(913) 773-5712
 us-ks-effingham-st-ann-3edeab53,St. Ann,301,,William,St,,,,301 William St,Effingham,KS,66023,,39.51982353,-95.4007009,(913) 833-5660
 us-ks-el-dorado-st-john-the-evangelist-9ffd8905,St. John the Evangelist,302,N,Denver,Ave,,,,302 N Denver Ave,El Dorado,KS,67042,,37.82014807,-96.85635587,(316) 321-4796
@@ -110,19 +90,14 @@ us-ks-erie-st-ambrose-a0afa963,St. Ambrose,519,N,Main,St,,,,519 N Main St,Erie,K
 us-ks-esbon-sacred-heart-015fd2fc,Sacred Heart,1100-1198,,KS-112,,,,,1100-1198 KS-112,Esbon,KS,66941,,39.81684514,-98.43585708,(785) 378-3939 or (785) 527-5559
 us-ks-eudora-holy-family-fae818a1,Holy Family,820,,Birch,St,,,,820 Birch St,Eudora,KS,66025,,38.94462488,-95.09418058,(785) 542-2788
 us-ks-eureka-sacred-heart-dd79fd12,Sacred Heart,514,N,Elm,St,,,,514 N Elm St,Eureka,KS,67045,,37.82413855,-96.29247889,(620) 583-7100
-us-ne-fairbury-st-michael-c8b062f4,St. Michael,807,,F,St,,,,807 F Street,Fairbury,NE,68352,,40.13951415,-97.17889951,(402) 729-2058
-us-ne-falls-city-st-mary-9b9606ee,St. Mary,65724,,713,Rd,,,,65724 713 Rd,Falls City,NE,68355,,40.15957027,-95.49659193,(402) 245-4731
-us-ne-falls-city-sts-peter-and-paul-2b5b91d5,Sts. Peter and Paul,1820,,Fulton,St,,,,1820 Fulton St,Falls City,NE,68355,2234,40.06304704,-95.59544406,(402) 245-3002
 us-ks-florence-st-patrick-holy-family-parish-4fd185c5,St. Patrick-Holy Family Parish,201,W,8th,St,,,,201 W 8th St,Florence,KS,66851,,38.24587059,-96.92841974,(620) 382-3369
 us-ks-flush-st-joseph-b00bbbc4,St. Joseph,8965,,Flush,Rd,,,,8965 Flush Rd,Flush,KS,66535,9733,39.2948091,-96.44007734,(785) 494-8234
-us-mo-forest-city-st-patrick-3fa40a0e,Mission of St. Patrick,303,,Grand,Ave,,,,303 Grand Ave,Forest City,MO,64451,,39.98250653,-95.18998872,816-324-5700
 us-ks-fort-leavenworth-st-ignatius-catholic-community-725494bf,St. Ignatius Catholic Community,500,,Pope,Ave,,,,500 Pope Ave,Fort Leavenworth,KS,66027,,39.35480387,-94.92250999,(913) 684-8992
 us-ks-fort-riley-fort-riley-victory-chapel-c890ba50,Fort Riley Victory Chapel,2560,,Trooper,Dr,,,,2560 Trooper Dr,Fort Riley,KS,66442,,39.06661737,-96.82870605,(626) 274-4467
 us-ks-fort-riley-st-mary-1d4ca17c,St. Mary,3,,Barry,Ave,,,,3 Barry Ave,Fort Riley,KS,66442,,39.06652012,-96.78490504,(626) 274-4467
 us-ks-fort-scott-mary-queen-of-angels-15883180,Mary Queen of Angels,714,S,Eddy,St,,,,714 S Eddy St,Fort Scott,KS,66701,,37.83437231,-94.71096698,(620) 223-4340
 us-ks-fowler-st-anthony-of-padua-0f8fe093,St. Anthony,411,W,4th,Ave,,,,411 W 4th Ave,Fowler,KS,67844,,37.38046018,-100.20097754,(620) 646-5297
 us-ks-frankfort-annunciation-b6ddc735,Annunciation,213,E,5th,,,,,213 E 5th,Frankfort,KS,66427,,39.70546881,-96.41525991,(785) 292-4462
-us-ne-franklin-st-katharine-drexel-573897a4,St. Katharine Drexel,358,,9th,Ave,,,,358 9th Ave,Franklin,NE,68920,,40.09885385,-98.96149445,(402) 746-3750
 us-ks-fredonia-sacred-heart-ab3b6705,Sacred Heart,1223,,Madison,,,,,1223 Madison,Fredonia,KS,66736,,37.53386782,-95.81828488,(620) 378 3658
 us-ks-frontenac-sacred-heart-1250e782,Sacred Heart,100,S,Cherokee,St,,,,100 S Cherokee St,Frontenac,KS,66763,,37.45489966,-94.69184644,(620) 231-7747
 us-ks-galena-st-patrick-ba8baec1,St. Patrick,307,,Galena,Ave,,,,307 Galena Ave,Galena,KS,66739,,37.077816,-94.63675,(620) 429-2639
@@ -135,15 +110,12 @@ us-ks-garnett-holy-angels-cc5795ae,Holy Angels,514,E,4th,,,,,514 E 4th,Garnett,K
 us-ks-garnett-st-boniface-rectory-84a852a2,St Boniface Rectory,32292,NE,Norton,Rd,,,,32292 NE Norton Rd,Garnett,KS,66032,,38.3654855,-95.2171217,+1-785-835-6273
 us-ks-garnett-st-boniface-f475d098,St. Boniface,32292,NE,Norton,Rd,,,,32292 N.E Norton Rd,Garnett,KS,66032,,38.30677749,-95.2127314,(785) 835-6273
 us-ks-girard-st-michael-400602d7,St. Michael,106,N,Western,St,,,,106 N Western St,Girard,KS,66743,,37.51132263,-94.85130406,(620) 724-8717
-us-mo-gladstone-st-andrew-the-apostle-f7f629b3,St. Andrew the Apostle,6415,NE,Antioch,Rd,,,,6415 NE Antioch Rd,Gladstone,MO,64119,,39.21122055,-94.5347153,(816) 453-2089
 us-ks-glasco-st-mary-05fa0018,St. Mary,301,E,1st,St,,,,301 E 1st St,Glasco,KS,67445,,39.35998489,-97.83731505,(785) 524-4823 or (785) 392-2079
 us-ks-goddard-catholic-church-of-the-holy-spirit-ff72bcdf,Catholic Church of the Holy Spirit,18218,,US-54,,,,,18218 US-54,Goddard,KS,67052,,37.6665157,-97.5521897,+1-316-794-3496
 us-ks-goddard-church-of-the-holy-spirit-df3336df,Holy Spirit,18218,,W,Hwy,,,,18218 W Highway 54,Goddard,KS,67052,,37.66658258,-97.55222061,(316) 794-3496
 us-ks-goodland-our-lady-of-perpetual-help-c60cc2dc,Our Lady of Perpetual Help,307,W,13th,St,,,,307 W 13th St,Goodland,KS,67735,,39.3453667,-101.71473798,(785) 890-7205
 us-ks-gorham-st-mary-help-of-christians-35207b56,St. Mary Help of Christians,66,,Chicago,St,,,,66 Chicago St,Gorham,KS,67640,,38.88309129,-99.02400644,(785) 483-2871
-us-mo-gower-abbatial-church-of-our-lady-queen-of-apostles-22faa8e5,"Abbatial Church of Our Lady, Queen of Apostles",,,Gower Missouri 64454,,,,,Gower Missouri 64454,Gower,MO,64454,,39.6655625,-94.5643125,
 us-ks-grainfield-st-agnes-a35a30e3,St. Agnes,242,,Cedar,St,,,,242 Cedar St,Grainfield,KS,67737,,39.11276233,-100.46862535,(785) 673-3176 or (785) 673-4684
-us-mo-grandview-coronation-of-our-lady-1ae758de,Coronation of Our Lady Parish,13000,,Bennington,Ave,,,,13000 Bennington Ave,Grandview,MO,64030,,38.88896144,-94.51733493,816-761-8811
 us-ks-great-bend-saint-patrick-prince-of-peace-parish-5d810796,St. Patrick (Prince of Peace Parish),4100,,Broadway,,,,,4100 Broadway,Great Bend,KS,67530,,38.36679154,-98.79358519,(620) 792-1396
 us-ks-great-bend-st-rose-of-lima-prince-of-peace-parish-1b402707,St. Rose of Lima (Prince of Peace Parish),1424,,Baker,Ave,,,,1424 Baker Ave,Great Bend,KS,67530,,38.36633091,-98.76212055,(620) 792-1396
 us-ks-greeley-st-john-the-baptist-6370e985,St. John the Baptist,,,Hwy 169 and Prairie,St,,,,Hwy 169 and Prairie St,Greeley,KS,66033,,38.36175582,-95.12526234,(785) 448-1686
@@ -156,24 +128,19 @@ us-ks-hamilton-st-john-14c5f569,St. John,,,Township Rd 91,,,,,Township Rd 91,Ham
 us-ks-hanover-st-john-the-baptist-42e2d816,St. John the Baptist,114,S,Church,St,,,,114 S Church St,Hanover,KS,66945,,39.89222155,-96.87308936,(785) 337-2289 or (785) 325-3147
 us-ks-hanston-saint-anthony-811af13b,St. Anthony,102,S,Douglas,St,,,,102 S Douglas St,Hanston,KS,67849,,38.12177994,-99.71031883,(620) 623-4791
 us-ks-harper-st-joan-of-arc-40054825,St. Joan of Arc,1023,W,Main,,,,,1023 W Main,Harper,KS,67058,,37.28645225,-98.03695743,(620) 896-7886
-us-mo-harrisonville-our-lady-of-lourdes-bdd17a89,Our Lady of Lourdes,2700,E,Mechanic,,,,,2700 E Mechanic,Harrisonville,MO,64701,,38.661214,-94.3263939,816-380-5744
 us-ks-hartford-st-mary-c1a932ea,St. Mary,501,,Mechanic,St,,,,501 Mechanic St,Hartford,KS,66854,,38.305727,-95.959403,(620) 475-3326
 us-ks-hays-comeau-catholic-campus-center-98a51a3a,Fort Hays State University,506,W,6th,St,,,,506 W 6th St,Hays,KS,67601,,38.87166583,-99.33961415,(785) 625-7396
 us-ks-hays-immaculate-heart-of-mary-645e07db,Immaculate Heart of Mary,1805,,Vine,St,,,,1805 Vine St,Hays,KS,67601,,38.87565112,-99.32011126,(785) 625-7339
 us-ks-hays-st-joseph-cd14420d,St. Joseph,215,W,13th,St,,,,215 W 13th St,Hays,KS,67601,,38.87501694,-99.33229997,(785) 625-7356
 us-ks-hays-st-nicholas-of-myra-a0871cde,St. Nicholas of Myra,2901,E,13th,St,,,,2901 E 13th St,Hays,KS,67601,,38.87163172,-99.28760543,(785) 628-1446
 us-ks-haysville-st-cecilia-91e4bf45,St. Cecilia,1830,W,Grand,Ave,,,,1830 W Grand Ave,Haysville,KS,67060,,37.5653343,-97.37295,(316) 524-7801
-us-ne-hebron-sacred-heart-cff1ff79,Sacred Heart,436,N,3rd,St,,,,436 N 3rd St,Hebron,NE,68370,,40.17054172,-97.59133025,(402) 768-6293
 us-ks-herington-st-john-the-evangelist-2f581983,St. John the Evangelist,712,N,Broadway,St,,,,712 N Broadway St,Herington,KS,67449,,38.67740678,-96.94334692,(785) 258-2013
 us-ks-herndon-assumption-of-mary-mission-7d07edaf,Assumption of Mary,541,,Palermo,Ave,,,,541 Palermo Ave,Herndon,KS,67739,,39.9100613,-100.78710437,(785) 626-3335
 us-ks-hiawatha-st-ann-9876cd26,St. Ann,800,,Hiawatha,Ave,,,,800 Hiawatha Ave,Hiawatha,KS,66434,1939,39.85777646,-95.5394677,(785) 742-3010
 us-ks-hill-city-immaculate-heart-of-mary-c1436ec7,Immaculate Heart of Mary,110,N,10th,Ave,,,,110 N 10th Ave,Hill City,KS,67642,,39.36497377,-99.85311859,(785) 421-2535
-us-mo-hirlingen-church-of-the-seven-dolors-aaee7055,Seven Dolors,12750,,Hurlingen,Rd,,,,12750 Hurlingen Rd,Hirlingen,MO,12750,,39.7978125,-94.6306875,18166711510
 us-ks-hoisington-st-john-the-evangelist-4bb89c6c,St. John the Evangelist,122,E,5th,St,,,,122 E 5th St,Hoisington,KS,67544,,38.51809585,-98.77652207,(620) 653-2695
-us-co-holly-st-frances-of-rome-00796996,St. Frances of Rome,101-199,S,6th,St,,,,101-199 S 6th St,Holly,CO,81047,,38.052469,-102.124746,(719) 537-6688 or (719) 336-7759
 us-ks-holton-st-dominic-1b33f245,St. Dominic,416,,Ohio,Ave,,,,416 Ohio Ave,Holton,KS,66436,,39.46470206,-95.73304208,(785) 364-3262
 us-ks-holyrood-st-mary-248ae7f0,St. Mary,202,S,Frank,St,,,,202 S Frank St,Holyrood,KS,67450,,38.58541015,-98.41404352,(785) 658-3361
-us-ok-hooker-sacred-heart-f335cdce,Sacred Heart,106,,Albright,St,,,,106 Albright St,Hooker,OK,73945,,36.86188878,-101.21218482,(580) 652-2320
 us-ks-hope-st-philip-1c998801,St. Phillip,114,N,Main,St,,,,114 N Main St,Hope,KS,67451,,38.68820091,-97.07803524,(785) 258-2013
 us-ks-horton-st-leo-5ca9db4b,St. Leo,1340,,First,Ave,E,,,1340 First Ave E,Horton,KS,66439,,39.6655227,-95.52549492,(785) 486-3971
 us-ks-hoxie-st-frances-cabrini-2d367af9,St. Frances Cabrini,924,N,17th,St,,,,924 N 17th St,Hoxie,KS,67740,,39.35561271,-100.43321815,(785) 675-3300
@@ -181,71 +148,27 @@ us-ks-hugoton-saint-helen-e7d292ed,St. Helen,1011,S,Jefferson,St,,,,1011 S Jeffe
 us-ks-humboldt-st-joseph-8f1ea8c7,St. Joseph,514,,Central,St,,,,514 Central St,Humboldt,KS,66748,,37.8132339,-95.44036831,(620) 431-3165
 us-ks-hutchinson-holy-cross-2a36d87f,Holy Cross,2631,,Independence,Rd,,,,2631 Independence Rd,Hutchinson,KS,67502,,38.08327494,-97.92100924,(620) 665-5163
 us-ks-hutchinson-st-teresa-5f460a44,St. Teresa,211,E,5th,Ave,,,,211 E 5th Ave,Hutchinson,KS,67501,,38.05835673,-97.92794248,(620) 662-7812
-us-mo-independence-nativity-of-mary-9f5a1ac9,Nativity of Blessed Virgin Mary,10017,E,36th,Ter,,,,10017 E 36th Ter,Independence,MO,64052,,39.05540374,-94.45915034,(816) 353-2184
 us-ks-independence-st-andrew-a7339920,St. Andrew,210,N,4th,St,,,,210 N 4th St,Independence,KS,67301,,37.22453274,-95.70209081,(620) 331-1789
-us-mo-independence-church-of-st-ann-b8cbf2b0,St. Ann,10113,E,Lexington,Ave,,,,10113 E Lexington Ave,Independence,MO,10113,,39.1064375,-94.4575625,18162521160
-us-mo-independence-church-of-st-joseph-the-worker-d4d92666,St. Joseph the Worker,2200,N,Blue Mills,Rd,,,,2200 N Blue Mills Rd,Independence,MO,64058,,39.1413125,-94.3398125,18167966877
-us-mo-independence-st-mark-the-evangelist-80e8e3e5,St. Mark,3736,S,Lees Summit,Rd,,,,3736 S Lees Summit Rd,Independence,MO,64055,,39.0520668,-94.38771,816-373-2600
-us-mo-independence-st-marys-catholic-church-f951fd09,St. Mary Parish,600,N,Liberty,St,,,,600 N Liberty St,Independence,MO,64050,,39.0970392,-94.41664879,816-252-0121
 us-ks-ingalls-saint-stanislaus-83af7a02,St. Stanislaus,200,N,Rush,St,,,,200 N Rush St,Ingalls,KS,67853,,37.82951905,-100.45056083,(620) 335-5202
 us-ks-iola-st-john-73fa341e,St. John,310,S,Jefferson,,,,,310 S Jefferson,Iola,KS,66749,,37.91979163,-95.40377935,(620) 365-2277
 us-ks-jetmore-saint-lawrence-26f58da3,St. Lawrence,413,,Niederacher,,,,,413 Niederacher,Jetmore,KS,67854,,38.08481759,-99.88881218,(620) 357-8791
 us-ks-johnson-saint-bernadette-parish-of-mary-queen-of-peace-and-st-bernadette-473c0e91,St. Bernadette (Parish of Mary Queen of Peace and St. Bernadette),105,N,Chestnut,St,,,,105 N Chestnut St,Johnson,KS,67855,,37.5711656,-101.74928624,(620) 356-1532
-us-mo-joplin-church-of-st-mary-f142e6e6,St. Mary,1230,E,7th,St,,,,1230 E 7th St,Joplin,MO,64801,,37.0835625,-94.5001875,14176233333
-us-mo-joplin-st-mary-0f34a72d,St. Mary ,3035,S,Central City,Rd,,,,3035 S Central City Rd,Joplin,MO,64804,,37.05731733,-94.58330275,(417) 623-3333
-us-mo-joplin-st-peter-the-apostle-4e160524,St. Peter the Apostle,812,,Pearl,Ave,,,,812 Pearl Ave,Joplin,MO,64801,,37.08272161,-94.51707595,(417) 623-8643
 us-ks-junction-city-st-francis-xavier-88b405ba,St. Francis Xavier,218,N,Washington,St,,,,218 N Washington St,Junction City,KS,66441,,39.02492106,-96.82976035,(785) 238-2998
-us-mo-kcmo-st-patrick-parish-5e631fa9,St. Patrick Parish,1357,NE,42nd,Ter,,,,1357 NE 42nd Terrace,KCMO,MO,64116,,39.1710437,-94.5624455,+1-816-453-5510
 us-ks-kanopolis-st-ignatius-loyola-b2a502ee,St. Ignatius Loyola,127,N,Missouri,Ave,,,,127 N Missouri Ave,Kanopolis,KS,67454,,38.71124878,-98.15610619,(785) 472-4874 or (785) 472-3137 (Pastor Office)
 us-ks-kansas-city-all-saints-6ea3ee1b,All Saints ,811,,Vermont,Ave,,,,811 Vermont Ave,Kansas City,KS,66101,,39.097705,-94.63052,(913) 371-1837
 us-ks-kansas-city-blessed-sacrament-d087cf9c,Blessed Sacrament,2203,,Parallel,Ave,,,,2203 Parallel Ave,Kansas City,KS,66104,,39.1281513,-94.65447043,(913) 321-1958
 us-ks-kansas-city-cathedral-of-st-peter-83cc5a17,Cathedral of St. Peter,416,N,14th,St,,,,416 N 14th St,Kansas City,KS,66102,,39.1102242,-94.64518481,(913) 371-0840
-us-mo-kansas-city-cathedral-of-the-immaculate-conception-433758ed,Cathedral of the Immaculate Conception,416,W,12th St at Broadway,Blvd,,,,416 W 12th St at Broadway Blvd,Kansas City,MO,64105,,39.10063547,-94.58923968,(816) 842-0416
 us-ks-kansas-city-christ-the-king-fec00e0b,Christ the King,3024,N,53rd,St,,,,3024 N 53rd St,Kansas City,KS,66104,,39.14251272,-94.70251844,(913) 287-8823
-us-mo-kansas-city-christ-the-king-d7ad7ff9,Christ the King,8510,,Wornall,Rd,,,,8510 Wornall Rd,Kansas City,MO,64114,,38.97380805,-94.59545095,816-363-4888
-us-mo-kansas-city-guardian-angels-164df66c,Guardian Angels,1310,,Westport,Rd,,,,1310 Westport Rd,Kansas City,MO,64111,4227,39.05042812,-94.60238995,(816) 931-4351
-us-mo-kansas-city-holy-cross-catholic-church-0d838a2f,Holy Cross,5106,,St John,Ave,,,,5106 St John Ave,Kansas City,MO,64123,,39.1126809,-94.5219829,816-231-4845 
 us-ks-kansas-city-holy-family-70450bcc,Holy Family,274,,Orchard,St,,,,274 Orchard St,Kansas City,KS,66101,,39.1078033,-94.62359,(913) 371-1561
-us-mo-kansas-city-holy-family-7a9aad5b,Holy Family,919,NE,96th,St,,,,919 NE 96th St,Kansas City,MO,64155,,39.26696815,-94.56753149,816-436-9200
-us-mo-kansas-city-church-of-the-holy-martyrs-2d4cd436,Holy Martyrs,7801,,The Paseo,,,,,7801 The Paseo,Kansas City,MO,64131,,38.9840625,-94.5661875,18163333214
 us-ks-kansas-city-holy-name-of-jesus-9a2832b8,Holy Name,1001,,SW,Blvd,,,,1001 SW Blvd,Kansas City,KS,66103,,39.06134661,-94.62055125,(913) 236-9219
-us-mo-kansas-city-holy-rosary-a8df522b,Holy Rosary,911,E,Missouri,Ave,,,,911 E Missouri Ave,Kansas City,MO,64106,,39.1091543,-94.57274728,816-842-5440
 us-ks-kansas-city-little-sisters-of-the-lamb-e02528a1,Little Sisters of the Lamb,36,S,Boeke,St,,,,36 S Boeke St,Kansas City,KS,66101,,39.09888,-94.63332,9136211727
-us-mo-kansas-city-old-saint-patrick-oratory-0bf6c7b5,Old St. Patrick Oratory,806,,Cherry,St,,,,806 Cherry St,Kansas City,MO,64106,,39.10410583,-94.57627738,(816) 931-5612
 us-ks-kansas-city-our-lady-and-st-rose-61cf135d,Our Lady and St. Rose,2300,N,8th,St,,,,2300 N 8th St,Kansas City,KS,66101,,39.13226417,-94.6294436,(913) 321-0550   
-us-mo-kansas-city-our-lady-of-ephesus-chapel-aff30de3,Our Lady of Ephesus Chapel,20,W,9th,St,,,,20 W 9th St,Kansas City,MO,64105,,39.10384914,-94.58404465,
-us-mo-kansas-city-our-lady-of-good-counsel-8952ed94,Our Lady of Good Counsel,3934,,Washington,St,,,,3934 Washington St,Kansas City,MO,64111,,39.05574337,-94.59182861,816-561-0400
-us-mo-kansas-city-our-lady-of-guadalupe-shrine-0b321e0c,Our Lady of Guadalupe Shrine,901,,Avenida Cesar E Chavez,,,,,901 Avenida Cesar E Chavez,Kansas City,MO,Jackson,,39.0856183,-94.59482134,8165997242
-us-mo-kansas-city-our-lady-of-peace-09d03683,Our Lady of Peace,1029,,Bennington,Ave,,,,1029 Bennington Ave,Kansas City,MO,64126,,39.09893462,-94.50496989,816-231-0853
-us-mo-kansas-city-our-lady-of-perpetual-help-d0064354,Our Lady of Perpetual Help,3333,,Broadway,,,,,3333 Broadway,Kansas City,MO,64111,,39.06683554,-94.58949667,816-561-3771
-us-mo-kansas-city-our-lady-of-sorrows-98215b66,Our Lady of Sorrows,2552,,Gillham,Rd,,,,2552 Gillham Rd,Kansas City,MO,64108,,39.079482,-94.579062,(816) 421-2112
 us-ks-kansas-city-our-lady-of-unity-sacred-heart-church-7f47d86e,Our Lady of Unity (Sacred Heart Church),2910,,Strong,Ave,,,,2910 Strong Ave,Kansas City,KS,66106,,39.05306864,-94.66851793,(913) 677-4621
 us-ks-kansas-city-providence-medical-center-chapel-394790a3,Providence Medical Center Chapel,8929,,Parallel,Pkwy,,,,8929 Parallel Pkwy,Kansas City,KS,66112,,39.12625675,-94.78661656,(913) 596-3494
-us-mo-kansas-city-sacred-heart-guadalupe-b0caa6fd,Sacred Heart–Guadalupe,2544,,Madison,Ave,,,,2544 Madison Ave,Kansas City,MO,64108,,39.08059547,-94.59477285,"816-599-7242, 816-842-6146"
-us-mo-kansas-city-st-anthony-49c26078,St. Anthony,309,,Benton,Blvd,,,,309 Benton Blvd,Kansas City,MO,64124,,39.11084741,-94.54416382,(816) 231-5445
-us-mo-kansas-city-st-bernadette-f861a6dd,St. Bernadette,9020,E,51st,Ter,,,,9020 E 51st Ter,Kansas City,MO,64133,,39.02998487,-94.47641274,816-356-3700
-us-mo-kansas-city-st-charles-borromeo-ce75f505,St. Charles Borromeo,900,NE,Shady,Ln,,,,900 NE Shady Ln Dr,Kansas City,MO,64118,,39.21068684,-94.57090861,816-436-0880
-us-mo-kansas-city-st-elizabeth-ddd00d59,St. Elizabeth,2,E,75th,St,,,,2 E 75th St,Kansas City,MO,64114,,38.99255076,-94.58990271,816-523-2405
-us-mo-kansas-city-st-francis-xavier-20f7f59c,St. Francis Xavier,1001,E,52nd,St,,,,1001 E 52nd St,Kansas City,MO,64110,,39.0322,-94.574295,816-523-5115
-us-mo-kansas-city-st-gabriel-archangel-22b928f5,St. Gabriel Archangel,4737,N,Cleveland,Ave,,,,4737 N Cleveland Ave,Kansas City,MO,64117,,39.1820607,-94.53329425,(816) 453-1183
-us-mo-kansas-city-st-james-13f7493f,St. James,3909,,Harrison,,,,,3909 Harrison,Kansas City,MO,64110,,39.05592788,-94.5730328,816-561-8512
-us-mo-kansas-city-st-john-francis-regis-410ca82a,St. John Francis Regis Parish,8941,,James A Reed,Rd,,,,8941 James A Reed Rd,Kansas City,MO,64138,,38.96121507,-94.49313196,816-761-1608
 us-ks-kansas-city-st-john-the-baptist-bbf1d15b,St. John the Baptist,708,N,4th,St,,,,708 N 4th St,Kansas City,KS,66101,,39.11292016,-94.61899781,(913) 371-0627
 us-ks-kansas-city-st-john-the-evangelist-our-lady-of-unity-75c2b552,St. John the Evangelist (Our Lady of Unity),2910,,Strong,Ave,,,,2910 Strong Ave,Kansas City,KS,66106,,39.0753555,-94.66346,(913) 677-4621
-us-mo-kansas-city-church-of-st-louis-d909fa2b,St. Louis,5930,,Swope,Pkwy,,,,5930 Swope Pkwy,Kansas City,MO,64130,,39.0171875,-94.5421875,18164446535
 us-ks-kansas-city-st-mary-and-st-anthony-3be2df3e,St. Mary–St. Anthony,615,N,7th,St,,,,615 N 7th St,Kansas City,KS,66101,,39.1122475,-94.62642,(913) 371-1408
-us-mo-kansas-city-church-of-st-matthew-apostle-ce01db39,St. Matthew Apostle,8001,,Longview,Rd,,,,8001 Longview Rd,Kansas City,MO,64134,,38.9139375,-94.4976875,18167630208
-us-mo-kansas-city-st-monica-catholic-church-d7fceae2,St. Monica Catholic Church ,1616,,The Paseo,Blvd,,,,1616 The Paseo Blvd,Kansas City,MO,64108,,39.0933456,-94.56517,816-471-3696
 us-ks-kansas-city-st-patrick-9c9721d7,St. Patrick,1086,N,94th,St,,,,1086 N 94th St,Kansas City,KS,66112,,39.11607434,-94.79810488,(913) 299-3370
-us-mo-kansas-city-st-patrick-805d942d,St. Patrick,1401,NE,42nd,Ter,,,,1401 NE 42nd Ter,Kansas City,MO,64116,,39.17112164,-94.56245654,(816) 453-5510
-us-mo-kansas-city-church-of-st-peter-fd40aa46,St. Peter,6415,,Holmes,St,,,,6415 Holmes St,Kansas City,MO,64131,,39.0114375,-94.5789375,18163632320
-us-mo-kansas-city-st-peters-catholic-church-6863265e,St. Peter's Catholic Church,701,E,Meyer,Blvd,,,,701 E Meyer Blvd,Kansas City,MO,64131,,39.01113157,-94.57750674,816-363-2320
-us-mo-kansas-city-st-therese-be1a2aa1,St. Therese,7207,,Missouri Rt 9,,,,,7207 Missouri Rt 9,Kansas City,MO,64152,,39.21940849,-94.66344693,816-741-2800
-us-mo-kansas-city-st-therese-little-flower-e8992a2e,St. Therese Little Flower Parish,5814,,Euclid,Ave,,,,5814 Euclid Ave,Kansas City,MO,64130,,39.02104042,-94.56264415,816-444-5406
-us-mo-kansas-city-st-thomas-more-6d40ee93,St. Thomas More,11822,,Holmes,Rd,,,,11822 Holmes Rd,Kansas City,MO,64131,,38.91184395,-94.58531575,816-942-2492
-us-mo-kansas-city-church-of-the-vietnamese-holy-martyrs-kansas-city-66eff3ba,Vietnamese Holy Martyrs - Kansas City,4101,E,105th,Ter,,,,4101 E 105th Ter,Kansas City,MO,64137,,38.93334183,-94.54184402,816-333-3214
-us-mo-kansas-city-visitation-of-the-blessed-virgin-mary-70475c18,Visitation of the Blessed Virgin Mary,5141,,Main,St,,,,5141 Main St,Kansas City,MO,64112,,39.033265,-94.586983,816-753-7422
-us-mo-kearney-church-of-the-annunciation-295849b1,Annunciation,701,N,Jefferson,,,,,701 N Jefferson,Kearney,MO,64060,,39.38179,-94.367081,816-628-5030
 us-ks-kelly-st-bede-a0de7a7e,St. Bede,7344,,Drought,St,,,,7344 Drought St,Kelly,KS,66538,,39.73945693,-96.00181051,(785) 889-4896
 us-ks-kingman-st-patrick-a03a221b,St. Patrick,630,,,Ave,,,,630 Ave D W,Kingman,KS,67068,,37.64699384,-98.12186146,(620) 532-5440
 us-ks-kinsley-saint-nicholas-dd8e6dc0,St. Nicholas,706,E,6th,St,,,,706 E 6th St,Kinsley,KS,67547,,37.92316561,-99.40454698,(620) 659-2521
@@ -253,7 +176,6 @@ us-ks-kiowa-st-john-the-apostle-c97d6edf,St. John the Apostle,920,E,Main,St,,,,9
 us-ks-la-crosse-saint-michael-0f4615c4,St. Michael,918,,Lincoln,St,,,,918 Lincoln St,La Crosse,KS,67548,,38.53245606,-99.30509855,(785) 222-3292 or (785) 222-2561 (Rectory)
 us-ks-la-cygne-our-lady-of-lourdes-6456e49d,Our Lady of Lourdes,819,N,5th,St,,,,819 N 5th St,La Cygne,KS,66040,,38.3545647,-94.75923,(913) 755-2652
 us-ks-lakin-saint-anthony-8ba97852,St. Anthony,600,,Soderberg,St,,,,600 Soderberg St,Lakin,KS,67860,,37.94616747,-101.25594903,(620) 355-6405
-us-mo-lamar-st-mary-93961078,St. Mary,200,E,17th,St,,,,200 E 17th St,Lamar,MO,64759,,37.48844439,-94.27453682,(417) 682-2492
 us-ks-lansing-st-francis-de-sales-16ca402a,St. Francis de Sales,900,,Ida,St,,,,900 Ida St,Lansing,KS,66043,,39.25125429,-94.91803162,(913) 727-3742
 us-ks-larned-sacred-heart-eacba7f5,Sacred Heart of Jesus,1111,,State,St,,,,1111 State St,Larned,KS,67550,,38.18516733,-99.10398181,(620) 285-2035
 us-ks-lawrence-corpus-christi-fbf5e4b9,Corpus Christi,6001,,Bob Billings,Pkwy,,,,6001 Bob Billings Pkwy,Lawrence,KS,66049,,38.95729123,-95.32367372,(785) 843-6286
@@ -268,15 +190,11 @@ us-ks-leavenworth-st-joseph-0994b809,St. Joseph,306,N,Broadway,,,,,306 N Broadwa
 us-ks-leawood-curé-of-ars-9fe5cdbb,Cure of Ars,9401,,Mission,Rd,,,,9401 Mission Rd,Leawood,KS,66206,,38.95972419,-94.62980946,(913) 649-1337
 us-ks-leawood-church-of-the-nativity-dba227a5,Nativity,3800,W,119th,St,,,,3800 W 119th St,Leawood,KS,66209,,38.91348171,-94.62942752,(913) 491-5017
 us-ks-leawood-st-michael-the-archangel-b22616ed,St. Michael the Archangel,14251,,Nall,Ave,,,,14251 Nall Ave,Leawood,KS,66223,,38.87047028,-94.64731831,(913) 402-3900
-us-mo-lees-summit-holy-spirit-bf35675b,Holy Spirit,1800,SW,MO-150,,,,,1800 SW MO-150,Lees Summit,MO,64082,,38.85533165,-94.4134971,(816) 537-6990
-us-mo-lees-summit-our-lady-of-the-presentation-1637e91a,Our Lady of the Presentation,130,NW,Murray,Rd,,,,130 NW Murray Rd,Lees Summit,MO,64081,,38.915948,-94.405137,816-251-1100
-us-mo-lees-summit-st-margaret-of-scotland-81d86fe1,St. Margaret,777,NE,Blackwell,Rd,,,,777 NE Blackwell Rd,Lees Summit,MO,64086,,38.92422759,-94.31672575,816-246-6800
 us-ks-lenexa-holy-trinity-cb6c01cf,Holy Trinity,13615,W,92nd,St,,,,13615 W 92nd St,Lenexa,KS,66215,,38.96154637,-94.74387118,(913) 888-2770
 us-ks-lenexa-st-therese-of-lisieux-syro-malabar-mission-a9688e4c,St. Therese of Lisieux Syro-Malabar Mission,9130,,Pflumm,Rd,,,,9130 Pflumm Rd,Lenexa,KS,66215,,38.962563,-94.74259922,
 us-ks-leoti-saint-anthony-of-padua-471215b4,St. Anthony of Padua,600,S,4th,St,,,,600 S 4th St [KS-25],Leoti,KS,67861,,38.47477162,-101.35876859,(620) 379-4427 or (620) 379-4431 (Rectory)
 us-ks-leoville-immaculate-conception-of-the-blessed-virgin-mary-ecc49edc,Immaculate Conception of the Blessed Virgin Mary,92,,1500th,Rd,,,,92 1500th Rd (KS-223),Leoville,KS,67757,,39.58157879,-100.46110972,(785) 475-3103
 us-ks-liberal-saint-anthony-of-padua-00fc5a38,St. Anthony of Padua,1510,N,Calhoun,Ave,,,,1510 N Calhoun Ave ,Liberal,KS,67901,,37.05485563,-100.93724487,(620) 624-4135
-us-mo-liberty-st-james-779ae9b4,St. James,309,S,Stewart,Rd,,,,309 S Stewart Rd,Liberty,MO,64068,9599,39.24072908,-94.45489691,(816) 781-4343
 us-ks-liebenthal-saint-joseph-8d32d6b4,St. Joseph,202,,Main,St,,,,202 Main St [Hwy 183],Liebenthal,KS,67553,,38.65383114,-99.31873639,(785) 222-3292 or (785) 222-2561 (Rectory)
 us-ks-lincoln-st-patrick-9d31f00d,St. Patrick,206,N,5th,St,,,,206 N 5th St,Lincoln,KS,67455,,39.04156879,-98.14972555,(785) 524-4823 or (785) 392-2079
 us-ks-lindsborg-st-bridget-of-sweden-81b0f8d1,St. Bridget of Sweden,206,W,Swensson,,,,,206 W Swensson,Lindsborg,KS,67456,,38.58045538,-97.67821024,(620) 241-0821
@@ -294,14 +212,11 @@ us-ks-marienthal-saint-mary-f7e096a9,St. Mary,210,N,2nd,St,,,,210 N 2nd St,Marie
 us-ks-marion-st-mark-holy-family-parish-889720ff,St. Mark-Holy Family Parish,415,N,Cedar,,,,,415 N Cedar,Marion,KS,66861,1307,38.35290606,-97.01316162,(620) 382-3369
 us-ks-marysville-st-gregory-216ab92a,St. Gregory,1310,,Carolina,,,,,1310 Carolina,Marysville,KS,66508,,39.84339305,-96.64126812,(785) 562-3302
 us-ks-mayetta-st-francis-xavier-0c7ec68d,St. Francis Xavier,301,E,James,,,,,301 E James,Mayetta,KS,66509,,39.33691133,-95.72095902,(785) 364-3262
-us-ne-mc-cook-st-patrick-e04f0082,St. Patrick,409,E,F,St,,,,409 E F Street,Mc Cook,NE,69001,,40.20305478,-100.62069642,(308) 345-6734
 us-ks-mcconnell-afb-st-maximilian-kolbe-bae97a56,St. Maximilian Kolbe,22,,ARW/HC 53150 Kansas,St,,,,22 ARW/HC 53150 Kansas St,McConnell AFB,KS,67221,,37.63321443,-97.25034102,(316) 759-3562
 us-ks-mcpherson-st-joseph-6901700d,St. Joseph,520,E,Northview,,,,,520 E Northview,Mcpherson,KS,67460,,38.39042319,-97.65898046,(620) 241-0821
 us-ks-meade-saint-john-the-baptist-bca75d12,St. John the Baptist,412,W,Carthage,St,,,,412 W Carthage St,Meade,KS,67864,,37.28573837,-100.34510755,(620) 873-2003
-us-ok-medford-st-mary-71b6af5a,St. Mary,214,W,Cherokee,St,,,,214 W Cherokee St,Medford,OK,73759,0360,36.8073799,-97.73721148,(580) 395-2148
 us-ks-medicine-lodge-holy-rosary-8ec1ce24,Holy Rosary,300,,Curry,Ln,,,,300 Curry Ln,Medicine Lodge,KS,67104,,37.29105487,-98.57516464,(620) 886-3596
 us-ks-meriden-st-aloysius-b276d255,St. Aloysius,615,,Wyandotte,,,,,615 Wyandotte,Meriden,KS,66512,,39.18676133,-95.55884948,(785) 484-3312
-us-ok-miami-sacred-heart-ffa61514,Sacred Heart,2515,N,Main,St,,,,2515 N Main St,Miami,OK,74354,2216,36.9059505,-94.87846548,(918) 542-5281
 us-ks-miltonvale-st-anthony-mission-62833acf,St. Anthony,612,W,4th,St,,,,612 W 4th St,Miltonvale,KS,67466,,39.35375995,-97.4540093,(785) 632-5011 or (785) 820-1303 (Emergncy Only)
 us-ks-minneapolis-immaculate-conception-of-the-blessed-virgin-mary-602b9474,Immaculate Conception of the Blessed Virgin Mary,216,,Cherry,St,,,,216 Cherry St,Minneapolis,KS,67467,,39.11902849,-97.70505585,(785) 392-2079 or (785) 524-4823
 us-ks-mission-st-pius-x-7861a616,St. Pius X,5500,,Woodson,Rd,,,,5500 Woodson Rd,Mission,KS,66202,,39.02921057,-94.65412348,(913) 432-4808
@@ -314,20 +229,15 @@ us-ks-munjor-st-francis-of-assisi-36ba3f7f,St. Francis of Assisi,883,,Moscow,St,
 us-ks-murdock-st-louis-02089621,St. Louis,9800,NE,20th,St,,,,9800 NE 20th St,Murdock,KS,67111,,37.6762232,-97.93965794,(316) 500-1940
 us-ks-nashville-st-leo-4a54c3ce,St. Leo,8035,SW,160th,Ave,,,,8035 SW 160th Ave,Nashville,KS,67112,,37.52856714,-98.41027775,(620) 246-5370
 us-ks-neodesha-st-ignatius-9cb2cbb6,St. Ignatius,801,N,8th,St,,,,801 N 8th St,Neodesha,KS,66757,,37.42490815,-95.68393338,(620) 325-5215
-us-mo-neosho-st-canera-5d2685b4,St. Canera,507,S,Wood,St,,,,507 S Wood St,Neosho,MO,64850,,36.86418564,-94.36859288,(417) 451-3411
 us-ks-ness-city-sacred-heart-996e78f7,Sacred Heart,510,S,School,St,,,,510 S School St,Ness City,KS,67560,,38.4484608,-99.90191527,(785) 798-3530
-us-mo-nevada-st-mary-4c83865b,St. Mary,330,N,Main,St,,,,330 N Main St,Nevada,MO,64772,,37.84162865,-94.35758262,417-667-7517
 us-ks-new-almelo-st-joseph-d1285ace,St. Joseph,28035,,St John,St,,,,28035 St John St,New Almelo,KS,67645,,39.59490218,-100.11650574,(785) 567-4875
-us-ok-newkirk-st-francis-of-assisi-f5cefeed,St. Francis of Assisi,610,W,9th,St,,,,610 W 9th St,Newkirk,OK,74647,,36.88008727,-97.0617969,(580) 382-6008
 us-ks-newton-our-lady-of-guadalupe-1d43fd8d,Our Lady of Guadalupe,421,S,Ash,St,,,,421 S Ash St,Newton,KS,67114,,38.03828812,-97.35191345,(316) 283-3499
 us-ks-newton-st-mary-5d88b1dd,St. Mary,106,E,8th,St,,,,106 E 8th St,Newton,KS,67114,,38.05241111,-97.34481519,(316) 282-0459
 us-ks-norton-st-francis-of-assisi-81709561,St. Francis of Assisi,108,S,Wabash,Ave,,,,108 S Wabash Ave,Norton,KS,67654,,39.82834223,-99.88612833,(785) 877-2234
 us-ks-nortonville-st-josephs-catholic-church-29d873ff,St Joseph's Catholic Church,221,N,Sycamore,St,,,,221 N Sycamore St,Nortonville,KS,66060,,39.4197592,-95.3268821,+1-913-886-2030
 us-ks-nortonville-st-joseph-fedc054d,St. Joseph,221,N,Sycamore,St,,,,221 N Sycamore St,Nortonville,KS,66060,,39.418787,-95.3266948,(913) 886-2030
-us-ok-nowata-st-catherine-of-alexandria-5b5f595c,St. Catherine,217,W,Modoc,Ave,,,,217 W Modoc Ave,Nowata,OK,74048,1049,36.69809162,-95.64061257,(918) 534-3420
 us-ks-oakley-st-joseph-9bd53b6f,St. Joseph,625,,Freeman,Ave,,,,625 Freeman Ave,Oakley,KS,67748,,39.13133952,-100.84937271,(785) 671-3828
 us-ks-oberlin-sacred-heart-8f1b508e,Sacred Heart,210,E,Washington,St,,,,210 E Washington St,Oberlin,KS,67749,,39.82538608,-100.52730295,(785) 475-3103
-us-ne-odell-st-mary-5d4604af,St. Mary,521,,Perry,St,,,,521 Perry St,Odell,NE,68415,,40.05388236,-96.8034339,(402) 645-3160
 us-ks-odin-holy-family-07d98146,Holy Family,1387,NE,90th,Ave,,,,1387 NE 90th Ave,Odin,KS,67525,,38.56366631,-98.60904582,(620) 587-3628
 us-ks-offerle-saint-joseph-c17e7ba1,St. Joseph,111,W,1st,St,,,,111 W 1st St,Offerle,KS,67563,,37.89234262,-99.56017342,(620) 659-5555
 us-ks-offerle-st-joseph-catholic-church-a95bc4d6,St. Joseph Catholic Church,221,W,1st,Ave,,,,221 W 1st Ave,Offerle,KS,67563,,37.8923969,-99.5601926,+1-620-659-2521
@@ -363,38 +273,24 @@ us-ks-pittsburg-our-lady-of-lourdes-1f467338,Our Lady of Lourdes,109,E,9th,St,,,
 us-ks-pittsburg-st-pius-x-catholic-student-center-c1adee0f,St. Pius X Catholic Student Center,301-A,E,Cleveland,,,,,301-A E Cleveland,Pittsburg,KS,66762,,37.39257922,-94.70216987,(620) 235-1138
 us-ks-plains-saint-patrick-550ebe9e,St. Patrick,601,,Superior,St,,,,601 Superior St,Plains,KS,67869,,37.26283532,-100.59530715,(620) 873-2003
 us-ks-plainville-sacred-heart-2d2b219b,Sacred Heart,206,N,Washington,St,,,,206 N Washington St,Plainville,KS,67663,,39.23608228,-99.29785085,(785) 434-4658
-us-mo-platte-city-twelve-apostles-catholic-parish-b266091a,Twelve Apostles,17900,,Humphrey's,Rd,,,,17900 Humphrey's Rd,Platte City,MO,64079,,39.34079241,-94.78718455,(816) 640-2206
-us-mo-pleasant-hill-st-bridget-abee7c69,St. Bridget,2103,N,Lexington,,,,,2103 N Lexington,Pleasant Hill,MO,64080,,38.81672552,-94.25563221,816-540-4563
-us-ok-ponca-city-st-mary-7a2ba3dc,St. Mary,707,E,Ponca,Ave,,,,707 E Ponca Ave,Ponca City,OK,74601,,36.69941633,-97.075961,(580) 765-7794
 us-ks-prairie-village-st-ann-395a154f,St. Ann,7231,,Mission,Rd,,,,7231 Mission Rd,Prairie Village,KS,66208,,38.99716585,-94.63010461,(913) 660-1182
 us-ks-pratt-sacred-heart-dcfb6d3d,Sacred Heart,332,N,Oak,St,,,,332 N Oak St,Pratt,KS,67124,,37.64947114,-98.73650613,(620) 672-6352
 us-ks-purcell-st-mary-2c54cd2d,St. Mary,446,,KS-Hwy 137,,,,,446 KS-Hwy 137,Purcell,KS,66041,,39.68203301,-95.33060137,(785) 847-6849
 us-ks-ransom-saint-aloysius-0a3f37d4,St. Aloysius,107,N,Vermont,Ave,,,,107 N Vermont Ave,Ransom,KS,67572,,38.63830655,-99.93171533,(785) 731-2497
-us-mo-raytown-church-of-our-lady-of-lourdes-355abeb5,Our Lady of Lourdes,7009,,Blue Ridge,Blvd,,,,7009 Blue Ridge Blvd,Raytown,MO,64133,6402,38.9963125,-94.4823125,18163532380
-us-ne-red-cloud-sacred-heart-79b457a1,Sacred Heart,321,W,4th,Ave,,,,321 W 4th Ave,Red Cloud,NE,68970,,40.08891718,-98.52235705,(402) 746-3750
 us-ks-richmond-st-boniface-st-therese-cc64712d,St. Boniface - St. Therese,544,E,Central,Ave,,,,544 E Central Ave,Richmond,KS,66080,,38.4017768,-95.2493224,+1-785-835-6273
 us-ks-roeland-park-st-agnes-e052dbc0,St. Agnes,5250,,Mission,Rd,,,,5250 Mission Rd,Roeland Park,KS,66205,,39.03398713,-94.62179516,913-262-2400
 us-ks-rossville-st-stanislaus-5bff63c2,St. Stanislaus,701,,Main,St,,,,701 Main St,Rossville,KS,66533,,39.13267647,-95.95271283,(785) 584-6612
-us-ne-rulo-immaculate-conception-ec1c44c2,Immaculate Conception,,,7th & Rouleau Sts,,,,,7th & Rouleau Sts,Rulo,NE,68431,,40.05159931,-95.43400526,(402) 245-4731
 us-ks-russell-st-mary-queen-of-angels-8d31b7c4,"St. Mary, Queen of Angels",415,S,Windsor,St,,,,415 S Windsor St,Russell,KS,67665,,38.88035874,-98.86278222,(785) 483-2871
 us-ks-sabetha-sacred-heart-a8563a72,Sacred Heart,1031,S,12th,St,,,,1031 S 12th St,Sabetha,KS,66534,2551,39.89471537,-95.80527498,(785) 284-0888
 us-ks-sabetha-st-augustine-5c61665c,St. Augustine,1948,,Acorn,Rd,,,,1948 Acorn Rd,Sabetha,KS,66534,,39.79069855,-95.78842163,(785) 284-0888
 us-ks-saint-benedict-st-mary-1f665825,St. Mary,9208,,Main,St,,,,9208 Main St,Saint Benedict,KS,66538,,39.88575093,-96.09865665,(785) 336-3174
 us-ks-saint-francis-st-francis-of-assisi-2661ac06,St. Francis of Assisi,625,S,River,St,,,,625 S River St,Saint Francis,KS,67756,,39.76800137,-101.80565576,(785) 332-2680 or (785) 626-3335
 us-ks-saint-john-st-john-the-apostle-7e174585,St. John the Apostle,609,E,4th,Ave,,,,609 E 4th Ave,Saint John,KS,67576,,38.00261816,-98.75339476,(620) 549-3847
-us-mo-saint-joseph-cathedral-of-saint-joseph-b67ab1fe,Co-Cathedral of St. Joseph,519,N,10th,St,,,,519 N 10th St,Saint Joseph,MO,64501,,39.77077145,-94.84780159,816-232-7763
-us-mo-saint-joseph-our-lady-of-guadalupe-593ec24d,Our Lady of Guadalupe,4503,,Frederick,Blvd,,,,4503 Frederick Blvd,Saint Joseph,MO,64506,,39.77939611,-94.78645371,816-232-2847
-us-mo-saint-joseph-st-francis-xavier-9bff339a,St. Francis Xavier,2618,,Seneca,St,,,,2618 Seneca St,Saint Joseph,MO,64507,,39.75710071,-94.82733898,816-232-8449
-us-mo-saint-joseph-st-james-931c8fc7,St. James,5814,,King Hill,Ave,,,,5814 King Hill Ave,Saint Joseph,MO,64504,,39.71569176,-94.86280228,816-238-0853
-us-mo-saint-joseph-st-josephs-ukrainian-catholic-church-3b85855d,St. Joseph's Ukrainian Catholic Church,526,,Virginia,St,,,,526 Virginia St,Saint Joseph,MO,64504,,39.71392884,-94.87011454,+14023451552
-us-mo-saint-joseph-st-mary-church-a51c1141,St. Mary,1606,N,2nd,St,,,,1606 N 2nd St,Saint Joseph,MO,64501,,39.77861,-94.85851,816-279-1154
-us-mo-saint-joseph-st-patrick-4f86f8e1,St. Patrick,1813,S,12th,St,,,,1813 S 12th St,Saint Joseph,MO,64503,,39.75093058,-94.84506414,816.279.2594
 us-ks-saint-paul-st-francis-7827fe31,St. Francis,208,,Washington,St,,,,208 Washington St,Saint Paul,KS,66771,,37.51541814,-95.16316115,(620) 449-2224
 us-ks-salina-sacred-heart-cathedral-f2a76799,Sacred Heart Cathedral,118,N,9th,St,,,,118 N 9th St,Salina,KS,67401,,38.84084649,-97.6119088,(785) 823-7221
 us-ks-salina-st-elizabeth-ann-seton-35dd850e,St Elizabeth Ann Seton,1000,,Burr Oak,Ln,,,,1000 Burr Oak Ln,Salina,KS,67401,,38.79122865,-97.59542507,(785)825-5282 or (785)825-4413 (Emergencies)
 us-ks-salina-st-mary-queen-of-the-universe-a454ef92,"St. Mary, Queen of the Universe",230,E,Cloud,St,,,,230 E Cloud St,Salina,KS,67401,,38.81212385,-97.60649333,(785) 827-5575
 us-ks-satanta-saint-alphonsus-ec314cc3,St. Alphonsus,601,,Tecumseh,Ave,,,,601 Tecumseh Ave,Satanta,KS,67870,,37.43737638,-100.99339404,(620) 649-2692
-us-mo-savannah-st-rose-of-lima-016213f5,St. Rose of Lima,707,S,Hall,Ave,,,,707 S Hall Ave,Savannah,MO,64485,,39.93416349,-94.82307878,816-324-5700
 us-ks-scammon-st-bridget-49079497,St. Bridget,406,N,Keith,St,,,,406 N Keith St,Scammon,KS,66773,,37.27864744,-94.82057223,(620) 429-2639
 us-ks-schoenchen-st-anthony-3546784a,St. Anthony,204,,Church,St,,,,204 Church St,Schoenchen,KS,67667,,38.7131096,-99.33207484,(785) 735-9456
 us-ks-scott-city-st-joseph-878917fc,St. Joseph,1002,S,Main,St,,,,1002 S Main St,Scott City,KS,67871,,38.47699354,-100.90661591,(620) 872-3644
@@ -403,7 +299,6 @@ us-ks-scranton-st-patrick-8c661889,St. Patrick,400,E,Bracken,St,,,,400 E Bracken
 us-ks-sedan-st-robert-bellarmine-196b14a4,St. Robert,407,S,Montgomery,,,,,407 S Montgomery,Sedan,KS,67353,,37.12304587,-96.18833845,(620) 647-3577
 us-ks-seguin-st-martin-of-tours-e2b1daab,St. Martin,,,Rd 70 W,,,,,Rd 70 W,Seguin,KS,67740,,39.33879586,-100.5941672,(785) 675-3300
 us-ks-selden-sacred-heart-7adc4790,Sacred Heart,201,S,Missouri,Ave,,,,201 S Missouri Ave,Selden,KS,67757,,39.54043261,-100.5653431,(785) 475-3103
-us-mo-seneca-st-mary-a22dbe36,St. Mary,1205,,Wyandotte,St,,,,1205 Wyandotte St,Seneca,MO,64865,,36.84356031,-94.60696271,(417) 776-3786
 us-ks-seneca-sts-peter-and-paul-cc1238a5,Sts. Peter and Paul,411,,Pioneer,,,,,411 Pioneer,Seneca,KS,66538,,39.83794259,-96.06201644,(785) 336-2128
 us-ks-seward-church-of-st-francis-xavier-ce6fba85,St. Francis Xavier,,,Lincoln,Ave,,,,Lincoln Ave,Seward,KS,67576,,38.1810625,-98.7975625,16204585691
 us-ks-sharon-saint-boniface-2035dd34,St. Boniface,412,N,Main,St,,,,412 N Main St,Sharon,KS,67138,,37.25207439,-98.41730924,(620) 294-5526 or (620) 886-3596
@@ -412,19 +307,14 @@ us-ks-shawnee-good-shepherd-f6700c04,Good Shepherd,12800,W,75th,St,,,,12800 W 75
 us-ks-shawnee-sacred-heart-of-jesus-bd52395d,Sacred Heart,5501,,Monticello,Rd,,,,5501 Monticello Rd,Shawnee,KS,66226,,39.02846242,-94.83871041,(913) 422-5700
 us-ks-shawnee-st-joseph-970c1e0a,St. Joseph,11311,,Johnson,Dr,,,,11311 Johnson Dr,Shawnee,KS,66203,,39.02231089,-94.71765175,(913) 631-5983
 us-ks-smith-center-st-mary-6d8d9d11,St. Mary,403,,W,Hwy,,,,403 W Hwy 36,Smith Center,KS,66967,,39.78455995,-98.79123612,(785) 543-5367 or (785) 766-5344
-us-mo-smithville-good-shepherd-657c1802,Good Shepherd,18601,N,169,Hwy,,,,18601 N 169 Hwy,Smithville,MO,64089,,39.43193,-94.5817261,816-532-4344
 us-ks-solomon-immaculate-conception-of-the-blessed-virgin-mary-b7b87800,Immaculate Conception of the Blessed Virgin Mary,3599,N,Field,Rd,,,,3599 N Field Rd,Solomon,KS,67480,,38.91812591,-97.38165303,(785) 655-2221 or (785) 820-0994
 us-ks-south-hutchinson-our-lady-of-guadalupe-913ee46e,Our Lady of Guadalupe,612,S,Maple,,,,,612 S Maple,South Hutchinson,KS,67505,,38.02016904,-97.93410892,(620) 662-6443
 us-ks-spearville-saint-john-the-baptist-133d33b9,St. John the Baptist,100,S,Main,St,,,,100 S Main St,Spearville,KS,67876,,37.84726544,-99.75475211,(620) 385-2202
 us-ks-spivey-st-peter-catholic-church-eb93d2f8,St. Peter Catholic Church,10044,SW,90,St,,,,10044 SW 90 St,Spivey,KS,67142,,37.5159017,-98.3015209,+1-620-246-5370
 us-ks-st-marys-immaculate-conception-80d420d7,Immaculate Conception,208,W,Bertrand,,,,,208 W Bertrand,St. Marys,KS,66536,,39.19192068,-96.06596216,(785) 437-2408 
-us-ne-steinauer-st-anthony-of-padua-806631a8,St. Anthony,201,,3rd,St,,,,201 3rd St,Steinauer,NE,68441,,40.20775408,-96.2296772,(402) 869-2256
 us-ks-stockton-st-thomas-225df9a4,St. Thomas,722,,Main,St,,,,722 Main St,Stockton,KS,67669,,39.43690472,-99.2698537,(785) 434-4658
 us-ks-strong-city-st-anthony-of-padua-7561bdf6,St. Anthony of Padua,602,,Cottonwood,,,,,602 Cottonwood,Strong City,KS,66869,,38.3992235,-96.53912146,(620) 767-6412
-us-mo-sugar-creek-church-of-st-cyril-91ef3a1c,St. Cyril,11231,,Chicago,St,,,,11231 Chicago St,Sugar Creek,MO,11231,,39.1148125,-94.4421875,18162529564
-us-mo-sugar-creek-saint-luke-ruthenian-6767c854,St. Luke [Ruthenian],11413,,Chicago,St,,,,11413 Chicago St,Sugar Creek,MO,64054,,39.11484847,-94.44128761,(816) 231-7100
 us-ks-summerfield-holy-family-a67ac7cf,Holy Family,600,,Main,St,,,,600 Main St,Summerfield,KS,66541,,39.9947766,-96.3485492,(785) 736-2220
-us-ne-superior-st-joseph-49e741d8,St. Joseph,1415,,California,St,,,,1415 California St,Superior,NE,68978,,40.03052675,-98.07259083,(402) 879-3735
 us-ks-syracuse-saint-raphael-64e62c5c,St. Raphael,608,N,Sumner,St,,,,608 N Sumner St,Syracuse,KS,67878,,37.98441746,-101.74422398,(620) 384-7337
 us-ks-tampa-holy-redeemer-holy-family-parish-299b9015,Holy Redeemer,426,,Main,St,,,,426 Main St,Tampa,KS,67483,,38.54945873,-97.15316324,(620) 382-3369
 us-ks-timken-holy-trinity-9e5969d6,Holy Trinity,103,S,Main,St,,,,103 S Main St,Timken,KS,67575,,38.46988361,-99.1800065,(785) 222-3292 or (785) 222-2561 (Rectory)
@@ -441,7 +331,6 @@ us-ks-topeka-our-lady-of-guadalupe-92570364,Our Lady of Guadalupe Church,201,NE,
 us-ks-topeka-sacred-heart-bb2c5fba,Sacred Heart,312,NE,Freeman,Ave,,,,312 NE Freeman Ave,Topeka,KS,66616,,39.05816709,-95.64759191,(785) 234-3338
 us-ks-topeka-st-joseph-5b1444a4,St. Joseph,227,SW,Van Buren,St,,,,227 SW Van Buren St,Topeka,KS,66603,,39.057084,-95.6746129,(785) 232-2863
 us-ks-topeka-st-matthew-cb442a5d,St. Matthew,2700,SE,Virginia,Ave,,,,2700 SE Virginia Ave,Topeka,KS,66605,,39.01797999,-95.66541644,(785) 232-5012
-us-ne-trenton-st-james-a5167461,St. James,117,W,B,St,,,,117 W B Street,Trenton,NE,69044,,40.1737559,-101.0141856,(308) 334-5328
 us-ks-tribune-saint-joseph-the-worker-f851c9e4,St. Joseph the Worker,801,,Broadway,Ave,,,,801 Broadway Ave [KS-27],Tribune,KS,67879,,38.47310115,-101.75273499,(620) 379-4427 or (620) 379-4431 (Rectory)
 us-ks-troy-st-charles-2445bca9,St. Charles,520,,Chestnut,,,,,520 Chestnut,Troy,KS,66087,,39.78584611,-95.09589731,(785) 989-4818 
 us-ks-ulysses-mary-queen-of-peace-parish-of-mary-queen-of-peace-and-st-bernadette-0acb4fd1,"Mary, Queen of Peace (Parish of Mary Queen of Peace and St. Bernadette)",804,N,Colorado,St,,,,804 N Colorado St,Ulysses,KS,67880,,37.58764739,-101.36272002,(620) 356-1532
@@ -450,18 +339,13 @@ us-ks-victoria-the-basilica-of-st-fidelis-the-cathedral-of-the-plains-6680698e,B
 us-ks-vincent-st-boniface-456466c0,St. Boniface,619,,Vincent,Ave,,,,619 Vincent Ave,Vincent,KS,67671,,38.77268821,-99.11569665,(785) 735-2777
 us-ks-viola-st-john-9dfaecc9,St. John,18630,W,71st,St,,,,18630 W 71st St,Viola,KS,67149,,37.5639615,-97.55580032,(620) 545-7171
 us-ks-wakeeney-christ-the-king-9e19ad30,Christ the King,412,N,9th,St,,,,412 N 9th St,Wakeeney,KS,67672,,39.02874016,-99.87758577,(785) 743-2330 or (785) 421-2535
-us-ok-wakita-st-mary-assumption-2f9df021,St. Mary Assumption,,,Main and Birch,,,,,Main and Birch,Wakita,OK,73771,,36.88297223,-97.91764401,(580) 395-2148
-us-ok-wakita-st-mary-assumption-catholic-church-d4e6a490,St. Mary Assumption Catholic Church,1938,,Main,St,,,,1938 Main St,Wakita,OK,73771,,36.8830402,-97.9177596,+1-580-395-2148
 us-ks-walker-st-ann-359c9977,St. Ann,1273,,Walker,Ave,,,,1273 Walker Ave,Walker,KS,67674,,38.86627143,-99.07733553,(785) 735-2777
 us-ks-wamego-church-of-st-bernard-d2460703,St. Bernard,1006,,Eighth,St,,,,1006 Eighth St,Wamego,KS,66547,,39.2060625,-96.3083125,
 us-ks-wamego-st-bernard-05fbfb20,St. Bernard,17655,,Old Post,Rd,,,,17655 Old Post Rd,Wamego,KS,66547,,39.21813066,-96.30476528,(785) 456-7869
 us-ks-washington-st-augustine-71598f89,St. Augustine,410,,B,St,,,,410 B Street,Washington,KS,66968,,39.81557377,-97.04820687,(785) 325-3147 or (785) 337-2289
 us-ks-wathena-st-joseph-bede7a39,St. Joseph,102,S,7th,St,,,,102 S 7th St,Wathena,KS,66090,,39.75891652,-94.9524127,(785) 989-4818
 us-ks-waverly-st-joseph-281d7107,St. Joseph,508,,Pearson,Ave,,,,508 Pearson Ave,Waverly,KS,66871,,38.39511799,-95.59993312,(620) 364-5671
-us-mo-webb-city-sacred-heart-64b301f6,Sacred Heart,909,N,Madison,St,,,,909 N Madison St,Webb City,MO,64870,,37.1567188,-94.47372416,(417) 673-2044
-us-ok-welch-st-ann-9a9e309a,St. Ann,450,S,Jefferson,St,,,,450 S Jefferson St,Welch,OK,74369,0025,36.87308676,-95.09802303,(918)788-3771
 us-ks-wellington-st-anthony-st-rose-644c263f,St. Anthony,210,N,B,St,,,,210 N B Street,Wellington,KS,67152,,37.26705705,-97.39576481,(620) 326-2522
-us-mo-weston-holy-trinity-1c8c68cc,Holy Trinity,407,,Cherry,St,,,,407 Cherry St,Weston,MO,64098,,39.409473,-94.899288,816-640-2206
 us-ks-westphalia-st-teresa-of-avila-52e9499e,St. Teresa,404,,Garrison,Ave,,,,404 Garrison Ave,Westphalia,KS,66093,,38.18304369,-95.49054191,(620) 364-5671
 us-ks-westwood-st-rose-philippine-duchesne-70d43ae0,St. Rose Philippine Duchesne,5035,,Rainbow,Blvd,,,,5035 Rainbow Blvd,Westwood,KS,66205,,39.0362854,-94.6112,(913) 236-0005
 us-ks-wetmore-st-james-e119925d,St. James,306,,5th,St,,,,306 5th St,Wetmore,KS,66550,,39.63512199,-95.80901202,(785) 284-0888
@@ -496,6 +380,5 @@ us-ks-willowdale-st-peter-508670e3,St. Peter,10044,SW,90th,St,,,,10044 S.W 90th 
 us-ks-wilson-st-wenceslaus-d1215356,St. Wenceslaus,2811,,,Ave,,,,2811 Ave D,Wilson,KS,67490,,38.82233868,-98.47287461,(785) 658-3361
 us-ks-winfield-holy-name-55d2a439,Holy Name,412,E,Eighth,St,,,,412 E Eighth St,Winfield,KS,67153,,37.24164732,-96.99239813,(620) 221-3610
 us-ks-wright-saint-andrew-a922536d,St. Andrew,11798,,Jewell,Rd,,,,11798 Jewell Rd,Wright,KS,67882,,37.77959316,-99.88782508,(620) 227-3363 or (620) 227-1555
-us-ne-wymore-st-mary-19b3cecc,St. Mary,115,N,11th,St,,,,115 N 11th St,Wymore,NE,68466,,40.12309309,-96.66786432,(402) 645-3160
 us-ks-yates-center-st-joseph-845b5a7c,St. Joseph,107,E,Bell,,,,,107 E Bell,Yates Center,KS,66783,,37.88663756,-95.73210052,(620) 365-2277
 us-ks-zenda-st-john-c8a08052,St. John,109,N,Ada,,,,,109 N Ada,Zenda,KS,67159,,37.44283628,-98.27936542,(620) 246-5370

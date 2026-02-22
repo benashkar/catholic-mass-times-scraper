@@ -1,6 +1,4 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
-us-va-abingdon-christ-the-king-d0b23642,Christ the King,820,E,Main,St,,,,820 E Main St,Abingdon,VA,24210,,36.71609686,-81.94634866,(276) 628-2941
-us-ky-albany-emmanuel-b6b399dc,Emmanuel,2546,,N,Hwy,,,,2546 N Hwy 127,Albany,KY,42602,,36.72114207,-85.13456733,6066881921
 us-tn-alcoa-our-lady-of-fatima-73002bc5,Our Lady of Fatima,858,,Louisville,Rd,,,,858 Louisville Rd,Alcoa,TN,37701,,35.7728424,-83.98997,(865) 982-3672
 us-tn-alto-st-margaret-mary-mission-e2b55c6a,Mission of St. Margaret Mary,9458,,Old Alto,Hwy,,,,9458 Old Alto Hwy,Alto,TN,37324,,35.26970616,-85.95797942,(931) 967-0961
 us-tn-ashland-city-st-marthas-be03924f,St. Martha,3331,,Bell,St,,,,3331 Bell St,Ashland City,TN,37015,,36.28739961,-87.0497853,615-792-4255
@@ -8,110 +6,71 @@ us-tn-athens-st-mary-a2e3dbbb,St. Mary,1291,E,Madison,Ave,,,,1291 E Madison Ave,
 us-tn-bartlett-catholic-church-of-the-nativity-7efaa0e5,Nativity,5955,,St Elmo,Rd,,,,5955 St Elmo Rd,Bartlett,TN,38135,1516,35.230419,-89.864142,(901) 382-2504
 us-tn-bartlett-st-ann-43df716d,St. Ann,6529,,Stage,Rd,,,,6529 Stage Rd,Bartlett,TN,38134,,35.20378517,-89.84561806,(901) 373-6011
 us-tn-bells-our-lady-of-guadalupe-2cb0943b,Our Lady of Guadalupe,172,,Main,St,,,,172 Main St,Bells,TN,38006,,35.71255837,-89.0900501,(731) 668-2596
-us-ga-blue-ridge-st-anthony-e6076b50,St. Anthony,967,E,Main,St,,,,967 E Main St,Blue Ridge,GA,30513,,34.86211006,-84.32688782,(706) 632-5970
 us-tn-bolivar-st-mary-295016da,St. Mary,223,,Mecklenburg,Dr,,,,223 Mecklenburg Dr,Bolivar,TN,38008,,35.25628286,-89.00606704,(731) 658-4627
-us-nc-boone-st-elizabeth-6c07184f,St. Elizabeth of the Hill Country,259,,Pilgrims,Way,,,,259 Pilgrims Way,Boone,NC,28607,6113,36.19487546,-81.66057212,(828) 264-8338
 us-tn-brentwood-holy-family-f471d74d,Holy Family,9100,,Crockett,Rd,,,,9100 Crockett Rd,Brentwood,TN,37027,,35.9787369,-86.7694,(615) 373-4696
-us-va-bristol-st-anne-50bcbd22,St. Anne,316,,Euclid,Ave,,,,316 Euclid Ave,Bristol,VA,24201,4014,36.60750386,-82.17849654,(276) 669-8200
 us-tn-brownsville-st-john-f52ef8c0,St. John,910,N,Washington,Ave,,,,910 N Washington Ave,Brownsville,TN,38012,,35.60185323,-89.26155419,(731) 668-2596
-us-nc-bryson-city-st-joseph-a7d68070,St. Joseph,316,,Main,St,,,,316 Main St,Bryson City,NC,28713,8096,35.42822121,-83.4430384,(828) 488-6766
-us-ky-burkesville-holy-cross-11536cf0,Holy Cross,254,,Glasgow,Rd,,,,254 Glasgow Rd,Burkesville,KY,42717,9696,36.7953167,-85.3959511,6066881921
-us-ky-burkesville-holy-cross-catholic-church-27495964,Holy Cross Catholic Church,264,,Glasgow,Rd,,,,264 Glasgow Rd,Burkesville,KY,42717,,36.7959645,-85.3710983,+1-270-864-4107
-us-nc-burnsville-sacred-heart-ef6ce14f,Sacred Heart,20,,Summit,St,,,,20 Summit St,Burnsville,NC,28714,,35.91818971,-82.29523358,(828) 689-3719
 us-tn-camden-st-mary-9fa76b1c,St. Mary,220,W,Main,St,,,,220 W Main St,Camden,TN,38320,,36.05878044,-88.10988683,(731) 584-6459
 us-tn-carthage-st-peter-the-apostle-f24741ac,St. Peter the Apostle,208,,Upper Ferry,Rd,,,,208 Upper Ferry Rd,Carthage,TN,37030,,36.24862546,-85.95236443,(615) 281-8327
-us-mo-caruthersville-sacred-heart-ec841d5f,Sacred Heart,605,,Ward,Ave,,,,605 Ward Ave,Caruthersville,MO,63830,,36.18990802,-89.65604406,(573) 333-4301
 us-tn-cedar-hill-st-michael-mission-2e142164,Mission of St. Michael,3553,S,Carter,Rd,,,,3553 S Carter Rd,Cedar Hill,TN,37032,,36.48724895,-86.99844737,(615) 384-6200
 us-tn-celina-divine-savior-mission-de8d4250,Divine Savior Mission ,150,,Divine Savior,Rd,,,,150 Divine Savior Rd,Celina,TN,38551,,36.54516955,-85.49586304,(931) 243-2618
 us-tn-celina-mission-of-the-divine-savior-b91782b6,Mission of the Divine Savior,150,,Divine Savior,Rd,,,,150 Divine Savior Rd,Celina,TN,38551,,36.5463125,-85.5019375,19312432618
 us-tn-centerville-christ-the-redeemer-f9d8c0c2,Christ the Redeemer,1515,,Woodland,Dr,,,,1515 Woodland Dr,Centerville,TN,37033,,35.81988879,-87.44059606,(931) 729-4669
 us-tn-chattanooga-saints-peter-and-paul-f834e6ae,Basilica of Sts. Peter and Paul,214,E,8th,St,,,,214 E 8th St,Chattanooga,TN,37402,,35.04681723,-85.30717301,(423) 266-1618
-us-tn-chattanooga-our-lady-of-perpetual-help-b23b496f,Our Lady of Perpetual Help,501,S,Moore,Rd,,,,501 S Moore Rd,Chattanooga,TN,37412,2949,35.00538796,-85.23222604,(423) 622-7232
 us-tn-chattanooga-our-lady-of-perpetual-help-99f7b72e,Our Lady of Perpetual Help,501,S,Moore,Rd,,,,501 S Moore Rd,Chattanooga,TN,37412,,35.0055306,-85.233591,+1-423-622-7232
 us-tn-chattanooga-st-jude-df69b0ca,St. Jude,930,,Ashland,Ter,,,,930 Ashland Ter,Chattanooga,TN,37415,,35.11686775,-85.26672216,(423) 870-2386
 us-tn-chattanooga-st-jude-catholic-church-4e9ab6e0,St. Jude Catholic Church,930,,Ashland,Ter,,,,930 Ashland Terrace,Chattanooga,TN,37415,,35.1151859,-85.2645065,+1-423-870-2386
 us-tn-chattanooga-church-of-st-stephen-8f1f2649,St. Stephen,7111,,Lee,Hwy,,,,7111 Lee Hwy,Chattanooga,TN,37421,,35.0483125,-85.1579375,14238921261
 us-tn-chattanooga-st-stephen-2f37f4e4,St. Stephen,7111,,Lee,Hwy,,,,7111 Lee Hwy,Chattanooga,TN,37421,,35.05066661,-85.15290535,(423) 892-1261
-us-nc-cherokee-our-lady-of-guadalupe-f354ceb0,Our Lady of Guadalupe,82,,Lambert Branch,Rd,,,,82 Lambert Branch Rd,Cherokee,NC,28719,,35.49285785,-83.31510424,(828) 488-6766
 us-tn-clarksville-immaculate-conception-2c5abfad,Immaculate Conception,709,,Franklin,St,,,,709 Franklin St,Clarksville,TN,37040,,36.52936813,-87.35060046,(931) 645-6275
 us-tn-cleveland-st-therese-of-lisieux-3d548f8a,St. Therese of Lisieux,900,,Clingan Ridge,Dr,NW,,,900 Clingan Ridge Dr NW,Cleveland,TN,37312,,35.1873642,-84.8727644,(423) 476-8123
-us-ky-clinton-st-jude-7338fd8f,St. Jude,308,,Mayfield,Rd,,,,308 Mayfield Rd,Clinton,KY,42031,,36.66508508,-88.99159023,(270) 653-6869 or (270) 472-2742 
 us-tn-clinton-st-therese-303ead52,St. Therese,701,S,Charles G Seivers,Blvd,,,,701 S Charles G Seivers Blvd,Clinton,TN,37716,,36.0896263,-84.147995,(865) 457-4073
 us-tn-collierville-the-incarnation-0d34f4b1,Incarnation,360,,Bray Station,Rd,,,,360 Bray Station Rd,Collierville,TN,38017,,35.05071973,-89.70450319,(901) 853-7468 
 us-tn-columbia-st-catherine-of-siena-cbf81bab,St. Catherine,3019,,Cayce,Ln,,,,3019 Cayce Ln,Columbia,TN,38401,,35.59467909,-87.09672678,(931) 388-3803
 us-tn-cookeville-st-thomas-aquinas-ddbf0eb2,St. Thomas Aquinas,421,N,Washington,Ave,,,,421 N Washington Ave,Cookeville,TN,38501,,36.16780403,-85.49801193,(931) 526-2575
 us-tn-copperhill-st-catherine-cc0bcecd,St. Catherine Laboure,115,,Main,St,,,,115 Main St,Copperhill,TN,37317,,34.98815,-84.36875,(423) 496-3498
 us-tn-cordova-st-francis-of-assisi-df57be32,St. Francis of Assisi,8151,,Chimneyrock,Blvd,,,,8151 Chimneyrock Blvd,Cordova,TN,38016,,35.18125744,-89.7908642,(901) 756-1213
-us-ms-corinth-st-james-the-less-3095da69,St. James the Less,3189,N,Harper,Rd,,,,3189 N Harper Rd,Corinth,MS,38834,,34.95144009,-88.49705596,(662) 331-5184
 us-tn-counce-our-lady-of-the-lake-be1000b3,Mission of Our Lady of the Lake,10645,,,Hwy,,,,10645 Hwy 57,Counce,TN,38326,,35.02357363,-88.23714876,(731) 925-4852
 us-tn-covington-st-alphonsus-0f61e6c5,St. Alphonsus,1225,,,Hwy,,,,1225 Hwy 51 S,Covington,TN,38019,,35.55028448,-89.65851036,(901) 476-8140
-us-ar-crawfordsville-sacred-heart-of-jesus-fd5c0550,Sacred Heart of Jesus,216,S,Main,St,,,,216 S Main St,Crawfordsville,AR,72327,,35.22511474,-90.32675254,(870) 733-1212 
 us-tn-crossville-saint-francis-of-assisi-catholic-church-da0b3e14,Saint Francis of Assisi Catholic Church,7503,,Peavine,Rd,,,,7503 Peavine Rd,Crossville,TN,38558,,36.0061111,-84.8802108,+1-931-484-3628
 us-tn-crossville-st-alphonsus-catholic-church-376c1711,St Alphonsus Catholic Church,151,,St Alphonsus,Way,,,,151 St Alphonsus Way,Crossville,TN,38555,,35.9534835,-85.0459899,+1-931-484-2358
 us-tn-crossville-st-alphonsus-deea3151,St. Alphonsus,151,,St Alphonsus,Way,,,,151 St Alphonsus Way,Crossville,TN,38555,,35.95424652,-85.04456329,(931) 484-2358
-us-ga-dalton-st-joseph-b6922654,St. Joseph,968,,Haig Mill Lake,Rd,,,,968 Haig Mill Lake Rd,Dalton,GA,30720,,34.80860928,-84.9885278,(706) 278-3107
 us-tn-dayton-st-bridget-de61949a,St. Bridget,320,,Walnut Grove Church,Rd,,,,320 Walnut Grove Church Rd,Dayton,TN,37321,,35.51336828,-84.99573004,(423) 775-2664
 us-tn-dayton-st-elizabeth-ann-seton-dayton-c7e22306,"St. Elizabeth Ann Seton, Dayton",500,,Oxford,Dr,,,,500 Oxford Dr,Dayton,TN,37321,,35.46815735,-85.05373753,(912) 508-5313
 us-tn-decherd-good-shepherd-2a35d384,Good Shepherd,2021,,Decherd,Blvd,,,,2021 Decherd Blvd,Decherd,TN,37324,,35.20833464,-86.09505507,(931) 967-0961
 us-tn-dickson-st-christopher-03dae1d9,St. Christopher,713,W,College,St,,,,713 W College St,Dickson,TN,37055,,36.08546366,-87.39679128,(615) 446-3927
 us-tn-dover-st-francis-of-assisi-24d015cf,St Francis of Assisi Church,1489,,Donelson,Pkwy,,,,1489 Donelson Pkwy,Dover,TN,37058,,36.47916547,-87.88804649,(931) 232-9422
-us-va-dungannon-st-patrick-55171a74,St. Patrick,,,VA-65,,,,,VA-65,Dungannon,VA,24245,,36.8267709,-82.46948444,(276) 669-8200
 us-tn-dunlap-church-of-the-shepherd-of-the-valley-89ab1bb1,Shepherd of the Valley,6191,,,Hwy,,,,6191 Hwy 28,Dunlap,TN,37327,,35.3485625,-85.4068125,14239496903
 us-tn-dunlap-shepherd-of-the-valley-6b3e318f,Shepherd of the Valley,6191,,,Hwy,,,,6191 Hwy 28,Dunlap,TN,37327,,35.36896515,-85.38557434,(423) 949-6903
 us-tn-dunlap-shepherd-of-the-valley-catholic-church-f60f4129,Shepherd of the Valley Catholic Church,6191,,TN-28,,,,,6191 TN-28,Dunlap,TN,37327,,35.3468335,-85.4078208,+1-423-949-6903
 us-tn-dyersburg-holy-angels-063c82f6,Holy Angels,535,,Tucker,St,,,,535 Tucker St,Dyersburg,TN,38024,,36.03638175,-89.39224889,(731) 287-8000
 us-tn-elizabethton-st-elizabeths-roman-catholic-church-9cdf8f97,St Elizabeth's Roman Catholic Church,510,W,C,St,,,,510 W C St,Elizabethton,TN,37643,,36.3479598,-82.2339529,+1-423-543-3412
 us-tn-elizabethton-st-elizabeth-83318d64,St. Elizabeth,510,W,C,St,,,,510 W C Street,Elizabethton,TN,37643,,36.34835509,-82.23297419,(423) 543-3412
-us-ky-elkton-church-of-st-susan-f7bab93c,St. Susan,221,,Allensville,St,,,,221 Allensville St,Elkton,KY,42220,0788,36.8058125,-87.1474375,12702655263
-us-ga-ellijay-good-samaritan-da977c0f,Good Samaritan,55,,Church,St,,,,55 Church St,Ellijay,GA,30540,,34.6939,-84.4826,(706) 636-2772
 us-tn-erwin-st-michael-the-archangel-e5ed772e,St. Michael the Archangel ,657,N,Mohawk,Dr,,,,657 N Mohawk Dr,Erwin,TN,37650,,36.147376,-82.397793,(423) 735-0484
 us-tn-fairfield-glade-st-francis-of-assisi-0206c7aa,St. Francis of Assisi,7503,,Peavine,Rd,,,,7503 Peavine Rd,Fairfield Glade,TN,38558,,36.00592422,-84.88063049,(931) 484-3628
 us-tn-farragut-st-john-neumann-745f5b10,St. John Neumann,633,,Saint John,Ct,,,,633 Saint John Ct,Farragut,TN,37934,,35.8859516,-84.19537045,(865) 966-4540
 us-tn-fayetteville-st-anthony-of-padua-c559d62d,St. Anthony,1900,,Huntsville,Hwy,,,,1900 Huntsville Hwy,Fayetteville,TN,37334,,35.11395839,-86.56541031,(931) 433-6525
-us-al-florence-st-joseph-78b40a7d,St. Joseph,203,,Plum,St,,,,203 Plum St,Florence,AL,35630,,34.80482635,-87.66309365,(256) 764-3303
-us-al-florence-st-michael-28201987,St. Michael,2751,,County Rd 30,,,,,2751 County Rd 30,Florence,AL,35634,,34.87500987,-87.62632972,(256) 764-1885
-us-ky-fort-campbell-the-catholic-community-of-the-sacred-heart-of-jesus-3671915d,The Catholic Community of The Sacred Heart of Jesus,,,Building# 5875 Desert Storm,Ave,,,, Building# 5875 Desert Storm Ave,Fort Campbell,KY,42223,,36.63956072,-87.46193708,270-798-2352
-us-ga-fort-oglethorpe-st-gerard-e16deca2,St. Gerard Majella,3049,,Lafayette,Rd,,,,3049 Lafayette Rd,Fort Oglethorpe,GA,30742,,34.9451209,-85.25832232,(706) 861-9410
 us-tn-franklin-corpus-christi-sspx-chapel-a53a99a7,Corpus Christi SSPX Chapel,130,,Old Liberty,Pike,,,,130 Old Liberty Pike,Franklin,TN,37064,,35.9292837,-86.8621281,+1-615-791-8776
-us-ky-franklin-st-mary-d011f541,St. Mary,403,N,Main,St,,,,403 N Main St,Franklin,KY,42135,,36.7258532,-86.57775677,(270) 586-4515 or (270) 253-3230 (Rectory)
 us-tn-franklin-st-matthew-02fe2f6b,St. Matthew,535,,Sneed,Rd,W,,,535 Sneed Rd W,Franklin,TN,37069,,36.02889572,-86.95785143,(615) 646-0378
 us-tn-franklin-st-nicholas-ukranian-37b1c20a,St. Nicholas [Ukranian],113,,2nd,Ave,S,,,113 2nd Ave S,Franklin,TN,37064,,35.92583479,-86.86635375,(931)647-7338
 us-tn-franklin-st-philip-e8fc4d32,St. Philip,113,,Second,Ave,S,,,113 Second Ave S,Franklin,TN,37064,,35.92594689,-86.86631151,(615) 794-8588
-us-ky-fulton-st-edward-8408dc93,St. Edward,504,,Eddings,St,,,,504 Eddings St,Fulton,KY,42041,,36.50804868,-88.87882403,(270) 472-2742
 us-tn-gallatin-st-john-vianney-e9daccad,St. John Vianney,449,N,Water,St,,,,449 N Water St,Gallatin,TN,37066,,36.39551007,-86.4461934,(615) 452-2977
-us-va-gate-city-st-bernard-3e8c17f7,St. Bernard,139,,Linda,St,,,,139 Linda St,Gate City,VA,24251,,36.63347124,-82.60015225,(276) 669-8200
 us-tn-gatlinburg-st-mary-58015623,St. Mary,304,,Airport,Rd,,,,304 Airport Rd,Gatlinburg,TN,37738,,35.7079,-83.518,(865) 436-4907
 us-tn-germantown-our-lady-of-perpetual-help-60d9a1bf,Our Lady of Perpetual Help,8151,,Poplar,Ave,,,,8151 Poplar Ave,Germantown,TN,38138,,35.08401233,-89.79274927,(901) 754-1204
 us-tn-greeneville-notre-dame-5f4311eb,Notre Dame,212,,Mount Bethel,Rd,,,,212 Mount Bethel Rd,Greeneville,TN,37745,,36.1684443,-82.80832825,(423) 639-9381
 us-tn-greeneville-notre-dame-catholic-church-1b340822,Notre Dame Catholic Church,212,,Mt Bethel,Rd,,,,212 Mt Bethel Rd,Greeneville,TN,37745,,36.1665713,-82.8079636,+1-423-639-9381
-us-ky-guthrie-st-francis-of-assisi-c9df1a62,St. Francis of Assisi,7600,,Russellville,Rd,,,,7600 Russellville Rd,Guthrie,KY,42234,,36.66844402,-87.16132456,(270) 265-5263
-us-ky-guthrie-church-of-sts-mary-and-james-02416686,Sts. Mary and James,313,,3rd,St,,,,313 3rd St,Guthrie,KY,42234,0325,36.6469375,-87.1680625,12704832571
-us-ky-harlan-holy-trinity-c3e6bed1,Holy Trinity,2536,S,US-421,,,,,2536 S US-421,Harlan,KY,40831,,36.8249931,-83.32075459,(606) 573-6311
-us-ky-harlan-holy-trinity-catholic-church-49d7a997,Holy Trinity Catholic Church,2536,,US-421,,,,,2536 US-421,Harlan,KY,40831,,36.8250103,-83.320853,+1-606-573-6311
 us-tn-harriman-blessed-sacrament-1306f7f8,Blessed Sacrament,535,,Margrave,Dr,,,,535 Margrave Dr,Harriman,TN,37748,2118,35.93997,-84.55249,(865) 882-9838
 us-tn-helenwood-st-jude-5a8b6d68,St. Jude,13067,,Scott,Hwy,,,,13067 Scott Hwy,Helenwood,TN,37755,,36.43390353,-84.53922592,(423) 569-9584
 us-tn-hendersonville-our-lady-of-the-lake-c9d7702f,Our Lady of the Lake,1729,,Stop 30,Rd,,,,1729 Stop 30 Rd,Hendersonville,TN,37075,,36.33347056,-86.58689736,(615) 824-3276
-us-ms-hernando-holy-spirit-ac36cfc7,Holy Spirit,545,E,Commerce,St,,,,545 E Commerce St,Hernando,MS,38632,,34.82349859,-89.98022289,(662) 429-7851
-us-ky-hickman-sacred-heart-4af1da7e,Sacred Heart,411,E,Moulton,St,,,,411 E Moulton St,Hickman,KY,42040,,36.57141082,-89.19141425,(270) 472-2742
 us-tn-hohenwald-holy-trinity-7c1d7c82,Holy Trinity,610,,Kimmins,St,,,,610 Kimmins St,Hohenwald,TN,38462,,35.55929982,-87.55635344,(931) 796-3738
-us-ms-holly-springs-st-joseph-be3c8c15,St. Joseph,305,E,Van Dorn,Ave,,,,305 E Van Dorn Ave,Holly Springs,MS,38635,,34.76614227,-89.44281462,(662) 252-3138
-us-ky-hopkinsville-sts-peter-paul-d972a355,Sts. Peter and Paul,902,E,9th,St,,,,902 E 9th St,Hopkinsville,KY,42240,,36.86258499,-87.48158691,(270) 885-8522
-us-ar-horseshoe-lake-church-of-st-mary-of-the-lake-cbc9f4bb,St. Mary of the Lake,626,,Horseshoe,Cir,,,,626 Horseshoe Cir,Horseshoe Lake,AR,72348,,34.91375,-90.30625,18703386990
-us-ar-horseshoe-lake-st-mary-of-the-lake-mission-c3106567,St. Mary of the Lake Mission,626,,Horseshoe,Cir,,,,626 Horseshoe Cir,Horseshoe Lake,AR,72348,,34.94703521,-90.32866103,(870) 733-1212
 us-tn-humboldt-sacred-heart-d560810e,Sacred Heart,2887,E,Main,St,,,,2887 E Main St,Humboldt,TN,38343,,35.81738568,-88.8983414,(731) 618- 6758
 us-tn-huntingdon-holy-family-catholic-mission-church-28566c50,Holy Family Catholic Mission Church,265,,Cotham,Dr,,,,265 Cotham Dr,Huntingdon,TN,38344,,35.9905033,-88.4307087,+1-731-584-6459
 us-tn-huntingdon-holy-family-a073f6fc,Mission of the Holy Family,265,,Cotham,Dr,,,,265 Cotham Dr,Huntingdon,TN,38344,,35.99053492,-88.43074162,(731) 584-6459
-us-al-huntsville-our-lady-queen-of-the-universe-909e7b8d,"Our Lady, Queen of the Universe",2421,,Shady,Ln,,,,2421 Shady Ln Dr,Huntsville,AL,35810,,34.76308016,-86.62661594,(256) 852-0788
-us-ms-iuka-st-mary-ed3c102e,St. Mary,205,,Eastport,St,E,,,205 Eastport St E,Iuka,MS,38852,,34.81180594,-88.18848844,(662) 423-9358
 us-tn-jackson-st-mary-c15c56bd,St. Mary,1665,,US-45 BYP,,,,,1665 US-45 BYP,Jackson,TN,38305,,35.65198735,-88.85286117,(731) 668-2596
 us-tn-jamestown-st-christopher-03d4781f,St. Christopher,160,,Holt Spur,Rd,,,,160 Holt Spur Rd,Jamestown,TN,38556,,36.442123,-84.928427,(865) 882-9838
-us-nc-jefferson-church-of-st-francis-of-assisi-4f57ca73,St. Francis of Assisi,326,E,Main,St,,,,326 E Main St,Jefferson,NC,28640,,36.4206875,-81.4693125,13362469151
-us-nc-jefferson-st-francis-of-assisi-a94e9801,St. Francis of Assisi,167,,St Francis,Pl,,,,167 St Francis Pl,Jefferson,NC,28640,,36.41679186,-81.453934,(336) 246-9151
 us-tn-jefferson-city-holy-trinity-64f1788f,Holy Trinity,475,,N,Hwy,,,,475 N Highway 92,Jefferson City,TN,37760,,36.0726013,-83.4776223,(865) 471-0347
 us-tn-joelton-st-lawrence-7c537165,St. Lawrence,5655,,Clarksville,Hwy,,,,5655 Clarksville Hwy,Joelton,TN,37080,,36.28755709,-86.87967227,(615) 876-2127
 us-tn-johnson-city-etsu-catholic-center-af713bce,ETSU Catholic Center,734,W,Locust,St,,,,734 W Locust St,Johnson City,TN,37604,,36.30666318,-82.35819403,(423) 926-7061
 us-tn-johnson-city-st-mary-638b0516,St. Mary,2211,E,Lakeview,Dr,,,,2211 E Lakeview Dr,Johnson City,TN,37601,,36.3510333,-82.3515353,(423) 282-6367
-us-va-jonesville-holy-spirit-dbd87cc7,Community of the Holy Spirit,384,,Eagle Ridge,Dr,,,,384 Eagle Ridge Dr,Jonesville,VA,24263,,36.71896061,-83.10951485,(276) 346-0269
 us-tn-kingsport-st-dominic-28e365d8,St. Dominic,2517,,John B Dennis,Hwy,,,,2517 John B Dennis Hwy,Kingsport,TN,37660,,36.5588523,-82.5049378,(423) 288-8101
 us-tn-knoxville-all-saints-9bc96013,All Saints,620,N,Cedar Bluff,Rd,,,,620 N Cedar Bluff Rd,Knoxville,TN,37923,,35.930452,-84.09502,(865) 531-0770
 us-tn-knoxville-holy-ghost-c60fc7bb,Holy Ghost,1041,N,Central,St,,,,1041 N Central St,Knoxville,TN,37917,,35.98016315,-83.92827789,(865) 522-2205
@@ -126,7 +85,6 @@ us-tn-knoxville-divine-mercy-4a4e9cd5,Vietnamese Parish of Divine Mercy,10919,,C
 us-tn-lafollette-our-lady-of-perpetual-help-909a5d88,Our Lady of Perpetual Help,1142,E,Elm,St,,,,1142 E Elm St,LaFollette,TN,37766,,36.3867835,-84.1039962,+1-423-562-0312
 us-tn-lafayette-holy-family-b8338319,Holy Family,431,,Old,Hwy,,,,431 Old Hwy 52,Lafayette,TN,37083,,36.52361008,-86.0640122,(615) 666-6466
 us-tn-lafayette-church-of-the-holy-family-747bde30,Holy Family,901,,Vinson,Rd,,,,901 Vinson Rd,Lafayette,TN,37083,,36.5371875,-86.0306875,16156666466
-us-tn-lafollette-our-lady-of-perpetual-help-af3c4816,Our Lady of Perpetual Help,1142,E,Elm,St,,,,1142 E Elm St,Lafollette,TN,37766,,36.38695362,-84.10683102,(423) 562-0312
 us-tn-lancing-st-ann-56ee1828,St. Ann,198,,Ridge,Rd,,,,198 Ridge Rd,Lancing,TN,37770,,36.12836,-84.69551,(865) 882-9838
 us-tn-lancing-st-ann-catholic-church-36043365,St. Ann Catholic Church,198,,Ridge,Rd,,,,198 Ridge Rd,Lancing,TN,37770,,36.1288548,-84.6953315,+1-865-882-9838
 us-tn-lawrenceburg-sacred-heart-ba3d3da2,Sacred Heart,212,,Berger,St,,,,212 Berger St,Lawrenceburg,TN,38464,,35.24628121,-87.33532009,(931) 762-3183
@@ -134,13 +92,11 @@ us-tn-lebanon-st-frances-cabrini-0641a304,St. Frances Cabrini,300,S,Tarver,Ave,,
 us-tn-lenoir-city-st-thomas-the-apostle-f6b3c534,St. Thomas the Apostle,1580,,St Thomas,Way,,,,1580 St Thomas Way,Lenoir City,TN,37772,,35.79756303,-84.24910024,(865) 986-9885
 us-tn-lewisburg-st-john-the-evangelist-60b0b70e,St. John the Evangelist,1061,,Ellington,Pkwy,S,,,1061 Ellington Pkwy S,Lewisburg,TN,37091,,35.4299582,-86.78608737,(931) 359-5017
 us-tn-lexington-st-andrew-the-apostle-d8a8de98,St. Andrew the Apostle,895,N,Broad,St,,,,895 N Broad St,Lexington,TN,38351,,35.6769226,-88.38613495,(731) 968-6393 
-us-ga-lookout-mountain-our-lady-of-the-mount-31cd5509,Our Lady of the Mount,1227,,Scenic,Hwy,,,,1227 Scenic Hwy,Lookout Mountain,GA,30750,,34.97726409,-85.36600636,(706) 820-0680
 us-tn-loretto-sacred-heart-parish-a4dc3707,Sacred Heart,301,,Church,St,,,,301 Church St,Loretto,TN,38469,,35.07693611,-87.44345297,(931) 853-4370
 us-tn-madison-st-joseph-905bb323,St. Joseph,1225,,Gallatin,Pike,S,,,1225 Gallatin Pike S,Madison,TN,37115,,36.24544132,-86.7211013,(615) 865-1071
 us-tn-madisonville-st-joseph-the-worker-catholic-church-38a769ff,St Joseph the Worker Catholic Church,649,,Old Tellico,Hwy,N,,,649 Old Tellico Hwy N,Madisonville,TN,37354,,35.4828855,-84.3613727,+1-423-442-7273
 us-tn-madisonville-st-joseph-the-worker-1dabb7b1,St. Joseph the Worker,649,,Old Tellico,Hwy,N,,,649 Old Tellico Hwy N,Madisonville,TN,37354,,35.4836104,-84.3623254,(423) 442-7273
 us-tn-manchester-st-mark-fb2ff327,St. Mark,2941,,Mcminnville,Hwy,,,,2941 Mcminnville Hwy,Manchester,TN,37355,,35.51021284,-86.05072204,(931) 723-4107
-us-nc-mars-hill-st-andrew-the-apostle-51143e82,St. Andrew the Apostle,149,,Brook,St,,,,149 Brook St,Mars Hill,NC,28754,,35.82789155,-82.56159188,(828) 689-3719
 us-tn-martin-st-jude-the-apostle-2a2c1e6a,St. Jude,435,,Moody,Ave,,,,435 Moody Ave,Martin,TN,38237,,36.33617675,-88.86078522,(731) 587-9777
 us-tn-maynardville-mission-of-st-teresa-of-calcutta-b4226dd2,Mission of St. Teresa of Calcutta,4365,,,Hwy,,,,4365 Hwy,Maynardville,TN,37807,,36.2543125,-83.7938125,18659927222
 us-tn-maynardville-st-teresa-of-kolkata-3841ec3b,St. Teresa of Kolkata,3445,,Maynardville,Hwy,,,,3445 Maynardville Hwy,Maynardville,TN,37807,,36.23980903,-83.82046114,(865) 992-7222
@@ -173,16 +129,12 @@ us-tn-memphis-st-mary-1c0106f2,St. Mary,155,,Market,St,,,,155 Market St,Memphis,
 us-tn-memphis-st-michael-6c38168b,St. Michael,3863,,Summer,Ave,,,,3863 Summer Ave,Memphis,TN,38122,,35.1487491,-89.93246853,(901) 323-0896
 us-tn-memphis-st-patrick-1eef790e,St. Patrick,287,S,Fourth,St,,,,287 S Fourth St,Memphis,TN,38126,,35.13701,-90.05004,(901) 527-2542
 us-tn-memphis-st-paul-the-apostle-72abdf69,St. Paul the Apostle,1425,E,Shelby,Dr,,,,1425 E Shelby Dr,Memphis,TN,38116,,35.02027638,-90.01541024,(901) 346-2380
-us-ky-middlesboro-st-julian-c2f4e089,St. Julian,118,E,Chester,Ave,,,,118 E Chester Ave,Middlesboro,KY,40965,,36.60583911,-83.71327354,(606) 248-2068
 us-tn-milan-st-matthew-eadcb9b1,St. Matthew,9060,,Telecom,Dr,,,,9060 Telecom Dr,Milan,TN,38358,,35.89341303,-88.75707602,(731) 784-3904
 us-tn-millington-st-william-7fac359c,St. William,4932,,Easley,St,,,,4932 Easley St,Millington,TN,38053,,35.34494684,-89.89889292,(901) 872-4099
 us-tn-morristown-st-patrick-0d7a5a25,St. Patrick,2518,W,Andrew Johnson,Hwy,,,,2518 W Andrew Johnson Hwy,Morristown,TN,37814,,36.20285072,-83.32981179,(423) 586-9174
 us-tn-morristown-st-patrick-catholic-church-b982061a,St. Patrick Catholic Church,2518,W,Andrew Johnson,Hwy,,,,2518 W Andrew Johnson Hwy,Morristown,TN,37814,,36.2039752,-83.328814,+1-423-586-9174
 us-tn-mountain-city-st-anthony-of-padua-9ee3943c,St. Anthony of Padua,833,W,Main,St,,,,833 W Main St,Mountain City,TN,37683,,36.47669796,-81.81472932,(423) 727-5156
 us-tn-murfreesboro-saint-rose-of-lima-catholic-church-c663d498,St. Rose of Lima Catholic Church,1601,N,Tennessee,Blvd,,,,1601 N Tennessee Blvd,Murfreesboro,TN,37130,,35.86500566,-86.3693919,(615) 893-1843
-us-nc-murphy-st-william-9355b3ac,St. William,765,,Andrews,Rd,,,,765 Andrews Rd,Murphy,NC,28906,2503,35.10010373,-84.02143806,(828) 837-2000
-us-ky-murray-newman-center-of-murray-state-university-e936e73b,Newman Center of Murray State University,401,N,12th,St,,,,401 N 12th St,Murray,KY,42071,1808,36.6156875,-88.3153125,12707533876
-us-ky-murray-st-leo-59ec456d,St. Leo,401,N,12th,St,,,,401 N 12th St,Murray,KY,42071,,36.61572001,-88.31579488,(270) 753-3876
 us-tn-nashville-assumption-of-the-blessed-virgin-mary-0523e697,Assumption,1227,,7th,Ave,N,,,1227 7th Ave N,Nashville,TN,37208,,36.17552402,-86.79142469,(615) 256-2729
 us-tn-nashville-blessed-martyr-bishops-byzantine-catholic-church-8df9510a,Blessed Martyr Bishops (Byzantine Catholic Church),2319,,Lebanon,Pike,,,,2319 Lebanon Pike,Nashville,TN,37214,,36.1684078,-86.68299142,(805) 765-0761
 us-tn-nashville-cathedral-of-the-incarnation-8aff609c,Cathedral of the Incarnation,2015,W,End,Ave,,,,2015 W End Ave,Nashville,TN,37203,,36.15091774,-86.79965553,(615) 327-2330
@@ -208,23 +160,17 @@ us-tn-nashville-university-catholic-vanderbilt-and-belmont-u-6fc528d1,University
 us-tn-newport-good-shepherd-b2074e44,Good Shepherd,2361,,Cosby,Hwy,,,,2361 Cosby Hwy,Newport,TN,37821,,35.89144979,-83.22452354,(423) 623-5051
 us-tn-nolensville-mother-teresa-3df14e5e,Mother Teresa ,7668,,Nolensville,Rd,,,,7668 Nolensville Rd (house on the hill ),Nolensville,TN,37135,,35.90078433,-86.66619962,(651) 283-3119
 us-tn-norris-st-joseph-d421301b,St. Joseph,3425,,Andersonville,Hwy,,,,3425 Andersonville Hwy,Norris,TN,37828,,36.19316864,-84.05682373,(865) 494-7746
-us-ky-oak-grove-st-michael-the-archangel-ac1b1b94,St. Michael the Archangel,448,,State Line,Rd,,,,448 State Line Rd,Oak Grove,KY,42262,,36.64150746,-87.42730417,(270) 640-9850
 us-tn-oak-ridge-st-mary-d78ae3b1,St. Mary,327,,Vermont,Ave,,,,327 Vermont Ave,Oak Ridge,TN,37830,,36.01670052,-84.25260073,(865) 482-2875
 us-tn-old-hickory-st-stephen-d27d5f96,St. Stephen,14544,,Lebanon,Rd,,,,14544 Lebanon Rd,Old Hickory,TN,37138,,36.2184645,-86.57007694,(615) 758-2424
-us-ms-olive-branch-queen-of-peace-08d12c5b,Queen of Peace,8455,,Germantown,Rd,,,,8455 Germantown Rd,Olive Branch,MS,38654,,34.98366223,-89.83196843,(662) 895-5007
-us-ar-osceola-st-matthew-mission-09317585,St. Matthew,501,S,Ermen,Ln,,,,501 S Ermen Ln,Osceola,AR,72370,,35.70178529,-89.98144131,(870) 762-2506
 us-tn-paris-holy-cross-4dd3bce2,Holy Cross,1210,E,Wood,St,,,,1210 E Wood St,Paris,TN,38242,,36.3060156,-88.30233965,(731) 642-4681
 us-tn-parsons-st-regina-9db6f891,St. Regina,108,,Skyline,Dr,,,,108 Skyline Dr,Parsons,TN,38363,,35.65901219,-88.12488669,(731) 847-2054 
 us-tn-pigeon-forge-holy-cross-3fea5711,Holy Cross,144,,Wears Valley,Rd,,,,144 Wears Valley Rd,Pigeon Forge,TN,37863,,35.80394765,-83.57964395,865-429-5587
-us-ky-pineville-st-anthony-2a414a04,St. Anthony,,,Laurel and Virginia,Ave,,,,Laurel and Virginia Ave,Pineville,KY,40977,,36.76294045,-83.69790744,(606) 337-2189
 us-tn-pulaski-immaculate-conception-de6e7147,Immaculate Conception,100,,Chapel,Rd,,,,100 Chapel Rd,Pulaski,TN,38478,,35.17739076,-87.02197003,(931) 363-5776
 us-tn-ripley-ave-maria-46eef284,Ave Maria,664,S,Washington,St,,,,664 S Washington St (TN-209),Ripley,TN,38063,,35.71726064,-89.54918174,(731)589-8302
 us-tn-rogersville-st-henry-70e77de5,St. Henry,112-114,,,Hwy,,,,112-114 Hwy 70 N,Rogersville,TN,37857,,36.42584229,-82.98282623,(423) 272-6897
-us-ky-russellville-sacred-heart-9691b33b,Sacred Heart,296,W,6th,St,,,,296 W 6th St,Russellville,KY,42276,,36.84334702,-86.88861671,(270) 726-6963
 us-tn-rutledge-st-john-paul-ii-34255718,Mission of St. John Paul II,161,,Bryan,Ln,,,,161 Bryan Ln,Rutledge,TN,37861,,36.27909555,-83.52619939,(865) 992-7222
 us-tn-saint-joseph-st-joseph-2078a2f5,St. Joseph,304,,American,Blvd,,,,304 American Blvd,Saint Joseph,TN,38481,,35.03325984,-87.50327828,931-853-4370
 us-tn-savannah-st-mary-e1c304bc,St. Mary,2315,,Pickwick,St,,,,2315 Pickwick St,Savannah,TN,38372,,35.194094,-88.24255574,(731) 925-4852
-us-ky-scottsville-christ-the-king-6a06b229,Christ the King,298,,Bluegrass,Dr,,,,298 Bluegrass Dr,Scottsville,KY,42164,,36.76836623,-86.17532929,(270) 237-4404 or (270) 586-4515
 us-tn-selmer-st-jude-the-apostle-08f26262,St. Jude,1318,E,Poplar,Ave,,,,1318 E Poplar Ave,Selmer,TN,38375,,35.16889404,-88.5563485,(731) 645-4188
 us-tn-seymour-holy-family-3f653931,Holy Family,201,,Black Oak Ridge,Rd,,,,201 Black Oak Ridge Rd,Seymour,TN,37865,,35.86638,-83.76482,(865) 573-1203
 us-tn-seymour-holy-family-catholic-church-a154fa64,Holy Family Catholic Church,201,,Black Oak Ridge,Rd,,,,201 Black Oak Ridge Rd,Seymour,TN,37865,,35.865779,-83.7670973,+1-865-573-1203
@@ -240,21 +186,13 @@ us-tn-soddy-daisy-holy-spirit-1975cbbe,Holy Spirit,10768,,Dayton,Pike,,,,10768 D
 us-tn-soddy-daisy-holy-spirit-catholic-church-0c5facfc,Holy Spirit Catholic Church,10768,,Dayton,Pike,,,,10768 Dayton Pike,Soddy-Daisy,TN,37379,,35.2677833,-85.1693629,+1-423-332-5300
 us-tn-somerville-st-philip-the-apostle-fa80d613,St. Philip the Apostle,11710,,US Hwy 64,,,,,11710 US Hwy 64,Somerville,TN,38068,,35.23313999,-89.43639431,(901) 465-8685
 us-tn-south-pittsburg-our-lady-of-lourdes-2e2177c7,Our Lady of Lourdes,704,,Holly,Ave,,,,704 Holly Ave,South Pittsburg,TN,37380,,35.00741959,-85.71051788,(423) 837-7068
-us-ms-southaven-christ-the-king-ad381536,Christ the King,785,,Church,Rd,W,,,785 Church Rd W,Southaven,MS,38671,,34.9319375,-90.00312936,(662) 342-1073
-us-ms-southaven-christ-the-king-catholic-church-fe94a4b8,Christ the King Catholic Church,785,,Church,Rd,W,,,785 Church Rd W,Southaven,MS,38671,,34.9319695,-90.0031329,+1-662-342-1073
 us-tn-sparta-st-andrew-16ec0539,St. Andrew,829,,Valley View,Dr,,,,829 Valley View Dr,Sparta,TN,38583,,35.95113589,-85.48818324,(931) 738-2140
 us-tn-spring-hill-church-of-the-nativity-bc2446fe,Nativity,2793,,Buckner,Ln,,,,2793 Buckner Ln,Spring Hill,TN,37179,,35.76681666,-86.88304583,(615) 794-4004
 us-tn-springfield-our-lady-of-lourdes-b1df1eae,Our Lady of Lourdes,103,,Golf Club,Ln,,,,103 Golf Club Ln,Springfield,TN,37172,,36.49127365,-86.87495748,(615) 384-6200
-us-nc-spruce-pine-st-lucien-098dd04c,St. Lucien,695,,Summit,St,,,,695 Summit St,Spruce Pine,NC,28777,3221,35.90693042,-82.07174659,(828) 898-6900
 us-tn-tazewell-christ-the-king-a06bf0c8,Christ the King,816,,Blue Top,Rd,,,,816 Blue Top Rd,Tazewell,TN,37879,,36.43201,-83.57223,(423) 562-0312
 us-tn-tennessee-ridge-st-elizabeth-ann-seton-ee9dea7b,St Elizabeth Ann Seton Church,755,,,Hwy,,,,755 Hwy 49,Tennessee Ridge,TN,37178,,36.33432716,-87.75015771,(931) 721-3769
 us-tn-thompsons-station-catholic-church-of-the-nativity-f7ceec81,Catholic Church of the Nativity,2793,,Buckner,Ln,,,,2793 Buckner Ln,Thompson's Station,TN,37179,,35.7666537,-86.883021,+1-615-794-4004
-us-ky-tompkinsville-church-of-christ-the-king-e871f41e,Christ the King,1000,,Celina,Rd,,,,1000 Celina Rd,Tompkinsville,KY,42167,,36.6919375,-85.6800625,12704320686
 us-tn-townsend-st-francis-of-assisi-d5d36a68,St. Francis of Assisi,7719,,River,Rd,,,,7719 River Rd,Townsend,TN,37882,,35.67750959,-83.75449609,(865) 448-6070
 us-tn-tullahoma-st-paul-the-apostle-71c1927b,St. Paul the Apostle,304,W,Grizzard,St,,,,304 W Grizzard St,Tullahoma,TN,37388,,35.36395646,-86.21607847,(931) 455-3050
-us-al-tuscumbia-our-lady-of-the-shoals-a199e5b8,Our Lady of the Shoals,200,E,Commons,St,N,,,200 E Commons St N,Tuscumbia,AL,35674,,34.73318416,-87.68775118,(256) 383-7207
 us-tn-union-city-immaculate-conception-060266bf,Immaculate Conception,1303,E,Reelfoot,Ave,,,,1303 E Reelfoot Ave,Union City,TN,38261,,36.41301392,-89.0440349,(731) 885-0963
 us-tn-waynesboro-st-cecilia-8526aa53,St. Cecilia,50,,Willowbrook,Dr,,,,50 Willowbrook Dr,Waynesboro,TN,38485,,35.322829,-87.74427153,(931) 722-5877
-us-ar-west-memphis-st-michael-33d8c9dc,St. Michael,411,,Missouri,St,,,,411 Missouri St,West Memphis,AR,72301,,35.15119704,-90.18431548,(870) 733-1212
-us-ky-whitley-city-good-shepherd-d1852ab0,Good Shepherd,130,N,Main,St,,,,130 N Main St,Whitley City,KY,42653,,36.72776345,-84.47035676,(606) 376-1840
-us-ga-wildwood-st-katharine-drexel-c36546f7,St. Katharine Drexel,140,,New England,Rd,,,,140 New England Rd,Wildwood,GA,30757,,34.90915486,-85.47925076,(706) 820-0680

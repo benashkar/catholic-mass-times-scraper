@@ -1,20 +1,13 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
 us-ga-acworth-st-clare-of-assisi-0480171b,St. Clare of Assisi ,6301,,Cedarcrest,Rd,,,,6301 Cedarcrest Rd,Acworth,GA,30101,,34.057419,-84.733516,(770) 485-0825
 us-ga-adel-church-of-st-margaret-mary-a91e6268,St. Margaret Mary,1706,S,Hutchinson,Ave,,,,1706 S Hutchinson Ave,Adel,GA,31620,,31.1154375,-83.4148125,12298967319
-us-sc-aiken-saint-gerard-43b4dbe5,St. Gerard,640,,Edrie,St,NE,,,640 Edrie St NE,Aiken,SC,29801,,33.56762191,-81.70373867,(803) 649-3203
-us-sc-aiken-st-mary-help-of-christians-c96277fb,St. Mary Help of Christians,138,,Fairfield,St,SE,,,138 Fairfield St SE,Aiken,SC,29801,,33.558579,-81.7166512,+1-803-649-4777
-us-sc-aiken-saint-mary-help-of-christians-2e314cb6,St. Mary Help of Christians,138,,Fairfield,St,SE,,,138 Fairfield St SE,Aiken,SC,29801,,33.55821327,-81.71622304,(803) 649-4777
 us-ga-alapaha-saint-ann-3ea50204,St. Ann,9007,,US Hwy 82,,,,,9007 US Hwy 82,Alapaha,GA,31622,,31.38794835,-83.22630953,(229) 382-4600
 us-ga-albany-saint-teresa-of-avila-a5c58cf1,St. Teresa,421,,Edgewood,Ln,,,,421 Edgewood Ln,Albany,GA,31707,,31.58307725,-84.18930979,(229) 439-2302
-us-sc-allendale-mission-of-st-mary-553207b3,Mission of St. Mary,3457,,Bluff,Rd,,,,3457 Bluff Rd,Allendale,SC,29810,,32.92875,-81.35875,18032597593
 us-ga-alma-st-frances-of-rome-8f1ed0b5,St. Frances of Rome,1497,W,12th,St,,,,1497 W 12th St,Alma,GA,31510,,31.5443283,-82.4968891,+1-912-705-8927
 us-ga-alma-saint-frances-of-rome-91ce35ef,St. Frances of Rome ,1497,,12th,St,W,,,1497 12th St W,Alma,GA,31510,,31.5449404,-82.51534313,(912) 705-8927
 us-ga-alma-church-of-st-raymond-32bb2429,St. Raymond,32,W,,,,,,32 W,Alma,GA,31510,0431,31.53875,-82.46375,19126325623
 us-ga-alpharetta-st-thomas-aquinas-53aa2629,St. Thomas Aquinas,535,,Rucker,Rd,,,,535 Rucker Rd,Alpharetta,GA,30004,,34.07651304,-84.34594912,(770) 475-4501
 us-ga-americus-st-mary-9d75e4d3,St. Mary,332,S,Lee,St,,,,332 S Lee St,Americus,GA,31709,,32.06794768,-84.23066091,(229) 924-3495
-us-sc-anderson-saint-joseph-8e8c6d02,St. Joseph,1200,,Cornelia,Rd,,,,1200 Cornelia Rd,Anderson,SC,29621,,34.52716945,-82.6322472,(864) 225-5341
-us-sc-anderson-saint-mary-of-the-angels-e2633827,St. Mary of the Angels,1821,,White,St,,,,1821 White St,Anderson,SC,29624,,34.48779038,-82.63775047,(864) 226-8621
-us-nc-andrews-holy-redeemer-e01f8c12,Holy Redeemer,214,,Aquone,Rd,,,,214 Aquone Rd,Andrews,NC,28901,,35.19932185,-83.81864893,
 us-ga-athens-catholic-center-at-the-university-of-georgia-36063e3e,Catholic Center at the University of Georgia,1344,S,Lumpkin,St,,,,1344 S Lumpkin St,Athens,GA,30605,,33.94383349,-83.38242956,(706) 543- 2293
 us-ga-athens-st-joseph-0f6d6e81,St. Joseph,958,,Epps Bridge,Pkwy,,,,958 Epps Bridge Pkwy,Athens,GA,30606,,33.925268,-83.443879,(706) 548-6332
 us-ga-atlanta-cathedral-of-christ-the-king-bc0eabc6,Cathedral of Christ the King,2699,,Peachtree,Rd,NE,,,2699 Peachtree Rd NE,Atlanta,GA,30305,,33.8280945,-84.38665,(404) 233-2145
@@ -47,8 +40,6 @@ us-ga-bishop-saint-aelred-catholic-church-b5889de5,St. Aelred Catholic Church,49
 us-ga-blairsville-st-francis-of-assisi-a1d0320d,St. Francis of Assisi,3717,,,Hwy,,,,3717 Hwy 515 E,Blairsville,GA,30512,,34.9048257,-83.90804367,(706) 745-6400
 us-ga-blakely-holy-family-52b46d1d,Holy Family,533,,Arlington,Ave,,,,533 Arlington Ave,Blakely,GA,39825,,31.38391853,-84.93263264,(229) 723-3339
 us-ga-blue-ridge-st-anthony-e6076b50,St. Anthony,967,E,Main,St,,,,967 E Main St,Blue Ridge,GA,30513,,34.86211006,-84.32688782,(706) 632-5970
-us-sc-bluffton-saint-andrew-3cf0228f,St. Andrew,220,,Pinckney Colony,Rd,,,,220 Pinckney Colony Rd,Bluffton,SC,29909,,32.30224608,-80.8894846,(843) 815-3100
-us-sc-bluffton-saint-gregory-the-great-fb897940,St. Gregory the Great,31,,Saint Gregory,Dr,,,,31 Saint Gregory Dr,Bluffton,SC,29909,,32.29144538,-80.90486018,(843) 815-3100
 us-ga-brookhaven-divina-misericordia-51e93716,Divina Misericordia,3542,,Clairmont,Rd,,,,3542 Clairmont Rd,Brookhaven,GA,30319,,33.86254198,-84.30982359,(404) 975-1765
 us-ga-brookhaven-our-lady-of-the-assumption-9a3c2f1b,Our Lady of the Assumption,,,135o Hearst Dr NE,,,,,135o Hearst Dr NE,Brookhaven,GA,30319,,33.88593198,-84.33059846,(404) 261-7181
 us-ga-brunswick-saint-francis-xavier-6de58c71,St Francis Xavier Church,1120,,Newcastle,St,,,,1120 Newcastle St,Brunswick,GA,31520,,31.1449365,-81.49351099,(912) 265-3249
@@ -57,7 +48,6 @@ us-ga-buena-vista-church-of-st-mary-magdalen-a5f10c00,St. Mary Magdalen,232,S,Br
 us-ga-cairo-st-elizabeth-ann-seton-00b96c21,St Elizabeth Ann Seton,1500,,11th,Ave,NW,,,1500 11th Ave N.W,Cairo,GA,39827,,30.88980614,-84.22917731,(229)226-3624
 us-ga-calhoun-st-clements-catholic-church-92a9b8c7,St Clement's Catholic Church,875,,,Hwy,,,,875 Hwy 53,Calhoun,GA,30701,,34.473325,-84.972043,+1-706-629-2345
 us-ga-calhoun-st-clement-10dbb0c4,St. Clement,875,,,Hwy,,,,875 Hwy 53 W SW,Calhoun,GA,30701,,34.44304261,-84.99858351,(706) 629-2345
-us-fl-callahan-our-lady-of-consolation-675274a8,Our Lady of Consolation,541668,,US Hwy 1,,,,,541668 US Hwy 1,Callahan,FL,32011,,30.54791107,-81.81733356,(904) 879-3662
 us-ga-camilla-saint-john-vianney-e97d5ca4,St. John Vianney,425,S,MacArthur,Dr,,,,425 S MacArthur Dr,Camilla,GA,31730,,31.22055139,-84.18920152,(229) 336-8685
 us-ga-canton-our-lady-of-la-salette-df992e29,Our Lady of La Salette,2941,,Sam Nelson,Rd,,,,2941 Sam Nelson Rd,Canton,GA,30114,5178,34.28783831,-84.52356079,(770) 479-8923
 us-ga-carrollton-our-lady-of-perpetual-help-b755dcb8,Our Lady of Perpetual Help,210,,Old Center Point,Rd,,,,210 Old Center Point Rd,Carrollton,GA,30117,,33.66372479,-85.04958401,(770) 832-8977
@@ -65,19 +55,9 @@ us-ga-cartersville-st-francis-of-assisi-f5a45889,St. Francis of Assisi,850,,Dout
 us-ga-cedartown-st-bernadette-137307c1,St. Bernadette,100,,Evergreen,Ln,,,,100 Evergreen Ln,Cedartown,GA,30125,,34.03829416,-85.26070612,(770) 748-1517
 us-ga-cedartown-st-bernadette-roman-catholic-church-193522fc,St. Bernadette Roman Catholic Church,100,,Evergreen,Ln,,,,100 Evergreen Ln,Cedartown,GA,30125,,34.0395526,-85.2608813,+1-770-748-1517
 us-ga-chatsworth-st-toribio-romo-684c6268,St. Toribio Romo Mission,2402,,US-76,,,,,2402 US-76,Chatsworth,GA,30705,,34.78168762,-84.81605454,706-517-6271
-us-fl-chattahoochee-church-of-the-holy-cross-1b4cb967,Holy Cross,4034,,Memorial Blue Star,Hwy,,,,4034 Memorial Blue Star Hwy,Chattahoochee,FL,32324,,30.7013125,-84.7954375,18506634610
-us-tn-chattanooga-saints-peter-and-paul-f834e6ae,Basilica of Sts. Peter and Paul,214,E,8th,St,,,,214 E 8th St,Chattanooga,TN,37402,,35.04681723,-85.30717301,(423) 266-1618
-us-tn-chattanooga-our-lady-of-perpetual-help-b23b496f,Our Lady of Perpetual Help,501,S,Moore,Rd,,,,501 S Moore Rd,Chattanooga,TN,37412,2949,35.00538796,-85.23222604,(423) 622-7232
-us-tn-chattanooga-our-lady-of-perpetual-help-99f7b72e,Our Lady of Perpetual Help,501,S,Moore,Rd,,,,501 S Moore Rd,Chattanooga,TN,37412,,35.0055306,-85.233591,+1-423-622-7232
-us-tn-chattanooga-st-jude-df69b0ca,St. Jude,930,,Ashland,Ter,,,,930 Ashland Ter,Chattanooga,TN,37415,,35.11686775,-85.26672216,(423) 870-2386
-us-tn-chattanooga-st-jude-catholic-church-4e9ab6e0,St. Jude Catholic Church,930,,Ashland,Ter,,,,930 Ashland Terrace,Chattanooga,TN,37415,,35.1151859,-85.2645065,+1-423-870-2386
-us-tn-chattanooga-st-stephen-2f37f4e4,St. Stephen,7111,,Lee,Hwy,,,,7111 Lee Hwy,Chattanooga,TN,37421,,35.05066661,-85.15290535,(423) 892-1261
-us-tn-chattanooga-church-of-st-stephen-8f1f2649,St. Stephen,7111,,Lee,Hwy,,,,7111 Lee Hwy,Chattanooga,TN,37421,,35.0483125,-85.1579375,14238921261
 us-ga-clarkesville-st-mark-2f5bcce1,St. Mark,5410,,,Hwy,,,,5410 Hwy 197 S,Clarkesville,GA,30523,,34.59601202,-83.50824296,(706) 754-4518
 us-ga-claxton-st-christopher-8630b97f,St. Christopher,400,S,River,St,,,,400 S River St,Claxton,GA,30417,,32.15482008,-81.89956331,(912) 739-3913
 us-ga-clayton-st-helena-fad97809,St. Helena,137,,Meadow Stream,Ln,,,,137 Meadow Stream Ln,Clayton,GA,30525,,34.884124,-83.40879,(706) 782-5152
-us-sc-clemson-saint-andrew-8c3700c6,St. Andrew,209,,Sloan,St,,,,209 Sloan St,Clemson,SC,29631,,34.68607432,-82.83849379,(864) 654-1757
-us-sc-clemson-st-andrews-at-clemson-university-463ba418,St. Andrew's at Clemson University,209,,Sloan,St,,,,209 Sloan St,Clemson,SC,29631,,34.67930639,-82.83815956,(864) 654-1757
 us-ga-cleveland-st-paul-the-apostle-8b5016c0,St. Paul the Apostle,1243,,Hulsey,Rd,,,,1243 Hulsey Rd,Cleveland,GA,30528,,34.6191226,-83.7547927,(706) 865-4474
 us-ga-columbus-our-lady-of-lourdes-08f09665,Our Lady of Lourdes,1953,,Torch Hill,Rd,,,,1953 Torch Hill Rd,Columbus,GA,31903,,32.4177412,-84.94917987,(706) 689-5720
 us-ga-columbus-st-benedict-the-moor-f7bcca12,St Benedict the Moor,2935,,9th,St,,,,2935 9th St,Columbus,GA,31906,,32.46272979,-84.94769478,(706) 323-8300
@@ -87,7 +67,6 @@ us-ga-conyers-mother-of-god-ukrainian-5b819c14,Mother of God (Ukrainian),2880,,G
 us-ga-conyers-our-lady-of-the-holy-spirit-abbey-6608f801,Our Lady of the Holy Spirit Abbey,2625,,,Hwy,,,,2625 Hwy 212 SW,Conyers,GA,30094,,33.5863125,-84.0664375,17704838705
 us-ga-conyers-st-pius-x-catholic-church-5de95bb6,St Pius X Catholic Church,2621,,GA-20,,,,,2621 GA-20,Conyers,GA,30013,,33.619816,-84.0159672,+1-770-483-3660
 us-ga-conyers-st-pius-the-tenth-8745159a,St. Pius the Tenth,2621,,,Hwy,,,,2621 Hwy 20 SE,Conyers,GA,30013,,33.60745246,-84.01487326,(770) 483-3660
-us-tn-copperhill-st-catherine-cc0bcecd,St. Catherine Laboure,115,,Main,St,,,,115 Main St,Copperhill,TN,37317,,34.98815,-84.36875,(423) 496-3498
 us-ga-cordele-st-theresa-748b0140,St. Theresa,807,,3rd,St,S,,,807 3rd St S,Cordele,GA,31015,1722,31.96067475,-83.77615036,(229) 273-3446
 us-ga-covington-st-augustine-0fc6e372,St. Augustine,11524,,,Hwy,,,,11524 Hwy 278 E,Covington,GA,30014,,33.59271686,-83.78781617,(770) 787-1064
 us-ga-crawfordville-the-church-of-the-purification-of-the-blessed-virgin-mary-6c06385c,The Church of the Purification of the Blessed Virgin Mary,240,,Washington,Rd,,,,240 Washington Rd,Crawfordville,GA,30631,,33.5636359,-82.793633,+1-706-417-8305
@@ -104,7 +83,6 @@ us-ga-dawsonville-christ-the-redeemer-2ab73dc8,Christ the Redeemer,991,,Kilough 
 us-ga-dawsonville-christ-the-redeemer-catholic-church-c227a48c,Christ the Redeemer Catholic Church,991,,Kilough Church,Rd,,,,991 Kilough Church Rd,Dawsonville,GA,30534,,34.3681609,-84.0175598,+1-706-265-1361
 us-ga-decatur-st-thomas-more-f7958e60,St. Thomas More,636,W,Ponce de Leon,Ave,,,,636 W Ponce de Leon Ave,Decatur,GA,30030,,33.7735634,-84.30594,(404) 378-4588
 us-ga-decatur-sts-peter-and-paul-f98fec8f,Sts. Peter and Paul,2560,,Tilson,Rd,,,,2560 Tilson Rd,Decatur,GA,30032,,33.72821572,-84.29144275,(404)241-5862
-us-ga-donalsonville-church-of-the-incarnation-a74afdc7,Incarnation,5541,,GA,Hwy,,,,5541 GA Hwy 91 S,Donalsonville,GA,39845,,30.9482093,-84.8798684,(229) 726-3752
 us-ga-donalsonville-church-of-the-incarnation-45b248fc,Incarnation,5541,,GA,Hwy,,,,5541 GA Hwy 91 S,Donalsonville,GA,39845,,31.0238125,-84.8938125,12292499146
 us-ga-doraville-korean-martyrs-d8dc4239,Korean Martyrs,6003,,Buford,Hwy,,,,6003 Buford Hwy,Doraville,GA,30340,1305,33.9140923,-84.26182192,(770) 455-1380
 us-ga-douglas-saint-paul-009d1633,St. Paul,4178,,,Hwy,,,,4178 Hwy 441 S,Douglas,GA,31535,,31.44899367,-82.85154378,(912) 384-3560
@@ -119,52 +97,32 @@ us-ga-duluth-st-monica-9300c684,St. Monica,1700,,Buford,Hwy,,,,1700 Buford Hwy,D
 us-ga-dunwoody-all-saints-e8dddeaa,All Saints,2443,,Mount Vernon,Rd,,,,2443 Mount Vernon Rd,Dunwoody,GA,30338,,33.95658886,-84.30384891,(770) 393-3255
 us-ga-dunwoody-all-saints-catholic-church-10a752f5,All Saints Catholic Church,2443,,Mt Vernon,Rd,,,,2443 Mt Vernon Rd,Dunwoody,GA,30338,,33.9564724,-84.3018747,+1-770-393-3255
 us-ga-eastman-saint-mark-95341c03,St. Mark,1687,,Hawkinsville,Hwy,,,,1687 Hawkinsville Hwy,Eastman,GA,31023,,32.19834293,-83.23199027,(478) 272-0266  
-us-sc-edgefield-saint-mary-of-the-immaculate-conception-936e4d80,St. Mary of the Immaculate Conception,302,,Jeter,St,,,,302 Jeter St,Edgefield,SC,29824,,33.79015668,-81.93055933,(803) 637-6248
 us-ga-elberton-st-mary-84fa38b2,St. Mary,155,,Forest,Ave,,,,155 Forest Ave,Elberton,GA,30635,,34.10963782,-82.87535446,(706) 376-4112
 us-ga-ellijay-good-samaritan-da977c0f,Good Samaritan,55,,Church,St,,,,55 Church St,Ellijay,GA,30540,,34.6939,-84.4826,(706) 636-2772
-us-al-eufaula-holy-redeemer-e22e5885,Holy Redeemer,515,W,Broad,St,,,,515 W Broad St,Eufaula,AL,36027,,31.89257801,-85.15139735,(334) 687-3716
 us-ga-fayetteville-st-gabriel-49d6c932,St. Gabriel,152,,Antioch,Rd,,,,152 Antioch Rd,Fayetteville,GA,30215,5201,33.39805984,-84.44205475,(770) 461-0492
-us-fl-fernandina-beach-st-michael-4ce79ea0,St. Michael,202,N,4th,St,,,,202 N 4th St,Fernandina Beach,FL,32034,,30.67381077,-81.46143311,(904) 261-3472
 us-ga-fitzgerald-saint-william-77db2b20,St. William,715,S,Merrimac,Dr,,,,715 S Merrimac Dr,Fitzgerald,GA,31750,,31.70670062,-83.26550804,(912) 384-3560
 us-ga-flowery-branch-prince-of-peace-23cc0962,Prince of Peace,6439,,Spout Springs,Rd,,,,6439 Spout Springs Rd,Flowery Branch,GA,30542,,34.15553816,-83.89418223,(678) 960-0040
 us-ga-flowery-branch-st-margaret-of-scotland-6acd11c3,St. Margaret of Scotland,3481,,Atlanta,Hwy,,,,3481 Atlanta Hwy,Flowery Branch,GA,30542,,34.21863844,-83.86619366,770-235-0271
 us-ga-folkston-church-of-st-francis-of-assisi-b045eaa9,St. Francis of Assisi,700,,Kingsland,Dr,,,,700 Kingsland Dr,Folkston,GA,31537,0487,30.8333125,-81.9926875,19124963219
 us-ga-folkston-st-francis-of-assisi-9b4a36eb,St. Francis of Assisi,700,,Kingsland,Dr,,,,700 Kingsland Dr ( Hwy 40 ),Folkston,GA,31537,,30.8305111,-82.0098343,(912) 882-4718
 us-ga-fort-gordon-fort-eisenhower-saint-michael-d8037b21,Fort Eisenhower (St. Michael),,,Good Shepherd Chapel Barnes,Ave,,,,Good Shepherd Chapel Barnes Ave,Fort Gordon,GA,30905,,33.42239459,-82.13980444,(706) 791-4829
-us-al-fort-mitchell-church-of-st-joseph-180276a3,St. Joseph,1444,,,Hwy,,,,1444 Hwy 165,Fort Mitchell,AL,36856,,32.27625,-85.00375,13348553148
-us-al-fort-mitchell-st-joseph-fbf3f888,St. Joseph,1444,,,Hwy,,,,1444 Hwy 165,Fort Mitchell,AL,36856,,32.22305515,-85.00773212,(334) 855-3148
-us-al-fort-mitchell-st-joseph-catholic-parish-c3aaf74f,St. Joseph Catholic Parish,1444,,AL-165,,,,,1444 AL-165,Fort Mitchell,AL,36856,,32.2230515,-85.0077876,+1-334-855-3148
 us-ga-fort-oglethorpe-st-gerard-e16deca2,St. Gerard Majella,3049,,Lafayette,Rd,,,,3049 Lafayette Rd,Fort Oglethorpe,GA,30742,,34.9451209,-85.25832232,(706) 861-9410
 us-ga-fort-stewart-military-chapel-37f2c74e,Military Chapel,374,,Divarty,Rd,,,,374 Divarty Rd,Fort Stewart,GA,31314,,31.86512876,-81.61044436,(912) 767-7028
 us-ga-fort-valley-st-juliana-a0310ced,St. Juliana,804,,M.L King Jr,Dr,,,,804 M.L King Jr Dr (Hwy 7/341S),Fort Valley,GA,31030,,32.544,-83.87904,(478) 825-7127
-us-nc-franklin-st-francis-of-assisi-bfcb4e34,St. Francis of Assisi,299,,Maple,St,,,,299 Maple St,Franklin,NC,28734,,35.17505679,-83.38688211,(828) 524-2289
 us-ga-gainesville-st-john-paul-ii-42fcb3f7,St. John Paul II ,2410,S,Smith,Rd,,,,2410 S Smith Rd,Gainesville,GA,30504,,34.27775996,-83.86711961,(770) 532-6772
 us-ga-gainesville-st-michael-catholic-church-14097849,St. Michael,1440,,Pearce,Cir,NE,,,1440 Pearce Cir NE,Gainesville,GA,30501,,34.3152351,-83.8165741,(770) 534-3338
 us-ga-glennville-saint-jude-c79a46bc,St. Jude,911,N,Veterans,Blvd,,,,911 N Veterans Blvd,Glennville,GA,30427,0772,31.94882685,-81.92429691,(912) 654-1908
 us-ga-glenville-church-of-our-lady-of-guadalupe-10eb11cf,Our Lady of Guadalupe,3879,,Smith Berry,Rd,,,,3879 Smith Berry Rd,Glenville,GA,30427,,31.84375,-81.86375,19127393913
-us-sc-gloverville-our-lady-of-the-valley-f057c894,Our Lady of the Valley,2457,,Augusta,Rd,,,,2457 Augusta Rd,Gloverville,SC,29828,,33.52191683,-81.83467068,(803) 593-2241
 us-ga-greensboro-christ-our-king-and-savior-f3f50c57,Christ Our King and Savior,6341,,Lake Oconee,Pkwy,,,,6341 Lake Oconee Pkwy,Greensboro,GA,30642,,33.45718161,-83.24744085,(706) 453-7292
 us-ga-griffin-sacred-heart-417a9891,Sacred Heart,1323,,Mac Arthur,Dr,,,,1323 Mac Arthur Dr,Griffin,GA,30224,,33.21923065,-84.24342346,(770) 227-2378
 us-ga-griffin-sacred-heart-catholic-church-7b1d04e4,Sacred Heart Catholic Church,1323,,Macarthur,Dr,,,,1323 Macarthur Dr,Griffin,GA,30224,,33.2181022,-84.2441814,+1-770-227-2378
 us-ga-grovetown-st-teresa-of-avila-7c83fc22,St. Teresa of Avila,4921,,Columbia,Rd,,,,4921 Columbia Rd,Grovetown,GA,30813,,33.50696722,-82.17960846,(706) 863-4956
 us-ga-hapeville-st-john-the-evangelist-eb376b49,St. John the Evangelist,230,,Arnold,St,,,,230 Arnold St,Hapeville,GA,30354,,33.65613701,-84.39759341,(404) 768-5688
-us-sc-hardeeville-saint-anthony-mission-588f2c5c,Mission of St. Anthony,23049,,Whyte Hardee,Blvd,,,,23049 Whyte Hardee Blvd,Hardeeville,SC,29927,,32.28866777,-81.08015877,(843) 784-2943
 us-ga-hartwell-sacred-heart-of-jesus-d91b8545,Sacred Heart of Jesus,1009,,Benson,St,,,,1009 Benson St,Hartwell,GA,30643,,34.33989848,-82.92178454,(706) 376-4112
-us-nc-hayesville-immaculate-heart-of-mary-c5c62323,Immaculate Heart of Mary,1433,,,Hwy,,,,1433 Hwy 64 W,Hayesville,NC,28904,,35.03368788,-83.8442057,(828) 837-2000
-us-nc-hayesville-church-of-the-immaculate-heart-of-mary-efd6bd1d,Immaculate Heart of Mary,1433,,,Hwy,,,,1433 Hwy 64 W,Hayesville,NC,28904,,35.0466875,-83.8196875,18288372000
 us-ga-hazlehurst-good-shepherd-64ed246e,Good Shepherd,258,,Baxley,Hwy,,,,258 Baxley Hwy,Hazlehurst,GA,31539,,31.86081203,-82.57582929,912-705-8927
-us-nc-highlands-our-lady-of-the-mountains-7eca109a,Our Lady of the Mountains,315,N,5th,St,,,,315 N 5th St,Highlands,NC,28741,2729,35.05312374,-83.19461992,(828) 526-2418
-us-sc-hilton-head-island-holy-family-2b0f3bfb,Holy Family,24,,Pope,Ave,,,,24 Pope Ave,Hilton Head Island,SC,29928,,32.15037259,-80.75998073,(843) 785-2895
-us-sc-hilton-head-island-francis-by-the-sea-8df9e089,St. Francis by the Sea,45,,Beach City,Rd,,,,45 Beach City Rd,Hilton Head Island,SC,29926,,32.22254105,-80.7115223,(843) 681-6350
 us-ga-hinesville-saint-stephen-protomartyr-aee042ce,St. Stephen Protomartyr,399,,Woodland,Dr,,,,399 Woodland Dr,Hinesville,GA,31313,,31.85116393,-81.58873331,(912) 876-4364
 us-ga-hinesville-church-of-st-stephen-first-martyr-71aa2f28,"St. Stephen, First Martyr",399,,Woodland,Dr,,,,399 Woodland Dr,Hinesville,GA,31313,2719,31.8508125,-81.5895625,19128764364
 us-ga-jackson-st-mary-mother-of-god-35ec2cc2,St. Mary Mother of God,359,,Old Griffin,Rd,,,,359 Old Griffin Rd,Jackson,GA,30233,,33.28884138,-83.99647402,(770) 775-4162
-us-fl-jacksonville-holy-spirit-catholic-church-09b2f117,Holy Spirit Catholic Church,11665,,Fort Caroline,Rd,,,,11665 Fort Caroline Rd,Jacksonville,FL,32225,,30.37142406,-81.51464821,(904) 641-7244
-us-fl-jacksonville-military-chapel-of-the-holy-family-by-the-sea-264ea2a5,Military Chapel of the Holy Family by the Sea,,,Massey Ave & Baltimore,Ave,,,,Massey Ave & Baltimore Ave,Jacksonville,FL,32228,,30.3883125,-81.3994375,19042705212
-us-fl-jacksonville-naval-station-mayport-holy-family-by-the-sea-641ec31f,Naval Station Mayport (Holy Family by the Sea),,,Massey Ave and Baltimore,Ave,,,,Massey Ave and Baltimore Ave,Jacksonville,FL,32228,,30.38841184,-81.39980676,(904) 270-5212
-us-fl-jacksonville-st-patrick-433fbd26,St. Patrick,601,,Airport Center,Dr,E,,,601 Airport Center Dr E,Jacksonville,FL,32218,7269,30.476675,-81.61709,(904) 768-2593
-us-fl-jacksonville-church-of-st-patrick-add34506,St. Patrick,1429,,Broward,Rd,,,,1429 Broward Rd,Jacksonville,FL,32218,,30.4175625,-81.6635625,19047682593
-us-fl-jasper-st-therese-of-the-child-jesus-97d55f5a,Mission of St. Therese of the Child Jesus,5430,,NW,Hwy,,,,5430 NW Hwy 41,Jasper,FL,32052,,30.52476974,-83.00944125,(386) 364-1108
 us-ga-jasper-our-lady-of-the-mountains-290bbb1c,Our Lady of the Mountains,1908,,Waleska,Hwy,,,,1908 Waleska Hwy 108,Jasper,GA,30143,,34.41056555,-84.41956067,(706) 253-3078
 us-ga-jefferson-st-catherine-laboure-644ac908,St. Catherine Labouré,180,,Elrod,Rd,,,,180 Elrod Rd,Jefferson,GA,30549,,34.13957454,-83.54426402,(706) 367-7220
 us-ga-jekyll-island-st-francis-xavier-jekyll-island-6f78cb84,St. Francis Xavier (Jekyll Island),503,,Riverview,Dr,,,,503 Riverview Dr,Jekyll Island,GA,31527,,31.07588761,-81.42527216,(912) 265-3249
@@ -180,13 +138,11 @@ us-ga-lagrange-st-peters-catholic-church-84af5de2,St. Peter's Catholic Church,20
 us-ga-lagrange-st-peter-50998266,St. Peter,200,,Lafayette,Pkwy,,,,200 Lafayette Pkwy,Lagrange,GA,30241,,33.03878998,-85.02986451,(706) 884-4224
 us-ga-lake-park-san-jose-1f7f64fd,San Jose,421,W,Marion,Ave,,,,421 W Marion Ave,Lake Park,GA,31636,,30.68493071,-83.18347921,(229) 244-2430
 us-ga-lakeland-church-of-the-queen-of-peace-e4a2c89b,Queen of Peace,1332,S,Mill,St,,,,1332 S Mill St,Lakeland,GA,31635,,31.0285625,-83.0684375,12298967319
-us-al-lanett-holy-family-5efc1a5e,Holy Family,705,N,3rd,Ave,,,,705 N 3rd Ave,Lanett,AL,36863,,32.87362417,-85.18834485,(334) 644-4405
 us-ga-lawrenceville-st-lawrence-351e0b84,St. Lawrence,319,,Grayson,Hwy,,,,319 Grayson Hwy,Lawrenceville,GA,30046,,33.94236374,-83.98395538,(770) 963-8992
 us-ga-lawrenceville-st-lawrence-catholic-church-deea2d61,St. Lawrence Catholic Church,319,,Grayson,Hwy,,,,319 Grayson Hwy,Lawrenceville,GA,30046,,33.9432869,-83.9853952,
 us-ga-lawrenceville-st-marguerite-dyouville-d54ed421,St. Marguerite d’Youville,85,,Gloster,Rd,,,,85 Gloster Rd,Lawrenceville,GA,30044,,33.91723551,-84.07085129,(770) 381-7337
 us-ga-lilburn-our-lady-of-the-americas-c69cfef7,Our Lady of the Americas,4603,,Lawrenceville,Hwy,,,,4603 Lawrenceville Hwy,Lilburn,GA,30047,,33.90032,-84.13592,(770) 717-1517
 us-ga-lilburn-st-john-neumann-regional-catholic-school-00057848,St John Neumann Regional Catholic School,791,,Tom Smith,Rd,SW,,,791 Tom Smith Rd SW,Lilburn,GA,30047,,33.8771569,-84.0924305,+1-770-923-6633
-us-ga-lilburn-st-stephen-the-martyr-6cb24556,St Stephen the Martyr,5373,,Wydella,Rd,,,,5373 Wydella Rd,Lilburn,GA,30047,,33.8647346,-84.1441956,(770) 381-7488
 us-ga-lilburn-st-stephen-the-martyr-7a4b6ba8,St Stephen the Martyr,5373,,Wydella,Rd,SW,,,5373 Wydella Rd SW,Lilburn,GA,30047,,33.8635144,-84.1434457,+1-770-381-7488
 us-ga-lilburn-st-john-neumann-2b8d259f,St. John Neumann,801,,Tom Smith,Rd,,,,801 Tom Smith Rd,Lilburn,GA,30047,,33.8744609,-84.092258,(770) 923-6633
 us-ga-lithia-springs-st-john-vianney-d0e1b1a7,St. John Vianney,1920,,Skyview,Dr,,,,1920 Skyview Dr,Lithia Springs,GA,30122,,33.78410352,-84.63806752,(770) 941-2807
@@ -204,7 +160,6 @@ us-ga-macon-st-peter-claver-7bf04379,St. Peter Claver,131,,Ward,St,,,,131 Ward S
 us-ga-madison-saint-aelred-catholic-church-ed834426,Saint Aelred Catholic Church,5070,,Lower Apalachee,Rd,,,,5070 Lower Apalachee Rd,Madison,GA,30650,,33.6897533,-83.4364374,+1-706-389-4009
 us-ga-madison-st-james-catholic-church-2a16d455,St James Catholic Church,562,,Vine,St,,,,562 Vine St,Madison,GA,30650,,33.5934867,-83.4606133,+1-706-342-9661
 us-ga-madison-st-james-ef9435a0,St. James,562,,Vine,St,,,,562 Vine St,Madison,GA,30650,,33.59581757,-83.46112061,(706) 342-9661
-us-fl-madison-st-vincent-de-paul-18d6ab32,St. Vincent de Paul,186,NW,Sumter,St,,,,186 NW Sumter St,Madison,FL,32341,,30.47130388,-83.41633929,(850) 973-2428
 us-ga-marietta-holy-family-4dfffa38,Holy Family,3401,,Lower Roswell,Rd,,,,3401 Lower Roswell Rd,Marietta,GA,30068,,33.9515457,-84.45286,(770) 973-0038
 us-ga-marietta-holy-family-catholic-church-42d5821f,Holy Family Catholic Church,3401,,Lower Roswell,Rd,,,,3401 Lower Roswell Rd,Marietta,GA,30068,,33.951509,-84.452874,+1-770-973-0038
 us-ga-marietta-st-ann-5c5c2631,St. Ann,4905,,Roswell,Rd,,,,4905 Roswell Rd,Marietta,GA,30062,,33.9993025,-84.40782857,(770) 552-6400
@@ -220,10 +175,8 @@ us-ga-milledgeville-sacred-heart-b7d363c1,Sacred Heart,110,N,Jefferson,St,,,,110
 us-ga-millen-st-bernadette-3a3dc3b0,St. Bernadette,441,,N,Ave,,,,441 N Ave,Millen,GA,30442,,32.81159574,-81.94313441,(478) 982-1445
 us-ga-monroe-st-anna-7e920c6c,St. Anna,1401,,Alcovy,St,,,,1401 Alcovy St,Monroe,GA,30655,,33.75903113,-83.72463418,(770) 267-7637
 us-ga-montezuma-st-michael-9a91dcc6,St. Michael,718,N,Dooly,St,,,,718 N Dooly St,Montezuma,GA,31063,,32.3159132,-84.02335027,(478)316-0786
-us-fl-monticello-st-margaret-fcbe61bb,St. Margaret,1565,E,Washington,St,,,,1565 E Washington St,Monticello,FL,32344,,30.54597205,-83.85127426,(850) 973-2428
 us-ga-moody-air-force-base-st-patricks-catholic-community-df633291,St. Patrick's Catholic Community,5120,,Austin Ellipse,,,,,5120 Austin Ellipse,Moody Air Force Base,GA,31699,,30.97488632,-83.20232412,(229) 257-3211
 us-ga-moultrie-immaculate-conception-cd8ab617,Immaculate Conception,1135,,2nd,St,SE,,,1135 2nd St SE,Moultrie,GA,31768,,31.16599443,-83.78635464,(229) 985-6550
-us-nc-murphy-st-william-9355b3ac,St. William,765,,Andrews,Rd,,,,765 Andrews Rd,Murphy,NC,28906,2503,35.10010373,-84.02143806,(828) 837-2000
 us-ga-newnan-st-george-catholic-church-9315220b,St George Catholic Church,771,,Roscoe,Rd,,,,771 Roscoe Rd,Newnan,GA,30263,,33.4135942,-84.8099238,+1-770-251-5353
 us-ga-newnan-st-george-78c3fe42,St. George,771,,Roscoe,Rd,,,,771 Roscoe Rd,Newnan,GA,30263,,33.41908172,-84.81164326,(770) 251-5353
 us-ga-newnan-st-mary-magadelene-4b5c62bb,St. Mary Magdalene,3,,Village,Rd,,,,3 Village Rd,Newnan,GA,30265,,33.38693,-84.66721,(770) 253-1888
@@ -231,31 +184,21 @@ us-ga-norcross-holy-name-of-jesus-e0774364,Holy Name of Jesus,5395,,Light,Cir,NW
 us-ga-norcross-holy-vietnamese-martyrs-8c5e2109,Holy Vietnamese Martyrs,4545-A,,Timmers,Way,,,,4545-A Timmers Way,Norcross,GA,30093,,33.936768,-84.157123,(770) 921-0077
 us-ga-norcross-mission-of-the-holy-name-of-jesus-e8069aa2,Mission of the Holy Name of Jesus,5395,,Light,Cir,NW,,,5395 Light Cir NW,Norcross,GA,30071,,33.9424375,-84.1985625,16786913261
 us-ga-norcross-st-patrick-ccd098f5,St. Patrick,2140,,Beaver Ruin,Rd,,,,2140 Beaver Ruin Rd,Norcross,GA,30071,,33.93558,-84.1818848,(770) 448-2028
-us-sc-north-augusta-our-lady-of-peace-5836440a,Our Lady of Peace,139,,,Way,,,,139 Way of Peace,North Augusta,SC,29841,,33.50657789,-81.95593869,(803) 279-0315
-us-sc-north-augusta-saint-edward-the-confessor-8bde3b64,St. Edward,1370,,Edgefield,Rd,,,,1370 Edgefield Rd,North Augusta,SC,29860,,33.59250714,-81.94107571,(803) 279-1837
 us-ga-peachtree-city-holy-trinity-1fed9ddc,Holy Trinity ,101,,Walt Banks,Rd,,,,101 Walt Banks Rd,Peachtree City,GA,30269,,33.41990573,-84.57268563,(770) 487-7672
 us-ga-peachtree-city-holy-trinity-catholic-church-bf00713a,Holy Trinity Catholic Church,101,,Walt Banks,Rd,,,,101 Walt Banks Rd,Peachtree City,GA,30269,,33.4181112,-84.5602878,+1-770-487-7672
 us-ga-peachtree-corners-mary-our-queen-06f454c2,Mary Our Queen,6260,,The Corners,Pkwy,,,,6260 The Corners Pkwy,Peachtree Corners,GA,30092,,33.9579277,-84.23804,(770) 416-0002
 us-ga-peachtree-corners-mary-our-queen-catholic-church-78e6d788,Mary Our Queen Catholic Church,6260,,The Corners,Pkwy,NW,,,6260 The Corners Pkwy NW,Peachtree Corners,GA,30092,,33.956961,-84.238958,+1-770-416-0002
 us-ga-pembroke-church-of-the-holy-cross-842eabbd,Holy Cross,30,W,Bacon,St,,,,30 W Bacon St,Pembroke,GA,31321,,32.1371875,-81.6381875,19126534659
 us-ga-pembroke-holy-cross-a585fc6d,Holy Cross,90,W,Bacon,St,,,,90 W Bacon St,Pembroke,GA,31321,,32.13702662,-81.63192495,(912) 653-4659
-us-al-phenix-city-church-of-the-mother-mary-f50744c9,Mother Mary,318,,Seale,Rd,,,,318 Seale Rd,Phenix City,AL,36869,,32.4519375,-85.0061875,13342982343
-us-al-phenix-city-st-patrick-b32f53aa,St. Patrick,1502,,Broad,St,,,,1502 Broad St,Phenix City,AL,36867,,32.47430605,-85.0004671,(334) 298-9025
-us-al-piedmont-st-joachim-7937555d,St. Joachim,555,,Babbling Brook,Rd,,,,555 Babbling Brook Rd,Piedmont,AL,36272,,33.91316602,-85.6031624,(256) 435-3238
 us-ga-pine-mountain-christ-the-king-134895ea,Christ the King,6700,,GA,Hwy,,,,6700 GA Hwy 354,Pine Mountain,GA,31822,,32.85339851,-84.86386478,(706) 663-0090
 us-ga-pine-mountain-christ-the-king-catholic-church-8cc7dabf,Christ the King Catholic Church,6700,,GA-354,,,,,6700 GA-354,Pine Mountain,GA,31822,,32.8537385,-84.8640132,+1-706-663-0090
 us-ga-pooler-corpus-christi-bec424fb,Corpus Christi ,1745,,Benton,Blvd,,,,1745 Benton Blvd ,Pooler,GA,31322,,32.15641637,-81.23816896,(912) 348-6426
 us-ga-port-wentworth-our-lady-of-lourdes-314251a8,Our Lady of Lourdes,501,S,Coastal,Hwy,,,,501 S Coastal Hwy,Port Wentworth,GA,31407,,32.14256965,-81.15798335,(912) 964-0219
-us-fl-quincy-church-of-st-thomas-the-apostle-351d5afe,St. Thomas the Apostle,27,N,Shadow,St,,,,27 N Shadow St,Quincy,FL,32351,,30.5864375,-84.5664375,18506272350
-us-fl-quincy-st-thomas-the-apostle-catholic-church-ba953237,St. Thomas the Apostle Catholic Church,27,N,Shadow,St,,,,27 N Shadow St,Quincy,FL,32351,,30.58656669,-84.56553817,850-627-2350
 us-ga-ray-city-saint-anthony-of-padua-43c72486,St. Anthony of Padua,2530,,Gardner,Rd,,,,2530 Gardner Rd,Ray City,GA,31645,,31.08321377,-83.22481983,(229) 455-5554
 us-ga-reidsville-st-andrew-the-apostle-05a5507a,St. Andrew the Apostle,138,,Industrial,Dr,,,,138 Industrial Dr,Reidsville,GA,30453,0891,32.0673,-82.1228,(912) 537-7709
 us-ga-reidsville-church-of-st-andrew-the-apostle-c58ae290,St. Andrew the Apostle,138,,Industrial,Dr,,,,138 Industrial Dr,Reidsville,GA,30453,,32.0725625,-82.1306875,19125377709
 us-ga-richmond-hill-saint-anne-7186d840,St. Anne,10550,,Ford,Ave,,,,10550 Ford Ave,Richmond Hill,GA,31324,,31.9410419,-81.30641764,(912) 737-0112
-us-sc-ridgeland-john-paul-ii-a00f96be,John Paul II ,4211,,Okatie,Hwy,,,,4211 Okatie Hwy,Ridgeland,SC,29936,,32.35453932,-80.91540998,(843) 815-3100
-us-sc-ridgeland-saint-anthony-f3e7d268,St. Anthony,10128,S,Jacob Smart,Blvd,,,,10128 S Jacob Smart Blvd,Ridgeland,SC,29936,,32.47195991,-80.98523432,(843) 726-3606
 us-ga-riverdale-our-lady-of-vietnam-vietnamese-d70e1e05,Our Lady of Vietnam [Vietnamese],91,,Valley Hill,Rd,,,,91 Valley Hill Rd,Riverdale,GA,30274,,33.5595489,-84.386749,(770) 472-9963
-us-al-roanoke-church-of-the-immaculate-conception-34789530,Immaculate Conception,1256,,Main,St,,,,1256 Main St,Roanoke,AL,36274,,33.1563125,-85.3788125,13347109927
 us-ga-rome-st-mary-991103cb,St. Mary,911,N,Broad,St,,,,911 N Broad St,Rome,GA,30161,,34.25796464,-85.16374033,(706) 290-9000
 us-ga-roswell-epiphany-of-our-lord-byzantine-catholic-church-d0a5d23f,Epiphany Of Our Lord Byzantine Catholic Church,2030,,Old Alabama,Rd,,,,2030 Old Alabama Rd,Roswell,GA,30076,,34.0271575,-84.3011841,+1-770-993-0973
 us-ga-roswell-epiphany-of-our-lord-29b9e81b,Epiphany of Our Lord ,2030,,Old Alabama,Rd,,,,2030 Old Alabama Rd,Roswell,GA,30076,,34.02325892,-84.31186042,(770) 993-0973
@@ -278,22 +221,16 @@ us-ga-savannah-saint-james-ad969f64,St. James the Less,8412,,Whitefield,Ave,,,,8
 us-ga-savannah-st-peter-the-apostle-cc6e3039,St. Peter the Apostle,7020,,Concord,Rd,,,,7020 Concord Rd,Savannah,GA,31410,,32.02036816,-80.96749077,(912) 897-5156
 us-ga-savannah-saints-peter-and-paul-apostles-d8e97d8e,Sts. Peter and Paul,3115,E,Victory,Dr,,,,3115 E Victory Dr,Savannah,GA,31404,,32.03457519,-81.05382097,(912) 354-4014
 us-ga-savannah-cathedral-basilica-of-saint-john-the-baptist-27ffaafd,The Cathedral Basilica of St. John the Baptist,222,E,Harris,St,,,,222 E Harris St,Savannah,GA,31401,,32.07331096,-81.09116489,(912) 233-4709
-us-sc-seneca-saint-paul-the-apostle-8763642f,St. Paul the Apostle,170,,Bountyland,Rd,,,,170 Bountyland Rd,Seneca,SC,29672,,34.7049217,-82.99845345,(864) 882-8551
-us-tn-signal-mountain-st-augustine-8039df61,St. Augustine,1716,,Anderson,Pike,,,,1716 Anderson Pike,Signal Mountain,TN,37377,,35.1489238,-85.31936243,(423) 886-3424
 us-ga-smyrna-st-thomas-the-apostle-catholic-church-dda33e25,St Thomas the Apostle Catholic Church,4300,,King Springs,Rd,SE,,,4300 King Springs Rd SE,Smyrna,GA,30082,,33.849237,-84.5217968,+1-770-432-8579
 us-ga-smyrna-st-thomas-the-apostle-0e88bc82,St. Thomas the Apostle,4300,,King Springs,Rd,SE,,,4300 King Springs Rd SE,Smyrna,GA,30082,4214,33.849069,-84.520268,(770) 432-8579
 us-ga-snellville-monastery-of-the-visitation-a6ff40d8,Monastery of the Visitation,2055,,Ridgedale,Dr,,,,2055 Ridgedale Dr,Snellville,GA,30078,,33.8755625,-83.9984375,17709721060
 us-ga-snellville-st-oliver-plunkett-79b458f2,St. Oliver Plunkett,3200,,Brooks,Dr,,,,3200 Brooks Dr,Snellville,GA,30078,,33.85437658,-83.96126544,(770) 979-2500
-us-tn-soddy-daisy-holy-spirit-1975cbbe,Holy Spirit,10768,,Dayton,Pike,,,,10768 Dayton Pike,Soddy Daisy,TN,37379,,35.2667236,-85.16579,(423) 332-5300
-us-tn-soddy-daisy-holy-spirit-catholic-church-0c5facfc,Holy Spirit Catholic Church,10768,,Dayton,Pike,,,,10768 Dayton Pike,Soddy-Daisy,TN,37379,,35.2677833,-85.1693629,+1-423-332-5300
-us-tn-south-pittsburg-our-lady-of-lourdes-2e2177c7,Our Lady of Lourdes,704,,Holly,Ave,,,,704 Holly Ave,South Pittsburg,TN,37380,,35.00741959,-85.71051788,(423) 837-7068
 us-ga-springfield-st-boniface-937740b5,St. Boniface,1952,,GA,Hwy,,,,1952 GA Hwy 21 S,Springfield,GA,31329,,32.34796,-81.275086,(912) 754-7473
 us-ga-statesboro-st-matthew-71367efb,St. Matthew,221,,John Paul,Ave,,,,221 John Paul Ave,Statesboro,GA,30458,,32.42607299,-81.77184191,(912) 681-6726
 us-ga-stone-mountain-corpus-christi-813cb53f,Corpus Christi,600,,Mountain View,Dr,,,,600 Mountain View Dr,Stone Mountain,GA,30083,,33.79480902,-84.18377771,(770) 469-0395
 us-ga-stone-mountain-kidanemehret-eritrean-geez-9b5f7e87,Kidanemehret Eritrean (Ge'ez),1355,,Rockbridge,Rd,SW,,,1355 Rockbridge Rd SW,Stone Mountain,GA,30087,,33.83811953,-84.13086211,404-453-7287
 us-ga-swainsboro-holy-trinity-4b484f03,Holy Trinity,928,W,Main,St,,,,928 W Main St,Swainsboro,GA,30401,,32.5879562,-82.35738113,(912) 685-5811
 us-ga-sylvania-our-lady-of-the-assumption-da417a75,Our Lady of the Assumption,121,,Ridgecrest,Dr,,,,121 Ridgecrest Dr,Sylvania,GA,30467,,32.75628484,-81.63952548,(912) 564-2312
-us-fl-tallahassee-good-shepherd-c79df26f,Good Shepherd,4665,,Thomasville,Rd,,,,4665 Thomasville Rd,Tallahassee,FL,32309,,30.53006079,-84.23323775,(850) 893-1837
 us-ga-thomaston-st-peter-the-rock-catholic-church-df1a0555,St Peter the Rock Catholic Church,3594,,Barnesville,St,,,,3594 Barnesville St,Thomaston,GA,30286,,32.938734,-84.2571078,+1-706-648-2599
 us-ga-thomaston-st-peter-the-rock-1038a323,St. Peter the Rock ,3594,,Barnesville,Hwy,,,,3594 Barnesville Hwy,Thomaston,GA,30286,,32.93831483,-84.25586962,(706) 648-2599
 us-ga-thomasville-st-augustine-0aa1b81b,St. Augustine,211,N,Pinetree,Blvd,,,,211 N Pinetree Blvd,Thomasville,GA,31792,,30.85750821,-83.95358352,(229) 226-3624
@@ -306,7 +243,6 @@ us-ga-tybee-island-st-michael-05794739,St. Michael,802,,Lovell,Ave,,,,802 Lovell
 us-ga-tyrone-st-matthew-b3039eba,St. Matthew,215,,Kirkley,Rd,,,,215 Kirkley Rd,Tyrone,GA,30290,,33.51650709,-84.58453019,(770) 964-5804
 us-ga-valdosta-st-john-the-evangelist-5c50f409,St. John the Evangelist,800,,Gornto,Rd,,,,800 Gornto Rd,Valdosta,GA,31602,,30.86015492,-83.30358112,(229) 244-2430
 us-ga-vidalia-sacred-heart-7789c58b,Sacred Heart,3119,E,N,St,,,,3119 E N St,Vidalia,GA,30474,,32.20606582,-82.35899245,(912) 537-7709
-us-sc-walhalla-saint-francis-of-assisi-st-pauls-parish-d51496c3,Mission of St. Francis,103,W,Mauldin,St,,,,103 W Mauldin St,Walhalla,SC,29691,,34.7620256,-83.06749896,(864) 882-8551
 us-ga-warm-springs-st-elizabeth-ann-seton-0004429b,St. Elizabeth Ann Seton ,2904,,Judson Bulloch,Rd,,,,2904 Judson Bulloch Rd,Warm Springs,GA,31830,,32.8580494,-84.64524902,(706) 884-4224
 us-ga-warm-springs-church-of-st-elizabeth-seton-587aa5b1,St. Elizabeth Seton,2904,,Judson Bulloch,Rd,,,,2904 Judson Bulloch Rd,Warm Springs,GA,31830,,32.8788125,-84.6451875,17068465223
 us-ga-warner-robins-sacred-heart-e1b34547,Sacred Heart,300,S,Davis,Dr,,,,300 S Davis Dr,Warner Robins,GA,31088,,32.61470833,-83.61255779,4783282847
@@ -321,4 +257,3 @@ us-ga-willacoochee-holy-family-a180e8c8,Holy Family,126,,Holy Family,Rd,,,,126 H
 us-ga-winder-st-matthew-39615d70,St. Matthew,25,,Wilkins,Rd,SW,,,25 Wilkins Rd SW,Winder,GA,30680,,33.99051,-83.7793961,(770)867-4876
 us-ga-woodstock-st-michael-the-archangel-0ddd10c0,St. Michael the Archangel,490,,Arnold Mill,Rd,,,,490 Arnold Mill Rd,Woodstock,GA,30188,,34.11813721,-84.47428693,(770) 516-0009
 us-ga-woodstock-st-michael-the-archangel-roman-catholic-church-6d84a2ee,St. Michael the Archangel Roman Catholic Church,490,,Arnold Mill,Rd,,,,490 Arnold Mill Rd,Woodstock,GA,30188,,34.1170594,-84.4730854,+1-770-516-0009
-us-fl-yulee-st-francis-of-assisi-catholic-mission-4eaa4878,St. Francis of Assisi Catholic Mission,86000,,St Francis,Way,,,,86000 St Francis Way,Yulee,FL,32097,,30.63084566,-81.56275329,(904) 849-1256

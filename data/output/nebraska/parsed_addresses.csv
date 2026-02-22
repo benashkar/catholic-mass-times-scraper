@@ -1,7 +1,6 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
 us-ne-abie-sts-peter-and-paul-cd01ffd1,Sts. Peter and Paul,222,,Maple,St,,,,222 Maple St,Abie,NE,68001,,41.33629391,-96.94884181,(402) 543-2493
 us-ne-ainsworth-st-pius-x-fdd86350,St. Pius X,938,E,3rd,St,,,,938 E 3rd St,Ainsworth,NE,69210,,42.54841898,-99.85054685,(402) 387-1275
-us-ia-akron-st-patricks-0c80a886,St. Patrick,650,,Dakota,St,,,,650 Dakota St,Akron,IA,51001,,42.82803387,-96.55364598,712 722-3011 or 712-568-3292
 us-ne-albion-st-michael-2e92dab9,St. Michael,524,W,Church,St,,,,524 W Church St,Albion,NE,68620,,41.69197443,-98.00369403,(402) 395-2332
 us-ne-alexandria-st-mary-59d36082,St. Mary,511,,Amanda,St,,,,511 Amanda St,Alexandria,NE,68303,,40.24741589,-97.39126462,(402) 729-2058
 us-ne-alliance-holy-rosary-0448d4ed,Holy Rosary,904,,Cheyenne,Ave,,,,904 Cheyenne Ave,Alliance,NE,69301,,42.10326333,-102.87405363,(308) 762-2009
@@ -18,20 +17,15 @@ us-ne-ashton-st-francis-bed30834,St. Francis,220,W,Carleton,St,,,,220 W Carleton
 us-ne-atkinson-st-joseph-8b3fdd45,St. Joseph,104,S,Tuller,St,,,,104 S Tuller St,Atkinson,NE,68713,,42.53125918,-98.98286507,(402) 925-2122
 us-ne-auburn-st-joseph-2074bd7b,St. Joseph,2221,,N,St,,,,2221 N Street,Auburn,NE,68305,,40.38146984,-95.84380366,(402) 274-3733
 us-ne-aurora-st-mary-6136e3f2,St. Mary,1420,,Ninth,St,,,,1420 Ninth St,Aurora,NE,68818,,40.87120476,-98.00693373,(402) 694-3427
-us-ks-axtell-st-michael-1987ae56,St. Michael,504,,Sixth,St,,,,504 Sixth St,Axtell,KS,66403,,39.87490551,-96.25623815,(785) 736-2220
-us-ks-baileyville-sacred-heart-6fa91ba6,Sacred Heart,357,N,Third,St,,,,357 N Third St,Baileyville,KS,66404,,39.84464608,-96.18580923,(785) 336-6464
 us-ne-bancroft-holy-cross-d58986fa,Holy Cross,501,,Park,St,,,,501 Park St,Bancroft,NE,68004,,42.01160399,-96.57444458,(402) 878-2402
 us-ne-barneston-st-joseph-ad9e31a7,St. Joseph,406,,Wyatt,St,,,,406 Wyatt St,Barneston,NE,68309,,40.05043047,-96.57164735,(402) 645-3160
 us-ne-bassett-holy-cross-764862af,Holy Cross,602,,Sunrise,Cir,,,,602 Sunrise Cir,Bassett,NE,68714,,42.5787562,-99.5274921,(402) 387-1275
 us-ne-battle-creek-st-patrick-6a3c58df,St. Patrick,107,N,3rd,St,,,,107 N 3rd St,Battle Creek,NE,68715,,42.0002577,-97.59971274,(402) 675-6345
 us-ne-bayard-sacred-heart-92e293e4,Sacred Heart,1003,,,Ave,,,,1003 Ave B,Bayard,NE,69334,,41.76092518,-103.32722829,(308) 262-0709
-us-ks-beardsley-st-john-nepomucene-85944bba,St. John Nepomucene,,,Co Rd Y & Rd 12,,,,,Co Rd Y & Rd 12 (Atwood),Beardsley,KS,67730,,39.91439816,-101.20518029,(785) 626-3335 or (785) 332-2680
 us-ne-beatrice-st-joseph-188aa31a,St. Joseph,600,,High,St,,,,600 High St,Beatrice,NE,68310,,40.26905785,-96.74650651,(402) 223-2923
-us-ks-beattie-st-malachy-793b1433,St. Malachy,1008,,Main,St,,,,1008 Main St,Beattie,KS,66406,,39.86070478,-96.42202298,(785) 353-2492
 us-ne-beaver-crossing-sacred-heart-367ffd07,Sacred Heart,401,,Dimery,Ave,,,,401 Dimery Ave,Beaver Crossing,NE,68313,,40.77779231,-97.28658022,(402) 532-2545
 us-ne-bee-st-wenceslaus-9a32a3b7,St. Wenceslaus,350,,Elm,St,,,,350 Elm St,Bee,NE,68314,,41.00675217,-97.05610144,(402) 643-9107
 us-ne-beemer-holy-cross-2993ecd6,Holy Cross,517,,Fraisier,St,,,,517 Fraisier St,Beemer,NE,68716,,41.93319998,-96.80932616,(402) 529-3891
-us-ks-belleville-st-edward-e5000ddd,St. Edward,1827,,Q,St,,,,1827 Q St,Belleville,KS,66935,,39.82317258,-97.6259398,(785) 527-5559
 us-ne-bellevue-st-marys-of-bellevue-catholic-church-aa71f855,St Mary's of Bellevue Catholic Church,2302,S,Crawford,St,,,,2302 S Crawford St,Bellevue,NE,68005,,41.1351691,-95.9039893,+1-402-291-1350
 us-ne-bellevue-st-bernadette-f6489896,St. Bernadette,7600,S,42nd,St,,,,7600 S 42nd St,Bellevue,NE,68147,,41.18318142,-95.97813462,(402) 731-4694
 us-ne-bellevue-st-mary-b94b7e70,St. Mary,2302,,Crawford,St,,,,2302 Crawford St,Bellevue,NE,68005,,41.13510673,-95.90318251,(402) 291-1350
@@ -40,12 +34,9 @@ us-ne-bellwood-presentation-236e4ba2,Presentation,1291,,41,Rd,,,,1291 41 Rd,Bell
 us-ne-bellwood-st-joseph-9eb3b635,St. Joseph,4211,,B,Rd,,,,4211 B Rd,Bellwood,NE,68624,,41.35181244,-97.3503658,(402) 538-3135
 us-ne-bellwood-st-peter-f60344f8,St. Peter,211,,Esplanade,St,,,,211 Esplanade St,Bellwood,NE,68624,,41.33964087,-97.23770461,(402) 538-3135
 us-ne-benkelman-st-joseph-b50f30bf,St. Joseph,819,,Cheyenne,St,,,,819 Cheyenne St,Benkelman,NE,69021,,40.05194083,-101.53727514,(308) 423-2329
-us-ks-bird-city-st-joseph-2eb85757,St. Joseph,203,N,Bird,Ave,,,,203 N Bird Ave,Bird City,KS,67731,,39.75404877,-101.5323025,(785) 332-2680 or (785) 626-3335
 us-ne-blair-st-francis-borgia-catholic-church-9cc79802,St. Francis Borgia Catholic Church,2005,,Davis,Dr,,,,2005 Davis Dr,Blair,NE,68008,,41.53756295,-96.14334532,402-426-3823
-us-ia-blencoe-st-bernard-mission-of-st-john-9b00f84b,St. Bernard (Mission of St. John),201,,Main,St,,,,201 Main St,Blencoe,IA,51523,,41.93069705,-96.08406502,(712) 423-1004
 us-ne-bloomfield-st-andrew-holy-angels-our-catholic-family-1fbe0c33,St. Andrew (Holy Angels-Our Catholic Family),305,S,McNamara,St,,,,305 S McNamara St,Bloomfield,NE,68718,,42.59626836,-97.6421263,402-357-3506
 us-ne-blue-hill-holy-trinity-a1ef0f88,Holy Trinity,513,S,Liberty,,,,,513 S Liberty,Blue Hill,NE,68930,,40.32780005,-98.4484005,402-756-2303
-us-sd-bonesteel-immaculate-conception-3174cd40,Immaculate Conception,605,,Mellette,,,,,605 Mellette,Bonesteel,SD,57317,,43.07351251,-98.94538946, (605)835-9290
 us-ne-bow-valley-ss-peter-and-paul-holy-family-our-catholic-family-435d2158,Sts. Peter and Paul (Holy Family-Our Catholic Family),,,Paul St & Valley View,Dr,,,,Paul St & Valley View Dr,Bow Valley,NE,68739,,42.71417576,-97.25128588,(402) 357-3506
 us-ne-boys-town-immaculate-conception-dowd-memorial-chapel-ebcaf8c4,Immaculate Conception,13943,,Dowd,Dr,,,,13943 Dowd Dr,Boys Town,NE,68010,,41.26098162,-96.13166676,(402) 498-1030
 us-ne-brainard-holy-trinity-d76901d8,Holy Trinity,108,E,Brainard,St,,,,108 E Brainard St,Brainard,NE,68626,,41.18808183,-97.00307886,(402) 545-2691
@@ -59,7 +50,6 @@ us-ne-butte-ss-peter-and-paul-76545c14,Sts. Peter and Paul,921,,Gale,St,,,,921 G
 us-ne-callaway-st-boniface-68b78052,St. Boniface,204,S,Morgan,Ave,,,,204 S Morgan Ave,Callaway,NE,68825,,41.28955834,-99.92142472,(308) 636-2421
 us-ne-cambridge-st-john-the-baptist-1e3d86f4,St. John the Baptist,705,,Shole,Ave,,,,705 Shole Ave,Cambridge,NE,69022,,40.28362341,-100.17276791,(308) 697-3722
 us-ne-campbell-st-anne-3bd5dfc9,St. Anne,536,S,Stewart,St,,,,536 S Stewart St,Campbell,NE,68932,,40.29638062,-98.733235,(402) 756-8006
-us-ia-carter-lake-corpus-christi-our-lady-of-carter-lake-church-656a21fb,Our Lady of Carter Lake,3501,N,9th,St,,,,3501 N 9th St,Carter Lake,IA,51510,,41.28959696,-95.91773553,712-323-2916
 us-ne-cedar-bluffs-st-mary-a6671e69,St. Mary,207,S,3rd,St,,,,207 S 3rd St,Cedar Bluffs,NE,68015,,41.39519731,-96.61454325,(402) 647-4901
 us-ne-cedar-rapids-st-anthony-45841963,St. Anthony,508,W,Main,St,,,,508 W Main St,Cedar Rapids,NE,68627,,41.56023908,-98.15083236,(308) 358-0773
 us-ne-central-city-st-michael-38d8acef,St. Michael,2402,,20th,Ave,,,,2402 20th Ave,Central City,NE,68826,,41.10783435,-98.00634994,308-773-2282
@@ -75,22 +65,14 @@ us-ne-columbus-st-anthony-9ad3df8d,St. Anthony,562,,17th,Ave,,,,562 17th Ave,Col
 us-ne-columbus-st-bonaventure-6c51c1ac,St. Bonaventure,1565,,18th,Ave,,,,1565 18th Ave,Columbus,NE,68601,,41.43178946,-97.34859714,(402) 564-7151
 us-ne-columbus-st-isidore-51a05e80,St. Isidore,3921,,20th,St,,,,3921 20th St,Columbus,NE,68601,,41.43562798,-97.37574205,(402) 564-8993
 us-ne-cortland-st-james-35b8fa35,St. James,500,W,First,St,,,,500 W First St,Cortland,NE,68331,,40.50955608,-96.70975888,(402) 798-7335
-us-ia-council-bluffs-holy-family-church-corpus-christi-parish-460ce042,Holy Family,2217,,,Ave,,,,2217 Ave B,Council Bluffs,IA,51501,,41.26359112,-95.8781285,(712) 323-2916
-us-ia-council-bluffs-corpus-christi-queen-of-apostles-church-d3077de7,Our Lady Queen of Apostles,3304,,Fourth,Ave,,,,3304 Fourth Ave,Council Bluffs,IA,51501,,41.25876854,-95.89897241,(712) 323-2916
-us-ia-council-bluffs-saint-patrick-b59a16fb,St. Patrick,4,,Valley View,Dr,,,,4 Valley View Dr,Council Bluffs,IA,51503,,41.2678968,-95.80266911,(712) 323-1484
-us-ia-council-bluffs-saint-peter-ea78a499,St. Peter,1,,Bluff,St,,,,1 Bluff St,Council Bluffs,IA,51503,,41.26050989,-95.84749728,(712) 318-3030
 us-ne-cozad-christ-the-king-a783e406,Christ the King,613,W,13th,St,,,,613 W 13th St,Cozad,NE,69130,,40.86400076,-99.99306413,(308) 784-4161
 us-ne-crawford-st-john-the-baptist-405ce650,St. John the Baptist,808,,4th,St,,,,808 4th St,Crawford,NE,69339,,42.68183092,-103.40917714,(308) 665-1584
 us-ne-creighton-st-ludger-holy-angels-our-catholic-family-f5dc337b,St. Ludger (Holy Angels-Our Catholic Family),410,,Bryant,Ave,,,,410 Bryant Ave,Creighton,NE,68729,,42.46996787,-97.90808904,402-357-3506
 us-ne-crete-sacred-heart-d8e3ddaa,Sacred Heart,515,E,14th,St,,,,515 E 14th St,Crete,NE,68333,,40.62603992,-96.95626178,(402) 826-2044
 us-ne-crofton-st-joseph-all-saints-our-catholic-family-6370e04f,Mission of St. Joseph (All Saints-Our Catholic Family),88829,,554th,Ave,,,,88829 554th Ave,Crofton,NE,68730,,42.70652434,-97.43644275,402-357-3506
 us-ne-crofton-st-rose-of-lima-our-catholic-family-579b6d68,St. Rose of Lima (Our Catholic Family),1316,W,5th,St,,,,1316 W 5th St,Crofton,NE,68730,,42.72922029,-97.50069658,(402)357-3506
-us-co-crook-st-peter-3ea9b50e,Mission of St. Peter,612,E,3rd,Ave,,,,612 E 3rd Ave,Crook,CO,80726,,40.85868087,-102.79752169,(970) 474-2655
 us-ne-curtis-st-james-ed541cde,St. James,313,E,6th,St,,,,313 E 6th St,Curtis,NE,69025,,40.63379739,-100.51110506,(308) 367-4280
-us-sd-dakota-dunes-st-teresa-of-calcutta-79100234,St. Teresa of Calcutta,995,N,Sioux Point,Rd,,,,995 N Sioux Point Rd,Dakota Dunes,SD,57049,,42.51251816,-96.49877621,605-235-1942
 us-ne-dalton-st-mary-708a1657,St. Mary,718,,Francis,St,,,,718 Francis St,Dalton,NE,69131,,41.40833902,-102.96794876,(308) 262-0709
-us-sd-dante-assumption-8d25822a,Assumption,416,,Haines,St,,,,416 Haines St,Dante,SD,57329,,43.03967612,-98.18314979,(605) 384-5518
-us-sd-dante-assumption-of-the-blessed-virgin-mary-d57ab830,Assumption Of The Blessed Virgin Mary,416,,Haines,St,,,,416 Haines St,Dante,SD,57329,,43.0382649,-98.1834901,+1-605-384-5518
 us-ne-davey-st-mary-87ebb12e,St. Mary,17630,N,3rd,St,,,,17630 N 3rd St,Davey,NE,68336,,40.98431511,-96.66720027,(402) 785-3445
 us-ne-david-city-assumption-8539b585,Assumption,1821,,38th,Rd,,,,1821 38th Rd,David City,NE,68632,,41.29241285,-97.0391652,(402) 367-3579
 us-ne-david-city-st-marys-catholic-church-b6676004,St Mary's Catholic Church,580,,I,St,,,,580 I St,David City,NE,68632,,41.2586126,-97.1281274,+1-402-367-3579
@@ -110,7 +92,6 @@ us-ne-duncan-st-stanislaus-fb49b430,St. Stanislaus,1120,,8th,St,,,,1120 8th St,D
 us-ne-dwight-assumption-7bfd0590,Assumption,336,W,Pine,St,,,,336 W Pine St,Dwight,NE,68635,,41.08362229,-97.02239239,(402) 566-2765
 us-ne-elba-st-joseph-88361d0f,St. Joseph's,1803,,,Hwy,,,,1803 Hwy 11,Elba,NE,68835,,41.28625577,-98.57447854,(308) 336-3351 
 us-ne-elgin-st-boniface-f7227342,St. Boniface,301,S,2nd,St,,,,301 S 2nd St,Elgin,NE,68636,,41.98094062,-98.08372157,(402) 843-2345
-us-sd-elk-point-st-joseph-20abccb1,St. Joseph,605,E,Main,St,,,,605 E Main St,Elk Point,SD,57025,,42.68400274,-96.67818155,(605) 356-2693
 us-ne-elkhorn-mount-michael-abbey-f5ca7366,Mount Michael Abbey,22520,,Mount Michael,Rd,,,,22520 Mount Michael Rd,Elkhorn,NE,22520,,41.3165625,-96.2688125,14022892541
 us-ne-elkhorn-church-of-st-patrick-db36afc4,St. Patrick,20500,W,Maple,Rd,,,,20500 W Maple Rd,Elkhorn,NE,20500,,41.2930625,-96.2354375,14022894289
 us-ne-elkhorn-st-patrick-f08d6aeb,St. Patrick,18602,W,Maple,Rd,,,,18602 W Maple Rd,Elkhorn,NE,68022,,41.29292918,-96.20753851,(402) 289-4289
@@ -119,11 +100,9 @@ us-ne-elmwood-st-mary-3863ebcd,St. Mary,500,W,G,St,,,,500 W G Street,Elmwood,NE,
 us-ne-elsie-resurrection-3cbe6a99,Resurrection,202,,Grant,St,,,,202 Grant St,Elsie,NE,69134,,40.84844484,-101.39043992,(308) 352-4803
 us-ne-emerson-sacred-heart-3eb3bddf,Sacred Heart,601,,Main,St,,,,601 Main St,Emerson,NE,68733,,42.28364594,-96.72686262,(402) 878-2402
 us-ne-ericson-st-theresa-54e2d8c2,St. Theresa,201,,Chesapeake,St,,,,201 Chesapeake St,Ericson,NE,68637,,41.78209398,-98.67884952,(308) 497-2662
-us-ks-esbon-sacred-heart-015fd2fc,Sacred Heart,1100-1198,,KS-112,,,,,1100-1198 KS-112,Esbon,KS,66941,,39.81684514,-98.43585708,(785) 378-3939 or (785) 527-5559
 us-ne-ewing-st-peter-de-alcantara-bc22e49e,St. Peter de Alcántara,220,,W,Hwy,,,,220 W Hwy 275,Ewing,NE,68735,,42.25939609,-98.34830773,(402) 626-7605
 us-ne-exeter-st-stephen-8608ef46,St. Stephen,207,N,Union,Ave,,,,207 N Union Ave,Exeter,NE,68351,,40.64756014,-97.452025,402-266-5581
 us-ne-fairbury-st-michael-c8b062f4,St. Michael,807,,F,St,,,,807 F Street,Fairbury,NE,68352,,40.13951415,-97.17889951,(402) 729-2058
-us-sd-fairfax-st-anthony-3ae2b993,St. Anthony,,,2nd,St,,,,2nd St,Fairfax,SD,57335,,43.02571473,-98.88657365,(605) 835-9290
 us-ne-falls-city-st-mary-9b9606ee,St. Mary,65724,,713,Rd,,,,65724 713 Rd,Falls City,NE,68355,,40.15957027,-95.49659193,(402) 245-4731
 us-ne-falls-city-sts-peter-and-paul-2b5b91d5,Sts. Peter and Paul,1820,,Fulton,St,,,,1820 Fulton St,Falls City,NE,68355,2234,40.06304704,-95.59544406,(402) 245-3002
 us-ne-farnam-st-joseph-90e68cf3,St. Joseph,540,,Main,St,,,,540 Main St,Farnam,NE,69025,,40.70984589,-100.21446213,(308) 367-4280
@@ -131,19 +110,16 @@ us-ne-farnam-st-joseph-catholic-church-8e2d4632,St. Joseph Catholic Church,540,,
 us-ne-farwell-st-anthony-of-padua-714bd112,St. Anthony,103,,Kearns,Ave,,,,103 Kearns Ave,Farwell,NE,68838,,41.21350196,-98.63171601,(308) 336-3351
 us-ne-fordyce-st-boniface-all-saints-our-catholic-family-7a195cc8,St. Boniface (All Saints-Our Catholic Family),55770,,894th,Rd,,,,55770 894th Rd,Fordyce,NE,68736,,42.78634631,-97.37511476,402-357-3506
 us-ne-fordyce-st-john-the-baptist-all-saints-our-catholic-family-e4d904ae,St. John the Baptist (All Saints-Our Catholic Family),311,,Omaha,St,,,,311 Omaha St,Fordyce,NE,68736,,42.69787351,-97.36558071,(402) 357-3506
-us-mo-forest-city-st-patrick-3fa40a0e,Mission of St. Patrick,303,,Grand,Ave,,,,303 Grand Ave,Forest City,MO,64451,,39.98250653,-95.18998872,816-324-5700
 us-ne-fort-calhoun-st-john-the-baptist-0aa86f7f,St. John the Baptist,215,N,13th,St,,,,215 N 13th St,Fort Calhoun,NE,68023,,41.45726783,-96.02477764,(402) 426-3823 
 us-ne-franklin-st-katharine-drexel-573897a4,St. Katharine Drexel,358,,9th,Ave,,,,358 9th Ave,Franklin,NE,68920,,40.09885385,-98.96149445,(402) 746-3750
 us-ne-fremont-st-patrick-catholic-church-parish-office-649b63ca,St Patrick Catholic Church Parish Office,422,E,4th,St,,,,422 E 4th St,Fremont,NE,68025,,41.4329031,-96.4931564,+1-402-721-6611
 us-ne-fremont-st-patrick-6a03b853,St. Patrick,3400,E,16th,St,,,,3400 E 16th St,Fremont,NE,68025,,41.44547487,-96.45367922,(402) 721-6611
 us-ne-friend-st-joseph-d4c20f8c,St. Joseph,405,S,Main,St,,,,405 S Main St,Friend,NE,68359,,40.65156843,-97.28850748,(402) 947-3651
 us-ne-fullerton-st-peter-15374c16,St. Peter,315,N,Esther,St,,,,315 N Esther St,Fullerton,NE,68638,,41.36823059,-97.96702164,(308) 536-2574
-us-sd-geddes-st-ann-13c3d0e2,St. Ann,303,,5th,St,,,,303 5th St ,Geddes,SD,57342,,43.2511704,-98.70076997,(605) 337-2465
 us-ne-geneva-st-joseph-8f1b6e1c,St. Joseph,831,,E,St,,,,831 E Street,Geneva,NE,68361,0383,40.52292303,-97.60359065,(402) 759-3225
 us-ne-genoa-st-rose-of-lima-32f2bb82,St. Rose of Lima,116,N,Elm,St,,,,116 N Elm St,Genoa,NE,68640,,41.44878099,-97.72530568,(308) 773-2282
 us-ne-gering-christ-the-king-cbd28e7d,Christ the King,,,18th and M,,,,,18th and M,Gering,NE,69341,,41.82223479,-103.67135565,(308) 436-2290
 us-ne-giltner-st-joseph-b2ba7bb1,St. Joseph,209,N,Derby,,,,,209 N Derby,Giltner,NE,68841,,40.772295,-98.15799236,(402) 694-3427
-us-ia-glenwood-our-lady-of-the-holy-rosary-2aa4c55e,Our Lady of the Holy Rosary Church,24116,,Marian,Ave,,,,24116 Marian Ave,Glenwood,IA,51534,,41.05132657,-95.72549462,(712) 527-5211
 us-ne-gordon-st-leo-e3f9091b,St. Leo,300,N,Maverick,St,,,,300 N Maverick St,Gordon,NE,69343,,42.80658582,-102.20927631,(308) 282-0427
 us-ne-gothenburg-our-lady-of-good-counsel-9f9e2c2a,Our Lady of Good Council,1915,,,Ave,,,,1915 Ave J,Gothenburg,NE,69138,,40.93784902,-100.15134622,(308) 784-4161
 us-ne-grafton-st-helena-56871edf,St. Helena,172,N,Jackson,Ave,,,,172 N Jackson Ave,Grafton,NE,68365,,40.62675849,-97.71648201,(402) 773-5346
@@ -154,12 +130,9 @@ us-ne-grand-island-st-leo-5e98b9d4,St. Leo,2410,S,Blaine,St,,,,2410 S Blaine St,
 us-ne-grand-island-st-mary-cdb5df72,St. Mary,112,S,Cedar,St,,,,112 S Cedar St,Grand Island,NE,68801,,40.92107418,-98.34253992,(308) 384-2523
 us-ne-grant-mother-of-sorrows-42258cb8,Mother of Sorrows,745,,Garfield,Ave,,,,745 Garfield Ave,Grant,NE,69140,,40.84663187,-101.7279806,(308) 352-4803
 us-ne-greeley-sacred-heart-614185eb,Sacred Heart,300,W,Wicklow,,,,,300 W Wicklow,Greeley,NE,68842,,41.55090256,-98.53387445,(308) 497-2662
-us-ks-greenleaf-sacred-heart-48b7fdbc,Sacred Heart,143,,Main,St,,,,143 Main St,Greenleaf,KS,66943,,39.72408319,-96.97518822,(785) 337-2289 or (785) 325-3147
 us-ne-greenwood-st-joseph-4b1893da,St. Joseph,7,,Oak,St,,,,7 Oak St,Greenwood,NE,68366,,40.96439256,-96.44347763,(402) 944-3554
 us-ne-gretna-st-charles-borromeo-6094c24a,St. Charles Borromeo,7790,S,192nd,St,,,,7790 S 192nd St,Gretna,NE,68028,,41.18163776,-96.21761644,(402) 916-9730
 us-ne-gretna-st-patrick-ad041216,St. Patrick,508,W,Angus,St,,,,508 W Angus St,Gretna,NE,68028,,41.13990571,-96.24395349,(402) 332-4444
-us-ia-hamburg-st-mary-581de295,St. Mary,1306,,Washington,St,,,,1306 Washington St,Hamburg,IA,51640,,40.60617051,-95.65402141,(712) 382-4316
-us-ks-hanover-st-john-the-baptist-42e2d816,St. John the Baptist,114,S,Church,St,,,,114 S Church St,Hanover,KS,66945,,39.89222155,-96.87308936,(785) 337-2289 or (785) 325-3147
 us-ne-harrison-nativity-of-the-blessed-virgin-mary-44fdd150,Nativity of the Blessed Virgin Mary,280,,Kate,St,,,,280 Kate St,Harrison,NE,69346,,42.68841242,-103.87999878,(308) 665-1584
 us-ne-hartington-holy-trinity-0f81d4df,Holy Trinity,406,S,Broadway,Ave,,,,406 S Broadway Ave,Hartington,NE,68739,,42.61667034,-97.26496968,(402) 254-6559
 us-ne-harvard-st-joseph-19fa6b8c,St. Joseph,611,N,Kearney,Ave,,,,611 N Kearney Ave,Harvard,NE,68944,,40.62246532,-98.09469603,(402) 772-3511  
@@ -171,10 +144,8 @@ us-ne-hazard-st-gabriel-ad3a83f9,St. Gabriel,112,,Market,St,,,,112 Market St,Haz
 us-ne-heartwell-holy-family-1ce71db8,Holy Family,245,,Jefferson,,,,,245 Jefferson,Heartwell,NE,68945,,40.57077964,-98.79091764,(308) 832-1245
 us-ne-hebron-sacred-heart-cff1ff79,Sacred Heart,436,N,3rd,St,,,,436 N 3rd St,Hebron,NE,68370,,40.17054172,-97.59133025,(402) 768-6293
 us-ne-hemingford-st-bridget-093dfefd,St. Bridget,801,,Niobrara,Ave,,,,801 Niobrara Ave,Hemingford,NE,69348,,42.3217837,-103.07770007,(308) 487-3617
-us-ks-herndon-assumption-of-mary-mission-7d07edaf,Assumption of Mary,541,,Palermo,Ave,,,,541 Palermo Ave,Herndon,KS,67739,,39.9100613,-100.78710437,(785) 626-3335
 us-ne-hershey-our-lady-of-guadalupe-1813b67c,Our Lady of Guadalupe,236,,Young,Rd,,,,236 Young Rd,Hershey,NE,69143,,41.16109408,-100.9995282,(308) 534-6623
 us-ne-heun-holy-trinity-b6448760,Holy Trinity,1733,,,Rd,,,,1733 Rd 12,Heun,NE,68629,,41.63109554,-97.04130271,(402) 986-1653
-us-ks-hiawatha-st-ann-9876cd26,St. Ann,800,,Hiawatha,Ave,,,,800 Hiawatha Ave,Hiawatha,KS,66434,1939,39.85777646,-95.5394677,(785) 742-3010
 us-ne-holdrege-all-saints-d307fff4,All Saints,1204,,Logan,St,,,,1204 Logan St,Holdrege,NE,68949,,40.44680494,-99.3655486,(308) 995-4590
 us-ne-homer-st-cornelius-969d27e7,Mission of St. Cornelius,410,N,3rd,St,,,,410 N 3rd St,Homer,NE,68030,,42.32499795,-96.49189952,(402) 878-2402
 us-ne-hooper-st-rose-of-lima-c288e26b,St. Rose of Lima,406,E,Elk,St,,,,406 E Elk St,Hooper,NE,68031,,41.61202506,-96.54335344,(402) 721-6611
@@ -186,8 +157,6 @@ us-ne-hyannis-all-saints-5ddab21a,All Saints,201,S,Maderson,Ave,,,,201 S Maderso
 us-ne-imperial-st-patrick-9190446f,St. Patrick,128,E,7th,St,,,,128 E 7th St,Imperial,NE,69033,,40.51804844,-101.64200312,(308) 882-4995
 us-ne-indianola-st-catherine-a36d3331,St. Catherine,815,,D,St,,,,815 D St,Indianola,NE,69034,,40.2344819,-100.42316437,(308) 364-2428
 us-ne-jackson-st-patrick-d4ea0f27,St. Patrick,119,E,Elk,St,,,,119 E Elk St,Jackson,NE,68743,,42.44849394,-96.56412721,(402) 878-2402
-us-sd-jefferson-st-peter-c3695448,St. Peter,402,,Main,St,,,,402 Main St,Jefferson,SD,57038,,42.60412817,-96.56038582,(605) 966-5716
-us-co-julesburg-st-anthony-012fc421,St. Anthony of Padua,606,W,3rd,St,,,,606 W 3rd St,Julesburg,CO,80737,,40.98496872,-102.27035037,(970) 474-2655
 us-ne-julian-st-bernard-d7f7b78c,St. Bernard,,,On Hwy 75 1 mile S of Julian exit,,,,,On Hwy 75 1 mile S of Julian exit,Julian,NE,68379,,40.50792695,-95.85949786,(402) 883-4569
 us-ne-kearney-prince-of-peace-db66da78,Prince of Peace,2407,W,56th,St,,,,2407 W 56th St,Kearney,NE,68845,,40.72985787,-99.11230555,(308) 236-9171
 us-ne-kearney-st-james-56e85189,St. James,3801,,,Ave,,,,3801 Ave A,Kearney,NE,68847,,40.71305157,-99.07956,(308) 234-5536
@@ -195,15 +164,11 @@ us-ne-kearney-st-teresa-of-calcutta-newman-center-68eef9f9,St. Teresa of Calcutt
 us-ne-kenesaw-sacred-heart-dd8f0800,Sacred Heart,103,W,Pine,St,,,,103 W Pine St,Kenesaw,NE,68832,,40.61839374,-98.65884584,(402) 845-2707
 us-ne-kenesaw-sacred-heart-catholic-church-kenesaw-nebraska-eb6c8239,"Sacred Heart Catholic Church Kenesaw, Nebraska",100,W,Pine,St,,,,100 W Pine St,Kenesaw,NE,68956,,40.618349,-98.6587876,+1-402-845-2707
 us-ne-kimball-st-joseph-0890137f,St. Joseph,507,S,Howard,St,,,,507 S Howard St,Kimball,NE,69145,,41.23225399,-103.66550108,(308) 235-2162
-us-ia-kingsley-st-michael-93224e53,St. Michael,208,,Brandon,St,,,,208 Brandon St,Kingsley,IA,51028,0099,42.58846445,-95.97195387,(712) 378-2722
 us-ne-krakow-ss-peter-and-paul-22782159,Sts. Peter and Paul,52121,S,380th,Ave,,,,52121 S 380th Ave,Krakow,NE,68640,,41.39392086,-97.75329375,(308) 773-2282
-us-sd-lake-andes-st-mark-ae176ad8,St. Mark,251,N,3rd,St,,,,251 N 3rd St,Lake Andes,SD,57356,0250,43.1593238,-98.5418493,605-724-2191
 us-ne-laurel-st-mary-d2a690da,St. Mary,408,,Elm,St,,,,408 Elm St,Laurel,NE,68745,,42.42630404,-97.0914311,(402) 375-2000
 us-ne-lawrence-sacred-heart-c02c7080,Sacred Heart,141,E,2nd,St,,,,141 E 2nd St,Lawrence,NE,68957,,40.29220241,-98.25889081,(402) 756-7393
 us-ne-lawrence-st-stephen-2cbc8f32,St. Stephen,1838,,,Rd,,,,1838 Rd 2600,Lawrence,NE,68957,,40.25428221,-98.25575531,(402) 756-7393
-us-ia-le-mars-st-james-6f84e950,St. James,109,,6th,Ave,SW,,,109 6th Ave S.W,Le Mars,IA,51031,,42.79191138,-96.17527678,(712) 546-5223
 us-ne-leigh-st-mary-35bd7ab4,St. Mary,319,N,Oak,St,,,,319 N Oak St,Leigh,NE,68643,,41.70717465,-97.23968595,(402) 487-2666
-us-sd-lesterville-st-john-the-baptist-f535c1a9,St. John the Baptist,701,,1st,St,,,,701 1st St,Lesterville,SD,57040,,43.03854614,-97.58833945,605-583-4318
 us-ne-lexington-st-ann-9593b932,St. Ann,301,E,6th,St,,,,301 E 6th St,Lexington,NE,68850,,40.77897873,-99.73845286,(308) 324-4647
 us-ne-lincoln-blessed-sacrament-010d3891,Blessed Sacrament,1720,,Lake,St,,,,1720 Lake St,Lincoln,NE,68502,,40.78821022,-96.69641258,(402) 474-4249
 us-ne-lincoln-cathedral-of-the-risen-christ-87c739f7,Cathedral of the Risen Lord,3500,,Sheridan,Blvd,,,,3500 Sheridan Blvd,Lincoln,NE,68506,,40.78005278,-96.67040732,(402) 488-0948
@@ -224,7 +189,6 @@ us-ne-lincoln-st-teresa-13d49777,St. Teresa,735,S,36th,St,,,,735 S 36th St,Linco
 us-ne-lincoln-st-thomas-aquinas-newman-center-8810558f,St. Thomas Aquinas Newman Center,320,N,16th,St,,,,320 N 16th St,Lincoln,NE,68508,,40.81617694,-96.69780491,(402) 474-7914
 us-ne-lindsay-holy-family-9af63170,Holy Family,103,E,3rd,St,,,,103 E 3rd St,Lindsay,NE,68644,,41.70149054,-97.69467743,(402) 428-2455
 us-ne-lisco-st-gall-407f5611,St. Gall,307,,1st,St,,,,307 1st St,Lisco,NE,69148,,41.49874061,-102.62234714,(308) 874-3407
-us-ia-logan-saint-anne-e53a440f,St. Anne,104,W,3rd,St,,,,104 W 3rd St,Logan,IA,51546,,41.64732899,-95.79049683,(712) 644-2520
 us-ne-loma-st-luke-czech-6f227901,St. Luke Czech ,,,Main,St,,,,Main St,Loma,NE,68626,,41.12840717,-96.9422543,(402) 545-2691
 us-ne-loup-city-st-josaphat-2650e778,St. Josaphat,704,N,9th,St,,,,704 N 9th St,Loup City,NE,68853,,41.28132206,-98.96975505,(308) 745-0315 
 us-ne-lyman-sacred-heart-be3def52,Sacred Heart,203,E,O,St,,,,203 E O St,Lyman,NE,69352,,41.91654114,-104.03726374,(308) 623-2245
@@ -233,11 +197,7 @@ us-ne-lyons-st-joseph-511a703c,St. Joseph,430,,Lincoln,St,,,,430 Lincoln St,Lyon
 us-ne-macy-mission-of-our-lady-of-fatima-25789d6e,Mission of Our Lady of Fatima,,,Macy Nebraska 68039,,,,,Macy Nebraska 68039,Macy,NE,68039,,42.1111875,-96.3531875,14028462402
 us-ne-macy-our-lady-of-fatima-ee15ac90,Our Lady of Fatima ,110,,Elk,St,,,,110 Elk St ,Macy,NE,68039,,42.1107173,-96.3559531,(402) 878-2402
 us-ne-madison-st-leonard-5de2e070,St. Leonard,504,S,Nebraska,St,,,,504 S Nebraska St,Madison,NE,68748,,41.82594692,-97.45349689,(402) 371-2621
-us-ks-mankato-st-theresa-ccad2fda,St. Theresa,422,N,Commercial,St,,,,422 N Commercial St,Mankato,KS,66956,,39.78872441,-98.20968327,(785) 527-5559
 us-ne-manley-st-patrick-af5b6b70,St. Patrick,101,N,Broadway,,,,,101 N Broadway,Manley,NE,68403,,40.92134382,-96.16642166,(402) 234-3595
-us-sd-marty-st-paul-65d06995,St. Paul,102,,Church,Dr,,,,102 Church Dr,Marty,SD,57361,0266,42.99301475,-98.4268234,(605) 384-3234
-us-ks-marysville-st-gregory-216ab92a,St. Gregory,1310,,Carolina,,,,,1310 Carolina,Marysville,KS,66508,,39.84339305,-96.64126812,(785) 562-3302
-us-sd-mayfield-church-of-st-columba-eacf4738,St. Columba,,,"444th Ave , 57037",,,,,"444th Ave , 57037",Mayfield,SD,29601,,43.0965625,-97.3184375,
 us-ne-mc-cook-st-patrick-e04f0082,St. Patrick,409,E,F,St,,,,409 E F Street,Mc Cook,NE,69001,,40.20305478,-100.62069642,(308) 345-6734
 us-ne-mc-cool-junction-st-patrick-e5376c60,St. Patrick,305,E,M,St,,,,305 E M St,Mc Cool Junction,NE,68401,,40.74440011,-97.59458251,(402) 362-4595
 us-ne-mccook-sacred-heart-20aa02e2,Sacred Heart,,,N on 83,,,,,N on 83,McCook,NE,69001,,40.48071191,-100.88134467,(308) 345-6734
@@ -245,25 +205,18 @@ us-ne-mccook-st-ann-0fdffc89,St. Ann,,,N on 83,,,,,N on 83,McCook,NE,69024,,40.4
 us-ne-mccool-junction-saint-patrick-catholic-church-mccool-junction-2dff39ee,"Saint Patrick Catholic Church, McCool Junction",305,E,M,St,,,,305 E M St,McCool Junction,NE,68401,,40.7443135,-97.5945989,+1-402-362-4595
 us-ne-mead-st-james-3f563184,St. James,213,E,8th,St,,,,213 E 8th St,Mead,NE,68041,,41.22291356,-96.48789743,(402) 624-3555
 us-ne-meadow-grove-mission-of-st-francis-de-sales-a63d729b,Mission of St. Francis de Sales,,,"543rd Ave , 68752",,,,,"543rd Ave , 68752",Meadow Grove,NE,82990,,41.8581875,-97.6583125,14026756345
-us-ia-merrill-church-of-the-assumption-16d29343,Assumption,615,,5th,St,,,,615 5th St,Merrill,IA,51038,,42.7216875,-96.2529375,17125465223
-us-ia-merrill-st-joseph-ellendale-afc01edd,St. Joseph's Catholic Church (Ellendale),23533,,Plymouth County,Rd,,,,23533 Plymouth County Rd K22,Merrill,IA,51038,,42.7136209,-96.37051266,712-546-5223
 us-ne-milligan-st-wenceslaus-b40ce249,St. Wenceslaus,703,,Main,St,,,,703 Main St,Milligan,NE,68406,,40.50164639,-97.38912434,(402) 629-4237
 us-ne-minden-st-john-the-baptist-df3a0b8b,St. John,624,N,Garber,Ave,,,,624 N Garber Ave,Minden,NE,68959,,40.50082125,-98.94195189,(308) 832-1245
-us-ia-missouri-valley-saint-patrick-ce2468e9,St. Patrick,215,N,7th,St,,,,215 N 7th St,Missouri Valley,IA,51555,,41.55785242,-95.88664271,712-642-2611
 us-ne-mitchell-st-theresa-bb284f4c,St. Theresa,1715,,17th,St,,,,1715 17th St,Mitchell,NE,69357,,41.94476437,-103.81151845,(308) 623-2245
-us-ia-mondamin-holy-family-938a1220,Holy Family,307,,Mulberry,St,,,,307 Mulberry St,Mondamin,IA,51557,,41.70739276,-96.02091436,402-689-8940
 us-ne-morrill-st-ann-373bb57c,St. Ann,,,Hwy 26 & Walsh,St,,,,Hwy 26 & Walsh St,Morrill,NE,69358,,41.96363819,-103.91972252,(308) 623-2245
 us-ne-morse-bluff-sacred-heart-107f70ab,Sacred Heart,2750,,County Rd 27,,,,,2750 County Rd 27,Morse Bluff,NE,68648,,41.40071487,-96.80890656,(402) 666-5280
 us-ne-morse-bluff-st-george-d26c29e2,St. George,260,,Short,St,,,,260 Short St,Morse Bluff,NE,68648,,41.43108849,-96.7649442,(402) 666-5280
-us-ia-moville-immaculate-conception-4eaa2967,Immaculate Conception,419,,Jones,St,,,,419 Jones St,Moville,IA,51039,0802,42.48811272,-96.06989782,(712) 873-3644
 us-ne-mullen-st-mary-13c6c633,St. Mary,304,S,Blaine,Ave,,,,304 S Blaine Ave,Mullen,NE,69152,,42.03990681,-101.04638449,(308) 546-2250
-us-ks-munden-st-george-6c9ebfca,St. George,105,W,Myrza,St,,,,105 W Myrza St,Munden,KS,66959,,39.91519878,-97.53908917,(785) 527-5559
 us-ne-nebraska-city-st-benedict-c7ff5cbf,St. Benedict,411,,5th Rue,,,,,411 5th Rue,Nebraska City,NE,68410,3023,40.66966133,-95.84088373,(402) 873-3047
 us-ne-nebraska-city-st-mary-61e58d03,St. Mary,218,N,6th,St,,,,218 N 6th St,Nebraska City,NE,68410,,40.67771912,-95.85214949,(402) 873-3024
 us-ne-neligh-st-francis-of-assisi-b4576f5b,St. Francis of Assisi,702,W,11th,St,,,,702 W 11th St,Neligh,NE,68756,,42.13611631,-98.03855705,(402) 887-4521
 us-ne-nelson-sacred-heart-3dade00a,Sacred Heart,24,S,Main,St,,,,24 S Main St,Nelson,NE,68978,,40.20537439,-98.06789299,(402) 879-3735
 us-ne-nenzel-st-mary-ea655406,St. Mary,203,S,Main,St,,,,203 S Main St,Nenzel,NE,69219,,42.92624644,-101.10309661,(402) 376-1672
-us-ia-neola-saint-patrick-24127f34,St. Patrick,311,,3rd,St,,,,311 3rd St,Neola,IA,51559,,41.45050553,-95.6183644, 712-485-2750
 us-ne-newcastle-st-peter-ff06e364,St. Peter,403,,Annie,St,,,,403 Annie St,Newcastle,NE,68757,,42.65256726,-96.87381176,(402) 254-6559
 us-ne-niobrara-st-william-holy-angels-our-catholic-family-5090d539,Mission of St. William (Holy Angels-Our Catholic Family),262,,Buckeye,Rd,,,,262 Buckeye Rd,Niobrara,NE,68760,,42.74835162,-98.02340901,402-357-3506
 us-ne-norfolk-immaculata-monastery-of-the-missionary-benedictine-sisters-c0b90437,Immaculata Monastery of the Missionary Benedictine Sisters,300,N,18th,St,,,,300 N 18th St,Norfolk,NE,68701,,42.0349375,-97.4331875,14023713438
@@ -306,7 +259,6 @@ us-ne-omaha-st-joan-of-arc-5fe3462e,St. Joan of Arc,3122,S,74th,St,,,,3122 S 74t
 us-ne-omaha-st-john-2cc14b1b,St. John,2500,,California Plaza,,,,,2500 California Plaza,Omaha,NE,68178,0465,41.26501275,-95.94836309,(402) 280-3031
 us-ne-omaha-st-john-vianney-1515706a,St. John Vianney,5801,,Oak Hills,Dr,,,,5801 Oak Hills Dr,Omaha,NE,68137,,41.19917414,-96.1079852,(402) 895-0808
 us-ne-omaha-st-joseph-42897f09,St. Joseph,1723,S,17th,St,,,,1723 S 17th St,Omaha,NE,68108,,41.24218084,-95.93832073,(402) 342-1618
-us-ne-omaha-st-joseph-f71db70e,St. Joseph,1723,S,17Th,St,,,,1723 S 17Th St,Omaha,NE,68108,,41.25552882,-95.93850732,(402) 342-1618
 us-ne-omaha-st-leo-the-great-a5a220a9,St. Leo the Great,1920,N,102nd,St,,,,1920 N 102nd St,Omaha,NE,68114,,41.27744995,-96.07218854,(402) 397-0407
 us-ne-omaha-st-margaret-mary-99da5dec,St. Margaret Mary,6116,,Dodge,St,,,,6116 Dodge St,Omaha,NE,68132,,41.26053462,-96.00748795,(402) 558-2255
 us-ne-omaha-st-mary-fbbed3da,St. Mary,3529,,Q,St,,,,3529 Q St,Omaha,NE,68107,,41.20527792,-95.96698503,(402) 731-4578
@@ -321,7 +273,6 @@ us-ne-omaha-st-thomas-more-8a0c89d8,St. Thomas More,4804,,Grover,St,,,,4804 Grov
 us-ne-omaha-st-vincent-de-paul-0c9023f6,St. Vincent de Paul,14330,,Eagle Run,Dr,,,,14330 Eagle Run Dr,Omaha,NE,68164,,41.28883311,-96.13765345,(402) 496-7988
 us-ne-omaha-st-wenceslaus-2eb75e69,St. Wenceslaus,15353,,Pacific,St,,,,15353 Pacific St,Omaha,NE,68154,,41.24655758,-96.15357433,(402) 330-0304
 us-ne-omaha-ss-peter-and-paul-67449ff5,Sts. Peter and Paul,5912,S,36th,St,,,,5912 S 36th St,Omaha,NE,68107,,41.19885,-95.96768994,(402) 731-4578
-us-ia-onawa-st-john-a020ff93,St. John,1009,,13th,St,,,,1009 13th St,Onawa,IA,51040,1508,42.02643143,-96.10089284,(712) 423-1004
 us-ne-oneill-st-patrick-d120d4ae,St. Patrick,,,,,,,,,Oneill,NE,68763,,42.46023076,-98.64815328,(402) 336-1602
 us-ne-ord-our-lady-of-perpetual-help-61ecd8d0,Our Lady of Perpetual Help,527,N,19th,,,,,527 N 19th,Ord,NE,68862,,41.60730985,-98.93341134,(308) 728-3351
 us-ne-orleans-st-mary-f7b32830,St. Mary,109,W,Linn,,,,,109 W Linn,Orleans,NE,68966,,40.13534698,-99.45543242,(308) 473-3475
@@ -336,14 +287,10 @@ us-ne-palmyra-st-leo-bfbe0152,St. Leo,340,W,8th,St,,,,340 W 8th St,Palmyra,NE,68
 us-ne-papillion-st-columbkille-7d025ad5,St. Columbkille,200,E,6th,St,,,,200 E 6th St,Papillion,NE,68046,,41.1620584,-96.04186882,(402) 339-3285
 us-ne-paul-st-joseph-7cc4077d,St. Joseph,5592,,O,Rd,,,,5592 O Road,Paul,NE,68410,,40.58069918,-95.93517065,(402) 873-4569
 us-ne-paxton-st-patrick-3bfcb89e,St. Patrick,301,E,4th,St,,,,301 E 4th St,Paxton,NE,69155,,41.1267094,-101.35366653,(308) 284-3196 
-us-co-peetz-sacred-heart-cbda1d52,Sacred Heart,621,,Logan,St,,,,621 Logan St,Peetz,CO,80747,,40.9634781,-103.112724,(970) 522-6422
 us-ne-pender-st-john-the-baptist-faa4e00d,St. John the Baptist,108,N,5th,St,,,,108 N 5th St,Pender,NE,68047,,42.11426089,-96.70873431,(402) 385-3258
 us-ne-peru-st-clara-4507562c,St. Clara,604,,6th,St,,,,604 6th St,Peru,NE,68421,,40.48217309,-95.73223064,(402) 274-3733
 us-ne-petersburg-st-john-the-baptist-5a174632,St. John the Baptist,108,N,4th,St,,,,108 N 4th St,Petersburg,NE,68652,,41.85482712,-98.07536169,(402) 843-2345
-us-ks-phillipsburg-sts-philip-and-james-aa976c31,Sts. Philip and James,690,S,7th,St,,,,690 S 7th St,Phillipsburg,KS,67661,,39.74198608,-99.31807593,(785) 543-5367 or (785) 766-5344
 us-ne-pierce-st-joseph-70306b2b,St. Joseph,118,W,Willow,St,,,,118 W Willow St,Pierce,NE,68767,,42.19615001,-97.52753018,(402) 329-4200
-us-wy-pine-bluffs-st-paul-393aa4bd,St. Paul,501,E,4th,St,,,,501 E 4th St,Pine Bluffs,WY,82082,,41.18094197,-104.06231738,(307) 245-3761
-us-sd-pine-ridge-sacred-heart-a9ad53c3,Sacred Heart,30236,,US-18,,,,,30236 US-18,Pine Ridge,SD,57770,,43.02594481,-102.55545497,605-867-5551
 us-ne-plainview-st-paul-dbf1e4df,St. Paul,203,E,Park,Ave,,,,203 E Park Ave,Plainview,NE,68769,,42.35103994,-97.78599365,(402) 358-3501
 us-ne-platte-center-st-joseph-04f27a4c,St. Joseph,155,,A,St,,,,155 A Street,Platte Center,NE,68653,,41.54028676,-97.48409276,(402) 246-2255
 us-ne-plattsmouth-holy-spirit-691f551a,Holy Spirit,520,S,18th,St,,,,520 S 18th St,Plattsmouth,NE,68048,,41.00516791,-95.90374146,(402) 296-3139
@@ -363,17 +310,11 @@ us-ne-roseland-assumption-0143be19,Assumption,12630,W,Assumption,Rd,,,,12630 W A
 us-ne-roseland-sacred-heart-8c793e03,Sacred Heart,11818,W,Alexander,,,,,11818 W Alexander,Roseland,NE,68973,,40.4729919,-98.55736,(402)756-6251
 us-ne-rulo-immaculate-conception-ec1c44c2,Immaculate Conception,,,7th & Rouleau Sts,,,,,7th & Rouleau Sts,Rulo,NE,68431,,40.05159931,-95.43400526,(402) 245-4731
 us-ne-rushville-immaculate-conception-03637111,Immaculate Conception,606,,Church,St,,,,606 Church St,Rushville,NE,69360,,42.71884898,-102.45522733,(308) 237-2430
-us-ks-sabetha-sacred-heart-a8563a72,Sacred Heart,1031,S,12th,St,,,,1031 S 12th St,Sabetha,KS,66534,2551,39.89471537,-95.80527498,(785) 284-0888
-us-ks-sabetha-st-augustine-5c61665c,St. Augustine,1948,,Acorn,Rd,,,,1948 Acorn Rd,Sabetha,KS,66534,,39.79069855,-95.78842163,(785) 284-0888
-us-ks-saint-benedict-st-mary-1f665825,St. Mary,9208,,Main,St,,,,9208 Main St,Saint Benedict,KS,66538,,39.88575093,-96.09865665,(785) 336-3174
 us-ne-saint-charles-st-anthony-012941b3,St. Anthony,413,,15th,Rd,,,,413 15th Rd,Saint Charles,NE,68788,,41.79117333,-96.75204568,(402) 372-2188
 us-ne-saint-edward-st-edward-32f649e2,St. Edward,805,,Washington,St,,,,805 Washington St,Saint Edward,NE,68660,,41.57307731,-97.85901559,4023952393
-us-sd-saint-francis-st-charles-borromeo-e56fe259,St. Charles Borromeo,240,,Main,St,,,,240 Main St,Saint Francis,SD,57572,0499,43.14089137,-100.90479251,(605) 747-2361
-us-ks-saint-francis-st-francis-of-assisi-2661ac06,St. Francis of Assisi,625,S,River,St,,,,625 S River St,Saint Francis,KS,67756,,39.76800137,-101.80565576,(785) 332-2680 or (785) 626-3335
 us-ne-saint-helena-immaculate-conception-holy-family-our-catholic-family-0467e33a,Immaculate Conception (Holy Family-Our Catholic Family),,,St Helena & 9th,St,,,,St Helena & 9th St,Saint Helena,NE,68774,,42.80934086,-97.24795402,402-357-3506
 us-ne-saint-mary-st-mary-0da128ee,St. Mary,61518,,,Hwy,,,,61518 Hwy 41,Saint Mary,NE,68443,,40.4252254,-96.29044533,(402) 335-3742
 us-ne-saint-paul-sts-peter-and-paul-068828f0,Sts. Peter and Paul,713,,Elm,St,,,,713 Elm St,Saint Paul,NE,68873,,41.21030067,-98.45844113,(308) 754-4002
-us-ia-salix-st-joseph-d2921410,St. Joseph,510,,Tipton,St,,,,510 Tipton St,Salix,IA,51052,,42.30530008,-96.28837867,712-946-5635
 us-ne-sargent-assumption-of-blessed-virgin-mary-44678cd6,Assumption of the Blessed Virgin Mary,300,N,2nd,St,,,,300 N 2nd St,Sargent,NE,68874,,41.64279422,-99.36946999,(308) 872-5716
 us-ne-schuyler-priory-of-christ-the-king-c6898d25,Priory of Christ the King,1123,,,Rd,,,,1123 Rd I,Schuyler,NE,68661,,41.5130625,-97.0538125,14023528819
 us-ne-schuyler-priory-of-christh-the-king-of-the-missionary-benedictines-d768fe0e,Priory of Christh the King of the Missionary Benedictines,,,Schuyler Nebraska 68661,,,,,Schuyler Nebraska 68661,Schuyler,NE,68661,,41.5129375,-97.0543125,14023528819
@@ -382,7 +323,6 @@ us-ne-schuyler-st-mary-e0630438,St. Mary,1019,,Banner,St,,,,1019 Banner St,Schuy
 us-ne-scottsbluff-our-lady-of-guadalupe-f4cf407a,Our Lady of Guadalupe,1102,,12th,Ave,,,,1102 12th Ave,Scottsbluff,NE,69361,,41.85764494,-103.6475807,(308) 632-2845
 us-ne-scottsbluff-st-agnes-a5b0fa89,St. Agnes,2314,,3rd,Ave,,,,2314 3rd Ave,Scottsbluff,NE,69361,,41.86988578,-103.6589003,(308) 632-2541
 us-ne-scribner-st-lawrence-5539bac9,Mission of St. Lawrence,910,,Grant,St,,,,910 Grant St,Scribner,NE,68057,,41.66480305,-96.65746942,(402) 721-6611
-us-ks-seneca-sts-peter-and-paul-cc1238a5,Sts. Peter and Paul,411,,Pioneer,,,,,411 Pioneer,Seneca,KS,66538,,39.83794259,-96.06201644,(785) 336-2128
 us-ne-seward-st-gregory-the-great-seminary-0371826d,St. Gregory the Great Seminary,800,,Fletcher,Rd,,,,800 Fletcher Rd,Seward,NE,68434,8145,40.8745625,-97.1041875,14026434052
 us-ne-seward-st-vincent-de-paul-9cd3ca28,St. Vincent de Paul,152,,Pinewood,Ave,,,,152 Pinewood Ave,Seward,NE,68434,,40.92401369,-97.09439241,(402) 643-3421
 us-ne-shelby-sacred-heart-aecf1144,Sacred Heart,210,S,Walnut,St,,,,210 S Walnut St,Shelby,NE,68662,,41.19047546,-97.4253006,(402) 527-5425
@@ -391,65 +331,41 @@ us-ne-shickley-st-mary-8c1cd0f9,St. Mary,703,,Swartzendruber,Dr,,,,703 Swartzend
 us-ne-shubert-st-anne-e345b8c4,St. Ann,507,,Main,St,,,,507 Main St,Shubert,NE,68337,,40.23791659,-95.68312883,(402) 855-3595
 us-ne-sidney-st-patrick-7fcb2cdd,St. Patrick,1039,,14th,Ave,,,,1039 14th Ave,Sidney,NE,69162,,41.14350498,-102.98074446,(308) 254-2828
 us-ne-silver-creek-st-lawrence-2536ba0c,St. Lawrence,407,,Vine,St,,,,407 Vine St,Silver Creek,NE,68663,,41.31749515,-97.6648165,(308) 773-2282
-us-ia-sioux-city-blessed-sacrament-holy-cross-parish-3c57bc76,Blessed Sacrament,3012,,Jackson,St,,,,3012 Jackson St,Sioux City,IA,51104,2799,42.52252385,-96.40182189,(712) 277-2949
-us-ia-sioux-city-cathedral-of-the-epiphany-77679022,Cathedral of the Epiphany,1000,,Douglas,St,,,,1000 Douglas St,Sioux City,IA,51105,,42.50091358,-96.40659929,(712) 255-1637
-us-ia-sioux-city-church-of-the-immaculate-conception-2b9ff950,Immaculate Conception,1212,,Morningside,Ave,,,,1212 Morningside Ave,Sioux City,IA,51106,,42.4780625,-96.3606875,17122764821
-us-ia-sioux-city-immaculate-conception-mater-dei-parish-9e1f78f7,Immaculate Conception,1212,,Morningside,Ave,,,,1212 Morningside Ave,Sioux City,IA,51106,2817,42.47836888,-96.36057617,(712) 276-4821
-us-ia-sioux-city-nativity-of-our-lord-jesus-christ-mater-dei-parish-d3b8a816,Nativity of Our Lord Jesus Christ,4241,,Natalia,Way,,,,4241 Natalia Way,Sioux City,IA,51106,4099,42.45223307,-96.35436215,712.276.4821
-us-ia-sioux-city-our-lady-of-grace-briar-cliff-university-c3961be8,Our Lady of Grace - Briar Cliff University ,3303,,Rebecca,St,,,,3303 Rebecca St,Sioux City,IA,51104,2100,42.52638,-96.4281845,(712) 279-5200
-us-ia-sioux-city-sacred-heart-e72341a0,Sacred Heart,5010,,Military,Rd,,,,5010 Military Rd,Sioux City,IA,51103,1564,42.51920514,-96.47300525,(712) 233-1652
-us-ia-sioux-city-st-boniface-556e73b7,St. Boniface,703,W,5th,,,,,703 W 5th,Sioux City,IA,51103,3799,42.50101624,-96.41843307,(712) 255-3577
-us-ia-sioux-city-st-joseph-6fdd8918,St. Joseph,1112,,8th,St,,,,1112 8th St,Sioux City,IA,51105,,42.49840388,-96.39526845,(712) 255-1637
-us-ia-sioux-city-church-of-st-michael-f091fd6c,St. Michael,2223,,Indian Hills,Dr,,,,2223 Indian Hills Dr,Sioux City,IA,51104,1604,42.5351875,-96.3811875,17122392411
-us-ia-sioux-city-st-michael-holy-cross-parish-4630086f,St. Michael,2223,,Indian Hills,Dr,,,,2223 Indian Hills Dr,Sioux City,IA,51104,,42.53560688,-96.38123512,(712) 277-2949
-us-ks-smith-center-st-mary-6d8d9d11,St. Mary,403,,W,Hwy,,,,403 W Hwy 36,Smith Center,KS,66967,,39.78455995,-98.79123612,(785) 543-5367 or (785) 766-5344
 us-ne-smithfield-st-john-cc85e082,St. John,105,E,Niobrara,St,,,,105 E Niobrara St,Smithfield,NE,68976,,40.57353817,-99.74123732,(308) 995-4590
 us-ne-snyder-st-leo-cd93b688,St. Leo,302,,Ash,St,,,,302 Ash St,Snyder,NE,68664,,41.70541534,-96.78838851,(402) 652-8437
 us-ne-south-sioux-city-st-michael-82800ce9,St. Michael,1405,,1st,Ave,,,,1405 1st Ave,South Sioux City,NE,68776,,42.47584264,-96.41410508,(402) 494-5423
 us-ne-spalding-st-michael-27f0b609,St. Michael,120,E,Marguerite,St,,,,120 E Marguerite St,Spalding,NE,68665,,41.69010347,-98.36268804,(308) 497-2662
 us-ne-spencer-st-mary-4c51d8c5,St. Mary,304,E,S,St,,,,304 E S St,Spencer,NE,68777,,42.87211913,-98.6980184,(402) 775-0067
 us-ne-springfield-st-joseph-6eae1ec1,St. Joseph,100,S,9th,St,,,,100 S 9th St,Springfield,NE,68059,,41.08131256,-96.12318754,(402) 253-2949
-us-sd-springfield-st-vincent-de-paul-c32e6e0b,St. Vincent,1203,,Wood,St,,,,1203 Wood St,Springfield,SD,57062,,42.85895825,-97.90215351,(605) 589-3504
 us-ne-st-libory-st-libory-84216bcd,St. Libory,505,,Spruce,St,,,,505 Spruce St,St. Libory,NE,68872,,41.0835527,-98.35690956,(308) 687-6276
 us-ne-stanton-st-peter-bff8fd2f,St. Peter,1504,,Ivy,St,,,,1504 Ivy St,Stanton,NE,68779,,41.95072774,-97.23127619,(402) 371-2621
 us-ne-stapleton-st-john-the-evangelist-697d3168,St. John the Evangelist,304,,H,St,,,,304 H St,Stapleton,NE,69163,,41.48030121,-100.51505297,(308) 636-2421
 us-ne-steinauer-st-anthony-of-padua-806631a8,St. Anthony,201,,3rd,St,,,,201 3rd St,Steinauer,NE,68441,,40.20775408,-96.2296772,(402) 869-2256
 us-ne-stratton-st-joseph-8a6bc247,St. Joseph,410,,County,Rd,,,,410 County Rd,Stratton,NE,69043,,40.14893343,-101.22093025,(308) 423-2329
 us-ne-stuart-st-boniface-ac10824d,St. Boniface,106,E,4th,St,,,,106 E 4th St,Stuart,NE,68780,,42.60160417,-99.14225824,(402) 924-3262
-us-ks-summerfield-holy-family-a67ac7cf,Holy Family,600,,Main,St,,,,600 Main St,Summerfield,KS,66541,,39.9947766,-96.3485492,(785) 736-2220
 us-ne-superior-st-joseph-49e741d8,St. Joseph,1415,,California,St,,,,1415 California St,Superior,NE,68978,,40.03052675,-98.07259083,(402) 879-3735
 us-ne-sutherland-sacred-heart-9acb1728,Sacred Heart,410,,Poplar,St,,,,410 Poplar St,Sutherland,NE,69165,,41.15995973,-101.13342158,(308) 534-6623
 us-ne-sutton-st-mary-362ddbf8,St. Mary,107,,Ivy,St,,,,107 Ivy St,Sutton,NE,68979,,40.60371919,-97.85933091,(402) 773-5346
 us-ne-syracuse-holy-trinity-07b07cae,Holy Trinity,863,,5th,St,,,,863 5th St,Syracuse,NE,68446,,40.77680588,-96.05857086,(402) 269-3382
 us-ne-syracuse-st-paulinus-4ed45bf6,St. Paulinus,476,,Poplar,,,,,476 Poplar,Syracuse,NE,68446,,40.65695572,-96.18004608,(402) 269-3382
-us-sd-tabor-st-wenceslaus-a017e0d4,St. Wenceslaus,205,N,Lidice,St,,,,205 N Lidice St,Tabor,SD,57063,2005,42.95042788,-97.65851521,(605) 463-2336
-us-mo-tarkio-st-paul-the-apostle-754d2a6a,St. Paul the Apostle,908,,Elm,St,,,,908 Elm St,Tarkio,MO,64491,,40.4397452,-95.38751797,660-736-4342
 us-ne-tarnov-st-michael-1f8a6589,St. Michael,309,,3rd,St,,,,309 3rd St Suite#1,Tarnov,NE,68642,,41.61562579,-97.50409577,(402) 923-0913
 us-ne-tecumseh-st-andrew-079e06cf,St. Andrew,186,N,5th,St,,,,186 N 5th St,Tecumseh,NE,68450,,40.36923939,-96.19229794,(402) 335-3742
 us-ne-tekamah-st-patrick-catholic-church-5f075e89,St. Patrick Catholic Church,3480,,W,Hwy,,,,3480 W Hwy 32,Tekamah,NE,68061,,41.77501979,-96.23457474,(402) 426-3823
 us-ne-thedford-st-thomas-of-canterbury-779943ac,St. Thomas of Canterbury,204,,Main,St,,,,204 Main St,Thedford,NE,69166,,41.97740971,-100.570106,(308) 546-2250
 us-ne-tilden-our-lady-of-mount-carmel-22a53f74,Our Lady of Mount Carmel,300,E,2nd,St,,,,300 E 2nd St,Tilden,NE,68781,,42.04717346,-97.83118856,(402) 368-7710
 us-ne-tobias-st-joseph-d64fd344,St. Joseph,511,N,Elm,St,,,,511 N Elm St,Tobias,NE,68453,,40.42183,-97.33739,(402) 821-2689
-us-wy-torrington-st-rose-of-lima-6c49d28b,St. Rose of Lima,605,E,22nd,Ave,,,,605 E 22nd Ave,Torrington,WY,82240,,42.0658988,-104.17741804,(307) 532-5556
 us-ne-touhy-st-vitus-6db8b6a0,St. Vitus,,,N Main,St,,,,N Main St,Touhy,NE,68065,,41.13426938,-96.82309248,(402) 642-5245
 us-ne-trenton-st-james-a5167461,St. James,117,W,B,St,,,,117 W B Street,Trenton,NE,69044,,40.1737559,-101.0141856,(308) 334-5328
-us-sd-tyndall-st-leo-c97b480c,St. Leo,100,E,20th,Ave,,,,100 E 20th Ave,Tyndall,SD,57066,0047,42.99634736,-97.86196232,(605) 589-3504
 us-ne-ulysses-immaculate-conception-9da3a6c1,Immaculate Conception,205,S,6th,St,,,,205 S 6th St,Ulysses,NE,68669,,41.07062301,-97.20501848,(402) 549-2437
-us-ia-underwood-saint-columbanus-ae188bea,St. Columbanus,22720,,Weston,Ave,,,,22720 Weston Ave,Underwood,IA,51576,,41.34280004,-95.74312947,(712) 485-2750
 us-ne-utica-st-patrick-0804caa9,St. Patrick,110,,3rd,St,,,,110 3rd St,Utica,NE,68456,,40.89710041,-97.34927416,(402) 532-2545
 us-ne-valentine-st-nicholas-104f3936,St. Nicholas,400,W,5th,St,,,,400 W 5th St,Valentine,NE,69201,,42.87798645,-100.55503879,(402) 376-1672
 us-ne-valley-st-john-the-evangelist-e7594cee,St. John,307,E,Meigs,St,,,,307 E Meigs St,Valley,NE,68064,,41.30571267,-96.34330134,(402) 359-5783
 us-ne-valparaiso-carmel-of-jesus-mary-and-joseph-4cbd170c,"Carmel of Jesus, Mary and Joseph",9300,W,Agnew,Rd,,,,9300 W Agnew Rd,Valparaiso,NE,68065,,41.02026661,-96.84732595,
 us-ne-valparaiso-sts-mary-and-joseph-519ad520,Sts. Mary & Joseph,637,S,Iver,St,,,,637 S Iver St,Valparaiso,NE,68065,,41.07761212,-96.82997604,(402) 784-2511
 us-ne-verdigre-st-wenceslaus-holy-angels-our-catholic-family-ba12c2ff,St. Wenceslaus (Holy Angels-Our Catholic Family),409,S,Third,St,,,,409 S Third St,Verdigre,NE,68783,,42.59673753,-98.03597357,402-357-3506
-us-sd-vermillion-st-agnes-69ed42ba,St. Agnes,416,,Walker,St,,,,416 Walker St,Vermillion,SD,57069,,42.77429058,-96.91818423,(605) 624-4478
-us-sd-vermillion-st-thomas-more-newman-center-fc4b5f50,University of South Dakota,320,E,Cherry,St,,,,320 E Cherry St,Vermillion,SD,57069,,42.78702266,-96.92645889,605-624-2697
-us-sd-wagner-st-john-the-baptist-8f2705f9,St. John the Baptist,107,,High,Ave,SW,,,107 High Ave S.W,Wagner,SD,57380,0637,43.0806063,-98.29671747,(605) 384-5518
 us-ne-wahoo-st-wenceslaus-735a0945,St. Wenceslaus,256,N,Linden,,,,,256 N Linden,Wahoo,NE,68066,,41.20700732,-96.61830674,(402) 443-4235
-us-sd-wakonda-st-patrick-565afc4b,St. Patrick,209,,Iowa,St,,,,209 Iowa St,Wakonda,SD,57073,0386,43.00955367,-97.10384946,(605) 267-2676
 us-ne-wallace-st-mary-086f7fa7,St. Mary,209,N,Commercial,Ave,,,,209 N Commercial Ave,Wallace,NE,69169,,40.84075464,-101.16564251,(308) 352-4803
 us-ne-walthill-st-joseph-aa00c27b,St. Joseph,501,,Main,St,,,,501 Main St,Walthill,NE,68067,,42.14843724,-96.49330945,(402) 878-2402
-us-ks-washington-st-augustine-71598f89,St. Augustine,410,,B,St,,,,410 B Street,Washington,KS,66968,,39.81557377,-97.04820687,(785) 325-3147 or (785) 337-2289
 us-ne-wauneta-st-john-4e3da94c,St. John,499,S,Arikaree,Ave,,,,499 S Arikaree Ave,Wauneta,NE,69045,,40.41205081,-101.36942922,(308) 334-5328
 us-ne-wayne-st-mary-e9a33c04,St. Mary,412,E,8th,St,,,,412 E 8th St,Wayne,NE,68787,,42.23680608,-97.01240624,(402) 375-2000
 us-ne-wellfleet-st-william-00fba9bd,St. William,203,,Nile,St,,,,203 Nile St,Wellfleet,NE,69170,,40.75609978,-100.7299304,308-367-4280
@@ -464,7 +380,4 @@ us-ne-wisner-st-joseph-ac56d391,St. Joseph,1318,,,Ave,,,,1318 Ave G W,Wisner,NE,
 us-ne-wood-river-st-mary-7409d18d,St. Mary,408,W,11th,St,,,,408 W 11th St,Wood River,NE,68883,,40.82273776,-98.60643909,(308) 583-2464
 us-ne-wymore-st-mary-19b3cecc,St. Mary,115,N,11th,St,,,,115 N 11th St,Wymore,NE,68466,,40.12309309,-96.66786432,(402) 645-3160
 us-ne-wynot-sacred-heart-holy-family-our-catholic-family-cbdd4d12,Sacred Heart (Holy Family-Our Catholic Family),,,W 8th St and Emerson,Ave,,,,W 8th St and Emerson Ave,Wynot,NE,68792,,42.74345561,-97.17188324,(402) 357-3506
-us-sd-yankton-sacred-heart-509aea5a,Sacred Heart,509,,Capitol,St,,,,509 Capitol St,Yankton,SD,57078,4024,42.87268309,-97.3909326,(605) 665-3655
-us-sd-yankton-sacred-heart-monastery-19a3bf56,Sacred Heart Monastery,1005,W,8th,St,,,,1005 W 8th St,Yankton,SD,57078,,42.87211688,-97.40929608,605-668-6000
-us-sd-yankton-st-benedict-cb9f8f4a,St. Benedict,1500,,St Benedict,Dr,,,,1500 St Benedict Dr,Yankton,SD,57078,,42.90662876,-97.41823705,605-664-6214
 us-ne-york-st-joseph-2f99ad7e,St. Joseph,505,,E,Ave,,,,505 E Ave,York,NE,68467,,40.86578339,-97.58625659,(402) 362-4595

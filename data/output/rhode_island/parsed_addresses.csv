@@ -1,52 +1,18 @@
 ﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
-us-ma-acushnet-st-francis-xavier-09158909,St. Francis Xavier,125,,Main,St,,,,125 Main St,Acushnet,MA,02743,,41.68325676,-70.90921138,(508) 995-7600
 us-ri-albion-st-ambrose-fcb2b273,St. Ambrose,191,,School,St,,,,191 School St,Albion,RI,02802,,41.9513253,-71.46134554,(401) 333-1568
 us-ri-ashaway-our-lady-of-victory-d72c3a45,Our Lady of Victory,169,,Main,St,,,,169 Main St,Ashaway,RI,02804,,41.42055727,-71.78944735,(401) 377-8830
-us-ct-ashford-st-philip-the-apostle-ffb2ef53,St Philip-Apostle Church,64,,Pompey Hollow,Rd,,,,64 Pompey Hollow Rd,Ashford,CT,06278,,41.86278861,-72.16531789,(860) 429-2860
-us-ma-ashland-st-cecilia-da8ff3ae,St. Cecilia,54,,Esty,St,,,,54 Esty St,Ashland,MA,01721,,42.256779,-71.46376725,(508) 881-1107
-us-ma-assonet-st-bernard-0948a711,St. Bernard,30,S,Main,St,,,,30 S Main St,Assonet,MA,02702,,41.76522104,-71.10254865,(508) 644-5585
-us-ma-assonet-church-of-st-bernard-37c8a427,St. Bernard,32,S,Main,St,,,,32 S Main St,Assonet,MA,02702,,41.7915625,-71.0701875,15086445585
-us-ma-attleboro-national-shrine-of-our-lady-of-la-salette-e5451dd7,National Shrine of Our Lady of La Salette,947,,Park,St,,,,947 Park St,Attleboro,MA,02703,,41.93105638,-71.26256568,(508) 222-5410
-us-ma-attleboro-st-john-the-evangelist-40adb4e9,St. John the Evangelist,,,One Saint John,Pl,,,,One Saint John Pl,Attleboro,MA,02703,,41.94769861,-71.28769073,(508) 222-1206
-us-ma-attleboro-st-theresa-of-the-child-jesus-c9ee1271,St. Theresa of the Child Jesus,18,,Baltic,St,,,,18 Baltic St,Attleboro,MA,02703,,41.90132335,-71.36743096,(508) 761-8111
-us-ma-attleboro-church-of-st-vincent-de-paul-77ad8d70,St. Vincent de Paul,71,,Linden,St,,,,71 Linden St,Attleboro,MA,02703,,41.9305625,-71.2971875,15082261115
-us-ma-attleboro-falls-st-mark-transfiguration-of-the-lord-parish-310a4a43,St. Mark,105,,Stanley,St,,,,105 Stanley St,Attleboro Falls,MA,02763,1066,41.97355485,-71.30632138,(508) 695-6161
-us-ma-auburn-north-american-martyrs-85fda7a9,North American Martyrs,8,,Wyoma,Dr,,,,8 Wyoma Dr,Auburn,MA,01501,,42.21602541,-71.82224475,(508) 798-8779
-us-ma-auburn-st-joseph-97ba54e1,St. Joseph,194,,Oxford,St,N,,,194 Oxford St N,Auburn,MA,01501,,42.21402995,-71.84558431,(508) 832-2074
-us-ma-avon-st-michael-51c01676,St. Michael,87,N,Main,St,,,,87 N Main St,Avon,MA,02322,,42.13403527,-71.04035169,(781) 767-0605
-us-ct-baltic-st-mary-of-the-immaculate-conception-85204a34,St. Mary of the Immaculate Conception,70,W,Main,St,,,,70 W Main St,Baltic,CT,06330,1348,41.61591534,-72.08871759,(860) 822-6378
 us-ri-barrington-holy-angels-1b380c26,Holy Angels,341,,Maple,Ave,,,,341 Maple Ave,Barrington,RI,02806,,41.73922503,-71.31933157,(401) 245-7743
 us-ri-barrington-st-luke-5f0453f6,St. Luke,108,,Washington,Rd,,,,108 Washington Rd,Barrington,RI,02806,,41.75045938,-71.34013869,(401) 246-1212
-us-ma-bellingham-st-blaise-7c447550,St. Blaise,1158,S,Main,St,,,,1158 S Main St,Bellingham,MA,02019,,42.08318042,-71.47450744,(508) 966-1258
-us-ma-bellingham-st-brendan-fc132ae4,St. Brendan,384,,Hartford,Ave,,,,384 Hartford Ave,Bellingham,MA,02019,,42.12552076,-71.45556824,(508) 966-0260
-us-ma-blackstone-divine-mercy-parish-6f340107,Divine Mercy Parish,48,,St Paul,St,,,,48 St Paul St,Blackstone,MA,01504,,42.0150231,-71.53839839,(508) 883-6726
-us-ma-blackstone-church-of-st-theresa-68420f80,St. Theresa,630,,Rathbun,St,,,,630 Rathbun St,Blackstone,MA,01504,,42.0196875,-71.5023125,15088837206
 us-ri-block-island-st-andrew-a1cb6b14,St. Andrew,23,,Chapel,St,,,,23 Chapel St,Block Island,RI,02807,,41.17307378,-71.56003478,(401) 456-5519
-us-ma-boylston-st-mary-of-the-hills-16e58417,St. Mary of the Hills,630,,Cross,St,,,,630 Cross St,Boylston,MA,01505,,42.33250474,-71.72075814,(508) 869-6771
-us-ct-bozrah-church-of-st-john-b5b56356,St. John,190,,Fitchville,Rd,,,,190 Fitchville Rd,Bozrah,CT,06334,,41.5651875,-72.1534375,18608869151
 us-ri-bradford-st-vincent-de-paul-16605dbd,St. Vincent de Paul,5,,Church Streer,,,,,5 Church Streer,Bradford,RI,02808,,41.40246322,-71.74725539,(401) 348-8765
-us-ma-bridgewater-st-basil-9cfeeeb9,Chapel of St. Basil,122,,Park,Ave,,,,122 Park Ave,Bridgewater,MA,02324,,41.98683387,-70.96877636,(508) 697-9528 
-us-ma-bridgewater-st-thomas-aquinas-a91170d4,St. Thomas Aquinas,103,,Center,St,,,,103 Center St,Bridgewater,MA,02324,,41.99762284,-70.98820101,(508) 697-9528
 us-ri-bristol-church-of-our-lady-of-mount-carmel-35c5197d,Our Lady of Mount Carmel,141,,State,St,,,,141 State St,Bristol,RI,02809,2205,41.6711875,-71.2729375,14012539449
 us-ri-bristol-our-lady-of-mt-carmel-86fac55b,Our Lady of Mt. Carmel,141,,State,St,,,,141 State St,Bristol,RI,02809,2228,41.67557291,-71.27307721,(401) 253-9449
 us-ri-bristol-st-elizabeth-8c010875,St. Elizabeth,577,,Wood,St,,,,577 Wood St,Bristol,RI,02809,,41.67538271,-71.27302049,(401) 253-8366
 us-ri-bristol-st-mary-990e87cd,St. Mary,330,,Wood,St,,,,330 Wood St,Bristol,RI,02809,,41.67117246,-71.27070943,(401) 253-3300
-us-ma-brockton-our-savior-3a81ad60,Chapel of Our Savior,475,,Westgate,Dr,,,,475 Westgate Dr,Brockton,MA,02301,,42.09331665,-71.05556528,(508) 583-8357
-us-ma-brockton-christ-the-king-a706a733,Christ the King,54,,Lyman,St,,,,54 Lyman St,Brockton,MA,02302,,42.08181982,-71.0056247,(508) 586-1575
-us-ma-brockton-our-lady-of-lourdes-c77dbca7,Our Lady of Lourdes,439,,W,St,,,,439 W St,Brockton,MA,02301,,42.07410297,-71.04321318,(508) 586-4715
-us-ma-brockton-st-edith-stein-7a4d9d30,St. Edith Stein,71,E,Main,St,,,,71 E Main St,Brockton,MA,02301,,42.09893294,-71.01933473,(508) 586-6491
-us-ma-brockton-st-patrick-2f18ad73,St. Patrick,335,,Main,St,,,,335 Main St,Brockton,MA,02301,,42.07874582,-71.02025896,(617) 533 0061
-us-ma-brockton-saint-theresa-maronite-ff3bcbab,St. Theresa (Maronite),343,N,Main,St,,,,343 N Main St,Brockton,MA,02301,,42.09263065,-71.01872863,(508) 586-1428
-us-ct-brooklyn-our-lady-of-la-salette-2384125f,Our Lady of La Salette Church,25,,Providence,Rd,,,,25 Providence Rd,Brooklyn,CT,06234,,41.78955795,-71.94795221,(860) 774-6275
-us-ct-canterbury-st-augustine-church-61bec50d,St. Augustine,144,,Westminster,Rd,,,,144 Westminster Rd,Canterbury,CT,06331,1417,41.69693851,-71.99087274,(860) 546-6074
-us-ma-canton-church-of-st-gerard-majella-ca698845,St. Gerard Majella,1860,,Washington,St,,,,1860 Washington St,Canton,MA,02021,,42.1846875,-71.1234375,17818283420
-us-ma-canton-st-oscar-romero-eb31aebb,St. John the Evangelist,700,,Washington,St,,,,700 Washington St,Canton,MA,02021,,42.15630067,-71.1463849,(781) 828-0090
 us-ri-carolina-st-mary-a1bf206c,St. Mary,437,,Carolina Back,Rd,,,,437 Carolina Back Rd,Carolina,RI,02812,,41.45306832,-71.65862302,(401) 364-7214
 us-ri-central-falls-holy-spirit-549872ba,Parish of the Holy Spirit,1030,,Dexter,St,,,,1030 Dexter St,Central Falls,RI,02863,1717,41.88955202,-71.40135339,(401) 726-2600
 us-ri-central-falls-st-joseph-9927a8ce,St. Joseph,391,,High,St,,,,391 High St,Central Falls,RI,02863,,41.88500758,-71.38362804,(401) 723-5427
 us-ri-charlestown-st-james-4928aedb,Chapel of St. James,2079,,Matunuck School House,Rd,,,,2079 Matunuck School House Rd,Charlestown,RI,02813,,41.38185391,-71.61971899,(401) 364-7214
-us-ma-charlton-st-josephs-church-dd0aa23c,St Joseph's Church,10,,H Putnam,Rd,,,,10 H Putnam Rd Extension,Charlton,MA,01507,,42.14286,-71.974661,+1-508-248-7862
-us-ma-charlton-st-joseph-5620d753,St. Joseph,10,,H Putnam,Ext,,,,10 H Putnam Ext,Charlton,MA,01507,,42.1428318,-71.97466832,(508) 248-7862
 us-ri-chepachet-st-eugene-d041552c,St. Eugene,1251,,Putnam,Pike,,,,1251 Putnam Pike,Chepachet,RI,2814,,41.9164413,-71.67562846,(401) 568-5102
 us-ri-coventry-our-lady-of-czenstochowa-ea83cf13,Our Lady of Czestochowa,445,,Washington,St,,,,445 Washington St,Coventry,RI,02816,,41.6957917,-71.53688598,(401) 821-7991
 us-ri-coventry-saints-john-and-paul-5fc09cc2,Saints John and Paul Church,341,S,Main,St,,,,341 S Main St,Coventry,RI,02816,,41.68039405,-71.57584766,(401) 821-5764
@@ -64,174 +30,46 @@ us-ri-cumberland-st-joan-of-arc-67a7f177,St. Joan of Arc,3357,,Mendon,Rd,,,,3357
 us-ri-cumberland-st-john-vianney-1c124c8e,St. John Vianney,3587,,Diamond Hill,Rd,,,,3587 Diamond Hill Rd,Cumberland,RI,02864,,41.98569026,-71.41098801,(401) 333-6060
 us-ri-cumberland-church-of-st-patrick-8d4cd721,St. Patrick,309,,Broad,St,,,,309 Broad St,Cumberland,RI,02864,7802,41.9070625,-71.3930625,14017250344
 us-ri-cumberland-st-joseph-ed8a56ed,St.Josephs,1303,,Mendon,Rd,,,,1303 Mendon Rd,Cumberland,RI,02864,,41.93429394,-71.42749881,(401) 333-4013
-us-ct-danielson-st-james-d7eaccbd,St. James,12,,Franklin,St,,,,12 Franklin St,Danielson,CT,06239,3536,41.80094945,-71.8847681,(860) 774-3900
-us-ct-dayville-church-of-st-joseph-3ce7e8b6,St. Joseph,350,,Hartford,Pike,,,,350 Hartford Pike,Dayville,CT,06241,2109,41.8470625,-71.8926875,18607748656
-us-ma-dedham-st-mary-of-the-assumption-4b219a8f,ST. MARY'S OF THE ASSUMPTION,25,,Avery,St,,,,25 Avery St,Dedham,MA,02026,,42.24828253,-71.16666633,(781) 326-0550
-us-ma-douglas-st-denis-49b505fe,St. Denis,23,,Manchaug,St,,,,23 Manchaug St,Douglas,MA,01516,,42.07649063,-71.71859539,(508) 476-2002
-us-ma-dover-most-precious-blood-67f81ae6,Most Precious Blood,30,,Centre,St,,,,30 Centre St,Dover,MA,02030,,42.25091178,-71.2746945,(508) 785-0305
-us-ma-dudley-st-andrew-bobola-a9078cb5,St. Andrew Bobola,54,W,Main,St,,,,54 W Main St,Dudley,MA,01571,0098,42.04665565,-71.894366,(508) 943-5633
-us-ma-dudley-st-anthony-of-padua-844b4d98,St. Anthony of Padua,24,,Dudley Hill,Rd,,,,24 Dudley Hill Rd,Dudley,MA,01571,5922,42.03979538,-71.92116507, 508-949-0335
-us-ma-east-bridgewater-st-john-the-evangelist-90fb1895,St. John the Evangelist,210,,Central,St,,,,210 Central St,East Bridgewater,MA,02333,,42.02967783,-70.95390877,(508) 378-4207
-us-ma-east-freetown-st-john-neumann-aee49731,St. John Neumann,157,,Middleboro,Rd,,,,157 Middleboro Rd,East Freetown,MA,02717,,41.77838574,-70.93340611,(508) 763-2240
 us-ri-east-greenwich-our-lady-of-mercy-18120d6a,Our Lady of Mercy,65,,Third,St,,,,65 Third St,East Greenwich,RI,02818,,41.65405911,-71.45766803,(401) 884-4968
-us-ct-east-lyme-st-john-xxiii-catholic-community-st-matthias-campus-a02b70dd,St. Matthias Church,317,,Chesterfield,Rd,,,,317 Chesterfield Rd,East Lyme,CT,06333,0025,41.4065247,-72.22321,860-739-9722
 us-ri-east-providence-our-lady-of-loreto-04854fde,Our Lady of Loreto,346,,Waterman,Ave,,,,346 Waterman Ave,East Providence,RI,02914,2637,41.819616,-71.36518,(401) 434-3535
 us-ri-east-providence-sacred-heart-c10933cf,Sacred Heart,118,,Taunton,Ave,,,,118 Taunton Ave,East Providence,RI,02914,,41.81990805,-71.37783856,(401) 434-0326
 us-ri-east-providence-st-francis-xavier-2cc46e43,St. Francis Xavier,81,N,Carpenter,St,,,,81 N Carpenter St,East Providence,RI,02914,,41.81733384,-71.37295431,(401) 434-1878
 us-ri-east-providence-st-martha-7bee8df5,St. Martha,2595,,Pawtucket,Ave,,,,2595 Pawtucket Ave,East Providence,RI,02914,3292,41.80392297,-71.3619033,(401) 434-4060
-us-ma-east-taunton-holy-family-eee550fa,Holy Family,372,,Middleboro,Ave,,,,372 Middleboro Ave,East Taunton,MA,02718,,41.88230654,-71.03394031,(508) 824-5707
 us-ri-exeter-saint-katheri-tekakwitha-2409f439,Community of St. Kateri Tekakwitha,84,,Exeter,Rd,,,,84 Exeter Rd,Exeter,RI,02822,,41.54553881,-71.52718703,(401) 295-0234
-us-ma-fairhaven-church-of-st-joseph-20646175,St. Joseph,41,,Walnut,St,,,,41 Walnut St,Fairhaven,MA,02719,2953,41.6361875,-70.9029375,15089949714
-us-ma-fairhaven-st-joseph-9fe1f82c,St. Joseph,74,,Spring,St,,,,74 Spring St,Fairhaven,MA,02719,,41.64102408,-70.89860607,(508) 994-9714
-us-ma-fairhaven-saint-mary-b2017e0b,St. Mary,440,,Main,St,,,,440 Main St,Fairhaven,MA,02719,,41.66279282,-70.90784446,(508) 992-7300
-us-ma-fall-river-bristol-community-col-campus-ministry-e1cfcb26,Bristol Community Col. Campus Ministry,777,,Elsbree,St,,,,777 Elsbree St,Fall River,MA,02720,,41.72010963,-71.12375193,(508) 678-2811
-us-ma-fall-river-st-mary-of-the-assumption-bf4a95c0,Cathedral of St. Mary of the Assumption,327,,Second,St,,,,327 Second St,Fall River,MA,02721,,41.69857692,-71.15728951,(508) 673-2833
-us-ma-fall-river-espirito-santo-950b75d3,Espirito Santo,311,,Alden,St,,,,311 Alden St,Fall River,MA,02723,,41.687801,-71.1337498,(508) 672-3352
-us-ma-fall-river-church-of-the-holy-cross-d7f7880d,Holy Cross,47,,Pulaski,St,,,,47 Pulaski St,Fall River,MA,02721,,41.6886875,-71.1525625,15086768463
-us-ma-fall-river-holy-name-df133836,Holy Name,709,,Hanover,St,,,,709 Hanover St,Fall River,MA,02720,3798,41.7137655,-71.14270553,(508) 679-6732
-us-ma-fall-river-holy-trinity-da0d59e3,Holy Trinity,951,,Stafford,Rd,,,,951 Stafford Rd,Fall River,MA,02721,,41.67596777,-71.15445323,(508) 672-3200
-us-ma-fall-river-good-shepherd-catholic-community-of-central-fall-river-ba698e7b,Parish of the Good Shepherd,1598,S,Main,St,,,,1598 S Main St,Fall River,MA,02721,,41.68566572,-71.17340841,(508) 673-2833
-us-ma-fall-river-church-of-the-sacred-heart-32bc851b,Sacred Heart,160,,Seabury,St,,,,160 Seabury St,Fall River,MA,02720,,41.7031875,-71.1479375,15086730852
-us-ma-fall-river-santo-christo-4b52be58,Santo Christo,185,,Canal,St,,,,185 Canal St,Fall River,MA,02721,1405,41.69937634,-71.16274455,(508) 676-1184
-us-ma-fall-river-santo-christo-parish-6aa3f8fe,Santo Christo Parish,185,,Canal,St,,,,185 Canal St,Fall River,MA,02721,,41.699428,-71.1627938,+1-774-294-0726
-us-ma-fall-river-st-anne-shrine-e3aee7ce,St. Anne Shrine,818,,Middle,St,,,,818 Middle St,Fall River,MA,02721,,41.6937406,-71.16344503,508-678-1510
-us-ma-fall-river-st-anthony-of-padua-a84900f6,St. Anthony of Padua,48,,Sixteenth,St,,,,48 Sixteenth St,Fall River,MA,02723,,41.69925675,-71.14225376,(508) 673-2402
-us-ma-fall-river-saint-anthony-of-the-desert-maronite-church-maronite-8983a04d,St. Anthony of the Desert Maronite Church,300,N,Eastern,Ave,,,,300 N Eastern Ave,Fall River,MA,02723,,41.70158711,-71.12963774,(508) 672-7653
-us-ma-fall-river-church-of-st-bernadette-916bf983,St. Bernadette,529,,Eastern,Ave,,,,529 Eastern Ave,Fall River,MA,02723,,41.6900625,-71.1315625,15086791991
-us-ma-fall-river-st-john-the-baptist-b28ed128,St. John the Baptist,339,,Center,St,,,,339 Center St,Fall River,MA,02724,,41.6908445,-71.17163301,(508) 673 - 2353
-us-ma-fall-river-st-joseph-6aa6babb,St. Joseph,1335,N,Main,St,,,,1335 N Main St,Fall River,MA,02720,,41.71878556,-71.14795804,(508) 673-1123
-us-ma-fall-river-st-michael-d1951523,St. Michael,189,,Essex,St,,,,189 Essex St,Fall River,MA,02720,,41.72364289,-71.1471469,(508) 672-6713
-us-ma-fall-river-st-stanislaus-catholic-community-of-central-fall-river-3d0c3e13,St. Stanislaus,37,,Rockland,St,,,,37 Rockland St,Fall River,MA,02721,,41.6912956,-71.16859954,(508) 673-2833
-us-ny-fishers-island-our-lady-of-grace-e05da7fe,Our Lady of Grace,,,Alpine,Ave,,,,Alpine Ave,Fishers Island,NY,06390,,41.26082835,-72.01420236,(860) 443-5393
-us-ma-fiskdale-st-anne-st-patrick-7eec5af4,St. Anne St. Patrick Parish,16,,Church,St,,,,16 Church St,Fiskdale,MA,01518,,42.117357,-72.11475086,(508) 347-7338
 us-ri-foster-st-paul-the-apostle-4b8306fc,St. Paul the Apostle,116,,A Danielson,Pike,,,,116 A Danielson Pike,Foster,RI,02825,,41.81557399,-71.73801232,(401) 647-3664
-us-ma-foxborough-st-mary-95721a00,St. Mary,58,,Carpenter,St,,,,58 Carpenter St,Foxborough,MA,02035,,42.05986849,-71.24941896,(508) 543-7726
-us-ma-framingham-catholic-newman-at-framingham-state-university-1e567b51,Catholic Newman at Framingham State University,100,,State,St,,,,100 State St,Framingham,MA,01701,,42.29666441,-71.43531468,(508) 626-4610
-us-ma-framingham-st-bridget-b709071e,St. Bridget,830,,Worcester,Rd,,,,830 Worcester Rd,Framingham,MA,01702,,42.29917709,-71.43120605,(508) 875-5959
-us-ma-framingham-st-george-7b6aedfd,St. George,74,,School,St,,,,74 School St,Framingham,MA,01701,,42.32230584,-71.39471628,(508) 877-5130
-us-ma-framingham-st-stephen-9ced0cc4,St. Stephen,221,,Concord,St,,,,221 Concord St,Framingham,MA,01702,,42.28157053,-71.41509335,(508) 875-4788
-us-ma-framingham-st-tarcicius-757b5713,St. Tarcisius,562,,Waverly,St,,,,562 Waverly St,Framingham,MA,01702,,42.27496156,-71.42170515,(508) 875-8623
-us-ma-framingham-st-thomas-syro-malabar-church-efa3fdd1,St. Thomas Syro-Malabar Church,41,,Brook,St,,,,41 Brook St,Framingham,MA,01701,,42.3244074,-71.416833,+1-508-532-8620
-us-ma-franklin-st-mary-7effb8ef,St. Mary,1,,Church Square,,,,,1 Church Square,Franklin,MA,02038,,42.0899265,-71.40144656,(508) 528-0020
-us-ct-gales-ferry-our-lady-of-lourdes-fa055667,Our Lady of Lourdes,1650,,Rte 12,,,,,1650 Rte 12,Gales Ferry,CT,06335,1534,41.4275715,-72.08116898,(860) 464-7251
 us-ri-georgiaville-st-michael-1f41469f,St. Michael,80,,Farmum,Pike,,,,80 Farmum Pike,Georgiaville,RI,02917,,41.8873245,-71.51160567,(401) 231-5119
 us-ri-greenville-st-philip-bbc18575,St. Philip,622,,Putnam,Pike,,,,622 Putnam Pike,Greenville,RI,02828,,41.87339754,-71.55943424,(401) 949-1500
-us-ct-griswold-our-lady-of-guadalupe-friary-351abf16,Marian Friary of Our Lady Of Guadalupe,199,,Colonel Brown,Rd,,,,199 Colonel Brown Rd,Griswold,CT,06351,,41.55340239,-71.92619169,(860) 376-6840
-us-ct-groton-sacred-heart-f5f3d7fd,Sacred Heart,56,,Sacred Heart,Dr,,,,56 Sacred Heart Dr,Groton,CT,06340,4437,41.34831019,-72.07362178,(860) 445-1446
-us-ct-groton-st-mary-mother-of-the-redeemer-b03ff57a,"St. Mary, Mother of the Redeemer",69,,Groton Long Point,Rd,,,,69 Groton Long Point Rd,Groton,CT,06340,4806,41.34210559,-72.01253254,(860) 445-1446
-us-ct-hampton-our-lady-of-lourdes-1582bce5,Our Lady of Lourdes,41,,Cedar Swamp,Rd,,,,41 Cedar Swamp Rd,Hampton,CT,06247,,41.7844548,-72.05889322,(860) 774-6275
 us-ri-harrisville-st-patrick-5dfcf7e1,St. Patrick,45,,Harrisville Main,St,,,,45 Harrisville Main St,Harrisville,RI,02830,,41.96749776,-71.67821131,(401) 568-5600
 us-ri-harrisville-st-theresa-of-the-child-jesus-2981405a,St. Theresa of the Child Jesus ,35,,Dion,Dr,,,,35 Dion Dr,Harrisville,RI,02830,,41.98356398,-71.61687743,(401) 568-8280
-us-ma-holliston-our-lady-of-fatima-7b709303,Our Lady of Fatima,101,,Summer,St,,,,101 Summer St,Holliston,MA,01746,,42.17896154,-71.44491644,(508) 429-2144
-us-ma-holliston-st-mary-3546cef8,St. Mary,8,,Church,St,,,,8 Church St,Holliston,MA,01746,,42.20184123,-71.42823606,(508) 429-4427
 us-ri-hope-valley-st-joseph-d23cbb58,St. Joseph,1105,,Main,St,,,,1105 Main St,Hope Valley,RI,02832,,41.51273325,-71.708904,(401) 539-8311
-us-ma-hopedale-sacred-heart-of-jesus-ad9ee316,Sacred Heart of Jesus,187,,Hopedale,St,,,,187 Hopedale St,Hopedale,MA,01747,,42.12407326,-71.53408926,(508) 473-1900
-us-ma-hopkinton-st-john-the-evangelist-f1286825,St. John the Evangelist,20,,Church,St,,,,20 Church St,Hopkinton,MA,01748,,42.22691915,-71.51979594,(508) 435-3313
 us-ri-jamestown-st-mark-fd722c07,St. Mark,60,,Narragansett,Ave,,,,60 Narragansett Ave,Jamestown,RI,02835,,41.49639299,-71.37162438,(401) 423-1421
-us-ct-jewett-city-st-mary-our-lady-of-the-rosary-6bb924b4,"St. Mary, Our Lady of the Rosary",34,N,Main,St,,,,34 N Main St,Jewett City,CT,06351,2012,41.60785236,-71.98048784,(860) 376-2044
 us-ri-johnston-our-lady-of-grace-9e6c9053,Our Lady of Grace,4,,Lafayette,St,,,,4 Lafayette St,Johnston,RI,02919,,41.83993903,-71.48376684,(401) 231-2220
 us-ri-johnston-st-robert-bellarmine-b5bbe37e,St Robert Bellarmine Church,1804,,Atwood,Ave,,,,1804 Atwood Ave,Johnston,RI,02919,,41.83740518,-71.50662069,(401) 232-5600
 us-ri-johnston-church-of-st-brigid-48198b60,St. Brigid,1231,,Plainfield,St,,,,1231 Plainfield St,Johnston,RI,02919,6922,41.7983125,-71.4758125,14019442232
 us-ri-johnston-st-rocco-41d0b51b,St. Rocco,927,,Atwood,Ave,,,,927 Atwood Ave,Johnston,RI,02919,,41.7968249,-71.48329631,(401) 942-5203
 us-ri-kingston-christ-the-king-e9c0cb62,Christ the King,180,,Old N,Rd,,,,180 Old N Rd,Kingston,RI,02881,,41.4853562,-71.52209887,(401) 783-7459
 us-ri-kingston-uri-catholic-center-1bdcccca,URI Catholic Center ,90,,Chapel,Way,,,,90 Chapel Way,Kingston,RI,02881,,41.48674038,-71.52354724,(401) 874-2324
-us-ma-lakeville-st-isidore-parish-sts-martha-and-mary-a6aa3c88,Sts. Martha and Mary,354,,Bedford,St,,,,354 Bedford St,Lakeville,MA,02347,,41.83824231,-70.94483687,(508) 947-2107
-us-ma-leicester-st-aloysius-st-jude-4af610f8,Aloysius St Jude,489,,Pleasant,St,,,,489 Pleasant St,Leicester,MA,01524,,42.2155855,-71.91344125,(508) 892-8296
-us-ma-leicester-st-pius-x-52c9d94c,St. Pius X,1161,,Main,St,,,,1161 Main St,Leicester,MA,01524,,42.24530217,-71.91289615,(508) 859-8083
-us-ma-leicester-st-pius-x-parish-st-joseph-d7a46fb0,St. Pius X Parish - St. Joseph,759,,Main,St,,,,759 Main St,Leicester,MA,01524,,42.24493658,-71.89406634,(508) 859-8083
 us-ri-lincoln-st-basil-the-great-melkite-e36e8efc,St. Basil the Great (Melkite),15,,Skyview,Dr,,,,15 Skyview Dr,Lincoln,RI,02865,,41.87952378,-71.42340633,(401) 722-1345
 us-ri-lincoln-st-jude-a672ba4f,St. Jude,301,,Front,St,,,,301 Front St,Lincoln,RI,02865,,41.90339389,-71.41214134,(401) 725-8140
-us-ma-linwood-church-of-the-good-shepherd-d50a3ae6,Good Shepherd,121,,,St,,,,121 St,Linwood,MA,01525,,42.0959375,-71.6408125,15082347726
 us-ri-little-compton-st-catherine-of-siena-ab82de5e,St. Catherine,74,,Simmons,Rd,,,,74 Simmons Rd,Little Compton,RI,02837,,41.51026348,-71.17004902,(401) 635-4420
-us-ma-mansfield-st-mary-fa89aeb9,St. Mary,330,,Pratt,St,,,,330 Pratt St,Mansfield,MA,02048,,42.03413385,-71.20259708,(508) 339-2981
 us-ri-manville-st-james-05842e94,St. James,33,,Divison Steet,,,,,33 Divison Steet,Manville,RI,02838,,41.97063853,-71.47542152,(401) 766-1558
 us-ri-mapleville-our-lady-of-good-help-9d3e9913,Our Lady of Good Help Church,1063,,Victory,Hwy,,,,1063 Victory Hwy,Mapleville,RI,02839,,41.95485946,-71.64952052,(401) 568-5272
-us-ma-marion-st-rita-b5c72d9a,St. Rita,121,,Front,St,,,,121 Front St,Marion,MA,02738,,41.70155205,-70.76202753,(508) 758-3719
-us-ma-marlborough-immaculate-conception-00ec7439,Immaculate Conception,11,,Prospect,St,,,,11 Prospect St,Marlborough,MA,01752,,42.34715373,-71.55118701,(508) 485-0016
-us-ma-mattapoisett-st-anthony-115d89ba,St. Anthony,22,,Barstow,St,,,,22 Barstow St,Mattapoisett,MA,02739,,41.66128929,-70.81346204,(508) 758-3719
-us-ma-medfield-st-edward-the-confessor-31670624,St. Edward the Confessor,133,,Spring,St,,,,133 Spring St,Medfield,MA,02052,,42.17711892,-71.30163563,(508) 359-2633
-us-ma-medway-st-joseph-7d65e869,St. Joseph,151,,Village,St,,,,151 Village St,Medway,MA,02053,,42.13990041,-71.39779345,(508) 533-6500
-us-ma-middleborough-sacred-heart-st-isidore-parish-adc9f263,Sacred Heart,340,,Centre,St,,,,340 Centre St,Middleborough,MA,02346,,41.89331478,-70.9144784,(508) 947-0444
 us-ri-middletown-st-lucy-ba639858,St. Lucy,909,W,Main,Rd,,,,909 W Main Rd,Middletown,RI,02842,,41.52683224,-71.29566072,(401) 847-6153
-us-ma-milford-sacred-heart-of-jesus-555c2a8c,Sacred Heart of Jesus,5,E,Main,St,,,,5 E Main St,Milford,MA,01757,,42.14359222,-71.51212784,(508) 634-5435
-us-ma-milford-st-mary-of-the-assumption-a443633a,St. Mary of the Assumption,19,,Winter,St,,,,19 Winter St,Milford,MA,01757,,42.14498088,-71.51658749,(508) 473-2000
-us-ma-millbury-our-lady-of-the-assumption-parish-394809c6,Our Lady of The Assumption Parish,10,,Waters,St,,,,10 Waters St,Millbury,MA,01527,,42.19119673,-71.76362371,508-865-6624 
-us-ma-millbury-st-brigid-040e9b9c,St. Brigid,59,,Main,St,,,,59 Main St,Millbury,MA,01527,,42.19483515,-71.76284194,(508) 865-6624
-us-ma-millis-st-thomas-the-apostle-b2094f91,St. Thomas the Apostle,82,,Exchange,St,,,,82 Exchange St,Millis,MA,02054,,42.16847195,-71.36082054,(508) 376-2621
-us-ma-millville-church-of-st-augustine-68a7e3d8,St. Augustine,17,,Lincoln,St,,,,17 Lincoln St,Millville,MA,01529,,42.0288125,-71.5795625,15088836678
-us-ny-montauk-st-therese-of-lisieux-65455765,St. Therese of Lisieux,67,S,Essex,St,,,,67 S Essex St,Montauk,NY,11954,,41.03627338,-71.9407388,(631) 668-2200
-us-ct-moosup-all-hallows-church-5b0b85e5,All Hallows,126,,Prospect,St,,,,126 Prospect St,Moosup,CT,06354,1499,41.7134819,-71.8860321,(860) 564-3313
-us-ct-mystic-chapel-of-our-lady-of-the-assumption-st-edmunds-retreat-517df5c1,Chapel of Our Lady of the Assumption- St Edmunds Retreat ,1,,Enders Island,,,,,1 Enders Island,Mystic,CT,06355,,41.32311243,-71.9630306,(860) 536-0565
-us-ct-mystic-st-patrick-c0e2eb43,St. Patrick,32,E,Main,St,,,,32 E Main St,Mystic,CT,06355,0236,41.35381906,-71.96522762,(860) 536-1800
 us-ri-narragansett-st-veronica-b74772b8,Chapel of St. Veronica,1035,,Boston Neck,Rd,,,,1035 Boston Neck Rd,Narragansett,RI,02882,,41.4828476,-71.43601065,(401) 789-7682
 us-ri-narragansett-st-mary-star-of-the-sea-14179aed,"St. Mary, Star of the Sea",864,,Point Judith,Rd,,,,864 Point Judith Rd,Narragansett,RI,02882,,41.38811501,-71.48477299,(401) 783-4449
 us-ri-narragansett-st-thomas-more-56761c59,St. Thomas More,53,,Rockland,St,,,,53 Rockland St,Narragansett,RI,02882,3620,41.42833199,-71.46277703,(401) 789-7682
-us-ma-natick-st-linus-26df908a,St. Linus,119,,Hartford,St,,,,119 Hartford St,Natick,MA,01760,,42.29244748,-71.38924313,(508) 653-1093
-us-ma-natick-st-patrick-4dce0752,St. Patrick,44,E,Central,St,,,,44 E Central St,Natick,MA,01760,,42.28485731,-71.34348504,(508) 653-1093
-us-ma-needham-church-of-st-bartholomew-af15536e,St. Bartholomew,1180,,Greendale,Ave,,,,1180 Greendale Ave,Needham,MA,02492,,42.2689375,-71.2053125,17814443434
-us-ma-needham-st-joseph-361d0573,St. Joseph,1382,,Highland,Ave,,,,1382 Highland Ave,Needham,MA,02192,,42.2830449,-71.23575121,(781) 444-0245
-us-ma-new-bedford-holy-name-of-the-sacred-heart-of-jesus-b84fa96b,Holy Name of the Sacred Heart of Jesus,121,,Mount Pleasant,St,,,,121 Mount Pleasant St,New Bedford,MA,02740,,41.65192683,-70.93684713,(508) 992-3184
-us-ma-new-bedford-church-of-our-lady-of-fatima-50d709f0,Our Lady of Fatima,4256,,Acushnet,Ave,,,,4256 Acushnet Ave,New Bedford,MA,02745,,41.7336875,-70.9436875,15089957351
-us-ma-new-bedford-our-lady-of-purgatory-maronite-98107f45,Our Lady of Fatima,4254,,Acushnet,Ave,,,,4254 Acushnet Ave,New Bedford,MA,02745,,41.73333247,-70.94322307,(508) 996-8934
-us-ma-new-bedford-st-james-our-lady-of-guadalupe-parish-ed090bdf,Our Lady of Guadalupe at St. James,233,,County,St,,,,233 County St,New Bedford,MA,02740,,41.62311317,-70.92505813,(508) 992-9408
-us-ma-new-bedford-our-lady-of-mount-carmel-ac9fb1f5,Our Lady of Mount Carmel,230,,Bonney,St,,,,230 Bonney St,New Bedford,MA,02744,,41.61990941,-70.92770481,508-993-4704
-us-ma-new-bedford-church-of-our-lady-of-perpetual-help-3f845645,Our Lady of Perpetual Help,235,N,Front,St,,,,235 N Front St,New Bedford,MA,02746,1933,41.6565625,-70.9255625,15089929378
-us-ma-new-bedford-our-lady-of-purgatory-rectory-d475aa51,Our Lady of Purgatory Rectory,4254,,Acushnet,Ave,,,,4254 Acushnet Ave,New Bedford,MA,02745,,41.7332966,-70.9433058,+1-508-996-8934
-us-ma-new-bedford-our-lady-of-the-assumption-103abd8a,Our Lady of the Assumption Church,47,S,Sixth,St,,,,47 S Sixth St,New Bedford,MA,02740,,41.63030074,-70.92710551,(508) 994-7602
-us-ma-new-bedford-our-lady-of-the-immaculate-conception-410818cd,Our Lady of the Immaculate Conception,136,,Earle,St,,,,136 Earle St,New Bedford,MA,02746,,41.66465072,-70.92582534,(508) 992-9892
-us-ma-new-bedford-our-ladys-chapel-b0b2f3f8,Our Lady’s Chapel,600,,Pleasant,St,,,,600 Pleasant St,New Bedford,MA,02740,,41.63494179,-70.92674242,(508) 996-8274
-us-ma-new-bedford-saint-anthony-of-padua-8af12413,St Anthony of Padua Parish,1359,,Acushnet,Ave,,,,1359 Acushnet Ave,New Bedford,MA,02746,,41.66028083,-70.92772926,(508) 993-1691
-us-ma-new-bedford-st-francis-of-assisi-bc7ac838,St. Francis of Assisi,247,,N,St,,,,247 N St,New Bedford,MA,02740,,41.63792778,-70.9367305,(508) 997-7732
-us-ma-new-bedford-st-francis-of-assisi-catholic-church-8301439b,St. Francis of Assisi Catholic Church,283,,Mill,St,,,,283 Mill St,New Bedford,MA,02740,,41.6371044,-70.9399753,+1-508-997-7732
-us-ma-new-bedford-st-gabriel-the-archangel-ae8d6df7,St. Gabriel the Archangel Catholic Church,43,,Tarkiln Hill,Rd,,,,43 Tarkiln Hill Rd,New Bedford,MA,02745,,41.68269467,-70.93087017,(508) 995-3593
-us-ma-new-bedford-church-of-st-josephst-therese-a0a2b812,St. Joseph–St. Therese,51,,Duncan,St,,,,51 Duncan St,New Bedford,MA,02745,6108,41.6745625,-70.9230625,15089955235
-us-ma-new-bedford-church-of-st-kilian-aacbe0a3,St. Kilian,306,,Ashley,Blvd,,,,306 Ashley Blvd,New Bedford,MA,02746,,41.6640625,-70.9300625,15089927587
-us-ma-new-bedford-st-lawrence-martyr-a425190c,"St. Lawrence, Martyr",565,,County,St,,,,565 County St,New Bedford,MA,02740,5299,41.63917512,-70.93137155,(508) 992-4251
-us-ct-new-london-st-joseph-church-st-brendan-the-navigator-community-fd26bced,St. Joseph (St. Brendan the Navigator Community),149,,Montauk,Ave,,,,149 Montauk Ave,New London,CT,06320,4891,41.34437416,-72.10512718,(860) 443-5393
-us-ct-new-london-st-mary-star-of-the-sea-st-brendan-the-navigator-community-92c83de0,St. Mary Star of the Sea (St. Brendan the Navigator Community),10,,Huntington,St,,,,10 Huntington St,New London,CT,06320,6198,41.35330964,-72.09967111,(860) 443-5393
 us-ri-newport-jesus-saviour-8e9d8406,Jesus Saviour,1,,Vernon,Ave,,,,1 Vernon Ave,Newport,RI,02840,,41.50371734,-71.30262651,(401) 847-1267
 us-ri-newport-salve-regina-530da72e,Salve Regina ,100,,Ochre Pt,Ave,,,,100 Ochre Pt Ave,Newport,RI,02840,,41.4878,-71.3119,(401) 341-2368
 us-ri-newport-st-augustin-9b82c7b0,St. Augustin,,,Corner of Carroll Ave & Harrison,Ave,,,,Corner of Carroll Ave & Harrison Ave,Newport,RI,02840,,41.47148132,-71.31534576,(401) 847-0518
 us-ri-newport-st-joseph-a4fbfd11,St. Joseph,5,,Mann,Ave,,,,5 Mann Ave,Newport,RI,02840,2708,41.4924374,-71.3108874,(401) 847-0065
 us-ri-newport-st-mary-d26ec7ce,St. Mary,12,,William,St,,,,12 William St,Newport,RI,02840,,41.48401593,-71.31290498,(401) 847-0475
-us-ct-niantic-st-francis-chapel-83748d60,Chapel of St. Francis,2,,Central,Ave,,,,2 Central Ave,Niantic,CT,06357,,41.31525241,-72.20758309,(860) 739-9722
-us-ct-niantic-st-agnes-campus-st-john-xxiii-catholic-community-058f3500,St. Agnes Church,22,,Haigh,Ave,,,,22 Haigh Ave,Niantic,CT,06357,3129,41.3210652,-72.19922813,(860) 739-9722
-us-ma-norfolk-st-jude-26db9e71,St. Jude,86,,Main,St,,,,86 Main St,Norfolk,MA,02056,,42.12126599,-71.31601002,(508) 528-0170
-us-ma-north-attleboro-sacred-heart-transfiguration-of-the-lord-parish-f0cc6a6c,Sacred Heart,14,,Park,St,,,,14 Park St,North Attleboro,MA,02760,,41.98302768,-71.33485525,(508) 695-6161
-us-ma-north-attleboro-st-marytransfiguration-of-the-lord-parish-cf9b1a03,St. Mary,14,,Park,St,,,,14 Park St,North Attleboro,MA,02760,1209,41.98887765,-71.33172411,(508) 695-6161
-us-ma-north-attleboro-church-of-st-mary-581a34dd,St. Mary,14,,Park,St,,,,14 Park St,North Attleboro,MA,02760,,41.9885625,-71.3314375,15086956161
-us-ma-north-dartmouth-servants-of-christ-the-light-convent-maronite-0b9686a8,Servants of Christ the Light convent (Maronite),856,,Tucker,Rd,,,,856 Tucker Rd,North Dartmouth,MA,02747,,41.61176564,-70.98194166,(508) 996-1753
-us-ma-north-dartmouth-st-julie-billiart-f520ff9a,St Julie Billiart Church,494,,Slocum,Rd,,,,494 Slocum Rd,North Dartmouth,MA,02747,,41.63491668,-70.96691738,(508) 993-2351
-us-ma-north-dartmouth-saint-george-a5f5d1ac,St. George,12,,Highland,Ave,,,,12 Highland Ave,North Dartmouth,MA,02790,,41.64134259,-71.04837325,(774) 319-5579
-us-ma-north-dartmouth-st-mary-university-of-ma-dartmouth-841b64d4,St. Mary. University of MA Dartmouth,783,,Dartmouth,St,,,,783 Dartmouth St,North Dartmouth,MA,02747,,41.63297529,-71.00686292,(508) 999-8872
-us-ma-north-dighton-st-nicholas-of-myra-5a1a7906,St. Nicholas of Myra,499,,Spring,St,,,,499 Spring St,North Dighton,MA,02764,,41.8641191,-71.12567043,(508) 822-3886
-us-ma-north-easton-immaculate-conception-f5b568e2,Immaculate Conception,193,,Main,St,,,,193 Main St,North Easton,MA,02356,,42.06563986,-71.09912074,(508) 238-3232
-us-ma-north-grafton-our-lady-of-hope-parish-st-mary-church-662be725,St Mary's Parish,17,,Waterville,St,,,,17 Waterville St,North Grafton,MA,01536,,42.23537576,-71.70631723,508-839-3993
-us-ct-north-grosvenordale-church-of-st-joseph-c57509d6,St. Joseph,12,,Main,St,,,,12 Main St,North Grosvenordale,CT,06255,0897,41.9833125,-71.9010625,18609232361
-us-ct-north-grosvenordale-st-joseph-a72d2863,St. Joseph ,18,,Main,St,,,,18 Main St,North Grosvenordale,CT,06255,0897,41.97881721,-71.90175767,860-923-2361
 us-ri-north-kingstown-st-bernard-47ac0d41,St. Bernard,275,,Tower Hill,Rd,,,,275 Tower Hill Rd,North Kingstown,RI,02852,,41.56138475,-71.46427227,(401) 295-0387
 us-ri-north-kingstown-st-francis-de-sales-66d198b1,St. Francis de Sales,381,,School,St,,,,381 School St,North Kingstown,RI,02852,,41.61973204,-71.46621496,(401) 884-2105
 us-ri-north-providence-mary-mother-of-mankind-8ea15210,"Mary, Mother of Mankind",25,,Fourth,St,,,,25 Fourth St,North Providence,RI,02911,,41.86206822,-71.47818863,(401) 231-3542 
 us-ri-north-providence-presentation-of-the-blessed-virgin-mary-6c92a776,Presentation of the Blessed Virgin Mary,1081,,Mineral Spring,Ave,,,,1081 Mineral Spring Ave,North Providence,RI,02904,4101,41.86848459,-71.42679751,(401) 353-3120
 us-ri-north-providence-st-anthony-27d30ca5,St. Anthony,1413,,Mineral Spring,Ave,,,,1413 Mineral Spring Ave,North Providence,RI,02904,,41.86665708,-71.44179899,(401) 353-3120
 us-ri-north-scituate-st-joseph-04110dcb,St. Joseph,151,,Danielson,Pike,,,,151 Danielson Pike,North Scituate,RI,02857,,41.83228039,-71.58808866,(401) 647-2255
-us-ct-north-stonington-st-thomas-more-95eef3d9,St. Thomas More,87,,Mystic,Rd,,,,87 Mystic Rd,North Stonington,CT,06359,1514,41.44389705,-71.90633932,860-599-5580
-us-ma-northboro-st-rose-of-lima-cbe032e6,St. Rose of Lima,244,W,Main,St,,,,244 W Main St,Northboro,MA,01532,,42.31025474,-71.6562444,(508) 393-2413
-us-ma-northborough-st-bernadette-f3a9dcff,St. Bernadette,266,,Main,St,,,,266 Main St,Northborough,MA,01532,0743,42.32688278,-71.62183587,(508) 393-2838
-us-ma-northbridge-st-peter-fc8967a5,St. Peter,39,,Church,Ave,,,,39 Church Ave,Northbridge,MA,01534,,42.15368951,-71.64967617,(508) 234-2156
-us-ma-norton-st-mary-2089e2f2,St. Mary,1,,Power,St,,,,1 Power St,Norton,MA,02766,,41.95622934,-71.21149374,(508) 285-4462
-us-ct-norwich-cathedral-of-st-patrick-f95c2762,Cathedral of St. Patrick,213,,Broadway,,,,,213 Broadway,Norwich,CT,06360,4307,41.53152234,-72.07779035,(860) 889-8441
-us-ct-norwich-sacred-heart-4380029b,Sacred Heart,52,W,Town,St,,,,52 W Town St,Norwich,CT,06360,2296,41.54906499,-72.10032609,(860) 887-1030
-us-ct-norwich-st-joseph-e30703a9,St. Joseph,120,,Cliff,St,,,,120 Cliff St,Norwich,CT,06360,5134,41.52678156,-72.06987617,(860) 887-1565
-us-ct-norwich-st-mary-4eee5330,St. Mary,70,,Central,Ave,,,,70 Central Ave,Norwich,CT,06360,,41.52963239,-72.05984125,(860) 887-2565
-us-ct-norwich-sts-peter-and-paul-adc33f1f,Sts. Peter and Paul,181,,Elizabeth,St,,,,181 Elizabeth St,Norwich,CT,06360,6199,41.51767534,-72.0919425,(860) 887-2565
-us-ma-norwood-st-catherine-of-siena-5c27c47a,St. Catherine of Siena,547,,Washington,St,,,,547 Washington St,Norwood,MA,02062,,42.19526807,-71.20060053,(781) 762-6080
-us-ma-norwood-st-timothy-bb90a086,St. Timothy,650,,Nichols,St,,,,650 Nichols St,Norwood,MA,02062,,42.18372597,-71.23477516,(781) 769-2522
-us-ct-oakdale-church-of-our-lady-of-the-lakes-cd1f6f58,Our Lady of the Lakes,752,,Norwich-Salem Turnpike,,,,,752 Norwich-Salem Turnpike,Oakdale,CT,06370,9640,41.5015625,-72.2144375,18608591575
-us-ct-occum-st-joseph-5335fc72,St. Joseph,11,,Baltic,Rd,,,,11 Baltic Rd,Occum,CT,06360,9461,41.59628553,-72.05161416,(860) 887-3072
-us-ma-oxford-st-roch-e57ba8da,St. Roch,332,,Main,St,,,,332 Main St,Oxford,MA,01540,,42.11873107,-71.86408127,(508) 987-8987
 us-ri-pascoag-st-joseph-013ea196,St. Joseph,183,,Sayles,Ave,,,,183 Sayles Ave,Pascoag,RI,02859,0188,41.96041432,-71.70393888,(401) 568-2411
-us-ct-pawcatuck-st-michael-the-archangel-9da36cb4,St. Michael the Archangel,60,,Liberty,St,,,,60 Liberty St,Pawcatuck,CT,06379,,41.38019702,-71.83759669,(860) 599-5580
 us-ri-pawtucket-immaculate-heart-of-mary-f5ba7437,Immaculate Heart of Mary,291,,High,St,,,,291 High St,Pawtucket,RI,02860,,41.88319341,-71.38363382,(401) 725-1126
 us-ri-pawtucket-our-lady-of-consolation-f0a1c381,Our Lady of Consolation,211,,Sabin,St,,,,211 Sabin St,Pawtucket,RI,02860,1138,41.89026642,-71.37276459,(401) 724-9190
 us-ri-pawtucket-saint-anthony-b684dcd5,St. Anthony,32,,Lawn,Ave,,,,32 Lawn Ave,Pawtucket,RI,02860,,41.87325537,-71.40011871,(401) 723-9138
@@ -243,13 +81,9 @@ us-ri-pawtucket-church-of-st-leo-the-great-80bbd3ef,St. Leo the Great,697,,Centr
 us-ri-pawtucket-church-of-st-maria-goretti-c183c5c0,St. Maria Goretti,155,,Power,Rd,,,,155 Power Rd,Pawtucket,RI,02860,3429,41.8646875,-71.4134375,14017254355
 us-ri-pawtucket-st-mary-7ac99097,St. Mary of the Immaculate Conception,103,,Pine,St,,,,103 Pine St,Pawtucket,RI,02862,,41.87184058,-71.38928462,(401) 722-5425
 us-ri-pawtucket-st-teresa-of-the-child-jesus-8290144f,St. Teresa of the Child Jesus,358,,Newport,Ave,,,,358 Newport Ave,Pawtucket,RI,02861,4130,41.8675728,-71.35481,(401) 722-4470
-us-ct-plainfield-st-andre-bessette-parish-st-john-the-apostle-b1cf5c72,St. John the Apostle,15,,Railroad,Ave,,,,15 Railroad Ave,Plainfield,CT,06374,,41.67997685,-71.91713227,(860) 564-3313
-us-ma-plainville-st-martha-c270baf7,St. Martha,227,,S,St,,,,227 S St,Plainville,MA,02762,,42.01156394,-71.33981548,508-699-8543
-us-ct-pomfret-st-therese-parish-most-holy-trinity-bc1d14b8,Most Holy Trinity Church,568,,Pomfret,St,,,,568 Pomfret St,Pomfret,CT,06258,0235,41.89651228,-71.96371645,860-928-6535
 us-ri-portsmouth-portsmouth-abbey-2daaa1a8,Abbatial Church of St. Gregory,285,,Corys,Ln,,,,285 Corys Ln,Portsmouth,RI,02871,,41.60124,-71.270107,(401) 683-2000
 us-ri-portsmouth-saint-anthonys-church-of-portsmouth-570b706a,St. Anthony,2836,E,Main,Rd,,,,2836 E Main Rd,Portsmouth,RI,02871,,41.60607808,-71.24770237,(401) 683-0089
 us-ri-portsmouth-st-barnabas-38125424,St. Barnabas,1697,E,Main,Rd,,,,1697 E Main Rd,Portsmouth,RI,02871,2427,41.57923888,-71.25203232,(401) 683-1343
-us-ct-preston-st-catherine-of-siena-047a2e10,St. Catherine of Siena,243,,Rt 164,,,,,243 Rt 164,Preston,CT,06365,8726,41.52246085,-71.98143377,860-376-2044
 us-ri-providence-assumption-of-the-blessed-virgin-mary-6627558a,Assumption of the Blessed Virgin Mary,791,,Potters,Ave,,,,791 Potters Ave,Providence,RI,02907,,41.80436977,-71.43564148,(401) 941-1248
 us-ri-providence-blessed-sacrament-c804b0b1,Blessed Sacrament,239,,Regent,Ave,,,,239 Regent Ave,Providence,RI,02908,,41.82957185,-71.44300364,(401) 751-7575
 us-ri-providence-brown-univ-risd-c87f426e,Brown Univ & RISD,51,,Prospect,St,,,,51 Prospect St,Providence,RI,02906,,41.82640076,-71.40390015,401-699-2183
@@ -280,66 +114,15 @@ us-ri-providence-st-pius-v-63657f66,St. Pius V,240,,Eaton,St,,,,240 Eaton St,Pro
 us-ri-providence-st-raymond-ddf9f479,St. Raymond,1240,N,Main,St,,,,1240 N Main St,Providence,RI,02904,,41.8539515,-71.40125776,(401) 351-4224
 us-ri-providence-st-sebastian-09fe4693,St. Sebastian,67,,Cole,Ave,,,,67 Cole Ave,Providence,RI,02906,,41.83543908,-71.38707149,(401) 751-0196
 us-ri-providence-st-thomas-37ef13e7,St. Thomas,65,,Fruit Hill,Ave,,,,65 Fruit Hill Ave,Providence,RI,02909,,41.83617597,-71.46783642,(401) 272-7118
-us-ct-putnam-st-therse-parish-st-mary-church-of-the-visitation-baafd3f9,St. Mary of the Visitation,218,,Providence,St,,,,218 Providence St,Putnam,CT,06260,1514,41.92388012,-71.91204226,(860) 928-6535
-us-ct-quaker-hill-our-lady-of-perpetual-help-36a39925,Our Lady of Perpetual Help,63,,Old Norwich,Rd,,,,63 Old Norwich Rd,Quaker Hill,CT,06375,,41.39413475,-72.10761057,860-848-1257
-us-ct-quinebaug-church-of-st-stephen-296a5ee1,St. Stephen,130,,Old Turnpike,Rd,,,,130 Old Turnpike Rd,Quinebaug,CT,06262,0897,42.0238125,-71.9509375,18609355205
-us-ct-quinebaug-st-therese-parish-st-stephen-church-0ccda66b,St. Stephen,130,,Old Turnpike,Rd,,,,130 Old Turnpike Rd,Quinebaug,CT,06262,,42.02371421,-71.9513799,860-928-6535
-us-ma-randolph-st-mary-2ddde54a,St. Mary,211,N,Main,St,,,,211 N Main St,Randolph,MA,02368,,42.16602337,-71.04308659,(781) 963-4141
-us-ma-raynham-st-ann-37a073db,St. Ann,675,N,Main,St,,,,675 N Main St,Raynham,MA,02767,,41.94076279,-71.05210811,(508) 823-9833
 us-ri-riverside-st-brendan-cd179529,St. Brendan,60,,Turner,Ave,,,,60 Turner Ave,Riverside,RI,02915,,41.77066338,-71.35933154,(401) 433-2600
-us-ma-rochester-st-isidore-parish-st-rose-of-lima-da00ca48,St. Rose of Lima,282,,Vaughn Hill,Rd,,,,282 Vaughn Hill Rd,Rochester,MA,02770,,41.74449216,-70.84805562,(508) 947-0444
 us-ri-rumford-st-margaret-eab89c94,St. Margaret,1098,,Pawtucket,Ave,,,,1098 Pawtucket Ave,Rumford,RI,02916,,41.84451495,-71.3512254,(401) 438-3230
-us-ct-scotland-church-of-st-margaret-af89ce03,St. Margaret,14,,,,,,,14,Scotland,CT,06264,,41.6989375,-72.0815625,
-us-ma-seekonk-our-lady-queen-of-martyrs-a11a8700,Our Lady Queen of Martyrs,385,,Central,Ave,,,,385 Central Ave,Seekonk,MA,02771,,41.89462931,-71.32578752,(508) 399-8440
-us-ma-seekonk-our-lady-queen-of-martyrs-church-6a9b1f35,Our Lady Queen of Martyrs Church,,,Coyle,Dr,,,,Coyle Dr,Seekonk,MA,02771,,41.896628,-71.322374,+1-508-399-8440
-us-ma-seekonk-our-lady-of-mount-carmel-c86e654d,Our Lady of Mount Carmel,984,,Taunton,Ave,,,,984 Taunton Ave,Seekonk,MA,02771,,41.8324176,-71.30389925,(508) 336-5549
-us-ma-sharon-our-lady-of-sorrows-94049d25,Our Lady of Sorrows,59,,Cottage,St,,,,59 Cottage St,Sharon,MA,02067,,42.11745325,-71.1723129,(781) 784-2265
-us-ma-sherborn-st-theresa-of-lisieux-8a07cb5d,St. Theresa of Lisieux,35,S,Main,St,,,,35 S Main St,Sherborn,MA,01770,,42.23789085,-71.36818945,(508) 653-6253
-us-ma-shrewsbury-st-anne-a524f874,St. Anne,130,,Boston Turnpike,,,,,130 Boston Turnpike,Shrewsbury,MA,01545,,42.27403161,-71.74873361,(508) 757-5154
-us-ma-shrewsbury-st-mary-178f2faf,St. Mary,640,,Main,St,,,,640 Main St,Shrewsbury,MA,01545,,42.29628581,-71.71033842,508.845.6341
 us-ri-slatersville-st-john-the-evangelist-9fffc011,St. John the Evangelist,63,,Church,St,,,,63 Church St,Slatersville,RI,02876,,41.99748943,-71.5799478,(401) 762-0946
-us-ma-somerset-st-john-of-god-c1b129b3,St. John of God,1036,,Brayton,Ave,,,,1036 Brayton Ave,Somerset,MA,02726,3118,41.73678783,-71.1607003,(508) 678-5513
-us-ma-somerset-st-patrick-church-at-our-lady-of-peace-parish-0838c9fe,St. Patrick,306,,S,St,,,,306 S St,Somerset,MA,02726,5617,41.76724596,-71.13318901,(508) 673-7831
-us-ma-somerset-our-lady-of-peace-parish-at-st-thomas-more-169ac1d6,St. Thomas More,386,,Luther,Ave,,,,386 Luther Ave,Somerset,MA,02726,,41.74352032,-71.14854121,(508) 673-7831
-us-ma-somerset-church-of-st-thomas-more-bdc3abb1,St. Thomas More,386,,Luther,Ave,,,,386 Luther Ave,Somerset,MA,02726,,41.7438125,-71.1479375,15086737831
-us-ma-south-dartmouth-st-mary-750ece18,St. Mary,789,,Dartmouth,St,,,,789 Dartmouth St,South Dartmouth,MA,02748,,41.5919521,-70.94334356,(508) 992-7505
-us-ma-south-easton-chapel-of-our-lady-of-the-most-holy-rosary-6b39f358,Chapel of Our Lady of the Most Holy Rosary,518,,Washington,St,,,,518 Washington St,South Easton,MA,02375,,42.0526875,-71.0830625,18002997729
-us-ma-south-easton-holy-cross-53f03f0e,Holy Cross,225,,Purchase,St,,,,225 Purchase St,South Easton,MA,02375,1605,42.02573838,-71.08384585,(508) 238-2235
-us-ma-south-grafton-our-lady-of-hope-parish-st-james-church-fdbd0ffc,Our Lady of Hope Parish - St. James Church ,89,,Main,St,,,,89 Main St,South Grafton,MA,01560,,42.17797801,-71.69623001,508-839-3993
-us-ma-south-grafton-church-of-st-james-26db6e51,St. James,89,,Main,St,,,,89 Main St,South Grafton,MA,01560,,42.1783125,-71.6949375,15088395354
-us-ma-southborough-st-anne-a45f5ee8,St. Anne,20,,Boston,Rd,,,,20 Boston Rd,Southborough,MA,01772,,42.30495087,-71.5200317,(508) 485-0141
-us-ma-southborough-st-matthew-d543ad70,St. Matthew,26,,Highland,St,,,,26 Highland St,Southborough,MA,01772,,42.26753539,-71.52939662,(508) 485-2285
-us-ma-southbridge-church-of-notre-dame-6c9863fa,Notre Dame,,,Main St & Marcy,St,,,,Main St & Marcy St,Southbridge,MA,01550,,42.0775625,-72.0368125,
-us-ma-southbridge-st-john-paul-ii-parish-notre-dame-dec109ff,Notre Dame,446,,Main,St,,,,446 Main St,Southbridge,MA,01550,,42.07790154,-72.03655093,tel:1-508-765-3701 ext. 110
-us-ma-southbridge-church-of-st-hedwig-4485c6de,St. Hedwig,104,,Everett,St,,,,104 Everett St,Southbridge,MA,01550,,42.0716875,-72.0339375,
-us-ma-southbridge-st-john-paul-ii-parish-st-mary-940cc4fa,St. Mary,247,,Hamilton,St,,,,247 Hamilton St,Southbridge,MA,01550,,42.08033628,-72.036413,508-765-3701 ext. 110
-us-ma-spencer-mary-queen-of-the-rosary-541ca1a6,Mary Queen of the Rosary Church,46,,Maple,St,,,,46 Maple St,Spencer,MA,01562,,42.2404171,-71.99229583,(508) 885-3111
-us-ct-stonington-st-mary-6a67938c,St. Mary,22,,Broad,St,,,,22 Broad St,Stonington,CT,06378,1219,41.33727131,-71.90629072,860-535-1700
-us-ma-stoughton-immaculate-conception-a07bb94f,Immaculate Conception,122,,Canton,St,,,,122 Canton St,Stoughton,MA,02072,,42.12535074,-71.10815469,(781) 344-2073
-us-ma-stoughton-st-james-94e6ea72,St. James,560,,Page,St,,,,560 Page St,Stoughton,MA,02072,,42.15220342,-71.07560705,(781) 344-2073
-us-ma-sutton-st-mark-c846e7ba,St. Mark,356,,Boston,Rd,,,,356 Boston Rd,Sutton,MA,01590,,42.14754006,-71.76862723,(508) 865-3860
-us-ma-swansea-saint-dominic-parish-cba5eed7,St. Dominic,1277,,GAR,Hwy,,,,1277 GAR Hwy,Swansea,MA,02777,,41.75256741,-71.2313612,508-657-7206
-us-ma-swansea-st-francis-of-assisi-4783b3f0,St. Francis of Assisi,530,,Gardner Neck,Rd,,,,530 Gardner Neck Rd,Swansea,MA,02777,,41.73435751,-71.19574137,(508) 673-2808
-us-ma-swansea-st-louis-de-france-at-our-lady-of-peace-parish-9552b84e,St. Louis de France,56,,Buffington,St,,,,56 Buffington St,Swansea,MA,02777,,41.75018703,-71.15690808,(508) 673-7831
-us-ct-taftville-sacred-heart-2e52b620,Sacred Heart,156,,Providence,St,,,,156 Providence St,Taftville,CT,06380,0186,41.56842078,-72.05520701,(860) 887-3072
-us-ma-taunton-annunciation-of-the-lord-8da04639,Annunciation of the Lord,31,,First,St,,,,31 First St,Taunton,MA,02780,,41.88848828,-71.09171857,(508) 823-2521
-us-ma-taunton-holy-rosary-eb4bdad9,Holy Rosary,80,,Bay,St,,,,80 Bay St,Taunton,MA,02780,,41.91467608,-71.09365094,(508) 824-3330 
-us-ma-taunton-st-andrew-the-apostle-c03841fd,St. Andrew the Apostle Parish,19,,Kilmer,Ave,,,,19 Kilmer Ave,Taunton,MA,02780,,41.90005205,-71.10723739,(508) 824-5577
-us-ma-taunton-st-anthony-5077a9fb,St. Anthony of Padua,126,,School,St,,,,126 School St,Taunton,MA,02780,,41.90872391,-71.08975455,(508) 824-3333
-us-ma-taunton-st-jude-the-apostle-ea093c95,St. Jude the Apostle,249,,Whittenton,St,,,,249 Whittenton St,Taunton,MA,02780,,41.92329199,-71.09941092,(508) 824-3333
-us-ma-taunton-st-mary-e5ae59e2,St. Mary,14,,,St,,,,14 St Mary's Square,Taunton,MA,02780,,41.90755101,-71.09262657,(508) 824-3333
 us-ri-tiverton-holy-ghost-4cbda561,Holy Ghost,303,,Hooper,St,,,,303 Hooper St,Tiverton,RI,02878,,41.66783578,-71.18444369,(401) 624-8131
 us-ri-tiverton-st-christopher-72e34e9d,St. Christopher,1554,,Main,Rd,,,,1554 Main Rd,Tiverton,RI,02878,,41.63279113,-71.21051868,(401) 624-8746
 us-ri-tiverton-st-madeleine-sophie-32764c41,St. Madeleine Sophie,35,,Lake,Rd,,,,35 Lake Rd,Tiverton,RI,02878,,41.5705566,-71.15854,(401) 624-4226
 us-ri-tiverton-st-theresa-b8b2adc8,St. Theresa,265,,Stafford,Rd,,,,265 Stafford Rd,Tiverton,RI,02878,,41.65546948,-71.15252241,(401) 624-8746
-us-ct-uncasville-divine-mercy-parish-st-john-the-evangelist-489cac43,St. John the Evangelist,22,,Maple,Ave,,,,22 Maple Ave,Uncasville,CT,06382,,41.43592092,-72.11200437,(860) 848-1257
-us-ma-upton-st-gabriel-the-archangel-b00039ee,St. Gabriel the Archangel,151,,Mendon,St,,,,151 Mendon St,Upton,MA,01568,,42.15355569,-71.5988416,(508) 603-1430
-us-ma-uxbridge-st-mary-acd386d3,St. Mary,77,,Mendon,St,,,,77 Mendon St,Uxbridge,MA,01569,,42.07785906,-71.62500108,(508) 278-2226
-us-ct-voluntown-st-thomas-and-anne-dd5c230c,St. Thomas the Apostle,61,,Preston City,Rd,,,,61 Preston City Rd,Voluntown,CT,06384,1833,41.57289388,-71.86391595,(860)376-2044
 us-ri-wakefield-st-francis-of-assisi-4ea573be,St. Francis of Assisi,114,,High,St,,,,114 High St,Wakefield,RI,02879,,41.4404396,-71.50270583,(401) 783-4411
 us-ri-wakefield-st-romuald-25469a91,St. Romuald,61,,Atlantic,Ave,,,,61 Atlantic Ave,Wakefield,RI,02879,,41.4266,-71.5285,(401) 783-4411
-us-ma-walpole-blessed-sacrament-8dc9eb23,Blessed Sacrament,10,,Diamond,St,,,,10 Diamond St,Walpole,MA,02081,,42.14697452,-71.24589571,(508) 668-4700
-us-ma-walpole-st-mary-0d4c6630,St. Mary,176,,Washington,St,,,,176 Washington St,Walpole,MA,02032,,42.16056856,-71.21665154,(508) 668-4700
 us-ri-warren-st-alexander-deee5b2c,St. Alexander,221,,Main,St,,,,221 Main St,Warren,RI,02885,,41.7348229,-71.28394794,(401) 245-7000
 us-ri-warren-church-of-st-jean-baptiste-3db5e8b4,St. Jean Baptiste,324,,Main,St,,,,324 Main St,Warren,RI,02885,,41.7326875,-71.2830625,
 us-ri-warren-saint-mary-of-the-bay-bea5dd4f,St. Mary of the Bay,645,,Main,St,,,,645 Main St,Warren,RI,02885,,41.7259942,-71.28201073,(401) 245-7000
@@ -354,42 +137,19 @@ us-ri-warwick-st-peter-860168cc,St. Peter,350,,Fair,St,,,,350 Fair St,Warwick,RI
 us-ri-warwick-st-rita-87951171,St. Rita,722,,Oakland Beach,Ave,,,,722 Oakland Beach Ave,Warwick,RI,02889,,41.68926378,-71.39782765,(401) 738-1800
 us-ri-warwick-st-timothy-dd1e1c41,St. Timothy,1799,,Warwick,Ave,,,,1799 Warwick Ave,Warwick,RI,02889,,41.7285538,-71.40688057,(401) 738-1800
 us-ri-warwick-church-of-st-william-8ee3a11a,St. William,200,,Pettaconsett,Ave,,,,200 Pettaconsett Ave,Warwick,RI,02888,,41.7485625,-71.4286875,14017817226
-us-ct-waterford-st-ann-melkite-401b26b5,St. Ann (Melkite),41,,Cross,Rd,,,,41 Cross Rd,Waterford,CT,06385,1622,41.360024,-72.163605,(860) 442-2211
-us-ct-waterford-st-paul-church-st-brendan-the-navigator-catholic-community-8b267b3b,St. Paul in Chains,170,,Rope Ferry,Rd,,,,170 Rope Ferry Rd,Waterford,CT,06385,,41.33360203,-72.15295744,(860) 443-5393
-us-ct-waterford-church-of-st-paul-in-chains-095d312d,St. Paul in Chains,170,,Rope Ferry,Rd,,,,170 Rope Ferry Rd,Waterford,CT,06385,2609,41.3340625,-72.1533125,18604435587
-us-ct-wauregan-church-of-the-sacred-heart-a4da1589,Sacred Heart,620,,,Rd,,,,620 Rd,Wauregan,CT,06387,0468,41.7513125,-71.9188125,18605642668
-us-ma-wayland-good-shepherd-parish-st-zepherin-1116edf0,Good Shepherd Parish - St. Zepherin,99,,Main,St,,,,99 Main St,Wayland,MA,01778,,42.3200744,-71.36413522,(508) 650-3545
-us-ma-webster-sacred-heart-of-jesus-b776faff,Sacred Heart of Jesus Church,18,E,Main,St,,,,18 E Main St,Webster,MA,01570,,42.0543872,-71.87681439,(508) 943-3140
-us-ma-webster-st-joseph-basilica-84ba3dfd,St. Joseph Basilica,53,,Whitcomb,St,,,,53 Whitcomb St,Webster,MA,01570,,42.05037065,-71.8742888,(508) 943-0467
-us-ma-webster-st-louis-438aaa2d,St. Louis,14,,Lake,St,,,,14 Lake St,Webster,MA,01570,,42.05016415,-71.87841619,(508) 943-0240
-us-ma-wellesley-babson-college-glavin-chapel-219f2c7b,Babson College/ Glavin Chapel,21,,Babson College,Dr,,,,21 Babson College Dr,Wellesley,MA,02481,,42.29713248,-71.26531231,(781) 235-1200
-us-ma-wellesley-st-paul-93e10322,St. Paul,502,,Washington,St,,,,502 Washington St,Wellesley,MA,02482,,42.29857284,-71.2882394,(781) 235-1060
-us-ma-wellesley-wellesley-college-newman-catholic-community-7939de74,Wellesley College Newman Catholic Community ,106,,Central,St,,,,106 Central St,Wellesley,MA,02481,,42.29155606,-71.30448495,(781) 283-1000
-us-ma-west-bridgewater-st-ann-5c718119,St. Ann,103,N,Main,St,,,,103 N Main St,West Bridgewater,MA,02379,,42.02246851,-71.00904848,(508) 586-4880
-us-ma-west-wareham-saint-anthony-82b58c62,Chapel of St. Anthony,35,,Gault,Rd,,,,35 Gault Rd,West Wareham,MA,02576,,41.78938462,-70.75752508,(508) 295-2411
 us-ri-west-warwick-christ-the-king-386c391d,Christ the King,130,,Legris,Ave,,,,130 Legris Ave,West Warwick,RI,02893,2994,41.69613153,-71.52024129,(401) 821-9228
 us-ri-west-warwick-our-lady-of-good-counsel-d6118bdc,Our Lady of Good Counsel,62,,Pleasant,St,,,,62 Pleasant St,West Warwick,RI,02893,,41.7247719,-71.5326298,+1-401-821-6428
-us-ri-west-warwick-our-lady-of-good-counsel-ac340434,Our Lady of Good Counsel,60,,Pleasant,St,,,,60 Pleasant St,West Warwick,RI,02893,5695,41.7247548,-71.53261264,401-821-4072
 us-ri-west-warwick-sacred-heart-c7c9ba69,Sacred Heart,820,,Providence,St,,,,820 Providence St,West Warwick,RI,02893,1135,41.72340678,-71.49178329,(401) 821-4184
 us-ri-west-warwick-st-anthony-ef3df615,St. Anthony,1,,Sunset,Ave,,,,1 Sunset Ave,West Warwick,RI,02893,,41.71543855,-71.52526426,(401) 821-8342
 us-ri-west-warwick-st-joseph-76d5de0c,St. Joseph,854,,Providence,St,,,,854 Providence St,West Warwick,RI,02893,,41.72477235,-71.49213364,(401) 821-4072
 us-ri-west-warwick-st-mary-mission-7236f421,St. Mary,70,,Church,St,,,,70 Church St,West Warwick,RI,02893,,41.68686894,-71.5200057,(401) 821-5555
 us-ri-west-warwick-ss-john-and-james-a7637598,Sts. John and James,40,,Washington,St,,,,40 Washington St,West Warwick,RI,02893,,41.70704646,-71.52505655,(401) 821-7661
 us-ri-west-warwick-ss-peter-and-paul-bfebb738,Sts. Peter and Paul,48,,Highland,St,,,,48 Highland St,West Warwick,RI,02893,,41.721756,-71.52956,(401) 821-2198
-us-ma-westborough-st-luke-the-evangelist-5c27261a,St. Luke the Evangelist,70,W,Main,St,,,,70 W Main St,Westborough,MA,01581,,42.26631218,-71.6160016,(508) 366-5502
 us-ri-westerly-immaculate-conception-e281eefb,Immaculate Conception,111,,High,St,,,,111 High St,Westerly,RI,02891,,41.38126296,-71.82520831,(401) 596-2130
 us-ri-westerly-saint-vincent-de-paul-catholic-church-afeebfd1,Saint Vincent de Paul Catholic Church,7,,Church,St,,,,7 Church St,Westerly,RI,02808,,41.3986999,-71.7468961,+1-401-377-8830
 us-ri-westerly-st-clare-d4db954d,St. Clare,4,,Saint Clare,Way,,,,4 Saint Clare Way ,Westerly,RI,02891,,41.32490921,-71.81912994,(401) 348-8765 x2
 us-ri-westerly-st-pius-x-06904892,St. Pius X,44,,Elm,St,,,,44 Elm St,Westerly,RI,02891,,41.37177715,-71.82942404,(401) 596-2535
-us-ma-westport-our-lady-of-grace-10cbbf4c,Our Lady of Grace,569,,Sanford,Rd,,,,569 Sanford Rd,Westport,MA,02790,,41.64906575,-71.10699329,(508) 674-6271
-us-ma-westport-saint-george-roman-catholic-church-f8d4f691,Saint George Roman Catholic Church,12,,Highland,Ave,,,,12 Highland Ave,Westport,MA,02790,,41.6413869,-71.0497147,+1-774-319-5579
-us-ma-westport-st-john-the-baptist-church-8d24ab13,St John the Baptist Church,945,,Main,Rd,,,,945 Main Rd,Westport,MA,02790,,41.5719928,-71.0912642,+1-508-636-2251
-us-ma-westport-st-john-the-baptist-94185af2,St. John the Baptist,945,,Main,Rd,,,,945 Main Rd,Westport,MA,02790,,41.5655632,-71.09217072,(508) 636-2251
-us-ma-westwood-st-joan-of-arc-parish-st-denis-c9ee4f08,St. Joan Of Arc Parish-St. Denis,157,,Washington,St,,,,157 Washington St,Westwood,MA,02090,,42.22363019,-71.18765119, (781) 326-1071
-us-ma-westwood-st-joan-of-arc-parish-st-margaret-mary-b024cb3e,St. Margaret Mary Church,845,,High,St,,,,845 High St,Westwood,MA,02090,,42.2199994,-71.2241661,(781) 326-1071 
-us-ma-whitinsville-st-patrick-631ca07f,St. Patrick,1,,Cross,St,,,,1 Cross St,Whitinsville,MA,01588,0060,42.11206411,-71.65904516,(508) 234-5656
 us-ri-wickford-church-of-st-bernard-051261cc,St. Bernard,275,,Tower Hill,Rd,,,,275 Tower Hill Rd,Wickford,RI,02852,5618,41.5670625,-71.4643125,14012950387
-us-ct-windham-sagrado-corazon-corpus-christi-catholic-parish-bdb90f46,Iglesia del Sagrado Corazón de Jesús,61,,Club,Rd,,,,61 Club Rd,Windham,CT,06280,1007,41.71772404,-72.18642943,860-423-8439
 us-ri-woonsocket-church-of-all-saints-a35f5ad4,All Saints,323,,Rathbun,St,,,,323 Rathbun St,Woonsocket,RI,02895,3398,42.0136875,-71.5025625,14017621100
 us-ri-woonsocket-church-of-the-holy-family-98039225,Holy Family,414,S,Main,St,,,,414 S Main St,Woonsocket,RI,02895,5193,41.9949375,-71.5243125,14017620830
 us-ri-woonsocket-holy-trinity-038fae24,Holy Trinity ,1409,,Park,Ave,,,,1409 Park Ave,Woonsocket,RI,02895,,41.98458324,-71.51648124,(401) 762-5117
@@ -401,27 +161,3 @@ us-ri-woonsocket-st-anthony-9413ee6f,St. Anthony,126,,Greene,St,,,,126 Greene St
 us-ri-woonsocket-church-of-st-charles-borromeo-04a1a3aa,St. Charles Borromeo,,,N Main St & Daniels,St,,,,N Main St & Daniels St,Woonsocket,RI,02895,,42.0081875,-71.5136875,14017660176
 us-ri-woonsocket-saint-joseph-98d7d9c8,St. Joseph,1200,,Mendon,Rd,,,,1200 Mendon Rd,Woonsocket,RI,02895,,42.00334773,-71.47958146,(401) 766-0626
 us-ri-woonsocket-st-michael-ukrainian-de75ffa3,St. Michael the Archangel Ukrainian Catholic Church (Ukrainian),396,,Blackstone,St,,,,396 Blackstone St,Woonsocket,RI,02895,1917,42.00597847,-71.51969331,(401) 762-2733
-us-ma-worcester-blessed-sacrament-c09db1d8,Blessed Sacrament,555,,Pleasant,St,,,,555 Pleasant St,Worcester,MA,01602,,42.26499796,-71.82102968,(508) 755-5291
-us-ma-worcester-christ-the-king-f5fff789,Christ the King,1052,,Pleasant,St,,,,1052 Pleasant St,Worcester,MA,01602,,42.27811161,-71.84757854,(508) 754-5361
-us-ma-worcester-immaculate-conception-58f8f183,Immaculate Conception,353,,Grove,St,,,,353 Grove St,Worcester,MA,01605,,42.28580245,-71.80814203,(508) 754-8419
-us-ma-worcester-our-lady-of-czestochowa-56a6f394,Our Lady of Czestochowa,34,,Ward,St,,,,34 Ward St,Worcester,MA,01610,,42.2517067,-71.79844673,(508) 755-5959
-us-ma-worcester-our-lady-of-lourdes-33ac204d,Our Lady of Lourdes,1290,,Grafton,St,,,,1290 Grafton St,Worcester,MA,01604,,42.23555511,-71.75294345,(508) 757-0789
-us-ma-worcester-our-lady-of-mercy-maronite-65b65387,Our Lady of Mercy (Maronite),341,,June,St,,,,341 June St,Worcester,MA,01602,,42.26177936,-71.84685685,(508) 752-4287
-us-ma-worcester-our-lady-of-mt-carmel-and-our-lady-of-loreto-a02edeb3,Our Lady of Mt. Carmel and Our Lady of Loreto,37,,Massasoit,Rd,,,,37 Massasoit Rd,Worcester,MA,01604,,42.24922531,-71.77800927,(508) 753-5001
-us-ma-worcester-our-lady-of-perpetual-help-melkite-73ba7a5a,Our Lady of Perpetual Help (Melkite),256,,Hamilton,St,,,,256 Hamilton St,Worcester,MA,01604,2220,42.256225,-71.771036,(508) 752-4174
-us-ma-worcester-our-lady-of-providence-chapel-e52aa3cc,Our Lady of Providence Chapel,123,,Summer,St,,,,123 Summer St,Worcester,MA,01608,,42.26471116,-71.7967949,(508) 363-6246
-us-ma-worcester-our-lady-of-providence-parish-st-bernard-4324ba9a,Our Lady of Providence Parish - St. Bernard,236,,Lincoln,St,,,,236 Lincoln St,Worcester,MA,01605,,42.28320817,-71.79296347,(508) 755-3820
-us-ma-worcester-our-lady-of-vilna-7899b692,Our Lady of Vilna,151,,Sterling,St,,,,151 Sterling St,Worcester,MA,01610,,42.24265751,-71.80090652,(508) 752-1825
-us-ma-worcester-our-lady-of-the-angels-cc8040ce,Our Lady of the Angels,1222,,Main,St,,,,1222 Main St,Worcester,MA,01603,,42.24379174,-71.84084689,(508) 791-0951
-us-ma-worcester-our-lady-of-the-rosary-3129f9ff,Our Lady of the Rosary,25,,Fales,St,,,,25 Fales St,Worcester,MA,01606,,42.3111317,-71.79474934,(508) 853-1640
-us-ma-worcester-sacred-heart-st-catherine-of-sweden-385a624b,Sacred Heart of Jesus,600,,Cambridge,St,,,,600 Cambridge St,Worcester,MA,01610,,42.24463423,-71.80624069,(508) 752-1608
-us-ma-worcester-st-andrew-the-apostle-2d89f031,St. Andrew the Apostle,5,,Spaulding,St,,,,5 Spaulding St,Worcester,MA,01603,,42.25233656,-71.83180053,(508) 754-6057
-us-ma-worcester-st-ignatius-of-antioch-syrian-22a28551,St. Ignatius of Antioch (Syrian),551,,Pleasant,St,,,,551 Pleasant St,Worcester,MA,01602,,42.2651766,-71.82082583,(201) 888-2542
-us-ma-worcester-st-joan-of-arc-c824cfa1,St. Joan of Arc,570,,Lincoln,St,,,,570 Lincoln St,Worcester,MA,01605,,42.29628554,-71.77096197,(508) 852-3232
-us-ma-worcester-st-john-3e7c0602,St. John,44,,Temple,St,,,,44 Temple St,Worcester,MA,01604,,42.25967219,-71.79640961,(508) 756-7165
-us-ma-worcester-st-joseph-39291c05,St. Joseph,35,,Hamilton,St,,,,35 Hamilton St,Worcester,MA,01604,,42.25642646,-71.78353872,508.754.6722 
-us-ma-worcester-cathedral-of-saint-paul-8855e46c,St. Paul Cathedral,38,,High,St,,,,38 High St,Worcester,MA,01609,,42.26162354,-71.80416766,(508) 799-4193
-us-ma-worcester-st-peter-74ee1304,St. Peter,929,,Main,St,,,,929 Main St,Worcester,MA,01610,1428,42.25059989,-71.82089294,(508) 752-4674
-us-ma-worcester-st-stephen-c6d9a950,St. Stephen,357,,Grafton,St,,,,357 Grafton St,Worcester,MA,01604,,42.25558618,-71.78446919,(508) 755-3165
-us-ma-wrentham-mount-st-mary-abbey-b795ad5e,Mount St. Mary Abbey,300,,Arnold,St,,,,300 Arnold St,Wrentham,MA,02093,,42.0406875,-71.3941875,15085281282
-us-ma-wrentham-st-mary-d676e83b,St. Mary,130,,S,St,,,,130 S St,Wrentham,MA,02093,,42.06488938,-71.33113554,(508) 384-3373
