@@ -42,11 +42,13 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# Rate limit: 0.3s between requests (lightweight pages, not full scrapes)
-RESOLVE_DELAY = 0.3
-PROGRESS_SAVE_INTERVAL = 50
+# Rate limit: 1.5s between requests to avoid Cloudflare rate limiting (429)
+# The /api/out endpoint has aggressive Cloudflare protection. If we go faster,
+# we get error 1015 (rate limited). 1.5s matches the main scraper delay.
+RESOLVE_DELAY = 1.5
+PROGRESS_SAVE_INTERVAL = 25
 REQUEST_TIMEOUT = 10
-USER_AGENT = "CatholicMassTimesScraper/1.0 (CR Community News; URL resolver)"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
 _last_request_time = 0.0
 
@@ -111,41 +113,59 @@ def resolve_state(name: str) -> tuple[str, str] | None:
     return STATE_ALIASES.get(key)
 
 
-def resolve_redirect_url(redirect_path: str) -> str | None:
+def _rate_limited_get(url: str) -> requests.Response | None:
     """
-    Fetch the CatholicIndex /api/out interstitial page and extract the real URL.
+    Make a rate-limited GET request.
+
+    Returns the Response object, or None on failure.
+    """
+    global _last_request_time
+
+    elapsed = time.time() - _last_request_time
+    if elapsed < RESOLVE_DELAY:
+        time.sleep(RESOLVE_DELAY - elapsed)
+
+    _last_request_time = time.time()
+
+    try:
+        resp = requests.get(
+            url,
+            timeout=REQUEST_TIMEOUT,
+            headers={"User-Agent": USER_AGENT},
+        )
+        return resp
+    except requests.RequestException as e:
+        logger.debug(f"Request failed for {url}: {e}")
+        return None
+
+
+def resolve_redirect_url(redirect_path: str, slug: str = "") -> str | None:
+    """
+    Resolve a CatholicIndex /api/out redirect URL to the actual church website URL.
+
+    Two-step approach:
+    1. First try using the stored redirect URL directly.
+    2. If that fails (expired signature / Cloudflare 429), fetch the church's detail
+       page to get a fresh signed URL, then follow that.
 
     The interstitial page contains: window.location.href = "https://actualsite.org";
     We parse that to get the real church website URL.
 
     Args:
         redirect_path: The /api/out?... path from CatholicIndex
+        slug: The church slug (used to fetch fresh URL if stored one is expired)
 
     Returns:
         The actual church website URL, or None on failure.
     """
-    global _last_request_time
-
     if not redirect_path or redirect_path == "#" or "/api/out" not in redirect_path:
         return None
 
-    # Rate limiting
-    elapsed = time.time() - _last_request_time
-    if elapsed < RESOLVE_DELAY:
-        time.sleep(RESOLVE_DELAY - elapsed)
-
+    # Step 1: Try the stored redirect URL directly
     full_url = f"https://catholicindex.org{redirect_path}"
-    _last_request_time = time.time()
+    resp = _rate_limited_get(full_url)
 
-    try:
-        resp = requests.get(
-            full_url,
-            timeout=REQUEST_TIMEOUT,
-            headers={"User-Agent": USER_AGENT},
-        )
-        if resp.status_code != 200:
-            return None
-
+    if resp and resp.status_code == 200:
         # Parse window.location.href = "..." from the interstitial page
         match = re.search(r'window\.location\.href\s*=\s*"([^"]+)"', resp.text)
         if match:
@@ -157,11 +177,31 @@ def resolve_redirect_url(redirect_path: str) -> str | None:
             if "catholicindex.org" not in url and "cloudflare" not in url:
                 return url
 
-        return None
+    # Step 2: If stored URL failed (expired sig, 429, etc.), fetch fresh URL from
+    # the church detail page
+    if slug:
+        church_url = f"https://catholicindex.org/churches/{slug}"
+        resp2 = _rate_limited_get(church_url)
 
-    except requests.RequestException as e:
-        logger.debug(f"Request failed for {redirect_path}: {e}")
-        return None
+        if resp2 and resp2.status_code == 200:
+            # Extract the fresh signed website URL from the page
+            pattern = (
+                r'/api/out\?id=' + re.escape(slug)
+                + r'&type=website&t=\d+&sig=[A-Za-z0-9_\-=]+'
+            )
+            fresh_match = re.search(pattern, resp2.text)
+            if fresh_match:
+                fresh_url = f"https://catholicindex.org{fresh_match.group(0)}"
+                resp3 = _rate_limited_get(fresh_url)
+
+                if resp3 and resp3.status_code == 200:
+                    match = re.search(
+                        r'window\.location\.href\s*=\s*"([^"]+)"', resp3.text
+                    )
+                    if match:
+                        return match.group(1)
+
+    return None
 
 
 def resolve_urls_for_state(
@@ -241,8 +281,8 @@ def resolve_urls_for_state(
             processed_this_run += 1
             continue
 
-        # Resolve the redirect URL
-        actual_url = resolve_redirect_url(website)
+        # Resolve the redirect URL (pass slug for fresh-URL fallback)
+        actual_url = resolve_redirect_url(website, slug=slug)
         church["website_resolved"] = actual_url
         completed_slugs.add(slug)
         processed_this_run += 1
