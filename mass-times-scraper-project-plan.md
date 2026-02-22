@@ -381,7 +381,7 @@ Confidence reflects whether this is likely a **real person connected to the chur
 | `prayer_list` | **high** | Sick/homebound lists, prayer requests — real parishioners |
 | `ministry_contextual` | **medium** | Names near ministry keywords (lector, usher, cantor, committee) — likely real but looser match |
 
-**Output CSV columns (full provenance):**
+**Output CSV columns (full provenance + split name fields):**
 | Column | Description |
 |--------|-------------|
 | `church_name` | Name of the church |
@@ -390,10 +390,18 @@ Confidence reflects whether this is likely a **real person connected to the chur
 | `pdf_file` | Local filename of downloaded PDF |
 | `pdf_url` | Original download URL (source link for verification) |
 | `pdf_date` | Date extracted from PDF filename (YYYY-MM-DD) |
-| `person_name` | Extracted name |
+| `person_name` | Full extracted name string (e.g., "Fr. John M. Smith") |
+| `title` | Name prefix/title: "Fr.", "Dr.", "Rev.", "Dcn.", "Sr.", etc. (empty if none) |
+| `first_name` | First name: "John" |
+| `middle_name` | Middle name or initial: "M." or "Michael" (empty if none) |
+| `last_name` | Last name: "Smith" |
 | `category` | Extraction category (clergy_staff, mass_intention, prayer_list, ministry_contextual) |
 | `confidence` | Confidence flag: high, medium, or low |
 | `context` | Surrounding text snippet for verification |
+
+**Deduplication:** Names are deduplicated **per church**, not statewide. If "John Smith" appears in bulletins from 3 different churches, he shows up 3 times (once per church) — this is intentional because we want city+name pairs for matching. Within a single church's bulletins, each name appears only once (the first occurrence is kept for provenance).
+
+**Name splitting:** The `parse_name_parts()` function splits extracted names into structured fields (title, first, middle, last). This enables downstream matching against external name lists using city+first+last pairs. Titles like "Fr.", "Rev.", "Dr." are separated into their own column.
 
 **False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Confidence flag allows downstream filtering — "high" names are very likely real people, "low" names may be false positives. Names will ultimately be matched against a known name list, so recall is prioritized over precision.
 
@@ -415,8 +423,13 @@ Confidence reflects whether this is likely a **real person connected to the chur
 **Dependencies:** `requests`, `beautifulsoup4`, `lxml`, `pdfplumber`
 **Note:** `spacy` NER is incompatible with Python 3.14. Using regex-based name extraction instead, which is more targeted for church bulletin patterns.
 
-**Database tables added:** `bulletin_source`, `bulletin_pdf`, `bulletin_name` (with `is_suspect` flag for possible false positives)
-**Database views added:** `v_bulletin_summary` (state-level stats), `v_bulletin_names_detail` (full provenance per name), `v_bulletin_church_stats` (per-church stats with avg/median)
+**Database tables added:** `bulletin_source`, `bulletin_pdf`, `bulletin_name` (with `is_suspect` flag, split name fields: `title`, `first_name`, `middle_name`, `last_name`)
+**Database views added:**
+- `v_bulletin_summary` — state-level stats (total churches, bulletins, names, avg/median per church)
+- `v_bulletin_names_detail` — full provenance per name with split fields (where did this name come from?)
+- `v_bulletin_church_stats` — per-church stats with counts by confidence/category
+- `v_bulletin_ui_names` — **flat denormalized view for the UI** (filterable by state → city → church → name)
+- `v_bulletin_ui_city_summary` — city-level rollup for sidebar/filter in UI (church count + name count per city)
 
 **Status (2026-02-22):** Re-running full pipeline on Arizona and Georgia with all bulletins. Wisconsin and Pennsylvania pending URL resolution completion.
 

@@ -541,6 +541,58 @@ def extract_text_from_pdf(pdf_path: Path):
         return ""
 
 
+def parse_name_parts(full_name: str) -> dict:
+    """
+    Split a full name into structured parts: title, first, middle, last.
+
+    Examples:
+        "John Smith"        -> {title:"", first:"John", middle:"", last:"Smith"}
+        "Mary Jane Wilson"  -> {title:"", first:"Mary", middle:"Jane", last:"Wilson"}
+        "Dr. Robert Lee"    -> {title:"Dr.", first:"Robert", middle:"", last:"Lee"}
+        "Fr. John M. Smith" -> {title:"Fr.", first:"John", middle:"M.", last:"Smith"}
+    """
+    result = {"title": "", "first_name": "", "middle_name": "", "last_name": ""}
+
+    if not full_name:
+        return result
+
+    parts = full_name.strip().split()
+    if not parts:
+        return result
+
+    # Check if first token is a title/prefix
+    title_patterns = {
+        'fr.', 'father', 'rev.', 'reverend', 'msgr.', 'monsignor',
+        'dcn.', 'deacon', 'sr.', 'sister', 'br.', 'brother',
+        'dr.', 'doctor', 'mr.', 'mrs.', 'ms.', 'miss',
+        'prof.', 'professor', 'bishop', 'archbishop',
+    }
+
+    if parts[0].lower().rstrip('.') + '.' in title_patterns or parts[0].lower() in title_patterns:
+        result["title"] = parts[0]
+        parts = parts[1:]
+
+    if not parts:
+        return result
+
+    if len(parts) == 1:
+        result["first_name"] = parts[0]
+    elif len(parts) == 2:
+        result["first_name"] = parts[0]
+        result["last_name"] = parts[1]
+    elif len(parts) == 3:
+        result["first_name"] = parts[0]
+        result["middle_name"] = parts[1]
+        result["last_name"] = parts[2]
+    else:
+        # 4+ parts: first, middle initial(s), last
+        result["first_name"] = parts[0]
+        result["middle_name"] = " ".join(parts[1:-1])
+        result["last_name"] = parts[-1]
+
+    return result
+
+
 def extract_names_from_text(text: str, church_name: str = ""):
     """
     Extract people's names from bulletin text using pattern matching.
@@ -552,7 +604,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
     - Ministry schedules
     - Donor/sponsor listings
 
-    Returns list of dicts with: name, context, category
+    Returns list of dicts with: name, title, first_name, middle_name, last_name, context, category
     """
     names = []
     seen_names = set()
@@ -577,10 +629,18 @@ def extract_names_from_text(text: str, church_name: str = ""):
         for m in re.finditer(pattern, text):
             name = m.group(1).strip()
             name = re.sub(r'\s+', ' ', name)
+            # Also capture the title prefix from the full match text
+            full_match = m.group(0).strip()
             if is_valid_name(name) and name not in seen_names:
                 seen_names.add(name)
+                # Parse the full matched text (with title) to get split parts
+                name_parts = parse_name_parts(full_match.split(":")[-1].strip())
+                # If parse didn't get a last name, fall back to parsing just the captured name
+                if not name_parts["last_name"]:
+                    name_parts = parse_name_parts(name)
                 names.append({
                     "name": name,
+                    **name_parts,
                     "context": text[max(0, m.start()-30):m.end()+30].strip(),
                     "category": "clergy_staff"
                 })
@@ -604,8 +664,10 @@ def extract_names_from_text(text: str, church_name: str = ""):
             name = re.sub(r'\s+(?:and|&)\s*$', '', name)
             if is_valid_name(name) and name not in seen_names:
                 seen_names.add(name)
+                name_parts = parse_name_parts(name)
                 names.append({
                     "name": name,
+                    **name_parts,
                     "context": text[max(0, m.start()-20):m.end()+20].strip(),
                     "category": "mass_intention"
                 })
@@ -625,8 +687,10 @@ def extract_names_from_text(text: str, church_name: str = ""):
             if re.match(r'^[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?$', name):
                 if is_valid_name(name) and name not in seen_names:
                     seen_names.add(name)
+                    name_parts = parse_name_parts(name)
                     names.append({
                         "name": name,
+                        **name_parts,
                         "context": "prayer list",
                         "category": "prayer_list"
                     })
@@ -656,8 +720,10 @@ def extract_names_from_text(text: str, church_name: str = ""):
                 name = name_match.group(1).strip()
                 if is_valid_name(name) and name not in seen_names:
                     seen_names.add(name)
+                    name_parts = parse_name_parts(name)
                     names.append({
                         "name": name,
+                        **name_parts,
                         "context": kw,
                         "category": "ministry_contextual"
                     })
@@ -984,6 +1050,10 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
         "ministry_contextual": "medium",  # Name found near a ministry keyword: likely real but looser match
     }
 
+    # Track unique names PER CHURCH (not statewide) — each church has its own seen-names set
+    # This way a name appearing at 5 different churches shows up 5 times (once per church)
+    church_seen_names = {}  # slug -> set of names already output for this church
+
     for slug, info in downloaded.items():
         files = info.get("files", [])
         if not files:
@@ -991,6 +1061,12 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
 
         church_name = info.get("church_name", slug)
         church_url = discovery_data.get(slug, {}).get("church_url", "")
+
+        # Initialize per-church dedup set
+        if slug not in church_seen_names:
+            church_seen_names[slug] = set()
+
+        church_name_count = 0
 
         for file_info in files:
             pdf_path = Path(file_info["local_path"])
@@ -1021,9 +1097,18 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
             names = extract_names_from_text(text, church_name)
 
             if names:
-                churches_with_names += 1
-                total_names += len(names)
                 for name_info in names:
+                    person_name = name_info["name"]
+
+                    # Per-church dedup: only output each name once per church
+                    # but keep the FIRST occurrence (has the best provenance — earliest PDF)
+                    name_key = person_name.lower().strip()
+                    if name_key in church_seen_names[slug]:
+                        continue
+                    church_seen_names[slug].add(name_key)
+
+                    church_name_count += 1
+                    total_names += 1
                     all_names.append({
                         "church_name": church_name,
                         "church_slug": slug,
@@ -1031,12 +1116,19 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                         "pdf_file": pdf_path.name,
                         "pdf_url": pdf_url,
                         "pdf_date": pdf_date,
-                        "person_name": name_info["name"],
+                        "person_name": person_name,
+                        "title": name_info.get("title", ""),
+                        "first_name": name_info.get("first_name", ""),
+                        "middle_name": name_info.get("middle_name", ""),
+                        "last_name": name_info.get("last_name", ""),
                         "category": name_info["category"],
                         "confidence": CONFIDENCE_MAP.get(name_info["category"], "low"),
                         "context": name_info["context"][:100],
                     })
-                logger.info(f"  {church_name}: {len(names)} names found")
+
+        if church_name_count > 0:
+            churches_with_names += 1
+            logger.info(f"  {church_name}: {church_name_count} unique names found")
 
     # Save names to CSV
     csv_path = state_dir / "bulletin_names.csv"
@@ -1045,7 +1137,8 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
             writer = csv.DictWriter(f, fieldnames=[
                 "church_name", "church_slug", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
-                "person_name", "category", "confidence", "context"
+                "person_name", "title", "first_name", "middle_name", "last_name",
+                "category", "confidence", "context"
             ])
             writer.writeheader()
             writer.writerows(all_names)
@@ -1056,7 +1149,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
         json.dump(all_names, f, indent=2)
 
     logger.info(f"\n=== Extraction complete ===")
-    logger.info(f"  {total_names} total names extracted from {churches_with_names} churches")
+    logger.info(f"  {total_names} unique names (per-church) from {churches_with_names} churches")
     logger.info(f"  CSV: {csv_path}")
     logger.info(f"  JSON: {json_path}")
 

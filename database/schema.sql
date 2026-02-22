@@ -737,10 +737,16 @@ CREATE TABLE bulletin_pdf (
 CREATE INDEX idx_bulletin_pdf_date ON bulletin_pdf(pdf_date);
 
 -- Extracted names from bulletin PDFs
+-- Names are split into structured parts for matching: title, first, middle, last
+-- person_name is kept as a convenience field (the full extracted string)
 CREATE TABLE bulletin_name (
     bulletin_name_id    SERIAL PRIMARY KEY,
     bulletin_pdf_id     INTEGER REFERENCES bulletin_pdf(bulletin_pdf_id) ON DELETE CASCADE,
-    person_name         VARCHAR(100) NOT NULL,       -- extracted name
+    person_name         VARCHAR(100) NOT NULL,       -- full extracted name string (e.g., "Fr. John M. Smith")
+    title               VARCHAR(20)  DEFAULT '',     -- prefix/title: "Fr.", "Dr.", "Rev.", "Dcn.", etc.
+    first_name          VARCHAR(50)  NOT NULL DEFAULT '',  -- "John"
+    middle_name         VARCHAR(50)  DEFAULT '',     -- "M." or "Michael"
+    last_name           VARCHAR(50)  NOT NULL DEFAULT '',  -- "Smith"
     category            VARCHAR(30) NOT NULL,        -- clergy_staff, mass_intention, prayer_list, ministry_contextual
     confidence          VARCHAR(10) NOT NULL,        -- high, medium, low
     context             TEXT,                        -- surrounding text snippet for verification
@@ -750,6 +756,9 @@ CREATE TABLE bulletin_name (
 );
 
 CREATE INDEX idx_bulletin_name_person ON bulletin_name(person_name);
+CREATE INDEX idx_bulletin_name_first ON bulletin_name(first_name);
+CREATE INDEX idx_bulletin_name_last ON bulletin_name(last_name);
+CREATE INDEX idx_bulletin_name_first_last ON bulletin_name(first_name, last_name);
 CREATE INDEX idx_bulletin_name_confidence ON bulletin_name(confidence);
 CREATE INDEX idx_bulletin_name_category ON bulletin_name(category);
 
@@ -794,17 +803,27 @@ ORDER BY s.state_name;
 
 -- v_bulletin_names_detail: Full provenance for every extracted name
 -- Use this to answer "where did this name come from?"
+-- Includes split name fields for matching: first_name, middle_name, last_name, title
 CREATE OR REPLACE VIEW v_bulletin_names_detail AS
 SELECT
+    bn.bulletin_name_id,
     bn.person_name,
+    bn.title,
+    bn.first_name,
+    bn.middle_name,
+    bn.last_name,
     bn.category,
     bn.confidence,
     bn.is_suspect,
+    bn.is_verified,
     bn.context,
+    c.church_id,
     c.name AS church_name,
     c.city AS church_city,
     c.state_code,
-    c.website AS church_url,
+    c.website_url AS church_url,
+    c.street AS church_street,
+    c.postal_code AS church_zip,
     bp.pdf_url,
     bp.pdf_date,
     bp.local_filename AS pdf_file,
@@ -840,6 +859,71 @@ JOIN bulletin_pdf bp ON bp.bulletin_source_id = bs.bulletin_source_id
 LEFT JOIN bulletin_name bn ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
 GROUP BY c.church_id, c.name, c.city, c.state_code
 ORDER BY unique_names DESC;
+
+
+-- =============================================================================
+-- UI VIEWS (for filterable data explorer)
+-- =============================================================================
+
+-- v_bulletin_ui_names: Flat, denormalized view optimized for the UI.
+-- Filterable by state, city, church, name, confidence, category.
+-- Each row = one unique name at one church, with the bulletin link (provenance).
+-- Use this as the primary data source for the name explorer UI.
+CREATE OR REPLACE VIEW v_bulletin_ui_names AS
+SELECT
+    bn.bulletin_name_id,
+    -- Name fields (split for matching against external lists)
+    bn.person_name,
+    bn.title,
+    bn.first_name,
+    bn.middle_name,
+    bn.last_name,
+    -- Classification
+    bn.category,
+    bn.confidence,
+    bn.is_suspect,
+    bn.is_verified,
+    -- Source bulletin (provenance: "where did this name come from?")
+    bp.pdf_url,
+    bp.pdf_date         AS bulletin_date,
+    bp.local_filename   AS pdf_file,
+    -- Church info
+    c.church_id,
+    c.name              AS church_name,
+    c.street            AS church_street,
+    c.city              AS church_city,
+    c.state_code,
+    st.state_name,
+    c.postal_code       AS church_zip,
+    c.latitude          AS church_lat,
+    c.longitude         AS church_lng,
+    c.website_url       AS church_website
+FROM bulletin_name bn
+JOIN bulletin_pdf bp    ON bp.bulletin_pdf_id = bn.bulletin_pdf_id
+JOIN bulletin_source bs ON bs.bulletin_source_id = bp.bulletin_source_id
+JOIN church c           ON c.church_id = bs.church_id
+JOIN lk_state st        ON st.state_code = c.state_code;
+
+-- Index-friendly ordering: the UI will most often filter by state, then city, then church
+-- The view itself is unordered; the application adds ORDER BY as needed.
+
+-- v_bulletin_ui_city_summary: City-level rollup for the UI sidebar/filter.
+-- Shows how many churches and names are in each city within a state.
+CREATE OR REPLACE VIEW v_bulletin_ui_city_summary AS
+SELECT
+    c.state_code,
+    st.state_name,
+    c.city,
+    COUNT(DISTINCT c.church_id) AS church_count,
+    COUNT(DISTINCT bn.bulletin_name_id) AS total_names,
+    COUNT(DISTINCT bn.person_name) AS unique_names
+FROM church c
+JOIN lk_state st        ON st.state_code = c.state_code
+JOIN bulletin_source bs ON bs.church_id = c.church_id
+JOIN bulletin_pdf bp    ON bp.bulletin_source_id = bs.bulletin_source_id
+JOIN bulletin_name bn   ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+GROUP BY c.state_code, st.state_name, c.city
+ORDER BY c.state_code, unique_names DESC;
 
 
 -- =============================================================================
