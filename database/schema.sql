@@ -707,6 +707,142 @@ ORDER BY c.city, c.name;
 
 
 -- =============================================================================
+-- BULLETIN TABLES (Phase 7: Bulletin PDF Scraping & Name Extraction)
+-- =============================================================================
+
+-- Bulletin discovery results — which churches have bulletin pages
+CREATE TABLE bulletin_source (
+    bulletin_source_id  SERIAL PRIMARY KEY,
+    church_id           INTEGER REFERENCES church(church_id) ON DELETE CASCADE,
+    bulletin_page_url   TEXT,                        -- URL of the bulletin page on the church website
+    discovery_source    VARCHAR(30),                 -- how we found it: 'direct_path', 'homepage_link', 'lpi_embed', etc.
+    lpi_parish_id       VARCHAR(20),                 -- LPi/ParishesOnline.com parish ID (if applicable)
+    is_active           BOOLEAN DEFAULT TRUE,
+    discovered_at       TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (church_id)
+);
+
+-- Downloaded bulletin PDFs
+CREATE TABLE bulletin_pdf (
+    bulletin_pdf_id     SERIAL PRIMARY KEY,
+    bulletin_source_id  INTEGER REFERENCES bulletin_source(bulletin_source_id) ON DELETE CASCADE,
+    pdf_url             TEXT NOT NULL,               -- original download URL (provenance)
+    pdf_date            DATE,                        -- date extracted from filename (e.g., 2026-02-22)
+    local_filename      VARCHAR(255),                -- local file name in bulletins/ directory
+    file_size_bytes     INTEGER,
+    text_extracted      BOOLEAN DEFAULT FALSE,       -- has text been extracted from this PDF?
+    downloaded_at       TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_bulletin_pdf_date ON bulletin_pdf(pdf_date);
+
+-- Extracted names from bulletin PDFs
+CREATE TABLE bulletin_name (
+    bulletin_name_id    SERIAL PRIMARY KEY,
+    bulletin_pdf_id     INTEGER REFERENCES bulletin_pdf(bulletin_pdf_id) ON DELETE CASCADE,
+    person_name         VARCHAR(100) NOT NULL,       -- extracted name
+    category            VARCHAR(30) NOT NULL,        -- clergy_staff, mass_intention, prayer_list, ministry_contextual
+    confidence          VARCHAR(10) NOT NULL,        -- high, medium, low
+    context             TEXT,                        -- surrounding text snippet for verification
+    is_verified         BOOLEAN DEFAULT FALSE,       -- manually verified as a real name?
+    is_suspect          BOOLEAN DEFAULT FALSE,       -- flagged as possible false positive
+    created_at          TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_bulletin_name_person ON bulletin_name(person_name);
+CREATE INDEX idx_bulletin_name_confidence ON bulletin_name(confidence);
+CREATE INDEX idx_bulletin_name_category ON bulletin_name(category);
+
+
+-- =============================================================================
+-- BULLETIN VIEWS (for analysis)
+-- =============================================================================
+
+-- v_bulletin_summary: State-level summary stats for bulletin scraping
+-- Shows total churches, churches with bulletins, PDFs downloaded, names extracted
+CREATE OR REPLACE VIEW v_bulletin_summary AS
+SELECT
+    s.state_code,
+    s.state_name,
+    COUNT(DISTINCT c.church_id) AS total_churches,
+    COUNT(DISTINCT bs.bulletin_source_id) AS churches_with_bulletins,
+    COUNT(DISTINCT bp.bulletin_pdf_id) AS total_pdfs,
+    COUNT(DISTINCT bn.bulletin_name_id) AS total_name_extractions,
+    COUNT(DISTINCT bn.person_name) AS unique_names,
+    ROUND(AVG(church_name_counts.unique_names_per_church), 1) AS avg_unique_names_per_church,
+    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY church_name_counts.unique_names_per_church) AS median_unique_names_per_church
+FROM lk_state s
+JOIN church c ON c.state_code = s.state_code
+LEFT JOIN bulletin_source bs ON bs.church_id = c.church_id
+LEFT JOIN bulletin_pdf bp ON bp.bulletin_source_id = bs.bulletin_source_id
+LEFT JOIN bulletin_name bn ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+LEFT JOIN (
+    -- Subquery: count unique names per church
+    SELECT
+        c2.church_id,
+        COUNT(DISTINCT bn2.person_name) AS unique_names_per_church
+    FROM church c2
+    JOIN bulletin_source bs2 ON bs2.church_id = c2.church_id
+    JOIN bulletin_pdf bp2 ON bp2.bulletin_source_id = bs2.bulletin_source_id
+    JOIN bulletin_name bn2 ON bn2.bulletin_pdf_id = bp2.bulletin_pdf_id
+    GROUP BY c2.church_id
+) church_name_counts ON church_name_counts.church_id = c.church_id
+WHERE c.is_active = TRUE
+GROUP BY s.state_code, s.state_name
+ORDER BY s.state_name;
+
+
+-- v_bulletin_names_detail: Full provenance for every extracted name
+-- Use this to answer "where did this name come from?"
+CREATE OR REPLACE VIEW v_bulletin_names_detail AS
+SELECT
+    bn.person_name,
+    bn.category,
+    bn.confidence,
+    bn.is_suspect,
+    bn.context,
+    c.name AS church_name,
+    c.city AS church_city,
+    c.state_code,
+    c.website AS church_url,
+    bp.pdf_url,
+    bp.pdf_date,
+    bp.local_filename AS pdf_file,
+    bs.discovery_source
+FROM bulletin_name bn
+JOIN bulletin_pdf bp ON bp.bulletin_pdf_id = bn.bulletin_pdf_id
+JOIN bulletin_source bs ON bs.bulletin_source_id = bp.bulletin_source_id
+JOIN church c ON c.church_id = bs.church_id
+ORDER BY c.state_code, c.name, bp.pdf_date DESC, bn.person_name;
+
+
+-- v_bulletin_church_stats: Per-church stats for analysis
+CREATE OR REPLACE VIEW v_bulletin_church_stats AS
+SELECT
+    c.church_id,
+    c.name AS church_name,
+    c.city,
+    c.state_code,
+    COUNT(DISTINCT bp.bulletin_pdf_id) AS total_pdfs,
+    COUNT(DISTINCT bn.bulletin_name_id) AS total_name_extractions,
+    COUNT(DISTINCT bn.person_name) AS unique_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.confidence = 'high') AS high_confidence_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.confidence = 'medium') AS medium_confidence_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.category = 'clergy_staff') AS clergy_staff_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.category = 'mass_intention') AS mass_intention_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.category = 'prayer_list') AS prayer_list_names,
+    COUNT(DISTINCT bn.person_name) FILTER (WHERE bn.category = 'ministry_contextual') AS ministry_names,
+    MIN(bp.pdf_date) AS earliest_bulletin,
+    MAX(bp.pdf_date) AS latest_bulletin
+FROM church c
+JOIN bulletin_source bs ON bs.church_id = c.church_id
+JOIN bulletin_pdf bp ON bp.bulletin_source_id = bs.bulletin_source_id
+LEFT JOIN bulletin_name bn ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+GROUP BY c.church_id, c.name, c.city, c.state_code
+ORDER BY unique_names DESC;
+
+
+-- =============================================================================
 -- MAPPING FUNCTIONS (for ETL pipeline)
 -- =============================================================================
 -- These functions help the Python ETL code map CatholicIndex values to our

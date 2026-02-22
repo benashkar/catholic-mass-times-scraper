@@ -68,7 +68,7 @@ logger = get_logger(__name__)
 
 REQUEST_DELAY = 1.0          # seconds between requests to same domain
 REQUEST_TIMEOUT = 15         # seconds
-MAX_PDFS_PER_CHURCH = 3      # download at most 3 most recent bulletins
+MAX_PDFS_PER_CHURCH = 100    # download all available bulletins (most churches have 20-52 weeks)
 MAX_PDF_SIZE_MB = 25         # skip PDFs larger than 25MB
 PROGRESS_SAVE_INTERVAL = 10  # save progress every N churches
 
@@ -376,7 +376,7 @@ def extract_pdf_links(soup, page_url: str):
     # Sort by date (most recent first)
     pdf_links.sort(key=lambda x: x["date_score"], reverse=True)
 
-    return [p["url"] for p in pdf_links[:MAX_PDFS_PER_CHURCH * 2]]
+    return [p["url"] for p in pdf_links[:MAX_PDFS_PER_CHURCH]]
 
 
 def extract_date_score(url: str, text: str):

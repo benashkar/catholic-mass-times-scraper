@@ -397,15 +397,28 @@ Confidence reflects whether this is likely a **real person connected to the chur
 
 **False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Confidence flag allows downstream filtering — "high" names are very likely real people, "low" names may be false positives. Names will ultimately be matched against a known name list, so recall is prioritized over precision.
 
-**Test results (10 Arizona churches):**
-- 8/9 churches with URLs had discoverable bulletin pages (89% hit rate)
-- 12 PDFs downloaded, 206 names extracted
-- Name categories: 173 ministry_contextual, 20 clergy_staff, 7 mass_intention, 6 prayer_list
+**Initial run results (3 PDFs/church cap):**
+
+| Metric | Arizona | Georgia |
+|--------|---------|---------|
+| Total churches processed | 122 | 236 |
+| Churches with bulletin page | 72 (59%) | 140 (59%) |
+| Churches with downloadable PDFs | 35 (28%) | ~40 (~17%) |
+| Total name extractions | 1,693 | 2,049 |
+| **Total unique names** | **960** | **1,162** |
+| Churches with extracted names | 27 | 34 |
+| Avg unique names per church | 41.1 | 43.5 |
+| Median unique names per church | 25.0 | 33.0 |
+
+**Full run (all bulletins per church) in progress** — re-running with MAX_PDFS=100 to capture every bulletin on each church site, not just the 3 most recent. Church bulletin archives typically contain 20–52+ weeks of PDFs.
 
 **Dependencies:** `requests`, `beautifulsoup4`, `lxml`, `pdfplumber`
 **Note:** `spacy` NER is incompatible with Python 3.14. Using regex-based name extraction instead, which is more targeted for church bulletin patterns.
 
-**Status (2026-02-22):** Running full pipeline on Arizona and Georgia. Wisconsin and Pennsylvania pending URL resolution completion.
+**Database tables added:** `bulletin_source`, `bulletin_pdf`, `bulletin_name` (with `is_suspect` flag for possible false positives)
+**Database views added:** `v_bulletin_summary` (state-level stats), `v_bulletin_names_detail` (full provenance per name), `v_bulletin_church_stats` (per-church stats with avg/median)
+
+**Status (2026-02-22):** Re-running full pipeline on Arizona and Georgia with all bulletins. Wisconsin and Pennsylvania pending URL resolution completion.
 
 ### Phase 8: Docker / Containerization
 **Goal:** Containerize both the church scrape pipeline and the bulletin/PDF pipeline as separate Docker services sharing the same data volume.
