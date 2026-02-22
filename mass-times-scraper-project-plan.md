@@ -320,10 +320,110 @@ CatholicIndex's API returns churches within a 25-mile radius of each queried cit
 - [ ] Add pastor/clergy data integration (from chosen data source)
 - [ ] Coverage dashboard by state/diocese
 
-### Phase 7: Ongoing Maintenance & Future Enhancements
+### Phase 7: Bulletin PDF Scraping & Name Extraction ⏳ IN PROGRESS
+**Goal:** Download church bulletins (PDFs) from parish websites, extract text, and pull out all people's names mentioned.
+
+**Use case:** Match names found in church bulletins against a known name list for community outreach / CR Community News.
+
+**Pipeline (`run_bulletin_scraper.py`):**
+```
+Phase 1 — DISCOVER: Find bulletin pages on each church's website
+Phase 2 — DOWNLOAD: Download the most recent bulletin PDFs (up to 3 per church)
+Phase 3 — EXTRACT:  Extract text from PDFs (pdfplumber) + identify names via regex patterns
+```
+
+**CLI:**
+```bash
+python run_bulletin_scraper.py discover arizona             # Phase 1 only
+python run_bulletin_scraper.py download arizona             # Phase 2 only
+python run_bulletin_scraper.py extract arizona              # Phase 3 only
+python run_bulletin_scraper.py all arizona                  # All 3 phases
+python run_bulletin_scraper.py all arizona georgia          # Multiple states
+python run_bulletin_scraper.py all arizona --limit 10       # Test on first 10 churches
+python run_bulletin_scraper.py all arizona --resume         # Resume interrupted run
+```
+
+**Output per state:**
+```
+data/output/{state}/bulletin_discovery.json     — bulletin page URLs per church
+data/output/{state}/bulletins/                   — downloaded PDF files
+data/output/{state}/bulletin_texts/              — extracted text files
+data/output/{state}/bulletin_names.csv           — extracted names (church, name, category, context)
+data/output/{state}/bulletin_names.json          — same data in JSON format
+data/output/{state}/bulletin_progress.json       — progress tracking for resume
+```
+
+**Bulletin Discovery Strategy (7 patterns identified):**
+
+| # | Pattern | Platform | PDF URL Format | Example Site |
+|---|---------|----------|---------------|--------------|
+| 1 | WordPress + Simple File List plugin | WordPress | `wp-content/uploads/simple-file-list/bulletin-YYYY-MM-DD.pdf` | ickenmore.org |
+| 2 | LPi / ParishesOnline.com (3rd party) | eCatholic/any | `container.parishesonline.com/bulletins/{region}/{id}/{YYYYMMDD}B.pdf` | ourladyofsorrows.com |
+| 3 | WordPress self-hosted (custom naming) | WordPress | `wp-content/uploads/YYYY/MM/YYMMDD*.pdf` | myblessedsacrament.org |
+| 4 | Squarespace self-hosted | Squarespace | `{domain}/s/YYYYMMDD-Web.pdf` | holyrosarybirmingham.org |
+| 5 | WordPress with descriptive filenames | WordPress | `wp-content/uploads/YYYY/MM/Final-Copy-{Month}-{Day}-{Year}.pdf` | stpeterstpaul.com |
+| 6 | Single latest bulletin link | WordPress | `wp-content/uploads/YYYY/MM/{Month}-{Day}-{Year}.pdf` | olfbirmingham.org |
+| 7 | Drupal/custom CMS | Drupal/custom | `sites/{name}/files/uploads/bulletins/{desc}.pdf` | queenofangels.org |
+
+**Discovery approach:**
+1. Try common bulletin URL paths (`/bulletin`, `/bulletins`, `/home/downloads`, etc.)
+2. Scan homepage for links containing "bulletin" keyword
+3. Check for LPi/ParishesOnline.com embeds (very common third-party service)
+4. Extract all PDF links from discovered bulletin pages
+
+**Name extraction categories + confidence scoring:**
+Confidence reflects whether this is likely a **real person connected to the church** (parishioner, staff, or community member).
+
+| Category | Confidence | Description |
+|----------|-----------|-------------|
+| `clergy_staff` | **high** | Pastor, Parochial Vicar, Deacon, staff listings (Fr./Rev./Msgr. patterns) |
+| `mass_intention` | **high** | "For the repose of...", "Special intentions of..." — real people (living or deceased) |
+| `prayer_list` | **high** | Sick/homebound lists, prayer requests — real parishioners |
+| `ministry_contextual` | **medium** | Names near ministry keywords (lector, usher, cantor, committee) — likely real but looser match |
+
+**Output CSV columns (full provenance):**
+| Column | Description |
+|--------|-------------|
+| `church_name` | Name of the church |
+| `church_slug` | CatholicIndex unique identifier |
+| `church_url` | Church website URL |
+| `pdf_file` | Local filename of downloaded PDF |
+| `pdf_url` | Original download URL (source link for verification) |
+| `pdf_date` | Date extracted from PDF filename (YYYY-MM-DD) |
+| `person_name` | Extracted name |
+| `category` | Extraction category (clergy_staff, mass_intention, prayer_list, ministry_contextual) |
+| `confidence` | Confidence flag: high, medium, or low |
+| `context` | Surrounding text snippet for verification |
+
+**False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Confidence flag allows downstream filtering — "high" names are very likely real people, "low" names may be false positives. Names will ultimately be matched against a known name list, so recall is prioritized over precision.
+
+**Test results (10 Arizona churches):**
+- 8/9 churches with URLs had discoverable bulletin pages (89% hit rate)
+- 12 PDFs downloaded, 206 names extracted
+- Name categories: 173 ministry_contextual, 20 clergy_staff, 7 mass_intention, 6 prayer_list
+
+**Dependencies:** `requests`, `beautifulsoup4`, `lxml`, `pdfplumber`
+**Note:** `spacy` NER is incompatible with Python 3.14. Using regex-based name extraction instead, which is more targeted for church bulletin patterns.
+
+**Status (2026-02-22):** Running full pipeline on Arizona and Georgia. Wisconsin and Pennsylvania pending URL resolution completion.
+
+### Phase 8: Docker / Containerization
+**Goal:** Containerize both the church scrape pipeline and the bulletin/PDF pipeline as separate Docker services sharing the same data volume.
+
+**Two containers, one data source:**
+| Container | Purpose | Key Scripts |
+|-----------|---------|-------------|
+| `church-scraper` | Scrape churches, mass times, addresses, URLs from CatholicIndex | `run_statewide.py`, `run_resolve_urls.py`, `run_dedup_cleanup.py`, `run_parse_addresses.py` |
+| `bulletin-scraper` | Discover bulletins, download PDFs, extract text + names | `run_bulletin_scraper.py` |
+
+**Shared data volume:** Both containers mount the same `data/` directory so the bulletin scraper reads church URLs produced by the church scraper.
+
+**Status:** Planned — not yet implemented.
+
+### Phase 9: Ongoing Maintenance & Future Enhancements
 - [ ] Monitor source sites for structural changes
 - [ ] Add new data sources as they emerge
-- [ ] Potential: other denominations, mobile-friendly web lookup, parish bulletin scraping
+- [ ] Potential: other denominations, mobile-friendly web lookup
 
 ---
 
@@ -444,7 +544,9 @@ church scrapes/
 ├── run_parse_addresses.py                 # Address parser CLI: parse JSONL → segmented CSV
 ├── run_all_states.py                      # Batch runner: scrape + parse + commit for all remaining states
 ├── run_dedup_cleanup.py                   # Phase 5.5: remove cross-state & base-slug duplicates
-└── run_resolve_urls.py                    # Resolve CatholicIndex redirect URLs to actual website URLs
+├── run_resolve_urls.py                    # Resolve CatholicIndex redirect URLs to actual website URLs
+├── run_bulletin_scraper.py                # Phase 7: bulletin discovery + PDF download + name extraction
+└── auto_commit_progress.sh               # Cron-style script to commit URL resolver progress every 2 hours
 ```
 
 ---
@@ -596,6 +698,23 @@ python run_resolve_urls.py all
 python run_resolve_urls.py ohio --resume
 ```
 
+### Run bulletin scraper (after URL resolution is complete for target states)
+```bash
+# Full pipeline on specific states:
+python run_bulletin_scraper.py all arizona georgia pennsylvania wisconsin
+
+# Test with a small sample first:
+python run_bulletin_scraper.py all arizona --limit 10
+
+# Resume if interrupted:
+python run_bulletin_scraper.py all arizona --resume
+
+# Run individual phases:
+python run_bulletin_scraper.py discover arizona    # Find bulletin pages
+python run_bulletin_scraper.py download arizona    # Download PDFs
+python run_bulletin_scraper.py extract arizona     # Extract text + names
+```
+
 ### Weekly refresh (once all states are complete)
 ```bash
 # Re-scrape all states with fresh data:
@@ -606,6 +725,8 @@ python run_dedup_cleanup.py --apply
 python run_parse_addresses.py all
 # Resolve URLs:
 python run_resolve_urls.py all
+# Run bulletin scraper:
+python run_bulletin_scraper.py all all
 ```
 
 ---
