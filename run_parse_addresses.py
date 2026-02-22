@@ -179,7 +179,7 @@ def _parse_and_save(state_code: str, dir_name: str):
         return
 
     # Sort by city, then name
-    parsed_rows.sort(key=lambda r: (r["city"], r["name"]))
+    parsed_rows.sort(key=lambda r: (r.get("city") or "", r.get("name") or ""))
 
     # Save CSV
     output_path = OUTPUT_DIR / dir_name / "parsed_addresses.csv"

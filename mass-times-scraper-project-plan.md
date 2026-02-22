@@ -195,14 +195,19 @@ Maps CatholicIndex raw values to normalized DB codes:
 - [ ] Flag Holy Days of Obligation within date range
 
 ### Phase 4: Scheduling & Automation
-**Goal:** Run the scraper on a recurring schedule and detect changes.
+**Goal:** Automatically re-scrape all states every Sunday so data stays fresh for weekly publication.
 
-- [ ] Dockerize the project
-- [ ] Weekly automated scrape: run Sunday night / Monday morning
+**Primary requirement: Fully automated Sunday refresh**
+- [ ] GitHub Actions workflow to run `run_all_states.py` every Sunday (cron: `0 2 * * 0`)
+- [ ] Or: Windows Task Scheduler / cron on local machine as fallback
+- [ ] Auto-commit and push results after each state completes
+- [ ] Slack/email notification on completion or failure
+
+**Additional automation:**
+- [ ] Dockerize the project for portable deployment
 - [ ] Change detection: compare current scrape to previous; flag schedule changes
 - [ ] Special events mode: pull date-specific events from CatholicIndex
 - [ ] Holy Day alerts: flag upcoming Holy Days so editorial can follow up with parishes
-- [ ] Slack/email alerts for scrape failures and anomalies
 - [ ] Store scrape history via `scrape_log` table
 
 ### Phase 5: Nationwide Statewide Expansion — IN PROGRESS
@@ -551,6 +556,6 @@ python run_parse_addresses.py ohio
 6. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
 7. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
 8. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
-9. **Set up weekly automation** — Cron job or GitHub Actions to re-scrape all states weekly
+9. **Set up weekly automation** — Automated Sunday re-scrape of all 50 states (GitHub Actions or Task Scheduler), auto-commit + push results
 10. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
 11. **Generate sample newspaper-ready output** for one publication week and review with editorial team

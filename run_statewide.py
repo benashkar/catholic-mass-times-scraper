@@ -296,7 +296,7 @@ def run_discovery(state_abbrev: str, state_name: str, resume: bool = False, limi
     # Generate master church list CSV
     master_list = sorted(
         discovered_churches.values(),
-        key=lambda c: (c.get("city", ""), c.get("name", ""))
+        key=lambda c: (c.get("city") or "", c.get("name") or "")
     )
     csv_path = state_dir / "master_church_list.csv"
     if master_list:
