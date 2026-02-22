@@ -1,0 +1,676 @@
+﻿slug,name,street_number,pre_direction,street_name,street_suffix,post_direction,unit_type,unit_number,full_street,city,state_code,zip5,zip4,latitude,longitude,phone
+church-c51206b5d76f,Blessed Sacrament,,,,,,,,,,,,,39.34041843,-76.60751062,
+us-pa-abbottstown-immaculate-heart-of-mary-b2541216,Immaculate Heart of Mary,6084,W,Canal,Rd,,,,6084 W Canal Rd,Abbottstown,PA,17301,,39.90365665,-76.96848136,(717) 259-0611
+us-md-aberdeen-st-joan-of-arc-f274c932,St. Joan of Arc,222,S,Law,St,,,,222 S Law St,Aberdeen,MD,21001,,39.50771706,-76.1706066,(410) 272-4535
+us-md-abingdon-st-francis-de-sales-cd7f7cdc,St. Francis de Sales,1450,,Abingdon,Rd,,,,1450 Abingdon Rd,Abingdon,MD,21009,,39.46477876,-76.2851277,410-676-5119
+us-va-aldie-corpus-christi-catholic-church-16594243,Corpus Christi Catholic Church,41685,,Corpus Christi,Dr,,,,41685 Corpus Christi Dr,Aldie,VA,20105,,38.94228944,-77.56100705,(703) 378-1037
+us-va-alexandria-blessed-sacrament-70666231,Blessed Sacrament,1427,W,Braddock,Rd,,,,1427 W Braddock Rd,Alexandria,VA,22302,,38.82728555,-77.08352047,(703) 998-6100
+us-va-alexandria-good-shepherd-dfda5c0e,Good Shepherd,8710,,Mt Vernon,Hwy,,,,8710 Mt Vernon Hwy,Alexandria,VA,22309,,38.72033528,-77.09213326,(703) 780-4055
+us-va-alexandria-poor-clare-monestary-5b0233c9,Poor Clare Monestary,2505,,Stonehedge,Dr,,,,2505 Stonehedge Dr,Alexandria,VA,22306,,38.76064687,-77.0756464,(703) 768-4918
+us-va-alexandria-queen-of-apostles-3e3e7d13,Queen of Apostles,4401,,Sano,St,,,,4401 Sano St,Alexandria,VA,22312,,38.82859929,-77.14327003,(703) 354-8711
+us-va-alexandria-st-joseph-1b55edbe,St. Joseph,711,N,Columbus,St,,,,711 N Columbus St,Alexandria,VA,22314,,38.81221481,-77.04634656,(703) 836-3725
+us-va-alexandria-st-lawrence-catholic-church-c7c4dc3e,St. Lawrence,6222,,Franconia,Rd,,,,6222 Franconia Rd,Alexandria,VA,22310,2511,38.78203,-77.153595,(703) 971-4378
+us-va-alexandria-st-louis-cb04718c,St. Louis,2907,,Popkins,Ln,,,,2907 Popkins Ln,Alexandria,VA,22306,,38.76430071,-77.08290609,(703) 765-4421
+us-va-alexandria-st-rita-a8e34500,St. Rita,3815,,Russell,Rd,,,,3815 Russell Rd,Alexandria,VA,22305,,38.83895233,-77.06359907,(703) 836-1640
+us-va-alexandria-basilica-of-saint-mary-3eb3e79a,The Basilica of St. Mary,310,S,Royal,St,,,,310 S Royal St,Alexandria,VA,22314,,38.8018494,-77.04389939,(703) 836-4100
+us-va-annandale-epiphany-of-our-lord-e15f3ce4,Epiphany of Our Lord,3410,,Woodburn,Rd,,,,3410 Woodburn Rd,Annandale,VA,22003,,38.85239294,-77.23205073,(703) 573-3986
+us-va-annandale-holy-spirit-6c52a399,Holy Spirit,8800,,Braddock,Rd,,,,8800 Braddock Rd,Annandale,VA,22003,4165,38.81224697,-77.25013224,(703) 978-8074
+us-va-annandale-st-ambrose-55a4c411,St. Ambrose,3901,,Woodburn,Rd,,,,3901 Woodburn Rd,Annandale,VA,22003,,38.84092529,-77.24307744,703-280-4400
+us-va-annandale-st-michael-95f7cc51,St. Michael,7401,,Saint Michael's,Ln,,,,7401 Saint Michael's Ln,Annandale,VA,22003,,38.82299761,-77.19903295,(703) 256-7822
+us-md-annapolis-st-andrew-by-the-bay-487e662c,St. Andrew by the Bay,701,,College,Pkwy,,,,701 College Pkwy,Annapolis,MD,21409,,39.03117228,-76.44842963,(410) 974-4366
+us-md-annapolis-st-john-neumann-bef7985b,St. John Neumann,620,N,Bestgate,Rd,,,,620 N Bestgate Rd,Annapolis,MD,21401,,38.99840917,-76.52136639,(410) 266-2498
+us-md-annapolis-st-marys-church-314d87cb,St. Mary,109,,Duke of Gloucester,St,,,,109 Duke of Gloucester St,Annapolis,MD,21401,,38.97501867,-76.48795677,(410) 990-4023
+us-md-annapolis-the-naval-academy-chapel-7f6f9e64,The Naval Academy Chapel,121,,Blake,Rd,,,,121 Blake Rd,Annapolis,MD,21401,,38.981704,-76.4862816,+1-410-293-1100
+us-md-aquasco-mission-of-st-dominic-7e904308,Mission of St. Dominic,22300,,,Rd,,,,22300 Rd,Aquasco,MD,22300,,38.5849375,-76.7246875,13018881498
+us-md-aquasco-saint-dominics-catholic-church-8d049bfd,Saint Dominics Catholic Church,22400,,Aquasco,Rd,,,,22400 Aquasco Rd,Aquasco,MD,20608,,38.5818524,-76.7237542,+1-240-681-3551
+us-md-aquasco-st-dominic-2eb3e692,St. Dominic,22300,,Aquasco,Rd,,,,22300 Aquasco Rd,Aquasco,MD,20608,2002,38.58185469,-76.72389039,240-681-3551
+us-md-arbutus-patronage-of-the-mother-of-god-ruthenian-14701b13,Patronage of the Mother of God (Ruthenian),1260,,Stevens,Ave,,,,1260 Stevens Ave,Arbutus,MD,21227,,39.25168698,-76.69547332,(410) 247-4936
+us-va-arlington-airport-chapel-4071aac5,Airport Chapel,,,B22 Ronald Reagan Washington National Airport Access,Rd,,,,B22 Ronald Reagan Washington National Airport Access Rd,Arlington,VA,22202,,38.8536513,-77.0432307,
+us-va-arlington-cathedral-of-st-thomas-more-381d2a07,Cathedral of St. Thomas More,3901,,Cathedral,Ln,,,,3901 Cathedral Ln,Arlington,VA,22203,,38.87073093,-77.10346364,(703) 525-1300
+us-va-arlington-holy-martyrs-of-vietnam-2d35de87,Holy Martyrs of Vietnam,915,S,Wakefield,St,,,,915 S Wakefield St,Arlington,VA,22204,,38.85878235,-77.10622904,(703) 553-0370
+us-va-arlington-marymount-university-sacred-heart-of-mary-chapel-963196aa,Marymount University (Sacred Heart of Mary Chapel),2807,N,Glebe,Rd,,,,2807 N Glebe Rd,Arlington,VA,22207,,38.9052963,-77.12847,(703) 284-1607
+us-va-arlington-our-lady-of-lourdes-045e2d16,Our Lady of Lourdes,830,S,23rd,St,,,,830 S 23rd St,Arlington,VA,22202,,38.85302442,-77.06055262,(703) 684-9261
+us-va-arlington-our-lady-queen-of-peace-e68577e2,"Our Lady, Queen of Peace",2700,S,19th,St,,,,2700 S 19th St,Arlington,VA,22204,5298,38.85423951,-77.08269644,(703) 979-5580
+us-va-arlington-ronald-reagan-national-airport-7ae00a4a,Ronald Reagan National Airport,,,Ronald Reagan National Airport,,,,,Ronald Reagan National Airport,Arlington,VA,,,38.8512421,-77.04023,(703) 417-1750
+us-va-arlington-st-agnes-aa17ac1d,St. Agnes,1910,N,Randolph,St,,,,1910 N Randolph St,Arlington,VA,22207,3046,38.89481259,-77.11117857,(703) 525-1166
+us-va-arlington-st-ann-c0c1cbcd,St. Ann,5300,N,10th,St,,,,5300 N 10th St,Arlington,VA,22205,,38.88112241,-77.12728539,(703) 528-6276
+us-va-arlington-st-charles-catholic-church-46f0b2ba,St. Charles Catholic Church,3304,,Washington,Blvd,,,,3304 Washington Blvd,Arlington,VA,22201,4506,38.88528464,-77.09907894,(703) 527-5500
+us-va-ashburn-st-theresa-89d9ee03,St. Theresa,21371,,St Theresa,Ln,,,,21371 St Theresa Ln,Ashburn,VA,20147,,39.02548678,-77.50162755,(703) 729-2287
+us-md-avenue-holy-angels-church-eca6d185,Holy Angels,21340,,Colton Point,Rd,,,,21340 Colton Point Rd,Avenue,MD,20609,,38.25475735,-76.76830185,(301) 769-3332
+us-pa-avondale-mision-santa-maria-7430a3dc,Mision Santa Maria,29,,Gap Newport,Pike,,,,29 Gap Newport Pike,Avondale,PA,19311,,39.8208329,-75.7762741,+1-610-268-3365
+us-pa-avondale-st-gabriel-of-the-sorrowful-mother-2169570e,St. Gabriel of the Sorrowful Mother,8910,,Gap-Newport,Pike,,,,8910 Gap-Newport Pike,Avondale,PA,19311,,39.81018585,-75.75774908,(610) 268-0296
+us-pa-avondale-st-rocco-23ce0668,St. Rocco,333,,Sunny Dell,Rd,,,,333 Sunny Dell Rd,Avondale,PA,19311,,39.8008878,-75.74221754,(610) 268-3365
+us-md-baltimore-church-of-the-annunciation-7f628110,Annunciation,5212,,McCormick,Ave,,,,5212 McCormick Ave,Baltimore,MD,21206,,39.33373933,-76.5227649,410 -665 -1054
+us-md-baltimore-ascension-d7db443c,Ascension,1527,,Potomac,Ave,,,,1527 Potomac Ave,Baltimore,MD,21227,,39.2409554,-76.68977,(410) 242-2292
+us-md-baltimore-baltimore-va-medical-center-all-faiths-chapel-bf6c7d82,Baltimore VA Medical Center All Faiths Chapel,10,N,Greene,St,,,,10 N Greene St,Baltimore,MD,21201,,39.28939509,-76.6243336,(410) 605-7000
+us-md-baltimore-bunting-interfaith-chapel-johns-hopkins-hospital-7ff32012,"Bunting Interfaith Chapel, Johns Hopkins Hospital",1800,,Orleans,St,,,,1800 Orleans St,Baltimore,MD,21287,,39.297046,-76.592758,410-955-5842
+us-md-baltimore-cathedral-of-mary-our-queen-c5f3429e,Cathedral of Mary Our Queen,5200,N,Charles,St,,,,5200 N Charles St,Baltimore,MD,21210,,39.35873486,-76.6255223,(410) 464-4000
+us-md-baltimore-catholic-community-at-relay-e7a53b0a,Catholic Community At Relay,5025,,Cedar,Ave,,,,5025 Cedar Ave,Baltimore,MD,21227,,39.22733215,-76.70603308,(410) 247-4033
+us-md-baltimore-corpus-christi-befdfed9,Corpus Christi,110,W,Lafayette,Ave,,,,110 W Lafayette Ave,Baltimore,MD,21217,,39.30798376,-76.62210355,(410) 523-4161
+us-md-baltimore-holy-cross-c0ffb638,Holy Cross,110,E,W,St,,,,110 E W St,Baltimore,MD,21230,,39.27619476,-76.61127995,(410) 752-8498
+us-md-baltimore-holy-korean-martyrs-559e7fdf,Holy Korean Martyrs,5801,,Security,Blvd,,,,5801 Security Blvd,Baltimore,MD,21207,,39.30859,-76.71625,410-265-8885
+us-md-baltimore-holy-rosary-fd7ed870,Holy Rosary ,408,S,Chester,St,,,,408 S Chester St,Baltimore,MD,21231,2729,39.28670613,-76.58731498,(410) 732-3960
+us-md-baltimore-church-of-the-immaculate-conception-73b0c3c5,Immaculate Conception,1512,,Druid Hill,Ave,,,,1512 Druid Hill Ave,Baltimore,MD,21217,,39.3036875,-76.6308125,14106243600
+us-md-baltimore-immaculate-heart-of-mary-3027bac7,Immaculate Heart of Mary Parish,8501,,Loch Raven,Blvd,,,,8501 Loch Raven Blvd,Baltimore,MD,21286,,39.39246903,-76.56382054,(410) 668-7935
+us-md-baltimore-loyola-university-maryland-9057d1e2,Loyola University Maryland,4501,N,Charles,St,,,,4501 N Charles St,Baltimore,MD,21210,,39.34620107,-76.62121823,(410) 617-2222
+us-md-baltimore-mcauley-chapel-mercy-hospital-597efca6,McAuley Chapel - Mercy Hospital,301,,St Paul,Pl,,,,301 St Paul Pl,Baltimore,MD,21202,,39.2929955,-76.61307,(410) 332-9000 
+us-md-baltimore-most-precious-blood-dcd39efa,Most Precious Blood,5010,,Bowleys,Ln,,,,5010 Bowleys Ln,Baltimore,MD,21206,,39.32304589,-76.55296718,410-433-2300
+us-md-baltimore-mount-calvary-c74a75b7,Mount Calvary,816,N,Eutaw,St,,,,816 N Eutaw St,Baltimore,MD,21201,,39.29937762,-76.62173152,(410) 728-6140
+us-md-baltimore-st-alphonsus-b9601a48,National Shrine of St Alphonsus,114,W,Saratoga,St,,,,114 W Saratoga St,Baltimore,MD,21201,,39.29307736,-76.61791487,(410) 685-6090
+us-md-baltimore-new-all-saints-c216cce1,New All Saints Church,4408,,Liberty Heights,Ave,,,,4408 Liberty Heights Ave,Baltimore,MD,21207,,39.3303978,-76.69166603,(410) 542-0445
+us-md-baltimore-our-lady-of-hope-742da1db,Our Lady Of Hope,1727,,Lynch,Rd,,,,1727 Lynch Rd,Baltimore,MD,21222,,39.26938757,-76.49315622,(410) 284-6600
+us-md-baltimore-our-lady-of-fatima-3108f90d,Our Lady of Fatima,6400,E,Pratt,St,,,,6400 E Pratt St,Baltimore,MD,21224,,39.2903949,-76.53795468,(410) 624-7737
+us-md-baltimore-our-lady-of-fatima-1dfad5a2,Our Lady of Fatima,6400,E,Pratt,St,,,,6400 E Pratt St,Baltimore,MD,21224,,39.2910021,-76.5387067,+1-410-633-9393
+us-md-baltimore-our-lady-of-good-counsel-e1116ff2,Our Lady of Good Counsel,1532,E,Fort,Ave,,,,1532 E Fort Ave,Baltimore,MD,21230,,39.26879941,-76.59251813,(410) 752-8498
+us-md-baltimore-our-lady-of-la-vang-24beacae,Our Lady of La Vang,335,,Sollers Point,Rd,,,,335 Sollers Point Rd,Baltimore,MD,21222,,39.24491903,-76.50816875,(410) 282-1496
+us-md-baltimore-our-lady-of-pompei-85b1a23a,Our Lady of Pompeii,3600,,Claremont,St,,,,3600 Claremont St,Baltimore,MD,21224,,39.28953833,-76.56715549,(410) 675-7790
+us-md-baltimore-our-lady-of-victory-6d922df8,Our Lady of Victory,4414,,Wilkens,Ave,,,,4414 Wilkens Ave,Baltimore,MD,21229,,39.26692289,-76.69658338,(410) 242-0131
+us-md-baltimore-st-josephs-passionist-monastery-b3991a02,Passionate Monastery of St. Joseph,3801,,Old Frederick,Rd,,,,3801 Old Frederick Rd,Baltimore,MD,21229,,39.28378066,-76.68074876,(410) 566-0877
+us-md-baltimore-sacred-heart-of-jesus-7a1bdfd1,Sacred Heart of Jesus,600,S,Conkling,St,,,,600 S Conkling St,Baltimore,MD,21224,,39.2848254,-76.56737119,(410) 342-4336 
+us-md-baltimore-sacred-heart-of-mary-cb154e84,Sacred Heart of Mary,6736,,Youngstown,Ave,,,,6736 Youngstown Ave,Baltimore,MD,21222,,39.27859696,-76.53039781,(410) 633-2828
+us-md-baltimore-sts-phillip-and-james-catholic-church-university-parish-3bd70864,Saints Philip & James Catholic Church (University Parish),2801,N,Charles,St,,,,2801 N Charles St,Baltimore,MD,21218,,39.32267375,-76.61704775,(410) 235-2294
+us-md-baltimore-shrine-of-the-little-flower-c2533369,Shrine of the Little Flower,3500,,Belair,Rd,,,,3500 Belair Rd,Baltimore,MD,21213,,39.32383579,-76.57198809,(410) 483-1700
+us-md-baltimore-st-clement-mary-hofbauer-160f5235,St Clement Mary Hofbauer Parish,1212,,Chesaco,Ave,,,,1212 Chesaco Ave,Baltimore,MD,21237,,39.32000413,-76.51236082,(410) 686-6188
+us-md-baltimore-st-jude-shrine-36b5d277,St Jude Shrine,308,N,Paca,St,,,,308 N Paca St,Baltimore,MD,21201,,39.2929696,-76.62305621,(410) 685-6026
+us-md-baltimore-st-thomas-aquinas-3d52a92a,St Thomas Aquinas Church,1008,W,37th,St,,,,1008 W 37th St,Baltimore,MD,21211,,39.33311473,-76.63293585,(410) 366-4488
+us-md-baltimore-st-agnes-8b8aab37,St. Agnes,5422,,Old Frederick,Rd,,,,5422 Old Frederick Rd,Baltimore,MD,21229,,39.29009722,-76.71998698,(410) 744-2900
+us-md-baltimore-st-ambrose-82571ced,St. Ambrose,4502,,Park Heights,Ave,,,,4502 Park Heights Ave,Baltimore,MD,21215,,39.341712,-76.66848238,(410) 367-9918
+us-md-baltimore-st-ann-9e2b200e,St. Ann,528,E,22nd,St,,,,528 E 22nd St,Baltimore,MD,21218,,39.31475062,-76.60921224,(410) 235-8169
+us-md-baltimore-patronage-of-the-mother-of-god-1ab0eb8b,St. Ann,1265,,Linden,Ave,,,,1265 Linden Ave,Baltimore,MD,21227,,39.66565715,-77.70481147,(410) 247-4936
+us-md-baltimore-st-anthony-of-padua-e3cc4fb9,St. Anthony of Padua,4414,,Frankford,Ave,,,,4414 Frankford Ave,Baltimore,MD,21206,,39.3354645,-76.54823,410-433-2300
+us-md-baltimore-st-athanasius-00079c0b,St. Athanasius,4708,,Prudence,St,,,,4708 Prudence St,Baltimore,MD,21226,,39.22296821,-76.59152871,(410) 355-5740
+us-md-baltimore-church-of-st-benedict-fb704b48,St. Benedict,2612,,Wilkens,Ave,,,,2612 Wilkens Ave,Baltimore,MD,21223,,39.2789375,-76.6566875,14109474988
+us-md-baltimore-st-bernardine-33ccfe2d,St. Bernardine,3812,,Edmondson,Ave,,,,3812 Edmondson Ave,Baltimore,MD,21229,,39.2940415,-76.68005006,(410) 362-8664
+us-md-baltimore-church-of-st-brigid-56718a48,St. Brigid,900,S,E,Ave,,,,900 S E Ave,Baltimore,MD,21224,,39.2816875,-76.5711875,14105631717
+us-md-baltimore-st-casimir-6dce83dc,St. Casimir,2800,,O'Donnell,St,,,,2800 O'Donnell St,Baltimore,MD,21224,4796,39.28018663,-76.57704628,(410) 276-1981
+us-md-baltimore-st-cecilia-1526f42c,St. Cecilia,3300,,Clifton,Ave,,,,3300 Clifton Ave,Baltimore,MD,21216,,39.31132942,-76.67268193,(410) 624-3600
+us-md-baltimore-st-clement-5f347c68,St. Clement,2700,,Washington,Ave,,,,2700 Washington Ave,Baltimore,MD,21227,,39.24372222,-76.66106768,(410) 242-1025
+us-md-baltimore-st-dominic-closed-613b3d3e,St. Dominic,5302,,Harford,Rd,,,,5302 Harford Rd,Baltimore,MD,21214,,39.35054114,-76.56312109,(410) 488-0400
+us-md-baltimore-st-edward-369bd3ee,St. Edward,901,,Poplar Grove,St,,,,901 Poplar Grove St,Baltimore,MD,21216,4350,39.29842598,-76.66497405,(410) 362-2000
+us-md-baltimore-st-elizabeth-of-hungary-d89ae9c0,St. Elizabeth of Hungary,2638,E,Baltimore,St,,,,2638 E Baltimore St,Baltimore,MD,21224,,39.29224864,-76.57878816,410.276.1981
+us-md-baltimore-st-francis-xavier-7fd33e15,St. Francis Xavier,1501,E,Oliver,St,,,,1501 E Oliver St,Baltimore,MD,21213,,39.30721935,-76.5978926,(410) 727-3103
+us-md-baltimore-st-francis-of-assisi-8b9a017f,St. Francis of Assisi,3615,,Harford,Rd,,,,3615 Harford Rd,Baltimore,MD,21218,,39.33093844,-76.57987703,(410) 235-5136
+us-md-baltimore-st-gabriel-9f4b9a41,St. Gabriel,6950,,Dogwood,Rd,,,,6950 Dogwood Rd,Baltimore,MD,21244,2697,39.32109311,-76.75670691,(410)944-2106
+us-md-baltimore-st-gregory-the-great-7bd9731e,St. Gregory the Great,1542,N,Gilmor,St,,,,1542 N Gilmor St,Baltimore,MD,21217,,39.30642715,-76.64350547,(410) 523-0061
+us-md-baltimore-st-ignatius-bae6ccad,St. Ignatius,740,N,Calvert,St,,,,740 N Calvert St,Baltimore,MD,21202,,39.29853346,-76.61313626,(410) 727-3848
+us-md-baltimore-st-isaac-jogues-4a7e5b6e,St. Isaac Jogues,9215,,Old Harford,Rd,,,,9215 Old Harford Rd,Baltimore,MD,21234,,39.40522148,-76.52581644,(410) 661-4888
+us-md-baltimore-st-leo-the-great-3c623a4e,St. Leo,227,S,Exeter,St,,,,227 S Exeter St,Baltimore,MD,21202,,39.28732396,-76.60091482,(410) 675-7275
+us-md-baltimore-church-of-st-mary-of-the-assumption-79e86214,St. Mary of the Assumption,5502,,York,Rd,,,,5502 York Rd,Baltimore,MD,21212,,39.3570625,-76.6100625,14104355900
+us-md-baltimore-st-mary-star-of-the-sea-5731847a,"St. Mary, Star of the Sea",1400,,Riverside,Ave,,,,1400 Riverside Ave,Baltimore,MD,21230,4695,39.2741066,-76.60868515,(410) 752-8498
+us-md-baltimore-st-marys-seminary-and-university-4dfe8c95,St. Mary’s Seminary and University,5400,,Roland,Ave,,,,5400 Roland Ave,Baltimore,MD,21210,1994,39.3605625,-76.6398125,14108644000
+us-md-baltimore-st-matthew-d23c18cc,St. Matthew,5401,,Loch Raven,Blvd,,,,5401 Loch Raven Blvd,Baltimore,MD,21239,,39.3557412,-76.58893794,(410) 433-2300
+us-md-baltimore-saint-michael-ukrainian-09a8568c,St. Michael (Ukrainian),2401,,Eastern,Ave,,,,2401 Eastern Ave,Baltimore,MD,21224,,39.28567248,-76.5825918,(410) 675-7557
+us-md-baltimore-st-michael-the-archangel-d9a36e9c,St. Michael the Archangel,10,,Willow,Ave,,,,10 Willow Ave,Baltimore,MD,21206,,39.35778355,-76.52682599,(410) 665-1054
+us-md-baltimore-st-patrick-65adc939,St. Patrick,600,S,CONKLING,St,,,,600 S CONKLING St,Baltimore,MD,21202,,39.28677268,-76.59319825,(410) 342-4336
+us-md-baltimore-st-peter-claver-5dfb9818,St. Peter Claver,1542,N,Fremont,Ave,,,,1542 N Fremont Ave,Baltimore,MD,21217,,39.30628797,-76.63867086,(410) 362-8664
+us-md-baltimore-church-of-st-pius-v-85280c97,St. Pius V,521,N,Schroeder,St,,,,521 N Schroeder St,Baltimore,MD,21223,,39.2954375,-76.6341875,14105231930
+us-md-baltimore-st-pius-v-3a215a2e,St. Pius V,1546,N,Fremont,Ave,,,,1546 N Fremont Ave,Baltimore,MD,21217,,39.2866135,-76.647047,(410) 669-0512
+us-md-baltimore-church-of-st-pius-x-49e6b233,St. Pius X,6428,,York,Rd,,,,6428 York Rd,Baltimore,MD,21212,,39.3750625,-76.6100625,14104277500
+us-md-baltimore-church-of-st-rita-85776d33,St. Rita,2907,,Dunleer,Rd,,,,2907 Dunleer Rd,Baltimore,MD,21222,,39.2564375,-76.5216875,14102840388
+us-md-baltimore-st-rose-of-lima-331538b8,St. Rose of Lima,3803,,4th,St,,,,3803 4th St,Baltimore,MD,21225,,39.23480936,-76.60605828,(410) 355-8515
+us-md-baltimore-church-of-st-thomas-more-25b58e7c,St. Thomas More,6806,,McClean,Blvd,,,,6806 McClean Blvd,Baltimore,MD,21234,,39.3699375,-76.5686875,14104446500
+us-md-baltimore-st-veronica-16b7c959,St. Veronica,806,,Cherry Hill,Rd,,,,806 Cherry Hill Rd,Baltimore,MD,21225,,39.24931457,-76.62558773,(410) 355-7466
+us-md-baltimore-st-vincent-de-paul-404130d4,St. Vincent de Paul Church,120,N,Front,St,,,,120 N Front St,Baltimore,MD,21202,,39.29143722,-76.6061859,(410) 962-5078
+us-md-baltimore-st-wenceslaus-55d96e54,St. Wenceslaus,2111,,Ashland,Ave,,,,2111 Ashland Ave,Baltimore,MD,21205,,39.30069367,-76.58708799,(410) 675-7304
+us-md-baltimore-st-william-of-york-01d056d6,St. William of York,600,,Cooks,Ln,,,,600 Cooks Ln,Baltimore,MD,21229,,39.29261801,-76.7024944,410-744-2900
+us-md-baltimore-sts-philip-and-james-f21b04a5,Sts. Philip and James,2801,N,Charles,St,,,,2801 N Charles St,Baltimore,MD,21218,,39.3226779,-76.61706921,(410) 235-2294
+us-md-baltimore-basilica-of-the-assumption-ad2fa315,The Baltimore Basilica,409,,Cathedral,St,,,,409 Cathedral St,Baltimore,MD,21201,,39.29443889,-76.61618702,(410) 547-5523
+us-md-baltimore-transfiguration-roman-catholic-congregation-5c3ca07c,Transfiguration Catholic Community,775,W,Hamburg,St,,,,775 W Hamburg St,Baltimore,MD,21230,,39.28059254,-76.62844592,(410) 685-5044
+us-md-baltimore-ummc-chapel-of-comfort-d36e2a9a,UMMC Chapel of Comfort,22,S,Greene,St,,,,22 S Greene St,Baltimore,MD,21201,,39.28807951,-76.62435515,
+us-md-barnesville-st-marys-church-shrine-of-our-lady-of-fatima-cd386f4b,St. Mary,18230,,Barnesville,Rd,,,,18230 Barnesville Rd,Barnesville,MD,20838,,39.22080326,-77.38071502,(301) 972-8660
+us-de-bear-st-elizabeth-ann-seton-roman-catholic-church-49e3f305,St Elizabeth Ann Seton Roman Catholic Church,345,,Bear Christiana,Rd,,,,345 Bear Christiana Rd,Bear,DE,19701,,39.6506891,-75.654357,+1-302-322-6430
+us-de-bear-st-elizabeth-ann-seton-6a860f8a,St. Elizabeth Ann Seton,345,,Bear- Christiana,Rd,,,,345 Bear- Christiana Rd,Bear,DE,19701,,39.65116882,-75.6555481,(302) 322-6430
+us-md-bel-air-st-margaret-eafa6583,St. Margaret,141,N,Hickory,Ave,,,,141 N Hickory Ave,Bel Air,MD,21014,,39.53987849,-76.34796465,(410) 879-2670
+us-md-bel-air-st-mary-magdalen-7ef09d58,St. Mary Magdalen,1716,,Churchville,Rd,,,,1716 Churchville Rd,Bel Air,MD,21015,,39.55039732,-76.30572751,(410) 879-2670
+us-md-beltsville-saint-gregory-of-nyssa-617584a4,St. Gregory of Nyssa ,12420,,Old Gunpower,Rd,,,,12420 Old Gunpower Rd Spur,Beltsville,MD,20705,,39.06296404,-76.92008338,(301) 953-9323
+us-md-beltsville-st-joseph-4283a6ea,St. Joseph,11007,,Montgomery,Rd,,,,11007 Montgomery Rd,Beltsville,MD,20705,,39.03610124,-76.92107649,(301) 937-7183
+us-md-benedict-st-francis-de-sales-fbdcb1f5,St. Francis de Sales,7185,,Benedict,Ave,,,,7185 Benedict Ave,Benedict,MD,20612,0306,38.51445026,-76.67900239,(301) 274-3416
+us-wv-berkeley-springs-st-vincent-de-paul-9bf87211,St. Vincent de Paul,67,,Liberty,St,,,,67 Liberty St,Berkeley Springs,WV,25411,,39.62615442,-78.22784775,304-258-1311
+us-md-berlin-st-john-neumann-d28bb50c,St. John Neumann,11211,,Beauchamp,Rd,,,,11211 Beauchamp Rd,Berlin,MD,21811,,38.388588,-75.18456,(410) 208-2956
+us-va-berryville-holy-cross-abbey-80eee042,Holy Cross Abbey,901,,Cool Spring,Ln,,,,901 Cool Spring Ln,Berryville,VA,22611,2700,39.1460625,-77.8774375,
+us-va-berryville-st-bridget-of-ireland-343ff78d,St Bridget of Ireland Church,1024,W,Main,St,,,,1024 W Main St,Berryville,VA,22611,,39.16679483,-78.00088193,(540) 277-2943
+us-de-bethany-beach-st-ann-85398478,St. Ann,691,,Garfield,Pkwy,,,,691 Garfield Pkwy,Bethany Beach,DE,19930,,38.53985537,-75.06761824,(302) 539-6449
+us-md-bethesda-church-of-the-little-flower-d360d4b1,Little Flower,5607,,Massachusetts,Ave,,,,5607 Massachusetts Ave,Bethesda,MD,20816,,38.96201393,-77.11196867,(301) 320-4538
+us-md-bethesda-our-lady-of-lourdes-f5a25fe2,Our Lady of Lourdes,7500,,Pearl,St,,,,7500 Pearl St,Bethesda,MD,20814,,38.98605618,-77.0915395,(301) 654-1287
+us-md-bethesda-st-bartholomew-4f3b7a73,St. Bartholomew,6900,,River,Rd,,,,6900 River Rd,Bethesda,MD,20817,,38.98407137,-77.14059973,(301) 229-7933
+us-md-bethesda-saint-jane-frances-de-chantal-bf725e62,St. Jane Frances de Chantal,9701,,Old Georgetown,Rd,,,,9701 Old Georgetown Rd,Bethesda,MD,20814,1795,39.01338158,-77.116444,(301) 530-1550
+us-md-bladdensburg-parish-of-st-luke-eeff5666,Parish of St. Luke,4002,,53rd,St,,,,4002 53rd St,Bladdensburg,MD,20710,,38.9394375,-76.9295625,13019276466
+us-pa-blue-ridge-summit-st-rita-853e351a,St. Rita,13219,,Monterey,Ln,,,,13219 Monterey Ln,Blue Ridge Summit,PA,17214,,39.72697808,-77.47156242,(717) 642-8815
+us-pa-bonneauville-st-joseph-the-worker-9b494b71,St. Joseph the Worker,12,E,Hanover,St,,,,12 E Hanover St,Bonneauville,PA,17325,,39.81167079,-77.13628413,(717) 334-2510
+us-md-boonsboro-st-james-0474e1a6,St. James,121,N,Main,St,,,,121 N Main St,Boonsboro,MD,21713,,39.5085486,-77.65310305,(301) 432-2887 
+us-md-bowie-ascension-d6696ea7,Ascension,12700,,Lanham-Severn,Rd,,,,12700 Lanham-Severn Rd,Bowie,MD,20720,4566,39.006314,-76.786921,(301) 262-2227
+us-md-bowie-sacred-heart-ec6d3a35,Sacred Heart,16501,,Annapolis,Rd,,,,16501 Annapolis Rd,Bowie,MD,20715,3096,38.98348718,-76.72126607,(301) 262-0704
+us-md-bowie-st-pius-catholic-church-759a02b9,St Pius Catholic Church,14716,,Annapolis,Rd,,,,14716 Annapolis Rd,Bowie,MD,20715,,38.9763157,-76.7494947,+1-301-262-2141
+us-md-bowie-st-edward-the-confessor-feab77ff,St. Edward the Confessor,1940,,Mitchellville,Rd,,,,1940 Mitchellville Rd,Bowie,MD,20716,,38.91479484,-76.72318198,(301) 249-9199
+us-md-bowie-saint-mary-syro-malankara-6b5ad41b,St. Mary (Syro-Malankara),16503,,Annapolis,Rd,,,,16503 Annapolis Rd,Bowie,MD,20715,,38.867071,-76.863372,
+us-md-bowie-st-pius-x-973f342e,St. Pius X,14720,,Annapolis,Rd,,,,14720 Annapolis Rd,Bowie,MD,20715,1813,38.97526567,-76.74936033,(301) 262-2141
+us-md-brandywine-st-michael-catholic-church-0aead3bf,St. Michael's Catholic Church,17510,,Horsehead,Rd,,,,17510 Horsehead Rd,Brandywine,MD,20613,,38.64974937,-76.77035649,240-681-3551
+us-md-brunswick-church-of-st-francis-of-assisi-9ee8b830,St. Francis of Assisi,113,,1st,Ave,,,,113 1st Ave,Brunswick,MD,21716,,39.3139375,-77.6254375,13018349185
+us-md-bryantown-st-marys-catholic-church-ccb69adb,St Mary's Catholic Church,13715,,Notre Dame,Pl,,,,13715 Notre Dame Pl,Bryantown,MD,20617,,38.5394984,-76.837153,+1-301-870-2220
+us-md-bryantown-st-mary-027a1a07,St. Mary,13715,,Notre Dame,Pl,,,,13715 Notre Dame Pl,Bryantown,MD,20617,2224,38.54584006,-76.84022911,(301) 870-2220
+us-va-burke-nativity-caf28c75,Nativity,6400,,Nativity,Ln,,,,6400 Nativity Ln,Burke,VA,22015,,38.77691918,-77.27999766,(703) 455-2400
+us-md-burtonsville-church-of-the-resurrection-bdf9231c,Resurrection,3315,,Greencastle,Rd,,,,3315 Greencastle Rd,Burtonsville,MD,20866,,39.09726794,-76.94363606,(301) 236-5200
+us-md-bushwood-sacred-heart-church-0da2c56c,Sacred Heart,23080,,Maddox,Rd,,,,23080 Maddox Rd,Bushwood,MD,20618,,38.30249173,-76.79208533,(301) 769-3100
+us-md-cambridge-st-mary-refuge-of-sinners-1e3c49e0,St. Mary Refuge of Sinners,1515,,Glasgow,St,,,,1515 Glasgow St,Cambridge,MD,21613,,38.58192995,-76.09169907,(410) 228-4770
+us-md-camp-springs-st-philip-the-apostle-a88eb9a0,St. Philip the Apostle,5416,,Henderson,Way,,,,5416 Henderson Way,Camp Springs,MD,20746,,38.82190791,-76.9129998,301-423-4244
+us-nj-carneys-point-corpus-christist-gabriel-the-archangel-parish-446fd20f,St Gabriel the Arch Angel Parish,369,,Georgetown,Rd,,,,369 Georgetown Rd,Carneys Point,NJ,08069,,39.7109154,-75.46276651,(856) 299-3833
+us-md-catonsville-community-of-st-timothy-49127e94,Community of St. Timothy,30,,Melvin,Ave,,,,30 Melvin Ave,Catonsville,MD,21228,,39.2728125,-76.7383125,
+us-md-catonsville-our-lady-of-the-angels-c58fa007,Our Lady of the Angels,711,,Maiden Choice,Ln,,,,711 Maiden Choice Ln,Catonsville,MD,21228,,39.26851854,-76.70330227,(410) 247-4779
+us-md-catonsville-st-josephs-nursing-home-089e549e,St. Joseph's Nursing Home,1222,,Tugwell,Dr,,,,1222 Tugwell Dr,Catonsville,MD,21228,,39.259505,-76.737688,410-747-0026
+us-md-catonsville-st-mark-3fe53d0c,St. Mark,30,,Melvin,Ave,,,,30 Melvin Ave,Catonsville,MD,21228,,39.27283953,-76.73702575,(410) 744-6560
+us-md-centreville-mother-of-sorrows-church-967a794a,Mother of Sorrows Church,303,,Chesterfield,Ave,,,,303 Chesterfield Ave,Centreville,MD,21617,,39.0474324,-76.0697169,+1-410-758-0140
+us-md-centreville-our-mother-of-sorrows-0330be83,Our Mother of Sorrows,301,,Chesterfield,Ave,,,,301 Chesterfield Ave,Centreville,MD,21617,1309,39.0474243,-76.06824,(410) 758-0143
+us-pa-chadds-ford-st-cornelius-3c81e618,St. Cornelius,160,,Ridge,Rd,,,,160 Ridge Rd,Chadds Ford,PA,19317,,39.86469529,-75.5574598,(610) 459-2502
+us-pa-chambersburg-corpus-christi-9049ea01,Corpus Christi,320,,Philadelphia,Ave,,,,320 Philadelphia Ave,Chambersburg,PA,17201,,39.94166303,-77.65985624,(717) 264-6317
+us-va-chantilly-st-jude-syro-malabar-catholic-church-4ee0f501,St. Jude Syro-Malabar Catholic Church,4219,,Lafayette Center,Dr,,,,4219 Lafayette Center Dr,Chantilly,VA,20151,,38.90715369,-77.4760315,(571) 287-7557
+us-va-chantilly-st-timothy-catholic-church-41233bb0,St. Timothy Catholic Church,13807,,Poplar Tree,Rd,,,,13807 Poplar Tree Rd,Chantilly,VA,20151,,38.87260176,-77.42441644,(703) 378-7461
+us-va-chantilly-st-veronica-38c31730,St. Veronica,3460,,Centreville,Rd,,,,3460 Centreville Rd,Chantilly,VA,20151,,38.90919505,-77.4236544,(703) 773-2000
+us-md-chapel-point-st-ignatius-of-chapel-point-a82dafdd,St. Ignatius,8855,,Chapel Point,Rd,,,,8855 Chapel Point Rd,Chapel Point,MD,20677,,38.46561482,-77.02382645,(301) 934-8245
+us-md-chaptico-our-lady-of-the-wayside-b3816fb1,Our Lady of the Wayside,37575,,Chaptico,Rd,,,,37575 Chaptico Rd,Chaptico,MD,20621,,38.368076,-76.775464,+1-301-884-2502
+us-md-chaptico-our-lady-of-wayside-156b7a18,Our Lady of the Wayside,37575,,Chapitco,Rd,,,,37575 Chapitco Rd,Chaptico,MD,20621,0097,38.36715508,-76.77728004,(301) 884-2502
+us-wv-charles-town-canons-regular-of-the-new-jerusalem-738303fd,Canons Regular of the New Jerusalem,301,S,George,St,,,,301 S George St,Charles Town,WV,25414,,39.28773091,-77.85881009,(304) 724-6995
+us-wv-charles-town-st-james-2f66bfcf,St. James,49,,Crosswinds,Dr,,,,49 Crosswinds Dr,Charles Town,WV,25414,,39.26710657,-77.83888569,(304) 725-5558
+us-md-charlotte-hall-st-marys-newport-64de0de2,St. Mary's Newport,11555,,St Marys Church,Rd,,,,11555 St Marys Church Rd,Charlotte Hall,MD,20622,,38.43370737,-76.90973679,(301) 934-8825
+us-md-chesapeake-city-saint-basil-ukrainian-9bedb1f0,St. Basil (Ukrainian),231,,Basil,Ave,,,,231 Basil Ave,Chesapeake City,MD,21915,1106,39.51867704,-75.82277596,(302) 762-5511
+us-md-chesapeake-city-st-rose-of-lima-8996a357,St. Rose of Lima,301,,Lock,St,,,,301 Lock St,Chesapeake City,MD,21915,,39.5312156,-75.8101849,(302) 378-5800
+us-md-chester-st-christopher-bab1d046,St. Christopher,1861,,Harbor,Dr,,,,1861 Harbor Dr,Chester,MD,21619,,38.97278,-76.29612,(410) 643-6220
+us-md-chestertown-sacred-heart-4c13661a,Sacred Heart,508,,High,St,,,,508 High St,Chestertown,MD,21620,,39.21206264,-76.07048292,(410) 778-3160
+us-md-cheverly-st-ambrose-45fd773c,St. Ambrose,3107,,63rd,Ave,,,,3107 63rd Ave,Cheverly,MD,20785,,38.9290268,-76.90821991,(301) 773-9300
+us-md-chillum-saint-john-baptist-de-la-salle-4896c56f,St John Baptist de la Salle,5706,,Sargent,Rd,,,,5706 Sargent Rd,Chillum,MD,20782,,38.96043045,-76.98737453,(301) 559-3636
+us-va-chincoteague-island-st-andrew-the-apostle-69dde0e6,St. Andrew the Apostle,6288,,Church,St,,,,6288 Church St,Chincoteague Island,VA,23336,,37.93304327,-75.37400356,(757) 336-5432
+us-md-church-creek-st-mary-star-of-the-sea-87dccecc,St. Mary Star of the Sea,917,,Hoopers Island,Rd,,,,917 Hoopers Island Rd,Church Creek,MD,21622,,38.3859802,-76.24947463,(410) 228-4770
+us-md-clarksville-st-louis-e7b683ef,St. Louis,12500,,Clarksville,Pike,,,,12500 Clarksville Pike,Clarksville,MD,21029,,39.20437857,-76.94443828,(410) 531-6040
+us-de-claymont-holy-rosary-4c79ea03,Holy Rosary,3200,,Philadelphia,Pike,,,,3200 Philadelphia Pike,Claymont,DE,19703,,39.7976952,-75.46274,(302) 798-2904
+us-md-clear-spring-st-michael-c21d2d5e,St. Michael,31,S,Martin,St,,,,31 S Martin St,Clear Spring,MD,21722,,39.6658,-77.9081,(301) 739-0390
+us-md-clear-spring-church-of-st-michael-617fcbb2,St. Michael,31,S,Martin,St,,,,31 S Martin St,Clear Spring,MD,21722,,39.6545625,-77.9313125,13017390390
+us-pa-clearville-seven-dolors-of-the-bvm-c7d2c696,Our Lady of Seven Dolors,2174,,Beans Cove,Rd,,,,2174 Beans Cove Rd,Clearville,PA,15535,,39.77619995,-78.59924588,(814) 767-9522
+us-pa-clearville-church-of-the-seven-dolors-of-the-blessed-virgin-mary-a3645b01,Seven Dolors of the Blessed Virgin Mary,2174,,Beans Cove,Rd,,,,2174 Beans Cove Rd,Clearville,PA,15535,,39.7925625,-78.5791875,18147679522
+us-va-clifton-st-andrew-the-apostle-39f041b1,St. Andrew the Apostle,6720,,Union Mill,Rd,,,,6720 Union Mill Rd,Clifton,VA,20124,,38.80509287,-77.421973,(703) 817-1770
+us-va-clifton-st-clare-of-assisi-32ec6c6a,St. Clare of Assisi,12409,,Henderson,Rd,,,,12409 Henderson Rd,Clifton,VA,20124,,38.7597733,-77.37691,(703) 266-1310
+us-md-clinton-saint-john-the-evangelist-f2211c67,St John the Evangelist,8908,,Old Branch,Ave,,,,8908 Old Branch Ave,Clinton,MD,20735,,38.76770622,-76.89712448,(301) 868-1070
+us-md-clinton-church-of-st-mary-ebd67299,St. Mary,13401,,Piscataway,Rd,,,,13401 Piscataway Rd,Clinton,MD,13401,,38.7048125,-76.9676875,13012920527
+us-md-clinton-st-marys-of-piscataway-50e2ad20,St. Mary's of Piscataway,13401,,Piscataway,Rd,,,,13401 Piscataway Rd,Clinton,MD,20735,,38.70438449,-76.9671129,(301) 292-0527
+us-pa-coatesville-our-lady-of-the-rosary-1b5dac55,Our Lady of the Rosary,80,S,17th,Ave,,,,80 S 17th Ave,Coatesville,PA,19320,,39.98425557,-75.79102655,(610) 384-1415
+us-pa-coatesville-st-joseph-37aba217,St. Joseph,404,,Charles,St,,,,404 Charles St,Coatesville,PA,19320,,39.97886844,-75.83473682,(610) 384-0360
+us-pa-coatesville-saint-mary-641213bb,St. Mary ,88,,Gap,Rd,,,,88 Gap Rd,Coatesville,PA,19320,,39.9834,-75.8231,(610) 933-2819
+us-md-cockeysville-st-joseph-d512334f,St. Joseph,100,,Church,Ln,,,,100 Church Ln,Cockeysville,MD,21030,,39.46364057,-76.63902281,(410) 683-0600
+us-md-college-park-holy-redeemer-7668784e,Holy Redeemer,4902,,Berwyn,Rd,,,,4902 Berwyn Rd,College Park,MD,20740,2196,38.994852,-76.92764287,(301) 474-3920
+us-md-college-park-catholic-student-center-at-university-of-maryland-104254a8,University of Maryland Catholic Student Center,4141,,Guilford,Dr,,,,4141 Guilford Dr,College Park,MD,20740,,38.98069217,-76.94509205,301-864-6223
+us-va-colonial-beach-st-elizabeth-of-hungary-2da4c522,St. Elizabeth,12,,Lossing,Ave,,,,12 Lossing Ave,Colonial Beach,VA,22443,,38.24985256,-76.9622097,(804) 224-7221
+us-pa-columbia-holy-trinity-be699682,Holy Trinity,409,,Cherry,St,,,,409 Cherry St,Columbia,PA,17512,,40.032255,-76.5000139,(717) 684-2711
+us-md-columbia-st-john-the-evangelist-8db2bbba,St. John the Evangelist,10431,,Twin Rivers,Rd,,,,10431 Twin Rivers Rd,Columbia,MD,21044,,39.21912047,-76.87246024,410-964-1425
+us-md-columbia-st-louis-roman-catholic-church-a391729b,St. Louis Roman Catholic Church,12500,,Clarksville,Pike,,,,12500 Clarksville Pike,Columbia,MD,21029,,39.2044019,-76.9443951,+1-410-531-6040
+us-pa-columbia-st-peter-09f56208,St. Peter,121,S,2nd,St,,,,121 S 2nd St,Columbia,PA,17512,,40.02944444,-76.50188608,(717) 684-7070
+us-pa-conewago-sacred-heart-of-jesus-5487a4c3,Sacred Heart of Jesus,30,,Basilica,Dr,,,,30 Basilica Dr,Conewago,PA,17331,,39.81875585,-77.03535367,(717) 637-2721
+us-md-conowingo-chapel-of-st-patrick-72863b5a,Chapel of St. Patrick,237,,Pleasant Grove,Rd,,,,237 Pleasant Grove Rd,Conowingo,MD,21918,,39.7160625,-76.2019375,14106426534
+us-md-conowingo-st-patrick-cc879c41,St. Patrick,287,,Pleasant Grove,Rd,,,,287 Pleasant Grove Rd,Conowingo,MD,21918,,39.71820667,-76.20106749,(410) 642-6534
+us-md-cordova-st-joseph-dddc8a17,St. Joseph,13209,,Church,Ln,,,,13209 Church Ln,Cordova,MD,21625,,38.91006975,-76.01345029,(410) 822-2344
+us-md-cresaptown-church-of-st-ambrose-f004184b,St. Ambrose,14923,,Winchester,Rd,,,,14923 Winchester Rd,Cresaptown,MD,14923,,39.5901875,-78.8330625,
+us-md-crofton-st-elizabeth-ann-seton-b92d3d35,St. Elizabeth Ann Seton,1800,,Seton,Dr,,,,1800 Seton Dr,Crofton,MD,21114,,39.00658498,-76.67582893,(410) 721-5770
+us-md-cumberland-our-lady-of-the-mountains-shrine-of-sts-peter-and-paul-e2e8faeb,Our Lady of the Mountains (Shrine of Sts. Peter and Paul),125,,Fayette,St,,,,125 Fayette St,Cumberland,MD,21502,2992,39.65234739,-78.76741055,301-777-1750
+us-md-cumberland-our-lady-of-the-mountains-st-patrick-8e91eb87,St Patrick Catholic Church,201,N,Centre,St,,,,201 N Centre St,Cumberland,MD,21502,,39.65527521,-78.76413933,(301) 777-1750
+us-md-cumberland-our-lady-of-the-mountains-st-marys-church-20f897e9,St. Mary of the Immaculate Conception,300,E,Oldtown,Rd,,,,300 E Oldtown Rd,Cumberland,MD,21502,,39.63908193,-78.75805295,301-777-1750
+us-va-dale-city-holy-family-5efa4667,Holy Family,14160,,Ferndale,Rd,,,,14160 Ferndale Rd,Dale City,VA,22193,,38.64637359,-77.32123662,(703) 670-8161
+us-pa-dallastown-st-joseph-04982977,St. Joseph,251,E,Main,St,,,,251 E Main St,Dallastown,PA,17313,2229,39.90018436,-76.63877187,(717) 246-3007
+us-md-damascus-st-paul-41923d52,St. Paul,9250,,Damascus,Rd,,,,9250 Damascus Rd,Damascus,MD,20872,,39.28360902,-77.19259045,(301) 253-2027
+us-md-darnestown-our-lady-of-the-visitation-9997fba3,Our Lady of the Visitation,14139,,Seneca,Rd,,,,14139 Seneca Rd,Darnestown,MD,20874,,39.10294489,-77.29477374,(301) 948-5536
+us-md-davidsonville-holy-family-8685a354,Holy Family,826,W,Central,Ave,,,,826 W Central Ave,Davidsonville,MD,21035,,38.92309602,-76.63129513,(410) 269-0586
+us-de-delaware-city-st-paul-725aba44,St. Paul,209,,Washington,St,,,,209 Washington St,Delaware City,DE,19706,,39.57632951,-75.59241975,(302) 834-4321
+us-md-delmar-holy-redeemer-church-st-francis-de-sales-holy-redeemer-parish-40193ff3,Holy Redeemer (St. Francis de Sales & Holy Redeemer parish),501,E,Chestnut,St,,,,501 E Chestnut St,Delmar,MD,21875,,38.45337797,-75.57280328,(410) 742-6443
+us-md-denton-st-elizabeth-of-hungary-1edb812a,St. Elizabeth,106,,So First,St,,,,106 So First St,Denton,MD,21629,,38.88535309,-75.83502197,(410) 634-2253
+us-md-derwood-st-francis-of-assisi-c1082bac,St. Francis of Assisi,6701,,Muncaster Mill,Rd,,,,6701 Muncaster Mill Rd,Derwood,MD,20855,1543,39.14164613,-77.13563496,(301) 840-1407
+us-pa-doe-run-st-malachi-98e17a4e,St. Malachy,76,,St Malachy,Rd,,,,76 St Malachy Rd,Doe Run,PA,19330,,39.89693951,-75.85015248,(610) 857-3510
+us-de-dover-holy-cross-0a0f4ddc,Holy Cross,631,S,State,St,,,,631 S State St,Dover,DE,19901,,39.15052022,-75.52127726,(302) 674-5787
+us-de-dover-afb-community-of-our-lady-of-perpetual-help-e7e02daf,Community of Our Lady of Perpetual Help,436,,AW/HC 419 12th,St,,,,436 AW/HC 419 12th St,Dover AFB,DE,19902,,39.1246875,-75.4798125,13026776340
+us-de-dover-afb-our-lady-of-perpetual-help-dacc5af7,Our Lady of Perpetual Help,436,,AW/HC 419 12th,St,,,,436 AW/HC 419 12th St,Dover Afb,DE,19902,,39.11714245,-75.48559236,302-677-3932
+us-va-dulles-dulles-international-airport-e48f95ce,Dulles International Airport,,,Dulles International Airport 1 Saarinen,Cir,,,,Dulles International Airport 1 Saarinen Cir,Dulles,VA,20166,,38.94871082,-77.44735657,
+us-md-dundalk-our-lady-of-hope-6df43ab5,Our Lady of Hope,2903,,Dunleer,Rd,,,,2903 Dunleer Rd,Dundalk,MD,21222,,39.25675044,-76.52219495,(410) 284-0388
+us-md-easton-saints-peter-and-paul-58b8532b,Sts. Peter and Paul,1210,S,Washington,St,,,,1210 S Washington St,Easton,MD,21601,,38.74474,-76.06929,(410) 822-2344
+us-md-edgewater-our-lady-of-perpetual-help-6574a491,Our Lady of Perpetual Help,515,,Loch Haven,Rd,,,,515 Loch Haven Rd,Edgewater,MD,21037,,38.91120373,-76.53988979,443-203-1002
+us-md-edgewood-prince-of-peace-2118653f,Prince of Peace,2600,,Willoughby Beach,Rd,,,,2600 Willoughby Beach Rd,Edgewood,MD,21040,3412,39.42771425,-76.28423092,(410) 679-5912
+us-md-eldersburg-st-joseph-catholic-church-sjcc-31917a43,St Joseph's Catholic Church (SJCC),915,,Liberty,Rd,,,,915 Liberty Rd,Eldersburg,MD,21784,,39.40647622,-76.96497556,(443) 920-9191
+us-md-elkridge-st-augustine-91769a10,St. Augustine,5976,,Old Washington,Rd,,,,5976 Old Washington Rd,Elkridge,MD,21075,,39.211451,-76.71570201,(410) 796-1520
+us-md-elkton-immaculate-conception-8db3158b,Immaculate Conception,454,,Bow St,Ext,,,,454 Bow St Extension,Elkton,MD,21921,,39.61506076,-75.83063133,(410) 398-1100
+us-md-ellicott-city-our-lady-of-perpetual-help-54c95248,Our Lady of Perpetual Help,4795,,Ilchester,Rd,,,,4795 Ilchester Rd,Ellicott City,MD,21043,,39.23830948,-76.76873324,(410) 747-4334
+us-md-ellicott-city-our-ladys-center-58870a98,Our Lady's Center ,3301,S,Rogers,Ave,,,,3301 S Rogers Ave,Ellicott City,MD,21043,,39.2820053,-76.80604,410-461-5066
+us-md-ellicott-city-resurrection-9216550a,Resurrection,3175,,Paulskirk,Dr,,,,3175 Paulskirk Dr,Ellicott City,MD,21042,,39.28190787,-76.83081666,(410) 461-9112
+us-md-ellicott-city-shrine-of-st-anthony-22af6856,Shrine of St. Anthony,12290,,Folly Quarter,Rd,,,,12290 Folly Quarter Rd,Ellicott City,MD,21042,,39.25749134,-76.93806672,(410) 531-2800
+us-md-ellicott-city-st-paul-ec2c932e,St. Paul,3755,,St Paul,St,,,,3755 St Paul St,Ellicott City,MD,21043,,39.2588,-76.8029,(410) 465-1670
+us-md-ellicott-city-st-paul-catholic-church-5123e702,St. Paul Catholic Church,3755,,St Paul,St,,,,3755 St Paul St,Ellicott City,MD,21043,,39.2667346,-76.7960429,+1-410-465-1670
+us-de-elsmere-corpus-christi-a3304f9f,Holy Family,905,,New,Rd,,,,905 New Rd,Elsmere,DE,19805,,39.7403641,-75.5969,(302) 994-2922
+us-md-emmitsburg-mount-st-marys-university-478a45e3,Mount St. Mary's University,16300,,Old Emmitsburg,Rd,,,,16300 Old Emmitsburg Rd,Emmitsburg,MD,21727,,39.68122966,-77.35403725,301-447-6122
+us-md-emmitsburg-national-shrine-grotto-of-lourdes-c03b51c2,National Shrine Grotto of Our Lady of Lourdes,16330,,Grotto,Rd,,,,16330 Grotto Rd,Emmitsburg,MD,21727,,39.68165908,-77.35637557,(301) 447-5318
+us-md-emmitsburg-st-anthony-shrine-bf7fb509,St Anthony Shrine,16150,,St Anthony,Rd,,,,16150 St Anthony Rd,Emmitsburg,MD,21727,,39.6765707,-77.3567766,+1-301-447-2367
+us-md-emmitsburg-st-anthony-shrine-ad55e580,St. Anthony Shrine ,16150,,St Anthony,Rd,,,,16150 St Anthony Rd,Emmitsburg,MD,21727,,39.69868042,-77.3262617,(301) 447-2367
+us-md-emmitsburg-st-joseph-193767f9,St. Joseph,47,,DePaul,St,,,,47 DePaul St,Emmitsburg,MD,21727,,39.70539674,-77.32618572,(301) 447-2326
+us-md-emmitsburg-the-national-shrine-of-saint-elizabeth-ann-seton-a372fa18,The National Shrine of St. Elizabeth Ann Seton,339,S,Seton,Ave,,,,339 S Seton Ave,Emmitsburg,MD,21727,,39.69890994,-77.32657845,(301) 447-6606
+us-md-essex-our-lady-of-mount-carmel-7e3a2c8a,Our Lady of Mount Carmel,1704,,Old Eastern,Ave,,,,1704 Old Eastern Ave,Essex,MD,21221,,39.32053508,-76.4484687,(410) 686-4972
+us-md-essex-st-clare-bc2c0f14,St. Clare,714,,Myrth,Ave,,,,714 Myrth Ave,Essex,MD,21221,,39.31662686,-76.46947938,410-686-4972
+us-pa-everett-st-john-the-evangelist-0e91abfb,St. John the Evangelist,161,E,First,Ave,,,,161 E First Ave,Everett,PA,15537,,40.00607211,-78.36075011,(814) 652-5854
+us-va-fairfax-st-leo-the-great-91927491,St. Leo the Great,3700,,Old Lee,Hwy,,,,3700 Old Lee Hwy,Fairfax,VA,22030,,38.85401461,-77.29656627,(703) 273-5369
+us-va-fairfax-st-mary-of-sorrows-ee07d972,St. Mary of Sorrows,5222,,Sideburn,Rd,,,,5222 Sideburn Rd,Fairfax,VA,22032,,38.81093372,-77.31073303,(703) 978-4141
+us-va-fairfax-st-paul-chung-of-korea-2e282b42,St. Paul Chung,4712,,Rippling Pond,Dr,,,,4712 Rippling Pond Dr,Fairfax,VA,22033,,38.8616333,-77.40425,(703) 968-3010
+us-va-fairfax-st-robert-bellarmine-chapel-gmu-catholic-campus-ministry-5299e112,St. Robert Bellarmine Chapel,4515,,Roberts,Rd,,,,4515 Roberts Rd,Fairfax,VA,22032,,38.8298073,-77.29918,(703) 425-0022
+us-va-fairfax-station-old-st-marys-catholic-church-0037efd9,Old St Mary's Catholic Church,5612,,Ox,Rd,,,,5612 Ox Rd,Fairfax Station,VA,22039,,38.8026981,-77.3264628,+1-703-978-4141
+us-pa-fairfield-carmel-of-jesus-mary-and-joseph-6e5ed2cc,"Carmel of Jesus, Mary, and Joseph",327,,Water,St,,,,327 Water St,Fairfield,PA,17320,,39.78002887,-77.35564708,
+us-pa-fairfield-immaculate-conception-of-bvm-5646e4fc,Immaculate Conception,256,,Tract,Rd,,,,256 Tract Rd,Fairfield,PA,17320,,39.778286,-77.36911,(717) 642-8815
+us-va-falls-church-st-anthony-of-padua-fe81dc28,St. Anthony,3305,,Glen Carlyn,Rd,,,,3305 Glen Carlyn Rd,Falls Church,VA,22041,,38.85632225,-77.13765222,(703) 820-7111
+us-va-falls-church-st-james-94089f17,St. James,103,N,Spring,St,,,,103 N Spring St,Falls Church,VA,22046,,38.89000681,-77.18137097,(703) 532-8815
+us-va-falls-church-st-philip-catholic-church-b86d3b87,St. Philip Catholic Church,7500,,Saint Philip's,Ct,,,,7500 Saint Philip's Ct,Falls Church,VA,22042,,38.85908964,-77.20675437,(703) 573-3808
+us-md-fallston-st-mark-44d0e100,St. Mark,2407,,Laurel Brook,Rd,,,,2407 Laurel Brook Rd,Fallston,MD,21047,,39.50921981,-76.40777995,(410) 299-6489
+us-md-forest-hill-st-ignatius-cbd497d4,St. Ignatius,533,E,Jarrettsvile,Rd,,,,533 E Jarrettsvile Rd,Forest Hill,MD,21050,1603,39.57379974,-76.35463531,(410) 879-1926
+us-md-forestville-holy-spirit-5c6899da,Holy Spirit,1717,,Ritchie,Rd,,,,1717 Ritchie Rd,Forestville,MD,20747,2519,38.86656561,-76.86434564,(301) 336-3707
+us-md-forestville-mount-calvary-457a1346,Mount Calvary,6700,,Marlboro,Pike,,,,6700 Marlboro Pike,Forestville,MD,20747,3272,38.85263849,-76.8907095,(301) 735-5532
+us-wv-fort-ashby-annunciation-of-our-lord-dc5b10fc,Annunciation of Our Lord,8819,,Frankfort,Hwy,,,,8819 Frankfort Hwy,Fort Ashby,WV,26719,,39.51964082,-78.76984424,(304) 298-3392
+us-va-fort-belvoir-community-of-fort-belvoir-197f562f,Community of Fort Belvoir,9410,,Jackson,Loop,,,,9410 Jackson Loop,Fort Belvoir,VA,22060,,38.7034375,-77.1495625,
+us-va-fort-belvoir-fort-belvoir-catholic-community-st-martin-of-tours-d6387bb3,Fort Belvoir Catholic Community (St. Martin of Tours),5950,,12th,St,,,,5950 12th St,Fort Belvoir,VA,22060,,38.69854093,-77.13993292,703-806-5745
+us-md-fort-meade-our-lady-of-peace-military-catholic-community-67ce2cf3,Our Lady of Peace Military Catholic Community,7100,,Rockenbach,Rd,,,,7100 Rockenbach Rd,Fort Meade,MD,20755,,39.11277161,-76.7601025,(301) 677-6035
+us-md-fort-washington-saint-lukes-at-st-ignatius-parish-8eb938e5,St. Ignatius,2315,,Brinkley,Rd,,,,2315 Brinkley Rd,Fort Washington,MD,20744,3008,38.804476,-76.966629,202-999-9934
+us-md-fort-washington-st-ignatius-298abc5f,St. Ignatius,2315,,Brinkley,Rd,,,,2315 Brinkley Rd,Fort Washington,MD,20744,,38.80449449,-76.96662749,(301) 567-4740
+us-de-frankford-our-lady-of-guadalupe-05c58c21,Our Lady of Guadalupe,35318,,Church,Rd,,,,35318 Church Rd,Frankford,DE,19945,,38.51201,-75.152916,(302) 539-6449
+us-de-frankford-church-of-our-lady-of-guadalupe-93506694,Our Lady of Guadalupe,35318,,Church,Rd,,,,35318 Church Rd,Frankford,DE,35318,,38.5115625,-75.1176875,13025396449
+us-md-frederick-st-john-the-evangelist-b16a2a5c,St. John the Evangelist,118,E,Second,St,,,,118 E Second St,Frederick,MD,21701,,39.41615897,-77.40764069,(301) 662-8288
+us-md-frederick-st-joseph-on-carrollton-manor-fa1544ac,St. Joseph on Carrollton Manor,5843,,Manor Woods,Rd,,,,5843 Manor Woods Rd,Frederick,MD,21703,,39.33088391,-77.46270443,(301) 663-0907
+us-md-frederick-st-katharine-drexel-c0107b1a,St. Katharine Drexel,8428,,Opossumtown,Pike,,,,8428 Opossumtown Pike,Frederick,MD,21702,,39.46787974,-77.41567612,(301) 360-9581
+us-md-frostburg-st-michael-5de5f865,St. Michael,44,E,Main,St,,,,44 E Main St,Frostburg,MD,21532,,39.65705358,-78.92722699,(301) 689-6767
+us-md-frostburg-st-michael-catholic-church-1ac77bab,St. Michael Catholic Church,44,E,Main,St,,,,44 E Main St,Frostburg,MD,21532,,39.65709,-78.9272528,+1-301-689-6767
+us-md-fulton-st-francis-of-assisi-a1e8b41d,St Francis of Assisi Parish,8300,,Old Columbia,Rd,,,,8300 Old Columbia Rd,Fulton,MD,20759,,39.14528902,-76.90798068,(410) 792-0470
+us-md-gaithersburg-epiphany-of-our-lord-mission-74d3cf86,Epiphany of Our Lord Mission,9301,,Warfield,Rd,,,,9301 Warfield Rd,Gaithersburg,MD,20882,,39.19789547,-77.19132196,(301) 482-0282
+us-md-gaithersburg-our-lady-of-perpetual-help-syro-malabar-ad0c32f2,Our Lady of Perpetual Help (Syro Malabar),20533,,Zion,Rd,,,,20533 Zion Rd,Gaithersburg,MD,20882,,39.19470778,-77.09734875,+14106395275
+us-md-gaithersburg-st-martin-of-tours-c9642fc5,St Martin Of Tours Church,201,S,Frederick,Ave,,,,201 S Frederick Ave,Gaithersburg,MD,20877,2393,39.13856017,-77.19437282,(301) 990-3203
+us-md-gaithersburg-st-john-neumann-b0ba2410,St. John Neumann,9000,,Warfield,Rd,,,,9000 Warfield Rd,Gaithersburg,MD,20882,,39.19395771,-77.18575991,(301) 977-5492
+us-md-gaithersburg-st-rose-of-lima-9b8dc8db,St. Rose of Lima,11701,,Clopper,Rd,,,,11701 Clopper Rd,Gaithersburg,MD,20878,1024,39.15027603,-77.24150595,(301) 948-7545
+us-md-galena-st-dennis-church-224ae49d,St Dennis Church,153,N,Main,St,,,,153 N Main St,Galena,MD,21635,,39.3461502,-75.8792727,+1-410-648-5145
+us-md-galena-st-dennis-84f1a9db,St. Dennis,153,N,Main,St,,,,153 N Main St,Galena,MD,21635,,39.34262466,-75.87963104,(410) 648-5145
+us-md-gambrills-church-of-the-holy-apostles-831ff620,Holy Apostles,2601,,Symphony,Ln,,,,2601 Symphony Ln,Gambrills,MD,21054,,39.0471875,-76.6918125,14105192291
+us-md-garrett-park-holy-cross-6dac0c08,Holy Cross,4900,,Strathmore,Ave,,,,4900 Strathmore Ave,Garrett Park,MD,20896,0249,39.03347982,-77.09804848,(301) 942-1020
+us-de-georgetown-st-michael-the-archangel-e5427d38,St. Michael the Archangel,202,,Edward,St,,,,202 Edward St,Georgetown,DE,19947,1108,38.691465,-75.3916324,(302)856-6451
+us-md-germantown-mother-seton-7cb720d7,Mother Seton,19951,,Father Hurley,Blvd,,,,19951 Father Hurley Blvd,Germantown,MD,20874,1003,39.18307395,-77.27321154,(301) 924-3838
+us-md-germantown-our-lady-of-the-visitation-parish-4190b6ca,Our Lady of the Visitation Parish,14139,,Seneca,Rd,,,,14139 Seneca Rd,Germantown,MD,20874,,39.1029738,-77.2946908,+1-301-948-5536
+us-pa-gettysburg-st-francis-xavier-859fd8d3,St. Francis Xavier,25,W,High,St,,,,25 W High St,Gettysburg,PA,17325,,39.82868709,-77.23199204,(717) 334-3919
+us-pa-gettysburg-xavier-center-of-st-francis-xavier-catholic-church-bf9a5d6f,Xavier Center of St. Francis Xavier Catholic Church,465,,Table Rock,Rd,,,,465 Table Rock Rd,Gettysburg,PA,17325,,39.859021,-77.2256527,+1-717-334-3919
+us-md-glen-burnie-church-of-the-crucifixion-53f25dab,Crucifixion,100,,Scott,Ave,,,,100 Scott Ave,Glen Burnie,MD,21060,,39.1444375,-76.5943125,14107684880
+us-md-glen-burnie-church-of-the-good-shepherd-ddfcfdd7,Good Shepherd,1451,,Furnace,Ave,,,,1451 Furnace Ave,Glen Burnie,MD,21060,,39.1711875,-76.5895625,14107614607
+us-md-glen-burnie-christ-the-king-c687fa5f,Holy Trinity,7436,,Baltimore Annapolis,Blvd,,,,7436 Baltimore Annapolis Blvd,Glen Burnie,MD,21061,,39.16650113,-76.62682225,(410) 766-5070
+us-md-grantsville-st-ann-fea83db9,St. Ann,12814,,New Germany,Rd,,,,12814 New Germany Rd,Grantsville,MD,21536,9478,39.69364221,-79.11999248,(301) 689-6767
+us-md-grantsville-st-ann-roman-catholic-church-1c98f653,St. Ann Roman Catholic Church,12814,,New Germany,Rd,,,,12814 New Germany Rd,Grantsville,MD,21536,,39.6946745,-79.1182007,+1-301-689-6767
+us-va-great-falls-st-catherine-of-siena-catholic-church-9a09123d,St. Catherine of Siena,1020,,Springvale,Rd,,,,1020 Springvale Rd,Great Falls,VA,22066,,38.9871368,-77.31442,(703) 759-4350
+us-md-great-mills-holy-face-1b228862,Holy Face,20408,,Point Lookout,Rd,,,,20408 Point Lookout Rd,Great Mills,MD,20634,,38.2392536,-76.5092453,(301) 994-0525
+us-md-greenbelt-st-hugh-of-grenoble-9f68c0f5,St. Hugh of Grenoble Church,135,,Crescent,Rd,,,,135 Crescent Rd,Greenbelt,MD,20770,,39.00505166,-76.87943156,(301) 474-4322
+us-pa-greencastle-st-mark-the-evangelist-c4282109,St. Mark the Evangelist,395,S,Ridge,Ave,,,,395 S Ridge Ave,Greencastle,PA,17225,,39.78250881,-77.72575986,(717) 597-2705
+us-de-greenville-st-joseph-on-the-brandywine-1fc08b15,St. Joseph on the Brandywine,10,,Old Church,Rd,,,,10 Old Church Rd,Greenville,DE,19807,,39.77188381,-75.58768124,(302) 658-7017
+us-md-hagerstown-st-ann-426fad90,St. Ann,1525,,Oak Hill,Ave,,,,1525 Oak Hill Ave,Hagerstown,MD,21742,,39.66573405,-77.70522437,(301) 733-0410
+us-md-hagerstown-st-joseph-f67e29e8,St. Joseph,17630,,Virginia,Ave,,,,17630 Virginia Ave,Hagerstown,MD,21740,,39.62191486,-77.75659449,(301) 797-9445
+us-md-hagerstown-st-mary-855eb66d,St. Mary,224,W,Washington,St,,,,224 W Washington St,Hagerstown,MD,21740,,39.64455163,-77.7250244,(301) 739-0390
+us-va-hague-st-paul-be4007c0,St. Paul,7808,,Cople,Hwy,,,,7808 Cople Hwy,Hague,VA,22469,,38.06890876,-76.65449589,8044723090
+us-md-halethorpe-st-alphonsa-syro-malabar-catholic-church-3d1f2028,St. Alphonsa Syro Malabar Catholic Church,5709,,Oakland,Rd,,,,5709 Oakland Rd,Halethorpe,MD,21227,,39.23776812,-76.69599959,
+us-md-hancock-st-peter-71b74708,St. Peter,16,E,High,St,,,,16 E High St,Hancock,MD,21750,,39.69978112,-78.17688175,(301) 678-6339
+us-pa-hanover-basilica-of-the-sacred-heart-of-jesus-20f57c9c,Basilica of the Sacred Heart of Jesus,30,,Basilica,Dr,,,,30 Basilica Dr Conewago,Hanover,PA,17331,8924,39.8188125,-77.0383125,17176372721
+us-pa-hanover-st-joseph-1ef44af3,St. Joseph,5055,,Grandview,Rd,,,,5055 Grandview Rd,Hanover,PA,17331,,39.77077108,-76.9875098,(717) 637-5236
+us-pa-hanover-church-of-st-joseph-d64fb66f,St. Joseph,236,,Baltimore,St,,,,236 Baltimore St,Hanover,PA,17331,3202,39.7976875,-76.9796875,17176375236
+us-md-hanover-st-lawrence-martyr-d666cdd7,St. Lawrence Martyr,7850,,Parkside,Blvd,,,,7850 Parkside Blvd,Hanover,MD,21076,,39.13218081,-76.7558608,(410) 799-1970
+us-pa-hanover-st-vincent-de-paul-a3160519,St. Vincent de Paul,220,,Third,St,,,,220 Third St,Hanover,PA,17331,,39.8043671,-76.99507,(717) 637-4625
+us-wv-harpers-ferry-st-peter-278a3490,St. Peter,110,,Church,St,,,,110 Church St,Harpers Ferry,WV,25425,,39.32275357,-77.73126732,(304) 725-5558
+us-de-harrington-church-of-st-bernadette-cc7eb746,St. Bernadette,109,,Dixon,St,,,,109 Dixon St,Harrington,DE,19952,,38.9256875,-75.5704375,13023988269
+us-de-harrington-st-bernadette-st-john-st-bernadette-parish-436c170d,St. Bernadette,109,,Dixon,St,,,,109 Dixon St,Harrington,DE,19952,,38.9260941,-75.57037,(302) 398-8269
+us-md-havre-de-grace-st-patrick-83d51fd5,St. Patrick,615,,Congress,Ave,,,,615 Congress Ave,Havre De Grace,MD,21078,,39.54793574,-76.09368641,(410) 939-2525
+us-va-haymarket-st-katharine-drexel-mission-st-stephen-parish-77b13e2c,St. Katharine Drexel Mission (St. Stephen Parish),15000,,Waterfall,Rd,,,,15000 Waterfall Rd,Haymarket,VA,20169,,38.87084695,-77.63913867,(703)-754-8444
+us-wv-hedgesville-st-bernadette-1c32aa8f,Mission of St. Bernadette,109,W,Main,St,,,,109 W Main St,Hedgesville,WV,25427,,39.55410909,-77.99561227,(304) 754-7830
+us-va-herndon-st-joseph-catholic-church-f2400348,St. Joseph Catholic Church,750,,Peachtree,St,,,,750 Peachtree St,Herndon,VA,20170,,38.97172149,-77.39363134,(703) 880-4300
+us-md-hillcrest-heights-holy-family-8185c50f,Holy Family,2210,,Callaway,St,,,,2210 Callaway St,Hillcrest Heights,MD,20748,4399,38.83586179,-76.96533623,(301) 894-2222
+us-md-hilltop-church-of-st-ignatius-loyola-fdd3b667,St. Ignatius Loyola,7640,,Port Tobacco,Rd,,,,7640 Port Tobacco Rd,Hilltop,MD,20677,,38.4839375,-77.1405625,13019349630
+us-md-hilltop-st-ignatius-of-loyola-st-catherine-parish-a28edc54,St. Ignatius of Loyola (St. Catherine Parish),6455,,Port Tobacco,Rd,,,,6455 Port Tobacco Rd,Hilltop,MD,20693,,38.4834534,-77.14178269,301-934-9630
+us-de-hockessin-st-mary-of-the-assumption-c36a0649,St. Mary of the Assumption,7200,,Lancaster Pk,,,,,7200 Lancaster Pk,Hockessin,DE,19707,,39.78378,-75.68464,(302) 239-7100
+us-md-hollywood-st-john-francis-regis-b5baa7cb,St. John Francis Regis,43927,,St Johns,Rd,,,,43927 St Johns Rd,Hollywood,MD,20636,,38.33269528,-76.55910602,(301) 373-2281
+us-md-hunt-valley-catholic-community-of-st-francis-xavier-30f9fc38,Catholic Community of St. Francis Xavier,13717,,Cuba,Rd,,,,13717 Cuba Rd,Hunt Valley,MD,21030,,39.50359229,-76.69003579,(410) 785-0356
+us-md-huntingtown-jesus-the-divine-word-d522652a,Jesus the Divine Word,885,,Cox,Rd,,,,885 Cox Rd,Huntingtown,MD,20639,,38.61082096,-76.59421813,(410) 414-8304
+us-md-hyattsville-st-jerome-1c819ccd,St. Jerome,5205,,43rd,Ave,,,,5205 43rd Ave,Hyattsville,MD,20781,2099,38.95329101,-76.94281462,(301) 927-6684
+us-md-hyattsville-st-mark-the-evangelist-33913390,St. Mark the Evangelist,7501,,Adelphi,Rd,,,,7501 Adelphi Rd,Hyattsville,MD,20783,1999,38.98273861,-76.95419994,(301) 422-8300
+us-md-hydes-st-john-the-evangelist-fc9c8402,St. John the Evangelist,13305,,Long Green,Pike,,,,13305 Long Green Pike,Hydes,MD,21082,,39.48767758,-76.47519673,(410) 592-6206
+us-md-ijamsville-st-ignatius-of-loyola-de75f639,St. Ignatius Loyola,4103,,Prices Distillery,Rd,,,,4103 Prices Distillery Rd,Ijamsville,MD,21754,,39.3462981,-77.30923067,(301) 695-8845
+us-md-indian-head-saint-marys-star-of-the-sea-catholic-church-df570040,Saint Mary's Star of The Sea Catholic Church,30,,Mattingly,Ave,E,,,30 Mattingly Ave E,Indian Head,MD,20640,,38.5959914,-77.1676683,+1-301-743-5770
+us-md-indian-head-st-mary-star-of-the-sea-7c03639e,"St. Mary, Star of the Sea",30,,Mattingly,Ave,,,,30 Mattingly Ave,Indian Head,MD,20640,,38.59789728,-77.16783574,301-743-5770
+us-wv-inwood-st-leo-4a4580b1,St. Leo,2109,,Sulphur Springs,Rd,,,,2109 Sulphur Springs Rd,Inwood,WV,25428,,39.35161905,-77.98964154,304-229-8945
+us-md-joppa-holy-spirit-61af49d3,Holy Spirit,540,,Joppa Farm,Rd,,,,540 Joppa Farm Rd,Joppa,MD,21085,,39.40454831,-76.34182321,(410) 593-7162
+us-md-joppatowne-holy-spirit-catholic-church-59197a6c,Holy Spirit Catholic Church,540,,Joppa Farm,Rd,,,,540 Joppa Farm Rd,Joppatowne,MD,21085,,39.4102713,-76.3523597,+1-410-593-7162
+us-pa-kennett-square-st-patrick-636eb7bd,St. Patrick,212,,Meredith,St,,,,212 Meredith St,Kennett Square,PA,19348,,39.8448677,-75.7147751,(610) 444-4364
+us-md-kensington-holy-redeemer-b480da46,Holy Redeemer,9705,,Summit,Ave,,,,9705 Summit Ave,Kensington,MD,20895,3699,39.0139476,-77.08473524,(301) 942-2333
+us-wv-keyser-assumption-2922976e,Assumption,34,,James,St,,,,34 James St,Keyser,WV,26726,,39.4413195,-78.98090169,(304) 788-2488
+us-va-king-george-st-anthony-of-padua-eaff95af,Mission of St. Anthony of Padua,10299,,Millbank,Rd,,,,10299 Millbank Rd,King George,VA,22485,,38.26939196,-77.18965522,540-848-4785
+us-md-kingsville-st-stephen-33fba0aa,St. Stephen,8030,,Bradshaw,Rd,,,,8030 Bradshaw Rd,Kingsville,MD,21087,,39.43213493,-76.39644415,(410) 592-7071
+us-wv-kingwood-st-sebastian-ab3acfd9,St. Sebastian,322,E,Main,St,,,,322 E Main St,Kingwood,WV,26537,,39.47039574,-79.67624801,(304) 329-1519
+us-md-la-plata-mount-carmel-monestary-d92fc089,Carmel of St. Joseph,5678,,Mount Carmel,Rd,,,,5678 Mount Carmel Rd,La Plata,MD,20646,,38.55614703,-77.00019609,
+us-md-la-plata-sacred-heart-church-5b49e6f9,Sacred Heart,201,,St Mary's,Ave,,,,201 St Mary's Ave,La Plata,MD,20646,0710,38.52625922,-76.97885712,(301) 934-2261
+us-va-lake-ridge-st-elizabeth-ann-seton-54101808,St. Elizabeth Ann Seton,12807,,Valleywood,Dr,,,,12807 Valleywood Dr,Lake Ridge,VA,22192,,38.67555485,-77.30166578,(703) 494-4008
+us-md-lake-shore-our-lady-of-the-chesapeake-4f0fb365,Our Lady Of The Chesapeake,8325,,Ventnor,Rd,,,,8325 Ventnor Rd,Lake Shore,MD,21122,,39.11086156,-76.45388053,(410) 255-3677
+us-pa-lancaster-assumption-of-the-bvm-26f85339,Assumption of the Blessed Virgin Mary,119,S,Prince,St,,,,119 S Prince St,Lancaster,PA,17603,,40.03589897,-76.30693166,(717) 392-2578
+us-pa-lancaster-sacred-heart-of-jesus-18984d10,Sacred Heart of Jesus Church,558,W,Walnut,St,,,,558 W Walnut St,Lancaster,PA,17603,,40.0415099,-76.31775044,(717) 394-0757
+us-pa-lancaster-san-juan-bautista-7e8eb81a,San Juan Bautista,425,S,Duke,St,,,,425 S Duke St,Lancaster,PA,17602,,40.034531,-76.300808,(717) 392-4118
+us-pa-lancaster-st-anne-and-our-lady-of-la-vang-c6bfaa32,St Anne and Our Lady of La Vang Church,929,N,Duke,St,,,,929 N Duke St,Lancaster,PA,17602,1905,40.05222268,-76.30605795,(717) 392-2225
+us-pa-lancaster-st-philip-the-apostle-37935fcd,St Philip the Apostle Church,2111,,Millersville,Pike,,,,2111 Millersville Pike,Lancaster,PA,17603,6216,40.01711504,-76.34928907,(717) 872-2166
+us-pa-lancaster-st-anthony-of-padua-0c41876a,St. Anthony of Padua,501,E,Orange,St,,,,501 E Orange St,Lancaster,PA,17602,,40.04108416,-76.29510605,(717) 394-0669
+us-pa-lancaster-saint-joseph-catholic-church-a7cc777e,St. Joseph Catholic Church,440,,St Joseph,St,,,,440 St Joseph St,Lancaster,PA,17603,5298,40.03477018,-76.3103356,(717) 397-6921
+us-pa-lancaster-st-leo-the-great-9e965baf,St. Leo the Great,2427,,Marietta,Ave,,,,2427 Marietta Ave,Lancaster,PA,17601,,40.05549145,-76.3660198,(717) 394-1742
+us-md-landover-hills-saint-mary-6f1d5ca3,St. Mary,7301,,Annapolis,Rd,,,,7301 Annapolis Rd,Landover Hills,MD,20784,,38.9474389,-76.88837758,(301) 577-8844
+us-md-lanham-st-matthias-apostle-3c7b809d,"St. Matthias, Apostle",9475,,Annapolis,Rd,,,,9475 Annapolis Rd,Lanham,MD,20706,3020,38.96404866,-76.84070261,(301) 459-4814
+us-md-largo-saint-joseph-ec7f433e,St. Joseph,2020,,Saint Joseph,Dr,,,,2020 Saint Joseph Dr,Largo,MD,20774,,38.91648119,-76.8450737,(301) 773-4838
+us-md-laurel-resurrection-of-our-lord-91f26d27,Resurrection Of Our Lord Church,8402,,Brock Bridge,Rd,,,,8402 Brock Bridge Rd,Laurel,MD,20724,1415,39.11697,-76.82057,(410) 792-7982
+us-md-laurel-st-mary-of-the-mills-637aa212,St. Mary of the Mills,114,,St Mary's,Pl,,,,114 St Mary's Pl,Laurel,MD,20707,4098,39.10811599,-76.85596174,(301) 725-3080
+us-md-laurel-st-nicholas-26ef8813,St. Nicholas,8603,,Contee,Rd,,,,8603 Contee Rd,Laurel,MD,20708,1499,39.07253808,-76.85873113,(301) 490-5116
+us-va-leesburg-st-john-the-apostle-594b301e,St. John the Apostle,101,,Oakcrest Manor,Dr,,,,101 Oakcrest Manor Dr,Leesburg,VA,20176,2221,39.12049295,-77.56146454,(703) 777-1317
+us-md-leonardtown-our-ladys-church-at-medleys-neck-4301b860,Our Lady's Church at Medley's Neck,41410,,Medley's Neck,Rd,,,,41410 Medley's Neck Rd (Rt 244),Leonardtown,MD,20650,,38.26083233,-76.62031531,(301) 475-8403
+us-md-leonardtown-st-aloysius-3ff81335,St. Aloysius,22800,,Washington,St,,,,22800 Washington St,Leonardtown,MD,20650,0310,38.2948425,-76.63505588,(301) 475-8064
+us-md-leonardtown-st-francis-xavier-945398d8,St. Francis Xavier,21370,,Newtowne Neck,Rd,,,,21370 Newtowne Neck Rd,Leonardtown,MD,20650,,38.25569148,-76.70017025,(301) 475-9885
+us-de-lewes-st-jude-the-apostle-78454a26,St. Jude the Apostle,152,,Tulip,Dr,,,,152 Tulip Dr,Lewes,DE,19958,,38.7500052,-75.18031201,(302) 644-7300
+us-md-lexington-park-immaculate-heart-of-mary-c4e196c6,Immaculate Heart of Mary,22375,,Three Notch,Rd,,,,22375 Three Notch Rd,Lexington Park,MD,20653,,38.28065237,-76.47243239,(301) 863-8144
+us-md-libertytown-st-peter-the-apostle-0fbdd8f1,St. Peter the Apostle,9190,,Church,St,,,,9190 Church St,Libertytown,MD,21791,,39.48669103,-77.24028583,(301) 898-5111
+us-md-linthicum-heights-st-philip-neri-d466132d,St. Philip Neri,6405,S,Orchard,Rd,,,,6405 S Orchard Rd,Linthicum Heights,MD,21090,2628,39.20214516,-76.64505301,(410) 859-0571
+us-md-little-orleans-st-patrick-ff0298f9,St. Patrick,12517,,St Patrick,Rd,SE,,,12517 St Patrick Rd SE,Little Orleans,MD,21766,,39.62979241,-78.39040083,(301) 678-6339
+us-pa-littlestown-st-aloysius-96d216e4,St. Aloysius,29,S,Queen,St,,,,29 S Queen St,Littlestown,PA,17340,,39.74375,-77.08795,(717) 359-4513
+us-md-lonaconing-church-of-st-mary-of-the-annunciation-4a5bb652,St. Mary of the Annunciation,16102,,St Mary Church,Ter,,,,16102 St Mary Church Ter,Lonaconing,MD,16102,,39.5728125,-78.9723125,13014636770
+us-pa-macdonaldton-st-gregory-476a5a76,St. Gregory,137,,Church,St,,,,137 Church St,Macdonaldton,PA,15530,,39.91546316,-78.92180621,(814) 634-8150
+us-va-manassas-church-of-all-saints-c3892183,All Saints,9300,,Stonewall,Rd,,,,9300 Stonewall Rd,Manassas,VA,20110,,38.7533125,-77.4849375,17033932144
+us-va-manassas-all-saints-catholic-church-d0df7503,All Saints Catholic Church,9300,,Stonewall,Rd,,,,9300 Stonewall Rd,Manassas,VA,20110,,38.75358126,-77.48659908,(703) 368-4500
+us-va-manassas-annunciation-of-blessed-virgin-mary-ukrainian-8169e5de,Annunciation of Blessed Virgin Mary (Ukrainian),6719,,Token Valley,Rd,,,,6719 Token Valley Rd,Manassas,VA,20112,,38.6636,-77.405,(703) 791-6635
+us-va-manassas-sacred-heart-ebef279d,Sacred Heart,12975,,Purcell,Rd,,,,12975 Purcell Rd,Manassas,VA,20112,3217,38.67522306,-77.39715292,(703) 590-0030
+us-va-manassas-park-misión-católica-san-gabriel-1406b3ea,Misión Católica San Gabriel,99,,Adams,St,,,,99 Adams St,Manassas Park,VA,20111,,38.78395749,-77.46120557,(703) 366-3527
+us-va-manassas-park-misión-católica-san-gabriel-7400a916,Misión Católica San Gabriel,9110,,Railroad,Dr,,Ste,300,9110 Railroad Dr Ste 300,Manassas Park,VA,20111,,38.76360446,-77.44119661,(703) 366-3527
+us-md-manchester-st-bartholomew-hanover-pike-church-c02f43da,St Bartholomew Church,2930,,Hanover,Pike,,,,2930 Hanover Pike,Manchester,MD,21102,,39.65469979,-76.88297105,(410) 239-8881
+us-md-manchester-st-bartholomew-historic-church-9ca7436d,St. Bartholomew Historic Church,3071,,Park,Ave,,,,3071 Park Ave,Manchester,MD,21102,,39.65842708,-76.88780006,(410) 239-8881
+us-md-marriottsville-sisters-of-bon-secours-chapel-10eda91b,Sisters of Bon Secours Chapel,1525,,Marriottsville,Rd,,,,1525 Marriottsville Rd,Marriottsville,MD,21104,,39.32978936,-76.89668889,410-442-3120
+us-wv-martinsburg-st-joseph-a3d386b7,St. Joseph,225,S,Queen,St,,,,225 S Queen St,Martinsburg,WV,25401,,39.45540404,-77.96439094,(304) 267-4893
+us-md-marydel-immaculate-conception-490aef31,Immaculate Conception Church,522,,Main,St,,,,522 Main St,Marydel,MD,21649,,39.11411372,-75.74910492,(410) 482-7687
+us-wv-masontown-st-zita-2298e764,St. Zita,33,,Maple,St,,,,33 Maple St,Masontown,WV,26542,,39.54838411,-79.80015208,(304) 329-1519
+us-pa-mc-sherrystown-annunciation-of-the-blessed-virgin-mary-56fdad14,Annunciation of the Blessed Virgin Mary,26,N,Third,St,,,,26 N Third St,Mc Sherrystown,PA,17344,,39.80410552,-77.02133583,(717) 637-1191
+us-md-mchenry-st-peter-at-the-lake-center-ba745b4d,St. Peter at the Lake Center,1140,,Mosser,Rd,,,,1140 Mosser Rd,McHenry,MD,21541,,39.55944879,-79.33560499,301-334-2202
+us-va-mclean-holy-child-4468ec90,Holy Child,6330,,Linway,Ter,,,,6330 Linway Ter,McLean,VA,22101,,38.92533129,-77.15671018,(703) 356-4473
+us-va-mclean-holy-transfiguration-melkite-d2e341a1,Holy Transfiguration (Melkite),8501,,Lewinsville,Rd,,,,8501 Lewinsville Rd,McLean,VA,22102,,38.936363,-77.239017,(703) 734-9566
+us-pa-mcconnellsburg-st-stephen-13821c7b,St. Stephen,303,,Lincoln,Way,E,,,303 Lincoln Way E,Mcconnellsburg,PA,17233,,39.93173704,-77.99736086,(717) 485-3723
+us-va-mclean-st-john-the-beloved-2e1111d1,St. John the Beloved,6420,,Linway,Ter,,,,6420 Linway Ter,Mclean,VA,22101,,38.92493219,-77.16131548,(703) 356-7916
+us-va-mclean-st-luke-70fc270a,St. Luke,7001,,Georgetown,Pike,,,,7001 Georgetown Pike,Mclean,VA,22101,,38.95215872,-77.18651622,(703) 356-1255
+us-md-mechanicsville-immaculate-conception-feaf7ed4,Immaculate Conception,28297,,Old Village,Rd,,,,28297 Old Village Rd,Mechanicsville,MD,20659,0166,38.44282696,-76.74829754,(301) 884-3123
+us-pa-mercersburg-mission-of-st-luke-the-evangelist-1afded92,Mission of St. Luke the Evangelist,115,,Overhill,Dr,,,,115 Overhill Dr,Mercersburg,PA,17236,,39.8374375,-77.9050625,17175972705
+us-pa-mercersburg-st-luke-the-evangelist-f2b46875,St. Luke the Evangelist,,,Overhill Dr and Black,Rd,,,,Overhill Dr and Black Rd,Mercersburg,PA,17236,,39.8111,-77.9226,(717) 597-2705
+us-pa-meyersdale-church-of-st-mary-62f9ee57,St. Mary,215,,Warrens Mill,Rd,,,,215 Warrens Mill Rd,Meyersdale,PA,15552,,39.7451875,-78.9585625,18146622958
+us-pa-meyersdale-sts-philip-and-james-f8e1702e,Sts. Philip and James,247,,High,St,,,,247 High St,Meyersdale,PA,15552,,39.81796332,-79.02723446,(814) 634-8150
+us-md-middle-river-our-lady-queen-of-peace-catholic-church-0b0c6708,Our Lady Queen of Peace Catholic Church,10003,,Bird River,Rd,,,,10003 Bird River Rd,Middle River,MD,21220,,39.3553553,-76.4319764,+1-410-686-3085
+us-md-middle-river-our-lady-queen-of-peace-f035c083,"Our Lady, Queen of Peace",10003,,Bird River,Rd,,,,10003 Bird River Rd,Middle River,MD,21220,,39.35635903,-76.43248658,(410) 686-3085
+us-va-middleburg-st-stephen-the-martyr-ec32c723,St. Stephen the Martyr,23331,,Sam Fred,Rd,,,,23331 Sam Fred Rd,Middleburg,VA,20117,,38.97382178,-77.72423346,(540) 687-6433
+us-md-middletown-the-pastorate-of-st-francis-st-mary-holy-family-89cbefa8,Holy Family,7321,,Burkittsville,Rd,,,,7321 Burkittsville Rd,Middletown,MD,21769,,39.43313176,-77.54933389,(301) 473-4800
+us-de-middletown-st-joseph-bafc8d79,St. Joseph,319,E,Main,St,,,,319 E Main St,Middletown,DE,19709,,39.45095218,-75.70483015,(302) 378-5800
+us-md-midland-st-joseph-82048f63,St. Joseph,19925,,Church,St,,,,19925 Church St,Midland,MD,21532,,39.59275147,-78.95013376,301-689-6767
+us-de-milford-st-john-the-apostle-71a770df,St. John the Apostle,506,,Seabury,Ave,,,,506 Seabury Ave,Milford,DE,19963,,38.90368,-75.431694,(302) 422-5123
+us-pa-millersville-millersville-university-newman-center-8d043cb5,Millersville University Newman Center,227,N,George,St,,,,227 N George St,Millersville,PA,17551,,40.00202382,-76.35619326,717-497-5675
+us-md-millersville-our-lady-of-the-fields-66199207,Our Lady of the Fields,1070,,Cecil,Ave,S,,,1070 Cecil Ave S,Millersville,MD,21108,,39.05048522,-76.65128884,(410) 923-7060
+us-de-millsboro-mary-mother-of-peace-35c41c56,Mary Mother of Peace Church,30839,,Mount Joy,Rd,,,,30839 Mount Joy Rd,Millsboro,DE,19966,,38.6157341,-75.2027359,(302)856-6451
+us-md-mitchellville-holy-family-195d0034,Holy Family,12010,,Woodmore,Rd,,,,12010 Woodmore Rd,Mitchellville,MD,20721,4106,38.92279919,-76.79650324,(301) 249-2266
+us-md-morganza-st-josephs-0d347f0e,St. Joseph,29119,,Point Lookout,Rd,,,,29119 Point Lookout Rd,Morganza,MD,20660,0175,38.37599528,-76.69717429,(301) 475-3293
+us-md-mount-airy-st-michael-c228b170,St. Michael,1125,,St Michael's,Rd,,,,1125 St Michael's Rd,Mount Airy,MD,21771,,39.33937336,-77.10562694,(410) 489-7667
+us-md-mount-rainier-st-james-f259c795,St. James,3628,,Rhode Island,Ave,,,,3628 Rhode Island Ave,Mount Rainier,MD,20712,,38.93815535,-76.95840659,(301) 927-0567
+us-pa-new-baltimore-st-john-the-baptist-cca17975,St. John the Baptist,101,,Findley,St,,,,101 Findley St,New Baltimore,PA,15553,,39.98374583,-78.7753432,(814) 733-2210
+us-de-new-castle-holy-spirit-966a48db,Holy Spirit,12,,Winder,Rd,,,,12 Winder Rd,New Castle,DE,19720,,39.6979446,-75.55533,(302) 328-2335
+us-de-new-castle-our-lady-of-fatima-202362fc,Our Lady of Fatima,801,N,duPont,Blvd,,,,801 N duPont Blvd,New Castle,DE,19720,,39.6868935,-75.58562,(302) 328-3431
+us-de-new-castle-st-peter-the-apostle-fb5d3d35,St. Peter the Apostle,521,,Harmony,St,,,,521 Harmony St (5th & Harmony),New Castle,DE,19720,,39.66207123,-75.56443787,(302) 328-2335
+us-pa-new-freedom-st-john-the-baptist-8746c869,St. John the Baptist,315,N,Constitution,Ave,,,,315 N Constitution Ave,New Freedom,PA,17349,,39.74212917,-76.69205544,(717) 235-2156
+us-pa-new-oxford-immaculate-conception-bvm-ccac3085,Immaculate Conception,106,,Carlisle,St,,,,106 Carlisle St,New Oxford,PA,17350,,39.8653336,-77.05601,(717) 624-4121
+us-de-newark-holy-family-59feaffb,Holy Family,15,,Gender,Rd,,,,15 Gender Rd,Newark,DE,19713,,39.6638949,-75.717651,(302) 368-4665
+us-de-newark-holy-family-catholic-church-96156801,Holy Family Catholic Church,15,,Gender,Rd,,,,15 Gender Rd,Newark,DE,19713,,39.6646113,-75.7187184,+1-302-368-4665
+us-de-newark-st-john-the-baptist-db4dfc62,St. John the Baptist,,,E Main & N Chapel Sts,,,,,E Main & N Chapel Sts,Newark,DE,19711,,39.68389513,-75.74535907,(302) 731-2200
+us-de-newark-holy-angels-319014e0,St. John the Baptist–Holy Angels,82,,Possum Park,Rd,,,,82 Possum Park Rd,Newark,DE,19711,,39.69929189,-75.72258126,(302) 731-2200
+us-de-newark-st-margaret-of-scotland-1c9f065f,St. Margaret of Scotland,2431,,Frazer,Rd,,,,2431 Frazer Rd,Newark,DE,19702,,39.60455217,-75.77280314,(302) 834-0225
+us-de-newark-the-newman-center-st-thomas-more-oratory-4a0d0234,The Newman Center @ St. Thomas More Oratory,45,,Lovett,Ave,,,,45 Lovett Ave,Newark,DE,19711,,39.67904,-75.74768,(302) 368-4728
+us-md-newburg-holy-ghost-catholic-church-1f80034e,Holy Ghost Church,15848,,Rock Point,Rd,,,,15848 Rock Point Rd,Newburg,MD,20664,,38.29904371,-76.88051802,301-259-2515
+us-md-newburg-st-francis-de-sales-chapel-3b25fe77,St. Francis de Sales Chapel,13675,,Furbush,Rd,,,,13675 Furbush Rd,Newburg,MD,20664,,38.26935023,-76.84501564,(301) 259-2515
+us-md-newport-church-of-st-mary-d24cd464,St. Mary,11555,,St Marys Church,Rd,,,,11555 St Marys Church Rd Charlotte Hall,Newport,MD,11555,,38.4341875,-76.9104375,13019348825
+us-pa-newville-saint-eleanor-regina-c8cb096e,Saint Eleanor Regina,2140,,Centerville,Rd,,,,2140 Centerville Road,Newville,PA,17241,,40.0451998,-77.3024102,+1-717-243-4411
+us-md-north-beach-st-anthony-of-padua-1ef7cb45,St. Anthony,8816,,Chesapeake,Ave,,,,8816 Chesapeake Ave,North Beach,MD,20714,9600,38.7033272,-76.53386,443-646-5721
+us-md-north-east-st-jude-catholic-church-2f27c1df,St. Jude Catholic Church,928,,Turkey Point,Rd,,,,928 Turkey Point Rd,North East,MD,21901,,39.5882913,-75.9414383,+1-410-398-1100
+us-md-northeast-st-jude-7100ab6f,St. Jude,928,,Turkey Pt,Rd,,,,928 Turkey Pt Rd,Northeast,MD,21901,,39.58693695,-75.94204712,(410) 398-1100
+us-md-nottingham-st-joseph-a2e540aa,St. Joseph,8420,,Belair,Rd,,,,8420 Belair Rd,Nottingham,MD,21236,,39.38684434,-76.49616226,(410) 256-1630
+us-md-oakland-st-peter-the-apostle-catholic-church-b1b30c90,St. Peter the Apostle,208,S,Fourth,St,,,,208 S Fourth St,Oakland,MD,21550,,39.40689059,-79.40578145,(301) 334-2202
+us-md-ocean-city-church-of-the-holy-savior-f1fad0cf,Holy Savior,,,17th St & N Philadelphia,Ave,,,,17th St & N Philadelphia Ave,Ocean City,MD,21842,,38.3479375,-75.0794375,14102890652
+us-md-ocean-city-holy-savior-st-mary-holy-savior-parish-2743d900,Holy Savior (St. Mary & Holy Savior Parish),1705,N,Philadelphia,Ave,,,,1705 N Philadelphia Ave,Ocean City,MD,21842,,38.347139,-75.079405,(410) 289-0652
+us-md-ocean-city-st-andrew-9f85f69b,St. Andrew,14401,,Sinepuxent,Ave,,,,14401 Sinepuxent Ave,Ocean City,MD,21842,,38.4494774,-75.05420831,(410) 250-0300
+us-md-ocean-city-st-luke-bb48708e,St. Luke,9903,,Coastal,Hwy,,,,9903 Coastal Hwy,Ocean City,MD,21842,,38.41244125,-75.0594101,(410) 250-0300
+us-md-ocean-city-st-mary-star-of-the-sea-st-mary-holy-savior-parish-3c854e87,St. Mary Star of the Sea (St. Mary & Holy Savior Parish),208,S,Baltimore,Ave,,,,208 S Baltimore Ave,Ocean City,MD,21842,,38.33047104,-75.08679199,(410) 289-0652
+us-md-odenton-st-joseph-6edb0e07,St. Joseph,1283,,Odenton,Rd,,,,1283 Odenton Rd,Odenton,MD,21113,1628,39.08112358,-76.69806157,(410) 674-9238
+us-md-olney-st-andrew-kim-korean-04504151,St. Andrew Kim,17615,,Old Baltimore,Rd,,,,17615 Old Baltimore Rd,Olney,MD,20832,,39.14536559,-77.05067921,(301) 260-1981
+us-md-olney-st-peter-4c8f32d4,St. Peter,2900,,Olney-Sandy Spring,Rd,,,,2900 Olney-Sandy Spring Rd,Olney,MD,20832,1520,39.14848988,-77.06229397,(301) 924-3774
+us-pa-orrtanna-st-ignatius-loyola-6b7bfcad,St Ignatius Loyola Church,1095,,Church,Rd,,,,1095 Church Rd,Orrtanna,PA,17353,,39.9171694,-77.3955078,(717) 677-8012
+us-md-owings-jesus-the-good-shepherd-71083a15,Jesus the Good Shepherd,1601,W,Mount Harmony,Rd,,,,1601 W Mount Harmony Rd,Owings,MD,20736,,38.70913167,-76.63803744,(410) 257-3810
+us-pa-oxford-sacred-heart-468cc7d0,Sacred Heart,203,,Church,Rd,,,,203 Church Rd,Oxford,PA,19363,,39.79299349,-75.97842107,(610) 932-5040
+us-md-oxon-hill-st-columba-catholic-church-34e2c276,St Columba Catholic Church,7804,,Livingston,Rd,,,,7804 Livingston Rd,Oxon Hill,MD,20745,,38.7837039,-76.9911253,+1-301-567-5506
+us-md-oxon-hill-st-columba-3748423f,St. Columba,7800,,Livingston,Rd,,,,7800 Livingston Rd,Oxon Hill,MD,20745,,38.78292832,-76.99259623,(301) 567-5506
+us-pa-parkesburg-our-lady-of-consolation-deb99424,Our Lady of Consolation,603,W,2nd,Ave,,,,603 W 2nd Ave,Parkesburg,PA,19365,,39.95715639,-75.92305946,(610) 857-3510
+us-md-parkton-our-lady-of-grace-eb97c029,Our Lady of Grace,18310,,Middletown,Rd,,,,18310 Middletown Rd,Parkton,MD,21120,,39.62737687,-76.66191082,(410) 329-6826
+us-md-parkville-st-ursula-2b6422ba,St. Ursula,8801,,Harford,Rd,,,,8801 Harford Rd,Parkville,MD,21234,,39.38336769,-76.53365776,(410) 665-2111
+us-nj-pennsville-church-of-the-queen-of-the-apostles-37145fca,Queen of the Apostles,391,S,Broadway,,,,,391 S Broadway,Pennsville,NJ,08070,,39.6346875,-75.5140625,18566785400
+us-md-perryville-good-shepherd-f19e5e6a,Good Shepherd,831,,Aiken,Ave,,,,831 Aiken Ave,Perryville,MD,21903,2738,39.56821876,-76.07076228,(410) 642-6534
+us-md-petersville-church-of-st-mary-082e6fc6,St. Mary,4231,,Catholic Church,Rd,,,,4231 Catholic Church Rd,Petersville,MD,21716,,39.3483125,-77.6165625,13018349185
+us-md-pikesville-st-charles-borromeo-6890fd86,St. Charles Borromeo Church,101,,Church,Ln,,,,101 Church Ln,Pikesville,MD,21208,,39.37433125,-76.7258144,(410) 486-5400
+us-md-piney-point-st-francis-xavier-c1e17b81,St. Francis Xavier Chapel,16370,,Thomas,Rd,,,,16370 Thomas Rd,Piney Point,MD,20674,,38.11723789,-76.48153245,301-994-0607
+us-pa-pocahontas-st-mary-43adbde7,St. Mary,215,,Warrens Mill,Rd,,,,215 Warrens Mill Rd,Pocahontas,PA,15565,,39.7875,-79.127,(814) 662-2958
+us-md-pocomoke-city-church-of-the-holy-name-of-jesus-a728d959,Holy Name of Jesus,1913,,Old Virginia,Rd,,,,1913 Old Virginia Rd,Pocomoke City,MD,21851,,38.0626875,-75.5499375,14109571215
+us-md-pocomoke-city-holy-name-of-jesus-382ee02d,Holy Name of Jesus,1913,,Old Virginia,Rd,,,,1913 Old Virginia Rd,Pocomoke City,MD,21851,,38.05613311,-75.55273736,(410) 957-1215
+us-md-pomfret-st-joseph-94021593,St. Joseph,4590,,St Joseph,Way,,,,4590 St Joseph Way,Pomfret,MD,20675,,38.58668167,-77.02412313,(301) 539-3903
+us-md-poolesville-our-lady-of-the-presentation-272a1fdb,Our Lady of the Presentation,17230,,Tom Fox,Ave,,,,17230 Tom Fox Ave,Poolesville,MD,20837,,39.1341376,-77.4071814,(301) 349-2045
+us-md-port-deposit-st-teresa-8be123cd,St. Teresa,162,N,Main,St,,,,162 N Main St,Port Deposit,MD,21904,,39.60972026,-76.12042687,(410) 642-6534
+us-md-port-tobacco-st-catherines-catholic-church-bf5e87c2,St Catherine's Catholic Church,7865,,Port Tobacco,Rd,,,,7865 Port Tobacco Rd,Port Tobacco,MD,20677,,38.5025498,-77.0584149,+1-301-934-9630
+us-md-port-tobacco-st-catherine-of-alexandria-2c4366a8,St. Catherine of Alexandria,7865,,Port Tobacco,Rd,,,,7865 Port Tobacco Rd,Port Tobacco,MD,20677,,38.5018054,-77.0604392,(301) 934-9630
+us-md-potomac-chapel-of-our-lady-of-fair-love-0f6d4fe8,Chapel of Our Lady of Fair Love,10400,,Seven Locks,Rd,,,,10400 Seven Locks Rd,Potomac,MD,10400,,39.0284375,-77.1645625,
+us-md-potomac-connelly-school-of-the-holy-child-0e08e707,Connelly School of the Holy Child,9029,,Bradley,Blvd,,,,9029 Bradley Blvd,Potomac,MD,20854,,38.9998493,-77.1869777,+1-703-356-4473
+us-md-potomac-our-lady-of-mercy-bee7b2fe,Our Lady of Mercy,9200,,Kentsdale,Dr,,,,9200 Kentsdale Dr,Potomac,MD,20854,,39.00917158,-77.17329308,(301) 365-1415
+us-va-potomac-falls-community-of-st-john-fisher-cc2834a7,Community of St. John Fisher,46639,,Algonkian,Pkwy,,,,46639 Algonkian Pkwy,Potomac Falls,VA,46639,,39.0498125,-77.3815625,
+us-va-potomac-falls-our-lady-of-hope-5d34580a,Our Lady of Hope,46639,,Algonkian,Pkwy,,,,46639 Algonkian Pkwy,Potomac Falls,VA,20165,,39.05010042,-77.38001347,(703) 433-6770
+us-md-prince-frederick-st-john-vianney-668435fd,St. John Vianney,105,,Vianney,Ln,,,,105 Vianney Ln,Prince Frederick,MD,20678,4123,38.53774086,-76.58076895,(410) 535-0223
+us-va-purcellville-st-francis-de-sales-ce26f9b9,St. Francis de Sales,37730,,St Francis,Ct,,,,37730 St Francis Ct,Purcellville,VA,20132,,39.14683527,-77.69931041,(540) 338-6381
+us-md-pylesville-st-mary-of-the-assumption-45b700c4,St Mary of the Assumption Church,1021,,St Mary's,Rd,,,,1021 St Mary's Rd,Pylesville,MD,21132,,39.69117392,-76.41505245,(410) 879-4015
+us-va-quantico-united-states-marine-corps-memorial-chapel-quantico-42c00034,United States Marine Corps Memorial Chapel Quantico,3251,,Embry,Loop,,,,3251 Embry Loop,Quantico,VA,22134,,38.51237948,-77.31276887,703-784-2518
+us-pa-quarryville-st-catherines-catholic-church-3816d453,St Catherine's Catholic Church,955,,Robert Fulton,Hwy,,,,955 Robert Fulton Hwy,Quarryville,PA,17566,,39.866322,-76.150243,+1-717-786-2695
+us-pa-quarryville-st-catherine-of-siena-1aefb3b5,St. Catherine of Siena,955,,Robert Fulton,Hwy,,,,955 Robert Fulton Hwy,Quarryville,PA,17566,,39.8660164,-76.14883,(717) 786-2695
+us-md-queenstown-st-peter-0ea2afb5,St. Peter,5319,,Ocean Gateway,,,,,5319 Ocean Gateway,Queenstown,MD,21658,,38.9775848,-76.13353,(410) 827-8404
+us-md-randallstown-holy-family-8ac46d55,Holy Family,9531,,Liberty,Rd,,,,9531 Liberty Rd,Randallstown,MD,21133,,39.37472088,-76.81529815,(410) 922-3800
+us-de-rehoboth-beach-st-edmond-8da98deb,St. Edmond,409,,King Charles,Ave,,,,409 King Charles Ave,Rehoboth Beach,DE,19971,,38.7129,-75.07864,(302) 227-4550
+us-md-reisterstown-sacred-heart-863a7ecb,Sacred Heart,65,,Sacred Heart,Ln,,,,65 Sacred Heart Ln,Reisterstown,MD,21136,,39.47065518,-76.82166181,(410) 833-1696
+us-va-reston-st-john-neumann-b3757d89,St. John Neumann,11900,,Lawyers,Rd,,,,11900 Lawyers Rd,Reston,VA,20191,,38.92427907,-77.35807991,(703) 860-8510
+us-va-reston-st-thomas-à-becket-ac698d4d,St. Thomas à Becket,1421,,Wiehle,Ave,,,,1421 Wiehle Ave,Reston,VA,20190,,38.97198749,-77.3325279,(703) 437-7113
+us-md-ridge-st-michael-0c7bb13f,St. Michael,16566,,Three-Notch,Rd,,,,16566 Three-Notch Rd,Ridge,MD,20680,0429,38.1147,-76.3697,(301) 872-4321
+us-md-ridge-st-michaels-catholic-church-ab425d55,St. Michael's Catholic Church,16566,,Three Notch,Rd,,,,16566 Three Notch Rd,Ridge,MD,20680,,38.1213493,-76.3672866,+1-301-872-4321
+us-wv-ridgeley-st-anthony-4f88de55,St. Anthony,176,,Main,St,,,,176 Main St,Ridgeley,WV,26753,,39.64361438,-78.77157716,(304) 298-3392
+us-md-ridgely-st-benedict-33872f89,St. Benedict,408,,Central,Ave,,,,408 Central Ave,Ridgely,MD,21660,,38.94419098,-75.88136292,(410) 634-2253
+us-md-rising-sun-st-agnes-ddf7907d,St. Agnes,150,S,Queen,St,,,,150 S Queen St,Rising Sun,MD,21911,,39.694778,-76.0613743,(410) 642-6534
+us-md-rising-sun-st-agnes-catholic-church-e8756e42,St. Agnes Catholic Church,150,S,Queen,St,,,,150 S Queen St,Rising Sun,MD,21911,,39.6957231,-76.0619912,+1-410-658-9422
+us-md-riverdale-park-st-bernard-of-clairvaux-d9ce49fd,St. Bernard of Clairvaux,5700,,St Bernard's,Dr,,,,5700 St Bernard's Dr,Riverdale Park,MD,20737,,38.95730408,-76.91566513,(301) 277-1000
+us-md-riviera-beach-st-jane-frances-de-chantal-5988add7,St. Jane Frances de Chantal,8499,,Virginia,Ave,,,,8499 Virginia Ave,Riviera Beach,MD,21122,3097,39.16077818,-76.51229094,(410) 255-4646
+us-md-rock-hall-st-john-47ff0b21,St. John ,,,W Main,St,,,,W Main St,Rock Hall,MD,21661,,39.1374,-76.2274,(410) 778-3160
+us-md-rock-hall-st-john-catholic-church-a4a1aab6,St. John Catholic Church,,,Catholic,Ave,,,,Catholic Ave,Rock Hall,MD,21661,,39.133894,-76.2326882,+1-410-778-3160
+us-md-rock-point-mission-of-st-francis-de-sales-457acbd9,Mission of St. Francis de Sales,,,Furbush,Rd,,,,Furbush Rd,Rock Point,MD,20664,,38.2723125,-76.8366875,13012592515
+us-md-rockville-our-lady-of-china-pastoral-mission-816187d9,Our Lady of China Pastoral Mission,520,,Veirs Mill,Rd,,,,520 Veirs Mill Rd,Rockville,MD,20852,,39.07974442,-77.13389032,301-738-2459
+us-md-rockville-shrine-of-st-jude-catholic-church-d5e304df,Shrine of St. Jude Catholic Church,12701,,Veirs Mill,Rd,,,,12701 Veirs Mill Rd,Rockville,MD,20853,3598,39.06533384,-77.0970721,(301) 946-8200
+us-md-rockville-st-elizabeth-catholic-parish-1254b5bc,St. Elizabeth,917,,Montrose,Rd,,,,917 Montrose Rd,Rockville,MD,20852,4203,39.05424759,-77.13687277,(301) 881-1380
+us-md-rockville-st-mary-27530994,St. Mary,520,,Veirs Mill,Rd,,,,520 Veirs Mill Rd,Rockville,MD,20852,,39.08170632,-77.14475266,(301) 424-5550
+us-md-rockville-st-patrick-31bf8be9,St. Patrick,4101,,Norbeck,Rd,,,,4101 Norbeck Rd,Rockville,MD,20853,,39.10847431,-77.08205032,(301) 924-2284
+us-md-rockville-st-raphael-70c3d6ba,St. Raphael,1513,,Dunster,Rd,,,,1513 Dunster Rd,Rockville,MD,20854,,39.06158572,-77.17590618,(301) 762-2143
+us-wv-romney-our-lady-of-grace-94e64da9,Our Lady of Grace,299,,School,St,,,,299 School St,Romney,WV,26757,,39.34606297,-78.76272893,(304) 822-5561
+us-md-saint-inigoes-st-peter-claver-1f4c09ea,St. Peter Claver,16922,,Saint Peter Claver Church,Rd,,,,16922 Saint Peter Claver Church Rd,Saint Inigoes,MD,20684,,38.161335,-76.41055,301-872-5460
+us-md-saint-marys-city-st-cecilia-54521963,St. Cecilia,47950,,Mattapany,Rd,,,,47950 Mattapany Rd,Saint Marys City,MD,20686,,38.19110485,-76.41679913,(301) 862-4600
+us-nj-salem-st-gabriel-the-archangel-parishst-marys-church-2491ceed,St. Mary,25,,Oak,St,,,,25 Oak St,Salem,NJ,08079,,39.57109215,-75.47128898,(856) 299-3833
+us-md-salisbury-st-francis-de-sales-st-francis-de-sales-holy-redeemer-parish-62671c4c,St. Francis de Sales (St Francis de Sales & Holy Redeemer parish),535,,Riverside,Dr,,,,535 Riverside Dr,Salisbury,MD,21801,,38.36074709,-75.60723424,(410) 742-6443
+us-de-seaford-our-lady-of-lourdes-913a5edf,Our Lady of Lourdes,528,E,Stein,Hwy,,,,528 E Stein Hwy,Seaford,DE,19973,,38.64841,-75.61049,(302) 629-3591
+us-md-seat-pleasant-st-margaret-of-scotland-44269042,St. Margaret of Scotland,410,,Addison,Rd,S,,,410 Addison Rd S,Seat Pleasant,MD,20743,3236,38.882785,-76.89680602,(301) 336-3344
+us-md-secretary-our-lady-of-good-counsel-church-12b36bdf,Our Lady of Good Counsel Church,115,,Main,St,,,,115 Main St,Secretary,MD,21664,,38.6100242,-75.9508192,+1-410-943-4300
+us-md-secretary-our-lady-of-good-counsel-dfd661c9,Our Lady of Good Counsel Church,115,,Main,St,,,,115 Main St,Secretary,MD,21664,,38.6097,-75.9496,(410) 943-4300
+us-md-severn-church-of-st-bernadette-cd99b750,St. Bernadette,801,,Stevenson,Rd,,,,801 Stevenson Rd,Severn,MD,21144,,39.1254375,-76.6448125,14109692783
+us-md-severn-st-bernadette-014b325f,St. Bernadette,801,,Stevenson,Rd,,,,801 Stevenson Rd,Severn,MD,21144,,39.12757224,-76.65010433,(410) 969-2783
+us-md-severna-park-st-john-the-evangelist-29c35958,St. John the Evangelist,689,,Ritchie,Hwy,,,,689 Ritchie Hwy,Severna Park,MD,21146,,39.07062025,-76.53829334,(410) 647-4884
+us-wv-shepherdstown-st-agnes-11b4de40,St. Agnes,200,S,Duke,St,,,,200 S Duke St,Shepherdstown,WV,25443,,39.43190024,-77.81202613,(304) 876-6436
+us-md-silver-spring-christ-the-king-e119465d,Christ the King,2301,,Colston,Dr,,,,2301 Colston Dr,Silver Spring,MD,20910,2513,38.9945142,-77.04871639,(301) 495-2306
+us-md-silver-spring-holy-family-seminary-7978c21b,Holy Family Seminary,401,,Randolph,Rd,,,,401 Randolph Rd,Silver Spring,MD,20904,,39.0680625,-77.0179375,13016221184
+us-md-silver-spring-holy-name-college-seminary-3f9f4bf1,Holy Name College Seminary,1650,,St Camillus,Dr,,,,1650 St Camillus Dr,Silver Spring,MD,20903,,39.0093125,-76.9811875,13014343400
+us-md-silver-spring-holy-trinity-ukrainian-1437f921,Holy Trinity (Ukrainian),16631,,New Hampshire,Ave,,,,16631 New Hampshire Ave,Silver Spring,MD,20905,3919,39.1297671,-76.99099894,(301) 421-1739
+us-md-silver-spring-holy-trinity-ukrainian-catholic-church-0dc007d7,Holy Trinity Ukrainian Catholic Church,16631,,New Hampshire,Ave,,,,16631 New Hampshire Ave,Silver Spring,MD,20905,,39.1297498,-76.9910225,+1-301-421-1739
+us-md-silver-spring-iglesia-católica-misión-san-andrés-0dd0ff80,Iglesia Católica Misión San Andrés,12247,,Georgia,Ave,,,,12247 Georgia Ave,Silver Spring,MD,20902,,39.0561855,-77.0494178,+1-301-202-9496
+us-md-silver-spring-old-st-john-the-evangelist-f7e14bd4,Old St. John the Evangelist Chapel,9700,,Rosensteel,Ave,,,,9700 Rosensteel Ave,Silver Spring,MD,20910,,39.01607973,-77.0515107,
+us-md-silver-spring-our-lady-of-grace-0ab4db15,Our Lady of Grace,15661,,Norbeck,Blvd,,,,15661 Norbeck Blvd,Silver Spring,MD,20906,,39.11215573,-77.0678798,(301) 924-0067
+us-md-silver-spring-our-lady-of-vietnam-9a465891,Our Lady of Vietnam,11812,,New Hampshire,Ave,,,,11812 New Hampshire Ave,Silver Spring,MD,20904,,39.04973543,-76.99437618,(301) 622-4895
+us-md-silver-spring-our-lady-queen-of-poland-and-saint-maximilian-kolbe-67207315,"Personal Parish of Our Lady, Queen of Poland",9700,,Rosensteel,Ave,,,,9700 Rosensteel Ave,Silver Spring,MD,20910,,39.01603257,-77.05143813,(301) 589-1857
+us-md-silver-spring-saint-john-the-baptist-catholic-church-b9837abc,Saint John the Baptist Catholic Church,12319,,New Hampshire,Ave,,,,12319 New Hampshire Ave,Silver Spring,MD,20904,,39.0583453,-76.9955648,+1-301-622-1122
+us-md-silver-spring-st-andrew-apostle-c19d9f32,St. Andrew Apostle,11600,,Kemp Mill,Rd,,,,11600 Kemp Mill Rd,Silver Spring,MD,20902,,39.0472985,-77.03115509,(301) 649-3700
+us-md-silver-spring-st-bernadette-12fa1982,St. Bernadette,72,,University,Blvd,E,,,72 University Blvd E,Silver Spring,MD,20901,2547,39.0202137,-77.00875282,(301) 593-0357
+us-md-silver-spring-st-camillus-e4e0e336,St. Camillus,1600,,Camillus,Dr,,,,1600 Camillus Dr,Silver Spring,MD,20903,,39.00967017,-76.98164995,(301) 434-8400
+us-md-silver-spring-st-john-the-baptist-48e716a0,St. John the Baptist,12319,,New Hampshire,Ave,,,,12319 New Hampshire Ave,Silver Spring,MD,20904,,39.05828944,-76.99545016,(301) 622-1122
+us-md-silver-spring-st-john-the-evangelist-cdd2303a,St. John the Evangelist,10103,,Georgia,Ave,,,,10103 Georgia Ave,Silver Spring,MD,20902,5696,39.02237754,-77.04457104,(301) 681-7663
+us-md-silver-spring-st-michael-the-archangel-9d8ec149,St. Michael the Archangel,805,,Wayne,Ave,,,,805 Wayne Ave,Silver Spring,MD,20910,4427,38.99700359,-77.02292168,(301) 589-1155
+us-de-skyline-ridge-resurrection-830b4f6e,Resurrection,3000,,Videre,Dr,,,,3000 Videre Dr,Skyline Ridge,DE,19808,,39.720059,-75.694996,(302) 368-0146
+us-de-smyrna-st-polycarp-52a40abd,St. Polycarp,55,,Ransom,Ln,,,,55 Ransom Ln,Smyrna,DE,19977,1617,39.29467288,-75.60978487,(302) 653-8279
+us-md-solomons-our-lady-star-of-the-sea-7975549e,"Our Lady, Star of the Sea",50,,Alexander,Ln,,,,50 Alexander Ln,Solomons,MD,20688,,38.32464728,-76.45862006,(410) 326-3535
+us-pa-somerset-st-peter-c6ebc821,St. Peter,433,W,Church,St,,,,433 W Church St,Somerset,PA,15501,,40.00653451,-79.08728878,(814) 443-6574
+us-md-sparrows-point-st-luke-39082fb6,St. Luke,7517,N,Point,Rd,,,,7517 N Point Rd,Sparrows Point,MD,21219,,39.23491441,-76.44360577,(410) 477-5200
+us-pa-spring-grove-church-of-the-sacred-heart-fd2ce037,Sacred Heart,146,N,Main,St,,,,146 N Main St,Spring Grove,PA,17362,,39.8766875,-76.8660625,17172251704
+us-pa-spring-grove-sacred-heart-of-jesus-9b468f35,Sacred Heart Of Jesus,146,N,Main,St,,,,146 N Main St,Spring Grove,PA,17362,,39.88732867,-76.85856004,(717) 251-1704
+us-va-springfield-st-bernadette-1774b50d,St. Bernadette,7600,,Old Keene Mill,Rd,,,,7600 Old Keene Mill Rd,Springfield,VA,22152,,38.77569047,-77.20519703,(703) 451-8576
+us-va-springfield-st-raymond-of-peñafort-ebb44acf,St. Raymond of Peñafort,8750,,Pohick,Rd,,,,8750 Pohick Rd,Springfield,VA,22153,,38.7453804,-77.24667358,(703) 440-0535
+us-md-st-inigoes-church-of-st-peter-claver-914df7cb,St. Peter Claver,16922,,St Peter Claver,Rd,,,,16922 St Peter Claver Rd,St. Inigoes,MD,16922,,38.1315625,-76.3818125,13018725460
+us-md-st-michaels-st-michael-59757ba0,St. Michael,109,,Lincoln,Ave,,,,109 Lincoln Ave,St. Michaels,MD,21601,,38.77497444,-76.21104805,(410) 822-2344
+us-va-stafford-st-william-of-york-f871e43b,St. William of York,3130,,Richmond,Hwy,,,,3130 Richmond Hwy,Stafford,VA,22554,,38.472538,-77.39551,(540) 659-1102
+us-va-sterling-christ-the-redeemer-b2021b74,Christ the Redeemer,46833,,Harry Byrd,Hwy,,,,46833 Harry Byrd Hwy,Sterling,VA,20164,,39.01752147,-77.37943885,(703) 430-0811
+us-md-suitland-st-bernardine-of-siena-941e7fcf,St. Bernardine of Siena,2400,,Brooks,Dr,,,,2400 Brooks Dr,Suitland,MD,20746,,38.85763024,-76.92008749,(301) 736-0707
+us-md-sykesville-saint-timothy-86f55cdd,St. Timothy ,7604,,Mellor,Ave,,,,7604 Mellor Ave,Sykesville,MD,21784,,39.36483651,-76.96866132,410-552-8615
+us-md-takoma-park-our-lady-of-sorrows-d6666c2c,Our Lady of Sorrows,1006,,Larch,Ave,,,,1006 Larch Ave,Takoma Park,MD,20912,6521,38.97779222,-76.99114108,(301) 891-3500
+us-md-taneytown-st-joseph-ddaf2c0b,St. Joseph,44,,Frederick,St,,,,44 Frederick St,Taneytown,MD,21787,,39.6584812,-77.17856424,410-756-2500
+us-va-tappahannock-st-timothy-037d3c78,St. Timothy,413,,Saint Timothy,Ln,,,,413 Saint Timothy Ln,Tappahannock,VA,22560,,37.93669816,-76.8674898,(804) 443-2760
+us-wv-terra-alta-st-edward-the-confessor-mission-cebc680a,St. Edward the Confessor Mission,1204,E,State,Ave,,,,1204 E State Ave,Terra Alta,WV,26764,,39.4412007,-79.53292404,(304) 329-1519
+us-wv-thomas-st-thomas-aquinas-41617416,St. Thomas Aquinas,316,,Brown,St,,,,316 Brown St,Thomas,WV,26292,,39.15050266,-79.49562259,(304) 463-4488
+us-md-thurmont-our-lady-of-mount-carmel-4712aa94,Our Lady of Mount Carmel,103,N,Church,St,,,,103 N Church St,Thurmont,MD,21788,,39.62587543,-77.41142122,(301) 447-2367
+us-md-timonium-church-of-the-nativity-14f5dac9,Nativity,20,E,Ridgely,Rd,,,,20 E Ridgely Rd,Timonium,MD,21093,,39.43261142,-76.61833364,(410) 252-6080
+us-md-towson-immaculate-conception-fe58ddff,Immaculate Conception Church,200,,Ware,Ave,,,,200 Ware Ave,Towson,MD,21204,,39.40419306,-76.60714148,(410) 427-4700
+us-md-towson-christ-the-king-4030bdc6,Parish of Christ the King,1102,,Hart,Rd,,,,1102 Hart Rd,Towson,MD,21286,,39.41719841,-76.56147676,(410) 321-0711
+us-va-triangle-st-francis-of-assisi-f745fe68,St. Francis of Assisi,18825,,Fuller Heights,Rd,,,,18825 Fuller Heights Rd,Triangle,VA,22172,,38.54321863,-77.32802219,(703) 221-4044
+us-md-upper-marlboro-most-holy-rosary-rectory-office-c557257f,Most Holy Rosary - Rectory Office,11704,,Duley Station,Rd,,,,11704 Duley Station Rd,Upper Marlboro,MD,20772,,38.7487986,-76.8033706,+1-301-856-3880
+us-md-upper-marlboro-most-holy-rosary-upper-marlboro-4c60fb4a,Most Holy Rosary - Upper Marlboro,11700,,Duley Station,Rd,,,,11700 Duley Station Rd,Upper Marlboro,MD,20772,7955,38.74906533,-76.80487901,(301) 856-3880
+us-md-upper-marlboro-st-joseph-catholic-church-36203670,St Joseph Catholic Church,2020,,St Josephs,Dr,,,,2020 St Josephs Dr,Upper Marlboro,MD,20774,,38.9181294,-76.8436514,+1-301-773-4838
+us-md-upper-marlboro-st-mary-of-the-assumption-b89362a2,St. Mary of the Assumption,14908,,Main,St,,,,14908 Main St,Upper Marlboro,MD,20772,3019,38.81862869,-76.74827037,(301) 627-3255
+us-md-urbana-st-ignatius-of-loyola-country-church-964dfa56,St. Ignatius of Loyola Country Church,8817,,Urbana Church,Rd,,,,8817 Urbana Church Rd,Urbana,MD,21704,,39.32495726,-77.35331668,(301) 695-8845
+us-md-valley-lee-st-george-catholic-church-f06df397,St. George,19199,,St George Church,Rd,,,,19199 St George Church Rd,Valley Lee,MD,20692,,38.19492671,-76.50324256,301-994-0607
+us-va-vienna-our-lady-of-good-counsel-5565d563,Our Lady of Good Counsel,8601,,Wolftrap,Rd,,,,8601 Wolftrap Rd,Vienna,VA,22182,,38.90710886,-77.24344918,703-938-2828
+us-va-vienna-st-mark-26c675d3,St. Mark,9970,,Vale,Rd,,,,9970 Vale Rd,Vienna,VA,22181,4005,38.90369844,-77.29230121,(703) 281-9100
+us-md-waldorf-our-lady-help-of-christians-aa8bcff1,Our Lady Help of Christians,100,,Village,St,,,,100 Village St,Waldorf,MD,20602,2183,38.60268499,-76.89835742,(301) 645-7112
+us-md-waldorf-st-peters-church-512ede64,St. Peter,3320,,St Peter's,Dr,,,,3320 St Peter's Dr,Waldorf,MD,20601,,38.62002656,-76.86128207,301-843-8916
+us-md-walkersville-st-timothy-7db84f83,St. Timothy,8651,,Biggs Ford,Rd,,,,8651 Biggs Ford Rd,Walkersville,MD,21793,,39.48206011,-77.36496834,(301) 845-8043
+us-md-warwick-saint-francis-xavier-church-816be7fd,Saint Francis Xavier Church,1649,,Bohemia Church,Rd,,,,1649 Bohemia Church Road,Warwick,MD,21912,,39.437228,-75.80458,+1-302-545-2126
+us-md-warwick-st-francis-xavier-0b851f4c,St. Francis Xavier,1640,,Bohemia Church,Rd,,,,1640 Bohemia Church Rd,Warwick,MD,21912,,39.41787,-75.779205,(302) 378-5800
+us-dc-washington-american-university-kay-spiritual-center-45e0010a,American University (Kay Spiritual Center),4001,,Yuma,St,NW,,,4001 Yuma St NW,Washington,DC,20016,,38.94593027,-77.08079847,(202) 885-3327
+us-dc-washington-annunciation-957ffb4a,Annunciation,3810,,Massachusetts,Ave,NW,,,3810 Massachusetts Ave NW,Washington,DC,20016,,38.93035848,-77.07679076,(202) 362-3323
+us-dc-washington-archdiocese-for-the-military-services-usa-4659e28c,"Archdiocese for the Military Services, USA",1025,,Michigan,Ave,NE,,,1025 Michigan Ave NE,Washington,DC,20017,,38.9354147,-76.9920557,+1-202-719-3600
+us-dc-washington-assumption-10557799,Assumption of the Blessed Virgin Mary,3401,,Martin Luther King Junior,Ave,SE,,,3401 Martin Luther King Junior Ave SE,Washington,DC,20032,1543,38.84115004,-77.00426185,(202) 561-4178
+us-dc-washington-basilica-of-the-national-shrine-of-the-immaculate-conception-098da934,Basilica of the National Shrine of the Immaculate Conception,400,,Michigan,Ave,NE,,,400 Michigan Ave NE,Washington,DC,20017,,38.93318252,-77.00065399,(202) 526-8300
+us-dc-washington-capuchin-college-saint-francis-friary-b0d5dcd5,Capuchin College - St. Francis Friary,4121,,Harewood,Rd,NE,,,4121 Harewood Rd NE,Washington,DC,20017,,38.94028,-77.002388,(202) 529-2188
+us-dc-washington-cathedral-of-saint-matthew-the-apostle-2b5f8085,Cathedral of St. Matthew the Apostle,1725,,Rhode Island,Ave,NW,,,1725 Rhode Island Ave NW,Washington,DC,20036,,38.90637,-77.0401,(202) 347-3215
+us-dc-washington-catholic-information-center-bec6f493,Catholic Information Center,1501,,K,St,NW,,,1501 K Street NW,Washington,DC,20005,2203,38.90275574,-77.03518677,(202) 783-2062
+us-dc-washington-catholic-university-school-of-theology-and-religious-studies-76a851e4,Catholic University School of Theology and Religious Studies,620,,Michigan,Ave,,,,620 Michigan Ave,Washington,DC,20064,,38.9345625,-76.9993125,
+us-dc-washington-church-of-the-incarnation-e287a596,Church of the Incarnation,880,,Eastern,Ave,NE,,,880 Eastern Ave NE,Washington,DC,20019,,38.9015509,-76.9208867,+1-202-396-0942
+us-dc-washington-columbus-school-of-law-mary-mirror-of-justice-chapel-ca2f7d95,Columbus School of Law (Mary Mirror of Justice chapel),3600,,John McCormack,Rd,NE,,,3600 John McCormack Rd NE,Washington,DC,20017,,38.93633596,-76.9966929,202-319-5151
+us-dc-washington-copley-crypt-chapel-b32d6d7a,Copley Crypt Chapel,,,Georgetown,,,,,Georgetown,Washington,DC,20057,,38.9081664,-77.0730078,+112026874300
+us-dc-washington-dahlgren-chapel-2a1344cd,Dahlgren Chapel,,,Old N,Way,,,,Old N Way,Washington,DC,20057,,38.9072867,-77.0735523,+112026874300
+us-dc-washington-dominican-house-of-studies-immaculate-conception-priory-48ccf3a3,Dominican House of Studies (Immaculate Conception priory),487,,Michigan,Ave,NE,,,487 Michigan Ave NE,Washington,DC,20017,,38.93163089,-76.99880261,202-529-5300
+us-dc-washington-epiphany-e475584d,Epiphany,2712,,Dumbarton,St,NW,,,2712 Dumbarton St NW,Washington,DC,20007,,38.90753094,-77.05629954,(202) 965-1610
+us-dc-washington-franciscan-monastery-of-the-holy-land-in-america-8f5db281,Franciscan Monastery of the Holy Land in America,1400,,Quincy,St,NE,,,1400 Quincy St NE,Washington,DC,20017,,38.93757242,-76.98535883,(202) 526-6800
+us-dc-washington-gw-catholics-95ac6435,GW Catholics,2210,,F,St,NW,,,2210 F St NW,Washington,DC,20037,,38.89720328,-77.04939363,+12405447585
+us-dc-washington-georgetown-university-9611b848,Georgetown University,,,37th St and O Street NW,,,,,37th St and O Street NW,Washington,DC,20057,,38.90756803,-77.07204295,202-687-4300
+us-dc-washington-holy-comforter-saint-cyprian-0b0ce29d,Holy Comforter–St. Cyprian,1357,E,Capitol,St,SE,,,1357 E Capitol St SE,Washington,DC,20003,,38.88957724,-76.98615444,(202) 546-1885
+us-dc-washington-holy-name-of-jesus-04eec502,Holy Name of Jesus Parish⛪,920,,11th,St,NE,,,920 11th St NE,Washington,DC,20002,,38.90196062,-76.99177036,(202) 397-2525
+us-dc-washington-holy-redeemer-100c83be,Holy Redeemer,206,,New York,Ave,NW,,,206 New York Ave NW,Washington,DC,20001,1232,38.90535358,-77.01406583,(202) 347-7510
+us-dc-washington-holy-rosary-d5945bd4,Holy Rosary,595,,3rd,St,NW,,,595 3rd St NW,Washington,DC,20001,,38.897499,-77.014824,(202) 638-0165
+us-dc-washington-holy-trinity-64231d7e,Holy Trinity,3513,,N,St,NW,,,3513 N Street NW,Washington,DC,20007,,38.90712707,-77.07004255,(202) 337-2840
+us-dc-washington-immaculate-conception-church-eee4b2ec,Immaculate Conception Church⛪,1315,,8th,St,NW,,,1315 8th St NW,Washington,DC,20001,,38.90754543,-77.02272906,(202) 332-8888
+us-dc-washington-incarnation-0a63b60e,Incarnation,880,,Eastern,Ave,NE,,,880 Eastern Ave NE,Washington,DC,20019,,38.902948,-76.9222609,(202) 396-0942
+us-dc-washington-little-sisters-of-the-poor-283a5944,Little Sisters of the Poor,4200,,Harewood,Rd,NE,,,4200 Harewood Rd NE,Washington,DC,20017,,38.938703,-77.005988,(202) 269-1831
+us-dc-washington-georgetown-university-hospital-chapel-of-the-immaculate-heart-of-mary-a915c1bd,MedStar Georgetown University Hospital,3800,,Reservoir,Rd,NW,,,3800 Reservoir Rd NW,Washington,DC,20007,,38.9115497,-77.0752441,202-444-3700
+us-dc-washington-monastery-of-the-holy-cross-ukrainian-catholic-94a97e03,Monastery of the Holy Cross (Ukrainian Catholic),1302,,Quincy,St,NE,,,1302 Quincy St NE,Washington,DC,20017,,38.9374008,-76.98787419,2028328519
+us-dc-washington-nativity-fa45c673,Nativity of Our Lord Jesus,6001,,13th,St,NW,,,6001 13th St NW,Washington,DC,20011,5001,38.96321417,-77.02923939,(202) 726-6262
+us-dc-washington-naval-district-washington-chapel-6953a9f4,Naval District Washington Chapel,,,Navy Yard Bldg 6 716 Sicard St SE,,,,,Navy Yard Bldg 6 716 Sicard St SE,Washington,DC,20374,,38.87299108,-76.99651374,+1 202 433 2058
+us-dc-washington-our-lady-queen-of-peace-29cbfccf,Our Lady Queen of Peace,3800,,Ely,Pl,SE,,,3800 Ely Pl SE,Washington,DC,20019,,38.883361,-76.947524,(202) 582-8600
+us-dc-washington-our-lady-of-china-pastoral-mission-09a4c0df,Our Lady of China Pastoral Mission,727,,5th,St,NW,,,727 5th St NW,Washington,DC,20001,,38.89935374,-77.01877712,301-738-2459
+us-dc-washington-our-lady-of-lebanon-seminary-maronite-e96ec99d,Our Lady of Lebanon Seminary (Maronite),7164,,Alaska,Ave,NW,,,7164 Alaska Ave NW,Washington,DC,20012,,38.977029,-77.03485,(202) 723-8831
+us-dc-washington-our-lady-of-lebanon-seminary-maronite-6071e4e9,Our Lady of Lebanon seminary (Maronite),7142,,Alaska,Ave,NW,,,7142 Alaska Ave NW,Washington,DC,20012,,38.97704577,-77.03480375,(202) 291-5153
+us-dc-washington-our-lady-of-perpetual-help-dbcfea28,Our Lady of Perpetual Help,1600,,Morris,Rd,SE,,,1600 Morris Rd SE,Washington,DC,20020,,38.85814974,-76.9820506,(202) 678-4999
+us-dc-washington-our-lady-of-victory-d1a98e6d,Our Lady of Victory,4835,,MacArthur,Blvd,NW,,,4835 MacArthur Blvd NW,Washington,DC,20007,,38.91643581,-77.09464661,(202) 337-4835
+us-dc-washington-our-lady-queen-of-the-americas-79ac6197,"Our Lady, Queen of the Americas",2200,,California,St,NW,,,2200 California St NW,Washington,DC,20008,3902,38.9156723,-77.0491638,(202) 332-8838
+us-dc-washington-shrine-of-most-blessed-sacrament-22b9b5db,Shrine of Most Blessed Sacrament,5949,,Western,Ave,NW,,,5949 Western Ave NW,Washington,DC,20015,,38.96837852,-77.07537239,(202) 966-6575
+us-dc-washington-shrine-of-sacred-heart-744d75dc,Shrine of Sacred Heart,3211,,Sacred Heart,Way,NW,,,3211 Sacred Heart Way NW,Washington,DC,20010,,38.93117366,-77.03585149,(202) 234-8000
+us-dc-washington-sisters-of-life-adoration-chapel-34195c1e,Sisters of Life Convent,3900,,13th,St,NE,,,3900 13th St NE,Washington,DC,20017,,38.93740869,-76.98883597,202-635-0931
+us-dc-washington-saint-aloysius-permanently-closed-c5e6fe69,St. Aloysius (Permanently Closed),19,,Eye,St,NW,,,19 Eye St NW,Washington,DC,20001,1425,38.90152235,-77.00950572,(202) 336-7200
+us-dc-washington-saint-ann-a54f8886,St. Ann,4001,,Yuma,St,NW,,,4001 Yuma St NW,Washington,DC,20016,,38.9465166,-77.07950067,(202) 966-6288
+us-dc-washington-saint-anselm-abbey-063662ed,St. Anselm's Abbey,4501,S,Dakota,Ave,NE,,,4501 S Dakota Ave NE,Washington,DC,20017,,38.94570197,-76.98482338,(202) 269-2300
+us-dc-washington-st-anthony-of-padua-1b2dc969,St. Anthony of Padua,1029,,Monroe,St,NE,,,1029 Monroe St NE,Washington,DC,20017,,38.9323033,-76.99144834,(202) 526-8822
+us-dc-washington-saint-augustine-daa0e1e7,St. Augustine,1419,,V,St,NW,,,1419 V Street NW,Washington,DC,20009,5810,38.91817474,-77.03327942,(202) 265-1470
+us-dc-washington-saint-benedict-the-moor-d572ed92,St. Benedict the Moor,320,,21st,St,NE,,,320 21st St NE,Washington,DC,20002,,38.894232,-76.975699,(202) 397-3895
+us-dc-washington-saint-dominic-fe1e778d,St. Dominic,630,,E,St,SW,,,630 E Street SW,Washington,DC,20024,,38.88293519,-77.02017435,(202) 554-7863
+us-dc-washington-saint-francis-xavier-dd97e07e,St. Francis Xavier,2800,,Pennsylvania,Ave,SE,,,2800 Pennsylvania Ave SE,Washington,DC,20020,,38.87226725,-76.96772692,(202) 582-5021
+us-dc-washington-saint-francis-de-sales-fcaac506,St. Francis de Sales Church,2015,,Rhode Island,Ave,NE,,,2015 Rhode Island Ave NE,Washington,DC,20018,,38.92907459,-76.97558144,(202) 529-7451
+us-dc-washington-saint-gabriel-8e030f26,St. Gabriel,26,,Grant,Cir,NW,,,26 Grant Cir NW,Washington,DC,20011,,38.9437546,-77.02042008,(202) 726-9092
+us-dc-washington-saint-john-paul-ii-national-shrine-069f398e,St. John Paul II National Shrine,3900,,Harewood,Rd,NE,,,3900 Harewood Rd NE,Washington,DC,20017,,38.93747529,-77.00488276,(202) 635-5401
+us-dc-washington-st-josaphat-ukrainian-catholic-seminary-ukrainian-93780220,St. Josaphat Ukrainian Catholic Seminary (Ukrainian),201,,Taylor,St,NE,,,201 Taylor St NE,Washington,DC,20017,,38.9403125,-77.0038125,12025291177
+us-dc-washington-saint-josephs-on-capitol-hill-ebe6793c,St. Joseph on Capitol Hill,313,,2nd,St,NE,,,313 2nd St NE,Washington,DC,20002,5713,38.89374646,-77.00339771,(202) 547-1223
+us-dc-washington-st-josephs-seminary-48042220,St. Joseph’s Seminary,1200,,Varnum,St,NE,,,1200 Varnum St NE,Washington,DC,20017,2740,38.9435625,-76.9893125,12025264231
+us-dc-washington-saint-louis-de-france-2f7373fc,St. Louis de France,4125,,Garrison,St,NW,,,4125 Garrison St NW,Washington,DC,20016,,38.95620996,-77.0818911,(202) 537-0709
+us-dc-washington-saint-luke-38305f33,St. Luke,4925,E,Capitol,St,SE,,,4925 E Capitol St SE,Washington,DC,20019,5202,38.88971631,-76.93219533,(202) 584-8322
+us-dc-washington-st-luke-catholic-church-774b915a,St. Luke Catholic Church,4925,,East Capitol,St,SE,,,4925 East Capitol St SE,Washington,DC,20019,,38.8892808,-76.9306808,+1-202-584-8322
+us-dc-washington-saint-martin-of-tours-943788cd,St. Martin of Tours,1908,N,Capitol,St,NW,,,1908 N Capitol St NW,Washington,DC,20001,,38.915894,-77.00951,(202) 232-1144
+us-dc-washington-saint-mary-mother-of-god-557abca6,"St. Mary, Mother of God",727,,5th,St,NW,,,727 5th St NW,Washington,DC,20001,2666,38.89937772,-77.0186758,(202) 289-7771
+us-dc-washington-saint-patrick-9e880746,St. Patrick,619,,10th,St,NW,,,619 10th St NW,Washington,DC,20004,,38.8979064,-77.0257481,(202) 347-2713
+us-dc-washington-saint-peter-23d4d5c5,St. Peter's Church on Capitol Hill,313,,2nd,St,SE,,,313 2nd St SE,Washington,DC,20003,,38.88555764,-77.00364809,(202) 547-1430
+us-dc-washington-saint-stephen-martyr-a04bd720,"St. Stephen, Martyr",2436,,Pennsylvania,Ave,NW,,,2436 Pennsylvania Ave NW,Washington,DC,20037,1717,38.90331786,-77.05302583,(202) 785-0982
+us-dc-washington-saint-teresa-of-avila-7ed5e868,St. Teresa of Avila,1244,,V,St,SE,,,1244 V Street SE,Washington,DC,20020,,38.86563661,-76.98763529,(202) 678-3709
+us-dc-washington-saint-thomas-more-83d231e5,St. Thomas More,4275,,4th,St,SE,,,4275 4th St SE,Washington,DC,20032,3310,38.82542,-77.00023,(202) 562-0431
+us-dc-washington-saint-thomas-apostle-5d4dd5b2,St. Thomas the Apostle,2665,,Woodley,Rd,NW,,,2665 Woodley Rd NW,Washington,DC,20008,,38.92613243,-77.05477173,(202) 234-1488
+us-dc-washington-saint-vincent-de-paul-013af7b0,St. Vincent De Paul Church,14,,M,St,SE,,,14 M Street SE,Washington,DC,20003,,38.87669466,-77.00876458,202-488-1354
+us-dc-washington-the-catholic-university-of-america-4c36ba3e,The Catholic University of America,620,,Michigan,Ave,NE,,,620 Michigan Ave NE,Washington,DC,20064,,38.9378836,-76.99743155,(202) 319-5575
+us-dc-washington-the-catholic-university-of-america-caldwell-chapel-8638af5e,The Catholic University of America (Caldwell chapel),620,,Michigan,Ave,NE,,,620 Michigan Ave NE,Washington,DC,20064,,38.935586,-77.000319,202-319-5575
+us-dc-washington-the-catholic-university-of-america-st-paul-chapel-caldwell-hall-a8a7c058,The Catholic University of America (St. Paul Chapel - Caldwell Hall),620,,Michigan,Ave,NE,,,620 Michigan Ave NE The Catholic University of America,Washington,DC,20064,,38.93257766,-76.99810484,202-319-5575
+us-dc-washington-the-catholic-university-of-america-saint-vincent-de-paul-chapel-f990f69d,The Catholic University of America (St. Vincent de Paul chapel),3502,,John McCormack,Rd,NE,,,3502 John McCormack Rd NE,Washington,DC,20017,,38.93793681,-76.99758522,202-319-5575
+us-dc-washington-theological-college-e186aaf2,Theological College,401,,Michigan,Ave,NE,,,401 Michigan Ave NE,Washington,DC,20017,,38.9310625,-76.9999375,
+us-dc-washington-shrine-of-holy-family-ukrainian-801665a8,Ukrainian Catholic National Shrine of the Holy Family,4250,,Harewood,Rd,NE,,,4250 Harewood Rd NE,Washington,DC,20017,,38.939703,-77.003524,(202) 526-3737
+us-dc-washington-washington-theological-union-45da6f14,Washington Theological Union,1600,,Webster,St,NE,,,1600 Webster St NE,Washington,DC,20017,,38.9445625,-76.9825625,12025261221
+us-pa-waynesboro-st-andrew-the-apostle-b0e933a0,St. Andrew,12,N,Broad,St,,,,12 N Broad St,Waynesboro,PA,17268,,39.75402331,-77.57431042,(717) 762-1914
+us-pa-west-grove-assumption-bvm-589ec4c6,Assumption B.V.M.,300,,State,Rd,,,,300 State Rd,West Grove,PA,19390,,39.81641496,-75.818048,(610) 869-2722
+us-md-west-hyattsville-pallottine-seminary-at-green-hill-98d13ef6,Pallottine Seminary at Green Hill,2009,,Van Buren,St,,,,2009 Van Buren St,West Hyattsville,MD,20782,,38.9706875,-76.9754375,13014223777
+us-md-west-river-our-lady-of-sorrows-4a162fe2,Our Lady of Sorrows,101,,Owensville,Rd,,,,101 Owensville Rd,West River,MD,20778,,38.84765104,-76.59900052,(410) 867-2059
+us-pa-west-salisbury-st-michael-4c2187c4,St. Michael,1316,,St Paul,Rd,,,,1316 St Paul Rd,West Salisbury,PA,15558,,39.76078333,-79.09157338,(814) 662-2958
+us-md-westernport-st-peter-94eb51e3,St. Peter,127,,Church,St,,,,127 Church St,Westernport,MD,21562,,39.483578,-79.04374963,(301) 359-3055
+us-md-westminster-st-john-23792ab3,St. John,43,,Monroe,St,,,,43 Monroe St,Westminster,MD,21157,,39.58585261,-76.99324713,(410) 848-4744
+us-md-westover-church-of-st-elizabeth-a58c41c8,St. Elizabeth,,,Old Marion,Rd,,,,Old Marion Rd,Westover,MD,21851,,38.1211875,-75.7065625,14109571215
+us-md-westover-st-elizabeth-f4e4496f,St. Elizabeth,8734,,Old Westover Marion,Rd,,,,8734 Old Westover Marion Rd,Westover,MD,21871,,38.1044726,-75.7487779,(410) 957-1215
+us-md-wheaton-st-catherine-laboure-c92388f1,St. Catherine Labouré,11801,,Claridge,Rd,,,,11801 Claridge Rd,Wheaton,MD,20902,2220,39.04818572,-77.06808962,(301) 946-3636
+us-md-williamsport-st-augustine-2683deda,St. Augustine,32,E,Potomac,St,,,,32 E Potomac St,Williamsport,MD,21795,,39.60025314,-77.82005689,(301) 223-7959
+us-de-wilmington-cathedral-of-st-peter-ffde9b2a,Cathedral of St. Peter,500,N,W,St,,,,500 N W St,Wilmington,DE,19801,,39.74275653,-75.55328011,(302) 652–0743
+us-de-wilmington-church-of-christ-our-king-75f62a1e,Christ Our King,,,28th St & Madison,St,,,,28th St & Madison St,Wilmington,DE,19802,,39.7603125,-75.5375625,13027624140
+us-de-wilmington-holy-child-d704c60e,Corpus Christi,2500,,Naamans,Rd,,,,2500 Naamans Rd,Wilmington,DE,19810,,39.8257523,-75.51545,(302) 475-6486
+us-de-wilmington-immaculate-heart-of-mary-9441fc4f,Immaculate Heart of Mary,4701,,Weldin,Rd,,,,4701 Weldin Rd,Wilmington,DE,19803,,39.78270791,-75.51958586,(302) 764-0357
+us-de-wilmington-immaculate-heart-of-mary-roman-catholic-church-df91bd91,Immaculate Heart of Mary Roman Catholic Church,4701,,Weldin,Rd,,,,4701 Weldin Rd,Wilmington,DE,19803,,39.7819079,-75.5191595,+1-302-764-0357
+us-de-wilmington-sacred-heart-oratory-9bc63fe1,Sacred Heart Oratory,917,N,Madison,St,,,,917 N Madison St,Wilmington,DE,19801,,39.74802,-75.5545654,(302) 428-3658
+us-de-wilmington-st-ann-9c0449dd,St. Ann,2013,,Gilpin,Ave,,,,2013 Gilpin Ave,Wilmington,DE,19806,,39.7616577,-75.56438,(302) 654-5519
+us-de-wilmington-st-anthony-of-padua-31646d36,St. Anthony of Padua,901,N,Dupont,St,,,,901 N Dupont St,Wilmington,DE,19805,,39.752964,-75.5671,(302) 421-3700
+us-de-wilmington-st-catherine-of-siena-eb4fd0a0,St. Catherine of Siena,2503,,Centerville,Rd,,,,2503 Centerville Rd,Wilmington,DE,19808,,39.7502652,-75.62432,(302) 633-4900
+us-de-wilmington-st-catherine-of-siena-roman-catholic-church-5875110f,St. Catherine of Siena Roman Catholic Church,2503,,Centerville,Rd,,,,2503 Centerville Rd,Wilmington,DE,19808,,39.7494213,-75.6258097,+1-302-633-4900
+us-de-wilmington-st-elizabeth-d498e745,St. Elizabeth,809,S,Broom,St,,,,809 S Broom St,Wilmington,DE,19805,,39.73874444,-75.57298072,(302) 652-3626
+us-de-wilmington-st-hedwig-537a9aef,St. Hedwig,408,S,Harrison,St,,,,408 S Harrison St,Wilmington,DE,19805,,39.74060555,-75.56604114,(302) 594-1400
+us-de-wilmington-st-helena-efcd2322,St. Helena,602,,Philadelphia,Pike,,,,602 Philadelphia Pike,Wilmington,DE,19809,,39.7685738,-75.50225,(302) 764-0325
+us-de-wilmington-st-john-the-beloved-cbea8983,St. John the Beloved,907,,Milltown,Rd,,,,907 Milltown Rd,Wilmington,DE,19808,,39.735467,-75.657751,(302) 999-0211
+us-de-wilmington-st-joseph-848db885,St. Joseph,1012,N,French,St,,,,1012 N French St,Wilmington,DE,19801,,39.74527246,-75.54572172,(302) 658-4535
+us-de-wilmington-st-joseph-on-the-brandywine-roman-catholic-church-52e0dd4e,St. Joseph on the Brandywine Roman Catholic Church,10,,Old Church,Rd,,,,10 Old Church Rd,Wilmington,DE,19807,,39.7721416,-75.5893161,+1-302-658-7017
+us-de-wilmington-st-joseph-the-worker-chapel-at-jesus-house-d9ab8a42,St. Joseph the Worker Chapel at Jesus House,2501,,Milltown,Rd,,,,2501 Milltown Rd,Wilmington,DE,19808,,39.7158051,-75.67347,(302) 995-6859
+us-de-wilmington-st-mary-magdalen-d2c84187,St. Mary Magdalen,7,,Sharpley,Rd,,,,7 Sharpley Rd,Wilmington,DE,19803,,39.79409495,-75.54881573,(302) 652-6800
+us-de-wilmington-st-mary-of-the-immaculate-conception-b1bab1f1,St. Mary of the Immaculate Conception,600,E,6th,St,,,,600 E 6th St,Wilmington,DE,19801,,39.7391595,-75.54409838,(302) 652-0743
+us-de-wilmington-st-matthew-040a8b9c,St. Matthew,901,E,Newport,Pike,,,,901 E Newport Pike,Wilmington,DE,19804,,39.72161685,-75.59593325,(302) 655-5830
+us-de-wilmington-saint-nicholas-ukrainian-e2aae520,St. Nicholas (Ukrainian),800,,Lea,Blvd,,,,800 Lea Blvd,Wilmington,DE,19802,2530,39.76929827,-75.53235149,(302) 762-5511
+us-de-wilmington-st-nicholas-ukrainian-catholic-church-356905b0,St. Nicholas Ukrainian Catholic Church,800,W,Lea,Blvd,,,,800 W Lea Blvd,Wilmington,DE,19802,,39.7692802,-75.5324376,+1-302-762-5511
+us-de-wilmington-st-patrick-f433d320,St. Patrick,1414,,King,St,,,,1414 King St,Wilmington,DE,19801,,39.74894587,-75.54423738,(302) 652-0743
+us-de-wilmington-st-paul-76dfd233,St. Paul,1010,W,4th,St,,,,1010 W 4th St,Wilmington,DE,19805,,39.7442322,-75.56129,(302) 655-6596
+us-de-wilmington-st-thomas-the-apostle-b84d3549,St. Thomas the Apostle,301,N,Bancroft,Pkwy,,,,301 N Bancroft Pkwy,Wilmington,DE,19805,,39.74935944,-75.57424714,(302) 658-5131
+us-va-woodbridge-our-lady-of-angels-4f0f8f1a,Our Lady of Angels,13752,,Mary's,Way,,,,13752 Mary's Way,Woodbridge,VA,22191,,38.65380649,-77.25623773,(703) 494-2444
+us-md-woodstock-st-alphonsus-rodriguez-4f5133c0,St. Alphonsus Rodriguez,10800,,Old,Ct,,,,10800 Old Ct Rd,Woodstock,MD,21163,,39.33871241,-76.86074577,(410) 461-5267
+us-pa-york-immaculate-conception-of-bvm-96b6c0db,Immaculate Conception,309,S,George,St,,,,309 S George St,York,PA,17401,,39.95812607,-76.72511292,(717) 845-7629
+us-pa-york-st-joseph-e900fb93,St. Joseph,2935,,Kingston,Rd,,,,2935 Kingston Rd,York,PA,17402,4003,39.97065,-76.66795,(717) 755-7503
+us-pa-york-st-patrick-91724c7c,St. Patrick,231,S,Beaver,St,,,,231 S Beaver St,York,PA,17401,,39.958374,-76.72765,(717) 848-2007
+us-pa-york-st-rose-of-lima-18fdbbad,St. Rose of Lima,950,W,Market,St,,,,950 W Market St,York,PA,17401,,39.95541,-76.74948,(717) 846-4935
