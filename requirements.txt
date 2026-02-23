@@ -26,4 +26,4 @@ pytest-cov==6.0.*         # Measures how much of the code is covered by tests
 # --- Future / Phase 5+ ---
 # psycopg2-binary==2.9.*  # PostgreSQL database driver (uncomment when moving to DB)
 # flask==3.1.*            # Web dashboard (uncomment for Improvement 3)
-# playwright==1.49.*      # Headless browser for JS-rendered sites (uncomment if needed for MassTimes.org)
+playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, eCatholic)

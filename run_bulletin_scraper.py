@@ -18,6 +18,7 @@ HOW TO RUN:
     python run_bulletin_scraper.py all arizona --limit 10       # Test with first 10 churches
     python run_bulletin_scraper.py all arizona --resume         # Resume interrupted run
     python run_bulletin_scraper.py all arizona --retry-no-url   # Re-check churches that got new URLs
+    python run_bulletin_scraper.py all arizona --retry-no-pdfs  # Re-try churches with 0 PDFs (uses Playwright)
 
 OUTPUT:
     data/output/{state}/bulletin_discovery.json     — bulletin page URLs per church
@@ -57,6 +58,12 @@ except ImportError:
     HAS_PDFPLUMBER = False
     print("WARNING: pdfplumber not installed. PDF extraction will be skipped.")
     print("Install with: pip install pdfplumber")
+
+try:
+    from playwright.sync_api import sync_playwright
+    HAS_PLAYWRIGHT = True
+except ImportError:
+    HAS_PLAYWRIGHT = False
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -102,6 +109,15 @@ BULLETIN_PATHS = [
     "/media/bulletin",
     "/publications/bulletin",
     "/about/bulletin",
+    # Newsletter variants (some churches call them newsletters)
+    "/newsletter",
+    "/newsletters",
+    "/newsletter/",
+    "/newsletters/",
+    "/weekly-newsletter",
+    "/parish-newsletter",
+    "/news-events/bulletin",
+    "/news/bulletin",
 ]
 
 # Keywords that indicate a bulletin page (case-insensitive)
@@ -109,11 +125,15 @@ BULLETIN_PAGE_KEYWORDS = [
     "bulletin", "weekly bulletin", "parish bulletin",
     "sunday bulletin", "church bulletin", "current bulletin",
     "this week", "latest bulletin", "download bulletin",
+    # Newsletter variants
+    "newsletter", "weekly newsletter", "parish newsletter",
+    "current newsletter", "download newsletter",
 ]
 
 # Patterns to find bulletin links on church homepages
 BULLETIN_LINK_PATTERNS = [
     re.compile(r'bulletin', re.IGNORECASE),
+    re.compile(r'newsletter', re.IGNORECASE),
     re.compile(r'weekly\s*(news|update|publication)', re.IGNORECASE),
 ]
 
@@ -213,6 +233,138 @@ def safe_get_html(url: str):
         return BeautifulSoup(resp.text, "html.parser")
 
 
+# ── Playwright Headless Browser ────────────────────────────────────────────────
+
+BROWSER_TIMEOUT = 20000  # 20s for JS-rendered pages (vs 15s for HTTP)
+_playwright_instance = None
+_browser_instance = None
+
+
+def _get_playwright_browser():
+    """Lazy-init a single Playwright Chromium browser instance (reused across churches)."""
+    global _playwright_instance, _browser_instance
+    if not HAS_PLAYWRIGHT:
+        return None
+    if _browser_instance is None:
+        _playwright_instance = sync_playwright().start()
+        _browser_instance = _playwright_instance.chromium.launch(headless=True)
+    return _browser_instance
+
+
+def _close_playwright_browser():
+    """Clean up Playwright browser at shutdown."""
+    global _playwright_instance, _browser_instance
+    if _browser_instance:
+        try:
+            _browser_instance.close()
+        except Exception:
+            pass
+        _browser_instance = None
+    if _playwright_instance:
+        try:
+            _playwright_instance.stop()
+        except Exception:
+            pass
+        _playwright_instance = None
+
+
+def _extract_pdfs_with_browser(url: str):
+    """
+    Load a URL in headless Chromium, wait for JS to render, extract all PDF links.
+
+    Returns a list of absolute PDF URLs found in the rendered DOM.
+    """
+    global _last_request_time
+
+    browser = _get_playwright_browser()
+    if not browser:
+        return []
+
+    # Rate limit browser requests the same as HTTP
+    elapsed = time.time() - _last_request_time
+    if elapsed < REQUEST_DELAY:
+        time.sleep(REQUEST_DELAY - elapsed)
+    _last_request_time = time.time()
+
+    pdfs = []
+    page = None
+    try:
+        page = browser.new_page(user_agent=USER_AGENT)
+        page.set_default_timeout(BROWSER_TIMEOUT)
+        page.goto(url, wait_until="networkidle", timeout=BROWSER_TIMEOUT)
+
+        # Wait a bit for any lazy-loaded content
+        page.wait_for_timeout(2000)
+
+        # Extract all links from rendered DOM
+        links = page.eval_on_selector_all(
+            "a[href]",
+            "elements => elements.map(e => ({href: e.href, text: e.textContent || ''}))"
+        )
+
+        seen = set()
+        for link in links:
+            href = link.get("href", "")
+            if not href:
+                continue
+            # Direct PDF links
+            if href.lower().endswith(".pdf") or ".pdf?" in href.lower():
+                if href not in seen:
+                    seen.add(href)
+                    pdfs.append(href)
+            # LPi publication-page links with selectedPublication=<pdf_url>
+            elif "selectedPublication=" in href:
+                parsed_link = urlparse(href)
+                link_params = parse_qs(parsed_link.query)
+                if "selectedPublication" in link_params:
+                    pdf_url = link_params["selectedPublication"][0]
+                    if pdf_url not in seen:
+                        seen.add(pdf_url)
+                        pdfs.append(pdf_url)
+            # DiscoverMass download links
+            elif "discovermass.com/download.php" in href:
+                if href not in seen:
+                    seen.add(href)
+                    pdfs.append(href)
+
+        # Also check for iframes that might contain PDFs (Google Docs viewer, etc.)
+        iframes = page.eval_on_selector_all(
+            "iframe[src]",
+            "elements => elements.map(e => e.src)"
+        )
+        for iframe_src in iframes:
+            # Google Docs Viewer: docs.google.com/gview?url=<pdf_url>
+            if "docs.google.com/gview" in iframe_src:
+                parsed = urlparse(iframe_src)
+                params = parse_qs(parsed.query)
+                if "url" in params:
+                    pdf_url = params["url"][0]
+                    if pdf_url not in seen:
+                        seen.add(pdf_url)
+                        pdfs.append(pdf_url)
+            # Google Drive viewer
+            elif "drive.google.com/file" in iframe_src:
+                drive_m = re.search(r'/file/d/([^/]+)', iframe_src)
+                if drive_m:
+                    dl_url = f"https://drive.google.com/uc?export=download&id={drive_m.group(1)}"
+                    if dl_url not in seen:
+                        seen.add(dl_url)
+                        pdfs.append(dl_url)
+
+        logger.debug(f"  Browser extracted {len(pdfs)} PDFs from {url}")
+
+    except Exception as e:
+        logger.debug(f"  Browser failed for {url}: {e}")
+    finally:
+        if page:
+            try:
+                page.close()
+            except Exception:
+                pass
+
+    return pdfs[:MAX_PDFS_PER_CHURCH]
+
+
 # ── Phase 1: Bulletin Discovery ───────────────────────────────────────────────
 
 def find_bulletin_page(base_url: str):
@@ -220,9 +372,13 @@ def find_bulletin_page(base_url: str):
     Try to find the bulletin page for a church website.
 
     Strategy:
-    1. Check common paths (/bulletin, /bulletins, etc.)
-    2. Fetch homepage and search for bulletin links in nav/content
-    3. Check for LPi/ParishesOnline embeds
+    1. Check common paths (/bulletin, /bulletins, /newsletter, etc.)
+       1b. WordPress blog-style: follow sub-page links one level deeper
+       1c. LPi widget: extract PDFs from parishesonline.com widget API
+    2. Fetch homepage and search for bulletin/newsletter links in nav/content
+       2b. Also check for direct PDF links with "newsletter" text
+    3. Check for LPi/ParishesOnline embed on homepage
+    4. Check remaining direct paths (extended list)
 
     Returns dict with:
         bulletin_page_url: str | None
@@ -243,13 +399,13 @@ def find_bulletin_page(base_url: str):
         "lpi_parish_id": None,
     }
 
-    # Strategy 1: Try common bulletin paths
+    # Strategy 1: Try common bulletin/newsletter paths
     for path in BULLETIN_PATHS:
         try_url = base_origin + path
         resp = _rate_limited_get(try_url)
         if resp and resp.status_code == 200:
             text_lower = resp.text.lower()
-            # Verify this actually looks like a bulletin page
+            # Verify this actually looks like a bulletin/newsletter page
             if any(kw in text_lower for kw in BULLETIN_PAGE_KEYWORDS):
                 result["bulletin_page_url"] = resp.url  # may have redirected
                 result["source"] = "direct_path"
@@ -260,20 +416,48 @@ def find_bulletin_page(base_url: str):
                 lpi_id = find_lpi_parish_id(soup, resp.text)
                 if lpi_id:
                     result["lpi_parish_id"] = lpi_id
-                if result["pdf_urls"] or lpi_id:
+                if result["pdf_urls"]:
                     return result
-        # After trying 3 paths without success, move to homepage scan
+
+                # Strategy 1c: LPi widget — try extracting PDFs via widget API
+                if lpi_id:
+                    widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                    if widget_pdfs:
+                        result["pdf_urls"] = widget_pdfs
+                        result["source"] = "direct_path_lpi_widget"
+                        return result
+                    # Even without PDFs, having the LPi ID is useful
+                    return result
+
+                # Strategy 1b: WordPress blog-style archive — no direct PDFs,
+                # but sub-page links (e.g. /bulletins/first-sunday-of-lent/)
+                # may each contain a PDF download link one level deeper
+                wp_pdfs = extract_pdfs_from_subpages(soup, resp.url)
+                if wp_pdfs:
+                    result["pdf_urls"] = wp_pdfs
+                    result["source"] = "direct_path_wordpress"
+                    return result
+
+                # Strategy 1d: eCatholic / JS-heavy page — use Playwright
+                if HAS_PLAYWRIGHT and ("ecatholic" in text_lower or "myparish" in text_lower):
+                    browser_pdfs = _extract_pdfs_with_browser(resp.url)
+                    if browser_pdfs:
+                        result["pdf_urls"] = browser_pdfs
+                        result["source"] = "direct_path_browser"
+                        return result
+        # After trying first 3 paths without success, move to homepage scan
         if path == BULLETIN_PATHS[2] and not result["bulletin_page_url"]:
             break
 
-    # Strategy 2: Fetch homepage and look for bulletin link
+    # Strategy 2: Fetch homepage and look for bulletin/newsletter links
     soup = safe_get_html(base_url)
     if soup:
-        # Find links with "bulletin" in text or href
+        # Find links with "bulletin" or "newsletter" in text or href
         for link in soup.find_all("a", href=True):
             link_text = (link.get_text() or "").strip().lower()
             link_href = link["href"].lower()
-            if "bulletin" in link_text or "bulletin" in link_href:
+            if any(kw in link_text or kw in link_href
+                   for kw in ["bulletin", "newsletter"]):
                 full_url = urljoin(base_url, link["href"])
                 # Skip if it's just the same page
                 if full_url.rstrip("/") == base_url.rstrip("/"):
@@ -288,9 +472,17 @@ def find_bulletin_page(base_url: str):
                 if "parishesonline.com" in full_url or "4lpi.com" in full_url:
                     result["bulletin_page_url"] = full_url
                     result["source"] = "lpi_link"
-                    # Try to extract PDF URLs from the LPi page
                     lpi_pdfs = extract_lpi_pdfs(full_url)
                     result["pdf_urls"] = lpi_pdfs
+                    return result
+                # Check if it links to discovermass.com
+                if "discovermass.com" in full_url:
+                    result["bulletin_page_url"] = full_url
+                    result["source"] = "discovermass_link"
+                    # Extract bulletin PDFs from DiscoverMass page
+                    dm_pdfs = extract_discovermass_pdfs(full_url)
+                    if dm_pdfs:
+                        result["pdf_urls"] = dm_pdfs
                     return result
                 # Follow the link to the bulletin page
                 bulletin_soup = safe_get_html(full_url)
@@ -301,6 +493,26 @@ def find_bulletin_page(base_url: str):
                     lpi_id = find_lpi_parish_id(bulletin_soup, str(bulletin_soup))
                     if lpi_id:
                         result["lpi_parish_id"] = lpi_id
+                    # If we found the page but no PDFs, try LPi widget
+                    if not result["pdf_urls"] and lpi_id:
+                        widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                        if widget_pdfs:
+                            result["pdf_urls"] = widget_pdfs
+                            result["source"] = "homepage_link_lpi_widget"
+                    # If still no PDFs, try WordPress subpages
+                    if not result["pdf_urls"]:
+                        wp_pdfs = extract_pdfs_from_subpages(bulletin_soup, full_url)
+                        if wp_pdfs:
+                            result["pdf_urls"] = wp_pdfs
+                            result["source"] = "homepage_link_wordpress"
+                    # If still no PDFs, try Playwright for JS-heavy pages
+                    if not result["pdf_urls"] and HAS_PLAYWRIGHT:
+                        page_html = str(bulletin_soup).lower()
+                        if "ecatholic" in page_html or "myparish" in page_html or not result["lpi_parish_id"]:
+                            browser_pdfs = _extract_pdfs_with_browser(full_url)
+                            if browser_pdfs:
+                                result["pdf_urls"] = browser_pdfs
+                                result["source"] = "homepage_link_browser"
                     return result
 
         # Strategy 3: Check for LPi embed on homepage
@@ -308,7 +520,29 @@ def find_bulletin_page(base_url: str):
         if lpi_id:
             result["lpi_parish_id"] = lpi_id
             result["source"] = "lpi_embed_homepage"
+            # Try to get PDFs from the widget
+            widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+            if widget_pdfs:
+                result["pdf_urls"] = widget_pdfs
             return result
+
+        # Strategy 3b: Check for direct PDF links on homepage with
+        # bulletin/newsletter in the link text (catches "Open Latest Newsletter (PDF)")
+        homepage_pdfs = extract_pdf_links(soup, base_url)
+        if homepage_pdfs:
+            # Only keep PDFs whose link text mentions bulletin/newsletter
+            raw_html = str(soup)
+            for link in soup.find_all("a", href=True):
+                href = link["href"]
+                text = (link.get_text() or "").lower()
+                if (href.lower().endswith(".pdf") or ".pdf?" in href.lower()):
+                    if any(kw in text for kw in ["bulletin", "newsletter"]):
+                        full_url = urljoin(base_url, href)
+                        result["pdf_urls"].append(full_url)
+            if result["pdf_urls"]:
+                result["bulletin_page_url"] = base_url
+                result["source"] = "homepage_pdf_newsletter"
+                return result
 
         # Strategy 4: Check remaining direct paths
         for path in BULLETIN_PATHS[3:]:
@@ -324,12 +558,156 @@ def find_bulletin_page(base_url: str):
                         result["source"] = "direct_path_extended"
                         result["pdf_urls"] = pdfs
                         return result
+                    # Check for LPi on extended paths too
+                    lpi_id = find_lpi_parish_id(page_soup, resp.text)
+                    if lpi_id:
+                        result["lpi_parish_id"] = lpi_id
+                        result["bulletin_page_url"] = resp.url
+                        result["source"] = "direct_path_extended_lpi"
+                        widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                        if widget_pdfs:
+                            result["pdf_urls"] = widget_pdfs
+                        return result
+                    # WordPress subpages on extended paths
+                    wp_pdfs = extract_pdfs_from_subpages(page_soup, resp.url)
+                    if wp_pdfs:
+                        result["bulletin_page_url"] = resp.url
+                        result["source"] = "direct_path_extended_wordpress"
+                        result["pdf_urls"] = wp_pdfs
+                        return result
 
     return result
 
 
+def try_discovermass_fallback(church_name: str, city: str, state_code: str):
+    """
+    Strategy 5 fallback: Try to find bulletins on DiscoverMass.com using
+    the predictable slug format: church-name-city-state (lowercase, hyphenated).
+
+    DiscoverMass has many churches with downloadable bulletin PDFs that
+    churches may not link to from their own websites.
+    """
+    if not church_name or not city:
+        return None
+
+    # Generate the slug: lowercase, remove special chars, hyphenate
+    slug_parts = []
+    for word in re.split(r'[\s]+', church_name):
+        # Remove parenthetical suffixes like "(FSSP)" or "(Maronite)"
+        word = re.sub(r'\(.*?\)', '', word).strip()
+        # Remove punctuation except hyphens
+        word = re.sub(r'[^a-zA-Z0-9-]', '', word)
+        if word:
+            slug_parts.append(word.lower())
+
+    city_clean = re.sub(r'[^a-zA-Z0-9]', '-', city.lower()).strip('-')
+    state_clean = state_code.lower() if state_code else ""
+
+    slug = "-".join(slug_parts) + "-" + city_clean + "-" + state_clean
+    slug = re.sub(r'-+', '-', slug)  # collapse multiple hyphens
+
+    dm_url = f"https://discovermass.com/church/{slug}/"
+    resp = _rate_limited_get(dm_url)
+    if not resp or resp.status_code != 200:
+        return None
+
+    # Check if this page has bulletin PDFs
+    dm_pdfs = re.findall(
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
+        resp.text
+    )
+    if not dm_pdfs:
+        return None
+
+    # Deduplicate
+    seen = set()
+    unique_pdfs = []
+    for url in dm_pdfs:
+        if url not in seen:
+            seen.add(url)
+            unique_pdfs.append(url)
+
+    logger.debug(f"  DiscoverMass fallback hit for {slug}: {len(unique_pdfs)} bulletins")
+
+    return {
+        "bulletin_page_url": dm_url,
+        "pdf_urls": unique_pdfs[:MAX_PDFS_PER_CHURCH],
+        "source": "discovermass_fallback",
+        "lpi_parish_id": None,
+    }
+
+
+def extract_pdfs_from_subpages(soup, page_url: str, max_subpages: int = 10):
+    """
+    WordPress/blog-style bulletin archives: the bulletin page lists blog post
+    links (e.g. /bulletins/first-sunday-of-lent/) that each contain the actual
+    PDF download link one level deeper.
+
+    This function finds sub-page links under the same path prefix and follows
+    the most recent ones to extract PDFs.
+    """
+    parsed_page = urlparse(page_url)
+    page_path = parsed_page.path.rstrip("/")
+    base_origin = f"{parsed_page.scheme}://{parsed_page.netloc}"
+
+    # Collect candidate sub-page links (same domain, under the bulletin path)
+    subpage_urls = []
+    seen = set()
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+        full_url = urljoin(page_url, href)
+        parsed_link = urlparse(full_url)
+
+        # Must be same domain
+        if parsed_link.netloc != parsed_page.netloc:
+            continue
+        # Must be a sub-path of the bulletin page (e.g. /bulletins/some-post/)
+        link_path = parsed_link.path.rstrip("/")
+        if not link_path.startswith(page_path + "/") or link_path == page_path:
+            continue
+        # Skip PDFs (handled by extract_pdf_links already)
+        if link_path.lower().endswith(".pdf"):
+            continue
+        # Skip pagination links (/page/2/, ?page=2, etc.)
+        if re.search(r'/page/\d+', link_path) or re.search(r'[?&]page=', full_url):
+            continue
+        # Deduplicate
+        canonical = full_url.split("?")[0].rstrip("/")
+        if canonical in seen:
+            continue
+        seen.add(canonical)
+
+        link_text = (link.get_text() or "").strip()
+        date_score = extract_date_score(full_url, link_text)
+        subpage_urls.append((full_url, date_score, link_text))
+
+    if not subpage_urls:
+        return []
+
+    # Sort by date score (most recent first) and limit
+    subpage_urls.sort(key=lambda x: x[1], reverse=True)
+    subpage_urls = subpage_urls[:max_subpages]
+
+    # Follow each sub-page and extract PDF links
+    all_pdfs = []
+    for sub_url, _, _ in subpage_urls:
+        sub_soup = safe_get_html(sub_url)
+        if sub_soup:
+            pdfs = extract_pdf_links(sub_soup, sub_url)
+            all_pdfs.extend(pdfs)
+
+    logger.debug(f"  WordPress subpage scan: checked {len(subpage_urls)} posts, found {len(all_pdfs)} PDFs")
+    return all_pdfs
+
+
 def extract_pdf_links(soup, page_url: str):
-    """Extract all PDF links from a page, sorted by likely recency."""
+    """Extract all PDF links from a page, sorted by likely recency.
+
+    Also extracts PDFs embedded via:
+      - Google Docs Viewer (docs.google.com/gview?url=<encoded_pdf_url>)
+      - Google Drive viewer (drive.google.com/viewerng/viewer?url=...)
+      - LPi/ParishesOnline iframes
+    """
     pdf_links = []
     seen = set()
 
@@ -357,11 +735,12 @@ def extract_pdf_links(soup, page_url: str):
             "date_score": date_score,
         })
 
-    # Also check for ParishesOnline.com links in iframes/embeds
+    # Check iframes for embedded content
     for iframe in soup.find_all("iframe", src=True):
         src = iframe["src"]
+
+        # LPi/ParishesOnline embeds
         if "parishesonline.com" in src or "4lpi.com" in src:
-            # Extract PDF URL from LPi embed
             parsed = urlparse(src)
             params = parse_qs(parsed.query)
             if "selectedPublication" in params:
@@ -371,8 +750,69 @@ def extract_pdf_links(soup, page_url: str):
                     pdf_links.append({
                         "url": pdf_url,
                         "text": "LPi Bulletin",
-                        "date_score": 99999999,  # assume current
+                        "date_score": 99999999,
                     })
+
+        # Google Docs Viewer: docs.google.com/gview?url=<encoded_pdf>
+        if "docs.google.com/gview" in src or "docs.google.com/viewer" in src:
+            parsed = urlparse(src)
+            params = parse_qs(parsed.query)
+            if "url" in params:
+                pdf_url = params["url"][0]
+                if pdf_url not in seen:
+                    seen.add(pdf_url)
+                    date_score = extract_date_score(pdf_url, "")
+                    pdf_links.append({
+                        "url": pdf_url,
+                        "text": "Google Viewer Bulletin",
+                        "date_score": date_score if date_score else 99999999,
+                    })
+
+        # Google Drive viewer
+        if "drive.google.com/viewerng" in src:
+            parsed = urlparse(src)
+            params = parse_qs(parsed.query)
+            if "url" in params:
+                pdf_url = params["url"][0]
+                if pdf_url not in seen:
+                    seen.add(pdf_url)
+                    pdf_links.append({
+                        "url": pdf_url,
+                        "text": "Google Drive Bulletin",
+                        "date_score": 99999999,
+                    })
+
+    # Check for Google Docs viewer links in <a> tags too
+    for link in soup.find_all("a", href=True):
+        href = link["href"]
+        if "docs.google.com/gview" in href or "docs.google.com/viewer" in href:
+            parsed = urlparse(href)
+            params = parse_qs(parsed.query)
+            if "url" in params:
+                pdf_url = params["url"][0]
+                if pdf_url not in seen:
+                    seen.add(pdf_url)
+                    date_score = extract_date_score(pdf_url, "")
+                    pdf_links.append({
+                        "url": pdf_url,
+                        "text": "Google Viewer Bulletin",
+                        "date_score": date_score if date_score else 99999999,
+                    })
+
+    # Check for DiscoverMass bulletin download links in page source
+    raw_html = str(soup)
+    dm_downloads = re.findall(
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
+        raw_html
+    )
+    for dm_url in dm_downloads:
+        if dm_url not in seen:
+            seen.add(dm_url)
+            pdf_links.append({
+                "url": dm_url,
+                "text": "DiscoverMass Bulletin",
+                "date_score": 99999999,
+            })
 
     # Sort by date (most recent first)
     pdf_links.sort(key=lambda x: x["date_score"], reverse=True)
@@ -426,18 +866,74 @@ def extract_date_score(url: str, text: str):
 
 
 def find_lpi_parish_id(soup, raw_html: str):
-    """Check if page has LPi/ParishesOnline.com bulletin widget."""
-    # Look for parishesonline.com URLs
+    """Check if page has LPi/ParishesOnline.com bulletin widget.
+
+    Detects multiple LPi/ParishesOnline patterns:
+      - publicationWidget iframe: ?type=bulletin&id=0018000000Qbz0UAAR
+      - publications page: /publications?id=d45874de...
+      - container embed: /bulletins/123/456/
+      - organization page: /organization/parish-name-12345
+      - find page: /find/parish-name-12345
+    """
+    # Pattern 1: publicationWidget iframe with Salesforce-style ID
+    # e.g., parishesonline.com/publicationWidget?type=bulletin&id=0018000000Qbz0UAAR
+    m = re.search(r'parishesonline\.com/publicationWidget\?[^"\']*?id=([0-9a-zA-Z]+)', raw_html, re.IGNORECASE)
+    if m:
+        return m.group(1)
+
+    # Pattern 2: publications page with hash ID
+    # e.g., parishesonline.com/publications?id=d45874de570a2a3aa1ec99e23f8b1fc5209aa77f
+    m = re.search(r'parishesonline\.com/publications\?id=([0-9a-fA-F]+)', raw_html)
+    if m:
+        return m.group(1)
+
+    # Pattern 3: organization or find page
+    # e.g., parishesonline.com/organization/parish-name-12345
+    # e.g., parishesonline.com/find/parish-name-12345
+    m = re.search(r'parishesonline\.com/(?:organization|find)/([^"\'<>\s]+)', raw_html)
+    if m:
+        return m.group(1)
+
+    # Pattern 4: numeric ID in URL
     m = re.search(r'parishesonline\.com/[^"\']*?(\d{4,6})', raw_html)
     if m:
         return m.group(1)
 
-    # Look for LPi embed patterns
+    # Pattern 5: container embed
     m = re.search(r'container\.parishesonline\.com/bulletins/\d+/(\d+)/', raw_html)
     if m:
         return m.group(1)
 
     return None
+
+
+def extract_discovermass_pdfs(dm_url: str):
+    """
+    Extract bulletin PDF download URLs from a DiscoverMass church page.
+
+    DiscoverMass embeds bulletin PDFs as:
+      bulletins.discovermass.com/download.php?bulletin=<encoded_id>
+    These are direct PDF downloads (Content-Type: application/pdf).
+    """
+    pdfs = []
+    resp = _rate_limited_get(dm_url)
+    if not resp or resp.status_code != 200:
+        return pdfs
+
+    # Find all download URLs
+    download_urls = re.findall(
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
+        resp.text
+    )
+    # Deduplicate while preserving order
+    seen = set()
+    for url in download_urls:
+        if url not in seen:
+            seen.add(url)
+            pdfs.append(url)
+
+    logger.debug(f"  DiscoverMass scan: found {len(pdfs)} bulletin PDFs")
+    return pdfs[:MAX_PDFS_PER_CHURCH]
 
 
 def extract_lpi_pdfs(lpi_url: str):
@@ -455,12 +951,102 @@ def extract_lpi_pdfs(lpi_url: str):
     if soup:
         for link in soup.find_all("a", href=True):
             href = link["href"]
-            if "container.parishesonline.com" in href and href.endswith(".pdf"):
+            if href.lower().endswith(".pdf"):
                 full_url = urljoin(lpi_url, href)
                 if full_url not in pdfs:
                     pdfs.append(full_url)
 
+    # Fallback: use Playwright to render the JS-heavy LPi page
+    if not pdfs and HAS_PLAYWRIGHT:
+        logger.debug(f"  LPi page: trying Playwright for {lpi_url}")
+        browser_pdfs = _extract_pdfs_with_browser(lpi_url)
+        if browser_pdfs:
+            pdfs.extend(browser_pdfs)
+
     return pdfs[:MAX_PDFS_PER_CHURCH]
+
+
+def extract_lpi_pdfs_from_widget(parish_id: str):
+    """
+    Extract PDF URLs from an LPi/ParishesOnline publicationWidget.
+
+    Many churches embed bulletins via an iframe pointing to:
+      parishesonline.com/publicationWidget?type=bulletin&id=<ID>
+
+    This function tries multiple LPi URL patterns to find downloadable PDFs.
+    """
+    pdfs = []
+
+    # Try the publications page directly
+    urls_to_try = []
+
+    # If it looks like a Salesforce ID (starts with 001, alphanumeric)
+    if re.match(r'^001[0-9a-zA-Z]+$', parish_id, re.IGNORECASE):
+        urls_to_try.append(f"https://parishesonline.com/publicationWidget?type=bulletin&id={parish_id}")
+        urls_to_try.append(f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}")
+
+    # If it's a hex hash
+    elif re.match(r'^[0-9a-fA-F]{20,}$', parish_id):
+        urls_to_try.append(f"https://parishesonline.com/publications?id={parish_id}")
+        urls_to_try.append(f"https://www.parishesonline.com/publications?id={parish_id}")
+
+    # If it's an organization slug (like "our-lady-of-grace-church-85239")
+    elif not parish_id.isdigit():
+        urls_to_try.append(f"https://parishesonline.com/organization/{parish_id}")
+        urls_to_try.append(f"https://www.parishesonline.com/find/{parish_id}")
+
+    # Numeric ID
+    else:
+        urls_to_try.append(f"https://parishesonline.com/publications?id={parish_id}")
+
+    for url in urls_to_try:
+        resp = _rate_limited_get(url)
+        if resp and resp.status_code == 200:
+            soup = BeautifulSoup(resp.text, "lxml")
+            # Look for PDF links
+            for link in soup.find_all("a", href=True):
+                href = link["href"]
+                full_url = urljoin(url, href)
+                if full_url.lower().endswith(".pdf") or ".pdf?" in full_url.lower():
+                    if full_url not in pdfs:
+                        pdfs.append(full_url)
+            # Look for links containing "download" or "view" near bulletin
+            for link in soup.find_all("a", href=True):
+                href = link["href"]
+                text = (link.get_text() or "").lower()
+                if ("download" in text or "view" in text) and "bulletin" in text:
+                    full_url = urljoin(url, href)
+                    if full_url not in pdfs and full_url.lower().endswith(".pdf"):
+                        pdfs.append(full_url)
+            if pdfs:
+                break
+
+    if pdfs:
+        logger.debug(f"  LPi widget HTTP scan for {parish_id}: found {len(pdfs)} PDFs")
+        return pdfs[:MAX_PDFS_PER_CHURCH]
+
+    # Fallback: use Playwright headless browser to render the JS widget
+    if HAS_PLAYWRIGHT:
+        widget_url = f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}"
+        logger.debug(f"  LPi widget: trying Playwright for {parish_id}")
+        browser_pdfs = _extract_pdfs_with_browser(widget_url)
+        if browser_pdfs:
+            logger.debug(f"  LPi widget Playwright for {parish_id}: found {len(browser_pdfs)} PDFs")
+            return browser_pdfs[:MAX_PDFS_PER_CHURCH]
+
+    logger.debug(f"  LPi widget scan for {parish_id}: found 0 PDFs")
+    return []
+
+
+def _extract_pdfs_with_browser_from_page(page_url: str):
+    """
+    Use Playwright to render a church's bulletin page and extract PDF links.
+
+    Used for eCatholic and other JS-heavy sites where HTTP returns no PDF links.
+    """
+    if not HAS_PLAYWRIGHT:
+        return []
+    return _extract_pdfs_with_browser(page_url)
 
 
 # ── Phase 2: PDF Download ─────────────────────────────────────────────────────
@@ -1293,14 +1879,33 @@ def run_discover(state_name: str, state_dir: Path, churches: list, progress: dic
                 pdf_count = len(result["pdf_urls"])
                 logger.info(f"  [OK] Found bulletin page ({result['source']}), {pdf_count} PDFs")
             else:
-                discovered[slug] = {
-                    "status": "not_found",
-                    "bulletin_page": result.get("bulletin_page_url"),
-                    "pdfs": [],
-                    "church_name": church["name"],
-                    "church_url": url,
-                }
-                logger.info(f"  [--] No bulletin found")
+                # Strategy 5: Try DiscoverMass as a fallback
+                state_code = church.get("state", "")
+                dm_result = try_discovermass_fallback(
+                    church["name"], church["city"], state_code
+                )
+                if dm_result and dm_result["pdf_urls"]:
+                    found_count += 1
+                    discovered[slug] = {
+                        "status": "found",
+                        "bulletin_page": dm_result["bulletin_page_url"],
+                        "pdfs": dm_result["pdf_urls"],
+                        "source": dm_result["source"],
+                        "lpi_parish_id": None,
+                        "church_name": church["name"],
+                        "church_url": url,
+                    }
+                    pdf_count = len(dm_result["pdf_urls"])
+                    logger.info(f"  [DM] DiscoverMass fallback: {pdf_count} PDFs")
+                else:
+                    discovered[slug] = {
+                        "status": "not_found",
+                        "bulletin_page": result.get("bulletin_page_url"),
+                        "pdfs": [],
+                        "church_name": church["name"],
+                        "church_url": url,
+                    }
+                    logger.info(f"  [--] No bulletin found")
         except Exception as e:
             discovered[slug] = {"status": "error", "error": str(e), "pdfs": []}
             logger.warning(f"  [ERR] Error: {e}")
@@ -1588,11 +2193,23 @@ def main():
                            "running URL resolver --retry-failed to pick up newly resolved "
                            "URLs. Implies --resume for all other churches."
                        ))
+    parser.add_argument("--retry-no-pdfs", action="store_true",
+                       help=(
+                           "Re-run discovery ONLY for churches that were found but got 0 PDFs "
+                           "(e.g. LPi widgets, eCatholic sites that need a headless browser). "
+                           "Implies --resume for churches that already have PDFs. "
+                           "After discovery, automatically runs download + extract phases."
+                       ))
 
     args = parser.parse_args()
     # --retry-no-url implies --resume (keep existing progress, just retry no_url ones)
     if args.retry_no_url:
         args.resume = True
+    # --retry-no-pdfs implies --resume and forces all phases
+    if args.retry_no_pdfs:
+        args.resume = True
+        if args.phase == "discover":
+            args.phase = "all"  # auto-run full pipeline after rediscovery
 
     # Resolve state names
     if "all" in args.states:
@@ -1653,6 +2270,30 @@ def main():
                 )
                 save_progress(state_dir, progress)
 
+        # If --retry-no-pdfs, remove entries that were "found" but got 0 PDFs
+        # so they get re-processed with Playwright-enabled logic
+        if args.retry_no_pdfs:
+            discovered_dict = progress.get("discovered", {})
+            no_pdf_slugs = [
+                slug for slug, info in discovered_dict.items()
+                if info.get("status") == "found" and not info.get("pdfs")
+            ]
+            # Also retry "not_found" entries (might succeed with browser)
+            not_found_slugs = [
+                slug for slug, info in discovered_dict.items()
+                if info.get("status") == "not_found"
+            ]
+            retry_slugs = no_pdf_slugs + not_found_slugs
+            for slug in retry_slugs:
+                del discovered_dict[slug]
+            if retry_slugs:
+                logger.info(
+                    f"Retry-no-pdfs: removed {len(no_pdf_slugs)} 'found-but-0-pdfs' + "
+                    f"{len(not_found_slugs)} 'not_found' entries from discovered dict "
+                    f"(will re-check with Playwright-enabled logic)"
+                )
+                save_progress(state_dir, progress)
+
         if args.phase in ("discover", "all"):
             discovered = run_discover(state_name, state_dir, with_urls, progress, resume=args.resume)
         else:
@@ -1672,6 +2313,9 @@ def main():
 
         if args.phase in ("extract", "all"):
             run_extract(state_name, state_dir, downloaded, progress)
+
+    # Clean up Playwright browser
+    _close_playwright_browser()
 
     logger.info("\n=== ALL DONE ===")
 
