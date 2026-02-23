@@ -752,6 +752,7 @@ These inform the lookup table contents in the database schema:
 9. **Base-slug duplicates (203 records):** CatholicIndex listed some churches twice with slightly different names but same base slug. **Fixed:** `run_dedup_cleanup.py` keeps the most recently updated variant per base slug.
 10. **CatholicIndex redirect URLs:** Website field contained `/api/out?...` redirect links, not actual URLs. The endpoint serves an interstitial HTML page with `window.location.href` in JavaScript. **Fixed:** `run_resolve_urls.py` fetches the interstitial page and parses the actual URL via regex.
 11. **JSONL truncation with --limit flag:** `run_resolve_urls.py --limit 10` originally rewrote the JSONL with only the limited records, truncating the full file. **Fixed:** Separated `all_records` from `records` for the rewrite.
+12. **502 Bad Gateway on large bulletin states:** Illinois (223K names) and Michigan (75MB response) caused gunicorn 120s timeout on `/bulletin/<state>/`. **Fixed:** Added 50K row cap with truncation warning in `bulletin.py`. Server-side pre-filtering applies `?church=` and `?city=` query params before the cap, so filtered views show full results. Commit `1b047ec`.
 
 ---
 
