@@ -171,6 +171,12 @@ def resolve_redirect_url(redirect_path: str, slug: str = "") -> str | None:
         if match:
             return match.group(1)
 
+        # Fallback: extract URL from <div class="url">https://...</div>
+        # (newer CatholicIndex interstitial page format as of Feb 2026)
+        url_div = re.search(r'class="url"[^>]*>(https?://[^<]+)<', resp.text)
+        if url_div:
+            return url_div.group(1).strip()
+
         # Fallback: look for any non-CatholicIndex URL in the page
         urls = re.findall(r'href="(https?://[^"]+)"', resp.text)
         for url in urls:
@@ -201,11 +207,22 @@ def resolve_redirect_url(redirect_path: str, slug: str = "") -> str | None:
                     if match:
                         return match.group(1)
 
+                    # Fallback: <div class="url">https://...</div>
+                    url_div = re.search(
+                        r'class="url"[^>]*>(https?://[^<]+)<', resp3.text
+                    )
+                    if url_div:
+                        return url_div.group(1).strip()
+
     return None
 
 
 def resolve_urls_for_state(
-    state_code: str, dir_name: str, resume: bool = False, limit: int | None = None
+    state_code: str,
+    dir_name: str,
+    resume: bool = False,
+    limit: int | None = None,
+    retry_failed: bool = False,
 ):
     """
     Resolve all website redirect URLs for a state's churches.
@@ -239,12 +256,36 @@ def resolve_urls_for_state(
     total = len(records)
 
     # Load progress for resume
+    # --resume: skip all churches in completed_slugs (even if they failed)
+    # --retry-failed: only skip churches that SUCCESSFULLY resolved (have a real URL)
     completed_slugs = set()
     if resume and progress_path.exists():
         prog = load_from_json(progress_path)
         if prog:
-            completed_slugs = set(prog.get("completed_slugs", []))
-            logger.info(f"Resuming — {len(completed_slugs)} already resolved")
+            if retry_failed:
+                # Only skip churches that already have a real resolved URL
+                # This retries churches where resolve_redirect_url returned None
+                successfully_resolved = set()
+                for record in all_records:
+                    ch = record.get("church", {})
+                    s = ch.get("slug", "")
+                    wr = ch.get("website_resolved")
+                    ws = ch.get("website", "") or ""
+                    # Skip if: has a real URL, OR has no website to resolve
+                    if wr:
+                        successfully_resolved.add(s)
+                    elif not ws or ws == "#" or "/api/out" not in ws:
+                        successfully_resolved.add(s)
+                completed_slugs = successfully_resolved
+                total_in_prog = len(prog.get("completed_slugs", []))
+                retry_count = total_in_prog - len(completed_slugs)
+                logger.info(
+                    f"Retry-failed mode: {len(completed_slugs)} already resolved, "
+                    f"{retry_count} failed churches will be retried"
+                )
+            else:
+                completed_slugs = set(prog.get("completed_slugs", []))
+                logger.info(f"Resuming — {len(completed_slugs)} already resolved")
 
     logger.info("=" * 60)
     logger.info(f"RESOLVING URLS: {state_code} ({total} churches)")
@@ -329,7 +370,12 @@ def resolve_urls_for_state(
     logger.info(f"{'=' * 60}")
 
 
-def run_resolve(states: list[str], resume: bool = False, limit: int | None = None):
+def run_resolve(
+    states: list[str],
+    resume: bool = False,
+    limit: int | None = None,
+    retry_failed: bool = False,
+):
     """Resolve URLs for one or more states."""
     for state_input in states:
         if state_input.lower() == "all":
@@ -346,7 +392,10 @@ def run_resolve(states: list[str], resume: bool = False, limit: int | None = Non
                 # Look up state code from dir name
                 matched = STATE_ALIASES.get(dir_name)
                 code = matched[0] if matched else dir_name.upper()
-                resolve_urls_for_state(code, dir_name, resume=resume, limit=limit)
+                resolve_urls_for_state(
+                    code, dir_name, resume=resume, limit=limit,
+                    retry_failed=retry_failed,
+                )
             return
 
         resolved = resolve_state(state_input)
@@ -354,7 +403,10 @@ def run_resolve(states: list[str], resume: bool = False, limit: int | None = Non
             logger.error(f"Unknown state: '{state_input}'")
             continue
         state_code, dir_name = resolved
-        resolve_urls_for_state(state_code, dir_name, resume=resume, limit=limit)
+        resolve_urls_for_state(
+            state_code, dir_name, resume=resume, limit=limit,
+            retry_failed=retry_failed,
+        )
 
 
 if __name__ == "__main__":
@@ -377,5 +429,21 @@ if __name__ == "__main__":
         default=None,
         help="Only process first N churches per state (for testing)",
     )
+    parser.add_argument(
+        "--retry-failed",
+        action="store_true",
+        help=(
+            "Re-attempt resolution for churches that previously failed. "
+            "Implies --resume but only skips churches with a REAL resolved URL "
+            "(retries ones where website_resolved is None)."
+        ),
+    )
     args = parser.parse_args()
-    run_resolve(args.states, resume=args.resume, limit=args.limit)
+    # --retry-failed implies --resume (we still want to skip successes)
+    resume = args.resume or args.retry_failed
+    run_resolve(
+        args.states,
+        resume=resume,
+        limit=args.limit,
+        retry_failed=args.retry_failed,
+    )
