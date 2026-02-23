@@ -753,6 +753,7 @@ These inform the lookup table contents in the database schema:
 10. **CatholicIndex redirect URLs:** Website field contained `/api/out?...` redirect links, not actual URLs. The endpoint serves an interstitial HTML page with `window.location.href` in JavaScript. **Fixed:** `run_resolve_urls.py` fetches the interstitial page and parses the actual URL via regex.
 11. **JSONL truncation with --limit flag:** `run_resolve_urls.py --limit 10` originally rewrote the JSONL with only the limited records, truncating the full file. **Fixed:** Separated `all_records` from `records` for the rewrite.
 12. **502 Bad Gateway on large bulletin states:** Illinois (223K names) and Michigan (75MB response) caused gunicorn 120s timeout on `/bulletin/<state>/`. **Fixed:** Added 50K row cap with truncation warning in `bulletin.py`. Server-side pre-filtering applies `?church=` and `?city=` query params before the cap, so filtered views show full results. Commit `1b047ec`.
+13. **Stale deploys from batch scripts:** Batch/parallel scripts (`run_bulletin_batch.sh`, `run_parallel_bulletins.sh`, `auto_commit_bulletins.sh`, `auto_commit_progress.sh`, `auto_pipeline.sh`) did `git commit && git push` without pulling first. When dashboard code fixes were pushed separately, the batch script's data commit sat on an older parent, so Render auto-deployed a snapshot missing the latest dashboard code (e.g. the 502 fix). **Fixed:** Added `git pull --rebase` before every `git push` in all 5 scripts, so every deploy always includes the newest dashboard and route code. Commit `6ea4028`. **IMPORTANT: Any new script that does `git push` must include `git pull --rebase` first.**
 
 ---
 
@@ -799,6 +800,16 @@ These inform the lookup table contents in the database schema:
 ---
 
 ## How to Resume / Re-Run
+
+> **IMPORTANT — Git push rule for all scripts and automation:**
+> Any script or cron job that does `git push` **must** run `git pull --rebase` first.
+> Without this, data-only commits can deploy on an old parent that's missing dashboard
+> fixes, causing stale/broken code to go live on Render. See Known Issue #13.
+> ```bash
+> git commit -m "..."
+> git pull --rebase   # <-- REQUIRED before push
+> git push
+> ```
 
 ### If the batch was interrupted (machine crash, etc.)
 ```bash
