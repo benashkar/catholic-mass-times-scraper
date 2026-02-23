@@ -60,6 +60,7 @@
                     <th>Day</th>
                     <th>Time</th>
                     <th>Service</th>
+                    <th>Schedule</th>
                     <th>Language</th>
                     <th>Location</th>
                     <th>Notes</th>
@@ -67,13 +68,37 @@
             </thead>
             <tbody>
                 {% for svc in services %}
+                {% set has_day = svc.Day and svc.Day != 'nan' %}
+                {% set has_date = svc['Event Date'] and svc['Event Date'] != 'nan' %}
+                {% set stype = svc['Schedule Type'] if svc['Schedule Type'] and svc['Schedule Type'] != 'nan' else '' %}
                 <tr>
-                    <td><strong>{{ svc.Day if svc.Day and svc.Day != 'nan' else '' }}</strong></td>
+                    <td>
+                        <strong>
+                        {%- if has_day -%}
+                            {{ svc.Day }}
+                        {%- elif has_date -%}
+                            {{ svc['Event Date'] }}
+                        {%- endif -%}
+                        </strong>
+                    </td>
                     <td>
                         {{ svc['Time Start'] if svc['Time Start'] and svc['Time Start'] != 'nan' else '' }}
                         {% if svc['Time End'] and svc['Time End'] != 'nan' %}&ndash; {{ svc['Time End'] }}{% endif %}
                     </td>
                     <td>{{ svc['Service Name'] if svc['Service Name'] and svc['Service Name'] != 'nan' else '' }}</td>
+                    <td>
+                        {%- if stype == 'special_event' or stype == 'parish_event' -%}
+                            <span class="badge bg-info text-dark">One-time</span>
+                        {%- elif stype == 'weekday' or stype == 'specific_weekday' or stype == 'saturday' or stype == 'sunday' -%}
+                            <span class="badge bg-success">Weekly</span>
+                        {%- elif stype == 'daily' -%}
+                            <span class="badge bg-success">Daily</span>
+                        {%- elif stype == 'monthly' -%}
+                            <span class="badge bg-warning text-dark">Monthly</span>
+                        {%- elif stype == 'other' -%}
+                            <span class="badge bg-secondary">See notes</span>
+                        {%- endif -%}
+                    </td>
                     <td>{{ svc.Language if svc.Language and svc.Language != 'nan' else '' }}</td>
                     <td>{{ svc.Location if svc.Location and svc.Location != 'nan' else '' }}</td>
                     <td class="small text-muted">{{ svc.Notes if svc.Notes and svc.Notes != 'nan' else '' }}</td>
