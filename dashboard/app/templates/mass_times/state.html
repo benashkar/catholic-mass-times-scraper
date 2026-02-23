@@ -30,8 +30,8 @@
                 {% for c in churches %}
                 <tr>
                     <td>
-                        <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.church_display) }}" class="text-decoration-none fw-bold">
-                            {{ c.Church }}
+                        <a href="{{ url_for('mass_times.church_view', state=state, church_id=c.church_id) }}" class="text-decoration-none fw-bold">
+                            {{ c.church_display }}
                         </a>
                     </td>
                     <td>{{ c.city }}</td>

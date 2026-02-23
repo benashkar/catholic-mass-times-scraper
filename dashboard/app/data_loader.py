@@ -207,13 +207,34 @@ def get_services(state_dir):
     else:
         df["city"] = "Unknown"
 
-    # Create a unique church_key for disambiguation (Church + city)
-    # This handles cases like multiple "St. Joseph" in different cities
+    # Join services to slugs from parsed_addresses for unique identification
+    churches_df = get_churches_for_state(state_dir)
+    if not churches_df.empty and "Church" in df.columns and "city" in df.columns:
+        # Build lookup: (name, city) -> slug, and name -> slug (fallback)
+        slug_by_name_city = {}
+        slug_by_name = {}
+        for _, row in churches_df.iterrows():
+            name = str(row.get("name", "")).strip()
+            city = str(row.get("city", "")).strip()
+            slug = str(row.get("slug", "")).strip()
+            if name and slug:
+                slug_by_name_city[(name, city)] = slug
+                if name not in slug_by_name:
+                    slug_by_name[name] = slug
+
+        def _lookup_slug(row):
+            name = str(row.get("Church", "")).strip()
+            city = str(row.get("city", "")).strip()
+            return slug_by_name_city.get((name, city)) or slug_by_name.get(name, "")
+
+        df["church_slug"] = df.apply(_lookup_slug, axis=1)
+    else:
+        df["church_slug"] = ""
+
+    # Create display name: "Church Name (City)" for duplicate names
     if "Church" in df.columns and "city" in df.columns:
-        # Count churches with duplicate names
         name_counts = df.groupby("Church")["city"].nunique()
         dup_names = set(name_counts[name_counts > 1].index)
-        # For duplicate names, append city for disambiguation
         df["church_display"] = df.apply(
             lambda r: f"{r['Church']} ({r['city']})" if r["Church"] in dup_names else r["Church"],
             axis=1,

@@ -1,12 +1,12 @@
 """
-Mass Times Browser — Navigate state → city → church → services.
-Uses church_display (which includes city for disambiguation) as the URL key.
-Filters out cross-state contamination via data_loader.
+Mass Times Browser — Navigate state → church (by slug) → services.
+Uses slug as unique church ID for navigation. Falls back to name matching
+for legacy URLs.
 """
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, redirect, url_for
 from app.data_loader import (
     get_services, get_church_website, church_has_bulletin_names,
-    _load_church_details_jsonl,
+    _load_church_details_jsonl, get_bulletin_names,
 )
 
 bp = Blueprint("mass_times", __name__, url_prefix="/mass-times")
@@ -19,18 +19,27 @@ def state_view(state):
     if services.empty:
         abort(404)
 
-    # Get unique churches with their details
+    # Get unique churches with their details — group by slug when available
+    # For churches without slugs, fall back to church_display
     churches = (
-        services.groupby("church_display")
+        services.groupby("church_slug" if "church_slug" in services.columns else "church_display")
         .agg(
             Church=("Church", "first"),
+            church_display=("church_display", "first"),
+            church_slug=("church_slug", "first") if "church_slug" in services.columns else ("church_display", "first"),
             address=("Address", "first"),
             phone=("Phone", "first"),
             city=("city", "first"),
-            service_count=("church_display", "count"),
+            service_count=("Church", "count"),
         )
-        .reset_index()
+        .reset_index(drop=True)
         .sort_values("Church")
+    )
+
+    # For churches without a slug, use church_display as fallback ID
+    churches["church_id"] = churches.apply(
+        lambda r: r["church_slug"] if r["church_slug"] else r["church_display"],
+        axis=1,
     )
 
     # Add website URLs from JSONL
@@ -40,12 +49,10 @@ def state_view(state):
     )
 
     # Add bulletin names availability
-    from app.data_loader import get_bulletin_names
     bulletin_df = get_bulletin_names(state)
     if bulletin_df is not None and not bulletin_df.empty:
         bulletin_churches = set(bulletin_df["church_name"].unique())
         churches["has_bulletin"] = churches["Church"].isin(bulletin_churches)
-        # Count names per church
         name_counts = bulletin_df.groupby("church_name").size().to_dict()
         churches["bulletin_count"] = churches["Church"].map(name_counts).fillna(0).astype(int)
     else:
@@ -61,78 +68,56 @@ def state_view(state):
     )
 
 
-@bp.route("/<state>/city/<city>/")
-def city_view(state, city):
-    """Show churches in a city."""
-    services = get_services(state)
-    if services.empty:
-        abort(404)
-
-    city_services = services[services["city"] == city]
-    if city_services.empty:
-        abort(404)
-
-    churches = (
-        city_services.groupby("church_display")
-        .agg(
-            address=("Address", "first"),
-            phone=("Phone", "first"),
-            service_count=("church_display", "count"),
-            Church=("Church", "first"),
-        )
-        .reset_index()
-        .sort_values("church_display")
-    )
-    display_name = state.replace("_", " ").title()
-    return render_template(
-        "mass_times/city.html",
-        state=state,
-        display_name=display_name,
-        city=city,
-        churches=churches.to_dict("records"),
-    )
-
-
-@bp.route("/<state>/church/<path:church_name>/")
-def church_view(state, church_name):
+@bp.route("/<state>/church/<path:church_id>/")
+def church_view(state, church_id):
     """Show full schedule for one church.
-    church_name may be 'St. Joseph (Springfield)' for disambiguation,
-    or just 'St. Joseph' for unique names.
-    Also supports legacy URLs that match by Church column directly.
+    church_id can be a slug (preferred) or a church name (legacy).
     """
     services = get_services(state)
     if services.empty:
         abort(404)
 
-    # First try matching by church_display (new disambiguated key)
-    church_services = services[services["church_display"] == church_name]
+    # Try matching by slug first (unique ID)
+    church_services = services[services["church_slug"] == church_id] if "church_slug" in services.columns else services.iloc[0:0]
+
+    # Fallback: match by church_display (name with city disambiguation)
+    if church_services.empty:
+        church_services = services[services["church_display"] == church_id]
 
     # Fallback: match by original Church name (legacy URLs)
-    # But only if there's exactly one address (not ambiguous)
     if church_services.empty:
-        church_services = services[services["Church"] == church_name]
+        church_services = services[services["Church"] == church_id]
         if not church_services.empty:
-            # If multiple addresses exist, show disambiguation page
+            # If multiple slugs exist, show disambiguation page
+            unique_slugs = church_services["church_slug"].nunique() if "church_slug" in church_services.columns else 0
             unique_addresses = church_services["Address"].nunique()
             if unique_addresses > 1:
-                # Multiple churches with same name — show a picker
                 options = (
-                    church_services.groupby("church_display")
+                    church_services.groupby(
+                        "church_slug" if "church_slug" in church_services.columns else "church_display"
+                    )
                     .agg(
+                        church_display=("church_display", "first"),
+                        Church=("Church", "first"),
+                        church_slug=("church_slug", "first") if "church_slug" in church_services.columns else ("church_display", "first"),
                         address=("Address", "first"),
                         phone=("Phone", "first"),
                         city=("city", "first"),
-                        service_count=("church_display", "count"),
+                        service_count=("Church", "count"),
                     )
-                    .reset_index()
+                    .reset_index(drop=True)
                     .sort_values("city")
+                )
+                options["church_id"] = options.apply(
+                    lambda r: r["church_slug"] if r["church_slug"] else r["church_display"],
+                    axis=1,
                 )
                 display_name = state.replace("_", " ").title()
                 return render_template(
                     "mass_times/disambiguate.html",
                     state=state,
                     display_name=display_name,
-                    church_name=church_name,
+                    church_name=church_id,
                     options=options.to_dict("records"),
                 )
 
@@ -142,7 +127,8 @@ def church_view(state, church_name):
     info = church_services.iloc[0]
     address = info.get("Address", "")
     phone = info.get("Phone", "")
-    actual_name = info.get("Church", church_name)
+    actual_name = info.get("Church", church_id)
+    slug = info.get("church_slug", "")
 
     # Group by category
     categories = {}
@@ -170,6 +156,7 @@ def church_view(state, church_name):
         state=state,
         display_name=display_name,
         church_name=actual_name,
+        church_slug=slug,
         address=address,
         phone=phone,
         website_url=website_url,

@@ -20,7 +20,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">
-                    <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.church_display) }}" class="text-decoration-none">
+                    <a href="{{ url_for('mass_times.church_view', state=state, church_id=c.church_display) }}" class="text-decoration-none">
                         {{ c.church_display }}
                     </a>
                 </h5>
@@ -37,7 +37,7 @@
                 <span class="badge bg-primary">{{ c.service_count }} services</span>
             </div>
             <div class="card-footer bg-transparent">
-                <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.church_display) }}" class="btn btn-sm btn-outline-primary w-100">
+                <a href="{{ url_for('mass_times.church_view', state=state, church_id=c.church_display) }}" class="btn btn-sm btn-outline-primary w-100">
                     View Schedule <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
