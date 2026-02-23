@@ -48,7 +48,7 @@
                     </td>
                     <td class="text-center">
                         {% if c.has_bulletin and c.bulletin_count > 0 %}
-                        <a href="{{ url_for('bulletin.state_view', state=state) }}?church={{ c.Church }}" class="btn btn-sm btn-outline-success" target="_blank">
+                        <a href="{{ url_for('bulletin.state_view', state=state, church=c.Church, city=c.city) }}" class="btn btn-sm btn-outline-success" target="_blank">
                             <i class="bi bi-people"></i> {{ c.bulletin_count }}
                         </a>
                         {% endif %}

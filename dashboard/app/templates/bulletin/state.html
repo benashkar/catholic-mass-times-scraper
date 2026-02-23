@@ -68,8 +68,8 @@
     <div class="col-md-4">
         <select id="filterChurch" class="form-select form-select-sm">
             <option value="">All Churches</option>
-            {% for ch in churches %}
-            <option value="{{ ch }}">{{ ch }}</option>
+            {% for opt in church_options %}
+            <option value="{{ opt.church }}" data-city="{{ opt.city }}">{{ opt.label }}</option>
             {% endfor %}
         </select>
     </div>
@@ -186,15 +186,55 @@ $(document).ready(function() {
         table.column(6).search(this.value, false, false).draw();
     });
 
-    // Custom filter: Church (column index 5)
+    // Custom filter: Church (column index 5) — with optional city (column 6)
+    // When a church option has data-city, filter both columns for exact match
     $('#filterChurch').on('change', function() {
-        table.column(5).search(this.value, false, false).draw();
+        var churchVal = this.value;
+        var cityVal = $(this).find(':selected').data('city') || '';
+        // Use exact match via regex with ^ and $ anchors
+        if (churchVal) {
+            table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(churchVal) + '$', true, false);
+        } else {
+            table.column(5).search('', false, false);
+        }
+        if (cityVal) {
+            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
+        } else if (churchVal) {
+            // Don't reset city if we have a church selected — only reset if clearing church
+        } else {
+            table.column(6).search('', false, false);
+        }
+        table.draw();
     });
 
     // Custom filter: Category (column index 7)
     $('#filterCategory').on('change', function() {
         table.column(7).search(this.value, false, false).draw();
     });
+
+    // Auto-apply ?church= and ?city= prefilters from URL (linked from mass-times page)
+    var prefilterChurch = {{ prefilter_church|tojson }};
+    var prefilterCity = {{ prefilter_city|tojson }};
+    if (prefilterChurch) {
+        // Filter by church name (exact match)
+        table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(prefilterChurch) + '$', true, false);
+        // If city also provided, filter that column too (disambiguates duplicate names)
+        if (prefilterCity) {
+            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
+            // Select matching dropdown option with matching city
+            $('#filterChurch option').each(function() {
+                if ($(this).val() === prefilterChurch && $(this).data('city') === prefilterCity) {
+                    $(this).prop('selected', true);
+                }
+            });
+        } else {
+            // No city — select first matching option
+            $('#filterChurch option').filter(function() {
+                return $(this).val() === prefilterChurch;
+            }).first().prop('selected', true);
+        }
+        table.draw();
+    }
 });
 </script>
 {% endblock %}
