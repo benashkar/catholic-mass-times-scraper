@@ -107,6 +107,8 @@ commit_state() {
             git commit -m "Add bulletin + URL data for $state ($name_count names extracted)
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
+            # Rebase onto latest remote so deploy always includes newest dashboard code
+            git pull --rebase 2>&1
             git push 2>&1
             echo "[$state] Committed and pushed."
         else

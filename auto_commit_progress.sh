@@ -32,6 +32,8 @@ while true; do
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
 
+    # Rebase onto latest remote so deploy always includes newest dashboard code
+    git pull --rebase 2>&1
     git push 2>&1
 
     echo "$(date '+%Y-%m-%d %H:%M:%S') | Committed and pushed ($CHANGED states updated)"

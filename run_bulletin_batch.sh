@@ -56,32 +56,49 @@ commit_and_push() {
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
 
+    # Rebase onto latest remote so deploy always includes newest dashboard code
+    git pull --rebase 2>&1
     git push 2>&1
     echo "  Committed and pushed $state bulletin data ($name_count names)."
 }
 
 STATES=(
-    california
-    michigan
-    minnesota
-    massachusetts
-    florida
-    louisiana
-    indiana
-    iowa
-    kansas
-    connecticut
-    maryland
-    kentucky
-    colorado
     alabama
-    maine
-    arkansas
-    mississippi
     alaska
-    idaho
-    hawaii
+    arkansas
+    colorado
     delaware
+    hawaii
+    idaho
+    indiana
+    kansas
+    kentucky
+    louisiana
+    maine
+    maryland
+    massachusetts
+    mississippi
+    missouri
+    montana
+    nevada
+    new_hampshire
+    new_jersey
+    new_york
+    north_carolina
+    north_dakota
+    oklahoma
+    oregon
+    rhode_island
+    south_carolina
+    south_dakota
+    tennessee
+    utah
+    vermont
+    virginia
+    washington
+    west_virginia
+    wisconsin
+    wyoming
 )
 
 echo "=== BULLETIN BATCH SCRAPER ==="
