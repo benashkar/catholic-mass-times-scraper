@@ -45,6 +45,24 @@
     margin-bottom: 0;
 }
 
+/* Bulletin names table — compact columns, no horizontal scroll */
+.bulletin-table {
+    font-size: 0.82rem;
+}
+.bulletin-table td,
+.bulletin-table th {
+    padding: 0.3rem 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* Let church name and name columns wrap if needed */
+.bulletin-table td:nth-child(1),
+.bulletin-table td:nth-child(6) {
+    white-space: normal;
+    word-break: break-word;
+}
+
 /* Responsive table scroll */
 @media (max-width: 768px) {
     .card-body.p-0 {
