@@ -8,13 +8,78 @@ STRATEGY:
 This avoids needing a database for the POC while keeping memory usage manageable.
 """
 import os
+import re
 import pandas as pd
+import numpy as np
 from functools import lru_cache
 
 # Module-level globals set during init_data()
 DATA_DIR = None
 _churches_df = None   # Master church list (all states, ~23K rows, ~4 MB)
 _state_list = None    # Cached list of state dicts
+
+# Maps state directory names to expected state name in addresses
+STATE_DIR_TO_NAME = {
+    "alabama": "Alabama", "alaska": "Alaska", "arizona": "Arizona",
+    "arkansas": "Arkansas", "california": "California", "colorado": "Colorado",
+    "connecticut": "Connecticut", "delaware": "Delaware", "florida": "Florida",
+    "georgia": "Georgia", "hawaii": "Hawaii", "idaho": "Idaho",
+    "illinois": "Illinois", "indiana": "Indiana", "iowa": "Iowa",
+    "kansas": "Kansas", "kentucky": "Kentucky", "louisiana": "Louisiana",
+    "maine": "Maine", "maryland": "Maryland", "massachusetts": "Massachusetts",
+    "michigan": "Michigan", "minnesota": "Minnesota", "mississippi": "Mississippi",
+    "missouri": "Missouri", "montana": "Montana", "nebraska": "Nebraska",
+    "nevada": "Nevada", "new_hampshire": "New Hampshire", "new_jersey": "New Jersey",
+    "new_mexico": "New Mexico", "new_york": "New York",
+    "north_carolina": "North Carolina", "north_dakota": "North Dakota",
+    "ohio": "Ohio", "oklahoma": "Oklahoma", "oregon": "Oregon",
+    "pennsylvania": "Pennsylvania", "rhode_island": "Rhode Island",
+    "south_carolina": "South Carolina", "south_dakota": "South Dakota",
+    "tennessee": "Tennessee", "texas": "Texas", "utah": "Utah",
+    "vermont": "Vermont", "virginia": "Virginia", "washington": "Washington",
+    "west_virginia": "West Virginia", "wisconsin": "Wisconsin", "wyoming": "Wyoming",
+}
+
+# Also map abbreviations
+STATE_ABBREV_TO_DIR = {
+    "AL": "alabama", "AK": "alaska", "AZ": "arizona", "AR": "arkansas",
+    "CA": "california", "CO": "colorado", "CT": "connecticut", "DE": "delaware",
+    "FL": "florida", "GA": "georgia", "HI": "hawaii", "ID": "idaho",
+    "IL": "illinois", "IN": "indiana", "IA": "iowa", "KS": "kansas",
+    "KY": "kentucky", "LA": "louisiana", "ME": "maine", "MD": "maryland",
+    "MA": "massachusetts", "MI": "michigan", "MN": "minnesota", "MS": "mississippi",
+    "MO": "missouri", "MT": "montana", "NE": "nebraska", "NV": "nevada",
+    "NH": "new_hampshire", "NJ": "new_jersey", "NM": "new_mexico", "NY": "new_york",
+    "NC": "north_carolina", "ND": "north_dakota", "OH": "ohio", "OK": "oklahoma",
+    "OR": "oregon", "PA": "pennsylvania", "RI": "rhode_island", "SC": "south_carolina",
+    "SD": "south_dakota", "TN": "tennessee", "TX": "texas", "UT": "utah",
+    "VT": "vermont", "VA": "virginia", "WA": "washington", "WV": "west_virginia",
+    "WI": "wisconsin", "WY": "wyoming",
+}
+
+
+def _extract_state_from_address(address):
+    """Extract state name from an address like '123 Main St, City, State 12345'."""
+    if not isinstance(address, str):
+        return None
+    # Try full state name pattern: ", StateName 12345"
+    m = re.search(r",\s*([A-Za-z]+(?:\s+[A-Za-z]+)*)\s+\d{5}", address)
+    if m:
+        return m.group(1).strip()
+    # Try abbreviation pattern: ", ST 12345"
+    m = re.search(r",\s*([A-Z]{2})\s+\d{5}", address)
+    if m:
+        abbrev = m.group(1)
+        state_dir = STATE_ABBREV_TO_DIR.get(abbrev)
+        if state_dir:
+            return STATE_DIR_TO_NAME.get(state_dir)
+    return None
+
+
+def _clean_nan(df):
+    """Replace all NaN/None values with empty strings for display.
+    Pandas float('nan') is truthy, so Jinja2 'or' doesn't catch it."""
+    return df.fillna("")
 
 
 def init_data(app):
@@ -104,6 +169,8 @@ def get_services(state_dir):
     """
     Load and return services DataFrame for a state.
     Cached for the 5 most recently accessed states.
+    Filters out cross-state contamination (churches whose address
+    doesn't match the expected state).
     """
     path = os.path.join(DATA_DIR, state_dir, "all_services.csv")
     if not os.path.isfile(path):
@@ -111,14 +178,51 @@ def get_services(state_dir):
 
     df = pd.read_csv(path, encoding="utf-8-sig")
 
-    # Parse city from Address: "street, city, state zip"
+    # Parse city and address_state from Address: "street, City, State Zip"
     if "Address" in df.columns:
         parts = df["Address"].str.split(",")
         # City is usually the second part; state+zip is the third
         df["city"] = parts.str[1].str.strip()
         df["city"] = df["city"].fillna("Unknown")
+
+        # Filter: only keep rows whose address state matches this state_dir
+        expected_state = STATE_DIR_TO_NAME.get(state_dir, "")
+        if expected_state:
+            df["_addr_state"] = df["Address"].apply(_extract_state_from_address)
+            before = len(df)
+            # Keep rows where address state matches OR where we couldn't parse state
+            df = df[
+                (df["_addr_state"].isna()) |
+                (df["_addr_state"] == "") |
+                (df["_addr_state"].str.lower() == expected_state.lower())
+            ].copy()
+            removed = before - len(df)
+            if removed > 0:
+                import logging
+                logging.getLogger(__name__).info(
+                    f"Filtered {removed} cross-state services from {state_dir} "
+                    f"(kept {len(df)})"
+                )
+            df.drop(columns=["_addr_state"], inplace=True, errors="ignore")
     else:
         df["city"] = "Unknown"
+
+    # Create a unique church_key for disambiguation (Church + city)
+    # This handles cases like multiple "St. Joseph" in different cities
+    if "Church" in df.columns and "city" in df.columns:
+        # Count churches with duplicate names
+        name_counts = df.groupby("Church")["city"].nunique()
+        dup_names = set(name_counts[name_counts > 1].index)
+        # For duplicate names, append city for disambiguation
+        df["church_display"] = df.apply(
+            lambda r: f"{r['Church']} ({r['city']})" if r["Church"] in dup_names else r["Church"],
+            axis=1,
+        )
+    else:
+        df["church_display"] = df.get("Church", "")
+
+    # Clean all NaN values for display
+    df = _clean_nan(df)
 
     return df
 

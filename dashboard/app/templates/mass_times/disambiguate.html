@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ church_name }} — Which Location?{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('mass_times.state_view', state=state) }}">{{ display_name }}</a></li>
+        <li class="breadcrumb-item active">{{ church_name }}</li>
+    </ol>
+</nav>
+
+<h2><i class="bi bi-signpost-2"></i> Multiple &ldquo;{{ church_name }}&rdquo; Locations</h2>
+<p class="text-muted">There are {{ options|length }} churches named &ldquo;{{ church_name }}&rdquo; in {{ display_name }}. Please select the correct location:</p>
+
+<div class="row g-3">
+    {% for opt in options %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ url_for('mass_times.church_view', state=state, church_name=opt.church_display) }}" class="text-decoration-none">
+                        {{ opt.church_display }}
+                    </a>
+                </h5>
+                {% if opt.address %}
+                <p class="card-text small text-muted mb-1">
+                    <i class="bi bi-geo-alt"></i> {{ opt.address }}
+                </p>
+                {% endif %}
+                {% if opt.phone %}
+                <p class="card-text small text-muted mb-1">
+                    <i class="bi bi-telephone"></i> {{ opt.phone }}
+                </p>
+                {% endif %}
+                <span class="badge bg-primary">{{ opt.service_count }} services</span>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('mass_times.church_view', state=state, church_name=opt.church_display) }}" class="btn btn-sm btn-outline-primary w-100">
+                    View Schedule <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

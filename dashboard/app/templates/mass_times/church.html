@@ -55,15 +55,15 @@
             <tbody>
                 {% for svc in services %}
                 <tr>
-                    <td><strong>{{ svc.Day or '' }}</strong></td>
+                    <td><strong>{{ svc.Day if svc.Day and svc.Day != 'nan' else '' }}</strong></td>
                     <td>
-                        {{ svc['Time Start'] or '' }}
-                        {% if svc['Time End'] %}&ndash; {{ svc['Time End'] }}{% endif %}
+                        {{ svc['Time Start'] if svc['Time Start'] and svc['Time Start'] != 'nan' else '' }}
+                        {% if svc['Time End'] and svc['Time End'] != 'nan' %}&ndash; {{ svc['Time End'] }}{% endif %}
                     </td>
-                    <td>{{ svc['Service Name'] or '' }}</td>
-                    <td>{{ svc.Language or '' }}</td>
-                    <td>{{ svc.Location or '' }}</td>
-                    <td class="small text-muted">{{ svc.Notes or '' }}</td>
+                    <td>{{ svc['Service Name'] if svc['Service Name'] and svc['Service Name'] != 'nan' else '' }}</td>
+                    <td>{{ svc.Language if svc.Language and svc.Language != 'nan' else '' }}</td>
+                    <td>{{ svc.Location if svc.Location and svc.Location != 'nan' else '' }}</td>
+                    <td class="small text-muted">{{ svc.Notes if svc.Notes and svc.Notes != 'nan' else '' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
