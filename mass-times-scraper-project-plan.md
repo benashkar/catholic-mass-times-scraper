@@ -391,10 +391,11 @@ Confidence reflects whether this is likely a **real person connected to the chur
 | `pdf_url` | Original download URL (source link for verification) |
 | `pdf_date` | Date extracted from PDF filename (YYYY-MM-DD) |
 | `person_name` | Full extracted name string (e.g., "Fr. John M. Smith") |
-| `title` | Name prefix/title: "Fr.", "Dr.", "Rev.", "Dcn.", "Sr.", etc. (empty if none) |
+| `title` | **Honorific prefix**: "Fr.", "Dr.", "Rev.", "Dcn.", "Sr.", etc. (empty if none) |
 | `first_name` | First name: "John" |
 | `middle_name` | Middle name or initial: "M." or "Michael" (empty if none) |
 | `last_name` | Last name: "Smith" |
+| `role` | **Positional role**: "Pastor", "Business Manager", "Chairman", "Deacon", "Lector", etc. (empty if none). Separate from `title` — a person can have both: Pastor Fr. Michael Martinez → role="Pastor", title="Fr." |
 | `category` | Extraction category (clergy_staff, mass_intention, prayer_list, ministry_contextual) |
 | `confidence` | Confidence flag: high, medium, or low |
 | `context` | Surrounding text snippet for verification |
@@ -404,6 +405,26 @@ Confidence reflects whether this is likely a **real person connected to the chur
 **Name splitting:** The `parse_name_parts()` function splits extracted names into structured fields (title, first, middle, last). This enables downstream matching against external name lists using city+first+last pairs. Titles like "Fr.", "Rev.", "Dr." are separated into their own column.
 
 **False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Confidence flag allows downstream filtering — "high" names are very likely real people, "low" names may be false positives. Names will ultimately be matched against a known name list, so recall is prioritized over precision.
+
+**Name Extraction Architecture (all in `run_bulletin_scraper.py`):**
+
+ALL name extraction logic lives in a single file. The 3 key functions:
+- `extract_names_from_text()` — main extraction with 6 pattern groups
+- `parse_name_parts()` — splits "Fr. John M. Smith" into title/first/middle/last
+- `is_valid_name()` — false positive filtering (case-insensitive, with blocklist)
+
+**6 extraction patterns** (in priority order):
+1. **Staff role-name pairs**: "Pastor Fr. Michael Martinez", "Business Manager Teresa Mullen" — captures both the role AND the name
+2. **Honorific-only clergy**: "Fr. John Smith" anywhere in text (implies role=Priest)
+3. **Section-header roles**: "DEACONS" centered header → all names below get role=Deacon. Also handles PASTORAL COUNCIL, FINANCE COUNCIL, BOARD OF DIRECTORS
+4. **Ministry contact listings**: "Altar Servers, Aeneas Anderson 249-9820" — role=Altar Servers
+5. **Mass intentions**: "repose of the soul of John Smith", "†John Smith"
+6. **Prayer lists / sick lists**: comma-separated names after prayer headers
+7. **Contextual names**: capitalized names near ministry keywords (MEDIUM confidence, broadest/loosest)
+
+**Known challenge — PDF column bleed**: pdfplumber merges adjacent PDF columns onto the same text line (e.g. "Patrick Ledger Saturday Vigil 5:00pm"). The code strips trailing non-name words but this is an ongoing refinement area.
+
+**Iterative improvement workflow**: Download PDFs once (slow, network-bound), then re-run `python3 run_bulletin_scraper.py extract <state>` as many times as needed with improved logic (fast, CPU-only, ~2 min/state). This is the ideal development loop for refining extraction quality.
 
 **Initial run results (3 PDFs/church cap):**
 
@@ -431,7 +452,34 @@ Confidence reflects whether this is likely a **real person connected to the chur
 - `v_bulletin_ui_names` — **flat denormalized view for the UI** (filterable by state → city → church → name)
 - `v_bulletin_ui_city_summary` — city-level rollup for sidebar/filter in UI (church count + name count per city)
 
-**Status (2026-02-22):** Re-running full pipeline on Arizona and Georgia with all bulletins. Wisconsin and Pennsylvania pending URL resolution completion.
+**Full run results (100 PDFs/church cap, Feb 2026):**
+
+| Metric | Arizona |
+|--------|---------|
+| Total churches with PDFs | 35 |
+| Churches with names extracted | 27 |
+| Total unique names (per-church) | **5,385** |
+| Names with role assigned | 850 |
+| Names with honorific title | 250 |
+| Capped churches (hit 100 PDF limit) | 4 |
+
+**Capped churches** (saved in `capped_churches.json` for future second pass to grab remaining bulletins):
+- Our Lady of the Mountains, Holy Family, Most Holy Trinity Parish, Oratory of St. Gianna
+
+**Dashboard (Render):**
+- Live at: https://catholic-church-dashboard.onrender.com
+- Flask app in `dashboard/` subfolder, deployed via Render native Python runtime
+- Reads CSVs directly (no Postgres for POC), LRU cache per state
+- Bulletin Names view: filterable DataTable with Name, Role, Title, First, Last, Church, City, Category, Confidence, PDF link, Date
+- `render.yaml` at repo root configures the service
+
+**Status (2026-02-22):**
+- Arizona: extraction complete with role/title support, 5,385 unique names, dashboard live
+- Georgia: discover + download complete, extraction needs re-run with updated logic
+- Illinois: bulletin discovery running (~86/1,112 churches)
+- Minnesota: URL resolver nearly complete (~754/760), then bulletin scraper can start
+- Pennsylvania, Wisconsin: blocked on URL resolver (not yet started for these states)
+- **Ideal workflow**: Keep discover+download running for all states (slow), refine extraction logic on AZ sample (fast re-runs), then batch extract all states
 
 ### Phase 8: Docker / Containerization
 **Goal:** Containerize both the church scrape pipeline and the bulletin/PDF pipeline as separate Docker services sharing the same data volume.
@@ -572,7 +620,22 @@ church scrapes/
 ├── run_dedup_cleanup.py                   # Phase 5.5: remove cross-state & base-slug duplicates
 ├── run_resolve_urls.py                    # Resolve CatholicIndex redirect URLs to actual website URLs
 ├── run_bulletin_scraper.py                # Phase 7: bulletin discovery + PDF download + name extraction
-└── auto_commit_progress.sh               # Cron-style script to commit URL resolver progress every 2 hours
+├── auto_commit_progress.sh               # Cron-style script to commit URL resolver progress every 2 hours
+│
+├── dashboard/                             # Render dashboard (standalone Flask app)
+│   ├── app/
+│   │   ├── __init__.py                    # Flask app factory
+│   │   ├── config.py                      # Config from env vars
+│   │   ├── data_loader.py                 # CSV loading, parsing, LRU caching
+│   │   ├── routes/
+│   │   │   ├── main.py                    # Home page — state picker
+│   │   │   ├── mass_times.py              # State → city → church → services
+│   │   │   └── bulletin.py                # State → filterable names DataTable
+│   │   ├── templates/                     # Jinja2 templates (Bootstrap 5 + DataTables)
+│   │   └── static/css/style.css
+│   ├── requirements.txt
+│   └── Dockerfile                         # Not used (Render native runtime instead)
+└── render.yaml                            # Render Infrastructure as Code config
 ```
 
 ---
