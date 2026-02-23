@@ -32,6 +32,12 @@ ENV/
 # --- Logs ---
 # Log files are generated locally and can get very large
 logs/*.log
+*.log
+.auto_commit_bulletins.pid
+
+# --- Temp chain scripts (auto-generated, not needed in repo) ---
+auto_chain_*.sh
+auto_pipeline_start.sh
 
 # --- IDE / Editor ---
 .vscode/
