@@ -7,7 +7,7 @@
 **Scope:** Scrape, parse, and publish weekly Catholic mass times for every city in the United States
 **Final Output:** Date-specific mass time listings for newspaper publication (story + table format)
 **Long-Term Vision:** A comprehensive, continuously updated database of Catholic mass times for every parish in the United States (~17,000 parishes across 29,880 cities), powering CR Community News editions in any market
-**Schedule:** Weekly automated scrape (manual trigger for now, automated via cron/GitHub Actions in Phase 4)
+**Schedule:** Fully automated via Render cron jobs — weekly schedule refresh (Sunday) + daily bulletin batches (Tue–Sat)
 **GitHub:** https://github.com/benashkar/catholic-mass-times-scraper
 
 ---
@@ -184,31 +184,42 @@ Maps CatholicIndex raw values to normalized DB codes:
 ### Phase 3: Date Generation Layer ✅ COMPLETE
 **Goal:** Convert recurring day-of-week schedules into specific dated listings for newspaper publication.
 
-- [x] Map each recurring schedule entry to actual calendar dates (next 2 weeks)
+- [x] Map each recurring schedule entry to actual calendar dates (next 12 weeks)
 - [x] Handle weekly recurrence (Mon–Sun day codes → actual dates)
 - [x] Handle monthly patterns (First Friday, First Saturday, First Sunday, Thursday before First Friday)
 - [x] Handle one-time events with specific dates (eventDate field)
 - [x] Generate dated CSV with actual calendar dates
 - [x] Extract CSV generation logic into shared module (`src/etl/csv_generator.py`)
-- [ ] Input: custom publication date range (currently hardcoded to next 2 weeks)
+- [x] Extended date range from 2 weeks to 12 weeks (84 days) for better forward visibility
+- [x] Added `--dates-only` flag to `run_statewide.py` for fast regeneration without re-scraping
+- [x] Added `all` keyword support to run all 50 states: `python run_statewide.py all --dates-only`
 - [ ] Story format output (narrative text block for article-style listing)
 - [ ] Flag Holy Days of Obligation within date range
 
-### Phase 4: Scheduling & Automation
+### Phase 4: Scheduling & Automation ✅ COMPLETE
 **Goal:** Automatically re-scrape all states every Sunday so data stays fresh for weekly publication.
 
-**Primary requirement: Fully automated Sunday refresh**
-- [ ] GitHub Actions workflow to run `run_all_states.py` every Sunday (cron: `0 2 * * 0`)
-- [ ] Or: Windows Task Scheduler / cron on local machine as fallback
-- [ ] Auto-commit and push results after each state completes
-- [ ] Slack/email notification on completion or failure
+**Render Cron Jobs (all on Starter plan, Ohio region):**
 
-**Additional automation:**
-- [ ] Dockerize the project for portable deployment
+| Day | Job Name | What It Does |
+|-----|----------|-------------|
+| **Sunday** 3 AM UTC | `church-weekly-refresh` | Re-scrape all 50 states from CatholicIndex (`--detail-only --resume`), regenerate 12-week dated CSVs (`--dates-only`), git push → auto-deploy |
+| **Tuesday** 3 AM UTC | `bulletin-tue-batch1` | Bulletin pipeline for AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA |
+| **Wednesday** 3 AM UTC | `bulletin-wed-batch2` | Bulletin pipeline for HI, ID, IL, IN, IA, KS, KY, LA, ME, MD |
+| **Thursday** 3 AM UTC | `bulletin-thu-batch3` | Bulletin pipeline for MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ |
+| **Friday** 3 AM UTC | `bulletin-fri-batch4` | Bulletin pipeline for NM, NY, NC, ND, OH, OK, OR, PA, RI, SC |
+| **Saturday** 3 AM UTC | `bulletin-sat-batch5` | Bulletin pipeline for SD, TN, TX, UT, VT, VA, WA, WV, WI, WY |
+
+Each bulletin batch: resolve URLs → discover bulletin pages → download PDFs → extract names → git push → dashboard auto-deploys. Bulletins come out Mondays, processing starts Tuesday, all 50 states done by Saturday.
+
+- [x] Render cron job for weekly schedule re-scrape (Sundays)
+- [x] Render cron jobs for bulletin pipeline (Tue–Sat, 10 states/day)
+- [x] Auto-commit and push results after each batch
+- [x] Dashboard auto-deploys on push (Render auto-deploy enabled)
+- [x] `--resume` flags on all jobs so crashes don't lose progress
+- [ ] Slack/email notification on completion or failure
 - [ ] Change detection: compare current scrape to previous; flag schedule changes
-- [ ] Special events mode: pull date-specific events from CatholicIndex
 - [ ] Holy Day alerts: flag upcoming Holy Days so editorial can follow up with parishes
-- [ ] Store scrape history via `scrape_log` table
 
 ### Phase 5: Nationwide Statewide Expansion ✅ COMPLETE
 **Goal:** Run the scraper against every city in every US state, building comprehensive parish coverage.
@@ -225,16 +236,18 @@ Maps CatholicIndex raw values to normalized DB codes:
 - CLI: `python run_statewide.py ohio texas --resume --limit 10`
 - Discovery phase: queries every city in a state via CatholicIndex city pages
 - Detail phase: scrapes full schedules for all discovered churches
+- Dates-only phase: regenerate dated CSVs from existing JSONL (no scraping, takes seconds)
 - Resume: tracks completed cities/churches in progress JSON files
 - JSONL: saves each church detail incrementally (crash-safe)
 - 404 tolerance: most small towns return 404 (no CatholicIndex page) — that's expected
 - ETA display: shows estimated time remaining during long runs
-- Flags: `--resume`, `--limit N`, `--discovery-only`, `--detail-only`
+- Flags: `--resume`, `--limit N`, `--discovery-only`, `--detail-only`, `--dates-only`
+- Special keyword `all`: `python run_statewide.py all --dates-only` processes every state
 
 **Output per state:**
 - `data/churches/{state}/master_church_list.csv` — deduplicated church list
 - `data/output/{state}/all_services.csv` — one row per service
-- `data/output/{state}/dated_services.csv` — actual calendar dates for next 2 weeks
+- `data/output/{state}/dated_services.csv` — actual calendar dates for next 12 weeks
 - `data/output/{state}/church_details.jsonl` — raw JSON per church (incremental)
 - `data/output/{state}/parsed_addresses.csv` — segmented address fields
 
@@ -311,7 +324,7 @@ CatholicIndex's API returns churches within a 25-mile radius of each queried cit
 **Goal:** Ensure comprehensive, accurate coverage.
 
 - [x] Duplicate parish detection — handled in Phase 5.5
-- [ ] Resolve all website URLs to actual church websites (run_resolve_urls.py)
+- [x] Resolve all website URLs to actual church websites — 23,046/23,046 resolved, 0 failures
 - [ ] Cross-reference with all 196 US dioceses/archdioceses
 - [ ] Identify parishes with no mass times listed
 - [ ] Flag stale schedules (no update in 6+ months)
@@ -503,20 +516,25 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 - Live at: https://catholic-church-dashboard.onrender.com
 - Flask app in `dashboard/` subfolder, deployed via Render native Python runtime
 - Reads CSVs directly (no Postgres for POC), LRU cache per state
+- **Dated Activities Calendar**: `/mass-times/<state>/calendar/` — all activities for a state with fixed yyyy-mm-dd dates (next 12 weeks), filterable by date range, church, and category. CSV download available at `/mass-times/<state>/calendar/download/`
 - Bulletin Names view: filterable DataTable with Name, Role, Title, First, Last, Church, City, Category, Confidence, PDF link, Date
+- Church detail page: one-time event dates formatted as human-readable (e.g., "Feb 18")
+- State page: "View Calendar" link alongside church count
 - `render.yaml` at repo root configures the service
+- Auto-deploys on every push to master
 
 **Status (2026-02-23):**
-- Arizona: retry-no-pdfs with Playwright running, 35 → 41+ churches with PDFs (improving)
-- California: retry-no-pdfs with Playwright running
-- Florida: original run finishing, Playwright retry auto-chained
-- Illinois: original run finishing (download phase), Playwright retry auto-chained
-- Ohio: bulletin scraper running with new Playwright code (903 churches)
-- Texas: bulletin scraper running with new Playwright code (1,265 churches)
-- Pennsylvania, Michigan: bulletin scraper running from auto-pipeline
-- Georgia: complete with old code, will get Playwright retry later
-- **Auto-pipeline queued**: Remaining ~36 states will process automatically (3 at a time) — resolve URLs → scrape bulletins → commit → next state
-- **Estimated completion**: ~16-20 hours for all remaining states
+
+| Status | States | Count |
+|--------|--------|-------|
+| **DONE** (names extracted) | AZ, CA, CT, FL, GA, IA, IL, MI, MN, NE, NM, OH, PA, TX | 14 |
+| **IN PROGRESS** (discovery started) | LA, MA, NY, WI | 4 |
+| **URLs ONLY** (ready for bulletin scrape) | AL, AK, AR, CO, DE, HI, ID, IN, KS, KY, ME, MD, MS, MO, MT, NV, NH, NJ, NC, ND, OK, OR, RI, SC, SD, TN, UT, VT, VA, WA, WV, WY | 32 |
+
+- All 23,046 church URLs resolved (0 failures)
+- Full bulletin scraper running locally for all 50 states (`python run_bulletin_scraper.py all all --resume`)
+- 14 states complete with ~1.5M total extracted names
+- Render cron jobs (Tue–Sat batches) will take over weekly refreshes once initial run completes
 
 ### Phase 8: Docker / Containerization
 **Goal:** Containerize both the church scrape pipeline and the bulletin/PDF pipeline as separate Docker services sharing the same data volume.
@@ -639,7 +657,7 @@ church scrapes/
 │   └── output/
 │       ├── all_services.csv               # 1,203 service rows (Phase 2 — 79 churches)
 │       ├── all_churches_detail.json        # Raw JSON (Phase 2 — 79 churches)
-│       ├── dated_services.csv             # 1,774 dated instances (Phase 3 — next 2 weeks)
+│       ├── dated_services.csv             # 1,774 dated instances (Phase 3 — next 12 weeks)
 │       └── {state}/                       # Statewide output (created per state)
 │           ├── all_services.csv
 │           ├── dated_services.csv
@@ -668,9 +686,10 @@ church scrapes/
 │   │   ├── data_loader.py                 # CSV loading, parsing, LRU caching
 │   │   ├── routes/
 │   │   │   ├── main.py                    # Home page — state picker
-│   │   │   ├── mass_times.py              # State → city → church → services
+│   │   │   ├── mass_times.py              # State → church → services + calendar + CSV download
 │   │   │   └── bulletin.py                # State → filterable names DataTable
 │   │   ├── templates/                     # Jinja2 templates (Bootstrap 5 + DataTables)
+│   │   │   ├── mass_times/calendar.html   # Dated activities calendar with filters
 │   │   └── static/css/style.css
 │   ├── requirements.txt
 │   └── Dockerfile                         # Not used (Render native runtime instead)
@@ -856,18 +875,30 @@ tail -20 auto_pipeline.log               # Overall pipeline
 tail -20 pipeline_ohio.log               # Specific state
 ```
 
-### Weekly refresh (once all states are complete)
+### Regenerate dated calendars only (fast, no scraping)
+```bash
+# Rebuild dated_services.csv from existing JSONL for all states (takes ~45 seconds):
+python run_statewide.py all --dates-only
+
+# Single state:
+python run_statewide.py arizona --dates-only
+```
+
+### Weekly refresh (automated via Render cron jobs)
+The following runs automatically every week on Render:
+- **Sunday 3 AM UTC**: `church-weekly-refresh` — re-scrapes all 50 states + regenerates dated CSVs
+- **Tue–Sat 3 AM UTC**: `bulletin-*-batch[1-5]` — bulletin pipeline for 10 states/day
+
+To run manually:
 ```bash
 # Re-scrape all states with fresh data:
-python run_all_states.py
-# Run dedup cleanup:
-python run_dedup_cleanup.py --apply
-# Regenerate addresses:
-python run_parse_addresses.py all
-# Resolve URLs:
-python run_resolve_urls.py all
+python run_statewide.py all --detail-only --resume
+# Regenerate dated calendars:
+python run_statewide.py all --dates-only
 # Run bulletin scraper:
-python run_bulletin_scraper.py all all
+python run_bulletin_scraper.py all all --resume
+# Commit and push:
+git add data/ && git commit -m "Weekly data refresh" && git push
 ```
 
 ---
@@ -879,10 +910,13 @@ python run_bulletin_scraper.py all all
 3. ~~**Build address parser**~~ ✅ DONE — token-based parser with 43 tests
 4. ~~**Finish remaining states**~~ ✅ DONE — all 50 states scraped and committed
 5. ~~**Dedup & cross-state cleanup**~~ ✅ DONE — 31,972 → 23,046 unique churches
-6. **Resolve all website URLs** — `python run_resolve_urls.py all` on cleaned 23,046 records
-7. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
-8. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
-9. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
-10. **Set up weekly automation** — Automated Sunday re-scrape of all 50 states (GitHub Actions or Task Scheduler), auto-commit + push results
-10. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
-11. **Generate sample newspaper-ready output** for one publication week and review with editorial team
+6. ~~**Resolve all website URLs**~~ ✅ DONE — 23,046/23,046 resolved, 0 failures
+7. ~~**Set up weekly automation**~~ ✅ DONE — Render cron jobs: Sunday schedule refresh + Tue–Sat bulletin batches
+8. ~~**Extend date range to 12 weeks**~~ ✅ DONE — dated_services.csv now covers 84 days forward
+9. ~~**Add calendar page to dashboard**~~ ✅ DONE — `/mass-times/<state>/calendar/` with filters + CSV download
+10. **Complete initial bulletin scrape for all 50 states** — 14/50 done, remaining 36 running locally
+11. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
+12. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
+13. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
+14. **Choose a pastor/clergy data source** — CatholicParishDirectory.com (commercial) or scrape individual parish websites
+15. **Generate sample newspaper-ready output** for one publication week and review with editorial team
