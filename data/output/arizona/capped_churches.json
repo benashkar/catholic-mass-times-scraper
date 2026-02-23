@@ -2,21 +2,29 @@
   {
     "slug": "us-az-sierra-vista-our-lady-of-the-mountains-b478cf2f",
     "church_name": "Our Lady of the Mountains",
-    "total_pdfs_available": 100
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-az-tucson-holy-family-dd638344",
     "church_name": "Holy Family",
-    "total_pdfs_available": 100
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-az-tucson-most-holy-trinity-d3927210",
     "church_name": "Most Holy Trinity Parish",
-    "total_pdfs_available": 100
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-az-tucson-st-gianna-oratory-masses-in-latin-86935932",
     "church_name": "Oratory of St. Gianna (Masses in Latin)",
-    "total_pdfs_available": 100
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
   }
 ]
