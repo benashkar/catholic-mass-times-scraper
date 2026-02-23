@@ -75,6 +75,12 @@ def state_view(state):
     prefilter_church = request.args.get("church", "")
     prefilter_city = request.args.get("city", "")
 
+    # Apply pre-filters BEFORE truncating to reduce dataset for large states
+    if prefilter_church and "church_name" in df.columns:
+        df = df[df["church_name"] == prefilter_church]
+    if prefilter_city and "city" in df.columns:
+        df = df[df["city"] == prefilter_city]
+
     # Convert to list of dicts for the template
     # 'role' = positional role (Pastor, Chairman, etc.) — new field added Feb 2026
     # 'title' = honorific prefix (Fr., Rev., etc.)
@@ -85,6 +91,13 @@ def state_view(state):
     ]
     # Only include columns that exist
     available = [c for c in columns if c in df.columns]
+
+    # Cap rows to prevent timeout on large states (IL=223K, CA=257K)
+    MAX_ROWS = 50000
+    total_names = len(df)
+    truncated = total_names > MAX_ROWS
+    if truncated:
+        df = df.head(MAX_ROWS)
     names = df[available].fillna("").to_dict("records")
 
     return render_template(
@@ -97,4 +110,6 @@ def state_view(state):
         church_options=church_options,
         prefilter_church=prefilter_church,
         prefilter_city=prefilter_city,
+        total_names=total_names,
+        truncated=truncated,
     )

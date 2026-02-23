@@ -17,6 +17,12 @@
     </div>
 </div>
 
+{% if truncated %}
+<div class="alert alert-warning">
+    Showing {{ "{:,}".format(names|length) }} of {{ "{:,}".format(total_names) }} names. Use the Church or City filter to narrow results.
+</div>
+{% endif %}
+
 <!-- Stats row -->
 {% if stats %}
 <div class="row mb-4 g-2">
