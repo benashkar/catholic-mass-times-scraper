@@ -35,9 +35,11 @@ def state_view(state):
     churches = sorted(df["church_name"].dropna().unique().tolist())
 
     # Convert to list of dicts for the template
+    # 'role' = positional role (Pastor, Chairman, etc.) — new field added Feb 2026
+    # 'title' = honorific prefix (Fr., Rev., etc.)
     columns = [
         "person_name", "title", "first_name", "middle_name", "last_name",
-        "church_name", "city", "full_street", "category", "confidence",
+        "role", "church_name", "city", "full_street", "category", "confidence",
         "pdf_url", "pdf_date",
     ]
     # Only include columns that exist

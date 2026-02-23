@@ -545,6 +545,10 @@ def parse_name_parts(full_name: str) -> dict:
     """
     Split a full name into structured parts: title, first, middle, last.
 
+    The 'title' field captures HONORIFIC prefixes only (Fr., Rev., Dr., etc.).
+    Positional roles (Pastor, Chairman, etc.) are captured separately via the
+    'role' field in extract_names_from_text() — NOT here.
+
     Examples:
         "John Smith"        -> {title:"", first:"John", middle:"", last:"Smith"}
         "Mary Jane Wilson"  -> {title:"", first:"Mary", middle:"Jane", last:"Wilson"}
@@ -560,7 +564,7 @@ def parse_name_parts(full_name: str) -> dict:
     if not parts:
         return result
 
-    # Check if first token is a title/prefix
+    # Check if first token is a title/prefix (honorifics only)
     title_patterns = {
         'fr.', 'father', 'rev.', 'reverend', 'msgr.', 'monsignor',
         'dcn.', 'deacon', 'sr.', 'sister', 'br.', 'brother',
@@ -598,13 +602,23 @@ def extract_names_from_text(text: str, church_name: str = ""):
     Extract people's names from bulletin text using pattern matching.
 
     Looks for names in these common bulletin contexts:
-    - Staff/clergy listings
+    - Staff/clergy listings (with positional roles like Pastor, Business Manager)
+    - Section-header roles (DEACONS, PASTORAL COUNCIL headings apply to names below)
+    - Ministry contact listings ("Role, Person Name Phone#")
     - Mass intention lists
     - Prayer lists (sick, deceased, military)
-    - Ministry schedules
-    - Donor/sponsor listings
+    - Ministry schedules (names near ministry keywords)
 
-    Returns list of dicts with: name, title, first_name, middle_name, last_name, context, category
+    Returns list of dicts with:
+        name, title, first_name, middle_name, last_name,
+        role (positional role like Pastor, Chairman — separate from honorific title),
+        context, category
+
+    ROLE vs TITLE:
+        - 'title' = honorific prefix: Fr., Rev., Dr., Msgr., etc.
+        - 'role'  = positional job/role: Pastor, Business Manager, Chairman, Deacon, etc.
+        These are separate fields. A person can have BOTH: role="Pastor", title="Fr."
+        e.g. "Pastor Fr. Michael Martinez" -> role="Pastor", title="Fr."
     """
     names = []
     seen_names = set()
@@ -612,44 +626,339 @@ def extract_names_from_text(text: str, church_name: str = ""):
     if not text:
         return names
 
-    # Normalize text
+    # Normalize text — fix curly quotes, normalize whitespace
     text = text.replace("\u2019", "'").replace("\u2018", "'")
     text = text.replace("\u201c", '"').replace("\u201d", '"')
 
-    # ── Pattern 1: Staff/Clergy listings ──
-    # "Pastor: Fr. John Smith" / "Rev. John Smith, Pastor"
-    clergy_patterns = [
-        # Title: Name pattern
-        r'(?:Pastor|Parochial Vicar|Deacon|Administrator|Priest|Rector|Chaplain|Director|Principal|Secretary|Manager|Coordinator|Minister)\s*[:\-–]\s*(?:(?:Fr\.|Rev\.|Msgr\.|Sr\.|Br\.|Dcn\.)\s*)?([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-        # Fr./Rev./Msgr./Dcn. FirstName LastName
-        r'(?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon|Sr\.|Sister|Br\.|Brother)\s+([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-    ]
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 1: Staff/Clergy role-name pairs on the SAME LINE
+    # ─────────────────────────────────────────────────────────────────────────
+    # Matches structured listings like:
+    #   "Pastor        Fr. Michael Martinez"
+    #   "Business Manager  Teresa Mullen"
+    #   "Chairman      Patrick Ledger"
+    #   "Pastor: Fr. John Smith"
+    #   "Music Director - Jane Doe"
+    #
+    # The role is on the left, the name is on the right, separated by
+    # whitespace, colon, dash, or en-dash.
+    #
+    # NOTE: We capture the ROLE (positional title) separately from the
+    # honorific TITLE (Fr., Rev., etc.). Both are stored in the output.
+    # ─────────────────────────────────────────────────────────────────────────
 
-    for pattern in clergy_patterns:
-        for m in re.finditer(pattern, text):
-            name = m.group(1).strip()
-            name = re.sub(r'\s+', ' ', name)
-            # Also capture the title prefix from the full match text
-            full_match = m.group(0).strip()
-            if is_valid_name(name) and name not in seen_names:
-                seen_names.add(name)
-                # Parse the full matched text (with title) to get split parts
-                name_parts = parse_name_parts(full_match.split(":")[-1].strip())
-                # If parse didn't get a last name, fall back to parsing just the captured name
-                if not name_parts["last_name"]:
+    # Comprehensive list of positional roles found in bulletin staff sections
+    STAFF_ROLES = (
+        # Clergy roles
+        r'Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator'
+        r'|Administrator|Priest|Rector|Chaplain|Celebrant'
+        # Deacon roles
+        r'|Permanent Deacon|Transitional Deacon'
+        # Parish staff
+        r'|Business Manager|Business Mgr\.|Office Manager|Parish Manager'
+        r'|Parish Secretary|Parish Administrator|Administrative Assistant'
+        r'|Bookkeeper|Assistant Bookkeeper|Receptionist'
+        r'|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer'
+        # Education
+        r'|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?'
+        r'|Director of Faith Formation|Faith Formation Director'
+        r'|School Principal|School Secretary|Principal'
+        r'|Director of Youth Ministry|Youth Minister|Youth Director'
+        r'|Director of Music|Music Director|Music Minister'
+        r'|Liturgy Director|Liturgist|Worship Director'
+        # Facilities
+        r'|Maintenance|Custodian|Facilities Manager|Facilities Director'
+        r'|Maintenance Tech|Groundskeeper|Sexton'
+        # Ministry roles
+        r'|Director|Coordinator|Minister|Moderator'
+        r'|RCIA Director|RCIA Coordinator'
+        r'|Sacristan|Organist|Cantor|Choir Director'
+        r'|Stewardship Director|Communications Director'
+        r'|Hispanic Ministry|Spanish Ministry'
+        # Council/board roles
+        r'|Chairman|Co-Chairman|Chairperson|Co-Chair'
+        r'|Vice Chairman|Vice Chairperson'
+        r'|President|Vice President'
+        r'|Secretary|Treasurer'
+        r'|Grand Knight|Deputy Grand Knight'
+        r'|Financial Secretary|Membership Director'
+        r'|ASCS Principal'
+    )
+
+    # Name pattern: optional honorific + first [middle] last
+    # STRICT version: only 2-4 capitalized words after optional honorific.
+    # Does NOT greedily consume trailing text from adjacent PDF columns.
+    NAME_PATTERN = (
+        r'(?:(?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon'
+        r'|Sr\.|Sister|Br\.|Brother|Dr\.|Bishop|Archbishop)\s+)?'
+        r'[A-Z][a-z]{1,15}'                # First name
+        r'(?:\s+[A-Z]\.)?'                 # Optional middle initial
+        r'(?:\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}){1,2}'  # Last name (1-2 parts, allows "De La Rosa")
+    )
+
+    # Match: Role [separator] Name
+    staff_pattern = re.compile(
+        rf'({STAFF_ROLES})\s*[:\-–—]?\s+({NAME_PATTERN})',
+        re.IGNORECASE
+    )
+
+    for m in staff_pattern.finditer(text):
+        role_raw = m.group(1).strip()
+        name_raw = m.group(2).strip()
+        name_raw = re.sub(r'\s+', ' ', name_raw)
+
+        # Clean up trailing noise: phone numbers, email, punctuation
+        name_raw = re.sub(r'\s*\d{3}[\-\.]\d{3,4}.*$', '', name_raw)  # phone
+        name_raw = re.sub(r'\s*\(?\d{3}\)?.*$', '', name_raw)          # area code
+        # Trim trailing words that are clearly NOT part of a name.
+        # PDF columns frequently bleed together: "Patrick Ledger Saturday Vigil"
+        # We strip everything from the first non-name word onwards.
+        # This list includes common bulletin text that gets appended to names.
+        name_raw = re.sub(
+            r'\s+(?:Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday|Friday'
+            r'|Vigil|Mass|Vacant|Open|Position|By|Appointment|Please|Parish'
+            r'|Secretary|Vice|www\b|http|Sick|Marriage|Baptism|Members?'
+            r'|Business|School|Religious|Compliance|Office|Church|classes'
+            r'|First|Anointing|Maintenance|DEACONS?|STAFF|COUNCIL|BOARD'
+            r'|for|the|or|and|at|of|in|to|with|on|not|out|reach'
+            r'|You|Are|Dcn\b|Dir\b).*$',
+            '', name_raw, flags=re.IGNORECASE
+        )
+        name_raw = name_raw.strip()
+
+        # Skip "Position Open", "Vacant", "TBD", etc.
+        if re.match(r'^(?:Position\s+Open|Vacant|TBD|None|Open|N/?A)$', name_raw, re.IGNORECASE):
+            continue
+        # Skip if it looks like a phrase, not a name
+        if re.match(r'^(?:religious|classes|grades|brother|sister|priest|Tech|I\b)', name_raw, re.IGNORECASE):
+            continue
+
+        # Validate the name
+        name_parts = parse_name_parts(name_raw)
+        # Reconstruct the "clean" name (without title) for validation
+        clean_name = " ".join(
+            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+        )
+
+        if not clean_name or len(clean_name) < 4:
+            continue
+
+        # Relaxed validation for staff — we trust the role-name structure
+        parts = clean_name.split()
+        if len(parts) < 2 or len(parts) > 5:
+            continue
+        if clean_name in FALSE_POSITIVE_NAMES:
+            continue
+
+        if clean_name not in seen_names:
+            seen_names.add(clean_name)
+            names.append({
+                "name": clean_name,
+                **name_parts,
+                "role": role_raw.strip().rstrip(':').rstrip('-').strip(),
+                "context": text[max(0, m.start()-20):m.end()+30].strip(),
+                "category": "clergy_staff"
+            })
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 1b: Honorific-only clergy (no explicit role keyword on line)
+    # ─────────────────────────────────────────────────────────────────────────
+    # Catches: "Fr. Michael Martinez" or "Dcn. Reynaldo Romo" appearing
+    # anywhere (not just after a role keyword).
+    # The title itself implies a role (priest, deacon, etc.)
+    # Strict name pattern for honorific matches: FirstName [MiddleInitial] LastName only
+    # (max 2-3 capitalized words, no trailing column bleed)
+    honorific_pattern = re.compile(
+        r'((?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon'
+        r'|Sr\.|Sister|Br\.|Brother|Bishop|Archbishop)\s+'
+        r'[A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{1,20})'
+    )
+    for m in honorific_pattern.finditer(text):
+        full_match = m.group(1).strip()
+        name_parts = parse_name_parts(full_match)
+        # Reconstruct clean name without title
+        clean_name = " ".join(
+            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+        )
+        if not clean_name or len(clean_name) < 4:
+            continue
+        if is_valid_name(clean_name) and clean_name not in seen_names:
+            seen_names.add(clean_name)
+            # Infer role from honorific
+            honorific = full_match.split()[0].lower().rstrip('.')
+            implied_role = {
+                'fr': 'Priest', 'father': 'Priest', 'rev': 'Priest',
+                'reverend': 'Priest', 'msgr': 'Monsignor', 'monsignor': 'Monsignor',
+                'dcn': 'Deacon', 'deacon': 'Deacon',
+                'sr': 'Sister', 'sister': 'Sister',
+                'br': 'Brother', 'brother': 'Brother',
+                'bishop': 'Bishop', 'archbishop': 'Archbishop',
+            }.get(honorific, "")
+            names.append({
+                "name": clean_name,
+                **name_parts,
+                "role": implied_role,
+                "context": text[max(0, m.start()-30):m.end()+30].strip(),
+                "category": "clergy_staff"
+            })
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 2: Section-header roles (DEACONS, PASTORAL COUNCIL, etc.)
+    # ─────────────────────────────────────────────────────────────────────────
+    # Some bulletins have centered/bold section headers like:
+    #   DEACONS
+    #   Reynaldo Romo, Gene Tackett & Kurt Carlson
+    #
+    #   PASTORAL COUNCIL
+    #   President    Barry Gaston
+    #
+    # The section header implies a role for all names that follow,
+    # UNLESS those names already have their own explicit role from Pattern 1.
+    # ─────────────────────────────────────────────────────────────────────────
+
+    # Section headers that imply a role for names listed underneath
+    section_headers = {
+        r'\bDEACONS?\b': 'Deacon',
+        r'\bPASTORAL COUNCIL\b': 'Pastoral Council Member',
+        r'\bFINANCE COUNCIL\b': 'Finance Council Member',
+        r'\bPARISH COUNCIL\b': 'Parish Council Member',
+        r'\bBOARD OF DIRECTORS\b': 'Board of Directors Member',
+        r'\bSTAFF\b': '',           # Staff section — individual roles are per-line
+        r'\bPARISH STAFF\b': '',    # Same
+        r'\bMINISTRY CONTACTS?\b': '',
+        r'\bMINISTRIES AND CONTACTS\b': '',
+    }
+
+    for header_pattern, section_role in section_headers.items():
+        for header_match in re.finditer(header_pattern, text):
+            # Get the text after this header, up to the next ALL-CAPS header or 500 chars
+            start = header_match.end()
+            remaining = text[start:start+500]
+
+            # Stop at the next ALL-CAPS section header (line that is mostly uppercase)
+            lines = remaining.split('\n')
+            section_text_lines = []
+            for line in lines[1:]:  # skip the first line (might be part of header)
+                stripped = line.strip()
+                if not stripped:
+                    continue
+                # Stop at next section header: all-caps line with 2+ words
+                if (stripped.isupper() and len(stripped.split()) >= 2
+                        and not re.match(r'^\d', stripped)):
+                    break
+                section_text_lines.append(stripped)
+
+            section_text = '\n'.join(section_text_lines)
+
+            # Extract names from this section.
+            # Names can be: comma-separated, &-separated, or one-per-line.
+            # Lines that start with a known role keyword (e.g. "President Barry Gaston")
+            # are handled by Pattern 1. Here we only grab bare names that DIDN'T match
+            # Pattern 1 — these inherit the section header role.
+            name_candidates = re.split(r'[,&\n]+', section_text)
+            for candidate in name_candidates:
+                candidate = candidate.strip()
+                if not candidate:
+                    continue
+                # Skip lines that are clearly non-names
+                if re.match(r'^\d', candidate):     # starts with digit
+                    continue
+                if len(candidate) < 5:
+                    continue
+                # Skip lines that start with a known role keyword
+                # (those are already handled by Pattern 1 with their specific role)
+                if re.match(rf'^(?:{STAFF_ROLES})\b', candidate, re.IGNORECASE):
+                    continue
+
+                # Find name patterns: optional honorific + FirstName [Middle] LastName
+                for name_match in re.finditer(
+                    r'(?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?'
+                    r'([A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}'
+                    r'(?:\s+[A-Z][a-z]{1,20})?)',
+                    candidate
+                ):
+                    name = name_match.group(0).strip()
+                    name = re.sub(r'\s+', ' ', name)
+                    # Remove trailing phone numbers
+                    name = re.sub(r'\s*\d{3}[\-\.]\d{3,4}.*$', '', name)
+                    name = re.sub(r'\s*\(?\d{3}\)?.*$', '', name)
+                    name = name.strip()
+
                     name_parts = parse_name_parts(name)
-                names.append({
-                    "name": name,
-                    **name_parts,
-                    "context": text[max(0, m.start()-30):m.end()+30].strip(),
-                    "category": "clergy_staff"
-                })
+                    clean_name = " ".join(
+                        p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+                    )
+                    if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
+                        seen_names.add(clean_name)
+                        names.append({
+                            "name": clean_name,
+                            **name_parts,
+                            "role": section_role,
+                            "context": header_match.group(0).strip(),
+                            "category": "clergy_staff"
+                        })
 
-    # ── Pattern 2: Mass Intentions ──
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 3: Ministry contact listings
+    # ─────────────────────────────────────────────────────────────────────────
+    # Matches lines like:
+    #   "Altar Servers, Aeneas Anderson 249-9820"
+    #   "Eucharistic Ministers, Troy Lopes 209-678-1485"
+    #   "Gift Shop, Tonné Myers 508-7873"
+    #   "Lectors, Paul Angelo 803-9608"
+    #
+    # Pattern: MinistryRole comma/colon Name [Phone]
+    # ─────────────────────────────────────────────────────────────────────────
+
+    MINISTRY_ROLES = (
+        r'Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?'
+        r'|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?'
+        r'|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?'
+        r'|Jail Ministry|Knights? of Columbus|Ladies\s+Guild'
+        r'|Linens|Marriage Preparation|Money Counters?'
+        r'|Prayer Garden|Music Ministry|Choir'
+        r'|Baptism Class|Hispanic Spiritual Dir(?:ector)?'
+        r'|(?:You Are )?Not Alone|St\.?\s*Vincent de Paul'
+        r'|Religious Education|RCIA|Compliance Officer'
+        r'|Homebound Euch(?:aristic)?\.?\s*Ministers?'
+    )
+
+    # Match: MinistryRole [comma/colon] PersonName [PhoneNumber]
+    # The name part requires at least 2 capitalized words with reasonable length
+    ministry_contact_pattern = re.compile(
+        rf'({MINISTRY_ROLES})[,:\s]+\s*'
+        rf'((?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?'
+        rf'[A-Z][a-z]{{2,15}}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{{2,20}}(?:\s+[A-Z][a-z]{{2,20}})?)'
+        rf'(?:\s+\d{{3}}[\-\.]\d{{3,4}})?',
+        re.IGNORECASE
+    )
+
+    for m in ministry_contact_pattern.finditer(text):
+        ministry_role = m.group(1).strip()
+        name_raw = m.group(2).strip()
+        name_raw = re.sub(r'\s+', ' ', name_raw)
+
+        name_parts = parse_name_parts(name_raw)
+        clean_name = " ".join(
+            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+        )
+        if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
+            seen_names.add(clean_name)
+            names.append({
+                "name": clean_name,
+                **name_parts,
+                "role": ministry_role.strip(),
+                "context": text[max(0, m.start()-10):m.end()+20].strip(),
+                "category": "clergy_staff"
+            })
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 4: Mass Intentions
+    # ─────────────────────────────────────────────────────────────────────────
     # "For the repose of the soul of John Smith"
     # "Special intentions of Mary Jones"
     # "+John Smith" (deceased marker)
-    # "John Smith, requested by Jane Doe"
+    # "requested by Jane Doe"
     intention_patterns = [
         r'(?:repose of (?:the soul of )?|intention[s]? of |in memory of |for the (?:healing|health|recovery) of )([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
         r'(?:requested by |offered by |from )([A-Z][a-z]+(?:\s+(?:&|and)\s+)?[A-Z]?[a-z]*\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
@@ -668,12 +977,15 @@ def extract_names_from_text(text: str, church_name: str = ""):
                 names.append({
                     "name": name,
                     **name_parts,
+                    "role": "",
                     "context": text[max(0, m.start()-20):m.end()+20].strip(),
                     "category": "mass_intention"
                 })
 
-    # ── Pattern 3: Prayer / Sick Lists ──
-    # Usually comma-separated lists following a header like "Please pray for:"
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 5: Prayer / Sick Lists
+    # ─────────────────────────────────────────────────────────────────────────
+    # Comma-separated lists following headers like "Please pray for:"
     prayer_sections = re.finditer(
         r'(?:(?:pray(?:er)?\s*(?:list|request)?|sick\s*list|(?:those who are )?(?:sick|ill|homebound)|remember in prayer)[:\s]*)((?:[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s*,\s*)?)+)',
         text, re.IGNORECASE
@@ -691,13 +1003,16 @@ def extract_names_from_text(text: str, church_name: str = ""):
                     names.append({
                         "name": name,
                         **name_parts,
+                        "role": "",
                         "context": "prayer list",
                         "category": "prayer_list"
                     })
 
-    # ── Pattern 4: Generic Name Pattern (capitalized first+last) ──
-    # Look for "FirstName LastName" patterns near bulletin keywords
-    # This is broader but filtered by context
+    # ─────────────────────────────────────────────────────────────────────────
+    # Pattern 6: Generic contextual names (capitalized first+last near keywords)
+    # ─────────────────────────────────────────────────────────────────────────
+    # This is the broadest/loosest pattern. It finds "FirstName LastName"
+    # patterns near ministry keywords. Confidence is MEDIUM.
     context_keywords = [
         'lector', 'reader', 'usher', 'eucharistic minister', 'altar server',
         'music director', 'choir', 'organist', 'cantor',
@@ -724,6 +1039,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
                     names.append({
                         "name": name,
                         **name_parts,
+                        "role": "",
                         "context": kw,
                         "category": "ministry_contextual"
                     })
@@ -761,11 +1077,34 @@ FALSE_POSITIVE_NAMES = {
     "Religious Ed", "Youth Minister", "Choir Director",
     "Maintenance Director", "Athletic Director",
     "Pro Life", "Right Life",
+    # Bulletin structural/calendar phrases that look like names
+    "Ordinary Time", "An Invitation", "By Appointment",
+    "Job Opportunity", "Assembly Mtg", "Council Mtg",
+    "Degree Exemplification", "Money Counters",
+    "Compliance Officer", "Mercy Chaplet",
+    "Del Tiempo", "Domingo Del",
+    "Consejo Matrimonial",
+    "Grand Knight", "Deputy Grand",
+    "Hospital Euch", "Hispanic Spiritual",
+    "Tech I", "Tech II",
+    # Common truncated/merged column artifacts from PDF extraction
+    "Are Not", "You Are", "Are Not Alone",
+    "Anderson Gift", "Business Mgr",
+    "The Romo", "Of Jensen",
 }
 
 
 def is_valid_name(name: str) -> bool:
-    """Check if a string looks like a real person's name."""
+    """
+    Check if a string looks like a real person's name.
+
+    Validates that the string has 2-4 properly capitalized words,
+    is not a known false positive, and doesn't contain common
+    non-name words (church terminology, days, months, etc.).
+
+    Also rejects truncated/fragmented names from PDF column bleed
+    (e.g. "Teresa Mu", "Carlos Ze", "Kathleen Shils").
+    """
     if not name or len(name) < 4:
         return False
 
@@ -778,46 +1117,68 @@ def is_valid_name(name: str) -> bool:
     for part in parts:
         if not part[0].isupper():
             return False
-        # Reject all-caps
+        # Reject all-caps (except 1-2 letter abbreviations like initials)
         if part.isupper() and len(part) > 2:
             return False
 
-    # Check against false positives
+    # Check against false positives blocklist
     if name in FALSE_POSITIVE_NAMES:
         return False
 
-    # Reject if any part is a common non-name word
+    # Reject truncated names: last word should be at least 3 chars
+    # (catches PDF column bleed like "Teresa Mu", "Carlos Ze", "Reynaldo Ro")
+    # Exception: middle initials are OK (single letter + optional period)
+    if len(parts[-1]) < 3 and not re.match(r'^[A-Z]\.?$', parts[-1]):
+        return False
+
+    # Reject if first name is too short (catches "Fr Mike" without the period)
+    if len(parts[0]) < 2:
+        return False
+
+    # Reject if any part is a common non-name word.
+    # NOTE: Comparison is case-INSENSITIVE — we lowercase both sides.
+    # All entries should be stored lowercase in this set.
     non_name_words = {
         'the', 'and', 'for', 'from', 'with', 'that', 'this', 'are', 'was',
         'will', 'has', 'have', 'had', 'been', 'being', 'their', 'there',
         'where', 'when', 'what', 'which', 'also', 'than', 'them',
-        'Church', 'Parish', 'School', 'Center', 'Hall', 'Room', 'Chapel',
-        'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
-        'January', 'February', 'March', 'April', 'June', 'July', 'August',
-        'September', 'October', 'November', 'December',
-        'Mass', 'Masses', 'Confession', 'Communion', 'Lent', 'Easter', 'Advent', 'Christmas',
-        'Daily', 'Weekly', 'Monthly', 'Annual',
-        'Weekday', 'Weekend', 'Morning', 'Evening', 'Night',
-        'Table', 'Altar', 'Prayer', 'Music', 'Director', 'Ministers',
-        'Eucharistic', 'Servers', 'Rentals', 'Maintenance', 'Hour',
-        'Holy', 'Blessed', 'Sacred', 'Saint', 'Our',
-        'Rite', 'Christian', 'Catholic', 'Initiation', 'Adults',
-        'Stations', 'Cross', 'Rosary', 'Adoration', 'Benediction',
-        'Tree', 'Garden', 'Hall', 'Office', 'Building',
-        'Online', 'Giving', 'Live', 'Stream',
-        'Please', 'Contact', 'Call', 'Email', 'Visit',
-        'Registration', 'Information', 'Schedule', 'Calendar',
-        'Baptism', 'Confirmation', 'Marriage', 'Funeral', 'Anointing',
-        'Collection', 'Offertory', 'Budget', 'Total',
-        'Choir', 'Band', 'Ensemble', 'Group',
-        'Youth', 'Adult', 'Children', 'Family', 'Women', 'Men',
-        'Deacon', 'Priest', 'Bishop', 'Pastor', 'Vicar',
+        'not', 'out', 'who', 'how', 'its', 'may', 'can', 'you', 'your',
+        'church', 'parish', 'school', 'center', 'hall', 'room', 'chapel',
+        'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+        'january', 'february', 'march', 'april', 'june', 'july', 'august',
+        'september', 'october', 'november', 'december',
+        'mass', 'masses', 'confession', 'communion', 'lent', 'easter', 'advent', 'christmas',
+        'daily', 'weekly', 'monthly', 'annual',
+        'weekday', 'weekend', 'morning', 'evening', 'night',
+        'table', 'altar', 'prayer', 'music', 'director', 'ministers',
+        'eucharistic', 'servers', 'rentals', 'maintenance', 'hour',
+        'holy', 'blessed', 'sacred', 'saint', 'our',
+        'rite', 'christian', 'catholic', 'initiation', 'adults',
+        'stations', 'cross', 'rosary', 'adoration', 'benediction',
+        'tree', 'garden', 'office', 'building',
+        'online', 'giving', 'live', 'stream',
+        'please', 'contact', 'call', 'email', 'visit',
+        'registration', 'information', 'schedule', 'calendar',
+        'baptism', 'confirmation', 'marriage', 'funeral', 'anointing', 'communion',
+        'collection', 'offertory', 'budget', 'total',
+        'choir', 'band', 'ensemble', 'group',
+        'youth', 'adult', 'children', 'family', 'women', 'men',
+        'deacon', 'priest', 'bishop', 'pastor', 'vicar',
+        # Spanish words that appear in bilingual bulletins
+        'domingo', 'tiempo', 'ordinario', 'semana', 'consejo', 'matrimonial',
+        # Organizational terms that look like names
+        'president', 'vice', 'chairman', 'secretary', 'treasurer', 'members',
+        'lectors', 'counters', 'volunteer', 'principal', 'coordinator',
+        'gift', 'shop', 'sick', 'opportunity', 'invitation',
+        'tech', 'degree', 'exemplification', 'assembly', 'mtg',
+        'chaplet', 'spiritual', 'dcn', 'alone',
     }
-    if any(p in non_name_words for p in parts):
+    if any(p.lower() in non_name_words for p in parts):
         return False
 
-    # Reject very short first or last names (likely abbreviations/noise)
-    if len(parts[0]) < 2 or len(parts[-1]) < 2:
+    # Reject if first word is a known non-name starter (case-insensitive)
+    non_name_starters = {'the', 'are', 'of', 'or', 'by', 'at', 'in', 'to', 'on', 'an', 'if'}
+    if parts[0].lower() in non_name_starters:
         return False
 
     return True
@@ -962,6 +1323,14 @@ def run_discover(state_name: str, state_dir: Path, churches: list, progress: dic
     logger.info(f"\n=== Discovery complete: {found_count}/{total_active} churches have bulletins ===")
     logger.info(f"Results saved to {discovery_path}")
 
+    # Log churches with more than MAX_PDFS_PER_CHURCH PDFs (for future full collection)
+    over_limit = {slug: info for slug, info in discovered.items()
+                  if len(info.get("pdfs", [])) > MAX_PDFS_PER_CHURCH}
+    if over_limit:
+        logger.info(f"\n[!] {len(over_limit)} churches have >{MAX_PDFS_PER_CHURCH} PDFs (capped at {MAX_PDFS_PER_CHURCH}):")
+        for slug, info in sorted(over_limit.items(), key=lambda x: -len(x[1].get("pdfs", []))):
+            logger.info(f"  {info.get('church_name', slug)}: {len(info['pdfs'])} PDFs total")
+
     return discovered
 
 
@@ -975,17 +1344,40 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
     downloaded = progress.get("downloaded", {})
     total_downloaded = 0
     total_pdfs = 0
+    capped_churches = []  # Track churches that hit the MAX_PDFS cap
 
     for slug, info in discovered.items():
         if info.get("status") != "found" or not info.get("pdfs"):
             continue
 
         if resume and slug in downloaded:
+            # Still check if this church was capped
+            all_pdfs = info["pdfs"]
+            if len(all_pdfs) >= MAX_PDFS_PER_CHURCH:
+                capped_churches.append({
+                    "slug": slug,
+                    "church_name": info.get("church_name", slug),
+                    "total_pdfs_available": len(all_pdfs),
+                    "pdfs_downloaded": MAX_PDFS_PER_CHURCH,
+                    "remaining_pdfs": len(all_pdfs) - MAX_PDFS_PER_CHURCH,
+                })
             continue
 
-        pdfs = info["pdfs"][:MAX_PDFS_PER_CHURCH]
+        all_pdfs = info["pdfs"]
+        pdfs = all_pdfs[:MAX_PDFS_PER_CHURCH]
         total_pdfs += len(pdfs)
         church_name = info.get("church_name", slug)
+
+        # Flag if this church hit the cap
+        if len(all_pdfs) >= MAX_PDFS_PER_CHURCH:
+            capped_churches.append({
+                "slug": slug,
+                "church_name": church_name,
+                "total_pdfs_available": len(all_pdfs),
+                "pdfs_downloaded": len(pdfs),
+                "remaining_pdfs": len(all_pdfs) - len(pdfs),
+            })
+            logger.info(f"  [CAP] {church_name}: {len(all_pdfs)} PDFs available, downloading {len(pdfs)} (capped at {MAX_PDFS_PER_CHURCH})")
 
         slug_safe = re.sub(r'[^a-zA-Z0-9_-]', '_', slug)
         church_downloads = []
@@ -1003,6 +1395,8 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
         downloaded[slug] = {
             "church_name": church_name,
             "files": church_downloads,
+            "capped": len(all_pdfs) >= MAX_PDFS_PER_CHURCH,
+            "total_available": len(all_pdfs),
         }
 
         if church_downloads:
@@ -1010,6 +1404,16 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
 
     progress["downloaded"] = downloaded
     save_progress(state_dir, progress)
+
+    # Save capped churches list for future reference
+    if capped_churches:
+        capped_path = state_dir / "capped_churches.json"
+        with open(capped_path, "w", encoding="utf-8") as f:
+            json.dump(capped_churches, f, indent=2)
+        logger.info(f"\n[!] {len(capped_churches)} churches hit the {MAX_PDFS_PER_CHURCH}-PDF cap:")
+        for c in sorted(capped_churches, key=lambda x: -x["total_pdfs_available"]):
+            logger.info(f"  {c['church_name']}: {c['total_pdfs_available']} available, {c['remaining_pdfs']} remaining")
+        logger.info(f"Capped churches saved to {capped_path}")
 
     logger.info(f"\n=== Download complete: {total_downloaded}/{total_pdfs} PDFs downloaded ===")
     logger.info(f"Saved to {bulletin_dir}")
@@ -1121,6 +1525,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                         "first_name": name_info.get("first_name", ""),
                         "middle_name": name_info.get("middle_name", ""),
                         "last_name": name_info.get("last_name", ""),
+                        "role": name_info.get("role", ""),
                         "category": name_info["category"],
                         "confidence": CONFIDENCE_MAP.get(name_info["category"], "low"),
                         "context": name_info["context"][:100],
@@ -1138,7 +1543,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                 "church_name", "church_slug", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
                 "person_name", "title", "first_name", "middle_name", "last_name",
-                "category", "confidence", "context"
+                "role", "category", "confidence", "context"
             ])
             writer.writeheader()
             writer.writerows(all_names)

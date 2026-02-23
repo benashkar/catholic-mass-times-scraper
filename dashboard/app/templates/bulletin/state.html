@@ -76,7 +76,7 @@
     <div class="col-md-4">
         <select id="filterCategory" class="form-select form-select-sm">
             <option value="">All Categories</option>
-            <option value="clergy">Clergy</option>
+            <option value="clergy_staff">Clergy/Staff</option>
             <option value="mass_intention">Mass Intention</option>
             <option value="prayer_list">Prayer List</option>
             <option value="ministry_contextual">Ministry/Contextual</option>
@@ -85,19 +85,31 @@
 </div>
 
 <!-- Data table -->
+<!-- Column layout:
+     0: Name (full person_name)
+     1: Role (positional: Pastor, Chairman, Deacon, etc.)
+     2: Title (honorific: Fr., Rev., Dr., etc.)
+     3: First
+     4: Last
+     5: Church
+     6: City
+     7: Category
+     8: Confidence
+     9: PDF
+    10: Date
+-->
 <div class="card">
     <div class="card-body p-0">
         <table class="table table-hover table-striped table-sm mb-0" id="namesTable" style="width:100%">
             <thead class="table-light">
                 <tr>
                     <th>Name</th>
+                    <th>Role</th>
                     <th>Title</th>
                     <th>First</th>
-                    <th>Middle</th>
                     <th>Last</th>
                     <th>Church</th>
                     <th>City</th>
-                    <th>Address</th>
                     <th>Category</th>
                     <th>Confidence</th>
                     <th>PDF</th>
@@ -108,16 +120,15 @@
                 {% for n in names %}
                 <tr>
                     <td><strong>{{ n.person_name }}</strong></td>
+                    <td class="small">{{ n.role }}</td>
                     <td>{{ n.title }}</td>
                     <td>{{ n.first_name }}</td>
-                    <td>{{ n.middle_name }}</td>
                     <td>{{ n.last_name }}</td>
                     <td>{{ n.church_name }}</td>
                     <td>{{ n.city }}</td>
-                    <td class="small">{{ n.full_street }}</td>
                     <td>
-                        {% if n.category == 'clergy' %}
-                        <span class="badge bg-primary">Clergy</span>
+                        {% if n.category == 'clergy_staff' %}
+                        <span class="badge bg-primary">Clergy/Staff</span>
                         {% elif n.category == 'mass_intention' %}
                         <span class="badge bg-info">Mass Intention</span>
                         {% elif n.category == 'prayer_list' %}
@@ -162,23 +173,23 @@ $(document).ready(function() {
         language: { search: "Search names:" },
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
         columnDefs: [
-            { targets: [10], orderable: false }  // PDF column not sortable
+            { targets: [9], orderable: false }  // PDF column not sortable
         ]
     });
 
-    // Custom filter: City
+    // Custom filter: City (column index 6)
     $('#filterCity').on('change', function() {
         table.column(6).search(this.value, false, false).draw();
     });
 
-    // Custom filter: Church
+    // Custom filter: Church (column index 5)
     $('#filterChurch').on('change', function() {
         table.column(5).search(this.value, false, false).draw();
     });
 
-    // Custom filter: Category
+    // Custom filter: Category (column index 7)
     $('#filterCategory').on('change', function() {
-        table.column(8).search(this.value, false, false).draw();
+        table.column(7).search(this.value, false, false).draw();
     });
 });
 </script>
