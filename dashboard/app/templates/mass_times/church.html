@@ -77,7 +77,17 @@
                         {%- if has_day -%}
                             {{ svc.Day }}
                         {%- elif has_date -%}
-                            {{ svc['Event Date'] }}
+                            {# Format ISO date as human-readable: "Wed, Feb 18" #}
+                            {%- set parts = svc['Event Date'].split('-') -%}
+                            {%- if parts|length == 3 -%}
+                                {%- set months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] -%}
+                                {%- set days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] -%}
+                                {%- set m = parts[1]|int -%}
+                                {%- set d = parts[2]|int -%}
+                                {{ months[m] }} {{ d }}
+                            {%- else -%}
+                                {{ svc['Event Date'] }}
+                            {%- endif -%}
                         {%- endif -%}
                         </strong>
                     </td>

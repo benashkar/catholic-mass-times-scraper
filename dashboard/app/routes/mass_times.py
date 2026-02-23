@@ -3,10 +3,10 @@ Mass Times Browser — Navigate state → church (by slug) → services.
 Uses slug as unique church ID for navigation. Falls back to name matching
 for legacy URLs.
 """
-from flask import Blueprint, render_template, abort, redirect, url_for
+from flask import Blueprint, render_template, abort, redirect, url_for, request, Response
 from app.data_loader import (
-    get_services, get_church_website, church_has_bulletin_names,
-    _load_church_details_jsonl, get_bulletin_names,
+    get_services, get_dated_services, get_church_website,
+    church_has_bulletin_names, _load_church_details_jsonl, get_bulletin_names,
 )
 
 bp = Blueprint("mass_times", __name__, url_prefix="/mass-times")
@@ -173,4 +173,69 @@ def church_view(state, church_id):
         website_url=website_url,
         has_bulletin=has_bulletin,
         categories=sorted_cats,
+    )
+
+
+@bp.route("/<state>/calendar/")
+def calendar_view(state):
+    """Show all dated activities for a state with filters."""
+    df = get_dated_services(state)
+    if df.empty:
+        abort(404)
+
+    # Get filter values from query params
+    date_from = request.args.get("from", "")
+    date_to = request.args.get("to", "")
+    church_filter = request.args.get("church", "")
+    category_filter = request.args.get("category", "")
+
+    # Build filter option lists before filtering
+    all_churches = sorted(df["Church"].unique().tolist()) if "Church" in df.columns else []
+    all_categories = sorted(df["Category"].unique().tolist()) if "Category" in df.columns else []
+
+    # Apply filters
+    if date_from and "Date Sort" in df.columns:
+        df = df[df["Date Sort"] >= date_from]
+    if date_to and "Date Sort" in df.columns:
+        df = df[df["Date Sort"] <= date_to]
+    if church_filter and "Church" in df.columns:
+        df = df[df["Church"] == church_filter]
+    if category_filter and "Category" in df.columns:
+        df = df[df["Category"] == category_filter]
+
+    rows = df.to_dict("records")
+
+    display_name = state.replace("_", " ").title()
+    return render_template(
+        "mass_times/calendar.html",
+        state=state,
+        display_name=display_name,
+        rows=rows,
+        total_rows=len(rows),
+        all_churches=all_churches,
+        all_categories=all_categories,
+        date_from=date_from,
+        date_to=date_to,
+        church_filter=church_filter,
+        category_filter=category_filter,
+    )
+
+
+@bp.route("/<state>/calendar/download/")
+def calendar_download(state):
+    """Download dated_services.csv as a file."""
+    import os
+    from app.data_loader import DATA_DIR
+
+    path = os.path.join(DATA_DIR, state, "dated_services.csv")
+    if not os.path.isfile(path):
+        abort(404)
+
+    with open(path, "r", encoding="utf-8-sig") as f:
+        csv_content = f.read()
+
+    return Response(
+        csv_content,
+        mimetype="text/csv",
+        headers={"Content-Disposition": f"attachment; filename={state}_dated_services.csv"},
     )

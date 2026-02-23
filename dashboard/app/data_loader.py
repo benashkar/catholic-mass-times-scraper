@@ -332,6 +332,21 @@ def get_church_slug(state_dir, church_name):
     return info.get("slug", "")
 
 
+@lru_cache(maxsize=5)
+def get_dated_services(state_dir):
+    """
+    Load and return dated services DataFrame for a state.
+    Cached for the 5 most recently accessed states.
+    """
+    path = os.path.join(DATA_DIR, state_dir, "dated_services.csv")
+    if not os.path.isfile(path):
+        return pd.DataFrame()
+
+    df = pd.read_csv(path, encoding="utf-8-sig")
+    df = _clean_nan(df)
+    return df
+
+
 def church_has_bulletin_names(state_dir, church_name):
     """Check if a church has any bulletin-extracted names."""
     df = get_bulletin_names(state_dir)

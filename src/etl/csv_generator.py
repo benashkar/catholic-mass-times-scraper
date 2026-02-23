@@ -11,7 +11,7 @@ HOW IT WORKS:
     1. Takes a list of church detail dicts (from scrape_church_detail())
     2. Flattens services into one-row-per-service format for all_services.csv
     3. Maps day-of-week + recurrence patterns to actual calendar dates for
-       dated_services.csv (next 2 weeks)
+       dated_services.csv (next 12 weeks)
 
 USAGE:
     from src.etl.csv_generator import generate_services_csv, generate_dated_services_csv
@@ -199,7 +199,7 @@ def generate_services_csv(all_details: list[dict], output_path: Path) -> int:
 def generate_dated_services_csv(all_details: list[dict], output_path: Path) -> int:
     """
     Generate a CSV that maps day-of-week + patterns to actual calendar dates
-    for the next 2 weeks.
+    for the next 12 weeks.
 
     Args:
         all_details: List of church detail dicts from scrape_church_detail()
@@ -227,15 +227,15 @@ def generate_dated_services_csv(all_details: list[dict], output_path: Path) -> i
                 if event_date_str:
                     try:
                         d = date.fromisoformat(event_date_str)
-                        if today <= d <= today + timedelta(days=14):
+                        if today <= d <= today + timedelta(days=84):
                             actual_dates.append(d)
                     except ValueError:
                         pass
                 elif pattern:
-                    actual_dates = get_pattern_dates(pattern, today, num_months=2)
-                    actual_dates = [d for d in actual_dates if d <= today + timedelta(days=14)]
+                    actual_dates = get_pattern_dates(pattern, today, num_months=4)
+                    actual_dates = [d for d in actual_dates if d <= today + timedelta(days=84)]
                 elif day_code:
-                    actual_dates = get_dates_for_day(day_code, today, num_weeks=2)
+                    actual_dates = get_dates_for_day(day_code, today, num_weeks=12)
 
                 for actual_date in actual_dates:
                     dated_rows.append({

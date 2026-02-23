@@ -15,6 +15,7 @@ HOW TO RUN:
     python run_statewide.py ohio --limit 10   # Test with first 10 cities only
     python run_statewide.py ohio --discovery-only   # Only discover, skip detail scrape
     python run_statewide.py ohio --detail-only      # Only detail scrape (requires prior discovery)
+    python run_statewide.py all --dates-only        # Just regenerate dated_services.csv (fast, no scraping)
 
 EXPECTED RUNTIME (full run):
     Ohio (~1,077 cities):  ~30 min discovery + ~20 min detail = ~50 min
@@ -27,7 +28,7 @@ OUTPUT FILES (per state):
     data/output/{state}/church_details.jsonl           — Incremental detail (for resume)
     data/output/{state}/detail_progress.json           — Resume checkpoint
     data/output/{state}/all_services.csv               — One row per service (viewable in Excel)
-    data/output/{state}/dated_services.csv             — Services mapped to actual dates (next 2 weeks)
+    data/output/{state}/dated_services.csv             — Services mapped to actual dates (next 12 weeks)
 
 WHY INCREMENTAL SAVES:
     A full Ohio run takes ~50 minutes. If the script crashes at minute 40,
@@ -437,10 +438,48 @@ def run_detail_scrape(state_name: str, resume: bool = False):
     logger.info(f"DETAIL SCRAPE COMPLETE: {state_name.upper()}")
     logger.info(f"Churches: {success_count} scraped, {fail_count} failed (of {total})")
     logger.info(f"Total services: {svc_count}")
-    logger.info(f"Dated service instances (2 weeks): {dated_count}")
+    logger.info(f"Dated service instances (12 weeks): {dated_count}")
     logger.info(f"Time: {elapsed_total:.1f} minutes")
     logger.info(f"Output: {state_output_dir}")
     logger.info("=" * 70)
+
+
+# ============================================================================
+# Phase 3: Dates only — regenerate dated_services.csv from existing JSONL
+# ============================================================================
+
+def run_dates_only(state_name: str):
+    """
+    Re-read existing church_details.jsonl and regenerate dated_services.csv.
+
+    This is the fast path — no network requests, just date expansion from
+    today forward. Takes seconds per state instead of hours.
+
+    Args:
+        state_name: Lowercase state name ("ohio", "texas")
+    """
+    state_output_dir = OUTPUT_DIR / state_name
+    jsonl_path = state_output_dir / "church_details.jsonl"
+
+    if not jsonl_path.exists():
+        logger.warning(f"No JSONL data for {state_name} — skipping (run detail scrape first)")
+        return
+
+    # Read all details from JSONL
+    all_details = []
+    with open(jsonl_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                all_details.append(json.loads(line))
+
+    if not all_details:
+        logger.warning(f"JSONL is empty for {state_name} — skipping")
+        return
+
+    # Regenerate dated CSV
+    dated_count = generate_dated_services_csv(all_details, state_output_dir / "dated_services.csv")
+    logger.info(f"{state_name.upper()}: {dated_count} dated service instances (12 weeks) from {len(all_details)} churches")
 
 
 # ============================================================================
@@ -472,19 +511,35 @@ def main():
         "--detail-only", action="store_true",
         help="Only run detail scraping (requires prior discovery run)"
     )
+    parser.add_argument(
+        "--dates-only", action="store_true",
+        help="Only regenerate dated_services.csv from existing JSONL (fast, no scraping)"
+    )
 
     args = parser.parse_args()
 
-    # Resolve state names
+    # Resolve state names — "all" expands to every known state
     state_configs = []
-    for s in args.states:
-        abbrev, name = resolve_state(s)
-        state_configs.append((abbrev, name))
+    if len(args.states) == 1 and args.states[0].lower() == "all":
+        seen = set()
+        for abbrev, name in STATE_ALIASES.values():
+            if name not in seen:
+                state_configs.append((abbrev, name))
+                seen.add(name)
+        state_configs.sort(key=lambda x: x[1])
+    else:
+        for s in args.states:
+            abbrev, name = resolve_state(s)
+            state_configs.append((abbrev, name))
 
     for state_abbrev, state_name in state_configs:
         logger.info(f"\n{'#' * 70}")
         logger.info(f"# STARTING: {state_name.upper()}")
         logger.info(f"{'#' * 70}\n")
+
+        if args.dates_only:
+            run_dates_only(state_name)
+            continue
 
         if not args.detail_only:
             run_discovery(state_abbrev, state_name, resume=args.resume, limit=args.limit)

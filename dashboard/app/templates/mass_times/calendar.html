@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}{{ display_name }} — Calendar{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('mass_times.state_view', state=state) }}">{{ display_name }}</a></li>
+        <li class="breadcrumb-item active">Calendar</li>
+    </ol>
+</nav>
+
+<h2><i class="bi bi-calendar3"></i> Dated Activities &mdash; {{ display_name }}</h2>
+<p class="text-muted">{{ total_rows }} activities (next 12 weeks)</p>
+
+<!-- Filters -->
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-2">
+                <label for="from" class="form-label">From Date</label>
+                <input type="date" class="form-control" id="from" name="from" value="{{ date_from }}">
+            </div>
+            <div class="col-md-2">
+                <label for="to" class="form-label">To Date</label>
+                <input type="date" class="form-control" id="to" name="to" value="{{ date_to }}">
+            </div>
+            <div class="col-md-3">
+                <label for="church" class="form-label">Church</label>
+                <select class="form-select" id="church" name="church">
+                    <option value="">All Churches</option>
+                    {% for c in all_churches %}
+                    <option value="{{ c }}" {% if c == church_filter %}selected{% endif %}>{{ c }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category">
+                    <option value="">All Categories</option>
+                    {% for cat in all_categories %}
+                    <option value="{{ cat }}" {% if cat == category_filter %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary me-2"><i class="bi bi-funnel"></i> Filter</button>
+                <a href="{{ url_for('mass_times.calendar_view', state=state) }}" class="btn btn-outline-secondary me-2">Clear</a>
+                <a href="{{ url_for('mass_times.calendar_download', state=state) }}" class="btn btn-outline-success"><i class="bi bi-download"></i> CSV</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Results table -->
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0" id="calendarTable">
+            <thead class="table-light">
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Church</th>
+                    <th>Service</th>
+                    <th>Category</th>
+                    <th>Language</th>
+                    <th>Location</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set current_date = namespace(value='') %}
+                {% for row in rows %}
+                {% set date_sort = row.get('Date Sort', '') %}
+                {% if date_sort != current_date.value %}
+                    {% set current_date.value = date_sort %}
+                <tr class="table-secondary">
+                    <td colspan="9"><strong>{{ row.get('Date', date_sort) }}</strong></td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <td class="text-nowrap">{{ row.get('Date', '') }}</td>
+                    <td>{{ row.get('Day', '') }}</td>
+                    <td class="text-nowrap">
+                        {{ row.get('Time', '') }}
+                        {% if row.get('End Time', '') %}&ndash; {{ row['End Time'] }}{% endif %}
+                    </td>
+                    <td>{{ row.get('Church', '') }}</td>
+                    <td>{{ row.get('Service Name', '') }}</td>
+                    <td><span class="badge bg-secondary">{{ row.get('Category', '') }}</span></td>
+                    <td>{{ row.get('Language', '') }}</td>
+                    <td>{{ row.get('Location', '') }}</td>
+                    <td class="small text-muted">{{ row.get('Notes', '') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if not rows %}
+<div class="alert alert-info mt-3">No activities found for the selected filters.</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#calendarTable').DataTable({
+        pageLength: 100,
+        ordering: false,
+        language: { search: "Search:" },
+    });
+});
+</script>
+{% endblock %}

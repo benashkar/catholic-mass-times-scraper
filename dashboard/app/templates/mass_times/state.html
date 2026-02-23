@@ -11,7 +11,12 @@
 </nav>
 
 <h2><i class="bi bi-clock"></i> Mass Times &mdash; {{ display_name }}</h2>
-<p class="text-muted">{{ churches|length }} churches</p>
+<p class="text-muted">
+    {{ churches|length }} churches
+    <a href="{{ url_for('mass_times.calendar_view', state=state) }}" class="btn btn-sm btn-outline-primary ms-3">
+        <i class="bi bi-calendar3"></i> View Calendar
+    </a>
+</p>
 
 <div class="card">
     <div class="card-body p-0">
