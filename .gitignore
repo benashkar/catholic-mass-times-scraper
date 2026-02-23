@@ -43,10 +43,17 @@ logs/*.log
 Thumbs.db
 
 # --- Data (large files) ---
-# Scraped data files can be large; keep them local
-# Remove these lines if you want to track data in git
-# data/output/*.csv
-# data/output/*.json
+# Raw downloaded PDFs and extracted text — too large for git
+data/output/*/bulletins/
+data/output/*/bulletin_texts/
+# Large JSON files (bulletin discovery, progress, raw names JSON)
+data/output/*/bulletin_names.json
+data/output/*/bulletin_discovery.json
+data/output/*/bulletin_progress.json
+# Root-level aggregates (rebuilt from per-state files)
+data/output/all_services.csv
+data/output/all_churches_detail.json
+data/output/dated_services.csv
 
 # --- Docker ---
 # docker-compose.override.yml

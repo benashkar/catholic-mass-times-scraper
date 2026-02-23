@@ -1,0 +1,58 @@
+/* Catholic Church Dashboard — Custom Styles */
+
+/* Cards */
+.card {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s;
+}
+.card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Stats cards */
+.card.text-center .card-title {
+    font-size: 2rem;
+}
+
+/* Table tweaks */
+.table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+.table td {
+    vertical-align: middle;
+}
+
+/* Compact badge styling */
+.badge {
+    font-weight: 500;
+}
+
+/* DataTables overrides */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 0.75rem;
+}
+.dataTables_wrapper .dataTables_info {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* Breadcrumb compact */
+.breadcrumb {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Responsive table scroll */
+@media (max-width: 768px) {
+    .card-body.p-0 {
+        overflow-x: auto;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa;
+}

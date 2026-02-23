@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}{{ display_name }} — Bulletin Names{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('bulletin.index') }}">Bulletin Names</a></li>
+        <li class="breadcrumb-item active">{{ display_name }}</li>
+    </ol>
+</nav>
+
+<div class="row mb-3 align-items-center">
+    <div class="col">
+        <h2><i class="bi bi-people"></i> Bulletin Names &mdash; {{ display_name }}</h2>
+    </div>
+</div>
+
+<!-- Stats row -->
+{% if stats %}
+<div class="row mb-4 g-2">
+    <div class="col-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-body py-2">
+                <h4 class="mb-0 text-primary">{{ "{:,}".format(stats.total_names) }}</h4>
+                <small class="text-muted">Total Names</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-body py-2">
+                <h4 class="mb-0 text-success">{{ "{:,}".format(stats.unique_names) }}</h4>
+                <small class="text-muted">Unique Names</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-body py-2">
+                <h4 class="mb-0 text-warning">{{ stats.church_count }}</h4>
+                <small class="text-muted">Churches</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card text-center">
+            <div class="card-body py-2">
+                <h4 class="mb-0 text-info">{{ stats.city_count }}</h4>
+                <small class="text-muted">Cities</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Filter controls -->
+<div class="row mb-3 g-2">
+    <div class="col-md-4">
+        <select id="filterCity" class="form-select form-select-sm">
+            <option value="">All Cities</option>
+            {% for c in cities %}
+            <option value="{{ c }}">{{ c }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <select id="filterChurch" class="form-select form-select-sm">
+            <option value="">All Churches</option>
+            {% for ch in churches %}
+            <option value="{{ ch }}">{{ ch }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-4">
+        <select id="filterCategory" class="form-select form-select-sm">
+            <option value="">All Categories</option>
+            <option value="clergy">Clergy</option>
+            <option value="mass_intention">Mass Intention</option>
+            <option value="prayer_list">Prayer List</option>
+            <option value="ministry_contextual">Ministry/Contextual</option>
+        </select>
+    </div>
+</div>
+
+<!-- Data table -->
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped table-sm mb-0" id="namesTable" style="width:100%">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>First</th>
+                    <th>Middle</th>
+                    <th>Last</th>
+                    <th>Church</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Category</th>
+                    <th>Confidence</th>
+                    <th>PDF</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for n in names %}
+                <tr>
+                    <td><strong>{{ n.person_name }}</strong></td>
+                    <td>{{ n.title }}</td>
+                    <td>{{ n.first_name }}</td>
+                    <td>{{ n.middle_name }}</td>
+                    <td>{{ n.last_name }}</td>
+                    <td>{{ n.church_name }}</td>
+                    <td>{{ n.city }}</td>
+                    <td class="small">{{ n.full_street }}</td>
+                    <td>
+                        {% if n.category == 'clergy' %}
+                        <span class="badge bg-primary">Clergy</span>
+                        {% elif n.category == 'mass_intention' %}
+                        <span class="badge bg-info">Mass Intention</span>
+                        {% elif n.category == 'prayer_list' %}
+                        <span class="badge bg-success">Prayer List</span>
+                        {% elif n.category == 'ministry_contextual' %}
+                        <span class="badge bg-secondary">Ministry</span>
+                        {% else %}
+                        <span class="badge bg-light text-dark">{{ n.category }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if n.confidence == 'high' %}
+                        <span class="badge bg-success">High</span>
+                        {% elif n.confidence == 'medium' %}
+                        <span class="badge bg-warning">Med</span>
+                        {% else %}
+                        <span class="badge bg-secondary">{{ n.confidence }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if n.pdf_url %}
+                        <a href="{{ n.pdf_url }}" target="_blank" rel="noopener" title="View source PDF" class="btn btn-sm btn-outline-secondary py-0">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td class="small text-nowrap">{{ n.pdf_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    var table = $('#namesTable').DataTable({
+        pageLength: 50,
+        order: [[0, 'asc']],
+        language: { search: "Search names:" },
+        dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
+        columnDefs: [
+            { targets: [10], orderable: false }  // PDF column not sortable
+        ]
+    });
+
+    // Custom filter: City
+    $('#filterCity').on('change', function() {
+        table.column(6).search(this.value, false, false).draw();
+    });
+
+    // Custom filter: Church
+    $('#filterChurch').on('change', function() {
+        table.column(5).search(this.value, false, false).draw();
+    });
+
+    // Custom filter: Category
+    $('#filterCategory').on('change', function() {
+        table.column(8).search(this.value, false, false).draw();
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Bulletin Names — States{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1><i class="bi bi-people"></i> Bulletin Names</h1>
+        <p class="lead text-muted">Names extracted from church bulletins, with full provenance (PDF link, date).</p>
+    </div>
+</div>
+
+{% if not states %}
+<div class="alert alert-info">No bulletin name data available yet. Run the bulletin scraper first.</div>
+{% else %}
+<div class="row g-3">
+    {% for s in states %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ url_for('bulletin.state_view', state=s.state_dir) }}" class="text-decoration-none">
+                        {{ s.display_name }}
+                    </a>
+                </h5>
+                <div class="row text-center mt-3">
+                    <div class="col-4">
+                        <div class="fw-bold text-primary">{{ "{:,}".format(s.total_names or 0) }}</div>
+                        <small class="text-muted">Names</small>
+                    </div>
+                    <div class="col-4">
+                        <div class="fw-bold text-success">{{ "{:,}".format(s.unique_names or 0) }}</div>
+                        <small class="text-muted">Unique</small>
+                    </div>
+                    <div class="col-4">
+                        <div class="fw-bold text-warning">{{ s.church_count or 0 }}</div>
+                        <small class="text-muted">Churches</small>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('bulletin.state_view', state=s.state_dir) }}" class="btn btn-sm btn-outline-warning w-100">
+                    Browse Names <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ city }}, {{ display_name }} — Mass Times{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('mass_times.state_view', state=state) }}">{{ display_name }}</a></li>
+        <li class="breadcrumb-item active">{{ city }}</li>
+    </ol>
+</nav>
+
+<h2><i class="bi bi-building"></i> Churches in {{ city }}, {{ display_name }}</h2>
+<p class="text-muted">{{ churches|length }} churches found</p>
+
+<div class="row g-3">
+    {% for c in churches %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.Church) }}" class="text-decoration-none">
+                        {{ c.Church }}
+                    </a>
+                </h5>
+                {% if c.address %}
+                <p class="card-text small text-muted mb-1">
+                    <i class="bi bi-geo-alt"></i> {{ c.address }}
+                </p>
+                {% endif %}
+                {% if c.phone %}
+                <p class="card-text small text-muted mb-1">
+                    <i class="bi bi-telephone"></i> {{ c.phone }}
+                </p>
+                {% endif %}
+                <span class="badge bg-primary">{{ c.service_count }} services</span>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.Church) }}" class="btn btn-sm btn-outline-primary w-100">
+                    View Schedule <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

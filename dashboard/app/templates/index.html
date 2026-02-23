@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}Catholic Church Dashboard — Home{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1><i class="bi bi-church"></i> Catholic Church Dashboard</h1>
+        <p class="lead text-muted">Browse mass times and bulletin-extracted names across US Catholic churches.</p>
+    </div>
+</div>
+
+<!-- Summary stats -->
+<div class="row mb-4 g-3">
+    <div class="col-md-4">
+        <div class="card text-center border-primary">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-0">{{ "{:,}".format(total_churches) }}</h2>
+                <p class="card-text text-muted">Total Churches</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center border-success">
+            <div class="card-body">
+                <h2 class="card-title text-success mb-0">{{ total_states }}</h2>
+                <p class="card-text text-muted">States with Data</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center border-warning">
+            <div class="card-body">
+                <h2 class="card-title text-warning mb-0">{{ bulletin_states }}</h2>
+                <p class="card-text text-muted">States with Bulletin Names</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- State grid -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-geo-alt"></i> States</h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0" id="statesTable">
+            <thead class="table-light">
+                <tr>
+                    <th>State</th>
+                    <th class="text-center">Churches</th>
+                    <th class="text-center">Mass Times</th>
+                    <th class="text-center">Bulletin Names</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in states %}
+                <tr>
+                    <td>
+                        <strong>{{ s.display_name }}</strong>
+                        <span class="badge bg-secondary ms-1">{{ s.state_code }}</span>
+                    </td>
+                    <td class="text-center">{{ "{:,}".format(s.church_count) }}</td>
+                    <td class="text-center">
+                        {% if s.has_services %}
+                        <span class="badge bg-success"><i class="bi bi-check-lg"></i> Yes</span>
+                        {% else %}
+                        <span class="badge bg-light text-muted">No</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if s.has_bulletin %}
+                        <span class="badge bg-success"><i class="bi bi-check-lg"></i> Yes</span>
+                        {% else %}
+                        <span class="badge bg-light text-muted">No</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if s.has_services %}
+                        <a href="{{ url_for('mass_times.state_view', state=s.state_dir) }}" class="btn btn-sm btn-outline-primary me-1">
+                            <i class="bi bi-clock"></i> Mass Times
+                        </a>
+                        {% endif %}
+                        {% if s.has_bulletin %}
+                        <a href="{{ url_for('bulletin.state_view', state=s.state_dir) }}" class="btn btn-sm btn-outline-warning">
+                            <i class="bi bi-people"></i> Names
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#statesTable').DataTable({
+        pageLength: 25,
+        order: [[0, 'asc']],
+        language: { search: "Filter states:" }
+    });
+});
+</script>
+{% endblock %}

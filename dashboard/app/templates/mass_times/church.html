@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}{{ church_name }} — Mass Times{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('mass_times.state_view', state=state) }}">{{ display_name }}</a></li>
+        <li class="breadcrumb-item active">{{ church_name }}</li>
+    </ol>
+</nav>
+
+<div class="row mb-4">
+    <div class="col">
+        <h2><i class="bi bi-church"></i> {{ church_name }}</h2>
+        {% if address %}
+        <p class="text-muted mb-1"><i class="bi bi-geo-alt"></i> {{ address }}</p>
+        {% endif %}
+        {% if phone %}
+        <p class="text-muted mb-0"><i class="bi bi-telephone"></i> {{ phone }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% for cat_name, services in categories %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h5 class="mb-0">
+            {% if cat_name == 'Mass' %}
+            <i class="bi bi-book"></i>
+            {% elif cat_name == 'Confession' %}
+            <i class="bi bi-chat-dots"></i>
+            {% elif cat_name == 'Adoration' %}
+            <i class="bi bi-sun"></i>
+            {% else %}
+            <i class="bi bi-calendar-event"></i>
+            {% endif %}
+            {{ cat_name }}
+            <span class="badge bg-secondary ms-2">{{ services|length }}</span>
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-sm table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Service</th>
+                    <th>Language</th>
+                    <th>Location</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for svc in services %}
+                <tr>
+                    <td><strong>{{ svc.Day or '' }}</strong></td>
+                    <td>
+                        {{ svc['Time Start'] or '' }}
+                        {% if svc['Time End'] %}&ndash; {{ svc['Time End'] }}{% endif %}
+                    </td>
+                    <td>{{ svc['Service Name'] or '' }}</td>
+                    <td>{{ svc.Language or '' }}</td>
+                    <td>{{ svc.Location or '' }}</td>
+                    <td class="small text-muted">{{ svc.Notes or '' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endfor %}
+
+{% if not categories %}
+<div class="alert alert-info">No service schedule data available for this church.</div>
+{% endif %}
+{% endblock %}
