@@ -310,9 +310,9 @@ def _load_church_details_jsonl(state_dir):
                 church = entry.get("church", {})
                 name = church.get("name", "").strip()
                 slug = church.get("slug", "")
-                website = entry.get("website_resolved") or church.get("website_resolved", "")
+                website = entry.get("website_resolved") or church.get("website_resolved", "") or ""
                 if name:
-                    lookup[name] = {"website": website, "slug": slug}
+                    lookup[name] = {"website": website, "slug": slug or ""}
     except Exception:
         pass
     return lookup

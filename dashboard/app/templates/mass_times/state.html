@@ -37,7 +37,7 @@
                     <td>{{ c.city }}</td>
                     <td class="small text-muted">{{ c.address }}</td>
                     <td>
-                        {% if c.website %}
+                        {% if c.website and c.website is string and c.website|length > 0 %}
                         <a href="{{ c.website }}" target="_blank" rel="noopener" class="text-decoration-none small">
                             <i class="bi bi-box-arrow-up-right"></i> {{ c.website[:40] }}{% if c.website|length > 40 %}...{% endif %}
                         </a>

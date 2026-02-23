@@ -19,14 +19,25 @@ def state_view(state):
     if services.empty:
         abort(404)
 
-    # Get unique churches with their details — group by slug when available
-    # For churches without slugs, fall back to church_display
+    # Get unique churches with their details
+    # Use slug as group key where available; fall back to church_display
+    # for churches without a slug (empty string = no match to parsed_addresses)
+    has_slugs = "church_slug" in services.columns
+    if has_slugs:
+        # For rows with empty slug, use church_display as fallback group key
+        services["_group_key"] = services.apply(
+            lambda r: r["church_slug"] if r["church_slug"] else r["church_display"],
+            axis=1,
+        )
+    else:
+        services["_group_key"] = services["church_display"]
+
     churches = (
-        services.groupby("church_slug" if "church_slug" in services.columns else "church_display")
+        services.groupby("_group_key")
         .agg(
             Church=("Church", "first"),
             church_display=("church_display", "first"),
-            church_slug=("church_slug", "first") if "church_slug" in services.columns else ("church_display", "first"),
+            church_slug=("church_slug", "first") if has_slugs else ("church_display", "first"),
             address=("Address", "first"),
             phone=("Phone", "first"),
             city=("city", "first"),
@@ -42,10 +53,10 @@ def state_view(state):
         axis=1,
     )
 
-    # Add website URLs from JSONL
+    # Add website URLs from JSONL (ensure always string, never NaN)
     website_lookup = _load_church_details_jsonl(state)
     churches["website"] = churches["Church"].apply(
-        lambda name: website_lookup.get(name, {}).get("website", "")
+        lambda name: website_lookup.get(name, {}).get("website", "") or ""
     )
 
     # Add bulletin names availability
