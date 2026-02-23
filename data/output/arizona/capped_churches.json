@@ -26,5 +26,19 @@
     "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
     "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-az-superior-st-francis-of-assisi-3d02e5a9",
+    "church_name": "St. Francis of Assisi",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-az-tucson-st-frances-cabrini-our-lady-of-lavang-bf40b56c",
+    "church_name": "St. Frances Cabrini",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
   }
 ]
