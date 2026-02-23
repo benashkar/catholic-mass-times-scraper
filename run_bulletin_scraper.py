@@ -1676,7 +1676,7 @@ FALSE_POSITIVE_NAMES = {
     "Maintenance Director", "Athletic Director",
     "Pro Life", "Right Life",
     # Bulletin structural/calendar phrases that look like names
-    "Ordinary Time", "An Invitation", "By Appointment",
+    "Ordinary Time", "By Appointment",
     "Job Opportunity", "Assembly Mtg", "Council Mtg",
     "Degree Exemplification", "Money Counters",
     "Compliance Officer", "Mercy Chaplet",
@@ -1693,12 +1693,12 @@ FALSE_POSITIVE_NAMES = {
     "New Year", "Immaculate Conception", "Columbus Council", "Finance Council",
     "Pastoral Council", "Pope Leo", "Food Pantry", "Fish Fry", "All Souls",
     "Wedding Anniversary", "Ordinary Time", "Second Vatican Council",
-    "Deceased Members", "All Saints", "Volunteers Needed", "All Souls Day",
+    "Deceased Members", "Volunteers Needed", "All Souls Day",
     "Lord Jesus Christ", "The Knights", "Paul Society", "May God",
     "Presbyteral Council", "Lord Jesus", "Good News", "Administrative Assistant",
     "The St", "Special Intention", "Memorial Day", "Jubilee Year",
-    "All Saints Day", "Labor Day", "Virgin Mary", "Feast Day",
-    "Blood Drive", "World Day", "Open House", "St Mary", "Jordan River",
+    "Labor Day", "Virgin Mary", "Feast Day",
+    "World Day", "Open House", "St Mary", "Jordan River",
     "Bake Sale", "Shawl Ministry", "Pancake Breakfast", "Latin America",
     "Old Testament", "The Lord", "Happy New Year", "Heavenly Father",
     "Thomas Aquinas", "Retirement Fund", "First Reconciliation",
@@ -1709,6 +1709,11 @@ FALSE_POSITIVE_NAMES = {
     "Faithful Departed", "Life Activities", "New Testament",
     "Property Manager", "Development Manager", "Case Managers",
     "Sun Rehearsal", "English Ministry", "Brother Knight",
+    # Phrases using 'Will' and 'Christian' that aren't names
+    # (these words were unblocked because they're common real names)
+    "Will Be", "Will Not", "Will Have", "Will Take",
+    "Christian Education", "Christian Formation", "Christian Initiation",
+    "Christian Service", "Christian Community", "Christian Life",
 }
 
 
@@ -1728,6 +1733,16 @@ def clean_extracted_name(name: str) -> str:
     day_abbrevs = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'}
     parts = name.split()
     while parts and parts[-1] in day_abbrevs:
+        parts.pop()
+    # Strip trailing ministry role words (PDF column bleed from schedule grids)
+    # e.g. "Richard Martinez Lector" -> "Richard Martinez"
+    trailing_roles = {
+        'Lector', 'Lectors', 'Usher', 'Ushers', 'Sacristan', 'Sacristans',
+        'Presider', 'Cantor', 'Cantors', 'Greeters', 'Greeter', 'Server',
+        'Servers', 'Reader', 'Readers', 'Minister', 'Ministers',
+        'Eucharist', 'Ext', 'Req', 'Deceased', 'God',
+    }
+    while parts and parts[-1] in trailing_roles:
         parts.pop()
     # Strip trailing 'All' (from "Edwin Arthur All")
     if parts and parts[-1] == 'All':
@@ -1788,29 +1803,29 @@ def is_valid_name(name: str) -> bool:
     # All entries should be stored lowercase in this set.
     non_name_words = {
         'the', 'and', 'for', 'from', 'with', 'that', 'this', 'are', 'was',
-        'will', 'has', 'have', 'had', 'been', 'being', 'their', 'there',
+        'has', 'have', 'had', 'their', 'there',
         'where', 'when', 'what', 'which', 'also', 'than', 'them',
         'not', 'out', 'who', 'how', 'its', 'may', 'can', 'you', 'your',
         'church', 'parish', 'school', 'center', 'hall', 'room', 'chapel',
-        'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+        'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'saturday',
         'january', 'february', 'march', 'april', 'june', 'july', 'august',
         'september', 'october', 'november', 'december',
-        'mass', 'masses', 'confession', 'communion', 'lent', 'easter', 'advent', 'christmas',
+        'mass', 'masses', 'confession', 'communion', 'lent', 'easter', 'christmas',
         'daily', 'weekly', 'monthly', 'annual',
         'weekday', 'weekend', 'morning', 'evening', 'night',
-        'table', 'altar', 'prayer', 'music', 'director', 'ministers',
+        'table', 'prayer', 'music', 'director', 'ministers',
         'eucharistic', 'servers', 'rentals', 'maintenance', 'hour',
         'holy', 'blessed', 'sacred', 'saint', 'our',
-        'rite', 'christian', 'catholic', 'initiation', 'adults',
+        'rite', 'catholic', 'initiation', 'adults',
         'stations', 'cross', 'rosary', 'adoration', 'benediction',
-        'tree', 'garden', 'office', 'building',
+        'tree', 'garden', 'office',
         'online', 'giving', 'live', 'stream',
         'please', 'contact', 'call', 'email', 'visit',
         'registration', 'information', 'schedule', 'calendar',
         'baptism', 'confirmation', 'marriage', 'funeral', 'anointing', 'communion',
         'collection', 'offertory', 'budget', 'total',
         'choir', 'band', 'ensemble', 'group',
-        'youth', 'adult', 'children', 'family', 'women', 'men',
+        'youth', 'children', 'family', 'women', 'men',
         'deacon', 'priest', 'bishop', 'pastor', 'vicar',
         # Spanish words that appear in bilingual bulletins
         'domingo', 'tiempo', 'ordinario', 'semana', 'consejo', 'matrimonial',
@@ -1822,8 +1837,8 @@ def is_valid_name(name: str) -> bool:
         'chaplet', 'spiritual', 'dcn', 'alone',
         # Event/activity words
         'activities', 'picnic', 'proceeds', 'novena', 'drive', 'sale', 'bake',
-        'pancake', 'breakfast', 'fry', 'pantry', 'store', 'bank', 'kitchen',
-        'shawl', 'blood', 'food', 'soup', 'thrift',
+        'pancake', 'fry', 'pantry', 'store', 'bank', 'kitchen',
+        'shawl', 'food', 'soup', 'thrift',
         # Time/calendar words
         'day', 'year', 'time', 'new', 'old', 'first', 'second',
         'labor', 'memorial', 'thanksgiving', 'happy', 'jubilee',
@@ -1842,6 +1857,36 @@ def is_valid_name(name: str) -> bool:
         'ad', 'dear', 'high', 'middle', 'pro', 'right', 'respect',
         'cardinal', 'pope', 'doctor', 'anniversary', 'feast', 'world',
         'society', 'news', 'knight', 'knights', 'life',
+        'active', 'ministries', 'ministry',
+        'cultural', 'community', 'ushers', 'wheelchair', 'disciples',
+        'committee', 'basketball',
+        # Bulletin vocabulary surfaced by frequency analysis
+        'lector', 'usher', 'sacristan', 'presider', 'cantor', 'greeters',
+        'greeter', 'server', 'reader', 'families', 'deceased',
+        'formation', 'welcome', 'education', 'lenten', 'university',
+        'club', 'program', 'service', 'services', 'parishioners',
+        'dinner', 'divine', 'bulletin', 'bible', 'road',
+        'retreat', 'care', 'join', 'ladies', 'health', 'class', 'classes',
+        'living', 'sacramental', 'social', 'study', 'baptisms', 'english',
+        'spanish', 'baby', 'need', 'cemetery', 'good', 'team', 'county',
+        'upcoming', 'book', 'avenue', 'liturgical', 'stewardship',
+        'hospitality', 'raffle', 'liturgy', 'gifts', 'events',
+        'american', 'parochial', 'college', 'financial',
+        'support', 'national', 'banns', 'confessions', 'help',
+        'association', 'training', 'eucharist', 'senior',
+        'grade', 'south', 'north', 'eternal', 'phone', 'child',
+        'conference', 'heart', 'project', 'guild', 'outreach',
+        'student', 'students', 'baptismal', 'today', 'staff',
+        'bread', 'nursing', 'event', 'campus', 'scholarship',
+        'scripture', 'death', 'perpetual', 'rehearsal', 'blvd',
+        'extraordinary', 'recently', 'central', 'lunch', 'gathering',
+        'abuse', 'weddings', 'vocations', 'commission', 'party',
+        'general', 'golf', 'order', 'tickets', 'blessings',
+        'clergy', 'scout', 'coffee', 'req', 'god', 'christ',
+        'wedding', 'pastoral', 'diocesan', 'intentions',
+        'feb', 'mar', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
+        'tues', 'thurs', 'ave', 'mrs', 'rev', 'ext',
+        'padre', 'familia', 'por', 'los', 'san', 'santa', 'santo',
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
