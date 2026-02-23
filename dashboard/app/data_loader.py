@@ -269,3 +269,51 @@ def get_bulletin_stats(state_dir):
         "church_count": df["church_name"].nunique(),
         "city_count": df["city"].nunique() if "city" in df.columns else 0,
     }
+
+
+@lru_cache(maxsize=10)
+def _load_church_details_jsonl(state_dir):
+    """Load church_details.jsonl and build a lookup by church name.
+    Returns dict mapping church name -> {website_resolved, slug}.
+    """
+    import json as _json
+    path = os.path.join(DATA_DIR, state_dir, "church_details.jsonl")
+    if not os.path.isfile(path):
+        return {}
+
+    lookup = {}
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                entry = _json.loads(line)
+                church = entry.get("church", {})
+                name = church.get("name", "").strip()
+                slug = church.get("slug", "")
+                website = entry.get("website_resolved") or church.get("website_resolved", "")
+                if name:
+                    lookup[name] = {"website": website, "slug": slug}
+    except Exception:
+        pass
+    return lookup
+
+
+def get_church_website(state_dir, church_name):
+    """Look up a church's resolved website URL from JSONL data."""
+    lookup = _load_church_details_jsonl(state_dir)
+    info = lookup.get(church_name, {})
+    return info.get("website", "")
+
+
+def get_church_slug(state_dir, church_name):
+    """Look up a church's slug from JSONL data."""
+    lookup = _load_church_details_jsonl(state_dir)
+    info = lookup.get(church_name, {})
+    return info.get("slug", "")
+
+
+def church_has_bulletin_names(state_dir, church_name):
+    """Check if a church has any bulletin-extracted names."""
+    df = get_bulletin_names(state_dir)
+    if df is None or df.empty:
+        return False
+    return (df["church_name"] == church_name).any()

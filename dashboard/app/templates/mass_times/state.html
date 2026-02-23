@@ -11,29 +11,47 @@
 </nav>
 
 <h2><i class="bi bi-clock"></i> Mass Times &mdash; {{ display_name }}</h2>
-<p class="text-muted">{{ cities|length }} cities with churches</p>
+<p class="text-muted">{{ churches|length }} churches</p>
 
 <div class="card">
     <div class="card-body p-0">
-        <table class="table table-hover table-striped mb-0" id="citiesTable">
+        <table class="table table-hover table-striped mb-0" id="churchesTable">
             <thead class="table-light">
                 <tr>
+                    <th>Church</th>
                     <th>City</th>
-                    <th class="text-center">Churches</th>
+                    <th>Address</th>
+                    <th>Website</th>
                     <th class="text-center">Services</th>
-                    <th>Action</th>
+                    <th class="text-center">Names</th>
                 </tr>
             </thead>
             <tbody>
-                {% for c in cities %}
+                {% for c in churches %}
                 <tr>
-                    <td><strong>{{ c.city }}</strong></td>
-                    <td class="text-center">{{ c.church_count }}</td>
-                    <td class="text-center">{{ c.service_count }}</td>
                     <td>
-                        <a href="{{ url_for('mass_times.city_view', state=state, city=c.city) }}" class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-arrow-right"></i> View
+                        <a href="{{ url_for('mass_times.church_view', state=state, church_name=c.church_display) }}" class="text-decoration-none fw-bold">
+                            {{ c.Church }}
                         </a>
+                    </td>
+                    <td>{{ c.city }}</td>
+                    <td class="small text-muted">{{ c.address }}</td>
+                    <td>
+                        {% if c.website %}
+                        <a href="{{ c.website }}" target="_blank" rel="noopener" class="text-decoration-none small">
+                            <i class="bi bi-box-arrow-up-right"></i> {{ c.website[:40] }}{% if c.website|length > 40 %}...{% endif %}
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <span class="badge bg-primary">{{ c.service_count }}</span>
+                    </td>
+                    <td class="text-center">
+                        {% if c.has_bulletin and c.bulletin_count > 0 %}
+                        <a href="{{ url_for('bulletin.state_view', state=state) }}?church={{ c.Church }}" class="btn btn-sm btn-outline-success" target="_blank">
+                            <i class="bi bi-people"></i> {{ c.bulletin_count }}
+                        </a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -46,10 +64,18 @@
 {% block extra_js %}
 <script>
 $(document).ready(function() {
-    $('#citiesTable').DataTable({
-        pageLength: 25,
+    $('#churchesTable').DataTable({
+        pageLength: 50,
         order: [[0, 'asc']],
-        language: { search: "Filter cities:" }
+        language: { search: "Filter:" },
+        columns: [
+            null,
+            null,
+            null,
+            null,
+            { searchable: false },
+            { searchable: false }
+        ]
     });
 });
 </script>

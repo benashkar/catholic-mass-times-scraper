@@ -4,33 +4,60 @@ Uses church_display (which includes city for disambiguation) as the URL key.
 Filters out cross-state contamination via data_loader.
 """
 from flask import Blueprint, render_template, abort
-from app.data_loader import get_services
+from app.data_loader import (
+    get_services, get_church_website, church_has_bulletin_names,
+    _load_church_details_jsonl,
+)
 
 bp = Blueprint("mass_times", __name__, url_prefix="/mass-times")
 
 
 @bp.route("/<state>/")
 def state_view(state):
-    """Show cities in a state with church/service counts."""
+    """Show all churches in a state with name, website, address, city."""
     services = get_services(state)
     if services.empty:
         abort(404)
 
-    cities = (
-        services.groupby("city")
+    # Get unique churches with their details
+    churches = (
+        services.groupby("church_display")
         .agg(
-            church_count=("church_display", "nunique"),
+            Church=("Church", "first"),
+            address=("Address", "first"),
+            phone=("Phone", "first"),
+            city=("city", "first"),
             service_count=("church_display", "count"),
         )
         .reset_index()
-        .sort_values("city")
+        .sort_values("Church")
     )
+
+    # Add website URLs from JSONL
+    website_lookup = _load_church_details_jsonl(state)
+    churches["website"] = churches["Church"].apply(
+        lambda name: website_lookup.get(name, {}).get("website", "")
+    )
+
+    # Add bulletin names availability
+    from app.data_loader import get_bulletin_names
+    bulletin_df = get_bulletin_names(state)
+    if bulletin_df is not None and not bulletin_df.empty:
+        bulletin_churches = set(bulletin_df["church_name"].unique())
+        churches["has_bulletin"] = churches["Church"].isin(bulletin_churches)
+        # Count names per church
+        name_counts = bulletin_df.groupby("church_name").size().to_dict()
+        churches["bulletin_count"] = churches["Church"].map(name_counts).fillna(0).astype(int)
+    else:
+        churches["has_bulletin"] = False
+        churches["bulletin_count"] = 0
+
     display_name = state.replace("_", " ").title()
     return render_template(
         "mass_times/state.html",
         state=state,
         display_name=display_name,
-        cities=cities.to_dict("records"),
+        churches=churches.to_dict("records"),
     )
 
 
@@ -133,6 +160,10 @@ def church_view(state, church_name):
         if c not in cat_order:
             sorted_cats.append((c, categories[c]))
 
+    # Look up website URL and bulletin availability
+    website_url = get_church_website(state, actual_name)
+    has_bulletin = church_has_bulletin_names(state, actual_name)
+
     display_name = state.replace("_", " ").title()
     return render_template(
         "mass_times/church.html",
@@ -141,5 +172,7 @@ def church_view(state, church_name):
         church_name=actual_name,
         address=address,
         phone=phone,
+        website_url=website_url,
+        has_bulletin=has_bulletin,
         categories=sorted_cats,
     )
