@@ -17,6 +17,7 @@ HOW TO RUN:
     python run_bulletin_scraper.py all arizona georgia          # Multiple states
     python run_bulletin_scraper.py all arizona --limit 10       # Test with first 10 churches
     python run_bulletin_scraper.py all arizona --resume         # Resume interrupted run
+    python run_bulletin_scraper.py all arizona --retry-no-url   # Re-check churches that got new URLs
 
 OUTPUT:
     data/output/{state}/bulletin_discovery.json     — bulletin page URLs per church
@@ -1580,8 +1581,18 @@ def main():
                        help="Limit number of churches to process (for testing)")
     parser.add_argument("--resume", action="store_true",
                        help="Resume from where we left off")
+    parser.add_argument("--retry-no-url", action="store_true",
+                       help=(
+                           "Re-check churches that were previously skipped because they "
+                           "had no resolved URL (status='no_url' in progress). Use after "
+                           "running URL resolver --retry-failed to pick up newly resolved "
+                           "URLs. Implies --resume for all other churches."
+                       ))
 
     args = parser.parse_args()
+    # --retry-no-url implies --resume (keep existing progress, just retry no_url ones)
+    if args.retry_no_url:
+        args.resume = True
 
     # Resolve state names
     if "all" in args.states:
@@ -1624,6 +1635,23 @@ def main():
 
         # Load progress
         progress = load_progress(state_dir)
+
+        # If --retry-no-url, remove "no_url" entries from discovered dict so they
+        # get re-processed with their now-resolved URLs
+        if args.retry_no_url:
+            discovered_dict = progress.get("discovered", {})
+            no_url_slugs = [
+                slug for slug, info in discovered_dict.items()
+                if info.get("status") == "no_url"
+            ]
+            for slug in no_url_slugs:
+                del discovered_dict[slug]
+            if no_url_slugs:
+                logger.info(
+                    f"Retry-no-url: removed {len(no_url_slugs)} 'no_url' entries "
+                    f"from discovered dict (will re-check with fresh URLs)"
+                )
+                save_progress(state_dir, progress)
 
         if args.phase in ("discover", "all"):
             discovered = run_discover(state_name, state_dir, with_urls, progress, resume=args.resume)
