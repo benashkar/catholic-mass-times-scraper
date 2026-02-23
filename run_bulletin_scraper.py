@@ -8,12 +8,14 @@ PIPELINE:
   Phase 1 — Discover: Find bulletin pages on church websites
   Phase 2 — Download: Download bulletin PDFs
   Phase 3 — Extract: Extract text from PDFs and identify names via pattern matching
+  Phase 4 — Clean: Re-clean existing extracted names with updated validation rules
 
 HOW TO RUN:
     python run_bulletin_scraper.py discover arizona             # Phase 1: find bulletin pages
     python run_bulletin_scraper.py download arizona             # Phase 2: download PDFs
     python run_bulletin_scraper.py extract arizona              # Phase 3: extract text + names
-    python run_bulletin_scraper.py all arizona                  # Run all phases
+    python run_bulletin_scraper.py clean arizona                # Phase 4: re-clean names with updated rules
+    python run_bulletin_scraper.py all arizona                  # Run phases 1-3
     python run_bulletin_scraper.py all arizona georgia          # Multiple states
     python run_bulletin_scraper.py all arizona --limit 10       # Test with first 10 churches
     python run_bulletin_scraper.py all arizona --resume         # Resume interrupted run
@@ -1321,11 +1323,13 @@ def extract_names_from_text(text: str, church_name: str = ""):
             continue
 
         # Validate the name
+        name_raw = clean_extracted_name(name_raw)
         name_parts = parse_name_parts(name_raw)
         # Reconstruct the "clean" name (without title) for validation
         clean_name = " ".join(
             p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
         )
+        clean_name = clean_extracted_name(clean_name)
 
         if not clean_name or len(clean_name) < 4:
             continue
@@ -1367,6 +1371,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
         clean_name = " ".join(
             p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
         )
+        clean_name = clean_extracted_name(clean_name)
         if not clean_name or len(clean_name) < 4:
             continue
         if is_valid_name(clean_name) and clean_name not in seen_names:
@@ -1471,10 +1476,12 @@ def extract_names_from_text(text: str, church_name: str = ""):
                     name = re.sub(r'\s*\(?\d{3}\)?.*$', '', name)
                     name = name.strip()
 
+                    name = clean_extracted_name(name)
                     name_parts = parse_name_parts(name)
                     clean_name = " ".join(
                         p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
                     )
+                    clean_name = clean_extracted_name(clean_name)
                     if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
                         seen_names.add(clean_name)
                         names.append({
@@ -1525,10 +1532,12 @@ def extract_names_from_text(text: str, church_name: str = ""):
         name_raw = m.group(2).strip()
         name_raw = re.sub(r'\s+', ' ', name_raw)
 
+        name_raw = clean_extracted_name(name_raw)
         name_parts = parse_name_parts(name_raw)
         clean_name = " ".join(
             p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
         )
+        clean_name = clean_extracted_name(clean_name)
         if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
             seen_names.add(clean_name)
             names.append({
@@ -1558,6 +1567,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
             name = re.sub(r'\s+', ' ', name)
             # Remove trailing conjunction fragments
             name = re.sub(r'\s+(?:and|&)\s*$', '', name)
+            name = clean_extracted_name(name)
             if is_valid_name(name) and name not in seen_names:
                 seen_names.add(name)
                 name_parts = parse_name_parts(name)
@@ -1582,6 +1592,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
         # Split on commas, semicolons, and newlines
         for name_candidate in re.split(r'[,;\n]+', name_list):
             name = name_candidate.strip()
+            name = clean_extracted_name(name)
             # Should be FirstName LastName format
             if re.match(r'^[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?$', name):
                 if is_valid_name(name) and name not in seen_names:
@@ -1619,7 +1630,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
                 r'([A-Z][a-z]{1,15}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?)',
                 nearby
             ):
-                name = name_match.group(1).strip()
+                name = clean_extracted_name(name_match.group(1).strip())
                 if is_valid_name(name) and name not in seen_names:
                     seen_names.add(name)
                     name_parts = parse_name_parts(name)
@@ -1678,7 +1689,53 @@ FALSE_POSITIVE_NAMES = {
     "Are Not", "You Are", "Are Not Alone",
     "Anderson Gift", "Business Mgr",
     "The Romo", "Of Jensen",
+    # Top false positive phrases found in data analysis (751K names, 6 states)
+    "New Year", "Immaculate Conception", "Columbus Council", "Finance Council",
+    "Pastoral Council", "Pope Leo", "Food Pantry", "Fish Fry", "All Souls",
+    "Wedding Anniversary", "Ordinary Time", "Second Vatican Council",
+    "Deceased Members", "All Saints", "Volunteers Needed", "All Souls Day",
+    "Lord Jesus Christ", "The Knights", "Paul Society", "May God",
+    "Presbyteral Council", "Lord Jesus", "Good News", "Administrative Assistant",
+    "The St", "Special Intention", "Memorial Day", "Jubilee Year",
+    "All Saints Day", "Labor Day", "Virgin Mary", "Feast Day",
+    "Blood Drive", "World Day", "Open House", "St Mary", "Jordan River",
+    "Bake Sale", "Shawl Ministry", "Pancake Breakfast", "Latin America",
+    "Old Testament", "The Lord", "Happy New Year", "Heavenly Father",
+    "Thomas Aquinas", "Retirement Fund", "First Reconciliation",
+    "Diocesan Council", "First Reading", "Place Your Ad", "Safe Environment",
+    "Thanksgiving Day", "Rice Bowl", "The Diocese", "Respect Life",
+    "Immaculate Heart", "The Epiphany", "Mailing Address", "Poor Souls",
+    "Second Reading", "Main Street", "Columbus Meeting", "Extraordinary Minister",
+    "Faithful Departed", "Life Activities", "New Testament",
+    "Property Manager", "Development Manager", "Case Managers",
+    "Sun Rehearsal", "English Ministry", "Brother Knight",
 }
+
+
+def clean_extracted_name(name: str) -> str:
+    """Clean common artifacts from extracted names before validation.
+
+    Called at every extraction point BEFORE is_valid_name(). The cleaned
+    name is what gets stored, so "Jose Gamboa Wed" becomes "Jose Gamboa".
+    """
+    if not name:
+        return name
+    # Remove newlines (PDF column bleed)
+    name = name.replace('\n', ' ').strip()
+    # Collapse multiple spaces
+    name = re.sub(r'\s+', ' ', name)
+    # Strip trailing day abbreviations (PDF column bleed from mass schedules)
+    day_abbrevs = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'}
+    parts = name.split()
+    while parts and parts[-1] in day_abbrevs:
+        parts.pop()
+    # Strip trailing 'All' (from "Edwin Arthur All")
+    if parts and parts[-1] == 'All':
+        parts.pop()
+    name = ' '.join(parts)
+    # Strip leading/trailing punctuation
+    name = name.strip('.,;:!?()[]{}"\'-/')
+    return name
 
 
 def is_valid_name(name: str) -> bool:
@@ -1693,6 +1750,10 @@ def is_valid_name(name: str) -> bool:
     (e.g. "Teresa Mu", "Carlos Ze", "Kathleen Shils").
     """
     if not name or len(name) < 4:
+        return False
+
+    # Reject names containing newlines (always PDF column bleed artifacts)
+    if '\n' in name:
         return False
 
     # Must have at least a first and last name
@@ -1759,6 +1820,28 @@ def is_valid_name(name: str) -> bool:
         'gift', 'shop', 'sick', 'opportunity', 'invitation',
         'tech', 'degree', 'exemplification', 'assembly', 'mtg',
         'chaplet', 'spiritual', 'dcn', 'alone',
+        # Event/activity words
+        'activities', 'picnic', 'proceeds', 'novena', 'drive', 'sale', 'bake',
+        'pancake', 'breakfast', 'fry', 'pantry', 'store', 'bank', 'kitchen',
+        'shawl', 'blood', 'food', 'soup', 'thrift',
+        # Time/calendar words
+        'day', 'year', 'time', 'new', 'old', 'first', 'second',
+        'labor', 'memorial', 'thanksgiving', 'happy', 'jubilee',
+        # Religious terms missing from current list
+        'gospel', 'amen', 'ordinary', 'heavenly', 'immaculate', 'conception',
+        'souls', 'saints', 'departed', 'reconciliation', 'testament',
+        'sacrament', 'intention', 'special',
+        # Organizational terms
+        'manager', 'property', 'development', 'finance', 'liaison', 'bookkeeper',
+        'case', 'assistant', 'needed', 'volunteers', 'members',
+        'council', 'meeting', 'fund', 'retirement', 'environment', 'safe',
+        # Location/structural
+        'street', 'address', 'mailing', 'place', 'house', 'open', 'sign',
+        'reading', 'word', 'river', 'america', 'latin',
+        # Misc
+        'ad', 'dear', 'high', 'middle', 'pro', 'right', 'respect',
+        'cardinal', 'pope', 'doctor', 'anniversary', 'feast', 'world',
+        'society', 'news', 'knight', 'knights', 'life',
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
@@ -2172,13 +2255,99 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     save_progress(state_dir, progress)
 
 
+def run_clean(state_name: str, state_dir: Path):
+    """Re-clean existing extracted names using updated cleaning/validation logic.
+
+    Reads bulletin_names.json, applies clean_extracted_name() + is_valid_name()
+    filters, and rewrites both CSV and JSON. Use after updating blocklists or
+    cleaning rules to fix existing data without re-extracting from PDFs.
+
+    Usage: python run_bulletin_scraper.py clean arizona florida georgia
+    """
+    json_path = state_dir / "bulletin_names.json"
+    if not json_path.exists():
+        logger.error(f"No bulletin_names.json found for {state_name}. Run 'extract' phase first.")
+        return
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        all_names = json.load(f)
+
+    original_count = len(all_names)
+    cleaned_names = []
+    removed_count = 0
+
+    # Track unique names per church (same dedup logic as run_extract)
+    church_seen_names = {}  # slug -> set of lowercased names
+
+    for entry in all_names:
+        person_name = entry.get("person_name", "")
+        slug = entry.get("church_slug", "")
+
+        # Apply new cleaning
+        cleaned = clean_extracted_name(person_name)
+        if not cleaned:
+            removed_count += 1
+            continue
+
+        # Re-validate with updated blocklists
+        if not is_valid_name(cleaned):
+            removed_count += 1
+            continue
+
+        # Per-church dedup
+        name_key = cleaned.lower().strip()
+        if slug not in church_seen_names:
+            church_seen_names[slug] = set()
+        if name_key in church_seen_names[slug]:
+            removed_count += 1
+            continue
+        church_seen_names[slug].add(name_key)
+
+        # Update the entry with the cleaned name
+        if cleaned != person_name:
+            entry["person_name"] = cleaned
+            # Re-parse name parts
+            name_parts = parse_name_parts(cleaned)
+            entry["first_name"] = name_parts.get("first_name", "")
+            entry["middle_name"] = name_parts.get("middle_name", "")
+            entry["last_name"] = name_parts.get("last_name", "")
+            entry["title"] = name_parts.get("title", "")
+
+        cleaned_names.append(entry)
+
+    # Write cleaned CSV
+    csv_path = state_dir / "bulletin_names.csv"
+    if cleaned_names:
+        with open(csv_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=[
+                "church_name", "church_slug", "church_url",
+                "pdf_file", "pdf_url", "pdf_date",
+                "person_name", "title", "first_name", "middle_name", "last_name",
+                "role", "category", "confidence", "context"
+            ])
+            writer.writeheader()
+            writer.writerows(cleaned_names)
+
+    # Write cleaned JSON
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(cleaned_names, f, indent=2)
+
+    pct = (removed_count / original_count * 100) if original_count > 0 else 0
+    logger.info(f"\n=== Clean complete for {state_name} ===")
+    logger.info(f"  Before: {original_count:,} names")
+    logger.info(f"  Removed: {removed_count:,} ({pct:.1f}%)")
+    logger.info(f"  After: {len(cleaned_names):,} names")
+    logger.info(f"  CSV: {csv_path}")
+    logger.info(f"  JSON: {json_path}")
+
+
 # ── CLI Entry Point ───────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser(
         description="Scrape church bulletins, download PDFs, and extract names"
     )
-    parser.add_argument("phase", choices=["discover", "download", "extract", "all"],
+    parser.add_argument("phase", choices=["discover", "download", "extract", "clean", "all"],
                        help="Which phase to run")
     parser.add_argument("states", nargs="+",
                        help="State names or 'all' for all states")
@@ -2239,6 +2408,11 @@ def main():
         logger.info(f"\n{'='*60}")
         logger.info(f"Processing {state_name.upper()}")
         logger.info(f"{'='*60}")
+
+        # Clean phase: just re-filter existing data, no need for churches/progress
+        if args.phase == "clean":
+            run_clean(state_name, state_dir)
+            continue
 
         # Load churches
         churches = load_churches(state_dir, limit=args.limit)
