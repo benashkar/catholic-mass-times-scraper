@@ -203,13 +203,24 @@ def init_data(app):
         try:
             total = _count_csv_lines(csv_path)
             # Read ALL rows (no nrows cap) for accurate unique counts.
-            # Only 3 narrow columns so even 365K rows is ~15 MB — fine for one-time startup.
+            # Only narrow columns so even 365K rows is fine for one-time startup.
             df = pd.read_csv(
                 csv_path,
                 encoding="utf-8-sig",
-                usecols=lambda c: c in ("person_name", "church_name", "city"),
+                usecols=lambda c: c in ("person_name", "church_name", "church_slug", "city"),
             )
-            if "city" in df.columns and df["city"].notna().any():
+
+            # If CSV lacks a city column, join with churches to get cities
+            has_csv_city = "city" in df.columns and df["city"].notna().any()
+            if not has_csv_city and "church_slug" in df.columns:
+                churches = get_churches_for_state(state_dir)
+                if not churches.empty and "slug" in churches.columns and "city" in churches.columns:
+                    slug_city = churches[["slug", "city"]].drop_duplicates("slug")
+                    df = df.merge(slug_city, left_on="church_slug", right_on="slug", how="left")
+                    df["city"] = df["city"].fillna("Unknown")
+                    has_csv_city = df["city"].notna().any()
+
+            if has_csv_city:
                 unique = df.groupby(["person_name", "city"], dropna=False).ngroups
             else:
                 unique = df["person_name"].nunique()
@@ -252,6 +263,20 @@ def init_data(app):
     app.logger.info(
         f"Pre-computed bulletin stats and filters for {len(_bulletin_stats_cache)} states"
     )
+
+    # Pre-warm the AJAX data cache for the largest states so the first
+    # DataTable request after a deploy doesn't block on CSV parsing.
+    warm_states = sorted(
+        _bulletin_stats_cache.items(), key=lambda x: x[1]["total_names"], reverse=True
+    )[:5]
+    for state_dir, stats in warm_states:
+        try:
+            get_bulletin_names(state_dir)
+            app.logger.info(
+                f"Pre-warmed bulletin cache: {state_dir} ({stats['total_names']:,} rows)"
+            )
+        except Exception as e:
+            app.logger.warning(f"Failed to pre-warm cache for {state_dir}: {e}")
 
 
 def _build_state_list():
