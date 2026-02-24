@@ -206,8 +206,8 @@ def init_data(app):
                 nrows=50_000,
                 usecols=lambda c: c in ("person_name", "church_name", "city"),
             )
-            if "city" in df.columns:
-                unique = df.groupby(["person_name", "city"]).ngroups
+            if "city" in df.columns and df["city"].notna().any():
+                unique = df.groupby(["person_name", "city"], dropna=False).ngroups
             else:
                 unique = df["person_name"].nunique()
             _bulletin_stats_cache[state_dir] = {
