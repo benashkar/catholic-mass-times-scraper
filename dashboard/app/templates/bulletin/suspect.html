@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block title %}Suspect Names — Review{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('bulletin.index') }}">Bulletin Names</a></li>
+        <li class="breadcrumb-item active">Suspect Names</li>
+    </ol>
+</nav>
+
+<div class="row mb-3 align-items-center">
+    <div class="col">
+        <h2><i class="bi bi-exclamation-triangle"></i> Suspect Names for Review</h2>
+        <p class="text-muted">
+            Low-confidence names (score &lt; 0.4) that are likely junk.
+            Click <strong>Remove</strong> to exclude a name from the state dashboard.
+            <a href="{{ url_for('bulletin.view_removed') }}">View removed names ({{ removed_count }})</a>
+        </p>
+    </div>
+</div>
+
+<div class="alert alert-info">
+    Showing {{ suspect|length }} suspect names across all states, sorted by confidence (lowest first).
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped table-sm mb-0" id="suspectTable" style="width:100%">
+            <thead class="table-light">
+                <tr>
+                    <th style="width:18%">Name</th>
+                    <th style="width:15%">Church</th>
+                    <th style="width:10%">City</th>
+                    <th style="width:10%">State</th>
+                    <th style="width:10%">Category</th>
+                    <th style="width:8%">Score</th>
+                    <th style="width:8%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in suspect %}
+                <tr id="row-{{ loop.index }}">
+                    <td><strong>{{ s.person_name }}</strong></td>
+                    <td>{{ s.church_name }}</td>
+                    <td>{{ s.city }}</td>
+                    <td>{{ s.state|replace("_", " ")|title }}</td>
+                    <td>
+                        {% if s.category == 'clergy_staff' %}
+                        <span class="badge bg-primary">Clergy/Staff</span>
+                        {% elif s.category == 'mass_intention' %}
+                        <span class="badge bg-info">Mass Int.</span>
+                        {% elif s.category == 'prayer_list' %}
+                        <span class="badge bg-success">Prayer</span>
+                        {% elif s.category == 'ministry_contextual' %}
+                        <span class="badge bg-secondary">Ministry</span>
+                        {% else %}
+                        <span class="badge bg-light text-dark">{{ s.category }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <span class="badge bg-danger">{{ '%.2f'|format(s.confidence_score) }}</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-danger remove-btn"
+                                data-name="{{ s.person_name }}"
+                                data-state="{{ s.state }}"
+                                data-church="{{ s.church_name }}"
+                                data-city="{{ s.city }}"
+                                data-category="{{ s.category }}"
+                                data-score="{{ s.confidence_score }}"
+                                data-row="row-{{ loop.index }}">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    var table = $('#suspectTable').DataTable({
+        pageLength: 100,
+        order: [[5, 'asc']],  // Sort by score ascending
+        language: { search: "Search:" },
+        dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
+    });
+
+    // Remove button handler
+    $(document).on('click', '.remove-btn', function() {
+        var btn = $(this);
+        var rowId = btn.data('row');
+        var payload = {
+            person_name: btn.data('name'),
+            state: btn.data('state'),
+            church_name: btn.data('church'),
+            city: btn.data('city'),
+            category: btn.data('category'),
+            confidence_score: btn.data('score')
+        };
+
+        btn.prop('disabled', true).text('Removing...');
+
+        $.ajax({
+            url: '{{ url_for("bulletin.remove_suspect") }}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(payload),
+            success: function(resp) {
+                // Remove the row from the DataTable
+                table.row('#' + rowId).remove().draw();
+            },
+            error: function() {
+                btn.prop('disabled', false).text('Remove');
+                alert('Failed to remove name. Please try again.');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

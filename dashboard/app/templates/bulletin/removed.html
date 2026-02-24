@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Removed Names{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('bulletin.index') }}">Bulletin Names</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('bulletin.suspect_names') }}">Suspect Names</a></li>
+        <li class="breadcrumb-item active">Removed</li>
+    </ol>
+</nav>
+
+<div class="row mb-3 align-items-center">
+    <div class="col">
+        <h2><i class="bi bi-trash"></i> Removed Names</h2>
+        <p class="text-muted">
+            {{ removed|length }} names removed from dashboards. These are saved for research.
+        </p>
+    </div>
+</div>
+
+{% if removed %}
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover table-striped table-sm mb-0" id="removedTable" style="width:100%">
+            <thead class="table-light">
+                <tr>
+                    <th>Name</th>
+                    <th>Church</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Category</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in removed %}
+                <tr>
+                    <td><strong>{{ r.person_name }}</strong></td>
+                    <td>{{ r.church_name }}</td>
+                    <td>{{ r.city }}</td>
+                    <td>{{ r.state|replace("_", " ")|title }}</td>
+                    <td>{{ r.category }}</td>
+                    <td>{{ r.confidence_score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-secondary">No names have been removed yet.</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#removedTable').DataTable({
+        pageLength: 50,
+        order: [[0, 'asc']],
+        language: { search: "Search:" },
+    });
+});
+</script>
+{% endblock %}

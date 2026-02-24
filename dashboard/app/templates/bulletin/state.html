@@ -57,7 +57,7 @@
 
 <!-- Filter controls -->
 <div class="row mb-3 g-2">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <select id="filterCity" class="form-select form-select-sm">
             <option value="">All Cities</option>
             {% for c in cities %}
@@ -65,7 +65,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <select id="filterChurch" class="form-select form-select-sm">
             <option value="">All Churches</option>
             {% for opt in church_options %}
@@ -73,7 +73,7 @@
             {% endfor %}
         </select>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <select id="filterCategory" class="form-select form-select-sm">
             <option value="">All Categories</option>
             <option value="clergy_staff">Clergy/Staff</option>
@@ -82,19 +82,27 @@
             <option value="ministry_contextual">Ministry/Contextual</option>
         </select>
     </div>
+    <div class="col-md-3">
+        <select id="filterConfidence" class="form-select form-select-sm">
+            <option value="">All Confidence</option>
+            <option value="high" {% if min_confidence == '0.7' %}selected{% endif %}>High only (&ge; 0.7)</option>
+            <option value="medium" {% if min_confidence == '0.4' %}selected{% endif %}>Medium+ (&ge; 0.4)</option>
+            <option value="low">Low (&lt; 0.4)</option>
+        </select>
+    </div>
 </div>
 
 <!-- Data table -->
-<!-- Column layout (compact — fits without horizontal scroll):
-     0: Name (full person_name)     ~14%
-     1: Role (Pastor, Deacon, etc.) ~10%
+<!-- Column layout:
+     0: Name (full person_name)     ~13%
+     1: Role (Pastor, Deacon, etc.) ~9%
      2: Title (Fr., Rev., Dr.)       ~4%
      3: First                         ~7%
      4: Last                          ~7%
-     5: Church                       ~20%
-     6: City                         ~10%
+     5: Church                       ~18%
+     6: City                         ~9%
      7: Category                      ~8%
-     8: Confidence                    ~5%
+     8: Confidence                    ~8%
      9: PDF                           ~3%
     10: Date                          ~7%
 -->
@@ -103,20 +111,74 @@
         <table class="table table-hover table-striped table-sm mb-0 bulletin-table" id="namesTable" style="width:100%; table-layout:fixed;">
             <thead class="table-light">
                 <tr>
-                    <th style="width:14%">Name</th>
-                    <th style="width:10%">Role</th>
+                    <th style="width:13%">Name</th>
+                    <th style="width:9%">Role</th>
                     <th style="width:4%">Title</th>
                     <th style="width:7%">First</th>
                     <th style="width:7%">Last</th>
-                    <th style="width:20%">Church</th>
-                    <th style="width:10%">City</th>
-                    <th style="width:9%">Category</th>
-                    <th style="width:5%">Conf.</th>
+                    <th style="width:18%">Church</th>
+                    <th style="width:9%">City</th>
+                    <th style="width:8%">Category</th>
+                    <th style="width:8%">Conf.</th>
                     <th style="width:3%">PDF</th>
                     <th style="width:7%">Date</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                {% for n in names %}
+                <tr>
+                    <td><strong>{{ n.person_name }}</strong></td>
+                    <td>{{ n.role }}</td>
+                    <td>{{ n.title }}</td>
+                    <td>{{ n.first_name }}</td>
+                    <td>{{ n.last_name }}</td>
+                    <td>{{ n.church_name }}</td>
+                    <td>{{ n.city }}</td>
+                    <td>
+                        {% if n.category == 'clergy_staff' %}
+                        <span class="badge bg-primary">Clergy/Staff</span>
+                        {% elif n.category == 'mass_intention' %}
+                        <span class="badge bg-info">Mass Int.</span>
+                        {% elif n.category == 'prayer_list' %}
+                        <span class="badge bg-success">Prayer</span>
+                        {% elif n.category == 'ministry_contextual' %}
+                        <span class="badge bg-secondary">Ministry</span>
+                        {% else %}
+                        <span class="badge bg-light text-dark">{{ n.category }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% set score = n.confidence_score if n.confidence_score is defined and n.confidence_score != '' else '' %}
+                        {% if score != '' %}
+                            {% set score_val = score|float %}
+                            {% if score_val >= 0.7 %}
+                            <span class="badge bg-success" title="Score: {{ '%.2f'|format(score_val) }}" data-bs-toggle="tooltip">High ({{ '%.2f'|format(score_val) }})</span>
+                            {% elif score_val >= 0.4 %}
+                            <span class="badge bg-warning text-dark" title="Score: {{ '%.2f'|format(score_val) }}" data-bs-toggle="tooltip">Med ({{ '%.2f'|format(score_val) }})</span>
+                            {% else %}
+                            <span class="badge bg-danger" title="Score: {{ '%.2f'|format(score_val) }}" data-bs-toggle="tooltip">Low ({{ '%.2f'|format(score_val) }})</span>
+                            {% endif %}
+                        {% else %}
+                            {% if n.confidence == 'high' %}
+                            <span class="badge bg-success">High</span>
+                            {% elif n.confidence == 'medium' %}
+                            <span class="badge bg-warning text-dark">Med</span>
+                            {% else %}
+                            <span class="badge bg-danger">{{ n.confidence }}</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if n.pdf_url %}
+                        <a href="{{ n.pdf_url }}" target="_blank" rel="noopener" title="View source PDF">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </a>
+                        {% endif %}
+                    </td>
+                    <td class="text-nowrap">{{ n.pdf_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </div>
@@ -125,20 +187,9 @@
 {% block extra_js %}
 <script>
 $(document).ready(function() {
-    var categoryBadge = function(val) {
-        if (val === 'clergy_staff') return '<span class="badge bg-primary">Clergy/Staff</span>';
-        if (val === 'mass_intention') return '<span class="badge bg-info">Mass Int.</span>';
-        if (val === 'prayer_list') return '<span class="badge bg-success">Prayer</span>';
-        if (val === 'ministry_contextual') return '<span class="badge bg-secondary">Ministry</span>';
-        if (val) return '<span class="badge bg-light text-dark">' + $('<span>').text(val).html() + '</span>';
-        return '';
-    };
-    var confBadge = function(val) {
-        if (val === 'high') return '<span class="badge bg-success">High</span>';
-        if (val === 'medium') return '<span class="badge bg-warning">Med</span>';
-        if (val) return '<span class="badge bg-secondary">' + $('<span>').text(val).html() + '</span>';
-        return '';
-    };
+    // Enable Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function(el) { new bootstrap.Tooltip(el); });
 
     var table = $('#namesTable').DataTable({
         processing: true,
@@ -171,20 +222,66 @@ $(document).ready(function() {
         order: [[0, 'asc']],
         language: { search: "Search names:" },
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
-        autoWidth: false
+        autoWidth: false,
+        columnDefs: [
+            { targets: [9], orderable: false },  // PDF column not sortable
+            { targets: [2], className: 'text-center' },  // Title centered
+            { targets: [8], className: 'text-center' },  // Confidence centered
+            { targets: [9], className: 'text-center' }   // PDF centered
+        ]
     });
 
-    // Filter dropdowns trigger server-side reload
-    $('#filterCity').on('change', function() { table.ajax.reload(); });
-    $('#filterChurch').on('change', function() { table.ajax.reload(); });
-    $('#filterCategory').on('change', function() { table.ajax.reload(); });
+    // Custom filter: City (column index 6)
+    $('#filterCity').on('change', function() {
+        table.column(6).search(this.value, false, false).draw();
+    });
 
-    // Auto-apply ?church= and ?city= prefilters from URL (linked from mass-times page)
+    // Custom filter: Church (column index 5) — with optional city (column 6)
+    $('#filterChurch').on('change', function() {
+        var churchVal = this.value;
+        var cityVal = $(this).find(':selected').data('city') || '';
+        if (churchVal) {
+            table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(churchVal) + '$', true, false);
+        } else {
+            table.column(5).search('', false, false);
+        }
+        if (cityVal) {
+            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
+        } else if (churchVal) {
+            // Don't reset city if we have a church selected
+        } else {
+            table.column(6).search('', false, false);
+        }
+        table.draw();
+    });
+
+    // Custom filter: Category (column index 7)
+    $('#filterCategory').on('change', function() {
+        table.column(7).search(this.value, false, false).draw();
+    });
+
+    // Custom filter: Confidence (column index 8)
+    $('#filterConfidence').on('change', function() {
+        var val = this.value;
+        if (val === 'high') {
+            table.column(8).search('High', false, false).draw();
+        } else if (val === 'medium') {
+            // Show High + Med (exclude Low)
+            table.column(8).search('High|Med', true, false).draw();
+        } else if (val === 'low') {
+            table.column(8).search('Low', false, false).draw();
+        } else {
+            table.column(8).search('', false, false).draw();
+        }
+    });
+
+    // Auto-apply ?church= and ?city= prefilters from URL
     var prefilterChurch = {{ prefilter_church|tojson }};
     var prefilterCity = {{ prefilter_city|tojson }};
     if (prefilterChurch) {
-        // Set the dropdown value so the AJAX request includes the filter
+        table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(prefilterChurch) + '$', true, false);
         if (prefilterCity) {
+            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
             $('#filterChurch option').each(function() {
                 if ($(this).val() === prefilterChurch && $(this).data('city') === prefilterCity) {
                     $(this).prop('selected', true);
