@@ -7,6 +7,11 @@
         <h1><i class="bi bi-people"></i> Bulletin Names</h1>
         <p class="lead text-muted">Names extracted from church bulletins, with full provenance (PDF link, date).</p>
     </div>
+    <div class="col-auto">
+        <a href="{{ url_for('bulletin.suspect_names') }}" class="btn btn-outline-danger">
+            <i class="bi bi-exclamation-triangle"></i> Suspect Names
+        </a>
+    </div>
 </div>
 
 {% if not states %}

@@ -74,6 +74,203 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
+# ── Name Reference Data (SSA + Census) ────────────────────────────────────────
+# Loaded lazily on first use by _load_reference_data()
+
+REFERENCE_DIR = Path(__file__).resolve().parent / "data" / "reference"
+
+_ssa_first_names = None       # set of lowercase first names
+_ssa_top1000 = None           # set of lowercase top-1000 first names
+_ssa_top5000 = None           # set of lowercase top-5000 first names
+_census_surnames = None       # set of lowercase surnames
+_reference_loaded = False
+
+
+def _load_reference_data():
+    """Load SSA first names and Census surnames into memory (lazy, once)."""
+    global _ssa_first_names, _ssa_top1000, _ssa_top5000
+    global _census_surnames, _reference_loaded
+
+    if _reference_loaded:
+        return
+
+    _ssa_first_names = set()
+    _ssa_top1000 = set()
+    _ssa_top5000 = set()
+    _census_surnames = set()
+
+    ssa_path = REFERENCE_DIR / "ssa_first_names.csv"
+    if ssa_path.exists():
+        with open(ssa_path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                name_lower = row["name"].lower()
+                _ssa_first_names.add(name_lower)
+                rank = int(row.get("rank", 0))
+                if rank <= 1000:
+                    _ssa_top1000.add(name_lower)
+                if rank <= 5000:
+                    _ssa_top5000.add(name_lower)
+        logger.info(f"Loaded {len(_ssa_first_names):,} SSA first names "
+                     f"({len(_ssa_top1000):,} top-1000)")
+    else:
+        logger.warning(f"SSA first names not found at {ssa_path}. "
+                        "Run: python scripts/prepare_name_reference.py")
+
+    census_path = REFERENCE_DIR / "census_surnames.csv"
+    if census_path.exists():
+        with open(census_path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                _census_surnames.add(row["name"].lower())
+        logger.info(f"Loaded {len(_census_surnames):,} Census surnames")
+    else:
+        logger.warning(f"Census surnames not found at {census_path}. "
+                        "Run: python scripts/prepare_name_reference.py")
+
+    _reference_loaded = True
+
+
+def score_name_confidence(person_name: str, category: str = "") -> float:
+    """Score how likely a string is to be a real person's name (0.0–1.0).
+
+    Uses SSA baby names and Census surnames as lookup dictionaries,
+    plus structural heuristics. Higher = more likely a real name.
+
+    Score components (additive, capped at 1.0):
+      +0.30  if first_name found in SSA first names
+      +0.30  if last_name found in Census surnames
+      +0.15  if category is clergy_staff or mass_intention
+      +0.10  if name has exactly 2–3 words
+      +0.05  if name has a recognized title (Fr., Rev., Dr., etc.)
+      +0.10  if first_name is in top-1000 SSA names
+
+      -0.40  if any word is a common English non-name word
+      -0.30  if name contains embedded newline
+      -0.25  if last word appears truncated (< 3 chars, not initial)
+      -0.20  if name looks like merged names (3+ words, last word is common first name)
+      -0.15  if name matches a known organization pattern
+    """
+    _load_reference_data()
+
+    if not person_name or not person_name.strip():
+        return 0.0
+
+    score = 0.0
+    parts = person_name.strip().split()
+
+    # Detect title prefix
+    title_prefixes = {
+        'fr.', 'father', 'rev.', 'reverend', 'msgr.', 'monsignor',
+        'dcn.', 'deacon', 'sr.', 'sister', 'br.', 'brother',
+        'dr.', 'doctor', 'mr.', 'mrs.', 'ms.', 'miss',
+    }
+    has_title = False
+    name_parts = parts[:]
+    if name_parts and name_parts[0].lower().rstrip('.') + '.' in title_prefixes:
+        has_title = True
+        name_parts = name_parts[1:]
+    elif name_parts and name_parts[0].lower() in title_prefixes:
+        has_title = True
+        name_parts = name_parts[1:]
+
+    first_name = name_parts[0].lower() if name_parts else ""
+    last_name = name_parts[-1].lower() if len(name_parts) >= 2 else ""
+
+    # ── Positive signals ──
+    if first_name and _ssa_first_names and first_name in _ssa_first_names:
+        score += 0.30
+    if last_name and _census_surnames and last_name in _census_surnames:
+        score += 0.30
+    if category in ("clergy_staff", "mass_intention"):
+        score += 0.15
+    if 2 <= len(parts) <= 3:
+        score += 0.10
+    if has_title:
+        score += 0.05
+    if first_name and _ssa_top1000 and first_name in _ssa_top1000:
+        score += 0.10
+
+    # ── Negative signals ──
+    # Non-name word check (expanded)
+    non_name_check = {
+        'the', 'and', 'for', 'from', 'with', 'church', 'parish', 'school',
+        'center', 'hall', 'room', 'chapel', 'mass', 'communion', 'council',
+        'meeting', 'committee', 'festival', 'hospital', 'clinic', 'county',
+        'street', 'avenue', 'boulevard', 'road', 'office', 'bulletin',
+        'newsletter', 'donate', 'register', 'attend', 'schedule', 'update',
+        'celebrate', 'hosting', 'columbus', 'columbian', 'insurance',
+        'plumbing', 'roofing', 'salad', 'pasta', 'pizza', 'chicken',
+        'sausage', 'alert', 'connected', 'download', 'facebook',
+        'ministry', 'ministries', 'knights', 'knight', 'society',
+        'foundation', 'corporation', 'donation', 'volunteer',
+    }
+    if any(p.lower() in non_name_check for p in parts):
+        score -= 0.40
+
+    # Newline contamination
+    if '\n' in person_name:
+        score -= 0.30
+
+    # Truncated last word
+    if last_name and len(last_name) < 3 and not re.match(r'^[a-z]\.?$', last_name):
+        score -= 0.25
+
+    # Merged names: 3+ words, last word is a common first name
+    if (len(name_parts) >= 3 and last_name and
+            _ssa_top5000 and last_name in _ssa_top5000):
+        # Exception: if last word is also a common surname, don't penalize
+        if not (_census_surnames and last_name in _census_surnames):
+            score -= 0.20
+
+    # Organization pattern
+    org_patterns = {'knights of', 'council of', 'society of', 'order of',
+                    'sons of', 'daughters of', 'ladies of', 'friends of'}
+    name_lower = person_name.lower()
+    if any(pat in name_lower for pat in org_patterns):
+        score -= 0.15
+
+    return max(0.0, min(1.0, round(score, 2)))
+
+
+def confidence_label(score: float) -> str:
+    """Map numeric confidence score to high/medium/low label."""
+    if score >= 0.7:
+        return "high"
+    elif score >= 0.4:
+        return "medium"
+    else:
+        return "low"
+
+
+def split_merged_name(person_name: str) -> str:
+    """Split merged names like 'Kevin Steinkamp Mary' -> 'Kevin Steinkamp'.
+
+    Only applies when:
+    - Name has 3+ words
+    - Last word is a top-5000 SSA first name
+    - Last word is NOT also a common Census surname
+    - The remaining 2-word name looks valid
+    """
+    _load_reference_data()
+
+    parts = person_name.strip().split()
+    if len(parts) < 3:
+        return person_name
+
+    last_word = parts[-1].lower()
+
+    # Only split if last word is a common first name but not a surname
+    if (_ssa_top5000 and last_word in _ssa_top5000 and
+            _census_surnames and last_word not in _census_surnames):
+        candidate = ' '.join(parts[:-1])
+        # Validate the shortened name has at least 2 parts
+        if len(parts[:-1]) >= 2:
+            return candidate
+
+    return person_name
+
+
 # ── Configuration ──────────────────────────────────────────────────────────────
 
 REQUEST_DELAY = 1.0          # seconds between requests to same domain
@@ -1741,8 +1938,9 @@ def clean_extracted_name(name: str) -> str:
     """
     if not name:
         return name
-    # Remove newlines (PDF column bleed)
-    name = name.replace('\n', ' ').strip()
+    # Newline fix: keep only the FIRST line (multi-line = PDF column bleed)
+    if '\n' in name:
+        name = name.split('\n')[0].strip()
     # Collapse multiple spaces
     name = re.sub(r'\s+', ' ', name)
     # Strip trailing day abbreviations (PDF column bleed from mass schedules)
@@ -1766,6 +1964,8 @@ def clean_extracted_name(name: str) -> str:
     name = ' '.join(parts)
     # Strip leading/trailing punctuation
     name = name.strip('.,;:!?()[]{}"\'-/')
+    # Split merged names (e.g. "Kevin Steinkamp Mary" -> "Kevin Steinkamp")
+    name = split_merged_name(name)
     return name
 
 
@@ -1920,6 +2120,14 @@ def is_valid_name(name: str) -> bool:
         'suggested', 'connected', 'handbook', 'brochure', 'quartet',
         'fiesta', 'session', 'sessions', 'requested', 'strips', 'rates',
         'repair', 'alert', 'serving', 'expert', 'experts',
+        # Action verbs surfaced by 10-state junk analysis
+        'donate', 'register', 'attend', 'update', 'celebrate', 'hosting',
+        # Missing common nouns
+        'festival', 'hospital', 'clinic', 'height',
+        # Missing day
+        'friday',
+        # Organization words
+        'columbus', 'columbian',
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
@@ -2229,17 +2437,6 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                 except (json.JSONDecodeError, KeyError):
                     pass
 
-    # Confidence mapping: based on whether this is likely a real person connected to the church
-    # HIGH = clearly a named individual (staff, parishioner mentioned by name, someone prayed for)
-    # MEDIUM = likely a real name but found via looser contextual matching
-    # LOW = might be a false positive (generic text near a ministry keyword)
-    CONFIDENCE_MAP = {
-        "clergy_staff": "high",       # Named staff: Fr. John Smith, Pastor: Jane Doe
-        "mass_intention": "high",     # Named in Mass intentions: real person (living or deceased)
-        "prayer_list": "high",        # Named on prayer/sick list: real parishioner
-        "ministry_contextual": "medium",  # Name found near a ministry keyword: likely real but looser match
-    }
-
     # Track unique names PER CHURCH (not statewide) — each church has its own seen-names set
     # This way a name appearing at 5 different churches shows up 5 times (once per church)
     church_seen_names = {}  # slug -> set of names already output for this church
@@ -2299,6 +2496,8 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
 
                     church_name_count += 1
                     total_names += 1
+                    cat = name_info["category"]
+                    conf_score = score_name_confidence(person_name, cat)
                     all_names.append({
                         "church_name": church_name,
                         "church_slug": slug,
@@ -2313,8 +2512,9 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                         "middle_name": name_info.get("middle_name", ""),
                         "last_name": name_info.get("last_name", ""),
                         "role": name_info.get("role", ""),
-                        "category": name_info["category"],
-                        "confidence": CONFIDENCE_MAP.get(name_info["category"], "low"),
+                        "category": cat,
+                        "confidence": confidence_label(conf_score),
+                        "confidence_score": conf_score,
                         "context": name_info["context"][:100],
                     })
 
@@ -2330,7 +2530,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                 "church_name", "church_slug", "city", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
                 "person_name", "title", "first_name", "middle_name", "last_name",
-                "role", "category", "confidence", "context"
+                "role", "category", "confidence", "confidence_score", "context"
             ])
             writer.writeheader()
             writer.writerows(all_names)
@@ -2353,19 +2553,27 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     save_progress(state_dir, progress)
 
 
-def run_clean(state_name: str, state_dir: Path):
+def run_clean(state_name: str, state_dir: Path, rescore: bool = False):
     """Re-clean existing extracted names using updated cleaning/validation logic.
 
     Reads bulletin_names.json, applies clean_extracted_name() + is_valid_name()
     filters, and rewrites both CSV and JSON. Use after updating blocklists or
     cleaning rules to fix existing data without re-extracting from PDFs.
 
-    Usage: python run_bulletin_scraper.py clean arizona florida georgia
+    With --rescore: also re-scores all names using SSA/Census dictionary data
+    and writes confidence_score column.
+
+    Usage:
+        python run_bulletin_scraper.py clean arizona florida georgia
+        python run_bulletin_scraper.py clean arizona --rescore
     """
     json_path = state_dir / "bulletin_names.json"
     if not json_path.exists():
         logger.error(f"No bulletin_names.json found for {state_name}. Run 'extract' phase first.")
         return
+
+    if rescore:
+        _load_reference_data()
 
     with open(json_path, "r", encoding="utf-8") as f:
         all_names = json.load(f)
@@ -2373,6 +2581,8 @@ def run_clean(state_name: str, state_dir: Path):
     original_count = len(all_names)
     cleaned_names = []
     removed_count = 0
+    rescored_count = 0
+    confidence_changes = {"up": 0, "down": 0, "same": 0}
 
     # Track unique names per church (same dedup logic as run_extract)
     church_seen_names = {}  # slug -> set of lowercased names
@@ -2411,6 +2621,29 @@ def run_clean(state_name: str, state_dir: Path):
             entry["last_name"] = name_parts.get("last_name", "")
             entry["title"] = name_parts.get("title", "")
 
+        # Re-score confidence if requested
+        if rescore:
+            old_conf = entry.get("confidence", "")
+            cat = entry.get("category", "")
+            new_score = score_name_confidence(cleaned, cat)
+            new_conf = confidence_label(new_score)
+            entry["confidence_score"] = new_score
+            entry["confidence"] = new_conf
+            rescored_count += 1
+            if new_conf != old_conf:
+                # Track direction of change
+                conf_order = {"low": 0, "medium": 1, "high": 2}
+                old_val = conf_order.get(old_conf, 1)
+                new_val = conf_order.get(new_conf, 1)
+                if new_val > old_val:
+                    confidence_changes["up"] += 1
+                elif new_val < old_val:
+                    confidence_changes["down"] += 1
+                else:
+                    confidence_changes["same"] += 1
+            else:
+                confidence_changes["same"] += 1
+
         cleaned_names.append(entry)
 
     # Write cleaned CSV
@@ -2421,7 +2654,7 @@ def run_clean(state_name: str, state_dir: Path):
                 "church_name", "church_slug", "city", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
                 "person_name", "title", "first_name", "middle_name", "last_name",
-                "role", "category", "confidence", "context"
+                "role", "category", "confidence", "confidence_score", "context"
             ])
             writer.writeheader()
             writer.writerows(cleaned_names)
@@ -2437,6 +2670,26 @@ def run_clean(state_name: str, state_dir: Path):
     logger.info(f"  After: {len(cleaned_names):,} names")
     logger.info(f"  CSV: {csv_path}")
     logger.info(f"  JSON: {json_path}")
+
+    if rescore:
+        logger.info(f"\n  Re-scored: {rescored_count:,} names")
+        logger.info(f"    Confidence UP:   {confidence_changes['up']:,}")
+        logger.info(f"    Confidence DOWN: {confidence_changes['down']:,}")
+        logger.info(f"    Confidence SAME: {confidence_changes['same']:,}")
+        # Score distribution
+        score_buckets = {"high (>=0.7)": 0, "medium (0.4-0.69)": 0, "low (<0.4)": 0}
+        for entry in cleaned_names:
+            s = entry.get("confidence_score", 0)
+            if s >= 0.7:
+                score_buckets["high (>=0.7)"] += 1
+            elif s >= 0.4:
+                score_buckets["medium (0.4-0.69)"] += 1
+            else:
+                score_buckets["low (<0.4)"] += 1
+        logger.info(f"    Score distribution:")
+        for bucket, count in score_buckets.items():
+            pct_b = (count / len(cleaned_names) * 100) if cleaned_names else 0
+            logger.info(f"      {bucket}: {count:,} ({pct_b:.1f}%)")
 
 
 # ── CLI Entry Point ───────────────────────────────────────────────────────────
@@ -2466,6 +2719,11 @@ def main():
                            "(e.g. LPi widgets, eCatholic sites that need a headless browser). "
                            "Implies --resume for churches that already have PDFs. "
                            "After discovery, automatically runs download + extract phases."
+                       ))
+    parser.add_argument("--rescore", action="store_true",
+                       help=(
+                           "Re-score all names using SSA/Census dictionary data "
+                           "(used with 'clean' phase). Adds confidence_score column."
                        ))
 
     args = parser.parse_args()
@@ -2509,7 +2767,7 @@ def main():
 
         # Clean phase: just re-filter existing data, no need for churches/progress
         if args.phase == "clean":
-            run_clean(state_name, state_dir)
+            run_clean(state_name, state_dir, rescore=args.rescore)
             continue
 
         # Load churches
