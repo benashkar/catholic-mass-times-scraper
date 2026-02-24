@@ -17,12 +17,6 @@
     </div>
 </div>
 
-{% if truncated %}
-<div class="alert alert-warning">
-    Showing {{ "{:,}".format(names|length) }} of {{ "{:,}".format(total_names) }} names. Use the Church or City filter to narrow results.
-</div>
-{% endif %}
-
 <!-- Stats row -->
 {% if stats %}
 <div class="row mb-4 g-2">
@@ -122,49 +116,7 @@
                     <th style="width:7%">Date</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for n in names %}
-                <tr>
-                    <td><strong>{{ n.person_name }}</strong></td>
-                    <td>{{ n.role }}</td>
-                    <td>{{ n.title }}</td>
-                    <td>{{ n.first_name }}</td>
-                    <td>{{ n.last_name }}</td>
-                    <td>{{ n.church_name }}</td>
-                    <td>{{ n.city }}</td>
-                    <td>
-                        {% if n.category == 'clergy_staff' %}
-                        <span class="badge bg-primary">Clergy/Staff</span>
-                        {% elif n.category == 'mass_intention' %}
-                        <span class="badge bg-info">Mass Int.</span>
-                        {% elif n.category == 'prayer_list' %}
-                        <span class="badge bg-success">Prayer</span>
-                        {% elif n.category == 'ministry_contextual' %}
-                        <span class="badge bg-secondary">Ministry</span>
-                        {% else %}
-                        <span class="badge bg-light text-dark">{{ n.category }}</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if n.confidence == 'high' %}
-                        <span class="badge bg-success">High</span>
-                        {% elif n.confidence == 'medium' %}
-                        <span class="badge bg-warning">Med</span>
-                        {% else %}
-                        <span class="badge bg-secondary">{{ n.confidence }}</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-center">
-                        {% if n.pdf_url %}
-                        <a href="{{ n.pdf_url }}" target="_blank" rel="noopener" title="View source PDF">
-                            <i class="bi bi-file-earmark-pdf"></i>
-                        </a>
-                        {% endif %}
-                    </td>
-                    <td class="text-nowrap">{{ n.pdf_date }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
@@ -173,73 +125,79 @@
 {% block extra_js %}
 <script>
 $(document).ready(function() {
+    var categoryBadge = function(val) {
+        if (val === 'clergy_staff') return '<span class="badge bg-primary">Clergy/Staff</span>';
+        if (val === 'mass_intention') return '<span class="badge bg-info">Mass Int.</span>';
+        if (val === 'prayer_list') return '<span class="badge bg-success">Prayer</span>';
+        if (val === 'ministry_contextual') return '<span class="badge bg-secondary">Ministry</span>';
+        if (val) return '<span class="badge bg-light text-dark">' + $('<span>').text(val).html() + '</span>';
+        return '';
+    };
+    var confBadge = function(val) {
+        if (val === 'high') return '<span class="badge bg-success">High</span>';
+        if (val === 'medium') return '<span class="badge bg-warning">Med</span>';
+        if (val) return '<span class="badge bg-secondary">' + $('<span>').text(val).html() + '</span>';
+        return '';
+    };
+
     var table = $('#namesTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '/bulletin/{{ state }}/api/names',
+            data: function(d) {
+                d.church = $('#filterChurch').val();
+                d.city = $('#filterCity').val();
+                d.category = $('#filterCategory').val();
+            }
+        },
+        columns: [
+            { data: 0, render: function(d) { return '<strong>' + $('<span>').text(d).html() + '</strong>'; } },
+            { data: 1 },
+            { data: 2, className: 'text-center' },
+            { data: 3 },
+            { data: 4 },
+            { data: 5 },
+            { data: 6 },
+            { data: 7, render: function(d) { return categoryBadge(d); } },
+            { data: 8, className: 'text-center', render: function(d) { return confBadge(d); } },
+            { data: 9, className: 'text-center', orderable: false, render: function(d) {
+                if (d) return '<a href="' + $('<span>').text(d).html() + '" target="_blank" rel="noopener" title="View source PDF"><i class="bi bi-file-earmark-pdf"></i></a>';
+                return '';
+            }},
+            { data: 10 }
+        ],
         pageLength: 50,
         order: [[0, 'asc']],
         language: { search: "Search names:" },
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
-        autoWidth: false,  // respect our fixed column widths
-        columnDefs: [
-            { targets: [9], orderable: false },  // PDF column not sortable
-            { targets: [2], className: 'text-center' },  // Title centered
-            { targets: [8], className: 'text-center' },  // Confidence centered
-            { targets: [9], className: 'text-center' }   // PDF centered
-        ]
+        autoWidth: false
     });
 
-    // Custom filter: City (column index 6)
-    $('#filterCity').on('change', function() {
-        table.column(6).search(this.value, false, false).draw();
-    });
-
-    // Custom filter: Church (column index 5) — with optional city (column 6)
-    // When a church option has data-city, filter both columns for exact match
-    $('#filterChurch').on('change', function() {
-        var churchVal = this.value;
-        var cityVal = $(this).find(':selected').data('city') || '';
-        // Use exact match via regex with ^ and $ anchors
-        if (churchVal) {
-            table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(churchVal) + '$', true, false);
-        } else {
-            table.column(5).search('', false, false);
-        }
-        if (cityVal) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
-        } else if (churchVal) {
-            // Don't reset city if we have a church selected — only reset if clearing church
-        } else {
-            table.column(6).search('', false, false);
-        }
-        table.draw();
-    });
-
-    // Custom filter: Category (column index 7)
-    $('#filterCategory').on('change', function() {
-        table.column(7).search(this.value, false, false).draw();
-    });
+    // Filter dropdowns trigger server-side reload
+    $('#filterCity').on('change', function() { table.ajax.reload(); });
+    $('#filterChurch').on('change', function() { table.ajax.reload(); });
+    $('#filterCategory').on('change', function() { table.ajax.reload(); });
 
     // Auto-apply ?church= and ?city= prefilters from URL (linked from mass-times page)
     var prefilterChurch = {{ prefilter_church|tojson }};
     var prefilterCity = {{ prefilter_city|tojson }};
     if (prefilterChurch) {
-        // Filter by church name (exact match)
-        table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(prefilterChurch) + '$', true, false);
-        // If city also provided, filter that column too (disambiguates duplicate names)
+        // Set the dropdown value so the AJAX request includes the filter
         if (prefilterCity) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
-            // Select matching dropdown option with matching city
             $('#filterChurch option').each(function() {
                 if ($(this).val() === prefilterChurch && $(this).data('city') === prefilterCity) {
                     $(this).prop('selected', true);
                 }
             });
+            $('#filterCity').val(prefilterCity);
         } else {
-            // No city — select first matching option
             $('#filterChurch option').filter(function() {
                 return $(this).val() === prefilterChurch;
             }).first().prop('selected', true);
         }
-        table.draw();
+        // Reload with the prefilter applied
+        table.ajax.reload();
     }
 });
 </script>
