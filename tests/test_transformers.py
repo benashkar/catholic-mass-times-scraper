@@ -9,17 +9,16 @@ Run these tests with:
 """
 
 from src.etl.transformers import (
-    transform_church,
-    transform_service,
-    transform_community,
-    parse_note_tags,
     CATEGORY_MAP,
-    SCHEDULE_TYPE_MAP,
     LANGUAGE_MAP,
     PATTERN_MAP,
+    SCHEDULE_TYPE_MAP,
     STATE_MAP,
+    parse_note_tags,
+    transform_church,
+    transform_community,
+    transform_service,
 )
-
 
 # --- Sample raw data mimicking what CatholicIndex returns ---
 
@@ -348,8 +347,16 @@ class TestMappingCompleteness:
 
     def test_all_schedule_types_mapped(self):
         """All known schedule types should have a mapping."""
-        known = ["sunday", "saturday", "weekday", "specific_weekday", "monthly",
-                 "special_event", "parish_event", "other"]
+        known = [
+            "sunday",
+            "saturday",
+            "weekday",
+            "specific_weekday",
+            "monthly",
+            "special_event",
+            "parish_event",
+            "other",
+        ]
         for st in known:
             assert st in SCHEDULE_TYPE_MAP, f"Schedule type '{st}' not in SCHEDULE_TYPE_MAP"
 

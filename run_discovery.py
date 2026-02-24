@@ -27,13 +27,13 @@ EXPECTED RUNTIME:
 """
 
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
 
 # Add project root to path so imports work when running this script directly
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config.settings import TARGET_COMMUNITIES, CHURCHES_DIR, OUTPUT_DIR
+from config.settings import CHURCHES_DIR, TARGET_COMMUNITIES
 from src.scrapers.catholic_index import discover_churches
 from src.utils.file_io import save_to_csv, save_to_json
 from src.utils.logger import get_logger
@@ -74,9 +74,9 @@ def run_discovery():
     fallback_cache = {}
 
     for i, community in enumerate(TARGET_COMMUNITIES, 1):
-        name = community['name']
-        state = community['state']
-        fallback = community.get('fallback_city')
+        name = community["name"]
+        state = community["state"]
+        fallback = community.get("fallback_city")
 
         logger.info(f"\n--- [{i}/{len(TARGET_COMMUNITIES)}] {name}, {state} ---")
 
@@ -107,43 +107,46 @@ def run_discovery():
             # Save per-community results as JSON
             community_slug = name.lower().replace(" ", "_")
             json_path = CHURCHES_DIR / f"{community_slug}.json"
-            save_to_json({
-                "community": name,
-                "state": state,
-                "county": community['county'],
-                "zip_codes": community['zips'],
-                "churches_found": len(churches),
-                "scraped_at": datetime.now(timezone.utc).isoformat(),
-                "churches": churches,
-            }, json_path)
+            save_to_json(
+                {
+                    "community": name,
+                    "state": state,
+                    "county": community["county"],
+                    "zip_codes": community["zips"],
+                    "churches_found": len(churches),
+                    "scraped_at": datetime.now(UTC).isoformat(),
+                    "churches": churches,
+                },
+                json_path,
+            )
 
             # Add churches to master list, deduplicating by slug
             for church in churches:
-                slug = church['slug']
+                slug = church["slug"]
                 if slug not in all_churches:
                     # First time seeing this church — add it
                     all_churches[slug] = {
-                        'slug': slug,
-                        'name': church['name'],
-                        'street': church.get('street', ''),
-                        'city': church.get('city', ''),
-                        'state_region': church.get('stateRegion', ''),
-                        'latitude': church.get('latitude', ''),
-                        'longitude': church.get('longitude', ''),
-                        'phone': church.get('phone', ''),
-                        'website': church.get('website', ''),
-                        'mass_count': church.get('massCount', 0),
-                        'confession_count': church.get('confessionCount', 0),
-                        'adoration_count': church.get('adorationCount', 0),
-                        'has_perpetual_adoration': church.get('hasPerpetualAdoration', False),
-                        'serving_communities': [name],
-                        'source_url': church.get('source_url', ''),
-                        'last_scraped': church.get('last_scraped', ''),
+                        "slug": slug,
+                        "name": church["name"],
+                        "street": church.get("street", ""),
+                        "city": church.get("city", ""),
+                        "state_region": church.get("stateRegion", ""),
+                        "latitude": church.get("latitude", ""),
+                        "longitude": church.get("longitude", ""),
+                        "phone": church.get("phone", ""),
+                        "website": church.get("website", ""),
+                        "mass_count": church.get("massCount", 0),
+                        "confession_count": church.get("confessionCount", 0),
+                        "adoration_count": church.get("adorationCount", 0),
+                        "has_perpetual_adoration": church.get("hasPerpetualAdoration", False),
+                        "serving_communities": [name],
+                        "source_url": church.get("source_url", ""),
+                        "last_scraped": church.get("last_scraped", ""),
                     }
                 else:
                     # Already seen this church — just add this community to its list
-                    if name not in all_churches[slug]['serving_communities']:
-                        all_churches[slug]['serving_communities'].append(name)
+                    if name not in all_churches[slug]["serving_communities"]:
+                        all_churches[slug]["serving_communities"].append(name)
         else:
             communities_failed += 1
             logger.warning(f"No churches found for {name}, {state}")
@@ -152,9 +155,9 @@ def run_discovery():
     # Join the serving_communities list into a semicolon-separated string
     # (semicolons because commas would conflict with CSV)
     master_list = []
-    for church in sorted(all_churches.values(), key=lambda c: (c['city'], c['name'])):
+    for church in sorted(all_churches.values(), key=lambda c: (c["city"], c["name"])):
         church_row = {**church}
-        church_row['serving_communities'] = '; '.join(church['serving_communities'])
+        church_row["serving_communities"] = "; ".join(church["serving_communities"])
         master_list.append(church_row)
 
     # Save master list as CSV
@@ -165,7 +168,9 @@ def run_discovery():
     # Print summary
     logger.info("\n" + "=" * 60)
     logger.info("PHASE 1: Church Discovery — Complete")
-    logger.info(f"Communities scraped successfully: {communities_success}/{len(TARGET_COMMUNITIES)}")
+    logger.info(
+        f"Communities scraped successfully: {communities_success}/{len(TARGET_COMMUNITIES)}"
+    )
     logger.info(f"Communities failed: {communities_failed}")
     logger.info(f"Total unique churches found: {len(all_churches)}")
     logger.info(f"Master list saved to: {CHURCHES_DIR / 'master_church_list.csv'}")

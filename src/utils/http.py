@@ -29,14 +29,16 @@ HOW TO USE:
 """
 
 import time
+
 import requests
-from src.utils.logger import get_logger
+
 from config.settings import (
+    MAX_RETRIES,
     REQUEST_HEADERS,
     REQUEST_TIMEOUT,
     SCRAPE_DELAY,
-    MAX_RETRIES,
 )
+from src.utils.logger import get_logger
 
 # Create a logger for this module — log messages will show "src.utils.http"
 logger = get_logger(__name__)
@@ -106,9 +108,7 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
 
             # Log the HTTP status code and how long it took
             elapsed_ms = (time.time() - _last_request_time) * 1000
-            logger.info(
-                f"HTTP {response.status_code} in {elapsed_ms:.0f}ms: {url}"
-            )
+            logger.info(f"HTTP {response.status_code} in {elapsed_ms:.0f}ms: {url}")
 
             # raise_for_status() throws an exception if the status code is 4xx or 5xx
             # (meaning the server returned an error)
@@ -127,43 +127,37 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
                 logger.warning(f"HTTP 404 (page not found): {url}")
                 return None
 
-            logger.warning(
-                f"HTTP error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}"
-            )
+            logger.warning(f"HTTP error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}")
             if attempt < MAX_RETRIES:
                 # Wait a bit longer before retrying (exponential backoff)
                 # Attempt 1: wait 2s, Attempt 2: wait 4s, etc.
-                backoff = 2 ** attempt
+                backoff = 2**attempt
                 logger.debug(f"Retrying in {backoff}s...")
                 time.sleep(backoff)
 
         except requests.exceptions.ConnectionError as e:
             # Could not connect to the server at all (DNS failure, server down, etc.)
-            logger.warning(
-                f"Connection error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}"
-            )
+            logger.warning(f"Connection error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}")
             if attempt < MAX_RETRIES:
-                backoff = 2 ** attempt
+                backoff = 2**attempt
                 time.sleep(backoff)
 
         except requests.exceptions.Timeout:
             # The server took too long to respond
             logger.warning(
-                f"Timeout on attempt {attempt}/{MAX_RETRIES} for {url} "
-                f"(>{REQUEST_TIMEOUT}s)"
+                f"Timeout on attempt {attempt}/{MAX_RETRIES} for {url} " f"(>{REQUEST_TIMEOUT}s)"
             )
             if attempt < MAX_RETRIES:
-                backoff = 2 ** attempt
+                backoff = 2**attempt
                 time.sleep(backoff)
 
         except requests.exceptions.RequestException as e:
             # Catch-all for any other request error
             logger.error(
-                f"Unexpected request error on attempt {attempt}/{MAX_RETRIES} "
-                f"for {url}: {e}"
+                f"Unexpected request error on attempt {attempt}/{MAX_RETRIES} " f"for {url}: {e}"
             )
             if attempt < MAX_RETRIES:
-                backoff = 2 ** attempt
+                backoff = 2**attempt
                 time.sleep(backoff)
 
     # If we get here, all retries failed

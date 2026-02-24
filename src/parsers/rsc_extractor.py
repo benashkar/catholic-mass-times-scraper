@@ -35,6 +35,7 @@ USAGE:
 
 import json
 import re
+
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -90,11 +91,11 @@ def extract_rsc_chunks(html: str) -> list[str]:
             # Fallback: manual unescaping for chunks that aren't valid JSON strings
             # (some chunks contain raw data that breaks json.loads)
             decoded = match.replace('\\"', '"')
-            decoded = decoded.replace('\\n', '\n')
-            decoded = decoded.replace('\\/', '/')
-            decoded = decoded.replace('\\u0026', '&')
+            decoded = decoded.replace("\\n", "\n")
+            decoded = decoded.replace("\\/", "/")
+            decoded = decoded.replace("\\u0026", "&")
             # WARNING: \\  must be replaced last to avoid double-processing
-            decoded = decoded.replace('\\\\', '\\')
+            decoded = decoded.replace("\\\\", "\\")
             decoded_chunks.append(decoded)
 
     logger.debug(f"Extracted {len(decoded_chunks)} RSC chunks from HTML")
@@ -126,20 +127,20 @@ def _find_json_object(text: str, start_marker: str) -> dict | list | None:
     # Back up to find the opening bracket/brace
     # The marker typically ends with ":[ or ":{
     # We need to include the opening bracket
-    if start_marker.endswith('['):
-        open_char = '['
-        close_char = ']'
+    if start_marker.endswith("["):
+        open_char = "["
+        close_char = "]"
         json_start = json_start - 1  # Include the [
-    elif start_marker.endswith('{'):
-        open_char = '{'
-        close_char = '}'
+    elif start_marker.endswith("{"):
+        open_char = "{"
+        close_char = "}"
         json_start = json_start - 1  # Include the {
     else:
         # Look for the next { or [
         for i in range(json_start, min(json_start + 10, len(text))):
-            if text[i] in ('{', '['):
+            if text[i] in ("{", "["):
                 open_char = text[i]
-                close_char = '}' if open_char == '{' else ']'
+                close_char = "}" if open_char == "{" else "]"
                 json_start = i
                 break
         else:
@@ -158,7 +159,7 @@ def _find_json_object(text: str, start_marker: str) -> dict | list | None:
             escape_next = False
             continue
 
-        if char == '\\':
+        if char == "\\":
             escape_next = True
             continue
 
@@ -174,7 +175,7 @@ def _find_json_object(text: str, start_marker: str) -> dict | list | None:
         elif char == close_char:
             depth -= 1
             if depth == 0:
-                json_str = text[json_start:i + 1]
+                json_str = text[json_start : i + 1]
                 try:
                     return json.loads(json_str)
                 except json.JSONDecodeError as e:
@@ -270,32 +271,32 @@ def extract_city_metadata(chunks: list[str]) -> dict:
         # Extract latitude
         lat_match = re.search(r'"latitude":([\d.-]+)', chunk)
         if lat_match:
-            metadata['latitude'] = float(lat_match.group(1))
+            metadata["latitude"] = float(lat_match.group(1))
 
         # Extract longitude
         lon_match = re.search(r'"longitude":([\d.-]+)', chunk)
         if lon_match:
-            metadata['longitude'] = float(lon_match.group(1))
+            metadata["longitude"] = float(lon_match.group(1))
 
         # Extract radius
         radius_match = re.search(r'"radius":(\d+)', chunk)
         if radius_match:
-            metadata['radius'] = int(radius_match.group(1))
+            metadata["radius"] = int(radius_match.group(1))
 
         # Extract context label (city name)
         label_match = re.search(r'"contextLabel":"([^"]+)"', chunk)
         if label_match:
-            metadata['contextLabel'] = label_match.group(1)
+            metadata["contextLabel"] = label_match.group(1)
 
         # Extract city slug
         slug_match = re.search(r'"citySlug":"([^"]+)"', chunk)
         if slug_match:
-            metadata['citySlug'] = slug_match.group(1)
+            metadata["citySlug"] = slug_match.group(1)
 
         # Extract timezone
         tz_match = re.search(r'"timeZone":"([^"]+)"', chunk)
         if tz_match:
-            metadata['timeZone'] = tz_match.group(1)
+            metadata["timeZone"] = tz_match.group(1)
 
         if metadata:
             logger.debug(f"Extracted city metadata: {metadata.get('contextLabel', 'unknown')}")
@@ -359,9 +360,9 @@ def extract_church_detail(chunks: list[str]) -> dict | None:
         # Look for the data prop containing church and services
         # Pattern: {"data":{"church":{...},"services":{...},...}}
         data = _find_json_object(chunk, '"data":{')
-        if data and 'church' in data and 'services' in data:
-            church_name = data['church'].get('name', 'unknown')
-            service_count = data.get('totalServices', 0)
+        if data and "church" in data and "services" in data:
+            church_name = data["church"].get("name", "unknown")
+            service_count = data.get("totalServices", 0)
             logger.info(f"Extracted detail for {church_name} ({service_count} services)")
 
             # Clean up the "$undefined" values that Next.js RSC uses for undefined

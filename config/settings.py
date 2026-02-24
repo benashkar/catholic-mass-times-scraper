@@ -19,6 +19,7 @@ WHY A SEPARATE FILE:
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 # ---------------------------------------------------------------------------
@@ -60,7 +61,7 @@ MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
 # contact us if there's a problem, instead of just blocking our IP.
 USER_AGENT = os.getenv(
     "USER_AGENT",
-    "CatholicMassTimesScraper/1.0 (CR Community News; contact: ben@healthyanalytics.com)"
+    "CatholicMassTimesScraper/1.0 (CR Community News; contact: ben@healthyanalytics.com)",
 )
 
 # Standard headers sent with every HTTP request
@@ -100,34 +101,93 @@ TARGET_COMMUNITIES = [
     {"name": "Groveport", "county": "Franklin", "state": "OH", "zips": ["43125"]},
     {"name": "Hilliard", "county": "Franklin", "state": "OH", "zips": ["43026"]},
     {"name": "Grove City", "county": "Franklin", "state": "OH", "zips": ["43123"]},
-
     # Communities WITHOUT their own CatholicIndex city page.
     # "fallback_city" tells the scraper which nearby city page to use instead.
     # We then filter results by distance to only include nearby churches.
-    {"name": "Obetz", "county": "Franklin", "state": "OH", "zips": ["43207"],
-     "fallback_city": "Columbus"},
-    {"name": "Hamilton Township", "county": "Franklin", "state": "OH", "zips": ["43137"],
-     "fallback_city": "Columbus"},
-    {"name": "Lithopolis", "county": "Fairfield", "state": "OH", "zips": ["43136"],
-     "fallback_city": "Columbus"},
-    {"name": "Lockbourne", "county": "Franklin", "state": "OH", "zips": ["43137"],
-     "fallback_city": "Columbus"},
-    {"name": "Madison Township", "county": "Franklin", "state": "OH", "zips": ["43110", "43125"],
-     "fallback_city": "Columbus"},
-    {"name": "West Columbus", "county": "Franklin", "state": "OH", "zips": ["43204", "43223"],
-     "fallback_city": "Columbus"},
-    {"name": "Lincoln Village", "county": "Franklin", "state": "OH", "zips": ["43228"],
-     "fallback_city": "Columbus"},
-    {"name": "Prairie Township", "county": "Franklin", "state": "OH", "zips": ["43123", "43228"],
-     "fallback_city": "Columbus"},
-    {"name": "Westgate", "county": "Franklin", "state": "OH", "zips": ["43204"],
-     "fallback_city": "Columbus"},
-    {"name": "Galloway", "county": "Franklin", "state": "OH", "zips": ["43119"],
-     "fallback_city": "Columbus"},
-    {"name": "Urbancrest", "county": "Franklin", "state": "OH", "zips": ["43123"],
-     "fallback_city": "Columbus"},
-    {"name": "Commercial Point", "county": "Pickaway", "state": "OH", "zips": ["43116"],
-     "fallback_city": "Columbus"},
+    {
+        "name": "Obetz",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43207"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Hamilton Township",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43137"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Lithopolis",
+        "county": "Fairfield",
+        "state": "OH",
+        "zips": ["43136"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Lockbourne",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43137"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Madison Township",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43110", "43125"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "West Columbus",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43204", "43223"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Lincoln Village",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43228"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Prairie Township",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43123", "43228"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Westgate",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43204"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Galloway",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43119"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Urbancrest",
+        "county": "Franklin",
+        "state": "OH",
+        "zips": ["43123"],
+        "fallback_city": "Columbus",
+    },
+    {
+        "name": "Commercial Point",
+        "county": "Pickaway",
+        "state": "OH",
+        "zips": ["43116"],
+        "fallback_city": "Columbus",
+    },
 ]
 
 # ---------------------------------------------------------------------------

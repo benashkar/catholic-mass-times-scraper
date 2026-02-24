@@ -1,0 +1,4 @@
+﻿person_name,role,title,first_name,last_name,church_name,church_slug,city,category,confidence,pdf_url,pdf_date
+Fr. John Smith,Pastor,,John,Smith,St. Mary,st-mary-columbus,Columbus,clergy,high,https://example.com/bulletin1.pdf,2024-01-15
+Jane Doe,Secretary,,Jane,Doe,St. Mary,st-mary-columbus,Columbus,staff,medium,https://example.com/bulletin1.pdf,2024-01-15
+Bob Jones,Deacon,,Bob,Jones,St. Joseph,st-joseph-cleveland,Cleveland,clergy,high,https://example.com/bulletin2.pdf,2024-01-22

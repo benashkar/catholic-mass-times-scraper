@@ -20,17 +20,18 @@ HOW TO RUN:
 """
 
 import pytest
-from src.parsers.address_parser import (
-    parse_street,
-    normalize_state,
-    split_postal_code,
-    parse_church_address,
-)
 
+from src.parsers.address_parser import (
+    normalize_state,
+    parse_church_address,
+    parse_street,
+    split_postal_code,
+)
 
 # =============================================================================
 # parse_street() tests
 # =============================================================================
+
 
 class TestParseStreetStandard:
     """Tests for standard street addresses."""
@@ -242,6 +243,7 @@ class TestParseStreetEdgeCases:
 # normalize_state() tests
 # =============================================================================
 
+
 class TestNormalizeState:
     """Tests for state name normalization."""
 
@@ -277,6 +279,7 @@ class TestNormalizeState:
 # split_postal_code() tests
 # =============================================================================
 
+
 class TestSplitPostalCode:
     """Tests for postal code splitting."""
 
@@ -302,6 +305,7 @@ class TestSplitPostalCode:
 # =============================================================================
 # parse_church_address() integration tests
 # =============================================================================
+
 
 class TestParseChurchAddress:
     """Integration tests for the full church address parser."""

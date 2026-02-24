@@ -1,8 +1,10 @@
 """
 Main routes — Home page with state picker.
 """
+
 from flask import Blueprint, render_template
-from app.data_loader import get_states, get_bulletin_stats
+
+from app.data_loader import get_bulletin_stats, get_states
 
 bp = Blueprint("main", __name__)
 

@@ -21,8 +21,8 @@ USAGE:
 """
 
 import csv
-from pathlib import Path
 from datetime import date, timedelta
+from pathlib import Path
 
 from src.utils.logger import get_logger
 
@@ -36,38 +36,62 @@ logger = get_logger(__name__)
 # Map 3-letter day codes to Python weekday integers
 # Python: Monday=0, Tuesday=1, ..., Sunday=6
 DAY_CODE_TO_WEEKDAY = {
-    "Mon": 0, "Tue": 1, "Wed": 2, "Thu": 3, "Fri": 4, "Sat": 5, "Sun": 6,
+    "Mon": 0,
+    "Tue": 1,
+    "Wed": 2,
+    "Thu": 3,
+    "Fri": 4,
+    "Sat": 5,
+    "Sun": 6,
 }
 
 # Map day codes to full names for display
 DAY_CODE_TO_FULL = {
-    "Mon": "Monday", "Tue": "Tuesday", "Wed": "Wednesday", "Thu": "Thursday",
-    "Fri": "Friday", "Sat": "Saturday", "Sun": "Sunday",
+    "Mon": "Monday",
+    "Tue": "Tuesday",
+    "Wed": "Wednesday",
+    "Thu": "Thursday",
+    "Fri": "Friday",
+    "Sat": "Saturday",
+    "Sun": "Sunday",
 }
 
 # Recurrence pattern -> (which_occurrence, weekday) in the month
 PATTERN_TO_OCCURRENCE = {
-    "first_friday_(recurring)":       (1, 4),
-    "first_saturday_(recurring)":     (1, 5),
-    "first_sunday":                   (1, 6),
+    "first_friday_(recurring)": (1, 4),
+    "first_saturday_(recurring)": (1, 5),
+    "first_sunday": (1, 6),
     "thursday_(before_first_friday)": None,  # Special case
 }
 
 # Sort order for service categories
 CATEGORY_ORDER = {
-    'Mass': 1, 'Confession': 2, 'Adoration': 3, 'Devotions': 4,
-    'Education': 5, 'Community': 6, 'Other': 7,
+    "Mass": 1,
+    "Confession": 2,
+    "Adoration": 3,
+    "Devotions": 4,
+    "Education": 5,
+    "Community": 6,
+    "Other": 7,
 }
 
 # Sort order for days of week
 DAY_ORDER = {
-    'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7, '': 8,
+    "Mon": 1,
+    "Tue": 2,
+    "Wed": 3,
+    "Thu": 4,
+    "Fri": 5,
+    "Sat": 6,
+    "Sun": 7,
+    "": 8,
 }
 
 
 # ============================================================================
 # Date conversion helpers
 # ============================================================================
+
 
 def format_time_12h(time_str: str | None) -> str:
     """Convert "HH:MM:SS" (24-hour) to "H:MM AM/PM" format."""
@@ -141,6 +165,7 @@ def get_pattern_dates(pattern: str, start_date: date, num_months: int = 2) -> li
 # CSV generation functions
 # ============================================================================
 
+
 def generate_services_csv(all_details: list[dict], output_path: Path) -> int:
     """
     Generate a flat CSV with one row per service across all churches.
@@ -156,38 +181,44 @@ def generate_services_csv(all_details: list[dict], output_path: Path) -> int:
 
     csv_rows = []
     for detail in all_details:
-        church = detail['church']
+        church = detail["church"]
 
-        for category, services in detail['services'].items():
+        for category, services in detail["services"].items():
             for svc in services:
-                csv_rows.append({
-                    'Church': church['name'],
-                    'Address': f"{church.get('street', '')}, {church.get('city', '')}, {church.get('stateRegion', '')} {church.get('postalCode', '')}",
-                    'Phone': church.get('phone', ''),
-                    'Category': category,
-                    'Day': svc.get('dayOfWeek') or '',
-                    'Time Start': format_time_12h(svc.get('timeStart')),
-                    'Time End': format_time_12h(svc.get('timeEnd')) if svc.get('timeEnd') else '',
-                    'Service Name': svc.get('displayName', ''),
-                    'Schedule Type': svc.get('scheduleType', ''),
-                    'Language': svc.get('language') or 'English',
-                    'Location': svc.get('location') or '',
-                    'Pattern': svc.get('pattern') or '',
-                    'Event Date': svc.get('eventDate') or '',
-                    'Time Relation': svc.get('timeRelation') or '',
-                    'Reference Service': svc.get('referenceService') or '',
-                    'Notes': svc.get('notes') or '',
-                })
+                csv_rows.append(
+                    {
+                        "Church": church["name"],
+                        "Address": f"{church.get('street', '')}, {church.get('city', '')}, {church.get('stateRegion', '')} {church.get('postalCode', '')}",
+                        "Phone": church.get("phone", ""),
+                        "Category": category,
+                        "Day": svc.get("dayOfWeek") or "",
+                        "Time Start": format_time_12h(svc.get("timeStart")),
+                        "Time End": format_time_12h(svc.get("timeEnd"))
+                        if svc.get("timeEnd")
+                        else "",
+                        "Service Name": svc.get("displayName", ""),
+                        "Schedule Type": svc.get("scheduleType", ""),
+                        "Language": svc.get("language") or "English",
+                        "Location": svc.get("location") or "",
+                        "Pattern": svc.get("pattern") or "",
+                        "Event Date": svc.get("eventDate") or "",
+                        "Time Relation": svc.get("timeRelation") or "",
+                        "Reference Service": svc.get("referenceService") or "",
+                        "Notes": svc.get("notes") or "",
+                    }
+                )
 
-    csv_rows.sort(key=lambda r: (
-        r['Church'],
-        CATEGORY_ORDER.get(r['Category'], 99),
-        DAY_ORDER.get(r['Day'], 99),
-        r['Time Start'],
-    ))
+    csv_rows.sort(
+        key=lambda r: (
+            r["Church"],
+            CATEGORY_ORDER.get(r["Category"], 99),
+            DAY_ORDER.get(r["Day"], 99),
+            r["Time Start"],
+        )
+    )
 
     if csv_rows:
-        with open(output_path, 'w', newline='', encoding='utf-8-sig') as f:
+        with open(output_path, "w", newline="", encoding="utf-8-sig") as f:
             writer = csv.DictWriter(f, fieldnames=csv_rows[0].keys())
             writer.writeheader()
             writer.writerows(csv_rows)
@@ -214,13 +245,13 @@ def generate_dated_services_csv(all_details: list[dict], output_path: Path) -> i
     dated_rows = []
 
     for detail in all_details:
-        church = detail['church']
+        church = detail["church"]
 
-        for category, services in detail['services'].items():
+        for category, services in detail["services"].items():
             for svc in services:
-                day_code = svc.get('dayOfWeek')
-                event_date_str = svc.get('eventDate')
-                pattern = svc.get('pattern')
+                day_code = svc.get("dayOfWeek")
+                event_date_str = svc.get("eventDate")
+                pattern = svc.get("pattern")
 
                 actual_dates = []
 
@@ -238,31 +269,39 @@ def generate_dated_services_csv(all_details: list[dict], output_path: Path) -> i
                     actual_dates = get_dates_for_day(day_code, today, num_weeks=12)
 
                 for actual_date in actual_dates:
-                    dated_rows.append({
-                        'Date': actual_date.strftime('%a, %b %d, %Y'),
-                        'Date Sort': actual_date.isoformat(),
-                        'Day': DAY_CODE_TO_FULL.get(day_code, day_code or actual_date.strftime('%A')),
-                        'Church': church['name'],
-                        'Address': f"{church.get('street', '')}, {church.get('city', '')}",
-                        'Phone': church.get('phone', ''),
-                        'Category': category,
-                        'Time': format_time_12h(svc.get('timeStart')),
-                        'End Time': format_time_12h(svc.get('timeEnd')) if svc.get('timeEnd') else '',
-                        'Service Name': svc.get('displayName', ''),
-                        'Language': svc.get('language') or 'English',
-                        'Location': svc.get('location') or '',
-                        'Notes': svc.get('notes') or '',
-                    })
+                    dated_rows.append(
+                        {
+                            "Date": actual_date.strftime("%a, %b %d, %Y"),
+                            "Date Sort": actual_date.isoformat(),
+                            "Day": DAY_CODE_TO_FULL.get(
+                                day_code, day_code or actual_date.strftime("%A")
+                            ),
+                            "Church": church["name"],
+                            "Address": f"{church.get('street', '')}, {church.get('city', '')}",
+                            "Phone": church.get("phone", ""),
+                            "Category": category,
+                            "Time": format_time_12h(svc.get("timeStart")),
+                            "End Time": format_time_12h(svc.get("timeEnd"))
+                            if svc.get("timeEnd")
+                            else "",
+                            "Service Name": svc.get("displayName", ""),
+                            "Language": svc.get("language") or "English",
+                            "Location": svc.get("location") or "",
+                            "Notes": svc.get("notes") or "",
+                        }
+                    )
 
-    dated_rows.sort(key=lambda r: (
-        r['Date Sort'],
-        CATEGORY_ORDER.get(r['Category'], 99),
-        r['Church'],
-        r['Time'],
-    ))
+    dated_rows.sort(
+        key=lambda r: (
+            r["Date Sort"],
+            CATEGORY_ORDER.get(r["Category"], 99),
+            r["Church"],
+            r["Time"],
+        )
+    )
 
     if dated_rows:
-        with open(output_path, 'w', newline='', encoding='utf-8-sig') as f:
+        with open(output_path, "w", newline="", encoding="utf-8-sig") as f:
             writer = csv.DictWriter(f, fieldnames=dated_rows[0].keys())
             writer.writeheader()
             writer.writerows(dated_rows)

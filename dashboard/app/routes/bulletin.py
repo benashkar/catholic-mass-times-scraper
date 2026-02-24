@@ -2,11 +2,18 @@
 Bulletin Names Browser — View extracted names from church bulletins.
 Filterable by state, city, church, confidence. Shows full provenance (PDF link, date).
 """
+
 import json
 import os
-from collections import Counter
-from flask import Blueprint, render_template, abort, request, jsonify
-from app.data_loader import get_bulletin_names, get_states_with_bulletins, get_bulletin_stats
+
+from flask import Blueprint, abort, jsonify, render_template, request
+
+from app.data_loader import (
+    get_bulletin_names,
+    get_bulletin_names_page,
+    get_bulletin_stats,
+    get_states_with_bulletins,
+)
 
 bp = Blueprint("bulletin", __name__, url_prefix="/bulletin")
 
@@ -18,7 +25,7 @@ _REMOVED_NAMES_PATH = os.path.join(_DATA_DIR, "removed_names.json")
 def _load_removed_names():
     """Load the set of removed (suspect) names."""
     if os.path.isfile(_REMOVED_NAMES_PATH):
-        with open(_REMOVED_NAMES_PATH, "r", encoding="utf-8") as f:
+        with open(_REMOVED_NAMES_PATH, encoding="utf-8") as f:
             return json.load(f)
     return []
 
@@ -70,16 +77,19 @@ def suspect_names():
             key = (row.get("person_name", ""), state_name)
             if key in removed_keys:
                 continue
-            suspect.append({
-                "person_name": row.get("person_name", ""),
-                "church_name": row.get("church_name", ""),
-                "city": row.get("city", ""),
-                "state": state_name,
-                "category": row.get("category", ""),
-                "confidence": row.get("confidence", ""),
-                "confidence_score": float(row.get("confidence_score", 0))
-                    if row.get("confidence_score", "") != "" else 0,
-            })
+            suspect.append(
+                {
+                    "person_name": row.get("person_name", ""),
+                    "church_name": row.get("church_name", ""),
+                    "city": row.get("city", ""),
+                    "state": state_name,
+                    "category": row.get("category", ""),
+                    "confidence": row.get("confidence", ""),
+                    "confidence_score": float(row.get("confidence_score", 0))
+                    if row.get("confidence_score", "") != ""
+                    else 0,
+                }
+            )
 
     # Sort by confidence_score ascending (worst first)
     suspect.sort(key=lambda x: x.get("confidence_score", 0))
@@ -99,14 +109,16 @@ def remove_suspect():
         return jsonify({"error": "Missing person_name or state"}), 400
 
     removed = _load_removed_names()
-    removed.append({
-        "person_name": data["person_name"],
-        "state": data["state"],
-        "church_name": data.get("church_name", ""),
-        "city": data.get("city", ""),
-        "category": data.get("category", ""),
-        "confidence_score": data.get("confidence_score", 0),
-    })
+    removed.append(
+        {
+            "person_name": data["person_name"],
+            "state": data["state"],
+            "church_name": data.get("church_name", ""),
+            "city": data.get("city", ""),
+            "category": data.get("category", ""),
+            "confidence_score": data.get("confidence_score", 0),
+        }
+    )
     _save_removed_names(removed)
 
     return jsonify({"status": "ok", "removed_count": len(removed)})
@@ -154,9 +166,6 @@ def state_view(state):
 
     # Build church dropdown entries with city disambiguation for duplicates
     church_names = df["church_name"].dropna().unique().tolist()
-    name_counts = Counter(
-        df.groupby("church_name")["city"].first().to_dict().values()
-    )
     if "city" in df.columns:
         church_city_pairs = (
             df[df["church_name"].notna() & df["city"].notna()]
@@ -172,17 +181,21 @@ def state_view(state):
         cities_for_church = church_city_pairs.get(name, [])
         if len(cities_for_church) > 1:
             for city in cities_for_church:
-                church_options.append({
-                    "label": f"{name} ({city})",
-                    "church": name,
-                    "city": city,
-                })
+                church_options.append(
+                    {
+                        "label": f"{name} ({city})",
+                        "church": name,
+                        "city": city,
+                    }
+                )
         else:
-            church_options.append({
-                "label": name,
-                "church": name,
-                "city": "",
-            })
+            church_options.append(
+                {
+                    "label": name,
+                    "church": name,
+                    "city": "",
+                }
+            )
 
     # Read ?church= and ?city= query params for pre-filtering from mass-times page
     prefilter_church = request.args.get("church", "")
@@ -194,22 +207,12 @@ def state_view(state):
     if prefilter_city and "city" in df.columns:
         df = df[df["city"] == prefilter_city]
 
-    # Convert to list of dicts for the template
-    columns = [
-        "person_name", "title", "first_name", "middle_name", "last_name",
-        "role", "church_name", "city", "full_street", "category", "confidence",
-        "confidence_score", "pdf_url", "pdf_date",
-    ]
-    available = [c for c in columns if c in df.columns]
-
     # Cap rows to prevent timeout on large states (IL=223K, CA=257K)
     MAX_ROWS = 50000
     total_names = len(df)
     truncated = total_names > MAX_ROWS
     if truncated:
         df = df.head(MAX_ROWS)
-    names = df[available].fillna("").to_dict("records")
-
 
     return render_template(
         "bulletin/state.html",
@@ -258,9 +261,11 @@ def api_names(state):
         category_filter=category,
     )
 
-    return jsonify({
-        "draw": draw,
-        "recordsTotal": total,
-        "recordsFiltered": filtered,
-        "data": rows,
-    })
+    return jsonify(
+        {
+            "draw": draw,
+            "recordsTotal": total,
+            "recordsFiltered": filtered,
+            "data": rows,
+        }
+    )

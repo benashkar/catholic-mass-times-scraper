@@ -23,6 +23,7 @@ HOW TO USE:
 import csv
 import json
 from pathlib import Path
+
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -99,7 +100,7 @@ def load_from_csv(file_path: str | Path) -> list[dict]:
         logger.warning(f"File not found: {file_path}")
         return []
 
-    with open(file_path, mode="r", encoding="utf-8-sig") as f:
+    with open(file_path, encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         data = list(reader)
 
@@ -151,7 +152,7 @@ def load_from_json(file_path: str | Path) -> dict | list | None:
         logger.warning(f"File not found: {file_path}")
         return None
 
-    with open(file_path, mode="r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         data = json.load(f)
 
     logger.info(f"Loaded JSON from {file_path}")

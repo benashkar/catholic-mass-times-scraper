@@ -38,23 +38,22 @@ APPROACH:
        staff listings, ministry leaders, etc.)
 """
 
-import sys
-import json
-import time
-import re
-import csv
 import argparse
+import csv
 import hashlib
-import os
-import traceback
-import requests
+import json
+import re
+import sys
+import time
 from pathlib import Path
-from datetime import datetime, timezone
-from urllib.parse import urljoin, urlparse, parse_qs
+from urllib.parse import parse_qs, urljoin, urlparse
+
+import requests
 from bs4 import BeautifulSoup
 
 try:
     import pdfplumber
+
     HAS_PDFPLUMBER = True
 except ImportError:
     HAS_PDFPLUMBER = False
@@ -63,6 +62,7 @@ except ImportError:
 
 try:
     from playwright.sync_api import sync_playwright
+
     HAS_PLAYWRIGHT = True
 except ImportError:
     HAS_PLAYWRIGHT = False
@@ -74,221 +74,12 @@ from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# ── Name Reference Data (SSA + Census) ────────────────────────────────────────
-# Loaded lazily on first use by _load_reference_data()
-
-REFERENCE_DIR = Path(__file__).resolve().parent / "data" / "reference"
-
-_ssa_first_names = None       # set of lowercase first names
-_ssa_top1000 = None           # set of lowercase top-1000 first names
-_ssa_top5000 = None           # set of lowercase top-5000 first names
-_census_surnames = None       # set of lowercase surnames
-_auto_removed_names = None    # set of exact-match names auto-removed by cross-state analysis
-_reference_loaded = False
-
-
-def _load_reference_data():
-    """Load SSA first names and Census surnames into memory (lazy, once)."""
-    global _ssa_first_names, _ssa_top1000, _ssa_top5000
-    global _census_surnames, _auto_removed_names, _reference_loaded
-
-    if _reference_loaded:
-        return
-
-    _ssa_first_names = set()
-    _ssa_top1000 = set()
-    _ssa_top5000 = set()
-    _census_surnames = set()
-
-    ssa_path = REFERENCE_DIR / "ssa_first_names.csv"
-    if ssa_path.exists():
-        with open(ssa_path, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                name_lower = row["name"].lower()
-                _ssa_first_names.add(name_lower)
-                rank = int(row.get("rank", 0))
-                if rank <= 1000:
-                    _ssa_top1000.add(name_lower)
-                if rank <= 5000:
-                    _ssa_top5000.add(name_lower)
-        logger.info(f"Loaded {len(_ssa_first_names):,} SSA first names "
-                     f"({len(_ssa_top1000):,} top-1000)")
-    else:
-        logger.warning(f"SSA first names not found at {ssa_path}. "
-                        "Run: python scripts/prepare_name_reference.py")
-
-    census_path = REFERENCE_DIR / "census_surnames.csv"
-    if census_path.exists():
-        with open(census_path, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                _census_surnames.add(row["name"].lower())
-        logger.info(f"Loaded {len(_census_surnames):,} Census surnames")
-    else:
-        logger.warning(f"Census surnames not found at {census_path}. "
-                        "Run: python scripts/prepare_name_reference.py")
-
-    # Load auto-removed names (cross-state low-confidence junk)
-    _auto_removed_names = set()
-    removed_path = REFERENCE_DIR / "auto_removed_low_conf_3states.txt"
-    if removed_path.exists():
-        with open(removed_path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    _auto_removed_names.add(line)
-        logger.info(f"Loaded {len(_auto_removed_names):,} auto-removed names")
-
-    _reference_loaded = True
-
-
-def score_name_confidence(person_name: str, category: str = "") -> float:
-    """Score how likely a string is to be a real person's name (0.0–1.0).
-
-    Uses SSA baby names and Census surnames as lookup dictionaries,
-    plus structural heuristics. Higher = more likely a real name.
-
-    Score components (additive, capped at 1.0):
-      +0.30  if first_name found in SSA first names
-      +0.30  if last_name found in Census surnames
-      +0.15  if category is clergy_staff or mass_intention
-      +0.10  if name has exactly 2–3 words
-      +0.05  if name has a recognized title (Fr., Rev., Dr., etc.)
-      +0.10  if first_name is in top-1000 SSA names
-
-      -0.40  if any word is a common English non-name word
-      -0.30  if name contains embedded newline
-      -0.25  if last word appears truncated (< 3 chars, not initial)
-      -0.20  if name looks like merged names (3+ words, last word is common first name)
-      -0.15  if name matches a known organization pattern
-    """
-    _load_reference_data()
-
-    if not person_name or not person_name.strip():
-        return 0.0
-
-    score = 0.0
-    parts = person_name.strip().split()
-
-    # Detect title prefix
-    title_prefixes = {
-        'fr.', 'father', 'rev.', 'reverend', 'msgr.', 'monsignor',
-        'dcn.', 'deacon', 'sr.', 'sister', 'br.', 'brother',
-        'dr.', 'doctor', 'mr.', 'mrs.', 'ms.', 'miss',
-    }
-    has_title = False
-    name_parts = parts[:]
-    if name_parts and name_parts[0].lower().rstrip('.') + '.' in title_prefixes:
-        has_title = True
-        name_parts = name_parts[1:]
-    elif name_parts and name_parts[0].lower() in title_prefixes:
-        has_title = True
-        name_parts = name_parts[1:]
-
-    first_name = name_parts[0].lower() if name_parts else ""
-    last_name = name_parts[-1].lower() if len(name_parts) >= 2 else ""
-
-    # ── Positive signals ──
-    if first_name and _ssa_first_names and first_name in _ssa_first_names:
-        score += 0.30
-    if last_name and _census_surnames and last_name in _census_surnames:
-        score += 0.30
-    if category in ("clergy_staff", "mass_intention"):
-        score += 0.15
-    if 2 <= len(parts) <= 3:
-        score += 0.10
-    if has_title:
-        score += 0.05
-    if first_name and _ssa_top1000 and first_name in _ssa_top1000:
-        score += 0.10
-
-    # ── Negative signals ──
-    # Non-name word check (expanded)
-    non_name_check = {
-        'the', 'and', 'for', 'from', 'with', 'church', 'parish', 'school',
-        'center', 'hall', 'room', 'chapel', 'mass', 'communion', 'council',
-        'meeting', 'committee', 'festival', 'hospital', 'clinic', 'county',
-        'street', 'avenue', 'boulevard', 'road', 'office', 'bulletin',
-        'newsletter', 'donate', 'register', 'attend', 'schedule', 'update',
-        'celebrate', 'hosting', 'columbus', 'columbian', 'insurance',
-        'plumbing', 'roofing', 'salad', 'pasta', 'pizza', 'chicken',
-        'sausage', 'alert', 'connected', 'download', 'facebook',
-        'ministry', 'ministries', 'knights', 'knight', 'society',
-        'foundation', 'corporation', 'donation', 'volunteer',
-    }
-    if any(p.lower() in non_name_check for p in parts):
-        score -= 0.40
-
-    # Newline contamination
-    if '\n' in person_name:
-        score -= 0.30
-
-    # Truncated last word
-    if last_name and len(last_name) < 3 and not re.match(r'^[a-z]\.?$', last_name):
-        score -= 0.25
-
-    # Merged names: 3+ words, last word is a common first name
-    if (len(name_parts) >= 3 and last_name and
-            _ssa_top5000 and last_name in _ssa_top5000):
-        # Exception: if last word is also a common surname, don't penalize
-        if not (_census_surnames and last_name in _census_surnames):
-            score -= 0.20
-
-    # Organization pattern
-    org_patterns = {'knights of', 'council of', 'society of', 'order of',
-                    'sons of', 'daughters of', 'ladies of', 'friends of'}
-    name_lower = person_name.lower()
-    if any(pat in name_lower for pat in org_patterns):
-        score -= 0.15
-
-    return max(0.0, min(1.0, round(score, 2)))
-
-
-def confidence_label(score: float) -> str:
-    """Map numeric confidence score to high/medium/low label."""
-    if score >= 0.7:
-        return "high"
-    elif score >= 0.4:
-        return "medium"
-    else:
-        return "low"
-
-
-def split_merged_name(person_name: str) -> str:
-    """Split merged names like 'Kevin Steinkamp Mary' -> 'Kevin Steinkamp'.
-
-    Only applies when:
-    - Name has 3+ words
-    - Last word is a top-5000 SSA first name
-    - Last word is NOT also a common Census surname
-    - The remaining 2-word name looks valid
-    """
-    _load_reference_data()
-
-    parts = person_name.strip().split()
-    if len(parts) < 3:
-        return person_name
-
-    last_word = parts[-1].lower()
-
-    # Only split if last word is a common first name but not a surname
-    if (_ssa_top5000 and last_word in _ssa_top5000 and
-            _census_surnames and last_word not in _census_surnames):
-        candidate = ' '.join(parts[:-1])
-        # Validate the shortened name has at least 2 parts
-        if len(parts[:-1]) >= 2:
-            return candidate
-
-    return person_name
-
-
 # ── Configuration ──────────────────────────────────────────────────────────────
 
-REQUEST_DELAY = 1.0          # seconds between requests to same domain
-REQUEST_TIMEOUT = 15         # seconds
-MAX_PDFS_PER_CHURCH = 100    # download all available bulletins (most churches have 20-52 weeks)
-MAX_PDF_SIZE_MB = 25         # skip PDFs larger than 25MB
+REQUEST_DELAY = 1.0  # seconds between requests to same domain
+REQUEST_TIMEOUT = 15  # seconds
+MAX_PDFS_PER_CHURCH = 100  # download all available bulletins (most churches have 20-52 weeks)
+MAX_PDF_SIZE_MB = 25  # skip PDFs larger than 25MB
 PROGRESS_SAVE_INTERVAL = 10  # save progress every N churches
 
 USER_AGENT = (
@@ -333,73 +124,132 @@ BULLETIN_PATHS = [
 
 # Keywords that indicate a bulletin page (case-insensitive)
 BULLETIN_PAGE_KEYWORDS = [
-    "bulletin", "weekly bulletin", "parish bulletin",
-    "sunday bulletin", "church bulletin", "current bulletin",
-    "this week", "latest bulletin", "download bulletin",
+    "bulletin",
+    "weekly bulletin",
+    "parish bulletin",
+    "sunday bulletin",
+    "church bulletin",
+    "current bulletin",
+    "this week",
+    "latest bulletin",
+    "download bulletin",
     # Newsletter variants
-    "newsletter", "weekly newsletter", "parish newsletter",
-    "current newsletter", "download newsletter",
+    "newsletter",
+    "weekly newsletter",
+    "parish newsletter",
+    "current newsletter",
+    "download newsletter",
 ]
 
 # Patterns to find bulletin links on church homepages
 BULLETIN_LINK_PATTERNS = [
-    re.compile(r'bulletin', re.IGNORECASE),
-    re.compile(r'newsletter', re.IGNORECASE),
-    re.compile(r'weekly\s*(news|update|publication)', re.IGNORECASE),
+    re.compile(r"bulletin", re.IGNORECASE),
+    re.compile(r"newsletter", re.IGNORECASE),
+    re.compile(r"weekly\s*(news|update|publication)", re.IGNORECASE),
 ]
 
 # State aliases (same as run_resolve_urls.py)
 STATE_ALIASES = {
-    "alabama": ("AL", "alabama"), "al": ("AL", "alabama"),
-    "alaska": ("AK", "alaska"), "ak": ("AK", "alaska"),
-    "arizona": ("AZ", "arizona"), "az": ("AZ", "arizona"),
-    "arkansas": ("AR", "arkansas"), "ar": ("AR", "arkansas"),
-    "california": ("CA", "california"), "ca": ("CA", "california"),
-    "colorado": ("CO", "colorado"), "co": ("CO", "colorado"),
-    "connecticut": ("CT", "connecticut"), "ct": ("CT", "connecticut"),
-    "delaware": ("DE", "delaware"), "de": ("DE", "delaware"),
-    "florida": ("FL", "florida"), "fl": ("FL", "florida"),
-    "georgia": ("GA", "georgia"), "ga": ("GA", "georgia"),
-    "hawaii": ("HI", "hawaii"), "hi": ("HI", "hawaii"),
-    "idaho": ("ID", "idaho"), "id": ("ID", "idaho"),
-    "illinois": ("IL", "illinois"), "il": ("IL", "illinois"),
-    "indiana": ("IN", "indiana"), "in": ("IN", "indiana"),
-    "iowa": ("IA", "iowa"), "ia": ("IA", "iowa"),
-    "kansas": ("KS", "kansas"), "ks": ("KS", "kansas"),
-    "kentucky": ("KY", "kentucky"), "ky": ("KY", "kentucky"),
-    "louisiana": ("LA", "louisiana"), "la": ("LA", "louisiana"),
-    "maine": ("ME", "maine"), "me": ("ME", "maine"),
-    "maryland": ("MD", "maryland"), "md": ("MD", "maryland"),
-    "massachusetts": ("MA", "massachusetts"), "ma": ("MA", "massachusetts"),
-    "michigan": ("MI", "michigan"), "mi": ("MI", "michigan"),
-    "minnesota": ("MN", "minnesota"), "mn": ("MN", "minnesota"),
-    "mississippi": ("MS", "mississippi"), "ms": ("MS", "mississippi"),
-    "missouri": ("MO", "missouri"), "mo": ("MO", "missouri"),
-    "montana": ("MT", "montana"), "mt": ("MT", "montana"),
-    "nebraska": ("NE", "nebraska"), "ne": ("NE", "nebraska"),
-    "nevada": ("NV", "nevada"), "nv": ("NV", "nevada"),
-    "new_hampshire": ("NH", "new_hampshire"), "nh": ("NH", "new_hampshire"),
-    "new_jersey": ("NJ", "new_jersey"), "nj": ("NJ", "new_jersey"),
-    "new_mexico": ("NM", "new_mexico"), "nm": ("NM", "new_mexico"),
-    "new_york": ("NY", "new_york"), "ny": ("NY", "new_york"),
-    "north_carolina": ("NC", "north_carolina"), "nc": ("NC", "north_carolina"),
-    "north_dakota": ("ND", "north_dakota"), "nd": ("ND", "north_dakota"),
-    "ohio": ("OH", "ohio"), "oh": ("OH", "ohio"),
-    "oklahoma": ("OK", "oklahoma"), "ok": ("OK", "oklahoma"),
-    "oregon": ("OR", "oregon"), "or": ("OR", "oregon"),
-    "pennsylvania": ("PA", "pennsylvania"), "pa": ("PA", "pennsylvania"),
-    "rhode_island": ("RI", "rhode_island"), "ri": ("RI", "rhode_island"),
-    "south_carolina": ("SC", "south_carolina"), "sc": ("SC", "south_carolina"),
-    "south_dakota": ("SD", "south_dakota"), "sd": ("SD", "south_dakota"),
-    "tennessee": ("TN", "tennessee"), "tn": ("TN", "tennessee"),
-    "texas": ("TX", "texas"), "tx": ("TX", "texas"),
-    "utah": ("UT", "utah"), "ut": ("UT", "utah"),
-    "vermont": ("VT", "vermont"), "vt": ("VT", "vermont"),
-    "virginia": ("VA", "virginia"), "va": ("VA", "virginia"),
-    "washington": ("WA", "washington"), "wa": ("WA", "washington"),
-    "west_virginia": ("WV", "west_virginia"), "wv": ("WV", "west_virginia"),
-    "wisconsin": ("WI", "wisconsin"), "wi": ("WI", "wisconsin"),
-    "wyoming": ("WY", "wyoming"), "wy": ("WY", "wyoming"),
+    "alabama": ("AL", "alabama"),
+    "al": ("AL", "alabama"),
+    "alaska": ("AK", "alaska"),
+    "ak": ("AK", "alaska"),
+    "arizona": ("AZ", "arizona"),
+    "az": ("AZ", "arizona"),
+    "arkansas": ("AR", "arkansas"),
+    "ar": ("AR", "arkansas"),
+    "california": ("CA", "california"),
+    "ca": ("CA", "california"),
+    "colorado": ("CO", "colorado"),
+    "co": ("CO", "colorado"),
+    "connecticut": ("CT", "connecticut"),
+    "ct": ("CT", "connecticut"),
+    "delaware": ("DE", "delaware"),
+    "de": ("DE", "delaware"),
+    "florida": ("FL", "florida"),
+    "fl": ("FL", "florida"),
+    "georgia": ("GA", "georgia"),
+    "ga": ("GA", "georgia"),
+    "hawaii": ("HI", "hawaii"),
+    "hi": ("HI", "hawaii"),
+    "idaho": ("ID", "idaho"),
+    "id": ("ID", "idaho"),
+    "illinois": ("IL", "illinois"),
+    "il": ("IL", "illinois"),
+    "indiana": ("IN", "indiana"),
+    "in": ("IN", "indiana"),
+    "iowa": ("IA", "iowa"),
+    "ia": ("IA", "iowa"),
+    "kansas": ("KS", "kansas"),
+    "ks": ("KS", "kansas"),
+    "kentucky": ("KY", "kentucky"),
+    "ky": ("KY", "kentucky"),
+    "louisiana": ("LA", "louisiana"),
+    "la": ("LA", "louisiana"),
+    "maine": ("ME", "maine"),
+    "me": ("ME", "maine"),
+    "maryland": ("MD", "maryland"),
+    "md": ("MD", "maryland"),
+    "massachusetts": ("MA", "massachusetts"),
+    "ma": ("MA", "massachusetts"),
+    "michigan": ("MI", "michigan"),
+    "mi": ("MI", "michigan"),
+    "minnesota": ("MN", "minnesota"),
+    "mn": ("MN", "minnesota"),
+    "mississippi": ("MS", "mississippi"),
+    "ms": ("MS", "mississippi"),
+    "missouri": ("MO", "missouri"),
+    "mo": ("MO", "missouri"),
+    "montana": ("MT", "montana"),
+    "mt": ("MT", "montana"),
+    "nebraska": ("NE", "nebraska"),
+    "ne": ("NE", "nebraska"),
+    "nevada": ("NV", "nevada"),
+    "nv": ("NV", "nevada"),
+    "new_hampshire": ("NH", "new_hampshire"),
+    "nh": ("NH", "new_hampshire"),
+    "new_jersey": ("NJ", "new_jersey"),
+    "nj": ("NJ", "new_jersey"),
+    "new_mexico": ("NM", "new_mexico"),
+    "nm": ("NM", "new_mexico"),
+    "new_york": ("NY", "new_york"),
+    "ny": ("NY", "new_york"),
+    "north_carolina": ("NC", "north_carolina"),
+    "nc": ("NC", "north_carolina"),
+    "north_dakota": ("ND", "north_dakota"),
+    "nd": ("ND", "north_dakota"),
+    "ohio": ("OH", "ohio"),
+    "oh": ("OH", "ohio"),
+    "oklahoma": ("OK", "oklahoma"),
+    "ok": ("OK", "oklahoma"),
+    "oregon": ("OR", "oregon"),
+    "or": ("OR", "oregon"),
+    "pennsylvania": ("PA", "pennsylvania"),
+    "pa": ("PA", "pennsylvania"),
+    "rhode_island": ("RI", "rhode_island"),
+    "ri": ("RI", "rhode_island"),
+    "south_carolina": ("SC", "south_carolina"),
+    "sc": ("SC", "south_carolina"),
+    "south_dakota": ("SD", "south_dakota"),
+    "sd": ("SD", "south_dakota"),
+    "tennessee": ("TN", "tennessee"),
+    "tn": ("TN", "tennessee"),
+    "texas": ("TX", "texas"),
+    "tx": ("TX", "texas"),
+    "utah": ("UT", "utah"),
+    "ut": ("UT", "utah"),
+    "vermont": ("VT", "vermont"),
+    "vt": ("VT", "vermont"),
+    "virginia": ("VA", "virginia"),
+    "va": ("VA", "virginia"),
+    "washington": ("WA", "washington"),
+    "wa": ("WA", "washington"),
+    "west_virginia": ("WV", "west_virginia"),
+    "wv": ("WV", "west_virginia"),
+    "wisconsin": ("WI", "wisconsin"),
+    "wi": ("WI", "wisconsin"),
+    "wyoming": ("WY", "wyoming"),
+    "wy": ("WY", "wyoming"),
     "dc": ("DC", "dc"),
 }
 
@@ -509,8 +359,7 @@ def _extract_pdfs_with_browser(url: str):
 
         # Extract all links from rendered DOM
         links = page.eval_on_selector_all(
-            "a[href]",
-            "elements => elements.map(e => ({href: e.href, text: e.textContent || ''}))"
+            "a[href]", "elements => elements.map(e => ({href: e.href, text: e.textContent || ''}))"
         )
 
         seen = set()
@@ -539,10 +388,7 @@ def _extract_pdfs_with_browser(url: str):
                     pdfs.append(href)
 
         # Also check for iframes that might contain PDFs (Google Docs viewer, etc.)
-        iframes = page.eval_on_selector_all(
-            "iframe[src]",
-            "elements => elements.map(e => e.src)"
-        )
+        iframes = page.eval_on_selector_all("iframe[src]", "elements => elements.map(e => e.src)")
         for iframe_src in iframes:
             # Google Docs Viewer: docs.google.com/gview?url=<pdf_url>
             if "docs.google.com/gview" in iframe_src:
@@ -555,7 +401,7 @@ def _extract_pdfs_with_browser(url: str):
                         pdfs.append(pdf_url)
             # Google Drive viewer
             elif "drive.google.com/file" in iframe_src:
-                drive_m = re.search(r'/file/d/([^/]+)', iframe_src)
+                drive_m = re.search(r"/file/d/([^/]+)", iframe_src)
                 if drive_m:
                     dl_url = f"https://drive.google.com/uc?export=download&id={drive_m.group(1)}"
                     if dl_url not in seen:
@@ -577,6 +423,7 @@ def _extract_pdfs_with_browser(url: str):
 
 
 # ── Phase 1: Bulletin Discovery ───────────────────────────────────────────────
+
 
 def find_bulletin_page(base_url: str):
     """
@@ -667,8 +514,7 @@ def find_bulletin_page(base_url: str):
         for link in soup.find_all("a", href=True):
             link_text = (link.get_text() or "").strip().lower()
             link_href = link["href"].lower()
-            if any(kw in link_text or kw in link_href
-                   for kw in ["bulletin", "newsletter"]):
+            if any(kw in link_text or kw in link_href for kw in ["bulletin", "newsletter"]):
                 full_url = urljoin(base_url, link["href"])
                 # Skip if it's just the same page
                 if full_url.rstrip("/") == base_url.rstrip("/"):
@@ -719,7 +565,11 @@ def find_bulletin_page(base_url: str):
                     # If still no PDFs, try Playwright for JS-heavy pages
                     if not result["pdf_urls"] and HAS_PLAYWRIGHT:
                         page_html = str(bulletin_soup).lower()
-                        if "ecatholic" in page_html or "myparish" in page_html or not result["lpi_parish_id"]:
+                        if (
+                            "ecatholic" in page_html
+                            or "myparish" in page_html
+                            or not result["lpi_parish_id"]
+                        ):
                             browser_pdfs = _extract_pdfs_with_browser(full_url)
                             if browser_pdfs:
                                 result["pdf_urls"] = browser_pdfs
@@ -742,11 +592,10 @@ def find_bulletin_page(base_url: str):
         homepage_pdfs = extract_pdf_links(soup, base_url)
         if homepage_pdfs:
             # Only keep PDFs whose link text mentions bulletin/newsletter
-            raw_html = str(soup)
             for link in soup.find_all("a", href=True):
                 href = link["href"]
                 text = (link.get_text() or "").lower()
-                if (href.lower().endswith(".pdf") or ".pdf?" in href.lower()):
+                if href.lower().endswith(".pdf") or ".pdf?" in href.lower():
                     if any(kw in text for kw in ["bulletin", "newsletter"]):
                         full_url = urljoin(base_url, href)
                         result["pdf_urls"].append(full_url)
@@ -803,19 +652,19 @@ def try_discovermass_fallback(church_name: str, city: str, state_code: str):
 
     # Generate the slug: lowercase, remove special chars, hyphenate
     slug_parts = []
-    for word in re.split(r'[\s]+', church_name):
+    for word in re.split(r"[\s]+", church_name):
         # Remove parenthetical suffixes like "(FSSP)" or "(Maronite)"
-        word = re.sub(r'\(.*?\)', '', word).strip()
+        word = re.sub(r"\(.*?\)", "", word).strip()
         # Remove punctuation except hyphens
-        word = re.sub(r'[^a-zA-Z0-9-]', '', word)
+        word = re.sub(r"[^a-zA-Z0-9-]", "", word)
         if word:
             slug_parts.append(word.lower())
 
-    city_clean = re.sub(r'[^a-zA-Z0-9]', '-', city.lower()).strip('-')
+    city_clean = re.sub(r"[^a-zA-Z0-9]", "-", city.lower()).strip("-")
     state_clean = state_code.lower() if state_code else ""
 
     slug = "-".join(slug_parts) + "-" + city_clean + "-" + state_clean
-    slug = re.sub(r'-+', '-', slug)  # collapse multiple hyphens
+    slug = re.sub(r"-+", "-", slug)  # collapse multiple hyphens
 
     dm_url = f"https://discovermass.com/church/{slug}/"
     resp = _rate_limited_get(dm_url)
@@ -824,8 +673,7 @@ def try_discovermass_fallback(church_name: str, city: str, state_code: str):
 
     # Check if this page has bulletin PDFs
     dm_pdfs = re.findall(
-        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
-        resp.text
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+', resp.text
     )
     if not dm_pdfs:
         return None
@@ -859,8 +707,6 @@ def extract_pdfs_from_subpages(soup, page_url: str, max_subpages: int = 10):
     """
     parsed_page = urlparse(page_url)
     page_path = parsed_page.path.rstrip("/")
-    base_origin = f"{parsed_page.scheme}://{parsed_page.netloc}"
-
     # Collect candidate sub-page links (same domain, under the bulletin path)
     subpage_urls = []
     seen = set()
@@ -880,7 +726,7 @@ def extract_pdfs_from_subpages(soup, page_url: str, max_subpages: int = 10):
         if link_path.lower().endswith(".pdf"):
             continue
         # Skip pagination links (/page/2/, ?page=2, etc.)
-        if re.search(r'/page/\d+', link_path) or re.search(r'[?&]page=', full_url):
+        if re.search(r"/page/\d+", link_path) or re.search(r"[?&]page=", full_url):
             continue
         # Deduplicate
         canonical = full_url.split("?")[0].rstrip("/")
@@ -907,7 +753,9 @@ def extract_pdfs_from_subpages(soup, page_url: str, max_subpages: int = 10):
             pdfs = extract_pdf_links(sub_soup, sub_url)
             all_pdfs.extend(pdfs)
 
-    logger.debug(f"  WordPress subpage scan: checked {len(subpage_urls)} posts, found {len(all_pdfs)} PDFs")
+    logger.debug(
+        f"  WordPress subpage scan: checked {len(subpage_urls)} posts, found {len(all_pdfs)} PDFs"
+    )
     return all_pdfs
 
 
@@ -940,11 +788,13 @@ def extract_pdf_links(soup, page_url: str):
         # Try to extract a date from the filename or link text
         date_score = extract_date_score(full_url, link_text)
 
-        pdf_links.append({
-            "url": full_url,
-            "text": link_text[:100],
-            "date_score": date_score,
-        })
+        pdf_links.append(
+            {
+                "url": full_url,
+                "text": link_text[:100],
+                "date_score": date_score,
+            }
+        )
 
     # Check iframes for embedded content
     for iframe in soup.find_all("iframe", src=True):
@@ -958,11 +808,13 @@ def extract_pdf_links(soup, page_url: str):
                 pdf_url = params["selectedPublication"][0]
                 if pdf_url not in seen:
                     seen.add(pdf_url)
-                    pdf_links.append({
-                        "url": pdf_url,
-                        "text": "LPi Bulletin",
-                        "date_score": 99999999,
-                    })
+                    pdf_links.append(
+                        {
+                            "url": pdf_url,
+                            "text": "LPi Bulletin",
+                            "date_score": 99999999,
+                        }
+                    )
 
         # Google Docs Viewer: docs.google.com/gview?url=<encoded_pdf>
         if "docs.google.com/gview" in src or "docs.google.com/viewer" in src:
@@ -973,11 +825,13 @@ def extract_pdf_links(soup, page_url: str):
                 if pdf_url not in seen:
                     seen.add(pdf_url)
                     date_score = extract_date_score(pdf_url, "")
-                    pdf_links.append({
-                        "url": pdf_url,
-                        "text": "Google Viewer Bulletin",
-                        "date_score": date_score if date_score else 99999999,
-                    })
+                    pdf_links.append(
+                        {
+                            "url": pdf_url,
+                            "text": "Google Viewer Bulletin",
+                            "date_score": date_score if date_score else 99999999,
+                        }
+                    )
 
         # Google Drive viewer
         if "drive.google.com/viewerng" in src:
@@ -987,11 +841,13 @@ def extract_pdf_links(soup, page_url: str):
                 pdf_url = params["url"][0]
                 if pdf_url not in seen:
                     seen.add(pdf_url)
-                    pdf_links.append({
-                        "url": pdf_url,
-                        "text": "Google Drive Bulletin",
-                        "date_score": 99999999,
-                    })
+                    pdf_links.append(
+                        {
+                            "url": pdf_url,
+                            "text": "Google Drive Bulletin",
+                            "date_score": 99999999,
+                        }
+                    )
 
     # Check for Google Docs viewer links in <a> tags too
     for link in soup.find_all("a", href=True):
@@ -1004,26 +860,29 @@ def extract_pdf_links(soup, page_url: str):
                 if pdf_url not in seen:
                     seen.add(pdf_url)
                     date_score = extract_date_score(pdf_url, "")
-                    pdf_links.append({
-                        "url": pdf_url,
-                        "text": "Google Viewer Bulletin",
-                        "date_score": date_score if date_score else 99999999,
-                    })
+                    pdf_links.append(
+                        {
+                            "url": pdf_url,
+                            "text": "Google Viewer Bulletin",
+                            "date_score": date_score if date_score else 99999999,
+                        }
+                    )
 
     # Check for DiscoverMass bulletin download links in page source
     raw_html = str(soup)
     dm_downloads = re.findall(
-        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
-        raw_html
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+', raw_html
     )
     for dm_url in dm_downloads:
         if dm_url not in seen:
             seen.add(dm_url)
-            pdf_links.append({
-                "url": dm_url,
-                "text": "DiscoverMass Bulletin",
-                "date_score": 99999999,
-            })
+            pdf_links.append(
+                {
+                    "url": dm_url,
+                    "text": "DiscoverMass Bulletin",
+                    "date_score": 99999999,
+                }
+            )
 
     # Sort by date (most recent first)
     pdf_links.sort(key=lambda x: x["date_score"], reverse=True)
@@ -1040,32 +899,48 @@ def extract_date_score(url: str, text: str):
     combined = url + " " + text
 
     # Pattern: YYYYMMDD
-    m = re.search(r'(20\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])', combined)
+    m = re.search(r"(20\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])", combined)
     if m:
         return int(m.group(1) + m.group(2) + m.group(3))
 
     # Pattern: MM-DD-YYYY or MM/DD/YYYY
-    m = re.search(r'(0?[1-9]|1[0-2])[-/](0?[1-9]|[12]\d|3[01])[-/](20\d{2})', combined)
+    m = re.search(r"(0?[1-9]|1[0-2])[-/](0?[1-9]|[12]\d|3[01])[-/](20\d{2})", combined)
     if m:
         return int(f"{m.group(3)}{int(m.group(1)):02d}{int(m.group(2)):02d}")
 
     # Pattern: YYYY/MM/ in path (WordPress uploads)
-    m = re.search(r'/(20\d{2})/(0[1-9]|1[0-2])/', url)
+    m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/", url)
     if m:
         return int(m.group(1) + m.group(2) + "01")
 
     # Pattern: Month Day, Year in text
     months = {
-        'january': '01', 'february': '02', 'march': '03', 'april': '04',
-        'may': '05', 'june': '06', 'july': '07', 'august': '08',
-        'september': '09', 'october': '10', 'november': '11', 'december': '12',
-        'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04',
-        'jun': '06', 'jul': '07', 'aug': '08', 'sep': '09',
-        'oct': '10', 'nov': '11', 'dec': '12',
+        "january": "01",
+        "february": "02",
+        "march": "03",
+        "april": "04",
+        "may": "05",
+        "june": "06",
+        "july": "07",
+        "august": "08",
+        "september": "09",
+        "october": "10",
+        "november": "11",
+        "december": "12",
+        "jan": "01",
+        "feb": "02",
+        "mar": "03",
+        "apr": "04",
+        "jun": "06",
+        "jul": "07",
+        "aug": "08",
+        "sep": "09",
+        "oct": "10",
+        "nov": "11",
+        "dec": "12",
     }
     m = re.search(
-        r'(' + '|'.join(months.keys()) + r')[\s._-]+(\d{1,2})[\s,._-]*(20\d{2})',
-        combined.lower()
+        r"(" + "|".join(months.keys()) + r")[\s._-]+(\d{1,2})[\s,._-]*(20\d{2})", combined.lower()
     )
     if m:
         month = months[m.group(1)]
@@ -1088,13 +963,15 @@ def find_lpi_parish_id(soup, raw_html: str):
     """
     # Pattern 1: publicationWidget iframe with Salesforce-style ID
     # e.g., parishesonline.com/publicationWidget?type=bulletin&id=0018000000Qbz0UAAR
-    m = re.search(r'parishesonline\.com/publicationWidget\?[^"\']*?id=([0-9a-zA-Z]+)', raw_html, re.IGNORECASE)
+    m = re.search(
+        r'parishesonline\.com/publicationWidget\?[^"\']*?id=([0-9a-zA-Z]+)', raw_html, re.IGNORECASE
+    )
     if m:
         return m.group(1)
 
     # Pattern 2: publications page with hash ID
     # e.g., parishesonline.com/publications?id=d45874de570a2a3aa1ec99e23f8b1fc5209aa77f
-    m = re.search(r'parishesonline\.com/publications\?id=([0-9a-fA-F]+)', raw_html)
+    m = re.search(r"parishesonline\.com/publications\?id=([0-9a-fA-F]+)", raw_html)
     if m:
         return m.group(1)
 
@@ -1111,7 +988,7 @@ def find_lpi_parish_id(soup, raw_html: str):
         return m.group(1)
 
     # Pattern 5: container embed
-    m = re.search(r'container\.parishesonline\.com/bulletins/\d+/(\d+)/', raw_html)
+    m = re.search(r"container\.parishesonline\.com/bulletins/\d+/(\d+)/", raw_html)
     if m:
         return m.group(1)
 
@@ -1133,8 +1010,7 @@ def extract_discovermass_pdfs(dm_url: str):
 
     # Find all download URLs
     download_urls = re.findall(
-        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+',
-        resp.text
+        r'https?://bulletins\.discovermass\.com/download\.php\?bulletin=[^\s"\'<>]+', resp.text
     )
     # Deduplicate while preserving order
     seen = set()
@@ -1192,12 +1068,16 @@ def extract_lpi_pdfs_from_widget(parish_id: str):
     urls_to_try = []
 
     # If it looks like a Salesforce ID (starts with 001, alphanumeric)
-    if re.match(r'^001[0-9a-zA-Z]+$', parish_id, re.IGNORECASE):
-        urls_to_try.append(f"https://parishesonline.com/publicationWidget?type=bulletin&id={parish_id}")
-        urls_to_try.append(f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}")
+    if re.match(r"^001[0-9a-zA-Z]+$", parish_id, re.IGNORECASE):
+        urls_to_try.append(
+            f"https://parishesonline.com/publicationWidget?type=bulletin&id={parish_id}"
+        )
+        urls_to_try.append(
+            f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}"
+        )
 
     # If it's a hex hash
-    elif re.match(r'^[0-9a-fA-F]{20,}$', parish_id):
+    elif re.match(r"^[0-9a-fA-F]{20,}$", parish_id):
         urls_to_try.append(f"https://parishesonline.com/publications?id={parish_id}")
         urls_to_try.append(f"https://www.parishesonline.com/publications?id={parish_id}")
 
@@ -1238,7 +1118,9 @@ def extract_lpi_pdfs_from_widget(parish_id: str):
 
     # Fallback: use Playwright headless browser to render the JS widget
     if HAS_PLAYWRIGHT:
-        widget_url = f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}"
+        widget_url = (
+            f"https://www.parishesonline.com/publicationWidget?type=bulletin&id={parish_id}"
+        )
         logger.debug(f"  LPi widget: trying Playwright for {parish_id}")
         browser_pdfs = _extract_pdfs_with_browser(widget_url)
         if browser_pdfs:
@@ -1262,6 +1144,7 @@ def _extract_pdfs_with_browser_from_page(page_url: str):
 
 # ── Phase 2: PDF Download ─────────────────────────────────────────────────────
 
+
 def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
     """
     Download a bulletin PDF. Returns the local file path or None.
@@ -1271,11 +1154,11 @@ def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
 
     # Try to extract date from URL
     date_str = ""
-    m = re.search(r'(20\d{6})', pdf_url)
+    m = re.search(r"(20\d{6})", pdf_url)
     if m:
         date_str = m.group(1) + "_"
     else:
-        m = re.search(r'(20\d{2})[-/](0[1-9]|1[0-2])[-/](\d{2})', pdf_url)
+        m = re.search(r"(20\d{2})[-/](0[1-9]|1[0-2])[-/](\d{2})", pdf_url)
         if m:
             date_str = m.group(1) + m.group(2) + m.group(3) + "_"
 
@@ -1321,6 +1204,7 @@ def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
 
 # ── Phase 3: Text Extraction + Name Recognition ──────────────────────────────
 
+
 def extract_text_from_pdf(pdf_path: Path):
     """Extract all text from a PDF using pdfplumber."""
     if not HAS_PDFPLUMBER:
@@ -1364,13 +1248,31 @@ def parse_name_parts(full_name: str) -> dict:
 
     # Check if first token is a title/prefix (honorifics only)
     title_patterns = {
-        'fr.', 'father', 'rev.', 'reverend', 'msgr.', 'monsignor',
-        'dcn.', 'deacon', 'sr.', 'sister', 'br.', 'brother',
-        'dr.', 'doctor', 'mr.', 'mrs.', 'ms.', 'miss',
-        'prof.', 'professor', 'bishop', 'archbishop',
+        "fr.",
+        "father",
+        "rev.",
+        "reverend",
+        "msgr.",
+        "monsignor",
+        "dcn.",
+        "deacon",
+        "sr.",
+        "sister",
+        "br.",
+        "brother",
+        "dr.",
+        "doctor",
+        "mr.",
+        "mrs.",
+        "ms.",
+        "miss",
+        "prof.",
+        "professor",
+        "bishop",
+        "archbishop",
     }
 
-    if parts[0].lower().rstrip('.') + '.' in title_patterns or parts[0].lower() in title_patterns:
+    if parts[0].lower().rstrip(".") + "." in title_patterns or parts[0].lower() in title_patterns:
         result["title"] = parts[0]
         parts = parts[1:]
 
@@ -1448,87 +1350,88 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # Comprehensive list of positional roles found in bulletin staff sections
     STAFF_ROLES = (
         # Clergy roles
-        r'Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator'
-        r'|Administrator|Priest|Rector|Chaplain|Celebrant'
+        r"Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator"
+        r"|Administrator|Priest|Rector|Chaplain|Celebrant"
         # Deacon roles
-        r'|Permanent Deacon|Transitional Deacon'
+        r"|Permanent Deacon|Transitional Deacon"
         # Parish staff
-        r'|Business Manager|Business Mgr\.|Office Manager|Parish Manager'
-        r'|Parish Secretary|Parish Administrator|Administrative Assistant'
-        r'|Bookkeeper|Assistant Bookkeeper|Receptionist'
-        r'|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer'
+        r"|Business Manager|Business Mgr\.|Office Manager|Parish Manager"
+        r"|Parish Secretary|Parish Administrator|Administrative Assistant"
+        r"|Bookkeeper|Assistant Bookkeeper|Receptionist"
+        r"|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer"
         # Education
-        r'|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?'
-        r'|Director of Faith Formation|Faith Formation Director'
-        r'|School Principal|School Secretary|Principal'
-        r'|Director of Youth Ministry|Youth Minister|Youth Director'
-        r'|Director of Music|Music Director|Music Minister'
-        r'|Liturgy Director|Liturgist|Worship Director'
+        r"|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?"
+        r"|Director of Faith Formation|Faith Formation Director"
+        r"|School Principal|School Secretary|Principal"
+        r"|Director of Youth Ministry|Youth Minister|Youth Director"
+        r"|Director of Music|Music Director|Music Minister"
+        r"|Liturgy Director|Liturgist|Worship Director"
         # Facilities
-        r'|Maintenance|Custodian|Facilities Manager|Facilities Director'
-        r'|Maintenance Tech|Groundskeeper|Sexton'
+        r"|Maintenance|Custodian|Facilities Manager|Facilities Director"
+        r"|Maintenance Tech|Groundskeeper|Sexton"
         # Ministry roles
-        r'|Director|Coordinator|Minister|Moderator'
-        r'|RCIA Director|RCIA Coordinator'
-        r'|Sacristan|Organist|Cantor|Choir Director'
-        r'|Stewardship Director|Communications Director'
-        r'|Hispanic Ministry|Spanish Ministry'
+        r"|Director|Coordinator|Minister|Moderator"
+        r"|RCIA Director|RCIA Coordinator"
+        r"|Sacristan|Organist|Cantor|Choir Director"
+        r"|Stewardship Director|Communications Director"
+        r"|Hispanic Ministry|Spanish Ministry"
         # Council/board roles
-        r'|Chairman|Co-Chairman|Chairperson|Co-Chair'
-        r'|Vice Chairman|Vice Chairperson'
-        r'|President|Vice President'
-        r'|Secretary|Treasurer'
-        r'|Grand Knight|Deputy Grand Knight'
-        r'|Financial Secretary|Membership Director'
-        r'|ASCS Principal'
+        r"|Chairman|Co-Chairman|Chairperson|Co-Chair"
+        r"|Vice Chairman|Vice Chairperson"
+        r"|President|Vice President"
+        r"|Secretary|Treasurer"
+        r"|Grand Knight|Deputy Grand Knight"
+        r"|Financial Secretary|Membership Director"
+        r"|ASCS Principal"
     )
 
     # Name pattern: optional honorific + first [middle] last
     # STRICT version: only 2-4 capitalized words after optional honorific.
     # Does NOT greedily consume trailing text from adjacent PDF columns.
     NAME_PATTERN = (
-        r'(?:(?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon'
-        r'|Sr\.|Sister|Br\.|Brother|Dr\.|Bishop|Archbishop)\s+)?'
-        r'[A-Z][a-z]{1,15}'                # First name
-        r'(?:\s+[A-Z]\.)?'                 # Optional middle initial
-        r'(?:\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}){1,2}'  # Last name (1-2 parts, allows "De La Rosa")
+        r"(?:(?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon"
+        r"|Sr\.|Sister|Br\.|Brother|Dr\.|Bishop|Archbishop)\s+)?"
+        r"[A-Z][a-z]{1,15}"  # First name
+        r"(?:\s+[A-Z]\.)?"  # Optional middle initial
+        r"(?:\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}){1,2}"  # Last name (1-2 parts, allows "De La Rosa")
     )
 
     # Match: Role [separator] Name
-    staff_pattern = re.compile(
-        rf'({STAFF_ROLES})\s*[:\-–—]?\s+({NAME_PATTERN})',
-        re.IGNORECASE
-    )
+    staff_pattern = re.compile(rf"({STAFF_ROLES})\s*[:\-–—]?\s+({NAME_PATTERN})", re.IGNORECASE)
 
     for m in staff_pattern.finditer(text):
         role_raw = m.group(1).strip()
         name_raw = m.group(2).strip()
-        name_raw = re.sub(r'\s+', ' ', name_raw)
+        name_raw = re.sub(r"\s+", " ", name_raw)
 
         # Clean up trailing noise: phone numbers, email, punctuation
-        name_raw = re.sub(r'\s*\d{3}[\-\.]\d{3,4}.*$', '', name_raw)  # phone
-        name_raw = re.sub(r'\s*\(?\d{3}\)?.*$', '', name_raw)          # area code
+        name_raw = re.sub(r"\s*\d{3}[\-\.]\d{3,4}.*$", "", name_raw)  # phone
+        name_raw = re.sub(r"\s*\(?\d{3}\)?.*$", "", name_raw)  # area code
         # Trim trailing words that are clearly NOT part of a name.
         # PDF columns frequently bleed together: "Patrick Ledger Saturday Vigil"
         # We strip everything from the first non-name word onwards.
         # This list includes common bulletin text that gets appended to names.
         name_raw = re.sub(
-            r'\s+(?:Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday|Friday'
-            r'|Vigil|Mass|Vacant|Open|Position|By|Appointment|Please|Parish'
-            r'|Secretary|Vice|www\b|http|Sick|Marriage|Baptism|Members?'
-            r'|Business|School|Religious|Compliance|Office|Church|classes'
-            r'|First|Anointing|Maintenance|DEACONS?|STAFF|COUNCIL|BOARD'
-            r'|for|the|or|and|at|of|in|to|with|on|not|out|reach'
-            r'|You|Are|Dcn\b|Dir\b).*$',
-            '', name_raw, flags=re.IGNORECASE
+            r"\s+(?:Saturday|Sunday|Monday|Tuesday|Wednesday|Thursday|Friday"
+            r"|Vigil|Mass|Vacant|Open|Position|By|Appointment|Please|Parish"
+            r"|Secretary|Vice|www\b|http|Sick|Marriage|Baptism|Members?"
+            r"|Business|School|Religious|Compliance|Office|Church|classes"
+            r"|First|Anointing|Maintenance|DEACONS?|STAFF|COUNCIL|BOARD"
+            r"|for|the|or|and|at|of|in|to|with|on|not|out|reach"
+            r"|You|Are|Dcn\b|Dir\b).*$",
+            "",
+            name_raw,
+            flags=re.IGNORECASE,
         )
         name_raw = name_raw.strip()
 
         # Skip "Position Open", "Vacant", "TBD", etc.
-        if re.match(r'^(?:Position\s+Open|Vacant|TBD|None|Open|N/?A)$', name_raw, re.IGNORECASE):
+        if re.match(r"^(?:Position\s+Open|Vacant|TBD|None|Open|N/?A)$", name_raw, re.IGNORECASE):
             continue
         # Skip if it looks like a phrase, not a name
-        if re.match(r'^(?:religious|classes|grades|brother|sister|priest|Tech|I\b)', name_raw, re.IGNORECASE):
+        if re.match(
+            r"^(?:religious|classes|grades|brother|sister|priest|Tech|I\b)", name_raw, re.IGNORECASE
+        ):
             continue
 
         # Validate the name
@@ -1536,7 +1439,9 @@ def extract_names_from_text(text: str, church_name: str = ""):
         name_parts = parse_name_parts(name_raw)
         # Reconstruct the "clean" name (without title) for validation
         clean_name = " ".join(
-            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+            p
+            for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]]
+            if p
         )
         clean_name = clean_extracted_name(clean_name)
 
@@ -1552,13 +1457,15 @@ def extract_names_from_text(text: str, church_name: str = ""):
 
         if clean_name not in seen_names:
             seen_names.add(clean_name)
-            names.append({
-                "name": clean_name,
-                **name_parts,
-                "role": role_raw.strip().rstrip(':').rstrip('-').strip(),
-                "context": text[max(0, m.start()-20):m.end()+30].strip(),
-                "category": "clergy_staff"
-            })
+            names.append(
+                {
+                    "name": clean_name,
+                    **name_parts,
+                    "role": role_raw.strip().rstrip(":").rstrip("-").strip(),
+                    "context": text[max(0, m.start() - 20) : m.end() + 30].strip(),
+                    "category": "clergy_staff",
+                }
+            )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 1b: Honorific-only clergy (no explicit role keyword on line)
@@ -1569,16 +1476,18 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # Strict name pattern for honorific matches: FirstName [MiddleInitial] LastName only
     # (max 2-3 capitalized words, no trailing column bleed)
     honorific_pattern = re.compile(
-        r'((?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon'
-        r'|Sr\.|Sister|Br\.|Brother|Bishop|Archbishop)\s+'
-        r'[A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{1,20})'
+        r"((?:Fr\.|Father|Rev\.|Reverend|Msgr\.|Monsignor|Dcn\.|Deacon"
+        r"|Sr\.|Sister|Br\.|Brother|Bishop|Archbishop)\s+"
+        r"[A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{1,20})"
     )
     for m in honorific_pattern.finditer(text):
         full_match = m.group(1).strip()
         name_parts = parse_name_parts(full_match)
         # Reconstruct clean name without title
         clean_name = " ".join(
-            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+            p
+            for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]]
+            if p
         )
         clean_name = clean_extracted_name(clean_name)
         if not clean_name or len(clean_name) < 4:
@@ -1586,22 +1495,32 @@ def extract_names_from_text(text: str, church_name: str = ""):
         if is_valid_name(clean_name) and clean_name not in seen_names:
             seen_names.add(clean_name)
             # Infer role from honorific
-            honorific = full_match.split()[0].lower().rstrip('.')
+            honorific = full_match.split()[0].lower().rstrip(".")
             implied_role = {
-                'fr': 'Priest', 'father': 'Priest', 'rev': 'Priest',
-                'reverend': 'Priest', 'msgr': 'Monsignor', 'monsignor': 'Monsignor',
-                'dcn': 'Deacon', 'deacon': 'Deacon',
-                'sr': 'Sister', 'sister': 'Sister',
-                'br': 'Brother', 'brother': 'Brother',
-                'bishop': 'Bishop', 'archbishop': 'Archbishop',
+                "fr": "Priest",
+                "father": "Priest",
+                "rev": "Priest",
+                "reverend": "Priest",
+                "msgr": "Monsignor",
+                "monsignor": "Monsignor",
+                "dcn": "Deacon",
+                "deacon": "Deacon",
+                "sr": "Sister",
+                "sister": "Sister",
+                "br": "Brother",
+                "brother": "Brother",
+                "bishop": "Bishop",
+                "archbishop": "Archbishop",
             }.get(honorific, "")
-            names.append({
-                "name": clean_name,
-                **name_parts,
-                "role": implied_role,
-                "context": text[max(0, m.start()-30):m.end()+30].strip(),
-                "category": "clergy_staff"
-            })
+            names.append(
+                {
+                    "name": clean_name,
+                    **name_parts,
+                    "role": implied_role,
+                    "context": text[max(0, m.start() - 30) : m.end() + 30].strip(),
+                    "category": "clergy_staff",
+                }
+            )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 2: Section-header roles (DEACONS, PASTORAL COUNCIL, etc.)
@@ -1619,87 +1538,98 @@ def extract_names_from_text(text: str, church_name: str = ""):
 
     # Section headers that imply a role for names listed underneath
     section_headers = {
-        r'\bDEACONS?\b': 'Deacon',
-        r'\bPASTORAL COUNCIL\b': 'Pastoral Council Member',
-        r'\bFINANCE COUNCIL\b': 'Finance Council Member',
-        r'\bPARISH COUNCIL\b': 'Parish Council Member',
-        r'\bBOARD OF DIRECTORS\b': 'Board of Directors Member',
-        r'\bSTAFF\b': '',           # Staff section — individual roles are per-line
-        r'\bPARISH STAFF\b': '',    # Same
-        r'\bMINISTRY CONTACTS?\b': '',
-        r'\bMINISTRIES AND CONTACTS\b': '',
+        r"\bDEACONS?\b": "Deacon",
+        r"\bPASTORAL COUNCIL\b": "Pastoral Council Member",
+        r"\bFINANCE COUNCIL\b": "Finance Council Member",
+        r"\bPARISH COUNCIL\b": "Parish Council Member",
+        r"\bBOARD OF DIRECTORS\b": "Board of Directors Member",
+        r"\bSTAFF\b": "",  # Staff section — individual roles are per-line
+        r"\bPARISH STAFF\b": "",  # Same
+        r"\bMINISTRY CONTACTS?\b": "",
+        r"\bMINISTRIES AND CONTACTS\b": "",
     }
 
     for header_pattern, section_role in section_headers.items():
         for header_match in re.finditer(header_pattern, text):
             # Get the text after this header, up to the next ALL-CAPS header or 500 chars
             start = header_match.end()
-            remaining = text[start:start+500]
+            remaining = text[start : start + 500]
 
             # Stop at the next ALL-CAPS section header (line that is mostly uppercase)
-            lines = remaining.split('\n')
+            lines = remaining.split("\n")
             section_text_lines = []
             for line in lines[1:]:  # skip the first line (might be part of header)
                 stripped = line.strip()
                 if not stripped:
                     continue
                 # Stop at next section header: all-caps line with 2+ words
-                if (stripped.isupper() and len(stripped.split()) >= 2
-                        and not re.match(r'^\d', stripped)):
+                if (
+                    stripped.isupper()
+                    and len(stripped.split()) >= 2
+                    and not re.match(r"^\d", stripped)
+                ):
                     break
                 section_text_lines.append(stripped)
 
-            section_text = '\n'.join(section_text_lines)
+            section_text = "\n".join(section_text_lines)
 
             # Extract names from this section.
             # Names can be: comma-separated, &-separated, or one-per-line.
             # Lines that start with a known role keyword (e.g. "President Barry Gaston")
             # are handled by Pattern 1. Here we only grab bare names that DIDN'T match
             # Pattern 1 — these inherit the section header role.
-            name_candidates = re.split(r'[,&\n]+', section_text)
+            name_candidates = re.split(r"[,&\n]+", section_text)
             for candidate in name_candidates:
                 candidate = candidate.strip()
                 if not candidate:
                     continue
                 # Skip lines that are clearly non-names
-                if re.match(r'^\d', candidate):     # starts with digit
+                if re.match(r"^\d", candidate):  # starts with digit
                     continue
                 if len(candidate) < 5:
                     continue
                 # Skip lines that start with a known role keyword
                 # (those are already handled by Pattern 1 with their specific role)
-                if re.match(rf'^(?:{STAFF_ROLES})\b', candidate, re.IGNORECASE):
+                if re.match(rf"^(?:{STAFF_ROLES})\b", candidate, re.IGNORECASE):
                     continue
 
                 # Find name patterns: optional honorific + FirstName [Middle] LastName
                 for name_match in re.finditer(
-                    r'(?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?'
-                    r'([A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}'
-                    r'(?:\s+[A-Z][a-z]{1,20})?)',
-                    candidate
+                    r"(?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?"
+                    r"([A-Z][a-z]{1,15}(?:\s+[A-Z]\.?)?\s+(?:De\s+La\s+)?[A-Z][a-z]{1,20}"
+                    r"(?:\s+[A-Z][a-z]{1,20})?)",
+                    candidate,
                 ):
                     name = name_match.group(0).strip()
-                    name = re.sub(r'\s+', ' ', name)
+                    name = re.sub(r"\s+", " ", name)
                     # Remove trailing phone numbers
-                    name = re.sub(r'\s*\d{3}[\-\.]\d{3,4}.*$', '', name)
-                    name = re.sub(r'\s*\(?\d{3}\)?.*$', '', name)
+                    name = re.sub(r"\s*\d{3}[\-\.]\d{3,4}.*$", "", name)
+                    name = re.sub(r"\s*\(?\d{3}\)?.*$", "", name)
                     name = name.strip()
 
                     name = clean_extracted_name(name)
                     name_parts = parse_name_parts(name)
                     clean_name = " ".join(
-                        p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+                        p
+                        for p in [
+                            name_parts["first_name"],
+                            name_parts["middle_name"],
+                            name_parts["last_name"],
+                        ]
+                        if p
                     )
                     clean_name = clean_extracted_name(clean_name)
                     if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
                         seen_names.add(clean_name)
-                        names.append({
-                            "name": clean_name,
-                            **name_parts,
-                            "role": section_role,
-                            "context": header_match.group(0).strip(),
-                            "category": "clergy_staff"
-                        })
+                        names.append(
+                            {
+                                "name": clean_name,
+                                **name_parts,
+                                "role": section_role,
+                                "context": header_match.group(0).strip(),
+                                "category": "clergy_staff",
+                            }
+                        )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 3: Ministry contact listings
@@ -1714,48 +1644,52 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # ─────────────────────────────────────────────────────────────────────────
 
     MINISTRY_ROLES = (
-        r'Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?'
-        r'|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?'
-        r'|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?'
-        r'|Jail Ministry|Knights? of Columbus|Ladies\s+Guild'
-        r'|Linens|Marriage Preparation|Money Counters?'
-        r'|Prayer Garden|Music Ministry|Choir'
-        r'|Baptism Class|Hispanic Spiritual Dir(?:ector)?'
-        r'|(?:You Are )?Not Alone|St\.?\s*Vincent de Paul'
-        r'|Religious Education|RCIA|Compliance Officer'
-        r'|Homebound Euch(?:aristic)?\.?\s*Ministers?'
+        r"Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?"
+        r"|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?"
+        r"|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?"
+        r"|Jail Ministry|Knights? of Columbus|Ladies\s+Guild"
+        r"|Linens|Marriage Preparation|Money Counters?"
+        r"|Prayer Garden|Music Ministry|Choir"
+        r"|Baptism Class|Hispanic Spiritual Dir(?:ector)?"
+        r"|(?:You Are )?Not Alone|St\.?\s*Vincent de Paul"
+        r"|Religious Education|RCIA|Compliance Officer"
+        r"|Homebound Euch(?:aristic)?\.?\s*Ministers?"
     )
 
     # Match: MinistryRole [comma/colon] PersonName [PhoneNumber]
     # The name part requires at least 2 capitalized words with reasonable length
     ministry_contact_pattern = re.compile(
-        rf'({MINISTRY_ROLES})[,:\s]+\s*'
-        rf'((?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?'
-        rf'[A-Z][a-z]{{2,15}}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{{2,20}}(?:\s+[A-Z][a-z]{{2,20}})?)'
-        rf'(?:\s+\d{{3}}[\-\.]\d{{3,4}})?',
-        re.IGNORECASE
+        rf"({MINISTRY_ROLES})[,:\s]+\s*"
+        rf"((?:(?:Fr\.|Rev\.|Msgr\.|Dcn\.|Sr\.|Br\.)\s+)?"
+        rf"[A-Z][a-z]{{2,15}}(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{{2,20}}(?:\s+[A-Z][a-z]{{2,20}})?)"
+        rf"(?:\s+\d{{3}}[\-\.]\d{{3,4}})?",
+        re.IGNORECASE,
     )
 
     for m in ministry_contact_pattern.finditer(text):
         ministry_role = m.group(1).strip()
         name_raw = m.group(2).strip()
-        name_raw = re.sub(r'\s+', ' ', name_raw)
+        name_raw = re.sub(r"\s+", " ", name_raw)
 
         name_raw = clean_extracted_name(name_raw)
         name_parts = parse_name_parts(name_raw)
         clean_name = " ".join(
-            p for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]] if p
+            p
+            for p in [name_parts["first_name"], name_parts["middle_name"], name_parts["last_name"]]
+            if p
         )
         clean_name = clean_extracted_name(clean_name)
         if clean_name and is_valid_name(clean_name) and clean_name not in seen_names:
             seen_names.add(clean_name)
-            names.append({
-                "name": clean_name,
-                **name_parts,
-                "role": ministry_role.strip(),
-                "context": text[max(0, m.start()-10):m.end()+20].strip(),
-                "category": "clergy_staff"
-            })
+            names.append(
+                {
+                    "name": clean_name,
+                    **name_parts,
+                    "role": ministry_role.strip(),
+                    "context": text[max(0, m.start() - 10) : m.end() + 20].strip(),
+                    "category": "clergy_staff",
+                }
+            )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 4: Mass Intentions
@@ -1765,55 +1699,60 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # "+John Smith" (deceased marker)
     # "requested by Jane Doe"
     intention_patterns = [
-        r'(?:repose of (?:the soul of )?|intention[s]? of |in memory of |for the (?:healing|health|recovery) of )([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-        r'(?:requested by |offered by |from )([A-Z][a-z]+(?:\s+(?:&|and)\s+)?[A-Z]?[a-z]*\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
-        r'(?:†|✝|\+)\s*([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)',
+        r"(?:repose of (?:the soul of )?|intention[s]? of |in memory of |for the (?:healing|health|recovery) of )([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)",
+        r"(?:requested by |offered by |from )([A-Z][a-z]+(?:\s+(?:&|and)\s+)?[A-Z]?[a-z]*\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)",
+        r"(?:†|✝|\+)\s*([A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)",
     ]
 
     for pattern in intention_patterns:
         for m in re.finditer(pattern, text):
             name = m.group(1).strip()
-            name = re.sub(r'\s+', ' ', name)
+            name = re.sub(r"\s+", " ", name)
             # Remove trailing conjunction fragments
-            name = re.sub(r'\s+(?:and|&)\s*$', '', name)
+            name = re.sub(r"\s+(?:and|&)\s*$", "", name)
             name = clean_extracted_name(name)
             if is_valid_name(name) and name not in seen_names:
                 seen_names.add(name)
                 name_parts = parse_name_parts(name)
-                names.append({
-                    "name": name,
-                    **name_parts,
-                    "role": "",
-                    "context": text[max(0, m.start()-20):m.end()+20].strip(),
-                    "category": "mass_intention"
-                })
+                names.append(
+                    {
+                        "name": name,
+                        **name_parts,
+                        "role": "",
+                        "context": text[max(0, m.start() - 20) : m.end() + 20].strip(),
+                        "category": "mass_intention",
+                    }
+                )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 5: Prayer / Sick Lists
     # ─────────────────────────────────────────────────────────────────────────
     # Comma-separated lists following headers like "Please pray for:"
     prayer_sections = re.finditer(
-        r'(?:(?:pray(?:er)?\s*(?:list|request)?|sick\s*list|(?:those who are )?(?:sick|ill|homebound)|remember in prayer)[:\s]*)((?:[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s*,\s*)?)+)',
-        text, re.IGNORECASE
+        r"(?:(?:pray(?:er)?\s*(?:list|request)?|sick\s*list|(?:those who are )?(?:sick|ill|homebound)|remember in prayer)[:\s]*)((?:[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s*,\s*)?)+)",
+        text,
+        re.IGNORECASE,
     )
     for section in prayer_sections:
         name_list = section.group(1)
         # Split on commas, semicolons, and newlines
-        for name_candidate in re.split(r'[,;\n]+', name_list):
+        for name_candidate in re.split(r"[,;\n]+", name_list):
             name = name_candidate.strip()
             name = clean_extracted_name(name)
             # Should be FirstName LastName format
-            if re.match(r'^[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?$', name):
+            if re.match(r"^[A-Z][a-z]+\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?$", name):
                 if is_valid_name(name) and name not in seen_names:
                     seen_names.add(name)
                     name_parts = parse_name_parts(name)
-                    names.append({
-                        "name": name,
-                        **name_parts,
-                        "role": "",
-                        "context": "prayer list",
-                        "category": "prayer_list"
-                    })
+                    names.append(
+                        {
+                            "name": name,
+                            **name_parts,
+                            "role": "",
+                            "context": "prayer list",
+                            "category": "prayer_list",
+                        }
+                    )
 
     # ─────────────────────────────────────────────────────────────────────────
     # Pattern 6: Generic contextual names (capitalized first+last near keywords)
@@ -1821,146 +1760,309 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # This is the broadest/loosest pattern. It finds "FirstName LastName"
     # patterns near ministry keywords. Confidence is MEDIUM.
     context_keywords = [
-        'lector', 'reader', 'usher', 'eucharistic minister', 'altar server',
-        'music director', 'choir', 'organist', 'cantor',
-        'knight', 'ladies', 'guild', 'council', 'committee',
-        'contact', 'volunteer', 'coordinator', 'chair',
-        'baptism', 'wedding', 'funeral', 'deceased',
-        'recently deceased', 'eternal rest', 'rest in peace',
-        'newly registered', 'welcome',
+        "lector",
+        "reader",
+        "usher",
+        "eucharistic minister",
+        "altar server",
+        "music director",
+        "choir",
+        "organist",
+        "cantor",
+        "knight",
+        "ladies",
+        "guild",
+        "council",
+        "committee",
+        "contact",
+        "volunteer",
+        "coordinator",
+        "chair",
+        "baptism",
+        "wedding",
+        "funeral",
+        "deceased",
+        "recently deceased",
+        "eternal rest",
+        "rest in peace",
+        "newly registered",
+        "welcome",
     ]
 
     for kw in context_keywords:
         # Find the keyword in text and look for names nearby
         for m in re.finditer(re.escape(kw), text, re.IGNORECASE):
-            nearby = text[max(0, m.start()-100):m.end()+200]
+            nearby = text[max(0, m.start() - 100) : m.end() + 200]
             # Find capitalized name patterns in the nearby text
             for name_match in re.finditer(
-                r'([A-Z][a-z]{1,15}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?)',
-                nearby
+                r"([A-Z][a-z]{1,15}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?)", nearby
             ):
                 name = clean_extracted_name(name_match.group(1).strip())
                 if is_valid_name(name) and name not in seen_names:
                     seen_names.add(name)
                     name_parts = parse_name_parts(name)
-                    names.append({
-                        "name": name,
-                        **name_parts,
-                        "role": "",
-                        "context": kw,
-                        "category": "ministry_contextual"
-                    })
+                    names.append(
+                        {
+                            "name": name,
+                            **name_parts,
+                            "role": "",
+                            "context": kw,
+                            "category": "ministry_contextual",
+                        }
+                    )
 
     return names
 
 
 # Common words that look like names but aren't
 FALSE_POSITIVE_NAMES = {
-    "Holy Spirit", "Holy Family", "Holy Cross", "Holy Rosary", "Holy Trinity",
-    "Sacred Heart", "Blessed Sacrament", "Blessed Mother", "Blessed Virgin",
-    "Our Lady", "Our Father", "Jesus Christ", "Holy Name", "Good Shepherd",
-    "Holy Communion", "First Communion", "Daily Mass", "Sunday Mass",
-    "Mass Times", "Mass Intentions", "Divine Mercy", "Eternal Rest",
-    "Saint Joseph", "Saint Patrick", "Saint Mary", "Saint Peter", "Saint Paul",
-    "Saint Michael", "Saint Francis", "Saint Thomas", "Saint Elizabeth",
-    "Palm Sunday", "Good Friday", "Easter Sunday", "Ash Wednesday",
-    "Office Hours", "Parish Office", "Faith Formation", "Religious Education",
-    "Social Media", "Weekly Bulletin", "Parish Life", "Parish Council",
-    "Ministry Schedule", "Altar Society", "Church Bulletin",
-    "North America", "South America", "New York", "New Jersey", "New Mexico",
+    "Holy Spirit",
+    "Holy Family",
+    "Holy Cross",
+    "Holy Rosary",
+    "Holy Trinity",
+    "Sacred Heart",
+    "Blessed Sacrament",
+    "Blessed Mother",
+    "Blessed Virgin",
+    "Our Lady",
+    "Our Father",
+    "Jesus Christ",
+    "Holy Name",
+    "Good Shepherd",
+    "Holy Communion",
+    "First Communion",
+    "Daily Mass",
+    "Sunday Mass",
+    "Mass Times",
+    "Mass Intentions",
+    "Divine Mercy",
+    "Eternal Rest",
+    "Saint Joseph",
+    "Saint Patrick",
+    "Saint Mary",
+    "Saint Peter",
+    "Saint Paul",
+    "Saint Michael",
+    "Saint Francis",
+    "Saint Thomas",
+    "Saint Elizabeth",
+    "Palm Sunday",
+    "Good Friday",
+    "Easter Sunday",
+    "Ash Wednesday",
+    "Office Hours",
+    "Parish Office",
+    "Faith Formation",
+    "Religious Education",
+    "Social Media",
+    "Weekly Bulletin",
+    "Parish Life",
+    "Parish Council",
+    "Ministry Schedule",
+    "Altar Society",
+    "Church Bulletin",
+    "North America",
+    "South America",
+    "New York",
+    "New Jersey",
+    "New Mexico",
     "Al Smith",  # very common false positive
-    "Catholic Church", "United States", "Pope Francis",
-    "Dear Parishioners", "Dear Friends", "For More",
-    "Please Contact", "High School", "Middle School",
-    "Sign Up", "Last Week", "Next Week", "This Week",
-    "Thank You", "God Bless",
-    "Weekday Masses", "Daily Mass", "Sunday Mass",
-    "Altar Servers", "Eucharistic Ministers", "Music Director",
-    "Prayer Tree", "Table Rentals", "Holy Hour",
-    "Vincent De Paul", "De Paul", "Corpus Christi",
-    "Stations Cross", "Bible Study", "Choir Practice",
-    "Food Bank", "Soup Kitchen", "Thrift Store",
-    "Office Manager", "Business Manager", "Facilities Manager",
-    "Religious Ed", "Youth Minister", "Choir Director",
-    "Maintenance Director", "Athletic Director",
-    "Pro Life", "Right Life",
+    "Catholic Church",
+    "United States",
+    "Pope Francis",
+    "Dear Parishioners",
+    "Dear Friends",
+    "For More",
+    "Please Contact",
+    "High School",
+    "Middle School",
+    "Sign Up",
+    "Last Week",
+    "Next Week",
+    "This Week",
+    "Thank You",
+    "God Bless",
+    "Weekday Masses",
+    "Daily Mass",
+    "Sunday Mass",
+    "Altar Servers",
+    "Eucharistic Ministers",
+    "Music Director",
+    "Prayer Tree",
+    "Table Rentals",
+    "Holy Hour",
+    "Vincent De Paul",
+    "De Paul",
+    "Corpus Christi",
+    "Stations Cross",
+    "Bible Study",
+    "Choir Practice",
+    "Food Bank",
+    "Soup Kitchen",
+    "Thrift Store",
+    "Office Manager",
+    "Business Manager",
+    "Facilities Manager",
+    "Religious Ed",
+    "Youth Minister",
+    "Choir Director",
+    "Maintenance Director",
+    "Athletic Director",
+    "Pro Life",
+    "Right Life",
     # Bulletin structural/calendar phrases that look like names
-    "Ordinary Time", "By Appointment",
-    "Job Opportunity", "Assembly Mtg", "Council Mtg",
-    "Degree Exemplification", "Money Counters",
-    "Compliance Officer", "Mercy Chaplet",
-    "Del Tiempo", "Domingo Del",
+    "Ordinary Time",
+    "By Appointment",
+    "Job Opportunity",
+    "Assembly Mtg",
+    "Council Mtg",
+    "Degree Exemplification",
+    "Money Counters",
+    "Compliance Officer",
+    "Mercy Chaplet",
+    "Del Tiempo",
+    "Domingo Del",
     "Consejo Matrimonial",
-    "Grand Knight", "Deputy Grand",
-    "Hospital Euch", "Hispanic Spiritual",
-    "Tech I", "Tech II",
+    "Grand Knight",
+    "Deputy Grand",
+    "Hospital Euch",
+    "Hispanic Spiritual",
+    "Tech I",
+    "Tech II",
     # Common truncated/merged column artifacts from PDF extraction
-    "Are Not", "You Are", "Are Not Alone",
-    "Anderson Gift", "Business Mgr",
-    "The Romo", "Of Jensen",
+    "Are Not",
+    "You Are",
+    "Are Not Alone",
+    "Anderson Gift",
+    "Business Mgr",
+    "The Romo",
+    "Of Jensen",
     # Top false positive phrases found in data analysis (751K names, 6 states)
-    "New Year", "Immaculate Conception", "Columbus Council", "Finance Council",
-    "Pastoral Council", "Pope Leo", "Food Pantry", "Fish Fry", "All Souls",
-    "Wedding Anniversary", "Ordinary Time", "Second Vatican Council",
-    "Deceased Members", "Volunteers Needed", "All Souls Day",
-    "Lord Jesus Christ", "The Knights", "Paul Society", "May God",
-    "Presbyteral Council", "Lord Jesus", "Good News", "Administrative Assistant",
-    "The St", "Special Intention", "Memorial Day", "Jubilee Year",
-    "Labor Day", "Virgin Mary", "Feast Day",
-    "World Day", "Open House", "St Mary", "Jordan River",
-    "Bake Sale", "Shawl Ministry", "Pancake Breakfast", "Latin America",
-    "Old Testament", "The Lord", "Happy New Year", "Heavenly Father",
-    "Thomas Aquinas", "Retirement Fund", "First Reconciliation",
-    "Diocesan Council", "First Reading", "Place Your Ad", "Safe Environment",
-    "Thanksgiving Day", "Rice Bowl", "The Diocese", "Respect Life",
-    "Immaculate Heart", "The Epiphany", "Mailing Address", "Poor Souls",
-    "Second Reading", "Main Street", "Columbus Meeting", "Extraordinary Minister",
-    "Faithful Departed", "Life Activities", "New Testament",
-    "Property Manager", "Development Manager", "Case Managers",
-    "Sun Rehearsal", "English Ministry", "Brother Knight",
+    "New Year",
+    "Immaculate Conception",
+    "Columbus Council",
+    "Finance Council",
+    "Pastoral Council",
+    "Pope Leo",
+    "Food Pantry",
+    "Fish Fry",
+    "All Souls",
+    "Wedding Anniversary",
+    "Ordinary Time",
+    "Second Vatican Council",
+    "Deceased Members",
+    "Volunteers Needed",
+    "All Souls Day",
+    "Lord Jesus Christ",
+    "The Knights",
+    "Paul Society",
+    "May God",
+    "Presbyteral Council",
+    "Lord Jesus",
+    "Good News",
+    "Administrative Assistant",
+    "The St",
+    "Special Intention",
+    "Memorial Day",
+    "Jubilee Year",
+    "Labor Day",
+    "Virgin Mary",
+    "Feast Day",
+    "World Day",
+    "Open House",
+    "St Mary",
+    "Jordan River",
+    "Bake Sale",
+    "Shawl Ministry",
+    "Pancake Breakfast",
+    "Latin America",
+    "Old Testament",
+    "The Lord",
+    "Happy New Year",
+    "Heavenly Father",
+    "Thomas Aquinas",
+    "Retirement Fund",
+    "First Reconciliation",
+    "Diocesan Council",
+    "First Reading",
+    "Place Your Ad",
+    "Safe Environment",
+    "Thanksgiving Day",
+    "Rice Bowl",
+    "The Diocese",
+    "Respect Life",
+    "Immaculate Heart",
+    "The Epiphany",
+    "Mailing Address",
+    "Poor Souls",
+    "Second Reading",
+    "Main Street",
+    "Columbus Meeting",
+    "Extraordinary Minister",
+    "Faithful Departed",
+    "Life Activities",
+    "New Testament",
+    "Property Manager",
+    "Development Manager",
+    "Case Managers",
+    "Sun Rehearsal",
+    "English Ministry",
+    "Brother Knight",
     # Bulletin ad/event junk that passes word-level filters
-    "Auto Body", "Auto Repair", "Auto Insurance",
-    "Fall Alert", "Craft Beer", "Beer Tent", "Beer Dance",
-    "Wine Bar", "Wine Pull", "Ice Cream",
-    "More Info", "Stay Connected", "Pork Sausage",
-    "Fried Chicken", "Chicken Strips", "Cake Donation",
-    "Smart Roofing", "Smart Roof", "Smart Driver",
-    "Pizza Villa", "Sports App", "Ascension App",
-    "Suggested Donation", "Contribution Statement", "Contribution Statements",
-    "Spring Alpha Session", "Generation To Generation",
-    "Doyle Vocal Quartet", "Vocal Quartet",
-    "Blood Drive", "Craft Bazaar",
+    "Auto Body",
+    "Auto Repair",
+    "Auto Insurance",
+    "Fall Alert",
+    "Craft Beer",
+    "Beer Tent",
+    "Beer Dance",
+    "Wine Bar",
+    "Wine Pull",
+    "Ice Cream",
+    "More Info",
+    "Stay Connected",
+    "Pork Sausage",
+    "Fried Chicken",
+    "Chicken Strips",
+    "Cake Donation",
+    "Smart Roofing",
+    "Smart Roof",
+    "Smart Driver",
+    "Pizza Villa",
+    "Sports App",
+    "Ascension App",
+    "Suggested Donation",
+    "Contribution Statement",
+    "Contribution Statements",
+    "Spring Alpha Session",
+    "Generation To Generation",
+    "Doyle Vocal Quartet",
+    "Vocal Quartet",
+    "Blood Drive",
+    "Craft Bazaar",
     # Spanish/Latin liturgical phrases
-    "Primera Comuni", "Primera Comunion", "La Primera Comuni",
-    "La Cuaresma", "El Evangelio", "Sacrosanctum Concilium",
-    "Nueve Domingos", "El Comit", "Arroz La Cuaresma",
+    "Primera Comuni",
+    "Primera Comunion",
+    "La Primera Comuni",
+    "La Cuaresma",
+    "El Evangelio",
+    "Sacrosanctum Concilium",
+    "Nueve Domingos",
+    "El Comit",
+    "Arroz La Cuaresma",
     # Phrases using 'Will' and 'Christian' that aren't names
     # (these words were unblocked because they're common real names)
-    "Will Be", "Will Not", "Will Have", "Will Take",
-    "Christian Education", "Christian Formation", "Christian Initiation",
-    "Christian Service", "Christian Community", "Christian Life",
-    # Phrases from Arizona manual review (Feb 2026)
-    "Submission Date", "Start Date", "End Date",
-    "Entrance Antiphon", "Entrance Antipho",
-    "Important Reminder", "Important Reminder Entrance",
-    "Important Reminder Compliance",
-    "Cub Scouts", "Boy Scouts", "Girl Scouts",
-    "Junior Vincentians", "Desert Hills",
-    "Tax Collector", "Small Faith Sharing",
-    "Home Visits", "Birth Certificate",
-    "Legal Protection", "Fire Protection",
-    "Mentor Couples", "Front Desk",
-    "His Spirit", "Why Registering",
-    "Envelope Fundraiser", "Fundraiser Request Form",
-    "Polish Grandmother", "Nativity Display", "Nativity Scene",
-    "Birthday Blessing", "Birthday Recognition",
-    "Commitment Card", "Snack Leader",
-    "Cathedral Concert Series", "Provincial Superior",
-    "Sanctuary Candle", "Various Sanctuary Candles",
-    "Clear Creek Monastery", "Prompt Succour", "Prompt Succor",
-    "Religious Items Booth", "Only Begotten Son",
-    "Las Catequistas", "Bautizo Hora Ultima",
-    "Fecha Fecha", "Obispo Kicanas",
+    "Will Be",
+    "Will Not",
+    "Will Have",
+    "Will Take",
+    "Christian Education",
+    "Christian Formation",
+    "Christian Initiation",
+    "Christian Service",
+    "Christian Community",
+    "Christian Life",
 }
 
 
@@ -1972,34 +2074,49 @@ def clean_extracted_name(name: str) -> str:
     """
     if not name:
         return name
-    # Newline fix: keep only the FIRST line (multi-line = PDF column bleed)
-    if '\n' in name:
-        name = name.split('\n')[0].strip()
+    # Remove newlines (PDF column bleed)
+    name = name.replace("\n", " ").strip()
     # Collapse multiple spaces
-    name = re.sub(r'\s+', ' ', name)
+    name = re.sub(r"\s+", " ", name)
     # Strip trailing day abbreviations (PDF column bleed from mass schedules)
-    day_abbrevs = {'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'}
+    day_abbrevs = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}
     parts = name.split()
     while parts and parts[-1] in day_abbrevs:
         parts.pop()
     # Strip trailing ministry role words (PDF column bleed from schedule grids)
     # e.g. "Richard Martinez Lector" -> "Richard Martinez"
     trailing_roles = {
-        'Lector', 'Lectors', 'Usher', 'Ushers', 'Sacristan', 'Sacristans',
-        'Presider', 'Cantor', 'Cantors', 'Greeters', 'Greeter', 'Server',
-        'Servers', 'Reader', 'Readers', 'Minister', 'Ministers',
-        'Eucharist', 'Ext', 'Req', 'Deceased', 'God',
+        "Lector",
+        "Lectors",
+        "Usher",
+        "Ushers",
+        "Sacristan",
+        "Sacristans",
+        "Presider",
+        "Cantor",
+        "Cantors",
+        "Greeters",
+        "Greeter",
+        "Server",
+        "Servers",
+        "Reader",
+        "Readers",
+        "Minister",
+        "Ministers",
+        "Eucharist",
+        "Ext",
+        "Req",
+        "Deceased",
+        "God",
     }
     while parts and parts[-1] in trailing_roles:
         parts.pop()
     # Strip trailing 'All' (from "Edwin Arthur All")
-    if parts and parts[-1] == 'All':
+    if parts and parts[-1] == "All":
         parts.pop()
-    name = ' '.join(parts)
+    name = " ".join(parts)
     # Strip leading/trailing punctuation
-    name = name.strip('.,;:!?()[]{}"\'-/')
-    # Split merged names (e.g. "Kevin Steinkamp Mary" -> "Kevin Steinkamp")
-    name = split_merged_name(name)
+    name = name.strip(".,;:!?()[]{}\"'-/")
     return name
 
 
@@ -2018,7 +2135,7 @@ def is_valid_name(name: str) -> bool:
         return False
 
     # Reject names containing newlines (always PDF column bleed artifacts)
-    if '\n' in name:
+    if "\n" in name:
         return False
 
     # Must have at least a first and last name
@@ -2038,163 +2155,516 @@ def is_valid_name(name: str) -> bool:
     if name in FALSE_POSITIVE_NAMES:
         return False
 
-    # Check against auto-removed names (cross-state low-confidence junk)
-    _load_reference_data()
-    if _auto_removed_names and name in _auto_removed_names:
-        return False
-
     # Reject truncated names: last word should be at least 3 chars
     # (catches PDF column bleed like "Teresa Mu", "Carlos Ze", "Reynaldo Ro")
     # Exception: middle initials are OK (single letter + optional period)
-    if len(parts[-1]) < 3 and not re.match(r'^[A-Z]\.?$', parts[-1]):
+    if len(parts[-1]) < 3 and not re.match(r"^[A-Z]\.?$", parts[-1]):
         return False
 
     # Reject if first name is too short (catches "Fr Mike" without the period)
     if len(parts[0]) < 2:
         return False
 
-    # Reject merged-word artifacts from PDF extraction (spaces stripped)
-    # Real names rarely have words longer than 15 characters
-    # Catches: "Honoryourfamilymember", "Wouldyouliketohonoral", "Regularclassesstartth"
-    if any(len(p) > 15 for p in parts):
-        return False
-
     # Reject if any part is a common non-name word.
     # NOTE: Comparison is case-INSENSITIVE — we lowercase both sides.
     # All entries should be stored lowercase in this set.
     non_name_words = {
-        'the', 'and', 'for', 'from', 'with', 'that', 'this', 'are', 'was',
-        'has', 'have', 'had', 'their', 'there',
-        'where', 'when', 'what', 'which', 'also', 'than', 'them',
-        'not', 'out', 'who', 'how', 'its', 'may', 'can', 'you', 'your',
-        'church', 'parish', 'school', 'center', 'hall', 'room', 'chapel',
-        'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'saturday',
-        'january', 'february', 'march', 'april', 'june', 'july', 'august',
-        'september', 'october', 'november', 'december',
-        'mass', 'masses', 'confession', 'communion', 'lent', 'easter', 'christmas',
-        'daily', 'weekly', 'monthly', 'annual',
-        'weekday', 'weekend', 'morning', 'evening', 'night',
-        'table', 'prayer', 'music', 'director', 'ministers',
-        'eucharistic', 'servers', 'rentals', 'maintenance', 'hour',
-        'holy', 'blessed', 'sacred', 'saint', 'our',
-        'rite', 'catholic', 'initiation', 'adults',
-        'stations', 'cross', 'rosary', 'adoration', 'benediction',
-        'tree', 'garden', 'office',
-        'online', 'giving', 'live', 'stream',
-        'please', 'contact', 'call', 'email', 'visit',
-        'registration', 'information', 'schedule', 'calendar',
-        'baptism', 'confirmation', 'marriage', 'funeral', 'anointing', 'communion',
-        'collection', 'offertory', 'budget', 'total',
-        'choir', 'band', 'ensemble', 'group',
-        'youth', 'children', 'family', 'women', 'men',
-        'deacon', 'priest', 'bishop', 'pastor', 'vicar',
+        "the",
+        "and",
+        "for",
+        "from",
+        "with",
+        "that",
+        "this",
+        "are",
+        "was",
+        "has",
+        "have",
+        "had",
+        "their",
+        "there",
+        "where",
+        "when",
+        "what",
+        "which",
+        "also",
+        "than",
+        "them",
+        "not",
+        "out",
+        "who",
+        "how",
+        "its",
+        "may",
+        "can",
+        "you",
+        "your",
+        "church",
+        "parish",
+        "school",
+        "center",
+        "hall",
+        "room",
+        "chapel",
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "saturday",
+        "january",
+        "february",
+        "march",
+        "april",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december",
+        "mass",
+        "masses",
+        "confession",
+        "communion",
+        "lent",
+        "easter",
+        "christmas",
+        "daily",
+        "weekly",
+        "monthly",
+        "annual",
+        "weekday",
+        "weekend",
+        "morning",
+        "evening",
+        "night",
+        "table",
+        "prayer",
+        "music",
+        "director",
+        "ministers",
+        "eucharistic",
+        "servers",
+        "rentals",
+        "maintenance",
+        "hour",
+        "holy",
+        "blessed",
+        "sacred",
+        "saint",
+        "our",
+        "rite",
+        "catholic",
+        "initiation",
+        "adults",
+        "stations",
+        "cross",
+        "rosary",
+        "adoration",
+        "benediction",
+        "tree",
+        "garden",
+        "office",
+        "online",
+        "giving",
+        "live",
+        "stream",
+        "please",
+        "contact",
+        "call",
+        "email",
+        "visit",
+        "registration",
+        "information",
+        "schedule",
+        "calendar",
+        "baptism",
+        "confirmation",
+        "marriage",
+        "funeral",
+        "anointing",
+        "communion",
+        "collection",
+        "offertory",
+        "budget",
+        "total",
+        "choir",
+        "band",
+        "ensemble",
+        "group",
+        "youth",
+        "children",
+        "family",
+        "women",
+        "men",
+        "deacon",
+        "priest",
+        "bishop",
+        "pastor",
+        "vicar",
         # Spanish words that appear in bilingual bulletins
-        'domingo', 'tiempo', 'ordinario', 'semana', 'consejo', 'matrimonial',
+        "domingo",
+        "tiempo",
+        "ordinario",
+        "semana",
+        "consejo",
+        "matrimonial",
         # Organizational terms that look like names
-        'president', 'vice', 'chairman', 'secretary', 'treasurer', 'members',
-        'lectors', 'counters', 'volunteer', 'principal', 'coordinator',
-        'gift', 'shop', 'sick', 'opportunity', 'invitation',
-        'tech', 'degree', 'exemplification', 'assembly', 'mtg',
-        'chaplet', 'spiritual', 'dcn', 'alone',
+        "president",
+        "vice",
+        "chairman",
+        "secretary",
+        "treasurer",
+        "members",
+        "lectors",
+        "counters",
+        "volunteer",
+        "principal",
+        "coordinator",
+        "gift",
+        "shop",
+        "sick",
+        "opportunity",
+        "invitation",
+        "tech",
+        "degree",
+        "exemplification",
+        "assembly",
+        "mtg",
+        "chaplet",
+        "spiritual",
+        "dcn",
+        "alone",
         # Event/activity words
-        'activities', 'picnic', 'proceeds', 'novena', 'drive', 'sale', 'bake',
-        'pancake', 'fry', 'pantry', 'store', 'bank', 'kitchen',
-        'shawl', 'food', 'soup', 'thrift',
+        "activities",
+        "picnic",
+        "proceeds",
+        "novena",
+        "drive",
+        "sale",
+        "bake",
+        "pancake",
+        "fry",
+        "pantry",
+        "store",
+        "bank",
+        "kitchen",
+        "shawl",
+        "food",
+        "soup",
+        "thrift",
         # Time/calendar words
-        'day', 'year', 'time', 'new', 'old', 'first', 'second',
-        'labor', 'memorial', 'thanksgiving', 'happy', 'jubilee',
+        "day",
+        "year",
+        "time",
+        "new",
+        "old",
+        "first",
+        "second",
+        "labor",
+        "memorial",
+        "thanksgiving",
+        "happy",
+        "jubilee",
         # Religious terms missing from current list
-        'gospel', 'amen', 'ordinary', 'heavenly', 'immaculate', 'conception',
-        'souls', 'saints', 'departed', 'reconciliation', 'testament',
-        'sacrament', 'intention', 'special',
+        "gospel",
+        "amen",
+        "ordinary",
+        "heavenly",
+        "immaculate",
+        "conception",
+        "souls",
+        "saints",
+        "departed",
+        "reconciliation",
+        "testament",
+        "sacrament",
+        "intention",
+        "special",
         # Organizational terms
-        'manager', 'property', 'development', 'finance', 'liaison', 'bookkeeper',
-        'case', 'assistant', 'needed', 'volunteers', 'members',
-        'council', 'meeting', 'fund', 'retirement', 'environment', 'safe',
+        "manager",
+        "property",
+        "development",
+        "finance",
+        "liaison",
+        "bookkeeper",
+        "case",
+        "assistant",
+        "needed",
+        "volunteers",
+        "members",
+        "council",
+        "meeting",
+        "fund",
+        "retirement",
+        "environment",
+        "safe",
         # Location/structural
-        'street', 'address', 'mailing', 'place', 'house', 'open', 'sign',
-        'reading', 'word', 'river', 'america', 'latin',
+        "street",
+        "address",
+        "mailing",
+        "place",
+        "house",
+        "open",
+        "sign",
+        "reading",
+        "word",
+        "river",
+        "america",
+        "latin",
         # Misc
-        'ad', 'dear', 'high', 'middle', 'pro', 'right', 'respect',
-        'cardinal', 'pope', 'doctor', 'anniversary', 'feast', 'world',
-        'society', 'news', 'knight', 'knights', 'life',
-        'active', 'ministries', 'ministry',
-        'cultural', 'community', 'ushers', 'wheelchair', 'disciples',
-        'committee', 'basketball',
+        "ad",
+        "dear",
+        "high",
+        "middle",
+        "pro",
+        "right",
+        "respect",
+        "cardinal",
+        "pope",
+        "doctor",
+        "anniversary",
+        "feast",
+        "world",
+        "society",
+        "news",
+        "knight",
+        "knights",
+        "life",
+        "active",
+        "ministries",
+        "ministry",
+        "cultural",
+        "community",
+        "ushers",
+        "wheelchair",
+        "disciples",
+        "committee",
+        "basketball",
         # Bulletin vocabulary surfaced by frequency analysis
-        'lector', 'usher', 'sacristan', 'presider', 'cantor', 'greeters',
-        'greeter', 'server', 'reader', 'families', 'deceased',
-        'formation', 'welcome', 'education', 'lenten', 'university',
-        'club', 'program', 'service', 'services', 'parishioners',
-        'dinner', 'divine', 'bulletin', 'bible', 'road',
-        'retreat', 'care', 'join', 'ladies', 'health', 'class', 'classes',
-        'living', 'sacramental', 'social', 'study', 'baptisms', 'english',
-        'spanish', 'baby', 'need', 'cemetery', 'good', 'team', 'county',
-        'upcoming', 'book', 'avenue', 'liturgical', 'stewardship',
-        'hospitality', 'raffle', 'liturgy', 'gifts', 'events',
-        'american', 'parochial', 'college', 'financial',
-        'support', 'national', 'banns', 'confessions', 'help',
-        'association', 'training', 'eucharist', 'senior',
-        'grade', 'south', 'north', 'eternal', 'phone', 'child',
-        'conference', 'heart', 'project', 'guild', 'outreach',
-        'student', 'students', 'baptismal', 'today', 'staff',
-        'bread', 'nursing', 'event', 'campus', 'scholarship',
-        'scripture', 'death', 'perpetual', 'rehearsal', 'blvd',
-        'extraordinary', 'recently', 'central', 'lunch', 'gathering',
-        'abuse', 'weddings', 'vocations', 'commission', 'party',
-        'general', 'golf', 'order', 'tickets', 'blessings',
-        'clergy', 'scout', 'coffee', 'req', 'god', 'christ',
-        'wedding', 'pastoral', 'diocesan', 'intentions',
-        'feb', 'mar', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
-        'tues', 'thurs', 'ave', 'mrs', 'rev', 'ext',
-        'padre', 'familia', 'por', 'los', 'san', 'santa', 'santo',
+        "lector",
+        "usher",
+        "sacristan",
+        "presider",
+        "cantor",
+        "greeters",
+        "greeter",
+        "server",
+        "reader",
+        "families",
+        "deceased",
+        "formation",
+        "welcome",
+        "education",
+        "lenten",
+        "university",
+        "club",
+        "program",
+        "service",
+        "services",
+        "parishioners",
+        "dinner",
+        "divine",
+        "bulletin",
+        "bible",
+        "road",
+        "retreat",
+        "care",
+        "join",
+        "ladies",
+        "health",
+        "class",
+        "classes",
+        "living",
+        "sacramental",
+        "social",
+        "study",
+        "baptisms",
+        "english",
+        "spanish",
+        "baby",
+        "need",
+        "cemetery",
+        "good",
+        "team",
+        "county",
+        "upcoming",
+        "book",
+        "avenue",
+        "liturgical",
+        "stewardship",
+        "hospitality",
+        "raffle",
+        "liturgy",
+        "gifts",
+        "events",
+        "american",
+        "parochial",
+        "college",
+        "financial",
+        "support",
+        "national",
+        "banns",
+        "confessions",
+        "help",
+        "association",
+        "training",
+        "eucharist",
+        "senior",
+        "grade",
+        "south",
+        "north",
+        "eternal",
+        "phone",
+        "child",
+        "conference",
+        "heart",
+        "project",
+        "guild",
+        "outreach",
+        "student",
+        "students",
+        "baptismal",
+        "today",
+        "staff",
+        "bread",
+        "nursing",
+        "event",
+        "campus",
+        "scholarship",
+        "scripture",
+        "death",
+        "perpetual",
+        "rehearsal",
+        "blvd",
+        "extraordinary",
+        "recently",
+        "central",
+        "lunch",
+        "gathering",
+        "abuse",
+        "weddings",
+        "vocations",
+        "commission",
+        "party",
+        "general",
+        "golf",
+        "order",
+        "tickets",
+        "blessings",
+        "clergy",
+        "scout",
+        "coffee",
+        "req",
+        "god",
+        "christ",
+        "wedding",
+        "pastoral",
+        "diocesan",
+        "intentions",
+        "feb",
+        "mar",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec",
+        "tues",
+        "thurs",
+        "ave",
+        "mrs",
+        "rev",
+        "ext",
+        "padre",
+        "familia",
+        "por",
+        "los",
+        "san",
+        "santa",
+        "santo",
         # Food/drink (bulletin ads, event menus)
-        'salad', 'pasta', 'pizza', 'chicken', 'sausage', 'pork', 'beef',
-        'taco', 'tamale', 'tamales', 'donut', 'doughnut', 'popcorn',
-        'chocolate', 'cocoa', 'dessert', 'recipe', 'catering', 'menu',
+        "salad",
+        "pasta",
+        "pizza",
+        "chicken",
+        "sausage",
+        "pork",
+        "beef",
+        "taco",
+        "tamale",
+        "tamales",
+        "donut",
+        "doughnut",
+        "popcorn",
+        "chocolate",
+        "cocoa",
+        "dessert",
+        "recipe",
+        "catering",
+        "menu",
         # Commercial/business ads in bulletins
-        'insurance', 'attorney', 'realtor', 'plumbing', 'roofing', 'heating',
-        'cooling', 'conditioning', 'dental', 'pharmacy', 'flooring', 'carpet',
-        'landscaping', 'towing', 'electrician', 'remodeling', 'locksmith',
-        'furnace', 'discount', 'coupon',
+        "insurance",
+        "attorney",
+        "realtor",
+        "plumbing",
+        "roofing",
+        "heating",
+        "cooling",
+        "conditioning",
+        "dental",
+        "pharmacy",
+        "flooring",
+        "carpet",
+        "landscaping",
+        "towing",
+        "electrician",
+        "remodeling",
+        "locksmith",
+        "furnace",
+        "discount",
+        "coupon",
         # Tech/social media
-        'adobe', 'acrobat', 'download', 'facebook', 'instagram', 'twitter',
-        'phishing', 'scam', 'flocknote', 'myparish',
+        "adobe",
+        "acrobat",
+        "download",
+        "facebook",
+        "instagram",
+        "twitter",
+        "phishing",
+        "scam",
+        "flocknote",
+        "myparish",
         # Non-name actions/objects from bulletin text
-        'donation', 'donations', 'contribution', 'statement', 'statements',
-        'suggested', 'connected', 'handbook', 'brochure', 'quartet',
-        'fiesta', 'session', 'sessions', 'requested', 'strips', 'rates',
-        'repair', 'alert', 'serving', 'expert', 'experts',
-        # Action verbs surfaced by 10-state junk analysis
-        'donate', 'register', 'attend', 'update', 'celebrate', 'hosting',
-        # Missing common nouns
-        'festival', 'hospital', 'clinic', 'height',
-        # Missing day
-        'friday',
-        # Organization words
-        'columbus', 'columbian',
-        # Words surfaced by Arizona manual review (Feb 2026)
-        'oratory', 'thank', 'thanks', 'linens', 'sanctuary', 'candle', 'candles',
-        'flowers', 'compliance', 'homebound', 'sales', 'mandatory', 'nativity',
-        'dancers', 'billboard', 'readings', 'items', 'mission', 'month',
-        'parents', 'psalm', 'date', 'tax', 'home', 'scene', 'various',
-        'sponsor', 'hurricane', 'walking', 'bereavement', 'report',
-        'quinceanera', 'responsorial', 'water', 'funerals', 'envelope',
-        'registering', 'grandmother', 'blessing', 'booth', 'begotten',
-        'purgatory', 'scouts', 'cub', 'boy', 'girl', 'leader', 'snack',
-        'bistro', 'shirt', 'card', 'commitment', 'reminder', 'important',
-        'prompt', 'catechetical', 'celebrant', 'caring',
-        'institute', 'hills', 'desert', 'submission', 'start', 'end',
-        'dedication', 'iglesia', 'crowning', 'mentor', 'couples',
-        'certificate', 'protection', 'legal', 'display', 'monastery',
-        'superior', 'provincial', 'recognition', 'collector', 'sharing',
-        'concert', 'series', 'cathedral', 'antiphon',
+        "donation",
+        "donations",
+        "contribution",
+        "statement",
+        "statements",
+        "suggested",
+        "connected",
+        "handbook",
+        "brochure",
+        "quartet",
+        "fiesta",
+        "session",
+        "sessions",
+        "requested",
+        "strips",
+        "rates",
+        "repair",
+        "alert",
+        "serving",
+        "expert",
+        "experts",
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
 
     # Reject if first word is a known non-name starter (case-insensitive)
-    non_name_starters = {'the', 'are', 'of', 'or', 'by', 'at', 'in', 'to', 'on', 'an', 'if'}
+    non_name_starters = {"the", "are", "of", "or", "by", "at", "in", "to", "on", "an", "if"}
     if parts[0].lower() in non_name_starters:
         return False
 
@@ -2202,6 +2672,7 @@ def is_valid_name(name: str) -> bool:
 
 
 # ── Main Pipeline ─────────────────────────────────────────────────────────────
+
 
 def load_churches(state_dir: Path, limit: int = 0):
     """Load church records from JSONL file."""
@@ -2211,7 +2682,7 @@ def load_churches(state_dir: Path, limit: int = 0):
         return []
 
     churches = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -2232,18 +2703,23 @@ def load_churches(state_dir: Path, limit: int = 0):
                     continue
 
                 # Skip diocese-level pages (not individual church sites)
-                if url and any(x in url.lower() for x in ["diocese", "archdiocese", "/parish-finder", "/parishfinder"]):
+                if url and any(
+                    x in url.lower()
+                    for x in ["diocese", "archdiocese", "/parish-finder", "/parishfinder"]
+                ):
                     continue
 
                 slug = church.get("slug", "")
-                churches.append({
-                    "name": church.get("name", "Unknown"),
-                    "city": church.get("city", ""),
-                    "state": church.get("state", ""),
-                    "slug": slug,
-                    "url": url,
-                    "raw_url": raw_url,
-                })
+                churches.append(
+                    {
+                        "name": church.get("name", "Unknown"),
+                        "city": church.get("city", ""),
+                        "state": church.get("state", ""),
+                        "slug": slug,
+                        "url": url,
+                        "raw_url": raw_url,
+                    }
+                )
             except json.JSONDecodeError:
                 continue
 
@@ -2257,7 +2733,7 @@ def load_progress(state_dir: Path):
     """Load progress tracking file."""
     progress_path = state_dir / "bulletin_progress.json"
     if progress_path.exists():
-        with open(progress_path, "r", encoding="utf-8") as f:
+        with open(progress_path, encoding="utf-8") as f:
             return json.load(f)
     return {"discovered": {}, "downloaded": {}, "extracted": {}}
 
@@ -2269,9 +2745,13 @@ def save_progress(state_dir: Path, progress: dict):
         json.dump(progress, f, indent=2)
 
 
-def run_discover(state_name: str, state_dir: Path, churches: list, progress: dict, resume: bool = False):
+def run_discover(
+    state_name: str, state_dir: Path, churches: list, progress: dict, resume: bool = False
+):
     """Phase 1: Discover bulletin pages for all churches."""
-    logger.info(f"=== Phase 1: DISCOVER bulletin pages for {state_name} ({len(churches)} churches) ===")
+    logger.info(
+        f"=== Phase 1: DISCOVER bulletin pages for {state_name} ({len(churches)} churches) ==="
+    )
 
     discovered = progress.get("discovered", {})
     found_count = 0
@@ -2311,9 +2791,7 @@ def run_discover(state_name: str, state_dir: Path, churches: list, progress: dic
             else:
                 # Strategy 5: Try DiscoverMass as a fallback
                 state_code = church.get("state", "")
-                dm_result = try_discovermass_fallback(
-                    church["name"], church["city"], state_code
-                )
+                dm_result = try_discovermass_fallback(church["name"], church["city"], state_code)
                 if dm_result and dm_result["pdf_urls"]:
                     found_count += 1
                     discovered[slug] = {
@@ -2335,7 +2813,7 @@ def run_discover(state_name: str, state_dir: Path, churches: list, progress: dic
                         "church_name": church["name"],
                         "church_url": url,
                     }
-                    logger.info(f"  [--] No bulletin found")
+                    logger.info("  [--] No bulletin found")
         except Exception as e:
             discovered[slug] = {"status": "error", "error": str(e), "pdfs": []}
             logger.warning(f"  [ERR] Error: {e}")
@@ -2356,21 +2834,30 @@ def run_discover(state_name: str, state_dir: Path, churches: list, progress: dic
         json.dump(discovered, f, indent=2)
 
     total_active = len(churches) - skipped
-    logger.info(f"\n=== Discovery complete: {found_count}/{total_active} churches have bulletins ===")
+    logger.info(
+        f"\n=== Discovery complete: {found_count}/{total_active} churches have bulletins ==="
+    )
     logger.info(f"Results saved to {discovery_path}")
 
     # Log churches with more than MAX_PDFS_PER_CHURCH PDFs (for future full collection)
-    over_limit = {slug: info for slug, info in discovered.items()
-                  if len(info.get("pdfs", [])) > MAX_PDFS_PER_CHURCH}
+    over_limit = {
+        slug: info
+        for slug, info in discovered.items()
+        if len(info.get("pdfs", [])) > MAX_PDFS_PER_CHURCH
+    }
     if over_limit:
-        logger.info(f"\n[!] {len(over_limit)} churches have >{MAX_PDFS_PER_CHURCH} PDFs (capped at {MAX_PDFS_PER_CHURCH}):")
+        logger.info(
+            f"\n[!] {len(over_limit)} churches have >{MAX_PDFS_PER_CHURCH} PDFs (capped at {MAX_PDFS_PER_CHURCH}):"
+        )
         for slug, info in sorted(over_limit.items(), key=lambda x: -len(x[1].get("pdfs", []))):
             logger.info(f"  {info.get('church_name', slug)}: {len(info['pdfs'])} PDFs total")
 
     return discovered
 
 
-def run_download(state_name: str, state_dir: Path, discovered: dict, progress: dict, resume: bool = False):
+def run_download(
+    state_name: str, state_dir: Path, discovered: dict, progress: dict, resume: bool = False
+):
     """Phase 2: Download bulletin PDFs."""
     logger.info(f"\n=== Phase 2: DOWNLOAD bulletin PDFs for {state_name} ===")
 
@@ -2390,13 +2877,15 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
             # Still check if this church was capped
             all_pdfs = info["pdfs"]
             if len(all_pdfs) >= MAX_PDFS_PER_CHURCH:
-                capped_churches.append({
-                    "slug": slug,
-                    "church_name": info.get("church_name", slug),
-                    "total_pdfs_available": len(all_pdfs),
-                    "pdfs_downloaded": MAX_PDFS_PER_CHURCH,
-                    "remaining_pdfs": len(all_pdfs) - MAX_PDFS_PER_CHURCH,
-                })
+                capped_churches.append(
+                    {
+                        "slug": slug,
+                        "church_name": info.get("church_name", slug),
+                        "total_pdfs_available": len(all_pdfs),
+                        "pdfs_downloaded": MAX_PDFS_PER_CHURCH,
+                        "remaining_pdfs": len(all_pdfs) - MAX_PDFS_PER_CHURCH,
+                    }
+                )
             continue
 
         all_pdfs = info["pdfs"]
@@ -2406,26 +2895,32 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
 
         # Flag if this church hit the cap
         if len(all_pdfs) >= MAX_PDFS_PER_CHURCH:
-            capped_churches.append({
-                "slug": slug,
-                "church_name": church_name,
-                "total_pdfs_available": len(all_pdfs),
-                "pdfs_downloaded": len(pdfs),
-                "remaining_pdfs": len(all_pdfs) - len(pdfs),
-            })
-            logger.info(f"  [CAP] {church_name}: {len(all_pdfs)} PDFs available, downloading {len(pdfs)} (capped at {MAX_PDFS_PER_CHURCH})")
+            capped_churches.append(
+                {
+                    "slug": slug,
+                    "church_name": church_name,
+                    "total_pdfs_available": len(all_pdfs),
+                    "pdfs_downloaded": len(pdfs),
+                    "remaining_pdfs": len(all_pdfs) - len(pdfs),
+                }
+            )
+            logger.info(
+                f"  [CAP] {church_name}: {len(all_pdfs)} PDFs available, downloading {len(pdfs)} (capped at {MAX_PDFS_PER_CHURCH})"
+            )
 
-        slug_safe = re.sub(r'[^a-zA-Z0-9_-]', '_', slug)
+        slug_safe = re.sub(r"[^a-zA-Z0-9_-]", "_", slug)
         church_downloads = []
 
         for pdf_url in pdfs:
             path = download_bulletin_pdf(pdf_url, bulletin_dir, slug_safe)
             if path:
-                church_downloads.append({
-                    "url": pdf_url,
-                    "local_path": str(path),
-                    "size_bytes": path.stat().st_size,
-                })
+                church_downloads.append(
+                    {
+                        "url": pdf_url,
+                        "local_path": str(path),
+                        "size_bytes": path.stat().st_size,
+                    }
+                )
                 total_downloaded += 1
 
         downloaded[slug] = {
@@ -2448,7 +2943,9 @@ def run_download(state_name: str, state_dir: Path, discovered: dict, progress: d
             json.dump(capped_churches, f, indent=2)
         logger.info(f"\n[!] {len(capped_churches)} churches hit the {MAX_PDFS_PER_CHURCH}-PDF cap:")
         for c in sorted(capped_churches, key=lambda x: -x["total_pdfs_available"]):
-            logger.info(f"  {c['church_name']}: {c['total_pdfs_available']} available, {c['remaining_pdfs']} remaining")
+            logger.info(
+                f"  {c['church_name']}: {c['total_pdfs_available']} available, {c['remaining_pdfs']} remaining"
+            )
         logger.info(f"Capped churches saved to {capped_path}")
 
     logger.info(f"\n=== Download complete: {total_downloaded}/{total_pdfs} PDFs downloaded ===")
@@ -2476,14 +2973,14 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     discovery_path = state_dir / "bulletin_discovery.json"
     discovery_data = {}
     if discovery_path.exists():
-        with open(discovery_path, "r", encoding="utf-8") as f:
+        with open(discovery_path, encoding="utf-8") as f:
             discovery_data = json.load(f)
 
     # Build slug→city mapping from church_details.jsonl
     slug_to_city = {}
     jsonl_path = state_dir / "church_details.jsonl"
     if jsonl_path.exists():
-        with open(jsonl_path, "r", encoding="utf-8") as f:
+        with open(jsonl_path, encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if not line:
@@ -2497,6 +2994,17 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                         slug_to_city[s] = c
                 except (json.JSONDecodeError, KeyError):
                     pass
+
+    # Confidence mapping: based on whether this is likely a real person connected to the church
+    # HIGH = clearly a named individual (staff, parishioner mentioned by name, someone prayed for)
+    # MEDIUM = likely a real name but found via looser contextual matching
+    # LOW = might be a false positive (generic text near a ministry keyword)
+    CONFIDENCE_MAP = {
+        "clergy_staff": "high",  # Named staff: Fr. John Smith, Pastor: Jane Doe
+        "mass_intention": "high",  # Named in Mass intentions: real person (living or deceased)
+        "prayer_list": "high",  # Named on prayer/sick list: real parishioner
+        "ministry_contextual": "medium",  # Name found near a ministry keyword: likely real but looser match
+    }
 
     # Track unique names PER CHURCH (not statewide) — each church has its own seen-names set
     # This way a name appearing at 5 different churches shows up 5 times (once per church)
@@ -2557,27 +3065,26 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
 
                     church_name_count += 1
                     total_names += 1
-                    cat = name_info["category"]
-                    conf_score = score_name_confidence(person_name, cat)
-                    all_names.append({
-                        "church_name": church_name,
-                        "church_slug": slug,
-                        "city": slug_to_city.get(slug, ""),
-                        "church_url": church_url,
-                        "pdf_file": pdf_path.name,
-                        "pdf_url": pdf_url,
-                        "pdf_date": pdf_date,
-                        "person_name": person_name,
-                        "title": name_info.get("title", ""),
-                        "first_name": name_info.get("first_name", ""),
-                        "middle_name": name_info.get("middle_name", ""),
-                        "last_name": name_info.get("last_name", ""),
-                        "role": name_info.get("role", ""),
-                        "category": cat,
-                        "confidence": confidence_label(conf_score),
-                        "confidence_score": conf_score,
-                        "context": name_info["context"][:100],
-                    })
+                    all_names.append(
+                        {
+                            "church_name": church_name,
+                            "church_slug": slug,
+                            "city": slug_to_city.get(slug, ""),
+                            "church_url": church_url,
+                            "pdf_file": pdf_path.name,
+                            "pdf_url": pdf_url,
+                            "pdf_date": pdf_date,
+                            "person_name": person_name,
+                            "title": name_info.get("title", ""),
+                            "first_name": name_info.get("first_name", ""),
+                            "middle_name": name_info.get("middle_name", ""),
+                            "last_name": name_info.get("last_name", ""),
+                            "role": name_info.get("role", ""),
+                            "category": name_info["category"],
+                            "confidence": CONFIDENCE_MAP.get(name_info["category"], "low"),
+                            "context": name_info["context"][:100],
+                        }
+                    )
 
         if church_name_count > 0:
             churches_with_names += 1
@@ -2587,12 +3094,27 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     csv_path = state_dir / "bulletin_names.csv"
     if all_names:
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=[
-                "church_name", "church_slug", "city", "church_url",
-                "pdf_file", "pdf_url", "pdf_date",
-                "person_name", "title", "first_name", "middle_name", "last_name",
-                "role", "category", "confidence", "confidence_score", "context"
-            ])
+            writer = csv.DictWriter(
+                f,
+                fieldnames=[
+                    "church_name",
+                    "church_slug",
+                    "city",
+                    "church_url",
+                    "pdf_file",
+                    "pdf_url",
+                    "pdf_date",
+                    "person_name",
+                    "title",
+                    "first_name",
+                    "middle_name",
+                    "last_name",
+                    "role",
+                    "category",
+                    "confidence",
+                    "context",
+                ],
+            )
             writer.writeheader()
             writer.writerows(all_names)
 
@@ -2601,7 +3123,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(all_names, f, indent=2)
 
-    logger.info(f"\n=== Extraction complete ===")
+    logger.info("\n=== Extraction complete ===")
     logger.info(f"  {total_names} unique names (per-church) from {churches_with_names} churches")
     logger.info(f"  CSV: {csv_path}")
     logger.info(f"  JSON: {json_path}")
@@ -2614,36 +3136,26 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     save_progress(state_dir, progress)
 
 
-def run_clean(state_name: str, state_dir: Path, rescore: bool = False):
+def run_clean(state_name: str, state_dir: Path):
     """Re-clean existing extracted names using updated cleaning/validation logic.
 
     Reads bulletin_names.json, applies clean_extracted_name() + is_valid_name()
     filters, and rewrites both CSV and JSON. Use after updating blocklists or
     cleaning rules to fix existing data without re-extracting from PDFs.
 
-    With --rescore: also re-scores all names using SSA/Census dictionary data
-    and writes confidence_score column.
-
-    Usage:
-        python run_bulletin_scraper.py clean arizona florida georgia
-        python run_bulletin_scraper.py clean arizona --rescore
+    Usage: python run_bulletin_scraper.py clean arizona florida georgia
     """
     json_path = state_dir / "bulletin_names.json"
     if not json_path.exists():
         logger.error(f"No bulletin_names.json found for {state_name}. Run 'extract' phase first.")
         return
 
-    if rescore:
-        _load_reference_data()
-
-    with open(json_path, "r", encoding="utf-8") as f:
+    with open(json_path, encoding="utf-8") as f:
         all_names = json.load(f)
 
     original_count = len(all_names)
     cleaned_names = []
     removed_count = 0
-    rescored_count = 0
-    confidence_changes = {"up": 0, "down": 0, "same": 0}
 
     # Track unique names per church (same dedup logic as run_extract)
     church_seen_names = {}  # slug -> set of lowercased names
@@ -2682,41 +3194,33 @@ def run_clean(state_name: str, state_dir: Path, rescore: bool = False):
             entry["last_name"] = name_parts.get("last_name", "")
             entry["title"] = name_parts.get("title", "")
 
-        # Re-score confidence if requested
-        if rescore:
-            old_conf = entry.get("confidence", "")
-            cat = entry.get("category", "")
-            new_score = score_name_confidence(cleaned, cat)
-            new_conf = confidence_label(new_score)
-            entry["confidence_score"] = new_score
-            entry["confidence"] = new_conf
-            rescored_count += 1
-            if new_conf != old_conf:
-                # Track direction of change
-                conf_order = {"low": 0, "medium": 1, "high": 2}
-                old_val = conf_order.get(old_conf, 1)
-                new_val = conf_order.get(new_conf, 1)
-                if new_val > old_val:
-                    confidence_changes["up"] += 1
-                elif new_val < old_val:
-                    confidence_changes["down"] += 1
-                else:
-                    confidence_changes["same"] += 1
-            else:
-                confidence_changes["same"] += 1
-
         cleaned_names.append(entry)
 
     # Write cleaned CSV
     csv_path = state_dir / "bulletin_names.csv"
     if cleaned_names:
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=[
-                "church_name", "church_slug", "city", "church_url",
-                "pdf_file", "pdf_url", "pdf_date",
-                "person_name", "title", "first_name", "middle_name", "last_name",
-                "role", "category", "confidence", "confidence_score", "context"
-            ])
+            writer = csv.DictWriter(
+                f,
+                fieldnames=[
+                    "church_name",
+                    "church_slug",
+                    "city",
+                    "church_url",
+                    "pdf_file",
+                    "pdf_url",
+                    "pdf_date",
+                    "person_name",
+                    "title",
+                    "first_name",
+                    "middle_name",
+                    "last_name",
+                    "role",
+                    "category",
+                    "confidence",
+                    "context",
+                ],
+            )
             writer.writeheader()
             writer.writerows(cleaned_names)
 
@@ -2732,60 +3236,44 @@ def run_clean(state_name: str, state_dir: Path, rescore: bool = False):
     logger.info(f"  CSV: {csv_path}")
     logger.info(f"  JSON: {json_path}")
 
-    if rescore:
-        logger.info(f"\n  Re-scored: {rescored_count:,} names")
-        logger.info(f"    Confidence UP:   {confidence_changes['up']:,}")
-        logger.info(f"    Confidence DOWN: {confidence_changes['down']:,}")
-        logger.info(f"    Confidence SAME: {confidence_changes['same']:,}")
-        # Score distribution
-        score_buckets = {"high (>=0.7)": 0, "medium (0.4-0.69)": 0, "low (<0.4)": 0}
-        for entry in cleaned_names:
-            s = entry.get("confidence_score", 0)
-            if s >= 0.7:
-                score_buckets["high (>=0.7)"] += 1
-            elif s >= 0.4:
-                score_buckets["medium (0.4-0.69)"] += 1
-            else:
-                score_buckets["low (<0.4)"] += 1
-        logger.info(f"    Score distribution:")
-        for bucket, count in score_buckets.items():
-            pct_b = (count / len(cleaned_names) * 100) if cleaned_names else 0
-            logger.info(f"      {bucket}: {count:,} ({pct_b:.1f}%)")
-
 
 # ── CLI Entry Point ───────────────────────────────────────────────────────────
+
 
 def main():
     parser = argparse.ArgumentParser(
         description="Scrape church bulletins, download PDFs, and extract names"
     )
-    parser.add_argument("phase", choices=["discover", "download", "extract", "clean", "all"],
-                       help="Which phase to run")
-    parser.add_argument("states", nargs="+",
-                       help="State names or 'all' for all states")
-    parser.add_argument("--limit", type=int, default=0,
-                       help="Limit number of churches to process (for testing)")
-    parser.add_argument("--resume", action="store_true",
-                       help="Resume from where we left off")
-    parser.add_argument("--retry-no-url", action="store_true",
-                       help=(
-                           "Re-check churches that were previously skipped because they "
-                           "had no resolved URL (status='no_url' in progress). Use after "
-                           "running URL resolver --retry-failed to pick up newly resolved "
-                           "URLs. Implies --resume for all other churches."
-                       ))
-    parser.add_argument("--retry-no-pdfs", action="store_true",
-                       help=(
-                           "Re-run discovery ONLY for churches that were found but got 0 PDFs "
-                           "(e.g. LPi widgets, eCatholic sites that need a headless browser). "
-                           "Implies --resume for churches that already have PDFs. "
-                           "After discovery, automatically runs download + extract phases."
-                       ))
-    parser.add_argument("--rescore", action="store_true",
-                       help=(
-                           "Re-score all names using SSA/Census dictionary data "
-                           "(used with 'clean' phase). Adds confidence_score column."
-                       ))
+    parser.add_argument(
+        "phase",
+        choices=["discover", "download", "extract", "clean", "all"],
+        help="Which phase to run",
+    )
+    parser.add_argument("states", nargs="+", help="State names or 'all' for all states")
+    parser.add_argument(
+        "--limit", type=int, default=0, help="Limit number of churches to process (for testing)"
+    )
+    parser.add_argument("--resume", action="store_true", help="Resume from where we left off")
+    parser.add_argument(
+        "--retry-no-url",
+        action="store_true",
+        help=(
+            "Re-check churches that were previously skipped because they "
+            "had no resolved URL (status='no_url' in progress). Use after "
+            "running URL resolver --retry-failed to pick up newly resolved "
+            "URLs. Implies --resume for all other churches."
+        ),
+    )
+    parser.add_argument(
+        "--retry-no-pdfs",
+        action="store_true",
+        help=(
+            "Re-run discovery ONLY for churches that were found but got 0 PDFs "
+            "(e.g. LPi widgets, eCatholic sites that need a headless browser). "
+            "Implies --resume for churches that already have PDFs. "
+            "After discovery, automatically runs download + extract phases."
+        ),
+    )
 
     args = parser.parse_args()
     # --retry-no-url implies --resume (keep existing progress, just retry no_url ones)
@@ -2799,10 +3287,13 @@ def main():
 
     # Resolve state names
     if "all" in args.states:
-        state_dirs = sorted([
-            d for d in OUTPUT_DIR.iterdir()
-            if d.is_dir() and (d / "church_details.jsonl").exists()
-        ])
+        state_dirs = sorted(
+            [
+                d
+                for d in OUTPUT_DIR.iterdir()
+                if d.is_dir() and (d / "church_details.jsonl").exists()
+            ]
+        )
     else:
         state_dirs = []
         for name in args.states:
@@ -2828,7 +3319,7 @@ def main():
 
         # Clean phase: just re-filter existing data, no need for churches/progress
         if args.phase == "clean":
-            run_clean(state_name, state_dir, rescore=args.rescore)
+            run_clean(state_name, state_dir)
             continue
 
         # Load churches
@@ -2849,8 +3340,7 @@ def main():
         if args.retry_no_url:
             discovered_dict = progress.get("discovered", {})
             no_url_slugs = [
-                slug for slug, info in discovered_dict.items()
-                if info.get("status") == "no_url"
+                slug for slug, info in discovered_dict.items() if info.get("status") == "no_url"
             ]
             for slug in no_url_slugs:
                 del discovered_dict[slug]
@@ -2866,13 +3356,13 @@ def main():
         if args.retry_no_pdfs:
             discovered_dict = progress.get("discovered", {})
             no_pdf_slugs = [
-                slug for slug, info in discovered_dict.items()
+                slug
+                for slug, info in discovered_dict.items()
                 if info.get("status") == "found" and not info.get("pdfs")
             ]
             # Also retry "not_found" entries (might succeed with browser)
             not_found_slugs = [
-                slug for slug, info in discovered_dict.items()
-                if info.get("status") == "not_found"
+                slug for slug, info in discovered_dict.items() if info.get("status") == "not_found"
             ]
             retry_slugs = no_pdf_slugs + not_found_slugs
             for slug in retry_slugs:
@@ -2886,19 +3376,23 @@ def main():
                 save_progress(state_dir, progress)
 
         if args.phase in ("discover", "all"):
-            discovered = run_discover(state_name, state_dir, with_urls, progress, resume=args.resume)
+            discovered = run_discover(
+                state_name, state_dir, with_urls, progress, resume=args.resume
+            )
         else:
             # Load existing discovery data
             discovery_path = state_dir / "bulletin_discovery.json"
             if discovery_path.exists():
-                with open(discovery_path, "r", encoding="utf-8") as f:
+                with open(discovery_path, encoding="utf-8") as f:
                     discovered = json.load(f)
             else:
-                logger.error(f"No discovery data found. Run 'discover' phase first.")
+                logger.error("No discovery data found. Run 'discover' phase first.")
                 continue
 
         if args.phase in ("download", "all"):
-            downloaded = run_download(state_name, state_dir, discovered, progress, resume=args.resume)
+            downloaded = run_download(
+                state_name, state_dir, discovered, progress, resume=args.resume
+            )
         else:
             downloaded = progress.get("downloaded", {})
 

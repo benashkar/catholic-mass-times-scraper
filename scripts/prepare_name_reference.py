@@ -18,8 +18,6 @@ Output:
 
 import csv
 import io
-import os
-import sys
 import zipfile
 from pathlib import Path
 
@@ -37,57 +35,259 @@ CENSUS_URL = "https://www2.census.gov/topics/genealogy/2010surnames/names.zip"
 # Common English words that should never be treated as person names.
 # Curated from bulletin junk analysis — words that pass capitalization checks
 # but are clearly not names.
-NON_NAME_WORDS = sorted({
-    # Prepositions / conjunctions / articles
-    "the", "and", "for", "from", "with", "that", "this", "are", "was",
-    "has", "have", "had", "their", "there", "where", "when", "what",
-    "which", "also", "than", "them", "not", "out", "who", "how", "its",
-    "may", "can", "you", "your", "will", "but", "all", "our", "been",
-    "being", "into", "over", "under", "about", "after", "before",
-    # Action verbs (bulletin event descriptions)
-    "donate", "register", "attend", "schedule", "update", "celebrate",
-    "hosting", "join", "call", "email", "visit", "contact", "please",
-    "welcome", "support", "help", "need", "serve", "bring", "submit",
-    "prepare", "complete", "provide", "receive",
-    # Common nouns (bulletin vocabulary)
-    "festival", "hospital", "clinic", "county", "height", "heights",
-    "church", "parish", "school", "center", "hall", "room", "chapel",
-    "office", "street", "avenue", "boulevard", "road", "drive", "lane",
-    "table", "prayer", "music", "director", "ministers", "ministry",
-    "council", "meeting", "committee", "board", "group", "team",
-    "club", "program", "service", "services", "class", "classes",
-    "event", "events", "dinner", "lunch", "breakfast", "picnic",
-    "sale", "store", "shop", "bank", "kitchen", "pantry", "food",
-    "soup", "thrift", "drive", "raffle", "bazaar", "auction",
-    # Days and months
-    "sunday", "monday", "tuesday", "wednesday", "thursday", "friday",
-    "saturday", "january", "february", "march", "april", "june",
-    "july", "august", "september", "october", "november", "december",
-    # Religious terms
-    "mass", "masses", "confession", "communion", "lent", "easter",
-    "christmas", "holy", "blessed", "sacred", "saint", "rosary",
-    "adoration", "benediction", "sacrament", "eucharist", "gospel",
-    "amen", "liturgy", "novena", "retreat", "bible", "scripture",
-    "baptism", "confirmation", "marriage", "funeral", "anointing",
-    # Organization words
-    "columbus", "columbian", "knights", "knight", "society", "council",
-    "association", "foundation", "corporation", "insurance", "attorney",
-    # Food/drink (bulletin ads)
-    "salad", "pasta", "pizza", "chicken", "sausage", "pork", "beef",
-    "taco", "tamale", "tamales", "chocolate", "dessert", "recipe",
-    # Commercial/business
-    "plumbing", "roofing", "heating", "cooling", "dental", "pharmacy",
-    "flooring", "carpet", "landscaping", "electrician", "remodeling",
-    "discount", "coupon", "insurance", "realtor",
-    # Calendar/time
-    "daily", "weekly", "monthly", "annual", "weekday", "weekend",
-    "morning", "evening", "night", "today", "tomorrow", "yesterday",
-    # Misc
-    "bulletin", "newsletter", "online", "download", "facebook",
-    "instagram", "twitter", "website", "flocknote",
-    "donation", "donations", "contribution", "volunteer", "volunteers",
-    "needed", "upcoming", "recently", "connected", "alert",
-})
+NON_NAME_WORDS = sorted(
+    {
+        # Prepositions / conjunctions / articles
+        "the",
+        "and",
+        "for",
+        "from",
+        "with",
+        "that",
+        "this",
+        "are",
+        "was",
+        "has",
+        "have",
+        "had",
+        "their",
+        "there",
+        "where",
+        "when",
+        "what",
+        "which",
+        "also",
+        "than",
+        "them",
+        "not",
+        "out",
+        "who",
+        "how",
+        "its",
+        "may",
+        "can",
+        "you",
+        "your",
+        "will",
+        "but",
+        "all",
+        "our",
+        "been",
+        "being",
+        "into",
+        "over",
+        "under",
+        "about",
+        "after",
+        "before",
+        # Action verbs (bulletin event descriptions)
+        "donate",
+        "register",
+        "attend",
+        "schedule",
+        "update",
+        "celebrate",
+        "hosting",
+        "join",
+        "call",
+        "email",
+        "visit",
+        "contact",
+        "please",
+        "welcome",
+        "support",
+        "help",
+        "need",
+        "serve",
+        "bring",
+        "submit",
+        "prepare",
+        "complete",
+        "provide",
+        "receive",
+        # Common nouns (bulletin vocabulary)
+        "festival",
+        "hospital",
+        "clinic",
+        "county",
+        "height",
+        "heights",
+        "church",
+        "parish",
+        "school",
+        "center",
+        "hall",
+        "room",
+        "chapel",
+        "office",
+        "street",
+        "avenue",
+        "boulevard",
+        "road",
+        "drive",
+        "lane",
+        "table",
+        "prayer",
+        "music",
+        "director",
+        "ministers",
+        "ministry",
+        "council",
+        "meeting",
+        "committee",
+        "board",
+        "group",
+        "team",
+        "club",
+        "program",
+        "service",
+        "services",
+        "class",
+        "classes",
+        "event",
+        "events",
+        "dinner",
+        "lunch",
+        "breakfast",
+        "picnic",
+        "sale",
+        "store",
+        "shop",
+        "bank",
+        "kitchen",
+        "pantry",
+        "food",
+        "soup",
+        "thrift",
+        "drive",
+        "raffle",
+        "bazaar",
+        "auction",
+        # Days and months
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "january",
+        "february",
+        "march",
+        "april",
+        "june",
+        "july",
+        "august",
+        "september",
+        "october",
+        "november",
+        "december",
+        # Religious terms
+        "mass",
+        "masses",
+        "confession",
+        "communion",
+        "lent",
+        "easter",
+        "christmas",
+        "holy",
+        "blessed",
+        "sacred",
+        "saint",
+        "rosary",
+        "adoration",
+        "benediction",
+        "sacrament",
+        "eucharist",
+        "gospel",
+        "amen",
+        "liturgy",
+        "novena",
+        "retreat",
+        "bible",
+        "scripture",
+        "baptism",
+        "confirmation",
+        "marriage",
+        "funeral",
+        "anointing",
+        # Organization words
+        "columbus",
+        "columbian",
+        "knights",
+        "knight",
+        "society",
+        "council",
+        "association",
+        "foundation",
+        "corporation",
+        "insurance",
+        "attorney",
+        # Food/drink (bulletin ads)
+        "salad",
+        "pasta",
+        "pizza",
+        "chicken",
+        "sausage",
+        "pork",
+        "beef",
+        "taco",
+        "tamale",
+        "tamales",
+        "chocolate",
+        "dessert",
+        "recipe",
+        # Commercial/business
+        "plumbing",
+        "roofing",
+        "heating",
+        "cooling",
+        "dental",
+        "pharmacy",
+        "flooring",
+        "carpet",
+        "landscaping",
+        "electrician",
+        "remodeling",
+        "discount",
+        "coupon",
+        "insurance",
+        "realtor",
+        # Calendar/time
+        "daily",
+        "weekly",
+        "monthly",
+        "annual",
+        "weekday",
+        "weekend",
+        "morning",
+        "evening",
+        "night",
+        "today",
+        "tomorrow",
+        "yesterday",
+        # Misc
+        "bulletin",
+        "newsletter",
+        "online",
+        "download",
+        "facebook",
+        "instagram",
+        "twitter",
+        "website",
+        "flocknote",
+        "donation",
+        "donations",
+        "contribution",
+        "volunteer",
+        "volunteers",
+        "needed",
+        "upcoming",
+        "recently",
+        "connected",
+        "alert",
+    }
+)
 
 
 def download_file(url, desc="file"):
@@ -127,7 +327,7 @@ def prepare_ssa_names(zip_bytes):
                 for row in reader:
                     if len(row) < 3:
                         continue
-                    name, sex, count = row[0], row[1], int(row[2])
+                    name, _sex, count = row[0], row[1], int(row[2])
                     key = name.lower()
                     if key not in name_counts:
                         name_counts[key] = {"name": name, "total_count": 0}
@@ -219,11 +419,13 @@ def prepare_census_surnames(zip_bytes):
                     rank = int(rank)
                 except ValueError:
                     rank = 0
-                rows.append({
-                    "name": display_name,
-                    "count": count,
-                    "rank": rank,
-                })
+                rows.append(
+                    {
+                        "name": display_name,
+                        "count": count,
+                        "rank": rank,
+                    }
+                )
 
     out_path = REFERENCE_DIR / "census_surnames.csv"
     with open(out_path, "w", newline="", encoding="utf-8") as f:
@@ -266,8 +468,10 @@ def main():
                 print(f"  Found local {local_alldata}, processing...")
                 ssa_count = prepare_ssa_names_from_text(local_alldata.read_bytes())
             else:
-                print("  No SSA data available. Place names.zip or ssa_alldata.txt "
-                      "in data/reference/ and re-run.")
+                print(
+                    "  No SSA data available. Place names.zip or ssa_alldata.txt "
+                    "in data/reference/ and re-run."
+                )
 
     # Download Census surnames
     try:
@@ -281,7 +485,7 @@ def main():
     write_non_names()
 
     print(f"\n{'='*50}")
-    print(f"Reference data preparation complete:")
+    print("Reference data preparation complete:")
     print(f"  SSA first names:    {ssa_count:,}")
     print(f"  Census surnames:    {census_count:,}")
     print(f"  Non-name words:     {len(NON_NAME_WORDS)}")

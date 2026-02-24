@@ -22,18 +22,18 @@ EXPECTED RUNTIME:
 """
 
 import sys
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
-from datetime import datetime, timezone, date, timedelta
 
 # Add project root to path so imports work when running this script directly
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+import csv
 
 from config.settings import CHURCHES_DIR, OUTPUT_DIR
 from src.scrapers.catholic_index import scrape_church_detail
 from src.utils.file_io import load_from_csv, save_to_json
 from src.utils.logger import get_logger
-
-import csv
 
 logger = get_logger(__name__)
 
@@ -68,10 +68,10 @@ DAY_CODE_TO_FULL = {
 # Recurrence pattern -> which occurrence in the month (1st, 2nd, 3rd, 4th, last)
 # and which weekday. Used for "first_friday_(recurring)" etc.
 PATTERN_TO_OCCURRENCE = {
-    "first_friday_(recurring)":       (1, 4),   # 1st Friday (weekday 4)
-    "first_saturday_(recurring)":     (1, 5),   # 1st Saturday (weekday 5)
-    "first_sunday":                   (1, 6),   # 1st Sunday (weekday 6)
-    "thursday_(before_first_friday)": None,      # Special case — computed relative to first friday
+    "first_friday_(recurring)": (1, 4),  # 1st Friday (weekday 4)
+    "first_saturday_(recurring)": (1, 5),  # 1st Saturday (weekday 5)
+    "first_sunday": (1, 6),  # 1st Sunday (weekday 6)
+    "thursday_(before_first_friday)": None,  # Special case — computed relative to first friday
 }
 
 
@@ -218,6 +218,7 @@ def format_time_12h(time_str: str | None) -> str:
 # Main scrape logic
 # ============================================================================
 
+
 def run_full_scrape():
     """
     Scrape full detail for all churches in the master list, then generate
@@ -243,17 +244,17 @@ def run_full_scrape():
     fail_count = 0
 
     for i, church in enumerate(master_list, 1):
-        slug = church['slug']
-        name = church['name']
-        city = church.get('city', '?')
-        communities = church.get('serving_communities', '')
+        slug = church["slug"]
+        name = church["name"]
+        city = church.get("city", "?")
+        communities = church.get("serving_communities", "")
 
         logger.info(f"[{i}/{len(master_list)}] {name} ({city}) — serves: {communities}")
 
         detail = scrape_church_detail(slug)
         if detail:
             # Add serving_communities to the detail for the output
-            detail['serving_communities'] = communities
+            detail["serving_communities"] = communities
             all_details.append(detail)
             success_count += 1
         else:
@@ -263,12 +264,15 @@ def run_full_scrape():
     # Save raw JSON (all church details)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     json_path = OUTPUT_DIR / "all_churches_detail.json"
-    save_to_json({
-        "scrape_date": datetime.now(timezone.utc).isoformat(),
-        "churches_scraped": success_count,
-        "churches_failed": fail_count,
-        "church_details": all_details,
-    }, json_path)
+    save_to_json(
+        {
+            "scrape_date": datetime.now(UTC).isoformat(),
+            "churches_scraped": success_count,
+            "churches_failed": fail_count,
+            "church_details": all_details,
+        },
+        json_path,
+    )
     logger.info(f"\nRaw JSON saved to: {json_path}")
 
     # ========================================================================
@@ -278,47 +282,60 @@ def run_full_scrape():
 
     csv_rows = []
     for detail in all_details:
-        church = detail['church']
-        communities = detail.get('serving_communities', '')
+        church = detail["church"]
+        communities = detail.get("serving_communities", "")
 
-        for category, services in detail['services'].items():
+        for category, services in detail["services"].items():
             for svc in services:
-                csv_rows.append({
-                    'Church': church['name'],
-                    'Address': f"{church.get('street', '')}, {church.get('city', '')}, {church.get('stateRegion', '')} {church.get('postalCode', '')}",
-                    'Phone': church.get('phone', ''),
-                    'Communities Served': communities,
-                    'Category': category,
-                    'Day': svc.get('dayOfWeek') or '',
-                    'Time Start': format_time_12h(svc.get('timeStart')),
-                    'Time End': format_time_12h(svc.get('timeEnd')) if svc.get('timeEnd') else '',
-                    'Service Name': svc.get('displayName', ''),
-                    'Schedule Type': svc.get('scheduleType', ''),
-                    'Language': svc.get('language') or 'English',
-                    'Location': svc.get('location') or '',
-                    'Pattern': svc.get('pattern') or '',
-                    'Event Date': svc.get('eventDate') or '',
-                    'Time Relation': svc.get('timeRelation') or '',
-                    'Reference Service': svc.get('referenceService') or '',
-                    'Notes': svc.get('notes') or '',
-                })
+                csv_rows.append(
+                    {
+                        "Church": church["name"],
+                        "Address": f"{church.get('street', '')}, {church.get('city', '')}, {church.get('stateRegion', '')} {church.get('postalCode', '')}",
+                        "Phone": church.get("phone", ""),
+                        "Communities Served": communities,
+                        "Category": category,
+                        "Day": svc.get("dayOfWeek") or "",
+                        "Time Start": format_time_12h(svc.get("timeStart")),
+                        "Time End": format_time_12h(svc.get("timeEnd"))
+                        if svc.get("timeEnd")
+                        else "",
+                        "Service Name": svc.get("displayName", ""),
+                        "Schedule Type": svc.get("scheduleType", ""),
+                        "Language": svc.get("language") or "English",
+                        "Location": svc.get("location") or "",
+                        "Pattern": svc.get("pattern") or "",
+                        "Event Date": svc.get("eventDate") or "",
+                        "Time Relation": svc.get("timeRelation") or "",
+                        "Reference Service": svc.get("referenceService") or "",
+                        "Notes": svc.get("notes") or "",
+                    }
+                )
 
     # Sort: by Church name, then by category priority, then by day, then by time
-    category_order = {'Mass': 1, 'Confession': 2, 'Adoration': 3, 'Devotions': 4,
-                      'Education': 5, 'Community': 6, 'Other': 7}
-    day_order = {'Mon': 1, 'Tue': 2, 'Wed': 3, 'Thu': 4, 'Fri': 5, 'Sat': 6, 'Sun': 7, '': 8}
+    category_order = {
+        "Mass": 1,
+        "Confession": 2,
+        "Adoration": 3,
+        "Devotions": 4,
+        "Education": 5,
+        "Community": 6,
+        "Other": 7,
+    }
+    day_order = {"Mon": 1, "Tue": 2, "Wed": 3, "Thu": 4, "Fri": 5, "Sat": 6, "Sun": 7, "": 8}
 
-    csv_rows.sort(key=lambda r: (
-        r['Church'],
-        category_order.get(r['Category'], 99),
-        day_order.get(r['Day'], 99),
-        r['Time Start'],
-    ))
+    csv_rows.sort(
+        key=lambda r: (
+            r["Church"],
+            category_order.get(r["Category"], 99),
+            day_order.get(r["Day"], 99),
+            r["Time Start"],
+        )
+    )
 
     # Write the all-services CSV
     services_csv_path = OUTPUT_DIR / "all_services.csv"
     if csv_rows:
-        with open(services_csv_path, 'w', newline='', encoding='utf-8-sig') as f:
+        with open(services_csv_path, "w", newline="", encoding="utf-8-sig") as f:
             writer = csv.DictWriter(f, fieldnames=csv_rows[0].keys())
             writer.writeheader()
             writer.writerows(csv_rows)
@@ -333,16 +350,14 @@ def run_full_scrape():
     dated_rows = []
 
     for detail in all_details:
-        church = detail['church']
-        communities = detail.get('serving_communities', '')
+        church = detail["church"]
+        communities = detail.get("serving_communities", "")
 
-        for category, services in detail['services'].items():
+        for category, services in detail["services"].items():
             for svc in services:
-                day_code = svc.get('dayOfWeek')
-                event_date_str = svc.get('eventDate')
-                pattern = svc.get('pattern')
-                schedule_type = svc.get('scheduleType', '')
-
+                day_code = svc.get("dayOfWeek")
+                event_date_str = svc.get("eventDate")
+                pattern = svc.get("pattern")
                 # Determine the actual dates this service occurs on
                 actual_dates = []
 
@@ -367,35 +382,43 @@ def run_full_scrape():
 
                 # Create a row for each actual date
                 for actual_date in actual_dates:
-                    dated_rows.append({
-                        'Date': actual_date.strftime('%a, %b %d, %Y'),
-                        'Date Sort': actual_date.isoformat(),
-                        'Day': DAY_CODE_TO_FULL.get(day_code, day_code or actual_date.strftime('%A')),
-                        'Church': church['name'],
-                        'Address': f"{church.get('street', '')}, {church.get('city', '')}",
-                        'Phone': church.get('phone', ''),
-                        'Communities Served': communities,
-                        'Category': category,
-                        'Time': format_time_12h(svc.get('timeStart')),
-                        'End Time': format_time_12h(svc.get('timeEnd')) if svc.get('timeEnd') else '',
-                        'Service Name': svc.get('displayName', ''),
-                        'Language': svc.get('language') or 'English',
-                        'Location': svc.get('location') or '',
-                        'Notes': svc.get('notes') or '',
-                    })
+                    dated_rows.append(
+                        {
+                            "Date": actual_date.strftime("%a, %b %d, %Y"),
+                            "Date Sort": actual_date.isoformat(),
+                            "Day": DAY_CODE_TO_FULL.get(
+                                day_code, day_code or actual_date.strftime("%A")
+                            ),
+                            "Church": church["name"],
+                            "Address": f"{church.get('street', '')}, {church.get('city', '')}",
+                            "Phone": church.get("phone", ""),
+                            "Communities Served": communities,
+                            "Category": category,
+                            "Time": format_time_12h(svc.get("timeStart")),
+                            "End Time": format_time_12h(svc.get("timeEnd"))
+                            if svc.get("timeEnd")
+                            else "",
+                            "Service Name": svc.get("displayName", ""),
+                            "Language": svc.get("language") or "English",
+                            "Location": svc.get("location") or "",
+                            "Notes": svc.get("notes") or "",
+                        }
+                    )
 
     # Sort dated rows by date, then church, then time
-    dated_rows.sort(key=lambda r: (
-        r['Date Sort'],
-        category_order.get(r['Category'], 99),
-        r['Church'],
-        r['Time'],
-    ))
+    dated_rows.sort(
+        key=lambda r: (
+            r["Date Sort"],
+            category_order.get(r["Category"], 99),
+            r["Church"],
+            r["Time"],
+        )
+    )
 
     # Write the dated services CSV
     dated_csv_path = OUTPUT_DIR / "dated_services.csv"
     if dated_rows:
-        with open(dated_csv_path, 'w', newline='', encoding='utf-8-sig') as f:
+        with open(dated_csv_path, "w", newline="", encoding="utf-8-sig") as f:
             writer = csv.DictWriter(f, fieldnames=dated_rows[0].keys())
             writer.writeheader()
             writer.writerows(dated_rows)
@@ -409,7 +432,7 @@ def run_full_scrape():
     logger.info(f"Churches scraped: {success_count}/{len(master_list)} ({fail_count} failed)")
     logger.info(f"Total services found: {len(csv_rows)}")
     logger.info(f"Dated service instances (next 2 weeks): {len(dated_rows)}")
-    logger.info(f"\nOutput files:")
+    logger.info("\nOutput files:")
     logger.info(f"  Raw JSON:          {json_path}")
     logger.info(f"  All Services CSV:  {services_csv_path}")
     logger.info(f"  Dated Services CSV: {dated_csv_path}")

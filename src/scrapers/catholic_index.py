@@ -28,16 +28,17 @@ USAGE:
     detail = scrape_church_detail("us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf")
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
+from config.settings import CATHOLIC_INDEX_BASE_URL, CATHOLIC_INDEX_MASS_TIMES_URL
+from src.parsers.rsc_extractor import (
+    extract_church_detail,
+    extract_city_metadata,
+    extract_initial_churches,
+    extract_rsc_chunks,
+)
 from src.utils.http import fetch_page
 from src.utils.logger import get_logger
-from src.parsers.rsc_extractor import (
-    extract_rsc_chunks,
-    extract_initial_churches,
-    extract_city_metadata,
-    extract_church_detail,
-)
-from config.settings import CATHOLIC_INDEX_BASE_URL, CATHOLIC_INDEX_MASS_TIMES_URL
 
 logger = get_logger(__name__)
 
@@ -63,19 +64,57 @@ def _city_to_slug(city: str, state: str = "ohio") -> str:
     # Map state abbreviations to full names (lowercase, hyphenated for URLs)
     # CatholicIndex URL format: /mass-times/{city}-{state}
     state_map = {
-        "AL": "alabama", "AK": "alaska", "AZ": "arizona", "AR": "arkansas",
-        "CA": "california", "CO": "colorado", "CT": "connecticut", "DE": "delaware",
-        "FL": "florida", "GA": "georgia", "HI": "hawaii", "ID": "idaho",
-        "IL": "illinois", "IN": "indiana", "IA": "iowa", "KS": "kansas",
-        "KY": "kentucky", "LA": "louisiana", "ME": "maine", "MD": "maryland",
-        "MA": "massachusetts", "MI": "michigan", "MN": "minnesota", "MS": "mississippi",
-        "MO": "missouri", "MT": "montana", "NE": "nebraska", "NV": "nevada",
-        "NH": "new-hampshire", "NJ": "new-jersey", "NM": "new-mexico", "NY": "new-york",
-        "NC": "north-carolina", "ND": "north-dakota", "OH": "ohio", "OK": "oklahoma",
-        "OR": "oregon", "PA": "pennsylvania", "RI": "rhode-island", "SC": "south-carolina",
-        "SD": "south-dakota", "TN": "tennessee", "TX": "texas", "UT": "utah",
-        "VT": "vermont", "VA": "virginia", "WA": "washington", "WV": "west-virginia",
-        "WI": "wisconsin", "WY": "wyoming", "DC": "district-of-columbia",
+        "AL": "alabama",
+        "AK": "alaska",
+        "AZ": "arizona",
+        "AR": "arkansas",
+        "CA": "california",
+        "CO": "colorado",
+        "CT": "connecticut",
+        "DE": "delaware",
+        "FL": "florida",
+        "GA": "georgia",
+        "HI": "hawaii",
+        "ID": "idaho",
+        "IL": "illinois",
+        "IN": "indiana",
+        "IA": "iowa",
+        "KS": "kansas",
+        "KY": "kentucky",
+        "LA": "louisiana",
+        "ME": "maine",
+        "MD": "maryland",
+        "MA": "massachusetts",
+        "MI": "michigan",
+        "MN": "minnesota",
+        "MS": "mississippi",
+        "MO": "missouri",
+        "MT": "montana",
+        "NE": "nebraska",
+        "NV": "nevada",
+        "NH": "new-hampshire",
+        "NJ": "new-jersey",
+        "NM": "new-mexico",
+        "NY": "new-york",
+        "NC": "north-carolina",
+        "ND": "north-dakota",
+        "OH": "ohio",
+        "OK": "oklahoma",
+        "OR": "oregon",
+        "PA": "pennsylvania",
+        "RI": "rhode-island",
+        "SC": "south-carolina",
+        "SD": "south-dakota",
+        "TN": "tennessee",
+        "TX": "texas",
+        "UT": "utah",
+        "VT": "vermont",
+        "VA": "virginia",
+        "WA": "washington",
+        "WV": "west-virginia",
+        "WI": "wisconsin",
+        "WY": "wyoming",
+        "DC": "district-of-columbia",
     }
 
     # Convert state abbreviation to full name if needed
@@ -155,16 +194,14 @@ def discover_churches(city: str, state: str = "OH") -> list[dict]:
     churches = extract_initial_churches(chunks)
 
     # Add scraping metadata to each church record
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
     for church in churches:
-        church['source_url'] = url
-        church['last_scraped'] = now
-        church['searched_city'] = city
-        church['searched_state'] = state
+        church["source_url"] = url
+        church["last_scraped"] = now
+        church["searched_city"] = city
+        church["searched_state"] = state
 
-    logger.info(
-        f"Found {len(churches)} churches within radius of {city}, {state}"
-    )
+    logger.info(f"Found {len(churches)} churches within radius of {city}, {state}")
 
     return churches
 
@@ -228,11 +265,11 @@ def scrape_church_detail(slug: str) -> dict | None:
         return None
 
     # Add scraping metadata
-    detail['source_url'] = url
-    detail['last_scraped'] = datetime.now(timezone.utc).isoformat()
+    detail["source_url"] = url
+    detail["last_scraped"] = datetime.now(UTC).isoformat()
 
-    church_name = detail.get('church', {}).get('name', 'unknown')
-    total = detail.get('totalServices', 0)
+    church_name = detail.get("church", {}).get("name", "unknown")
+    total = detail.get("totalServices", 0)
     logger.info(f"Successfully scraped {church_name}: {total} services")
 
     return detail

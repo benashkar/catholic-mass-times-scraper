@@ -3,10 +3,16 @@ Mass Times Browser — Navigate state → church (by slug) → services.
 Uses slug as unique church ID for navigation. Falls back to name matching
 for legacy URLs.
 """
-from flask import Blueprint, render_template, abort, redirect, url_for, request, Response
+
+from flask import Blueprint, Response, abort, render_template, request
+
 from app.data_loader import (
-    get_services, get_dated_services, get_church_website,
-    church_has_bulletin_names, _load_church_details_jsonl, get_bulletin_names,
+    _load_church_details_jsonl,
+    church_has_bulletin_names,
+    get_bulletin_names,
+    get_church_website,
+    get_dated_services,
+    get_services,
 )
 
 bp = Blueprint("mass_times", __name__, url_prefix="/mass-times")
@@ -89,7 +95,11 @@ def church_view(state, church_id):
         abort(404)
 
     # Try matching by slug first (unique ID)
-    church_services = services[services["church_slug"] == church_id] if "church_slug" in services.columns else services.iloc[0:0]
+    church_services = (
+        services[services["church_slug"] == church_id]
+        if "church_slug" in services.columns
+        else services.iloc[0:0]
+    )
 
     # Fallback: match by church_display (name with city disambiguation)
     if church_services.empty:
@@ -99,18 +109,21 @@ def church_view(state, church_id):
     if church_services.empty:
         church_services = services[services["Church"] == church_id]
         if not church_services.empty:
-            # If multiple slugs exist, show disambiguation page
-            unique_slugs = church_services["church_slug"].nunique() if "church_slug" in church_services.columns else 0
+            # If multiple addresses exist, show disambiguation page
             unique_addresses = church_services["Address"].nunique()
             if unique_addresses > 1:
                 options = (
                     church_services.groupby(
-                        "church_slug" if "church_slug" in church_services.columns else "church_display"
+                        "church_slug"
+                        if "church_slug" in church_services.columns
+                        else "church_display"
                     )
                     .agg(
                         church_display=("church_display", "first"),
                         Church=("Church", "first"),
-                        church_slug=("church_slug", "first") if "church_slug" in church_services.columns else ("church_display", "first"),
+                        church_slug=("church_slug", "first")
+                        if "church_slug" in church_services.columns
+                        else ("church_display", "first"),
                         address=("Address", "first"),
                         phone=("Phone", "first"),
                         city=("city", "first"),
@@ -225,13 +238,14 @@ def calendar_view(state):
 def calendar_download(state):
     """Download dated_services.csv as a file."""
     import os
+
     from app.data_loader import DATA_DIR
 
     path = os.path.join(DATA_DIR, state, "dated_services.csv")
     if not os.path.isfile(path):
         abort(404)
 
-    with open(path, "r", encoding="utf-8-sig") as f:
+    with open(path, encoding="utf-8-sig") as f:
         csv_content = f.read()
 
     return Response(

@@ -28,11 +28,10 @@ Usage:
 """
 
 import json
+import logging
 import os
 import sys
-import logging
 from collections import defaultdict
-from datetime import datetime
 
 # ---------------------------------------------------------------------------
 # Setup logging
@@ -48,19 +47,57 @@ logger = logging.getLogger(__name__)
 # State code mapping — maps directory names to 2-letter codes used in slugs
 # ---------------------------------------------------------------------------
 STATE_DIR_TO_CODE = {
-    'alabama': 'al', 'alaska': 'ak', 'arizona': 'az', 'arkansas': 'ar',
-    'california': 'ca', 'colorado': 'co', 'connecticut': 'ct', 'delaware': 'de',
-    'dc': 'dc', 'florida': 'fl', 'georgia': 'ga', 'hawaii': 'hi', 'idaho': 'id',
-    'illinois': 'il', 'indiana': 'in', 'iowa': 'ia', 'kansas': 'ks',
-    'kentucky': 'ky', 'louisiana': 'la', 'maine': 'me', 'maryland': 'md',
-    'massachusetts': 'ma', 'michigan': 'mi', 'minnesota': 'mn', 'mississippi': 'ms',
-    'missouri': 'mo', 'montana': 'mt', 'nebraska': 'ne', 'nevada': 'nv',
-    'new_hampshire': 'nh', 'new_jersey': 'nj', 'new_mexico': 'nm', 'new_york': 'ny',
-    'north_carolina': 'nc', 'north_dakota': 'nd', 'ohio': 'oh', 'oklahoma': 'ok',
-    'oregon': 'or', 'pennsylvania': 'pa', 'rhode_island': 'ri', 'south_carolina': 'sc',
-    'south_dakota': 'sd', 'tennessee': 'tn', 'texas': 'tx', 'utah': 'ut',
-    'vermont': 'vt', 'virginia': 'va', 'washington': 'wa', 'west_virginia': 'wv',
-    'wisconsin': 'wi', 'wyoming': 'wy',
+    "alabama": "al",
+    "alaska": "ak",
+    "arizona": "az",
+    "arkansas": "ar",
+    "california": "ca",
+    "colorado": "co",
+    "connecticut": "ct",
+    "delaware": "de",
+    "dc": "dc",
+    "florida": "fl",
+    "georgia": "ga",
+    "hawaii": "hi",
+    "idaho": "id",
+    "illinois": "il",
+    "indiana": "in",
+    "iowa": "ia",
+    "kansas": "ks",
+    "kentucky": "ky",
+    "louisiana": "la",
+    "maine": "me",
+    "maryland": "md",
+    "massachusetts": "ma",
+    "michigan": "mi",
+    "minnesota": "mn",
+    "mississippi": "ms",
+    "missouri": "mo",
+    "montana": "mt",
+    "nebraska": "ne",
+    "nevada": "nv",
+    "new_hampshire": "nh",
+    "new_jersey": "nj",
+    "new_mexico": "nm",
+    "new_york": "ny",
+    "north_carolina": "nc",
+    "north_dakota": "nd",
+    "ohio": "oh",
+    "oklahoma": "ok",
+    "oregon": "or",
+    "pennsylvania": "pa",
+    "rhode_island": "ri",
+    "south_carolina": "sc",
+    "south_dakota": "sd",
+    "tennessee": "tn",
+    "texas": "tx",
+    "utah": "ut",
+    "vermont": "vt",
+    "virginia": "va",
+    "washington": "wa",
+    "west_virginia": "wv",
+    "wisconsin": "wi",
+    "wyoming": "wy",
 }
 
 
@@ -73,10 +110,10 @@ def extract_slug_state(slug: str) -> str:
 
     Returns the state code, or '??' if the slug format is unexpected.
     """
-    parts = slug.split('-')
-    if len(parts) >= 3 and parts[0] == 'us':
+    parts = slug.split("-")
+    if len(parts) >= 3 and parts[0] == "us":
         return parts[1].lower()
-    return '??'
+    return "??"
 
 
 def extract_base_slug(slug: str) -> str:
@@ -88,10 +125,10 @@ def extract_base_slug(slug: str) -> str:
 
     Example: us-oh-ada-our-lady-of-lourdes-7728ad72 -> us-oh-ada-our-lady-of-lourdes
     """
-    parts = slug.rsplit('-', 1)
+    parts = slug.rsplit("-", 1)
     if len(parts) == 2 and len(parts[1]) == 8:
         # Verify it looks like a hex hash
-        if all(c in '0123456789abcdef' for c in parts[1]):
+        if all(c in "0123456789abcdef" for c in parts[1]):
             return parts[0]
     return slug
 
@@ -105,18 +142,18 @@ def load_all_records(output_dir: str) -> list:
     all_records = []
 
     for state_dir in sorted(os.listdir(output_dir)):
-        jsonl_path = os.path.join(output_dir, state_dir, 'church_details.jsonl')
+        jsonl_path = os.path.join(output_dir, state_dir, "church_details.jsonl")
         if not os.path.exists(jsonl_path):
             continue
 
-        with open(jsonl_path, 'r', encoding='utf-8') as f:
+        with open(jsonl_path, encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if not line:
                     continue
                 record = json.loads(line)
-                church = record.get('church', {})
-                slug = church.get('slug', '')
+                church = record.get("church", {})
+                slug = church.get("slug", "")
                 base_slug = extract_base_slug(slug)
                 slug_state = extract_slug_state(slug)
 
@@ -202,7 +239,7 @@ def run_cleanup(output_dir: str, apply: bool = False):
     orphan_base_slugs_kept = set()
 
     # Build per-state keep/remove lists
-    state_results = defaultdict(lambda: {'keep': [], 'remove_cross_state': [], 'remove_dupe': []})
+    state_results = defaultdict(lambda: {"keep": [], "remove_cross_state": [], "remove_dupe": []})
 
     # First pass: collect all home-state records and pick best per base_slug
     for state_dir, record, slug, base_slug, slug_state in all_records:
@@ -210,7 +247,7 @@ def run_cleanup(output_dir: str, apply: bool = False):
 
         if slug_state == expected_code:
             # This record is in its home state
-            updated_at = record.get('church', {}).get('updatedAt', '')
+            updated_at = record.get("church", {}).get("updatedAt", "")
 
             if base_slug not in global_base_slugs_kept:
                 global_base_slugs_kept[base_slug] = (slug, updated_at, state_dir)
@@ -224,31 +261,27 @@ def run_cleanup(output_dir: str, apply: bool = False):
     # Second pass: assign keep/remove for each record
     for state_dir, record, slug, base_slug, slug_state in all_records:
         expected_code = STATE_DIR_TO_CODE.get(state_dir, state_dir)
-        church_name = record.get('church', {}).get('name', 'Unknown')
+        church_name = record.get("church", {}).get("name", "Unknown")
 
         if slug_state == expected_code:
             # Home state record — keep only if it's the chosen slug for this base_slug
             chosen_slug, _, chosen_dir = global_base_slugs_kept.get(base_slug, (None, None, None))
             if slug == chosen_slug and state_dir == chosen_dir:
-                state_results[state_dir]['keep'].append(record)
+                state_results[state_dir]["keep"].append(record)
             else:
-                state_results[state_dir]['remove_dupe'].append(
-                    f"{church_name} ({slug})"
-                )
+                state_results[state_dir]["remove_dupe"].append(f"{church_name} ({slug})")
         elif slug in orphan_slugs:
             # Orphan — keep only the first copy (alphabetically by state_dir)
             if base_slug not in orphan_base_slugs_kept:
                 orphan_base_slugs_kept.add(base_slug)
-                state_results[state_dir]['keep'].append(record)
+                state_results[state_dir]["keep"].append(record)
             else:
-                state_results[state_dir]['remove_dupe'].append(
+                state_results[state_dir]["remove_dupe"].append(
                     f"[orphan dupe] {church_name} ({slug})"
                 )
         else:
             # Cross-state duplicate — this record also exists in its home state
-            state_results[state_dir]['remove_cross_state'].append(
-                f"{church_name} ({slug})"
-            )
+            state_results[state_dir]["remove_cross_state"].append(f"{church_name} ({slug})")
 
     # -----------------------------------------------------------------------
     # Phase 4: Print summary
@@ -268,9 +301,9 @@ def run_cleanup(output_dir: str, apply: bool = False):
 
     for state_dir in sorted(state_results.keys()):
         result = state_results[state_dir]
-        kept = len(result['keep'])
-        removed_cross = len(result['remove_cross_state'])
-        removed_dupe = len(result['remove_dupe'])
+        kept = len(result["keep"])
+        removed_cross = len(result["remove_cross_state"])
+        removed_dupe = len(result["remove_dupe"])
         before = kept + removed_cross + removed_dupe
 
         total_kept += kept
@@ -283,11 +316,15 @@ def run_cleanup(output_dir: str, apply: bool = False):
         else:
             marker = ""
 
-        print(f"{state_dir:<20s} {before:>7,d} {kept:>7,d} {removed_cross:>9,d} {removed_dupe:>6,d}{marker}")
+        print(
+            f"{state_dir:<20s} {before:>7,d} {kept:>7,d} {removed_cross:>9,d} {removed_dupe:>6,d}{marker}"
+        )
 
     print("-" * 55)
-    print(f"{'TOTAL':<20s} {total_kept + total_removed_cross + total_removed_dupe:>7,d} "
-          f"{total_kept:>7,d} {total_removed_cross:>9,d} {total_removed_dupe:>6,d}")
+    print(
+        f"{'TOTAL':<20s} {total_kept + total_removed_cross + total_removed_dupe:>7,d} "
+        f"{total_kept:>7,d} {total_removed_cross:>9,d} {total_removed_dupe:>6,d}"
+    )
     print(f"\n* = modified ({len(modified_states)} states)")
 
     logger.info(f"Total kept:            {total_kept:,}")
@@ -309,23 +346,25 @@ def run_cleanup(output_dir: str, apply: bool = False):
 
     for state_dir in modified_states:
         result = state_results[state_dir]
-        jsonl_path = os.path.join(output_dir, state_dir, 'church_details.jsonl')
+        jsonl_path = os.path.join(output_dir, state_dir, "church_details.jsonl")
 
         # Sort kept records by city then name for consistent ordering
         kept_records = sorted(
-            result['keep'],
+            result["keep"],
             key=lambda r: (
-                (r.get('church', {}).get('city') or '').lower(),
-                (r.get('church', {}).get('name') or '').lower()
-            )
+                (r.get("church", {}).get("city") or "").lower(),
+                (r.get("church", {}).get("name") or "").lower(),
+            ),
         )
 
         # Write the cleaned JSONL
-        with open(jsonl_path, 'w', encoding='utf-8') as f:
+        with open(jsonl_path, "w", encoding="utf-8") as f:
             for record in kept_records:
-                f.write(json.dumps(record, ensure_ascii=False) + '\n')
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-        before_count = len(result['keep']) + len(result['remove_cross_state']) + len(result['remove_dupe'])
+        before_count = (
+            len(result["keep"]) + len(result["remove_cross_state"]) + len(result["remove_dupe"])
+        )
         logger.info(f"  {state_dir}: {before_count:,} -> {len(kept_records):,} records")
 
     logger.info(f"  Rewrote {len(modified_states)} JSONL files.")
@@ -336,7 +375,7 @@ def run_cleanup(output_dir: str, apply: bool = False):
     logger.info("Phase 6: Removing stale resolve_progress.json files...")
     removed_progress = 0
     for state_dir in sorted(os.listdir(output_dir)):
-        prog_path = os.path.join(output_dir, state_dir, 'resolve_progress.json')
+        prog_path = os.path.join(output_dir, state_dir, "resolve_progress.json")
         if os.path.exists(prog_path):
             os.remove(prog_path)
             removed_progress += 1
@@ -355,8 +394,8 @@ def run_cleanup(output_dir: str, apply: bool = False):
     return modified_states, total_kept, total_removed_cross, total_removed_dupe
 
 
-if __name__ == '__main__':
-    apply = '--apply' in sys.argv
-    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'output')
+if __name__ == "__main__":
+    apply = "--apply" in sys.argv
+    output_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "output")
 
     run_cleanup(output_dir, apply=apply)

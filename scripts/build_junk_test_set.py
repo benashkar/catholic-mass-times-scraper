@@ -24,12 +24,20 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from config.settings import OUTPUT_DIR
+from config.settings import OUTPUT_DIR  # noqa: E402
 
 # 10 diverse states for geographic coverage
 TARGET_STATES = [
-    "illinois", "texas", "california", "ohio", "florida",
-    "wisconsin", "connecticut", "minnesota", "alaska", "arizona",
+    "illinois",
+    "texas",
+    "california",
+    "ohio",
+    "florida",
+    "wisconsin",
+    "connecticut",
+    "minnesota",
+    "alaska",
+    "arizona",
 ]
 
 SAMPLES_PER_STATE = 200
@@ -44,7 +52,7 @@ def load_state_names(state_name):
         return []
 
     rows = []
-    with open(csv_path, "r", encoding="utf-8-sig") as f:
+    with open(csv_path, encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
         for row in reader:
             rows.append(row)
@@ -107,20 +115,24 @@ def sample_state(state_name, n=SAMPLES_PER_STATE):
     # Build output rows with relevant columns
     output = []
     for row in sampled:
-        output.append({
-            "person_name": row.get("person_name", ""),
-            "church_name": row.get("church_name", ""),
-            "city": row.get("city", ""),
-            "state": state_name,
-            "category": row.get("category", ""),
-            "confidence": row.get("confidence", ""),
-            "confidence_score": row.get("confidence_score", ""),
-            "auto_label": classify_heuristic(row),
-            "manual_label": "",  # blank — for human review
-        })
+        output.append(
+            {
+                "person_name": row.get("person_name", ""),
+                "church_name": row.get("church_name", ""),
+                "city": row.get("city", ""),
+                "state": state_name,
+                "category": row.get("category", ""),
+                "confidence": row.get("confidence", ""),
+                "confidence_score": row.get("confidence_score", ""),
+                "auto_label": classify_heuristic(row),
+                "manual_label": "",  # blank — for human review
+            }
+        )
 
-    print(f"  {state_name}: sampled {len(output)} names "
-          f"({len(sampled_clean)} clean, {len(sampled_junk)} junk)")
+    print(
+        f"  {state_name}: sampled {len(output)} names "
+        f"({len(sampled_clean)} clean, {len(sampled_junk)} junk)"
+    )
     return output
 
 
@@ -138,14 +150,22 @@ def main():
         all_samples.extend(samples)
 
     if not all_samples:
-        print("ERROR: No samples collected. Check that bulletin_names.csv exists for target states.")
+        print(
+            "ERROR: No samples collected. Check that bulletin_names.csv exists for target states."
+        )
         sys.exit(1)
 
     # Write output CSV
     fieldnames = [
-        "person_name", "church_name", "city", "state",
-        "category", "confidence", "confidence_score",
-        "auto_label", "manual_label",
+        "person_name",
+        "church_name",
+        "city",
+        "state",
+        "category",
+        "confidence",
+        "confidence_score",
+        "auto_label",
+        "manual_label",
     ]
     with open(output_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)

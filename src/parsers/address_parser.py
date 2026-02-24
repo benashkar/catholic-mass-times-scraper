@@ -34,6 +34,7 @@ USAGE:
 """
 
 import re
+
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -45,52 +46,95 @@ logger = get_logger(__name__)
 
 # Directional words — used to detect pre/post directional tokens
 DIRECTIONALS = {
-    "N", "S", "E", "W", "NE", "NW", "SE", "SW",
-    "NORTH", "SOUTH", "EAST", "WEST",
-    "NORTHEAST", "NORTHWEST", "SOUTHEAST", "SOUTHWEST",
+    "N",
+    "S",
+    "E",
+    "W",
+    "NE",
+    "NW",
+    "SE",
+    "SW",
+    "NORTH",
+    "SOUTH",
+    "EAST",
+    "WEST",
+    "NORTHEAST",
+    "NORTHWEST",
+    "SOUTHEAST",
+    "SOUTHWEST",
 }
 
 # Normalize directional tokens to standard 1-2 letter abbreviations
 DIRECTION_NORMALIZE = {
-    "NORTH": "N", "SOUTH": "S", "EAST": "E", "WEST": "W",
-    "NORTHEAST": "NE", "NORTHWEST": "NW",
-    "SOUTHEAST": "SE", "SOUTHWEST": "SW",
-    "N": "N", "S": "S", "E": "E", "W": "W",
-    "NE": "NE", "NW": "NW", "SE": "SE", "SW": "SW",
+    "NORTH": "N",
+    "SOUTH": "S",
+    "EAST": "E",
+    "WEST": "W",
+    "NORTHEAST": "NE",
+    "NORTHWEST": "NW",
+    "SOUTHEAST": "SE",
+    "SOUTHWEST": "SW",
+    "N": "N",
+    "S": "S",
+    "E": "E",
+    "W": "W",
+    "NE": "NE",
+    "NW": "NW",
+    "SE": "SE",
+    "SW": "SW",
 }
 
 # USPS standard street suffixes — maps variants to canonical form
 STREET_SUFFIXES = {
-    "AVE": "Ave", "AVENUE": "Ave",
-    "BLVD": "Blvd", "BOULEVARD": "Blvd",
-    "CIR": "Cir", "CIRCLE": "Cir",
-    "CT": "Ct", "COURT": "Ct",
-    "DR": "Dr", "DRIVE": "Dr",
-    "HWY": "Hwy", "HIGHWAY": "Hwy",
-    "LN": "Ln", "LANE": "Ln",
+    "AVE": "Ave",
+    "AVENUE": "Ave",
+    "BLVD": "Blvd",
+    "BOULEVARD": "Blvd",
+    "CIR": "Cir",
+    "CIRCLE": "Cir",
+    "CT": "Ct",
+    "COURT": "Ct",
+    "DR": "Dr",
+    "DRIVE": "Dr",
+    "HWY": "Hwy",
+    "HIGHWAY": "Hwy",
+    "LN": "Ln",
+    "LANE": "Ln",
     "LOOP": "Loop",
     "PASS": "Pass",
     "PATH": "Path",
     "PIKE": "Pike",
-    "PKWY": "Pkwy", "PARKWAY": "Pkwy",
-    "PL": "Pl", "PLACE": "Pl",
-    "RD": "Rd", "ROAD": "Rd",
-    "ST": "St", "STREET": "St",
-    "TER": "Ter", "TERRACE": "Ter",
-    "TRL": "Trl", "TRAIL": "Trl",
+    "PKWY": "Pkwy",
+    "PARKWAY": "Pkwy",
+    "PL": "Pl",
+    "PLACE": "Pl",
+    "RD": "Rd",
+    "ROAD": "Rd",
+    "ST": "St",
+    "STREET": "St",
+    "TER": "Ter",
+    "TERRACE": "Ter",
+    "TRL": "Trl",
+    "TRAIL": "Trl",
     "WAY": "Way",
-    "EXT": "Ext", "EXTENSION": "Ext",
+    "EXT": "Ext",
+    "EXTENSION": "Ext",
 }
 
 # Unit/apartment designators
 UNIT_TYPES = {
-    "APT": "Apt", "APARTMENT": "Apt",
-    "STE": "Ste", "SUITE": "Ste",
+    "APT": "Apt",
+    "APARTMENT": "Apt",
+    "STE": "Ste",
+    "SUITE": "Ste",
     "UNIT": "Unit",
     "#": "#",
-    "FL": "Fl", "FLOOR": "Fl",
-    "RM": "Rm", "ROOM": "Rm",
-    "BLDG": "Bldg", "BUILDING": "Bldg",
+    "FL": "Fl",
+    "FLOOR": "Fl",
+    "RM": "Rm",
+    "ROOM": "Rm",
+    "BLDG": "Bldg",
+    "BUILDING": "Bldg",
 }
 
 # Route patterns — these are named roads where the "name" includes a route number
@@ -107,19 +151,57 @@ ROUTE_PATTERNS = [
 
 # Full state name -> 2-letter USPS code (all 50 states + DC)
 STATE_NAME_TO_CODE = {
-    "Alabama": "AL", "Alaska": "AK", "Arizona": "AZ", "Arkansas": "AR",
-    "California": "CA", "Colorado": "CO", "Connecticut": "CT", "Delaware": "DE",
-    "Florida": "FL", "Georgia": "GA", "Hawaii": "HI", "Idaho": "ID",
-    "Illinois": "IL", "Indiana": "IN", "Iowa": "IA", "Kansas": "KS",
-    "Kentucky": "KY", "Louisiana": "LA", "Maine": "ME", "Maryland": "MD",
-    "Massachusetts": "MA", "Michigan": "MI", "Minnesota": "MN", "Mississippi": "MS",
-    "Missouri": "MO", "Montana": "MT", "Nebraska": "NE", "Nevada": "NV",
-    "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY",
-    "North Carolina": "NC", "North Dakota": "ND", "Ohio": "OH", "Oklahoma": "OK",
-    "Oregon": "OR", "Pennsylvania": "PA", "Rhode Island": "RI", "South Carolina": "SC",
-    "South Dakota": "SD", "Tennessee": "TN", "Texas": "TX", "Utah": "UT",
-    "Vermont": "VT", "Virginia": "VA", "Washington": "WA", "West Virginia": "WV",
-    "Wisconsin": "WI", "Wyoming": "WY", "District of Columbia": "DC",
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
+    "District of Columbia": "DC",
 }
 
 # Reverse lookup: code -> code (so we can validate abbreviations too)
@@ -129,6 +211,7 @@ VALID_STATE_CODES = set(STATE_NAME_TO_CODE.values())
 # =============================================================================
 # PARSING FUNCTIONS
 # =============================================================================
+
 
 def _clean_street(street: str) -> tuple[str, str]:
     """
@@ -150,19 +233,19 @@ def _clean_street(street: str) -> tuple[str, str]:
     notes = []
 
     # Extract parenthetical content: "(Sansbury Hall)", "(US Rte 42)"
-    paren_matches = re.findall(r'\([^)]+\)', cleaned)
+    paren_matches = re.findall(r"\([^)]+\)", cleaned)
     for m in paren_matches:
         notes.append(m)
         cleaned = cleaned.replace(m, "")
 
     # Extract bracket content: "[PO Box 219]", "[McCartyville]"
-    bracket_matches = re.findall(r'\[[^\]]+\]', cleaned)
+    bracket_matches = re.findall(r"\[[^\]]+\]", cleaned)
     for m in bracket_matches:
         notes.append(m)
         cleaned = cleaned.replace(m, "")
 
     # Normalize dotted directionals: "S.E" -> "SE", "N.E" -> "NE"
-    cleaned = re.sub(r'\b([NSEW])\.([NSEW])\b', r'\1\2', cleaned)
+    cleaned = re.sub(r"\b([NSEW])\.([NSEW])\b", r"\1\2", cleaned)
 
     # Remove extra whitespace
     cleaned = " ".join(cleaned.split())
@@ -264,10 +347,10 @@ def parse_street(street: str) -> dict:
     # ---- Step 1: Extract street number ----
     # Match leading digits, possibly with hyphen (e.g., "300", "02441")
     street_number = ""
-    if tokens[0] and re.match(r'^\d+$', tokens[0]):
+    if tokens[0] and re.match(r"^\d+$", tokens[0]):
         street_number = tokens[0]
         pos = 1
-    elif tokens[0] and re.match(r'^\d+-', tokens[0]):
+    elif tokens[0] and re.match(r"^\d+-", tokens[0]):
         # Hyphenated number like "13-779" — take the whole thing
         street_number = tokens[0]
         pos = 1
@@ -312,7 +395,7 @@ def parse_street(street: str) -> dict:
             if pos + 1 < len(tokens) and tokens[pos + 1].upper() in STREET_SUFFIXES:
                 # Check if there's at most one more token after the suffix
                 # (could be a post-directional)
-                remaining_after_suffix = tokens[pos + 2:]
+                remaining_after_suffix = tokens[pos + 2 :]
                 if len(remaining_after_suffix) <= 1:
                     # "N St" or "N St E" — N is the name, not direction
                     pass  # Don't consume as direction
@@ -350,10 +433,8 @@ def parse_street(street: str) -> dict:
                 # Rule: if "St" is followed by a word and there's another
                 # suffix later, treat it as "Saint"
                 if upper == "ST" and pos + 1 < len(tokens):
-                    future_tokens = tokens[pos + 1:]
-                    has_later_suffix = any(
-                        t.upper() in STREET_SUFFIXES for t in future_tokens
-                    )
+                    future_tokens = tokens[pos + 1 :]
+                    has_later_suffix = any(t.upper() in STREET_SUFFIXES for t in future_tokens)
                     if has_later_suffix:
                         # "St Joseph Dr" — St is "Saint", keep going
                         name_tokens.append(tokens[pos])

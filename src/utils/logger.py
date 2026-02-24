@@ -36,11 +36,9 @@ HOW TO READ LOG FILES:
 import logging
 import sys
 from datetime import datetime
-from logging.handlers import TimedRotatingFileHandler
-from pathlib import Path
 
 # Import settings — we need log levels and the logs directory path
-from config.settings import LOGS_DIR, LOG_LEVEL_CONSOLE, LOG_LEVEL_FILE, LOG_RETENTION_DAYS
+from config.settings import LOG_LEVEL_CONSOLE, LOG_LEVEL_FILE, LOGS_DIR
 
 
 def get_logger(name: str) -> logging.Logger:
@@ -82,8 +80,7 @@ def get_logger(name: str) -> logging.Logger:
     # %(name)s          → Logger name (the module that created the log)
     # %(message)s       → The actual log message
     log_format = logging.Formatter(
-        fmt="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
+        fmt="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
     )
 
     # --- Console Handler ---
@@ -108,7 +105,7 @@ def get_logger(name: str) -> logging.Logger:
     file_handler = logging.FileHandler(
         filename=log_file_path,
         mode="a",  # "a" = append (don't overwrite if file exists)
-        encoding="utf-8"
+        encoding="utf-8",
     )
     file_handler.setLevel(getattr(logging, LOG_LEVEL_FILE.upper(), logging.DEBUG))
     file_handler.setFormatter(log_format)

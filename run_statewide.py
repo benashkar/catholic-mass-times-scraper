@@ -37,19 +37,19 @@ WHY INCREMENTAL SAVES:
     completes. On --resume, we skip everything already done and continue.
 """
 
-import sys
-import json
-import time
 import argparse
+import json
+import sys
+import time
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config.settings import CHURCHES_DIR, OUTPUT_DIR, CITY_LISTS_DIR, PROGRESS_SAVE_INTERVAL
+from config.settings import CHURCHES_DIR, CITY_LISTS_DIR, OUTPUT_DIR, PROGRESS_SAVE_INTERVAL
+from src.etl.csv_generator import generate_dated_services_csv, generate_services_csv
 from src.scrapers.catholic_index import discover_churches, scrape_church_detail
-from src.utils.file_io import save_to_csv, load_from_csv, save_to_json, load_from_json
-from src.etl.csv_generator import generate_services_csv, generate_dated_services_csv
+from src.utils.file_io import load_from_csv, load_from_json, save_to_csv, save_to_json
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -61,56 +61,107 @@ logger = get_logger(__name__)
 
 # Map various inputs to (state_abbrev, state_name_lower) pairs
 STATE_ALIASES = {
-    "ohio": ("OH", "ohio"), "oh": ("OH", "ohio"),
-    "texas": ("TX", "texas"), "tx": ("TX", "texas"),
-    "california": ("CA", "california"), "ca": ("CA", "california"),
-    "florida": ("FL", "florida"), "fl": ("FL", "florida"),
-    "new-york": ("NY", "new_york"), "ny": ("NY", "new_york"), "new york": ("NY", "new_york"),
-    "pennsylvania": ("PA", "pennsylvania"), "pa": ("PA", "pennsylvania"),
-    "illinois": ("IL", "illinois"), "il": ("IL", "illinois"),
-    "michigan": ("MI", "michigan"), "mi": ("MI", "michigan"),
-    "georgia": ("GA", "georgia"), "ga": ("GA", "georgia"),
-    "north-carolina": ("NC", "north_carolina"), "nc": ("NC", "north_carolina"),
-    "indiana": ("IN", "indiana"), "in": ("IN", "indiana"),
-    "virginia": ("VA", "virginia"), "va": ("VA", "virginia"),
-    "tennessee": ("TN", "tennessee"), "tn": ("TN", "tennessee"),
-    "missouri": ("MO", "missouri"), "mo": ("MO", "missouri"),
-    "maryland": ("MD", "maryland"), "md": ("MD", "maryland"),
-    "wisconsin": ("WI", "wisconsin"), "wi": ("WI", "wisconsin"),
-    "minnesota": ("MN", "minnesota"), "mn": ("MN", "minnesota"),
-    "colorado": ("CO", "colorado"), "co": ("CO", "colorado"),
-    "alabama": ("AL", "alabama"), "al": ("AL", "alabama"),
-    "south-carolina": ("SC", "south_carolina"), "sc": ("SC", "south_carolina"),
-    "louisiana": ("LA", "louisiana"), "la": ("LA", "louisiana"),
-    "kentucky": ("KY", "kentucky"), "ky": ("KY", "kentucky"),
-    "oregon": ("OR", "oregon"), "or": ("OR", "oregon"),
-    "oklahoma": ("OK", "oklahoma"), "ok": ("OK", "oklahoma"),
-    "connecticut": ("CT", "connecticut"), "ct": ("CT", "connecticut"),
-    "iowa": ("IA", "iowa"), "ia": ("IA", "iowa"),
-    "mississippi": ("MS", "mississippi"), "ms": ("MS", "mississippi"),
-    "arkansas": ("AR", "arkansas"), "ar": ("AR", "arkansas"),
-    "utah": ("UT", "utah"), "ut": ("UT", "utah"),
-    "kansas": ("KS", "kansas"), "ks": ("KS", "kansas"),
-    "nevada": ("NV", "nevada"), "nv": ("NV", "nevada"),
-    "nebraska": ("NE", "nebraska"), "ne": ("NE", "nebraska"),
-    "new-mexico": ("NM", "new_mexico"), "nm": ("NM", "new_mexico"),
-    "west-virginia": ("WV", "west_virginia"), "wv": ("WV", "west_virginia"),
-    "idaho": ("ID", "idaho"), "id": ("ID", "idaho"),
-    "hawaii": ("HI", "hawaii"), "hi": ("HI", "hawaii"),
-    "new-hampshire": ("NH", "new_hampshire"), "nh": ("NH", "new_hampshire"),
-    "maine": ("ME", "maine"), "me": ("ME", "maine"),
-    "montana": ("MT", "montana"), "mt": ("MT", "montana"),
-    "rhode-island": ("RI", "rhode_island"), "ri": ("RI", "rhode_island"),
-    "delaware": ("DE", "delaware"), "de": ("DE", "delaware"),
-    "south-dakota": ("SD", "south_dakota"), "sd": ("SD", "south_dakota"),
-    "north-dakota": ("ND", "north_dakota"), "nd": ("ND", "north_dakota"),
-    "alaska": ("AK", "alaska"), "ak": ("AK", "alaska"),
-    "vermont": ("VT", "vermont"), "vt": ("VT", "vermont"),
-    "wyoming": ("WY", "wyoming"), "wy": ("WY", "wyoming"),
-    "arizona": ("AZ", "arizona"), "az": ("AZ", "arizona"),
-    "washington": ("WA", "washington"), "wa": ("WA", "washington"),
-    "massachusetts": ("MA", "massachusetts"), "ma": ("MA", "massachusetts"),
-    "new-jersey": ("NJ", "new_jersey"), "nj": ("NJ", "new_jersey"),
+    "ohio": ("OH", "ohio"),
+    "oh": ("OH", "ohio"),
+    "texas": ("TX", "texas"),
+    "tx": ("TX", "texas"),
+    "california": ("CA", "california"),
+    "ca": ("CA", "california"),
+    "florida": ("FL", "florida"),
+    "fl": ("FL", "florida"),
+    "new-york": ("NY", "new_york"),
+    "ny": ("NY", "new_york"),
+    "new york": ("NY", "new_york"),
+    "pennsylvania": ("PA", "pennsylvania"),
+    "pa": ("PA", "pennsylvania"),
+    "illinois": ("IL", "illinois"),
+    "il": ("IL", "illinois"),
+    "michigan": ("MI", "michigan"),
+    "mi": ("MI", "michigan"),
+    "georgia": ("GA", "georgia"),
+    "ga": ("GA", "georgia"),
+    "north-carolina": ("NC", "north_carolina"),
+    "nc": ("NC", "north_carolina"),
+    "indiana": ("IN", "indiana"),
+    "in": ("IN", "indiana"),
+    "virginia": ("VA", "virginia"),
+    "va": ("VA", "virginia"),
+    "tennessee": ("TN", "tennessee"),
+    "tn": ("TN", "tennessee"),
+    "missouri": ("MO", "missouri"),
+    "mo": ("MO", "missouri"),
+    "maryland": ("MD", "maryland"),
+    "md": ("MD", "maryland"),
+    "wisconsin": ("WI", "wisconsin"),
+    "wi": ("WI", "wisconsin"),
+    "minnesota": ("MN", "minnesota"),
+    "mn": ("MN", "minnesota"),
+    "colorado": ("CO", "colorado"),
+    "co": ("CO", "colorado"),
+    "alabama": ("AL", "alabama"),
+    "al": ("AL", "alabama"),
+    "south-carolina": ("SC", "south_carolina"),
+    "sc": ("SC", "south_carolina"),
+    "louisiana": ("LA", "louisiana"),
+    "la": ("LA", "louisiana"),
+    "kentucky": ("KY", "kentucky"),
+    "ky": ("KY", "kentucky"),
+    "oregon": ("OR", "oregon"),
+    "or": ("OR", "oregon"),
+    "oklahoma": ("OK", "oklahoma"),
+    "ok": ("OK", "oklahoma"),
+    "connecticut": ("CT", "connecticut"),
+    "ct": ("CT", "connecticut"),
+    "iowa": ("IA", "iowa"),
+    "ia": ("IA", "iowa"),
+    "mississippi": ("MS", "mississippi"),
+    "ms": ("MS", "mississippi"),
+    "arkansas": ("AR", "arkansas"),
+    "ar": ("AR", "arkansas"),
+    "utah": ("UT", "utah"),
+    "ut": ("UT", "utah"),
+    "kansas": ("KS", "kansas"),
+    "ks": ("KS", "kansas"),
+    "nevada": ("NV", "nevada"),
+    "nv": ("NV", "nevada"),
+    "nebraska": ("NE", "nebraska"),
+    "ne": ("NE", "nebraska"),
+    "new-mexico": ("NM", "new_mexico"),
+    "nm": ("NM", "new_mexico"),
+    "west-virginia": ("WV", "west_virginia"),
+    "wv": ("WV", "west_virginia"),
+    "idaho": ("ID", "idaho"),
+    "id": ("ID", "idaho"),
+    "hawaii": ("HI", "hawaii"),
+    "hi": ("HI", "hawaii"),
+    "new-hampshire": ("NH", "new_hampshire"),
+    "nh": ("NH", "new_hampshire"),
+    "maine": ("ME", "maine"),
+    "me": ("ME", "maine"),
+    "montana": ("MT", "montana"),
+    "mt": ("MT", "montana"),
+    "rhode-island": ("RI", "rhode_island"),
+    "ri": ("RI", "rhode_island"),
+    "delaware": ("DE", "delaware"),
+    "de": ("DE", "delaware"),
+    "south-dakota": ("SD", "south_dakota"),
+    "sd": ("SD", "south_dakota"),
+    "north-dakota": ("ND", "north_dakota"),
+    "nd": ("ND", "north_dakota"),
+    "alaska": ("AK", "alaska"),
+    "ak": ("AK", "alaska"),
+    "vermont": ("VT", "vermont"),
+    "vt": ("VT", "vermont"),
+    "wyoming": ("WY", "wyoming"),
+    "wy": ("WY", "wyoming"),
+    "arizona": ("AZ", "arizona"),
+    "az": ("AZ", "arizona"),
+    "washington": ("WA", "washington"),
+    "wa": ("WA", "washington"),
+    "massachusetts": ("MA", "massachusetts"),
+    "ma": ("MA", "massachusetts"),
+    "new-jersey": ("NJ", "new_jersey"),
+    "nj": ("NJ", "new_jersey"),
 }
 
 
@@ -129,6 +180,7 @@ def resolve_state(user_input: str) -> tuple[str, str]:
 # ============================================================================
 # City list loading
 # ============================================================================
+
 
 def load_city_list(state_abbrev: str) -> list[dict]:
     """
@@ -149,7 +201,7 @@ def load_city_list(state_abbrev: str) -> list[dict]:
         sys.exit(1)
 
     all_cities = load_from_csv(master_path)
-    state_cities = [c for c in all_cities if c.get('state_code') == state_abbrev]
+    state_cities = [c for c in all_cities if c.get("state_code") == state_abbrev]
 
     if not state_cities:
         logger.error(f"No cities found for state '{state_abbrev}' in {master_path}")
@@ -162,6 +214,7 @@ def load_city_list(state_abbrev: str) -> list[dict]:
 # ============================================================================
 # Progress tracking
 # ============================================================================
+
 
 def load_progress(path: Path) -> dict:
     """Load a progress file, or return empty structure."""
@@ -182,7 +235,10 @@ def save_progress_file(data: dict, path: Path):
 # Phase 1: Discovery — find all churches in a state
 # ============================================================================
 
-def run_discovery(state_abbrev: str, state_name: str, resume: bool = False, limit: int | None = None):
+
+def run_discovery(
+    state_abbrev: str, state_name: str, resume: bool = False, limit: int | None = None
+):
     """
     Discover all churches in a state by querying every city on CatholicIndex.
 
@@ -214,7 +270,9 @@ def run_discovery(state_abbrev: str, state_name: str, resume: bool = False, limi
     logger.info("=" * 70)
     logger.info(f"DISCOVERY: {state_name.upper()} ({total_cities} cities)")
     if resume and completed_cities:
-        logger.info(f"Resuming — {len(completed_cities)} cities already done, {len(discovered_churches)} churches found")
+        logger.info(
+            f"Resuming — {len(completed_cities)} cities already done, {len(discovered_churches)} churches found"
+        )
     logger.info("=" * 70)
 
     start_time = time.time()
@@ -281,23 +339,28 @@ def run_discovery(state_abbrev: str, state_name: str, resume: bool = False, limi
 
         # Periodic progress save
         if processed_this_run % PROGRESS_SAVE_INTERVAL == 0:
-            save_progress_file({
-                "completed_cities": list(completed_cities),
-                "discovered_churches": discovered_churches,
-                "stats": stats,
-            }, progress_path)
+            save_progress_file(
+                {
+                    "completed_cities": list(completed_cities),
+                    "discovered_churches": discovered_churches,
+                    "stats": stats,
+                },
+                progress_path,
+            )
 
     # Final save
-    save_progress_file({
-        "completed_cities": list(completed_cities),
-        "discovered_churches": discovered_churches,
-        "stats": stats,
-    }, progress_path)
+    save_progress_file(
+        {
+            "completed_cities": list(completed_cities),
+            "discovered_churches": discovered_churches,
+            "stats": stats,
+        },
+        progress_path,
+    )
 
     # Generate master church list CSV
     master_list = sorted(
-        discovered_churches.values(),
-        key=lambda c: (c.get("city") or "", c.get("name") or "")
+        discovered_churches.values(), key=lambda c: (c.get("city") or "", c.get("name") or "")
     )
     csv_path = state_dir / "master_church_list.csv"
     if master_list:
@@ -320,6 +383,7 @@ def run_discovery(state_abbrev: str, state_name: str, resume: bool = False, limi
 # ============================================================================
 # Phase 2: Detail scrape — get full schedules for every church
 # ============================================================================
+
 
 def run_detail_scrape(state_name: str, resume: bool = False):
     """
@@ -385,7 +449,7 @@ def run_detail_scrape(state_name: str, resume: bool = False):
                 jsonl_file.flush()
                 completed_slugs.add(slug)
                 success_count += 1
-                svc_count = detail.get('totalServices', 0)
+                svc_count = detail.get("totalServices", 0)
             else:
                 fail_count += 1
                 svc_count = "FAILED"
@@ -413,7 +477,7 @@ def run_detail_scrape(state_name: str, resume: bool = False):
     # Read all details from JSONL for CSV generation
     logger.info("\nLoading JSONL and generating output CSVs...")
     all_details = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -421,13 +485,16 @@ def run_detail_scrape(state_name: str, resume: bool = False):
 
     # Save complete JSON
     json_path = state_output_dir / "all_churches_detail.json"
-    save_to_json({
-        "scrape_date": datetime.now(timezone.utc).isoformat(),
-        "state": state_name,
-        "churches_scraped": success_count,
-        "churches_failed": fail_count,
-        "church_details": all_details,
-    }, json_path)
+    save_to_json(
+        {
+            "scrape_date": datetime.now(UTC).isoformat(),
+            "state": state_name,
+            "churches_scraped": success_count,
+            "churches_failed": fail_count,
+            "church_details": all_details,
+        },
+        json_path,
+    )
 
     # Generate viewable CSVs
     svc_count = generate_services_csv(all_details, state_output_dir / "all_services.csv")
@@ -448,6 +515,7 @@ def run_detail_scrape(state_name: str, resume: bool = False):
 # Phase 3: Dates only — regenerate dated_services.csv from existing JSONL
 # ============================================================================
 
+
 def run_dates_only(state_name: str):
     """
     Re-read existing church_details.jsonl and regenerate dated_services.csv.
@@ -467,7 +535,7 @@ def run_dates_only(state_name: str):
 
     # Read all details from JSONL
     all_details = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -479,41 +547,51 @@ def run_dates_only(state_name: str):
 
     # Regenerate dated CSV
     dated_count = generate_dated_services_csv(all_details, state_output_dir / "dated_services.csv")
-    logger.info(f"{state_name.upper()}: {dated_count} dated service instances (12 weeks) from {len(all_details)} churches")
+    logger.info(
+        f"{state_name.upper()}: {dated_count} dated service instances (12 weeks) from {len(all_details)} churches"
+    )
 
 
 # ============================================================================
 # CLI entry point
 # ============================================================================
 
+
 def main():
     parser = argparse.ArgumentParser(
         description="Statewide Catholic church discovery and schedule scraping.",
-        epilog="Example: python run_statewide.py ohio texas"
+        epilog="Example: python run_statewide.py ohio texas",
     )
     parser.add_argument(
-        "states", nargs="+",
-        help="States to scrape (e.g., ohio texas ca ny). Use full name or 2-letter code."
+        "states",
+        nargs="+",
+        help="States to scrape (e.g., ohio texas ca ny). Use full name or 2-letter code.",
     )
     parser.add_argument(
-        "--resume", action="store_true",
-        help="Resume an interrupted run (skip already-completed cities/churches)"
+        "--resume",
+        action="store_true",
+        help="Resume an interrupted run (skip already-completed cities/churches)",
     )
     parser.add_argument(
-        "--limit", type=int, default=None,
-        help="Only process the first N cities per state (for testing)"
+        "--limit",
+        type=int,
+        default=None,
+        help="Only process the first N cities per state (for testing)",
     )
     parser.add_argument(
-        "--discovery-only", action="store_true",
-        help="Only run discovery (find churches), skip detail scraping"
+        "--discovery-only",
+        action="store_true",
+        help="Only run discovery (find churches), skip detail scraping",
     )
     parser.add_argument(
-        "--detail-only", action="store_true",
-        help="Only run detail scraping (requires prior discovery run)"
+        "--detail-only",
+        action="store_true",
+        help="Only run detail scraping (requires prior discovery run)",
     )
     parser.add_argument(
-        "--dates-only", action="store_true",
-        help="Only regenerate dated_services.csv from existing JSONL (fast, no scraping)"
+        "--dates-only",
+        action="store_true",
+        help="Only regenerate dated_services.csv from existing JSONL (fast, no scraping)",
     )
 
     args = parser.parse_args()

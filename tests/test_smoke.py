@@ -16,7 +16,7 @@ Run this test with:
 
 def test_config_imports():
     """Verify that the config module can be imported without errors."""
-    from config.settings import TARGET_COMMUNITIES, SCRAPE_DELAY
+    from config.settings import SCRAPE_DELAY, TARGET_COMMUNITIES
 
     # We should have 16 target communities defined
     assert len(TARGET_COMMUNITIES) == 16
@@ -27,8 +27,8 @@ def test_config_imports():
 
 def test_utils_import():
     """Verify that utility modules can be imported without errors."""
+    from src.utils.file_io import load_from_csv, save_to_csv
     from src.utils.logger import get_logger
-    from src.utils.file_io import save_to_csv, load_from_csv
 
     # get_logger should return a logger object
     logger = get_logger("test")

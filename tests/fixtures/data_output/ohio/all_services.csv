@@ -1,0 +1,5 @@
+﻿Church,Address,Phone,Category,Day,Time Start,Time End,Service Name,Schedule Type,Language,Location,Pattern,Event Date,Time Relation,Reference Service,Notes
+St. Mary,"123 Main St, Columbus, Ohio 43215",614-555-0101,Mass,Sun,10:00 AM,,Sunday Mass,weekly,English,,,,,,
+St. Mary,"123 Main St, Columbus, Ohio 43215",614-555-0101,Mass,Sat,5:00 PM,,Vigil Mass,weekly,English,,,,,,
+St. Joseph,"456 Oak Ave, Cleveland, Ohio 44101",216-555-0202,Mass,Sun,9:00 AM,,Sunday Mass,weekly,English,,,,,,
+St. Joseph,"456 Oak Ave, Cleveland, Ohio 44101",216-555-0202,Confession,Sat,3:00 PM,4:00 PM,Saturday Confession,weekly,English,,,,,,

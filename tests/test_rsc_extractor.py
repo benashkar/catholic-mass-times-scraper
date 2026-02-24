@@ -11,19 +11,18 @@ Run these tests with:
 """
 
 from src.parsers.rsc_extractor import (
-    extract_rsc_chunks,
-    extract_initial_churches,
+    _clean_undefined,
+    _find_json_object,
     extract_church_detail,
     extract_city_metadata,
-    _find_json_object,
-    _clean_undefined,
+    extract_initial_churches,
+    extract_rsc_chunks,
 )
-
 
 # --- Sample RSC data that mimics what CatholicIndex embeds in its HTML ---
 # These are simplified versions of real data for testing purposes.
 
-SAMPLE_CITY_HTML = '''
+SAMPLE_CITY_HTML = """
 <html>
 <head><title>Catholic Mass Times in Grove City, Ohio</title></head>
 <body>
@@ -32,9 +31,9 @@ SAMPLE_CITY_HTML = '''
 <script>self.__next_f.push([1,"8:[\\"$\\",\\"main\\",null,{\\"children\\":[[\\"$\\",\\"$L14\\",null,{\\"sessionId\\":\\"s_test\\",\\"latitude\\":39.887,\\"longitude\\":-83.088,\\"radius\\":25,\\"contextLabel\\":\\"Grove City, Ohio\\",\\"citySlug\\":\\"grove-city-ohio\\",\\"timeZone\\":\\"America/New_York\\",\\"initialChurches\\":[{\\"slug\\":\\"us-oh-grove-city-our-lady-7815f1cf\\",\\"name\\":\\"Our Lady of Perpetual Help Church\\",\\"street\\":\\"3730 Broadway\\",\\"city\\":\\"Grove City\\",\\"stateRegion\\":\\"Ohio\\",\\"latitude\\":39.887,\\"longitude\\":-83.088,\\"phone\\":\\"(614) 875-3322\\",\\"website\\":\\"http://ourladygc.org/\\",\\"distanceMiles\\":\\"0.0\\",\\"massCount\\":7,\\"confessionCount\\":2,\\"adorationCount\\":1,\\"todayMassCount\\":0,\\"todayConfessionCount\\":0,\\"todayAdorationCount\\":0,\\"todayMassTimes\\":[],\\"todayConfessionTimes\\":[],\\"todayAdorationTimes\\":[],\\"upcomingMasses\\":[{\\"day\\":\\"Sat\\",\\"time\\":\\"16:00:00\\",\\"timeEnd\\":null,\\"daysFromToday\\":1,\\"location\\":null}],\\"upcomingConfessions\\":[],\\"upcomingAdorations\\":[],\\"hasPerpetualAdoration\\":false},{\\"slug\\":\\"us-oh-columbus-st-stephen-abc123\\",\\"name\\":\\"St. Stephen the Martyr\\",\\"street\\":\\"1314 Main St\\",\\"city\\":\\"Columbus\\",\\"stateRegion\\":\\"Ohio\\",\\"latitude\\":39.92,\\"longitude\\":-83.1,\\"phone\\":\\"(614) 555-1234\\",\\"website\\":\\"http://ststephen.org/\\",\\"distanceMiles\\":\\"3.1\\",\\"massCount\\":5,\\"confessionCount\\":1,\\"adorationCount\\":0,\\"todayMassCount\\":0,\\"todayConfessionCount\\":0,\\"todayAdorationCount\\":0,\\"todayMassTimes\\":[],\\"todayConfessionTimes\\":[],\\"todayAdorationTimes\\":[],\\"upcomingMasses\\":[{\\"day\\":\\"Sun\\",\\"time\\":\\"09:00:00\\",\\"timeEnd\\":null,\\"daysFromToday\\":2,\\"location\\":null}],\\"upcomingConfessions\\":[],\\"upcomingAdorations\\":[],\\"hasPerpetualAdoration\\":false}]}]]}"])</script>
 </body>
 </html>
-'''
+"""
 
-SAMPLE_CHURCH_HTML = '''
+SAMPLE_CHURCH_HTML = """
 <html>
 <head><title>Our Lady of Perpetual Help Church</title></head>
 <body>
@@ -43,7 +42,7 @@ SAMPLE_CHURCH_HTML = '''
 <script>self.__next_f.push([1,"15:[\\"$\\",\\"$L20\\",null,{\\"data\\":{\\"church\\":{\\"slug\\":\\"us-oh-grove-city-our-lady-7815f1cf\\",\\"name\\":\\"Our Lady of Perpetual Help Church\\",\\"street\\":\\"3730 Broadway\\",\\"city\\":\\"Grove City\\",\\"stateRegion\\":\\"Ohio\\",\\"postalCode\\":\\"43123\\",\\"latitude\\":39.887,\\"longitude\\":-83.088,\\"phone\\":\\"(614) 875-3322\\",\\"website\\":\\"http://ourladygc.org/\\",\\"updatedAt\\":\\"2026-02-17T23:18:28.730Z\\"},\\"services\\":{\\"Mass\\":[{\\"serviceId\\":\\"svc1\\",\\"category\\":\\"Mass\\",\\"scheduleType\\":\\"sunday\\",\\"dayOfWeek\\":\\"Sun\\",\\"timeStart\\":\\"08:30:00\\",\\"timeEnd\\":null,\\"displayName\\":\\"Holy Mass\\",\\"language\\":null,\\"location\\":null,\\"eventDate\\":\\"$undefined\\",\\"pattern\\":null,\\"timeRelation\\":null,\\"referenceService\\":null,\\"offsetMinutes\\":null,\\"notes\\":null},{\\"serviceId\\":\\"svc2\\",\\"category\\":\\"Mass\\",\\"scheduleType\\":\\"sunday\\",\\"dayOfWeek\\":\\"Sun\\",\\"timeStart\\":\\"10:30:00\\",\\"timeEnd\\":null,\\"displayName\\":\\"Holy Mass\\",\\"language\\":null,\\"location\\":null,\\"eventDate\\":\\"$undefined\\",\\"pattern\\":null,\\"timeRelation\\":null,\\"referenceService\\":null,\\"offsetMinutes\\":null,\\"notes\\":null},{\\"serviceId\\":\\"svc3\\",\\"category\\":\\"Mass\\",\\"scheduleType\\":\\"saturday\\",\\"dayOfWeek\\":\\"Sat\\",\\"timeStart\\":\\"16:00:00\\",\\"timeEnd\\":null,\\"displayName\\":\\"Vigil\\",\\"language\\":null,\\"location\\":null,\\"eventDate\\":\\"$undefined\\",\\"pattern\\":null,\\"timeRelation\\":null,\\"referenceService\\":null,\\"offsetMinutes\\":null,\\"notes\\":\\"vigil\\"}],\\"Confession\\":[{\\"serviceId\\":\\"svc4\\",\\"category\\":\\"Confession\\",\\"scheduleType\\":\\"saturday\\",\\"dayOfWeek\\":\\"Sat\\",\\"timeStart\\":\\"15:00:00\\",\\"timeEnd\\":\\"15:45:00\\",\\"displayName\\":\\"Confession\\",\\"language\\":null,\\"location\\":null,\\"eventDate\\":\\"$undefined\\",\\"pattern\\":null,\\"timeRelation\\":null,\\"referenceService\\":null,\\"offsetMinutes\\":null,\\"notes\\":\\"Or anytime by appointment\\"}],\\"Adoration\\":[{\\"serviceId\\":\\"svc5\\",\\"category\\":\\"Adoration\\",\\"scheduleType\\":\\"specific_weekday\\",\\"dayOfWeek\\":\\"Fri\\",\\"timeStart\\":\\"09:00:00\\",\\"timeEnd\\":\\"21:00:00\\",\\"displayName\\":\\"Adoration\\",\\"language\\":null,\\"location\\":null,\\"eventDate\\":\\"$undefined\\",\\"pattern\\":null,\\"timeRelation\\":null,\\"referenceService\\":null,\\"offsetMinutes\\":null,\\"notes\\":null}]},\\"totalServices\\":5,\\"communityInsights\\":\\"Great parish.\\"}}]"])</script>
 </body>
 </html>
-'''
+"""
 
 
 class TestExtractRscChunks:
@@ -65,7 +64,7 @@ class TestExtractRscChunks:
         """Should unescape double-escaped characters in RSC data."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         # The chunk with church data should have unescaped quotes
-        church_chunk = [c for c in chunks if 'initialChurches' in c]
+        church_chunk = [c for c in chunks if "initialChurches" in c]
         assert len(church_chunk) == 1
         assert '"initialChurches"' in church_chunk[0]
 
@@ -83,15 +82,23 @@ class TestExtractInitialChurches:
         """Should correctly parse the church name."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         churches = extract_initial_churches(chunks)
-        assert churches[0]['name'] == "Our Lady of Perpetual Help Church"
+        assert churches[0]["name"] == "Our Lady of Perpetual Help Church"
 
     def test_church_has_required_fields(self):
         """Every church should have the essential fields we need."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         churches = extract_initial_churches(chunks)
 
-        required_fields = ['slug', 'name', 'street', 'city', 'stateRegion',
-                           'latitude', 'longitude', 'phone']
+        required_fields = [
+            "slug",
+            "name",
+            "street",
+            "city",
+            "stateRegion",
+            "latitude",
+            "longitude",
+            "phone",
+        ]
         for church in churches:
             for field in required_fields:
                 assert field in church, f"Missing field '{field}' in church {church.get('name')}"
@@ -100,8 +107,8 @@ class TestExtractInitialChurches:
         """Should include mass count for each church."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         churches = extract_initial_churches(chunks)
-        assert churches[0]['massCount'] == 7
-        assert churches[1]['massCount'] == 5
+        assert churches[0]["massCount"] == 7
+        assert churches[1]["massCount"] == 5
 
     def test_returns_empty_for_no_churches(self):
         """Should return empty list when no initialChurches in data."""
@@ -117,20 +124,20 @@ class TestExtractCityMetadata:
         """Should extract the city name/label."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         metadata = extract_city_metadata(chunks)
-        assert metadata['contextLabel'] == "Grove City, Ohio"
+        assert metadata["contextLabel"] == "Grove City, Ohio"
 
     def test_extracts_coordinates(self):
         """Should extract center lat/lng."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         metadata = extract_city_metadata(chunks)
-        assert abs(metadata['latitude'] - 39.887) < 0.01
-        assert abs(metadata['longitude'] - (-83.088)) < 0.01
+        assert abs(metadata["latitude"] - 39.887) < 0.01
+        assert abs(metadata["longitude"] - (-83.088)) < 0.01
 
     def test_extracts_radius(self):
         """Should extract the search radius."""
         chunks = extract_rsc_chunks(SAMPLE_CITY_HTML)
         metadata = extract_city_metadata(chunks)
-        assert metadata['radius'] == 25
+        assert metadata["radius"] == 25
 
 
 class TestExtractChurchDetail:
@@ -142,52 +149,52 @@ class TestExtractChurchDetail:
         detail = extract_church_detail(chunks)
 
         assert detail is not None
-        assert detail['church']['name'] == "Our Lady of Perpetual Help Church"
-        assert detail['church']['street'] == "3730 Broadway"
-        assert detail['church']['city'] == "Grove City"
-        assert detail['church']['postalCode'] == "43123"
+        assert detail["church"]["name"] == "Our Lady of Perpetual Help Church"
+        assert detail["church"]["street"] == "3730 Broadway"
+        assert detail["church"]["city"] == "Grove City"
+        assert detail["church"]["postalCode"] == "43123"
 
     def test_extracts_mass_services(self):
         """Should extract all mass times."""
         chunks = extract_rsc_chunks(SAMPLE_CHURCH_HTML)
         detail = extract_church_detail(chunks)
 
-        masses = detail['services']['Mass']
+        masses = detail["services"]["Mass"]
         assert len(masses) == 3
 
         # Check the Sunday 8:30 AM mass
-        sun_830 = [m for m in masses if m['timeStart'] == '08:30:00' and m['dayOfWeek'] == 'Sun']
+        sun_830 = [m for m in masses if m["timeStart"] == "08:30:00" and m["dayOfWeek"] == "Sun"]
         assert len(sun_830) == 1
-        assert sun_830[0]['displayName'] == "Holy Mass"
-        assert sun_830[0]['scheduleType'] == "sunday"
+        assert sun_830[0]["displayName"] == "Holy Mass"
+        assert sun_830[0]["scheduleType"] == "sunday"
 
     def test_extracts_confession_with_time_range(self):
         """Should extract confession times with start AND end times."""
         chunks = extract_rsc_chunks(SAMPLE_CHURCH_HTML)
         detail = extract_church_detail(chunks)
 
-        confessions = detail['services']['Confession']
+        confessions = detail["services"]["Confession"]
         assert len(confessions) == 1
-        assert confessions[0]['timeStart'] == "15:00:00"
-        assert confessions[0]['timeEnd'] == "15:45:00"
-        assert confessions[0]['notes'] == "Or anytime by appointment"
+        assert confessions[0]["timeStart"] == "15:00:00"
+        assert confessions[0]["timeEnd"] == "15:45:00"
+        assert confessions[0]["notes"] == "Or anytime by appointment"
 
     def test_extracts_adoration(self):
         """Should extract adoration hours."""
         chunks = extract_rsc_chunks(SAMPLE_CHURCH_HTML)
         detail = extract_church_detail(chunks)
 
-        adoration = detail['services']['Adoration']
+        adoration = detail["services"]["Adoration"]
         assert len(adoration) == 1
-        assert adoration[0]['dayOfWeek'] == "Fri"
-        assert adoration[0]['timeStart'] == "09:00:00"
-        assert adoration[0]['timeEnd'] == "21:00:00"
+        assert adoration[0]["dayOfWeek"] == "Fri"
+        assert adoration[0]["timeStart"] == "09:00:00"
+        assert adoration[0]["timeEnd"] == "21:00:00"
 
     def test_extracts_total_services(self):
         """Should include the total service count."""
         chunks = extract_rsc_chunks(SAMPLE_CHURCH_HTML)
         detail = extract_church_detail(chunks)
-        assert detail['totalServices'] == 5
+        assert detail["totalServices"] == 5
 
     def test_cleans_undefined_values(self):
         """Should replace '$undefined' with None."""
@@ -195,19 +202,22 @@ class TestExtractChurchDetail:
         detail = extract_church_detail(chunks)
 
         # eventDate fields were "$undefined" in the raw data
-        for mass in detail['services']['Mass']:
-            assert mass['eventDate'] is None  # Should be None, not "$undefined"
+        for mass in detail["services"]["Mass"]:
+            assert mass["eventDate"] is None  # Should be None, not "$undefined"
 
     def test_vigil_mass_identified(self):
         """Should correctly identify Saturday vigil masses."""
         chunks = extract_rsc_chunks(SAMPLE_CHURCH_HTML)
         detail = extract_church_detail(chunks)
 
-        vigil = [m for m in detail['services']['Mass']
-                 if m['dayOfWeek'] == 'Sat' and m['scheduleType'] == 'saturday']
+        vigil = [
+            m
+            for m in detail["services"]["Mass"]
+            if m["dayOfWeek"] == "Sat" and m["scheduleType"] == "saturday"
+        ]
         assert len(vigil) == 1
-        assert vigil[0]['displayName'] == "Vigil"
-        assert vigil[0]['timeStart'] == "16:00:00"
+        assert vigil[0]["displayName"] == "Vigil"
+        assert vigil[0]["timeStart"] == "16:00:00"
 
 
 class TestCleanUndefined:

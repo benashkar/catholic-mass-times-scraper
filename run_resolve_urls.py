@@ -29,19 +29,20 @@ EXPECTED RUNTIME:
     ~0.5s per church. Ohio (1,239 churches) ≈ 10 min. All 50 states ≈ 4-5 hours.
 """
 
-import sys
-import json
-import time
-import re
 import argparse
-import requests
+import json
+import re
+import sys
+import time
+from datetime import UTC, datetime
 from pathlib import Path
-from datetime import datetime, timezone
+
+import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config.settings import OUTPUT_DIR
-from src.utils.file_io import save_to_json, load_from_json
+from src.utils.file_io import load_from_json, save_to_json
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -58,56 +59,106 @@ _last_request_time = 0.0
 
 # State aliases — same as run_parse_addresses.py
 STATE_ALIASES = {
-    "alabama": ("AL", "alabama"), "al": ("AL", "alabama"),
-    "alaska": ("AK", "alaska"), "ak": ("AK", "alaska"),
-    "arizona": ("AZ", "arizona"), "az": ("AZ", "arizona"),
-    "arkansas": ("AR", "arkansas"), "ar": ("AR", "arkansas"),
-    "california": ("CA", "california"), "ca": ("CA", "california"),
-    "colorado": ("CO", "colorado"), "co": ("CO", "colorado"),
-    "connecticut": ("CT", "connecticut"), "ct": ("CT", "connecticut"),
-    "delaware": ("DE", "delaware"), "de": ("DE", "delaware"),
-    "florida": ("FL", "florida"), "fl": ("FL", "florida"),
-    "georgia": ("GA", "georgia"), "ga": ("GA", "georgia"),
-    "hawaii": ("HI", "hawaii"), "hi": ("HI", "hawaii"),
-    "idaho": ("ID", "idaho"), "id": ("ID", "idaho"),
-    "illinois": ("IL", "illinois"), "il": ("IL", "illinois"),
-    "indiana": ("IN", "indiana"), "in": ("IN", "indiana"),
-    "iowa": ("IA", "iowa"), "ia": ("IA", "iowa"),
-    "kansas": ("KS", "kansas"), "ks": ("KS", "kansas"),
-    "kentucky": ("KY", "kentucky"), "ky": ("KY", "kentucky"),
-    "louisiana": ("LA", "louisiana"), "la": ("LA", "louisiana"),
-    "maine": ("ME", "maine"), "me": ("ME", "maine"),
-    "maryland": ("MD", "maryland"), "md": ("MD", "maryland"),
-    "massachusetts": ("MA", "massachusetts"), "ma": ("MA", "massachusetts"),
-    "michigan": ("MI", "michigan"), "mi": ("MI", "michigan"),
-    "minnesota": ("MN", "minnesota"), "mn": ("MN", "minnesota"),
-    "mississippi": ("MS", "mississippi"), "ms": ("MS", "mississippi"),
-    "missouri": ("MO", "missouri"), "mo": ("MO", "missouri"),
-    "montana": ("MT", "montana"), "mt": ("MT", "montana"),
-    "nebraska": ("NE", "nebraska"), "ne": ("NE", "nebraska"),
-    "nevada": ("NV", "nevada"), "nv": ("NV", "nevada"),
-    "new_hampshire": ("NH", "new_hampshire"), "nh": ("NH", "new_hampshire"),
-    "new_jersey": ("NJ", "new_jersey"), "nj": ("NJ", "new_jersey"),
-    "new_mexico": ("NM", "new_mexico"), "nm": ("NM", "new_mexico"),
-    "new_york": ("NY", "new_york"), "ny": ("NY", "new_york"),
-    "north_carolina": ("NC", "north_carolina"), "nc": ("NC", "north_carolina"),
-    "north_dakota": ("ND", "north_dakota"), "nd": ("ND", "north_dakota"),
-    "ohio": ("OH", "ohio"), "oh": ("OH", "ohio"),
-    "oklahoma": ("OK", "oklahoma"), "ok": ("OK", "oklahoma"),
-    "oregon": ("OR", "oregon"), "or": ("OR", "oregon"),
-    "pennsylvania": ("PA", "pennsylvania"), "pa": ("PA", "pennsylvania"),
-    "rhode_island": ("RI", "rhode_island"), "ri": ("RI", "rhode_island"),
-    "south_carolina": ("SC", "south_carolina"), "sc": ("SC", "south_carolina"),
-    "south_dakota": ("SD", "south_dakota"), "sd": ("SD", "south_dakota"),
-    "tennessee": ("TN", "tennessee"), "tn": ("TN", "tennessee"),
-    "texas": ("TX", "texas"), "tx": ("TX", "texas"),
-    "utah": ("UT", "utah"), "ut": ("UT", "utah"),
-    "vermont": ("VT", "vermont"), "vt": ("VT", "vermont"),
-    "virginia": ("VA", "virginia"), "va": ("VA", "virginia"),
-    "washington": ("WA", "washington"), "wa": ("WA", "washington"),
-    "west_virginia": ("WV", "west_virginia"), "wv": ("WV", "west_virginia"),
-    "wisconsin": ("WI", "wisconsin"), "wi": ("WI", "wisconsin"),
-    "wyoming": ("WY", "wyoming"), "wy": ("WY", "wyoming"),
+    "alabama": ("AL", "alabama"),
+    "al": ("AL", "alabama"),
+    "alaska": ("AK", "alaska"),
+    "ak": ("AK", "alaska"),
+    "arizona": ("AZ", "arizona"),
+    "az": ("AZ", "arizona"),
+    "arkansas": ("AR", "arkansas"),
+    "ar": ("AR", "arkansas"),
+    "california": ("CA", "california"),
+    "ca": ("CA", "california"),
+    "colorado": ("CO", "colorado"),
+    "co": ("CO", "colorado"),
+    "connecticut": ("CT", "connecticut"),
+    "ct": ("CT", "connecticut"),
+    "delaware": ("DE", "delaware"),
+    "de": ("DE", "delaware"),
+    "florida": ("FL", "florida"),
+    "fl": ("FL", "florida"),
+    "georgia": ("GA", "georgia"),
+    "ga": ("GA", "georgia"),
+    "hawaii": ("HI", "hawaii"),
+    "hi": ("HI", "hawaii"),
+    "idaho": ("ID", "idaho"),
+    "id": ("ID", "idaho"),
+    "illinois": ("IL", "illinois"),
+    "il": ("IL", "illinois"),
+    "indiana": ("IN", "indiana"),
+    "in": ("IN", "indiana"),
+    "iowa": ("IA", "iowa"),
+    "ia": ("IA", "iowa"),
+    "kansas": ("KS", "kansas"),
+    "ks": ("KS", "kansas"),
+    "kentucky": ("KY", "kentucky"),
+    "ky": ("KY", "kentucky"),
+    "louisiana": ("LA", "louisiana"),
+    "la": ("LA", "louisiana"),
+    "maine": ("ME", "maine"),
+    "me": ("ME", "maine"),
+    "maryland": ("MD", "maryland"),
+    "md": ("MD", "maryland"),
+    "massachusetts": ("MA", "massachusetts"),
+    "ma": ("MA", "massachusetts"),
+    "michigan": ("MI", "michigan"),
+    "mi": ("MI", "michigan"),
+    "minnesota": ("MN", "minnesota"),
+    "mn": ("MN", "minnesota"),
+    "mississippi": ("MS", "mississippi"),
+    "ms": ("MS", "mississippi"),
+    "missouri": ("MO", "missouri"),
+    "mo": ("MO", "missouri"),
+    "montana": ("MT", "montana"),
+    "mt": ("MT", "montana"),
+    "nebraska": ("NE", "nebraska"),
+    "ne": ("NE", "nebraska"),
+    "nevada": ("NV", "nevada"),
+    "nv": ("NV", "nevada"),
+    "new_hampshire": ("NH", "new_hampshire"),
+    "nh": ("NH", "new_hampshire"),
+    "new_jersey": ("NJ", "new_jersey"),
+    "nj": ("NJ", "new_jersey"),
+    "new_mexico": ("NM", "new_mexico"),
+    "nm": ("NM", "new_mexico"),
+    "new_york": ("NY", "new_york"),
+    "ny": ("NY", "new_york"),
+    "north_carolina": ("NC", "north_carolina"),
+    "nc": ("NC", "north_carolina"),
+    "north_dakota": ("ND", "north_dakota"),
+    "nd": ("ND", "north_dakota"),
+    "ohio": ("OH", "ohio"),
+    "oh": ("OH", "ohio"),
+    "oklahoma": ("OK", "oklahoma"),
+    "ok": ("OK", "oklahoma"),
+    "oregon": ("OR", "oregon"),
+    "or": ("OR", "oregon"),
+    "pennsylvania": ("PA", "pennsylvania"),
+    "pa": ("PA", "pennsylvania"),
+    "rhode_island": ("RI", "rhode_island"),
+    "ri": ("RI", "rhode_island"),
+    "south_carolina": ("SC", "south_carolina"),
+    "sc": ("SC", "south_carolina"),
+    "south_dakota": ("SD", "south_dakota"),
+    "sd": ("SD", "south_dakota"),
+    "tennessee": ("TN", "tennessee"),
+    "tn": ("TN", "tennessee"),
+    "texas": ("TX", "texas"),
+    "tx": ("TX", "texas"),
+    "utah": ("UT", "utah"),
+    "ut": ("UT", "utah"),
+    "vermont": ("VT", "vermont"),
+    "vt": ("VT", "vermont"),
+    "virginia": ("VA", "virginia"),
+    "va": ("VA", "virginia"),
+    "washington": ("WA", "washington"),
+    "wa": ("WA", "washington"),
+    "west_virginia": ("WV", "west_virginia"),
+    "wv": ("WV", "west_virginia"),
+    "wisconsin": ("WI", "wisconsin"),
+    "wi": ("WI", "wisconsin"),
+    "wyoming": ("WY", "wyoming"),
+    "wy": ("WY", "wyoming"),
     "dc": ("DC", "dc"),
 }
 
@@ -203,8 +254,7 @@ def resolve_redirect_url(redirect_path: str, slug: str = "") -> tuple[str | None
         if resp2 and resp2.status_code == 200:
             # Extract the fresh signed website URL from the page
             pattern = (
-                r'/api/out\?id=' + re.escape(slug)
-                + r'&type=website&t=\d+&sig=[A-Za-z0-9_\-=]+'
+                r"/api/out\?id=" + re.escape(slug) + r"&type=website&t=\d+&sig=[A-Za-z0-9_\-=]+"
             )
             fresh_match = re.search(pattern, resp2.text)
             if fresh_match:
@@ -212,16 +262,12 @@ def resolve_redirect_url(redirect_path: str, slug: str = "") -> tuple[str | None
                 resp3 = _rate_limited_get(fresh_url)
 
                 if resp3 and resp3.status_code == 200:
-                    match = re.search(
-                        r'window\.location\.href\s*=\s*"([^"]+)"', resp3.text
-                    )
+                    match = re.search(r'window\.location\.href\s*=\s*"([^"]+)"', resp3.text)
                     if match:
                         return match.group(1), ""
 
                     # Fallback: <div class="url">https://...</div>
-                    url_div = re.search(
-                        r'class="url"[^>]*>(https?://[^<]+)<', resp3.text
-                    )
+                    url_div = re.search(r'class="url"[^>]*>(https?://[^<]+)<', resp3.text)
                     if url_div:
                         return url_div.group(1).strip(), ""
 
@@ -268,7 +314,7 @@ def resolve_urls_for_state(
 
     # Load all records
     all_records = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -361,12 +407,14 @@ def resolve_urls_for_state(
             resolved_count += 1
         else:
             failed_count += 1
-            failed_churches.append({
-                "slug": slug,
-                "name": name,
-                "city": church.get("city", ""),
-                "reason": fail_reason,
-            })
+            failed_churches.append(
+                {
+                    "slug": slug,
+                    "name": name,
+                    "city": church.get("city", ""),
+                    "reason": fail_reason,
+                }
+            )
 
         # Progress display
         done = len(completed_slugs)
@@ -376,8 +424,7 @@ def resolve_urls_for_state(
             remaining = total - done
             eta_min = (remaining * rate) / 60
             logger.info(
-                f"[{done}/{total}] {name}: "
-                f"{actual_url or 'FAILED'} | ETA: {eta_min:.1f}m"
+                f"[{done}/{total}] {name}: " f"{actual_url or 'FAILED'} | ETA: {eta_min:.1f}m"
             )
 
         # Periodic progress save
@@ -409,7 +456,7 @@ def resolve_urls_for_state(
             prev = existing_failures.get(f["slug"], {})
             f["attempts"] = prev.get("attempts", 0) + 1
             f["last_reason"] = f.pop("reason")
-            f["last_attempt"] = datetime.now(timezone.utc).isoformat()
+            f["last_attempt"] = datetime.now(UTC).isoformat()
             existing_failures[f["slug"]] = f
 
         # Remove any that were resolved this run (no longer failed)
@@ -419,25 +466,30 @@ def resolve_urls_for_state(
             if r.get("church", {}).get("website_resolved")
         }
         remaining_failures = [
-            f for slug, f in existing_failures.items()
-            if slug not in resolved_slugs
+            f for slug, f in existing_failures.items() if slug not in resolved_slugs
         ]
 
-        save_to_json({
-            "state": state_code,
-            "last_run": datetime.now(timezone.utc).isoformat(),
-            "total_failures": len(remaining_failures),
-            "failures": remaining_failures,
-        }, failures_path)
+        save_to_json(
+            {
+                "state": state_code,
+                "last_run": datetime.now(UTC).isoformat(),
+                "total_failures": len(remaining_failures),
+                "failures": remaining_failures,
+            },
+            failures_path,
+        )
         logger.info(f"Failure log saved: {failures_path} ({len(remaining_failures)} entries)")
     elif failures_path.exists():
         # All resolved! Clear the failure log
-        save_to_json({
-            "state": state_code,
-            "last_run": datetime.now(timezone.utc).isoformat(),
-            "total_failures": 0,
-            "failures": [],
-        }, failures_path)
+        save_to_json(
+            {
+                "state": state_code,
+                "last_run": datetime.now(UTC).isoformat(),
+                "total_failures": 0,
+                "failures": [],
+            },
+            failures_path,
+        )
         logger.info("All URLs resolved! Failure log cleared.")
 
     elapsed_total = (time.time() - start_time) / 60
@@ -493,7 +545,10 @@ def run_resolve(
 
     for state_code, dir_name in state_list:
         failed = resolve_urls_for_state(
-            state_code, dir_name, resume=resume, limit=limit,
+            state_code,
+            dir_name,
+            resume=resume,
+            limit=limit,
             retry_failed=retry_failed,
         )
 
@@ -509,7 +564,10 @@ def run_resolve(
                 time.sleep(wait_min * 60)
 
                 failed = resolve_urls_for_state(
-                    state_code, dir_name, resume=True, limit=limit,
+                    state_code,
+                    dir_name,
+                    resume=True,
+                    limit=limit,
                     retry_failed=True,
                 )
 

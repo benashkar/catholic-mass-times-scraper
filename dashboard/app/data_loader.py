@@ -7,54 +7,124 @@ STRATEGY:
 
 This avoids needing a database for the POC while keeping memory usage manageable.
 """
+
 import os
 import re
-import pandas as pd
-import numpy as np
 from functools import lru_cache
+
+import pandas as pd
 
 # Module-level globals set during init_data()
 DATA_DIR = None
-_churches_df = None   # Master church list (all states, ~23K rows, ~4 MB)
-_state_list = None    # Cached list of state dicts
+_churches_df = None  # Master church list (all states, ~23K rows, ~4 MB)
+_state_list = None  # Cached list of state dicts
 
 # Maps state directory names to expected state name in addresses
 STATE_DIR_TO_NAME = {
-    "alabama": "Alabama", "alaska": "Alaska", "arizona": "Arizona",
-    "arkansas": "Arkansas", "california": "California", "colorado": "Colorado",
-    "connecticut": "Connecticut", "delaware": "Delaware", "florida": "Florida",
-    "georgia": "Georgia", "hawaii": "Hawaii", "idaho": "Idaho",
-    "illinois": "Illinois", "indiana": "Indiana", "iowa": "Iowa",
-    "kansas": "Kansas", "kentucky": "Kentucky", "louisiana": "Louisiana",
-    "maine": "Maine", "maryland": "Maryland", "massachusetts": "Massachusetts",
-    "michigan": "Michigan", "minnesota": "Minnesota", "mississippi": "Mississippi",
-    "missouri": "Missouri", "montana": "Montana", "nebraska": "Nebraska",
-    "nevada": "Nevada", "new_hampshire": "New Hampshire", "new_jersey": "New Jersey",
-    "new_mexico": "New Mexico", "new_york": "New York",
-    "north_carolina": "North Carolina", "north_dakota": "North Dakota",
-    "ohio": "Ohio", "oklahoma": "Oklahoma", "oregon": "Oregon",
-    "pennsylvania": "Pennsylvania", "rhode_island": "Rhode Island",
-    "south_carolina": "South Carolina", "south_dakota": "South Dakota",
-    "tennessee": "Tennessee", "texas": "Texas", "utah": "Utah",
-    "vermont": "Vermont", "virginia": "Virginia", "washington": "Washington",
-    "west_virginia": "West Virginia", "wisconsin": "Wisconsin", "wyoming": "Wyoming",
+    "alabama": "Alabama",
+    "alaska": "Alaska",
+    "arizona": "Arizona",
+    "arkansas": "Arkansas",
+    "california": "California",
+    "colorado": "Colorado",
+    "connecticut": "Connecticut",
+    "delaware": "Delaware",
+    "florida": "Florida",
+    "georgia": "Georgia",
+    "hawaii": "Hawaii",
+    "idaho": "Idaho",
+    "illinois": "Illinois",
+    "indiana": "Indiana",
+    "iowa": "Iowa",
+    "kansas": "Kansas",
+    "kentucky": "Kentucky",
+    "louisiana": "Louisiana",
+    "maine": "Maine",
+    "maryland": "Maryland",
+    "massachusetts": "Massachusetts",
+    "michigan": "Michigan",
+    "minnesota": "Minnesota",
+    "mississippi": "Mississippi",
+    "missouri": "Missouri",
+    "montana": "Montana",
+    "nebraska": "Nebraska",
+    "nevada": "Nevada",
+    "new_hampshire": "New Hampshire",
+    "new_jersey": "New Jersey",
+    "new_mexico": "New Mexico",
+    "new_york": "New York",
+    "north_carolina": "North Carolina",
+    "north_dakota": "North Dakota",
+    "ohio": "Ohio",
+    "oklahoma": "Oklahoma",
+    "oregon": "Oregon",
+    "pennsylvania": "Pennsylvania",
+    "rhode_island": "Rhode Island",
+    "south_carolina": "South Carolina",
+    "south_dakota": "South Dakota",
+    "tennessee": "Tennessee",
+    "texas": "Texas",
+    "utah": "Utah",
+    "vermont": "Vermont",
+    "virginia": "Virginia",
+    "washington": "Washington",
+    "west_virginia": "West Virginia",
+    "wisconsin": "Wisconsin",
+    "wyoming": "Wyoming",
 }
 
 # Also map abbreviations
 STATE_ABBREV_TO_DIR = {
-    "AL": "alabama", "AK": "alaska", "AZ": "arizona", "AR": "arkansas",
-    "CA": "california", "CO": "colorado", "CT": "connecticut", "DE": "delaware",
-    "FL": "florida", "GA": "georgia", "HI": "hawaii", "ID": "idaho",
-    "IL": "illinois", "IN": "indiana", "IA": "iowa", "KS": "kansas",
-    "KY": "kentucky", "LA": "louisiana", "ME": "maine", "MD": "maryland",
-    "MA": "massachusetts", "MI": "michigan", "MN": "minnesota", "MS": "mississippi",
-    "MO": "missouri", "MT": "montana", "NE": "nebraska", "NV": "nevada",
-    "NH": "new_hampshire", "NJ": "new_jersey", "NM": "new_mexico", "NY": "new_york",
-    "NC": "north_carolina", "ND": "north_dakota", "OH": "ohio", "OK": "oklahoma",
-    "OR": "oregon", "PA": "pennsylvania", "RI": "rhode_island", "SC": "south_carolina",
-    "SD": "south_dakota", "TN": "tennessee", "TX": "texas", "UT": "utah",
-    "VT": "vermont", "VA": "virginia", "WA": "washington", "WV": "west_virginia",
-    "WI": "wisconsin", "WY": "wyoming",
+    "AL": "alabama",
+    "AK": "alaska",
+    "AZ": "arizona",
+    "AR": "arkansas",
+    "CA": "california",
+    "CO": "colorado",
+    "CT": "connecticut",
+    "DE": "delaware",
+    "FL": "florida",
+    "GA": "georgia",
+    "HI": "hawaii",
+    "ID": "idaho",
+    "IL": "illinois",
+    "IN": "indiana",
+    "IA": "iowa",
+    "KS": "kansas",
+    "KY": "kentucky",
+    "LA": "louisiana",
+    "ME": "maine",
+    "MD": "maryland",
+    "MA": "massachusetts",
+    "MI": "michigan",
+    "MN": "minnesota",
+    "MS": "mississippi",
+    "MO": "missouri",
+    "MT": "montana",
+    "NE": "nebraska",
+    "NV": "nevada",
+    "NH": "new_hampshire",
+    "NJ": "new_jersey",
+    "NM": "new_mexico",
+    "NY": "new_york",
+    "NC": "north_carolina",
+    "ND": "north_dakota",
+    "OH": "ohio",
+    "OK": "oklahoma",
+    "OR": "oregon",
+    "PA": "pennsylvania",
+    "RI": "rhode_island",
+    "SC": "south_carolina",
+    "SD": "south_dakota",
+    "TN": "tennessee",
+    "TX": "texas",
+    "UT": "utah",
+    "VT": "vermont",
+    "VA": "virginia",
+    "WA": "washington",
+    "WV": "west_virginia",
+    "WI": "wisconsin",
+    "WY": "wyoming",
 }
 
 
@@ -111,7 +181,9 @@ def init_data(app):
         # Fill NaN cities with empty string
         _churches_df["city"] = _churches_df["city"].fillna("Unknown")
         _churches_df["state_code"] = _churches_df["state_code"].fillna("")
-        app.logger.info(f"Loaded {len(_churches_df)} churches across {_churches_df['state_dir'].nunique()} states")
+        app.logger.info(
+            f"Loaded {len(_churches_df)} churches across {_churches_df['state_dir'].nunique()} states"
+        )
     else:
         _churches_df = pd.DataFrame()
         app.logger.warning("No church data found!")
@@ -125,24 +197,30 @@ def _build_state_list():
     if _churches_df is None or _churches_df.empty:
         return []
 
-    state_counts = _churches_df.groupby("state_dir").agg(
-        church_count=("slug", "count"),
-        state_code=("state_code", "first"),
-    ).reset_index()
+    state_counts = (
+        _churches_df.groupby("state_dir")
+        .agg(
+            church_count=("slug", "count"),
+            state_code=("state_code", "first"),
+        )
+        .reset_index()
+    )
 
     result = []
     for _, row in state_counts.iterrows():
         state_dir = row["state_dir"]
         has_bulletin = os.path.isfile(os.path.join(DATA_DIR, state_dir, "bulletin_names.csv"))
         has_services = os.path.isfile(os.path.join(DATA_DIR, state_dir, "all_services.csv"))
-        result.append({
-            "state_dir": state_dir,
-            "state_code": row["state_code"] or state_dir[:2].upper(),
-            "display_name": state_dir.replace("_", " ").title(),
-            "church_count": int(row["church_count"]),
-            "has_bulletin": has_bulletin,
-            "has_services": has_services,
-        })
+        result.append(
+            {
+                "state_dir": state_dir,
+                "state_code": row["state_code"] or state_dir[:2].upper(),
+                "display_name": state_dir.replace("_", " ").title(),
+                "church_count": int(row["church_count"]),
+                "has_bulletin": has_bulletin,
+                "has_services": has_services,
+            }
+        )
 
     return sorted(result, key=lambda x: x["display_name"])
 
@@ -192,16 +270,16 @@ def get_services(state_dir):
             before = len(df)
             # Keep rows where address state matches OR where we couldn't parse state
             df = df[
-                (df["_addr_state"].isna()) |
-                (df["_addr_state"] == "") |
-                (df["_addr_state"].str.lower() == expected_state.lower())
+                (df["_addr_state"].isna())
+                | (df["_addr_state"] == "")
+                | (df["_addr_state"].str.lower() == expected_state.lower())
             ].copy()
             removed = before - len(df)
             if removed > 0:
                 import logging
+
                 logging.getLogger(__name__).info(
-                    f"Filtered {removed} cross-state services from {state_dir} "
-                    f"(kept {len(df)})"
+                    f"Filtered {removed} cross-state services from {state_dir} " f"(kept {len(df)})"
                 )
             df.drop(columns=["_addr_state"], inplace=True, errors="ignore")
     else:
@@ -267,7 +345,9 @@ def get_bulletin_names(state_dir):
         # Still try to join for full_street if available
         churches = get_churches_for_state(state_dir)
         if not churches.empty and "church_slug" in df.columns:
-            addr_cols = [c for c in ["slug", "full_street", "state_code", "zip5"] if c in churches.columns]
+            addr_cols = [
+                c for c in ["slug", "full_street", "state_code", "zip5"] if c in churches.columns
+            ]
             if addr_cols:
                 merged = df.merge(
                     churches[addr_cols],
@@ -337,6 +417,7 @@ def _load_church_details_jsonl(state_dir):
     Returns dict mapping church name -> {website_resolved, slug}.
     """
     import json as _json
+
     path = os.path.join(DATA_DIR, state_dir, "church_details.jsonl")
     if not os.path.isfile(path):
         return {}
@@ -396,15 +477,31 @@ def church_has_bulletin_names(state_dir, church_name):
 
 # Columns served to the DataTables AJAX endpoint (order matters — matches column indices)
 _BULLETIN_PAGE_COLS = [
-    "person_name", "role", "title", "first_name", "last_name",
-    "church_name", "city", "category", "confidence", "pdf_url", "pdf_date",
+    "person_name",
+    "role",
+    "title",
+    "first_name",
+    "last_name",
+    "church_name",
+    "city",
+    "category",
+    "confidence",
+    "pdf_url",
+    "pdf_date",
 ]
 
 
-def get_bulletin_names_page(state_dir, start=0, length=50, search="",
-                            order_col=0, order_dir="asc",
-                            church_filter="", city_filter="",
-                            category_filter=""):
+def get_bulletin_names_page(
+    state_dir,
+    start=0,
+    length=50,
+    search="",
+    order_col=0,
+    order_dir="asc",
+    church_filter="",
+    city_filter="",
+    category_filter="",
+):
     """
     Return a page of bulletin names for DataTables server-side processing.
 
@@ -444,12 +541,13 @@ def get_bulletin_names_page(state_dir, start=0, length=50, search="",
         df = df.sort_values(sort_col, ascending=ascending, na_position="last")
 
     # --- Paginate ---
-    page = df.iloc[start:start + length]
+    page = df.iloc[start : start + length]
 
     # Build list-of-lists with only available columns (fill missing with "")
     rows = []
     for _, row in page.iterrows():
-        rows.append([str(row.get(c, "") if pd.notna(row.get(c, "")) else "")
-                      for c in _BULLETIN_PAGE_COLS])
+        rows.append(
+            [str(row.get(c, "") if pd.notna(row.get(c, "")) else "") for c in _BULLETIN_PAGE_COLS]
+        )
 
     return rows, total_records, filtered_records
