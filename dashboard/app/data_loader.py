@@ -210,9 +210,13 @@ def init_data(app):
                 usecols=lambda c: c in ("person_name", "church_name", "church_slug", "city"),
             )
 
-            # If CSV lacks a city column, join with churches to get cities
+            # If CSV lacks usable city data, join with churches to get cities
             has_csv_city = "city" in df.columns and df["city"].notna().any()
             if not has_csv_city and "church_slug" in df.columns:
+                # Drop the all-NaN city column first to avoid city_x/city_y
+                # conflict when merging with churches that also have a city col
+                if "city" in df.columns:
+                    df = df.drop(columns=["city"])
                 churches = get_churches_for_state(state_dir)
                 if not churches.empty and "slug" in churches.columns and "city" in churches.columns:
                     slug_city = churches[["slug", "city"]].drop_duplicates("slug")

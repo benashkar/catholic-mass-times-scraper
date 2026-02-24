@@ -134,6 +134,29 @@
 
 {% block extra_js %}
 <script>
+function categoryBadge(d) {
+    var map = {
+        'clergy_staff': '<span class="badge bg-primary">Clergy/Staff</span>',
+        'mass_intention': '<span class="badge bg-info">Mass Int.</span>',
+        'prayer_list': '<span class="badge bg-success">Prayer</span>',
+        'ministry_contextual': '<span class="badge bg-secondary">Ministry</span>'
+    };
+    return map[d] || '<span class="badge bg-light text-dark">' + $('<span>').text(d).html() + '</span>';
+}
+function confBadge(d) {
+    if (!d) return '';
+    var s = d.toString();
+    var m = s.match(/([\d.]+)/);
+    if (m) {
+        var v = parseFloat(m[1]);
+        if (v >= 0.7) return '<span class="badge bg-success">High (' + v.toFixed(2) + ')</span>';
+        if (v >= 0.4) return '<span class="badge bg-warning text-dark">Med (' + v.toFixed(2) + ')</span>';
+        return '<span class="badge bg-danger">Low (' + v.toFixed(2) + ')</span>';
+    }
+    if (s.toLowerCase() === 'high') return '<span class="badge bg-success">High</span>';
+    if (s.toLowerCase() === 'medium') return '<span class="badge bg-warning text-dark">Med</span>';
+    return '<span class="badge bg-danger">' + $('<span>').text(s).html() + '</span>';
+}
 $(document).ready(function() {
     // Enable Bootstrap tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
