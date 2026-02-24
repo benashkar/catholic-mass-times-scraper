@@ -10,7 +10,7 @@ services:
     plan: starter
     rootDir: dashboard
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --timeout 120 "app:create_app()"
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --preload "app:create_app()"
     envVars:
       - key: FLASK_APP
         value: app

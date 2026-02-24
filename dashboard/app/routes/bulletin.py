@@ -121,7 +121,7 @@ def view_removed():
 
 @bp.route("/<state>/")
 def state_view(state):
-    """Show all bulletin names for a state in a filterable DataTable."""
+    """Show all bulletin names for a state in a filterable DataTable (AJAX)."""
     df = get_bulletin_names(state)
     if df is None:
         abort(404)
@@ -210,11 +210,11 @@ def state_view(state):
         df = df.head(MAX_ROWS)
     names = df[available].fillna("").to_dict("records")
 
+
     return render_template(
         "bulletin/state.html",
         state=state,
         display_name=display_name,
-        names=names,
         stats=stats,
         cities=cities,
         church_options=church_options,
@@ -224,3 +224,43 @@ def state_view(state):
         total_names=total_names,
         truncated=truncated,
     )
+
+
+@bp.route("/<state>/api/names")
+def api_names(state):
+    """DataTables server-side AJAX endpoint for bulletin names."""
+    df = get_bulletin_names(state)
+    if df is None:
+        abort(404)
+
+    # DataTables parameters
+    draw = request.args.get("draw", 1, type=int)
+    start = request.args.get("start", 0, type=int)
+    length = request.args.get("length", 50, type=int)
+    search = request.args.get("search[value]", "")
+    order_col = request.args.get("order[0][column]", 0, type=int)
+    order_dir = request.args.get("order[0][dir]", "asc")
+
+    # Custom filter params
+    church = request.args.get("church", "")
+    city = request.args.get("city", "")
+    category = request.args.get("category", "")
+
+    rows, total, filtered = get_bulletin_names_page(
+        state,
+        start=start,
+        length=length,
+        search=search,
+        order_col=order_col,
+        order_dir=order_dir,
+        church_filter=church,
+        city_filter=city,
+        category_filter=category,
+    )
+
+    return jsonify({
+        "draw": draw,
+        "recordsTotal": total,
+        "recordsFiltered": filtered,
+        "data": rows,
+    })

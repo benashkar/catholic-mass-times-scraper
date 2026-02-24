@@ -564,10 +564,10 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 - Flask app in `dashboard/` subfolder, deployed via Render native Python runtime
 - Reads CSVs directly (no Postgres for POC), LRU cache per state
 - **Dated Activities Calendar**: `/mass-times/<state>/calendar/` — all activities for a state with fixed yyyy-mm-dd dates (next 12 weeks), filterable by date range, church, and category. CSV download available at `/mass-times/<state>/calendar/download/`
-- Bulletin Names view: filterable DataTable with Name, Role, Title, First, Last, Church, City, Category, Confidence, PDF link, Date
+- Bulletin Names view: **server-side AJAX DataTable** (prevents OOM on large states). Filter dropdowns (church, city, category) and search box trigger server-side queries via `GET /bulletin/<state>/api/names`. Columns: Name, Role, Title, First, Last, Church, City, Category, Confidence, PDF link, Date
 - Church detail page: one-time event dates formatted as human-readable (e.g., "Feb 18")
 - State page: "View Calendar" link alongside church count
-- `render.yaml` at repo root configures the service
+- `render.yaml` at repo root configures the service (1 worker + `--preload` for 512 MB memory limit)
 - Auto-deploys on every push to master
 
 **Status (2026-02-23):**
@@ -820,6 +820,7 @@ These inform the lookup table contents in the database schema:
 15. **Bulletin junk names passing filters (0.4% rate):** ~425 non-name entries like "Pasta Salad", "Fall Alert", "Adobe Acrobat", "Primera Comuni" were passing the `is_valid_name()` filter. **Fixed:** Added ~65 words to `non_name_words` (food, commercial, tech, bulletin text categories) and ~30 multi-word phrases to `FALSE_POSITIVE_NAMES`. Junk rate was only 0.4% — the existing ~180-word blocklist + ~150 phrase list was already catching 99.6%. Commit `05fb3ab`.
 16. **Bulletin junk names — 26% rate across 10 states (deeper analysis):** Expanded analysis of 787K rows across 10 states revealed much higher junk rate than the original 0.4% estimate. Top categories: newline contamination (15.5%), nouns/verbs (9.6%), merged names (1.6%), commercial/org names (1.4%). **Fixed:** Dictionary-based validation using SSA baby names (100K) + Census 2010 surnames (162K), numeric confidence scoring (0.0–1.0), newline contamination fix (keep first line only), merged name detection/splitting, expanded non_name_words. Dashboard updated with score badges, confidence filter, and suspect name review page. Branch `feature/junk-filter-confidence-scoring`, commit `6364142`.
 13. **Stale deploys from batch scripts:** Batch/parallel scripts (`run_bulletin_batch.sh`, `run_parallel_bulletins.sh`, `auto_commit_bulletins.sh`, `auto_commit_progress.sh`, `auto_pipeline.sh`) did `git commit && git push` without pulling first. When dashboard code fixes were pushed separately, the batch script's data commit sat on an older parent, so Render auto-deployed a snapshot missing the latest dashboard code (e.g. the 502 fix). **Fixed:** Added `git pull --rebase` before every `git push` in all 5 scripts, so every deploy always includes the newest dashboard and route code. Commit `6ea4028`. **IMPORTANT: Any new script that does `git push` must include `git pull --rebase` first.**
+16. **Dashboard OOM crash on large bulletin states (512 MB limit):** `/bulletin/illinois/` loaded 223K CSV rows into pandas, converted 50K to dicts, and rendered a 56.5 MB HTML response — spiking memory from ~107 MB to 469 MB and OOM-killing the 512 MB Starter instance. **Fixed:** Switched from server-rendered `{% for %}` loop to DataTables server-side AJAX pagination. Added `GET /bulletin/<state>/api/names` endpoint returning ~10 KB JSON pages instead of 56 MB HTML. Reduced gunicorn from 2 workers to 1 with `--preload` (halves memory, enables copy-on-write sharing of the 23K church DataFrame). Shrunk LRU caches (`get_services` 5→3, `get_bulletin_names` 5→2, `_load_church_details_jsonl` 10→3, `get_dated_services` 5→3) and capped CSV reads at 50K rows via `nrows=50_000`. Response size dropped from 56 MB to 25 KB (2,200x reduction). Peak memory drops from >512 MB (OOM) to ~180 MB. PR #1.
 
 ---
 

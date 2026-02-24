@@ -164,7 +164,7 @@ def get_churches_for_state(state_dir):
     return _churches_df[_churches_df["state_dir"] == state_dir].copy()
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=3)
 def get_services(state_dir):
     """
     Load and return services DataFrame for a state.
@@ -248,7 +248,7 @@ def get_services(state_dir):
     return df
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=2)
 def get_bulletin_names(state_dir):
     """
     Load and return bulletin names DataFrame for a state.
@@ -259,7 +259,7 @@ def get_bulletin_names(state_dir):
     if not os.path.isfile(path):
         return None
 
-    df = pd.read_csv(path, encoding="utf-8-sig")
+    df = pd.read_csv(path, encoding="utf-8-sig", nrows=50_000)
 
     # If CSV already has city column (new format), use it directly
     if "city" in df.columns and df["city"].notna().any():
@@ -297,11 +297,24 @@ def get_bulletin_names(state_dir):
     return df
 
 
+def _count_csv_lines(path):
+    """Count data rows in a CSV file (excluding header). Fast, no pandas."""
+    try:
+        with open(path, "rb") as f:
+            return sum(1 for _ in f) - 1  # subtract header
+    except Exception:
+        return 0
+
+
 def get_bulletin_stats(state_dir):
     """Return summary stats for bulletin names in a state."""
     df = get_bulletin_names(state_dir)
     if df is None or df.empty:
         return None
+
+    # True total from raw CSV (not capped by nrows)
+    csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
+    true_total = _count_csv_lines(csv_path)
 
     # Unique names: count by (person_name, city) pairs so the same name
     # at different churches in different cities counts as separate people
@@ -311,14 +324,14 @@ def get_bulletin_stats(state_dir):
         unique = df["person_name"].nunique()
 
     return {
-        "total_names": len(df),
+        "total_names": true_total,
         "unique_names": unique,
         "church_count": df["church_name"].nunique(),
         "city_count": df["city"].nunique() if "city" in df.columns else 0,
     }
 
 
-@lru_cache(maxsize=10)
+@lru_cache(maxsize=3)
 def _load_church_details_jsonl(state_dir):
     """Load church_details.jsonl and build a lookup by church name.
     Returns dict mapping church name -> {website_resolved, slug}.
@@ -358,7 +371,7 @@ def get_church_slug(state_dir, church_name):
     return info.get("slug", "")
 
 
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=3)
 def get_dated_services(state_dir):
     """
     Load and return dated services DataFrame for a state.
@@ -379,3 +392,64 @@ def church_has_bulletin_names(state_dir, church_name):
     if df is None or df.empty:
         return False
     return (df["church_name"] == church_name).any()
+
+
+# Columns served to the DataTables AJAX endpoint (order matters — matches column indices)
+_BULLETIN_PAGE_COLS = [
+    "person_name", "role", "title", "first_name", "last_name",
+    "church_name", "city", "category", "confidence", "pdf_url", "pdf_date",
+]
+
+
+def get_bulletin_names_page(state_dir, start=0, length=50, search="",
+                            order_col=0, order_dir="asc",
+                            church_filter="", city_filter="",
+                            category_filter=""):
+    """
+    Return a page of bulletin names for DataTables server-side processing.
+
+    Returns (rows_list, total_records, filtered_records) where rows_list
+    is a list of lists (one per row, columns in _BULLETIN_PAGE_COLS order).
+    """
+    df = get_bulletin_names(state_dir)
+    if df is None or df.empty:
+        return [], 0, 0
+
+    total_records = len(df)
+
+    # --- Apply filters ---
+    if church_filter and "church_name" in df.columns:
+        df = df[df["church_name"] == church_filter]
+    if city_filter and "city" in df.columns:
+        df = df[df["city"] == city_filter]
+    if category_filter and "category" in df.columns:
+        df = df[df["category"] == category_filter]
+
+    # Global search across all display columns
+    if search:
+        search_lower = search.lower()
+        available = [c for c in _BULLETIN_PAGE_COLS if c in df.columns and c != "pdf_url"]
+        mask = pd.Series(False, index=df.index)
+        for col in available:
+            mask = mask | df[col].astype(str).str.lower().str.contains(search_lower, na=False)
+        df = df[mask]
+
+    filtered_records = len(df)
+
+    # --- Sort ---
+    available_cols = [c for c in _BULLETIN_PAGE_COLS if c in df.columns]
+    if 0 <= order_col < len(available_cols):
+        sort_col = available_cols[order_col]
+        ascending = order_dir != "desc"
+        df = df.sort_values(sort_col, ascending=ascending, na_position="last")
+
+    # --- Paginate ---
+    page = df.iloc[start:start + length]
+
+    # Build list-of-lists with only available columns (fill missing with "")
+    rows = []
+    for _, row in page.iterrows():
+        rows.append([str(row.get(c, "") if pd.notna(row.get(c, "")) else "")
+                      for c in _BULLETIN_PAGE_COLS])
+
+    return rows, total_records, filtered_records

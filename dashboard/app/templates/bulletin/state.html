@@ -17,12 +17,6 @@
     </div>
 </div>
 
-{% if truncated %}
-<div class="alert alert-warning">
-    Showing {{ "{:,}".format(names|length) }} of {{ "{:,}".format(total_names) }} names. Use the Church or City filter to narrow results.
-</div>
-{% endif %}
-
 <!-- Stats row -->
 {% if stats %}
 <div class="row mb-4 g-2">
@@ -198,6 +192,32 @@ $(document).ready(function() {
     tooltipTriggerList.forEach(function(el) { new bootstrap.Tooltip(el); });
 
     var table = $('#namesTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '/bulletin/{{ state }}/api/names',
+            data: function(d) {
+                d.church = $('#filterChurch').val();
+                d.city = $('#filterCity').val();
+                d.category = $('#filterCategory').val();
+            }
+        },
+        columns: [
+            { data: 0, render: function(d) { return '<strong>' + $('<span>').text(d).html() + '</strong>'; } },
+            { data: 1 },
+            { data: 2, className: 'text-center' },
+            { data: 3 },
+            { data: 4 },
+            { data: 5 },
+            { data: 6 },
+            { data: 7, render: function(d) { return categoryBadge(d); } },
+            { data: 8, className: 'text-center', render: function(d) { return confBadge(d); } },
+            { data: 9, className: 'text-center', orderable: false, render: function(d) {
+                if (d) return '<a href="' + $('<span>').text(d).html() + '" target="_blank" rel="noopener" title="View source PDF"><i class="bi bi-file-earmark-pdf"></i></a>';
+                return '';
+            }},
+            { data: 10 }
+        ],
         pageLength: 50,
         order: [[0, 'asc']],
         language: { search: "Search names:" },
@@ -267,12 +287,14 @@ $(document).ready(function() {
                     $(this).prop('selected', true);
                 }
             });
+            $('#filterCity').val(prefilterCity);
         } else {
             $('#filterChurch option').filter(function() {
                 return $(this).val() === prefilterChurch;
             }).first().prop('selected', true);
         }
-        table.draw();
+        // Reload with the prefilter applied
+        table.ajax.reload();
     }
 });
 </script>
