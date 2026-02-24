@@ -18,6 +18,7 @@ import pandas as pd
 DATA_DIR = None
 _churches_df = None  # Master church list (all states, ~23K rows, ~4 MB)
 _state_list = None  # Cached list of state dicts
+_bulletin_stats_cache = {}  # Pre-computed stats per state (avoids CSV reload on every request)
 
 # Maps state directory names to expected state name in addresses
 STATE_DIR_TO_NAME = {
@@ -191,6 +192,30 @@ def init_data(app):
     # Pre-compute state list with counts
     _state_list = _build_state_list()
 
+    # Pre-compute bulletin stats at startup (avoids loading all CSVs per request)
+    global _bulletin_stats_cache
+    for state_dir in sorted(os.listdir(DATA_DIR)):
+        csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
+        if not os.path.isfile(csv_path):
+            continue
+        try:
+            total = _count_csv_lines(csv_path)
+            df = pd.read_csv(csv_path, encoding="utf-8-sig", nrows=50_000,
+                             usecols=lambda c: c in ("person_name", "church_name", "city"))
+            if "city" in df.columns:
+                unique = df.groupby(["person_name", "city"]).ngroups
+            else:
+                unique = df["person_name"].nunique()
+            _bulletin_stats_cache[state_dir] = {
+                "total_names": total,
+                "unique_names": unique,
+                "church_count": df["church_name"].nunique() if "church_name" in df.columns else 0,
+                "city_count": df["city"].nunique() if "city" in df.columns else 0,
+            }
+        except Exception as e:
+            app.logger.warning(f"Failed to compute bulletin stats for {state_dir}: {e}")
+    app.logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
+
 
 def _build_state_list():
     """Build a sorted list of states with church counts and bulletin availability."""
@@ -326,7 +351,7 @@ def get_services(state_dir):
     return df
 
 
-@lru_cache(maxsize=2)
+@lru_cache(maxsize=8)
 def get_bulletin_names(state_dir):
     """
     Load and return bulletin names DataFrame for a state.
@@ -337,7 +362,8 @@ def get_bulletin_names(state_dir):
     if not os.path.isfile(path):
         return None
 
-    df = pd.read_csv(path, encoding="utf-8-sig", nrows=50_000)
+    df = pd.read_csv(path, encoding="utf-8-sig", nrows=50_000,
+                      dtype={"confidence_score": "str"})
 
     # If CSV already has city column (new format), use it directly
     if "city" in df.columns and df["city"].notna().any():
@@ -387,28 +413,9 @@ def _count_csv_lines(path):
 
 
 def get_bulletin_stats(state_dir):
-    """Return summary stats for bulletin names in a state."""
-    df = get_bulletin_names(state_dir)
-    if df is None or df.empty:
-        return None
-
-    # True total from raw CSV (not capped by nrows)
-    csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
-    true_total = _count_csv_lines(csv_path)
-
-    # Unique names: count by (person_name, city) pairs so the same name
-    # at different churches in different cities counts as separate people
-    if "city" in df.columns:
-        unique = df.groupby(["person_name", "city"]).ngroups
-    else:
-        unique = df["person_name"].nunique()
-
-    return {
-        "total_names": true_total,
-        "unique_names": unique,
-        "church_count": df["church_name"].nunique(),
-        "city_count": df["city"].nunique() if "city" in df.columns else 0,
-    }
+    """Return summary stats for bulletin names in a state.
+    Uses pre-computed cache from init_data() for fast lookups."""
+    return _bulletin_stats_cache.get(state_dir)
 
 
 @lru_cache(maxsize=3)
