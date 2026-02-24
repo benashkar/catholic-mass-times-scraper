@@ -562,25 +562,33 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 **Dashboard (Render):**
 - Live at: https://catholic-church-dashboard.onrender.com
 - Flask app in `dashboard/` subfolder, deployed via Render native Python runtime
-- Reads CSVs directly (no Postgres for POC), LRU cache per state
+- Reads CSVs directly (no Postgres for POC), LRU cache per state (maxsize=8)
+- **Homepage**: State table with church counts, per-state unique name count badges on Names buttons, aggregate totals (total churches, states, names, unique names)
 - **Dated Activities Calendar**: `/mass-times/<state>/calendar/` — all activities for a state with fixed yyyy-mm-dd dates (next 12 weeks), filterable by date range, church, and category. CSV download available at `/mass-times/<state>/calendar/download/`
 - Bulletin Names view: **server-side AJAX DataTable** (prevents OOM on large states). Filter dropdowns (church, city, category) and search box trigger server-side queries via `GET /bulletin/<state>/api/names`. Columns: Name, Role, Title, First, Last, Church, City, Category, Confidence, PDF link, Date
 - Church detail page: one-time event dates formatted as human-readable (e.g., "Feb 18")
 - State page: "View Calendar" link alongside church count
+- **Performance**: Bulletin stats pre-computed at startup (avoids loading 47+ CSVs on every homepage request). Homepage loads in ~1s.
 - `render.yaml` at repo root configures the service (1 worker + `--preload` for 512 MB memory limit)
 - Auto-deploys on every push to master
 
-**Status (2026-02-23):**
+**CI Pipeline (GitHub Actions):**
+- `.github/workflows/ci.yml` — runs on push to master and PRs to master
+- **Lint job**: `ruff format --check` + `ruff check` (formatting + linting)
+- **Test job**: `pytest` with coverage — 63 unit tests for scoring/filtering functions (`score_name_confidence`, `confidence_label`, `split_merged_name`, `clean_extracted_name`, `is_valid_name`)
+- Lint and test jobs run in parallel (test no longer depends on lint)
+- Branch protection on master requires `test` status check to pass before merging
+
+**Status (2026-02-24):**
 
 | Status | States | Count |
 |--------|--------|-------|
-| **DONE** (names extracted) | AZ, CA, CT, FL, GA, IA, IL, MI, MN, NE, NM, OH, PA, TX | 14 |
-| **IN PROGRESS** (discovery started) | LA, MA, NY, WI | 4 |
-| **URLs ONLY** (ready for bulletin scrape) | AL, AK, AR, CO, DE, HI, ID, IN, KS, KY, ME, MD, MS, MO, MT, NV, NH, NJ, NC, ND, OK, OR, RI, SC, SD, TN, UT, VT, VA, WA, WV, WY | 32 |
+| **DONE** (names extracted) | AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TX, VT, WA, WV, WI, WY | 47 |
+| **IN PROGRESS** | TN, UT, VA | 3 |
 
 - All 23,046 church URLs resolved (0 failures)
-- Full bulletin scraper running locally for all 50 states (`python run_bulletin_scraper.py all all --resume`)
-- 14 states complete with ~1.5M total extracted names
+- **2,224,663 total extracted names** across 47 states
+- Batch orchestrator (`run_bulletin_batch.py`) runs 2 states in parallel, cycling through remaining states continuously
 - Render cron jobs (Tue–Sat batches) will take over weekly refreshes once initial run completes
 
 ### Phase 8: Docker / Containerization
@@ -637,7 +645,8 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 | Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | Exponential backoff on retries, no retry on 404s |
 | Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output to `logs/scrape_YYYY-MM-DD.log` |
 | Address parser | `src/parsers/address_parser.py` | Token-based street segmentation (43 tests) |
-| Testing | `pytest` (109 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) + address parser (43) |
+| Testing | `pytest` (172 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) + address parser (43) + bulletin names (63) |
+| CI | GitHub Actions (`.github/workflows/ci.yml`) | Lint (ruff) + Test (pytest) on push to master and PRs |
 | US city data | 29,880 cities across 52 states | Source: github.com/kelvins/US-Cities-Database |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
 | Scheduling (future) | Cron job or GitHub Actions | Weekly incremental, monthly full |
@@ -654,6 +663,9 @@ church scrapes/
 ├── pyproject.toml                         # pytest config
 ├── .env.example                           # Environment variable template
 ├── .gitignore
+├── .github/
+│   └── workflows/
+│       └── ci.yml                            # GitHub Actions CI: lint (ruff) + test (pytest) + dashboard-smoke
 │
 ├── config/
 │   ├── __init__.py
@@ -687,7 +699,8 @@ church scrapes/
 │   ├── test_smoke.py                      # 3 config/import smoke tests
 │   ├── test_rsc_extractor.py              # 22 RSC extractor tests
 │   ├── test_transformers.py               # 41 ETL transformer tests
-│   └── test_address_parser.py             # 43 address parser tests
+│   ├── test_address_parser.py             # 43 address parser tests
+│   └── test_bulletin_names.py             # 63 bulletin name scoring/filtering tests
 │
 ├── data/
 │   ├── city_lists/
@@ -723,7 +736,9 @@ church scrapes/
 ├── run_resolve_urls.py                    # Resolve CatholicIndex redirect URLs to actual website URLs
 ├── run_bulletin_scraper.py                # Phase 7: bulletin discovery + PDF download + name extraction (with Playwright)
 ├── auto_pipeline.sh                       # Parallel auto-pipeline: resolve URLs + scrape bulletins for all states (3 at a time)
-├── run_bulletin_batch.sh                  # Batch bulletin scraper with auto-commit + Render deploy per state
+├── run_bulletin_batch.sh                  # Bash batch bulletin scraper (replaced by Python version on Windows)
+├── run_bulletin_batch.py                  # Python batch orchestrator: 2 states in parallel, auto-commit + deploy
+├── monitor_scrapes.py                     # Hourly monitoring: check progress, commit finished states, trigger deploys
 ├── auto_commit_progress.sh               # Cron-style script to commit URL resolver progress every 2 hours
 │
 ├── scripts/
@@ -821,6 +836,9 @@ These inform the lookup table contents in the database schema:
 16. **Bulletin junk names — 26% rate across 10 states (deeper analysis):** Expanded analysis of 787K rows across 10 states revealed much higher junk rate than the original 0.4% estimate. Top categories: newline contamination (15.5%), nouns/verbs (9.6%), merged names (1.6%), commercial/org names (1.4%). **Fixed:** Dictionary-based validation using SSA baby names (100K) + Census 2010 surnames (162K), numeric confidence scoring (0.0–1.0), newline contamination fix (keep first line only), merged name detection/splitting, expanded non_name_words. Dashboard updated with score badges, confidence filter, and suspect name review page. Branch `feature/junk-filter-confidence-scoring`, commit `6364142`.
 13. **Stale deploys from batch scripts:** Batch/parallel scripts (`run_bulletin_batch.sh`, `run_parallel_bulletins.sh`, `auto_commit_bulletins.sh`, `auto_commit_progress.sh`, `auto_pipeline.sh`) did `git commit && git push` without pulling first. When dashboard code fixes were pushed separately, the batch script's data commit sat on an older parent, so Render auto-deployed a snapshot missing the latest dashboard code (e.g. the 502 fix). **Fixed:** Added `git pull --rebase` before every `git push` in all 5 scripts, so every deploy always includes the newest dashboard and route code. Commit `6ea4028`. **IMPORTANT: Any new script that does `git push` must include `git pull --rebase` first.**
 16. **Dashboard OOM crash on large bulletin states (512 MB limit):** `/bulletin/illinois/` loaded 223K CSV rows into pandas, converted 50K to dicts, and rendered a 56.5 MB HTML response — spiking memory from ~107 MB to 469 MB and OOM-killing the 512 MB Starter instance. **Fixed:** Switched from server-rendered `{% for %}` loop to DataTables server-side AJAX pagination. Added `GET /bulletin/<state>/api/names` endpoint returning ~10 KB JSON pages instead of 56 MB HTML. Reduced gunicorn from 2 workers to 1 with `--preload` (halves memory, enables copy-on-write sharing of the 23K church DataFrame). Shrunk LRU caches (`get_services` 5→3, `get_bulletin_names` 5→2, `_load_church_details_jsonl` 10→3, `get_dated_services` 5→3) and capped CSV reads at 50K rows via `nrows=50_000`. Response size dropped from 56 MB to 25 KB (2,200x reduction). Peak memory drops from >512 MB (OOM) to ~180 MB. PR #1.
+17. **Dashboard CPU maxed / instance cycling with 40+ states:** Homepage and bulletin overview called `get_bulletin_stats()` in a loop for all states, which called `get_bulletin_names()` → `pd.read_csv()`. With LRU `maxsize=2`, each CSV was evicted before the next iteration, so all 47+ CSVs were re-read on every page load. CPU pegged at 100% (0.5 starter limit), Render recycled 6 instances/hour, pages timed out. **Fixed:** Pre-compute bulletin stats once at startup in `init_data()` and serve from a dict lookup. Increased `get_bulletin_names` LRU cache from 2→8. CPU dropped from 100% to 0.04%, memory from 330 MB to 144 MB, homepage loads in 1.2s. Commit `99f3d16`.
+18. **Zero unique names for states with NaN city column:** States scraped before the `city` column was added (Arizona, California, Minnesota, etc.) had `city=NaN` for all rows. `pandas.groupby(["person_name", "city"])` silently drops NaN keys, giving 0 unique names. **Fixed:** Fall back to `person_name.nunique()` when city column is all-null. Commit `ff07df7`.
+19. **Bash batch script launched all 24 states at once on Windows:** `run_bulletin_batch.sh` used `wait -n -p` and `kill -0` which don't work in Windows Git Bash. The fallback poll loop found all PIDs "dead" immediately, launching all states simultaneously. **Fixed:** Created Python-based `run_bulletin_batch.py` using `subprocess.Popen` + `poll()` for Windows compatibility. Keeps exactly 2 states running at all times.
 
 ---
 
@@ -1006,7 +1024,7 @@ git add data/ && git commit -m "Weekly data refresh" && git push
 7. ~~**Set up weekly automation**~~ ✅ DONE — Render cron jobs: Sunday schedule refresh + Tue–Sat bulletin batches
 8. ~~**Extend date range to 12 weeks**~~ ✅ DONE — dated_services.csv now covers 84 days forward
 9. ~~**Add calendar page to dashboard**~~ ✅ DONE — `/mass-times/<state>/calendar/` with filters + CSV download
-10. **Complete initial bulletin scrape for all 50 states** — 14/50 done, remaining 36 running locally
+10. **Complete initial bulletin scrape for all 50 states** — 47/50 done (2,224,663 names), 3 remaining (TN, UT, VA)
 11. **Generate national coverage report** — How many parishes per state, coverage vs known parish counts
 12. **Set up PostgreSQL** and run `database/schema.sql` to create the production database
 13. **Build database loader** — Script to INSERT transformed data into PostgreSQL using the ETL transformers
