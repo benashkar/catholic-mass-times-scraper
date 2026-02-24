@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          allow-prereleases: true
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: pytest --cov=src --cov=run_bulletin_scraper --cov-report=term-missing -v
+
+  lint:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          allow-prereleases: true
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run linter
+        run: ruff check . --output-format=github
+
+  dashboard-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          allow-prereleases: true
+
+      - name: Install dashboard dependencies
+        run: pip install -r dashboard/requirements.txt
+
+      - name: Smoke test /health endpoint
+        working-directory: dashboard
+        run: |
+          python -c "
+          from app import create_app
+          app = create_app()
+          client = app.test_client()
+          resp = client.get('/health')
+          assert resp.status_code == 200, f'Expected 200, got {resp.status_code}'
+          print('Dashboard /health returned 200 OK')
+          "
