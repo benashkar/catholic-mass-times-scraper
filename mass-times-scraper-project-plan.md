@@ -455,10 +455,20 @@ Analysis across 10 states (787K rows, 499K unique names) found a 26% junk rate. 
 1. **Newline contamination fix** (~15.5% of junk): `clean_extracted_name()` now keeps only the first line instead of merging multi-line PDF text with spaces
 2. **Merged name detection** (~1.6%): `split_merged_name()` splits "Kevin Steinkamp Mary" → "Kevin Steinkamp" when last word is a top-5000 SSA first name but not a Census surname
 3. **Dictionary-based scoring**: SSA + Census lookup provides evidence-based confidence instead of category-only heuristics
-4. **Expanded non_name_words**: Added ~15 missing words (donate, register, friday, columbus, etc.)
-5. **Suspect name review**: Dashboard at `/bulletin/suspect/` shows low-confidence names for manual review with one-click removal
+4. **Expanded non_name_words**: Added ~85 new words from Arizona manual review (oratory, sanctuary, candle, flowers, scouts, billboard, psalm, quinceanera, etc.)
+5. **Merged-word rejection**: Words > 15 characters are rejected (catches PDF artifacts like "Honoryourfamilymember")
+6. **Cross-state auto-removal**: 1,076 junk phrases appearing in 3+ states with score < 0.4 auto-removed (file: `data/reference/auto_removed_low_conf_3states.txt`). Catches "Lateran Basilica", "Silent Auction", "Planned Parenthood", "Super Bowl", etc.
+7. **Suspect name review**: Dashboard at `/bulletin/suspect/` shows low-confidence names for manual review with one-click removal
+8. **Arizona manual review**: User reviewed 760 names, marked 8 as good (e.g. "Jysell Urcade", "Padilla Alta"), rest confirmed as junk. Feedback used to tune word lists and thresholds.
 
-**False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Numeric confidence score + dictionary validation allows precise downstream filtering. Dashboard supports `?min_confidence=0.7` to show only high-confidence names. Removed names saved to `data/reference/removed_names.json` for research.
+**Results after all filtering (21 states, 915K names):**
+| Confidence | Names | % |
+|---|---|---|
+| High (>= 0.7) | 601,029 | 65.7% |
+| Medium (0.4–0.69) | 247,392 | 27.0% |
+| Low (< 0.4) | 66,910 | 7.3% |
+
+**False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Numeric confidence score + dictionary validation allows precise downstream filtering. Dashboard supports `?min_confidence=0.7` to show only high-confidence names. Removed names saved to `data/reference/removed_names.json` for research. Cross-state auto-removed names saved to `data/reference/auto_removed_low_conf_3states.txt` (1,076 entries).
 
 **Test dataset:** `python scripts/build_junk_test_set.py` samples 2,000 names from 10 diverse states (200/state, 50/50 clean/junk split) for precision/recall benchmarking. Output: `data/reference/junk_test_set.csv` with `manual_label` column for human review.
 

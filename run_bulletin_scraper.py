@@ -83,13 +83,14 @@ _ssa_first_names = None       # set of lowercase first names
 _ssa_top1000 = None           # set of lowercase top-1000 first names
 _ssa_top5000 = None           # set of lowercase top-5000 first names
 _census_surnames = None       # set of lowercase surnames
+_auto_removed_names = None    # set of exact-match names auto-removed by cross-state analysis
 _reference_loaded = False
 
 
 def _load_reference_data():
     """Load SSA first names and Census surnames into memory (lazy, once)."""
     global _ssa_first_names, _ssa_top1000, _ssa_top5000
-    global _census_surnames, _reference_loaded
+    global _census_surnames, _auto_removed_names, _reference_loaded
 
     if _reference_loaded:
         return
@@ -127,6 +128,17 @@ def _load_reference_data():
     else:
         logger.warning(f"Census surnames not found at {census_path}. "
                         "Run: python scripts/prepare_name_reference.py")
+
+    # Load auto-removed names (cross-state low-confidence junk)
+    _auto_removed_names = set()
+    removed_path = REFERENCE_DIR / "auto_removed_low_conf_3states.txt"
+    if removed_path.exists():
+        with open(removed_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    _auto_removed_names.add(line)
+        logger.info(f"Loaded {len(_auto_removed_names):,} auto-removed names")
 
     _reference_loaded = True
 
@@ -1927,6 +1939,28 @@ FALSE_POSITIVE_NAMES = {
     "Will Be", "Will Not", "Will Have", "Will Take",
     "Christian Education", "Christian Formation", "Christian Initiation",
     "Christian Service", "Christian Community", "Christian Life",
+    # Phrases from Arizona manual review (Feb 2026)
+    "Submission Date", "Start Date", "End Date",
+    "Entrance Antiphon", "Entrance Antipho",
+    "Important Reminder", "Important Reminder Entrance",
+    "Important Reminder Compliance",
+    "Cub Scouts", "Boy Scouts", "Girl Scouts",
+    "Junior Vincentians", "Desert Hills",
+    "Tax Collector", "Small Faith Sharing",
+    "Home Visits", "Birth Certificate",
+    "Legal Protection", "Fire Protection",
+    "Mentor Couples", "Front Desk",
+    "His Spirit", "Why Registering",
+    "Envelope Fundraiser", "Fundraiser Request Form",
+    "Polish Grandmother", "Nativity Display", "Nativity Scene",
+    "Birthday Blessing", "Birthday Recognition",
+    "Commitment Card", "Snack Leader",
+    "Cathedral Concert Series", "Provincial Superior",
+    "Sanctuary Candle", "Various Sanctuary Candles",
+    "Clear Creek Monastery", "Prompt Succour", "Prompt Succor",
+    "Religious Items Booth", "Only Begotten Son",
+    "Las Catequistas", "Bautizo Hora Ultima",
+    "Fecha Fecha", "Obispo Kicanas",
 }
 
 
@@ -2004,6 +2038,11 @@ def is_valid_name(name: str) -> bool:
     if name in FALSE_POSITIVE_NAMES:
         return False
 
+    # Check against auto-removed names (cross-state low-confidence junk)
+    _load_reference_data()
+    if _auto_removed_names and name in _auto_removed_names:
+        return False
+
     # Reject truncated names: last word should be at least 3 chars
     # (catches PDF column bleed like "Teresa Mu", "Carlos Ze", "Reynaldo Ro")
     # Exception: middle initials are OK (single letter + optional period)
@@ -2012,6 +2051,12 @@ def is_valid_name(name: str) -> bool:
 
     # Reject if first name is too short (catches "Fr Mike" without the period)
     if len(parts[0]) < 2:
+        return False
+
+    # Reject merged-word artifacts from PDF extraction (spaces stripped)
+    # Real names rarely have words longer than 15 characters
+    # Catches: "Honoryourfamilymember", "Wouldyouliketohonoral", "Regularclassesstartth"
+    if any(len(p) > 15 for p in parts):
         return False
 
     # Reject if any part is a common non-name word.
@@ -2128,6 +2173,22 @@ def is_valid_name(name: str) -> bool:
         'friday',
         # Organization words
         'columbus', 'columbian',
+        # Words surfaced by Arizona manual review (Feb 2026)
+        'oratory', 'thank', 'thanks', 'linens', 'sanctuary', 'candle', 'candles',
+        'flowers', 'compliance', 'homebound', 'sales', 'mandatory', 'nativity',
+        'dancers', 'billboard', 'readings', 'items', 'mission', 'month',
+        'parents', 'psalm', 'date', 'tax', 'home', 'scene', 'various',
+        'sponsor', 'hurricane', 'walking', 'bereavement', 'report',
+        'quinceanera', 'responsorial', 'water', 'funerals', 'envelope',
+        'registering', 'grandmother', 'blessing', 'booth', 'begotten',
+        'purgatory', 'scouts', 'cub', 'boy', 'girl', 'leader', 'snack',
+        'bistro', 'shirt', 'card', 'commitment', 'reminder', 'important',
+        'prompt', 'catechetical', 'celebrant', 'caring',
+        'institute', 'hills', 'desert', 'submission', 'start', 'end',
+        'dedication', 'iglesia', 'crowning', 'mentor', 'couples',
+        'certificate', 'protection', 'legal', 'display', 'monastery',
+        'superior', 'provincial', 'recognition', 'collector', 'sharing',
+        'concert', 'series', 'cathedral', 'antiphon',
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
