@@ -363,7 +363,7 @@ python run_bulletin_scraper.py all arizona --retry-no-pdfs  # Re-try 0-PDF churc
 data/output/{state}/bulletin_discovery.json     — bulletin page URLs per church
 data/output/{state}/bulletins/                   — downloaded PDF files
 data/output/{state}/bulletin_texts/              — extracted text files
-data/output/{state}/bulletin_names.csv           — extracted names (church, name, category, context)
+data/output/{state}/bulletin_names.csv           — extracted names (church, city, name, category, context)
 data/output/{state}/bulletin_names.json          — same data in JSON format
 data/output/{state}/bulletin_progress.json       — progress tracking for resume
 ```
@@ -753,6 +753,8 @@ These inform the lookup table contents in the database schema:
 10. **CatholicIndex redirect URLs:** Website field contained `/api/out?...` redirect links, not actual URLs. The endpoint serves an interstitial HTML page with `window.location.href` in JavaScript. **Fixed:** `run_resolve_urls.py` fetches the interstitial page and parses the actual URL via regex.
 11. **JSONL truncation with --limit flag:** `run_resolve_urls.py --limit 10` originally rewrote the JSONL with only the limited records, truncating the full file. **Fixed:** Separated `all_records` from `records` for the rewrite.
 12. **502 Bad Gateway on large bulletin states:** Illinois (223K names) and Michigan (75MB response) caused gunicorn 120s timeout on `/bulletin/<state>/`. **Fixed:** Added 50K row cap with truncation warning in `bulletin.py`. Server-side pre-filtering applies `?church=` and `?city=` query params before the cap, so filtered views show full results. Commit `1b047ec`.
+14. **Missing city column in bulletin_names.csv:** The CSV had `church_slug` but no `city` column, requiring a join to `church_details.jsonl` to get city. Also, the dashboard "Unique Names" stat used `person_name.nunique()` which undercounted — "John Smith" at 9 churches in 9 cities was counted as 1 unique name. **Fixed:** Added `city` column to CSV output (denormalized from JSONL slug→city mapping). Dashboard stat now counts `(person_name, city)` pairs. Backfilled all 17 existing states. Commit `05fb3ab`.
+15. **Bulletin junk names passing filters (0.4% rate):** ~425 non-name entries like "Pasta Salad", "Fall Alert", "Adobe Acrobat", "Primera Comuni" were passing the `is_valid_name()` filter. **Fixed:** Added ~65 words to `non_name_words` (food, commercial, tech, bulletin text categories) and ~30 multi-word phrases to `FALSE_POSITIVE_NAMES`. Junk rate was only 0.4% — the existing ~180-word blocklist + ~150 phrase list was already catching 99.6%. Commit `05fb3ab`.
 13. **Stale deploys from batch scripts:** Batch/parallel scripts (`run_bulletin_batch.sh`, `run_parallel_bulletins.sh`, `auto_commit_bulletins.sh`, `auto_commit_progress.sh`, `auto_pipeline.sh`) did `git commit && git push` without pulling first. When dashboard code fixes were pushed separately, the batch script's data commit sat on an older parent, so Render auto-deployed a snapshot missing the latest dashboard code (e.g. the 502 fix). **Fixed:** Added `git pull --rebase` before every `git push` in all 5 scripts, so every deploy always includes the newest dashboard and route code. Commit `6ea4028`. **IMPORTANT: Any new script that does `git push` must include `git pull --rebase` first.**
 
 ---
