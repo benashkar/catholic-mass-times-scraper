@@ -200,10 +200,11 @@ def init_data(app):
             continue
         try:
             total = _count_csv_lines(csv_path)
+            # Read ALL rows (no nrows cap) for accurate unique counts.
+            # Only 3 narrow columns so even 365K rows is ~15 MB — fine for one-time startup.
             df = pd.read_csv(
                 csv_path,
                 encoding="utf-8-sig",
-                nrows=50_000,
                 usecols=lambda c: c in ("person_name", "church_name", "city"),
             )
             if "city" in df.columns and df["city"].notna().any():
