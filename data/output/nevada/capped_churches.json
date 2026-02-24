@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "us-nv-ely-sacred-heart-02357958",
+    "church_name": "Sacred Heart",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-nv-mc-gill-st-michael-d7e7d069",
+    "church_name": "St. Michael",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-nv-reno-oratory-of-st-joseph-35c46842",
+    "church_name": "Oratory of St Joseph",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-nv-reno-st-rose-of-lima-1f13e643",
+    "church_name": "St. Rose of Lima",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  }
+]
