@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "us-al-adamsville-saint-patrick-24beac2b",
+    "church_name": "St. Patrick",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-al-birmingham-holy-rosary-9296273e",
+    "church_name": "Holy Rosary",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  },
+  {
+    "slug": "us-al-leeds-st-theresa-of-the-child-jesus-1a98b44b",
+    "church_name": "St. Theresa of the Child Jesus",
+    "total_pdfs_available": 100,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 0
+  }
+]
