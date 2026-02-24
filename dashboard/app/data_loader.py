@@ -19,6 +19,7 @@ DATA_DIR = None
 _churches_df = None  # Master church list (all states, ~23K rows, ~4 MB)
 _state_list = None  # Cached list of state dicts
 _bulletin_stats_cache = {}  # Pre-computed stats per state (avoids CSV reload on every request)
+_bulletin_filters_cache = {}  # Pre-computed filter dropdowns per state (cities + church options)
 
 # Maps state directory names to expected state name in addresses
 STATE_DIR_TO_NAME = {
@@ -192,8 +193,9 @@ def init_data(app):
     # Pre-compute state list with counts
     _state_list = _build_state_list()
 
-    # Pre-compute bulletin stats at startup (avoids loading all CSVs per request)
-    global _bulletin_stats_cache
+    # Pre-compute bulletin stats AND filter dropdowns at startup.
+    # This avoids loading all CSVs per request and makes bulletin pages load instantly.
+    global _bulletin_stats_cache, _bulletin_filters_cache
     for state_dir in sorted(os.listdir(DATA_DIR)):
         csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
         if not os.path.isfile(csv_path):
@@ -217,9 +219,39 @@ def init_data(app):
                 "church_count": df["church_name"].nunique() if "church_name" in df.columns else 0,
                 "city_count": df["city"].nunique() if "city" in df.columns else 0,
             }
+
+            # Pre-compute filter dropdown data (cities + church options)
+            cities = sorted(df["city"].dropna().unique().tolist()) if "city" in df.columns else []
+            church_options = []
+            if "church_name" in df.columns:
+                church_names = sorted(df["church_name"].dropna().unique().tolist())
+                if "city" in df.columns and df["city"].notna().any():
+                    church_city_pairs = (
+                        df[df["church_name"].notna() & df["city"].notna()]
+                        .groupby("church_name")["city"]
+                        .apply(lambda x: sorted(x.unique().tolist()))
+                        .to_dict()
+                    )
+                else:
+                    church_city_pairs = {}
+                for name in church_names:
+                    cities_for = church_city_pairs.get(name, [])
+                    if len(cities_for) > 1:
+                        for city in cities_for:
+                            church_options.append(
+                                {"label": f"{name} ({city})", "church": name, "city": city}
+                            )
+                    else:
+                        church_options.append({"label": name, "church": name, "city": ""})
+            _bulletin_filters_cache[state_dir] = {
+                "cities": cities,
+                "church_options": church_options,
+            }
         except Exception as e:
             app.logger.warning(f"Failed to compute bulletin stats for {state_dir}: {e}")
-    app.logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
+    app.logger.info(
+        f"Pre-computed bulletin stats and filters for {len(_bulletin_stats_cache)} states"
+    )
 
 
 def _build_state_list():
@@ -420,6 +452,12 @@ def get_bulletin_stats(state_dir):
     """Return summary stats for bulletin names in a state.
     Uses pre-computed cache from init_data() for fast lookups."""
     return _bulletin_stats_cache.get(state_dir)
+
+
+def get_bulletin_filters(state_dir):
+    """Return pre-computed filter dropdown data (cities + church options) for a state.
+    Uses pre-computed cache from init_data() for instant page loads."""
+    return _bulletin_filters_cache.get(state_dir)
 
 
 @lru_cache(maxsize=3)

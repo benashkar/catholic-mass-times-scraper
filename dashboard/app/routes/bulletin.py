@@ -9,6 +9,7 @@ import os
 from flask import Blueprint, abort, jsonify, render_template, request
 
 from app.data_loader import (
+    get_bulletin_filters,
     get_bulletin_names,
     get_bulletin_names_page,
     get_bulletin_stats,
@@ -133,99 +134,35 @@ def view_removed():
 
 @bp.route("/<state>/")
 def state_view(state):
-    """Show all bulletin names for a state in a filterable DataTable (AJAX)."""
-    df = get_bulletin_names(state)
-    if df is None:
+    """Show all bulletin names for a state in a filterable DataTable (AJAX).
+
+    Uses pre-computed stats and filter dropdowns from startup so the page
+    shell loads instantly.  Actual data arrives via the AJAX api_names endpoint.
+    """
+    stats = get_bulletin_stats(state)
+    if stats is None:
         abort(404)
 
-    stats = get_bulletin_stats(state)
+    filters = get_bulletin_filters(state)
     display_name = state.replace("_", " ").title()
-
-    # Apply min_confidence filter
-    min_confidence = request.args.get("min_confidence", "")
-    if min_confidence:
-        try:
-            min_conf = float(min_confidence)
-            if "confidence_score" in df.columns:
-                df = df[df["confidence_score"].astype(float) >= min_conf]
-            elif min_conf >= 0.7:
-                df = df[df["confidence"] == "high"]
-            elif min_conf >= 0.4:
-                df = df[df["confidence"].isin(["high", "medium"])]
-        except ValueError:
-            pass
-
-    # Exclude removed names
-    removed = _load_removed_names()
-    removed_keys = {(r["person_name"], r["state"]) for r in removed}
-    if removed_keys and "person_name" in df.columns:
-        df = df[~df["person_name"].apply(lambda n: (n, state) in removed_keys)]
-
-    # Get unique cities and churches for filter dropdowns
-    cities = sorted(df["city"].dropna().unique().tolist()) if "city" in df.columns else []
-
-    # Build church dropdown entries with city disambiguation for duplicates
-    church_names = df["church_name"].dropna().unique().tolist()
-    if "city" in df.columns:
-        church_city_pairs = (
-            df[df["church_name"].notna() & df["city"].notna()]
-            .groupby("church_name")["city"]
-            .apply(lambda x: sorted(x.unique().tolist()))
-            .to_dict()
-        )
-    else:
-        church_city_pairs = {name: [] for name in church_names}
-
-    church_options = []
-    for name in sorted(church_names):
-        cities_for_church = church_city_pairs.get(name, [])
-        if len(cities_for_church) > 1:
-            for city in cities_for_church:
-                church_options.append(
-                    {
-                        "label": f"{name} ({city})",
-                        "church": name,
-                        "city": city,
-                    }
-                )
-        else:
-            church_options.append(
-                {
-                    "label": name,
-                    "church": name,
-                    "city": "",
-                }
-            )
 
     # Read ?church= and ?city= query params for pre-filtering from mass-times page
     prefilter_church = request.args.get("church", "")
     prefilter_city = request.args.get("city", "")
-
-    # Apply pre-filters BEFORE truncating to reduce dataset for large states
-    if prefilter_church and "church_name" in df.columns:
-        df = df[df["church_name"] == prefilter_church]
-    if prefilter_city and "city" in df.columns:
-        df = df[df["city"] == prefilter_city]
-
-    # Cap rows to prevent timeout on large states (IL=223K, CA=257K)
-    MAX_ROWS = 50000
-    total_names = len(df)
-    truncated = total_names > MAX_ROWS
-    if truncated:
-        df = df.head(MAX_ROWS)
+    min_confidence = request.args.get("min_confidence", "")
 
     return render_template(
         "bulletin/state.html",
         state=state,
         display_name=display_name,
         stats=stats,
-        cities=cities,
-        church_options=church_options,
+        cities=filters["cities"] if filters else [],
+        church_options=filters["church_options"] if filters else [],
         prefilter_church=prefilter_church,
         prefilter_city=prefilter_city,
         min_confidence=min_confidence,
-        total_names=total_names,
-        truncated=truncated,
+        total_names=stats["total_names"],
+        truncated=False,
     )
 
 
