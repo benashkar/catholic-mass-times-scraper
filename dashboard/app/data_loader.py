@@ -297,11 +297,24 @@ def get_bulletin_names(state_dir):
     return df
 
 
+def _count_csv_lines(path):
+    """Count data rows in a CSV file (excluding header). Fast, no pandas."""
+    try:
+        with open(path, "rb") as f:
+            return sum(1 for _ in f) - 1  # subtract header
+    except Exception:
+        return 0
+
+
 def get_bulletin_stats(state_dir):
     """Return summary stats for bulletin names in a state."""
     df = get_bulletin_names(state_dir)
     if df is None or df.empty:
         return None
+
+    # True total from raw CSV (not capped by nrows)
+    csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
+    true_total = _count_csv_lines(csv_path)
 
     # Unique names: count by (person_name, city) pairs so the same name
     # at different churches in different cities counts as separate people
@@ -311,7 +324,7 @@ def get_bulletin_stats(state_dir):
         unique = df["person_name"].nunique()
 
     return {
-        "total_names": len(df),
+        "total_names": true_total,
         "unique_names": unique,
         "church_count": df["church_name"].nunique(),
         "city_count": df["city"].nunique() if "city" in df.columns else 0,
