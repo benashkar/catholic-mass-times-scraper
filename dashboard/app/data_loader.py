@@ -261,7 +261,26 @@ def get_bulletin_names(state_dir):
 
     df = pd.read_csv(path, encoding="utf-8-sig")
 
-    # Join with churches to get city + full_street
+    # If CSV already has city column (new format), use it directly
+    if "city" in df.columns and df["city"].notna().any():
+        df["city"] = df["city"].fillna("Unknown")
+        # Still try to join for full_street if available
+        churches = get_churches_for_state(state_dir)
+        if not churches.empty and "church_slug" in df.columns:
+            addr_cols = [c for c in ["slug", "full_street", "state_code", "zip5"] if c in churches.columns]
+            if addr_cols:
+                merged = df.merge(
+                    churches[addr_cols],
+                    left_on="church_slug",
+                    right_on="slug",
+                    how="left",
+                    suffixes=("", "_addr"),
+                )
+                merged["full_street"] = merged.get("full_street", pd.Series("")).fillna("")
+                return merged
+        return df
+
+    # Legacy: CSV without city column — join with churches to get city + full_street
     churches = get_churches_for_state(state_dir)
     if not churches.empty and "church_slug" in df.columns:
         merged = df.merge(
@@ -284,9 +303,16 @@ def get_bulletin_stats(state_dir):
     if df is None or df.empty:
         return None
 
+    # Unique names: count by (person_name, city) pairs so the same name
+    # at different churches in different cities counts as separate people
+    if "city" in df.columns:
+        unique = df.groupby(["person_name", "city"]).ngroups
+    else:
+        unique = df["person_name"].nunique()
+
     return {
         "total_names": len(df),
-        "unique_names": df["person_name"].nunique(),
+        "unique_names": unique,
         "church_count": df["church_name"].nunique(),
         "city_count": df["city"].nunique() if "city" in df.columns else 0,
     }

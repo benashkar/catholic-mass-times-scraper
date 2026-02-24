@@ -1709,6 +1709,22 @@ FALSE_POSITIVE_NAMES = {
     "Faithful Departed", "Life Activities", "New Testament",
     "Property Manager", "Development Manager", "Case Managers",
     "Sun Rehearsal", "English Ministry", "Brother Knight",
+    # Bulletin ad/event junk that passes word-level filters
+    "Auto Body", "Auto Repair", "Auto Insurance",
+    "Fall Alert", "Craft Beer", "Beer Tent", "Beer Dance",
+    "Wine Bar", "Wine Pull", "Ice Cream",
+    "More Info", "Stay Connected", "Pork Sausage",
+    "Fried Chicken", "Chicken Strips", "Cake Donation",
+    "Smart Roofing", "Smart Roof", "Smart Driver",
+    "Pizza Villa", "Sports App", "Ascension App",
+    "Suggested Donation", "Contribution Statement", "Contribution Statements",
+    "Spring Alpha Session", "Generation To Generation",
+    "Doyle Vocal Quartet", "Vocal Quartet",
+    "Blood Drive", "Craft Bazaar",
+    # Spanish/Latin liturgical phrases
+    "Primera Comuni", "Primera Comunion", "La Primera Comuni",
+    "La Cuaresma", "El Evangelio", "Sacrosanctum Concilium",
+    "Nueve Domingos", "El Comit", "Arroz La Cuaresma",
     # Phrases using 'Will' and 'Christian' that aren't names
     # (these words were unblocked because they're common real names)
     "Will Be", "Will Not", "Will Have", "Will Take",
@@ -1887,6 +1903,23 @@ def is_valid_name(name: str) -> bool:
         'feb', 'mar', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
         'tues', 'thurs', 'ave', 'mrs', 'rev', 'ext',
         'padre', 'familia', 'por', 'los', 'san', 'santa', 'santo',
+        # Food/drink (bulletin ads, event menus)
+        'salad', 'pasta', 'pizza', 'chicken', 'sausage', 'pork', 'beef',
+        'taco', 'tamale', 'tamales', 'donut', 'doughnut', 'popcorn',
+        'chocolate', 'cocoa', 'dessert', 'recipe', 'catering', 'menu',
+        # Commercial/business ads in bulletins
+        'insurance', 'attorney', 'realtor', 'plumbing', 'roofing', 'heating',
+        'cooling', 'conditioning', 'dental', 'pharmacy', 'flooring', 'carpet',
+        'landscaping', 'towing', 'electrician', 'remodeling', 'locksmith',
+        'furnace', 'discount', 'coupon',
+        # Tech/social media
+        'adobe', 'acrobat', 'download', 'facebook', 'instagram', 'twitter',
+        'phishing', 'scam', 'flocknote', 'myparish',
+        # Non-name actions/objects from bulletin text
+        'donation', 'donations', 'contribution', 'statement', 'statements',
+        'suggested', 'connected', 'handbook', 'brochure', 'quartet',
+        'fiesta', 'session', 'sessions', 'requested', 'strips', 'rates',
+        'repair', 'alert', 'serving', 'expert', 'experts',
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
@@ -2177,6 +2210,25 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
         with open(discovery_path, "r", encoding="utf-8") as f:
             discovery_data = json.load(f)
 
+    # Build slug→city mapping from church_details.jsonl
+    slug_to_city = {}
+    jsonl_path = state_dir / "church_details.jsonl"
+    if jsonl_path.exists():
+        with open(jsonl_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                    church = rec.get("church", {})
+                    s = church.get("slug", "")
+                    c = church.get("city", "")
+                    if s and c:
+                        slug_to_city[s] = c
+                except (json.JSONDecodeError, KeyError):
+                    pass
+
     # Confidence mapping: based on whether this is likely a real person connected to the church
     # HIGH = clearly a named individual (staff, parishioner mentioned by name, someone prayed for)
     # MEDIUM = likely a real name but found via looser contextual matching
@@ -2250,6 +2302,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                     all_names.append({
                         "church_name": church_name,
                         "church_slug": slug,
+                        "city": slug_to_city.get(slug, ""),
                         "church_url": church_url,
                         "pdf_file": pdf_path.name,
                         "pdf_url": pdf_url,
@@ -2274,7 +2327,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
     if all_names:
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=[
-                "church_name", "church_slug", "church_url",
+                "church_name", "church_slug", "city", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
                 "person_name", "title", "first_name", "middle_name", "last_name",
                 "role", "category", "confidence", "context"
@@ -2365,7 +2418,7 @@ def run_clean(state_name: str, state_dir: Path):
     if cleaned_names:
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=[
-                "church_name", "church_slug", "church_url",
+                "church_name", "church_slug", "city", "church_url",
                 "pdf_file", "pdf_url", "pdf_date",
                 "person_name", "title", "first_name", "middle_name", "last_name",
                 "role", "category", "confidence", "context"
