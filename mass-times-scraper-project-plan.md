@@ -393,18 +393,44 @@ data/output/{state}/bulletin_progress.json       — progress tracking for resum
 **Name extraction categories + confidence scoring:**
 Confidence reflects whether this is likely a **real person connected to the church** (parishioner, staff, or community member).
 
-| Category | Confidence | Description |
+| Category | Base Signal | Description |
 |----------|-----------|-------------|
-| `clergy_staff` | **high** | Pastor, Parochial Vicar, Deacon, staff listings (Fr./Rev./Msgr. patterns) |
-| `mass_intention` | **high** | "For the repose of...", "Special intentions of..." — real people (living or deceased) |
-| `prayer_list` | **high** | Sick/homebound lists, prayer requests — real parishioners |
-| `ministry_contextual` | **medium** | Names near ministry keywords (lector, usher, cantor, committee) — likely real but looser match |
+| `clergy_staff` | +0.15 | Pastor, Parochial Vicar, Deacon, staff listings (Fr./Rev./Msgr. patterns) |
+| `mass_intention` | +0.15 | "For the repose of...", "Special intentions of..." — real people (living or deceased) |
+| `prayer_list` | — | Sick/homebound lists, prayer requests — real parishioners |
+| `ministry_contextual` | — | Names near ministry keywords (lector, usher, cantor, committee) — likely real but looser match |
+
+**Dictionary-based confidence scoring (added Feb 2026):**
+Names are scored 0.0–1.0 using `score_name_confidence()` which validates against two government datasets:
+- **SSA baby names** (100,364 unique first names, 1880–2024) — downloaded from [SSA](https://www.ssa.gov/oact/babynames/) with GitHub mirror fallback
+- **Census 2010 surnames** (162,254 entries) — downloaded from [Census Bureau](https://www2.census.gov/topics/genealogy/2010surnames/)
+
+Score components:
+| Signal | Weight | Description |
+|--------|--------|-------------|
+| First name in SSA | +0.30 | First word matches a known US first name |
+| Last name in Census | +0.30 | Last word matches a known US surname |
+| High-confidence category | +0.15 | clergy_staff or mass_intention |
+| 2–3 word name | +0.10 | Typical person name structure |
+| Title prefix | +0.05 | Fr., Rev., Dr., etc. |
+| Top-1000 first name | +0.10 | Very common first name (extra boost) |
+| Non-name word detected | -0.40 | Contains "church", "salad", "donate", etc. |
+| Newline contamination | -0.30 | Multi-line PDF text merged |
+| Truncated last word | -0.25 | Last word < 3 chars (PDF column bleed) |
+| Merged names detected | -0.20 | 3+ words, last word is a common first name |
+| Organization pattern | -0.15 | "Knights of", "Council of", etc. |
+
+Label mapping: >= 0.7 = **high**, 0.4–0.69 = **medium**, < 0.4 = **low**
+
+Reference data setup: `python scripts/prepare_name_reference.py`
+Re-score existing data: `python run_bulletin_scraper.py clean <state> --rescore`
 
 **Output CSV columns (full provenance + split name fields):**
 | Column | Description |
 |--------|-------------|
 | `church_name` | Name of the church |
 | `church_slug` | CatholicIndex unique identifier |
+| `city` | City name (denormalized from church_details.jsonl) |
 | `church_url` | Church website URL |
 | `pdf_file` | Local filename of downloaded PDF |
 | `pdf_url` | Original download URL (source link for verification) |
@@ -416,14 +442,25 @@ Confidence reflects whether this is likely a **real person connected to the chur
 | `last_name` | Last name: "Smith" |
 | `role` | **Positional role**: "Pastor", "Business Manager", "Chairman", "Deacon", "Lector", etc. (empty if none). Separate from `title` — a person can have both: Pastor Fr. Michael Martinez → role="Pastor", title="Fr." |
 | `category` | Extraction category (clergy_staff, mass_intention, prayer_list, ministry_contextual) |
-| `confidence` | Confidence flag: high, medium, or low |
+| `confidence` | Confidence label: high, medium, or low (derived from confidence_score) |
+| `confidence_score` | Numeric score 0.0–1.0 from `score_name_confidence()` |
 | `context` | Surrounding text snippet for verification |
 
 **Deduplication:** Names are deduplicated **per church**, not statewide. If "John Smith" appears in bulletins from 3 different churches, he shows up 3 times (once per church) — this is intentional because we want city+name pairs for matching. Within a single church's bulletins, each name appears only once (the first occurrence is kept for provenance).
 
 **Name splitting:** The `parse_name_parts()` function splits extracted names into structured fields (title, first, middle, last). This enables downstream matching against external name lists using city+first+last pairs. Titles like "Fr.", "Rev.", "Dr." are separated into their own column.
 
-**False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Confidence flag allows downstream filtering — "high" names are very likely real people, "low" names may be false positives. Names will ultimately be matched against a known name list, so recall is prioritized over precision.
+**Junk filtering improvements (Feb 2026):**
+Analysis across 10 states (787K rows, 499K unique names) found a 26% junk rate. Key fixes:
+1. **Newline contamination fix** (~15.5% of junk): `clean_extracted_name()` now keeps only the first line instead of merging multi-line PDF text with spaces
+2. **Merged name detection** (~1.6%): `split_merged_name()` splits "Kevin Steinkamp Mary" → "Kevin Steinkamp" when last word is a top-5000 SSA first name but not a Census surname
+3. **Dictionary-based scoring**: SSA + Census lookup provides evidence-based confidence instead of category-only heuristics
+4. **Expanded non_name_words**: Added ~15 missing words (donate, register, friday, columbus, etc.)
+5. **Suspect name review**: Dashboard at `/bulletin/suspect/` shows low-confidence names for manual review with one-click removal
+
+**False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Numeric confidence score + dictionary validation allows precise downstream filtering. Dashboard supports `?min_confidence=0.7` to show only high-confidence names. Removed names saved to `data/reference/removed_names.json` for research.
+
+**Test dataset:** `python scripts/build_junk_test_set.py` samples 2,000 names from 10 diverse states (200/state, 50/50 clean/junk split) for precision/recall benchmarking. Output: `data/reference/junk_test_set.csv` with `manual_label` column for human review.
 
 **Name Extraction Architecture (all in `run_bulletin_scraper.py`):**
 
@@ -679,6 +716,19 @@ church scrapes/
 ├── run_bulletin_batch.sh                  # Batch bulletin scraper with auto-commit + Render deploy per state
 ├── auto_commit_progress.sh               # Cron-style script to commit URL resolver progress every 2 hours
 │
+├── scripts/
+│   ├── prepare_name_reference.py          # Download SSA baby names + Census surnames for name validation
+│   ├── build_junk_test_set.py             # Build labeled test dataset (2K names from 10 states) for benchmarking
+│   ├── junk_analysis.py                   # Analysis scripts for junk rate measurement
+│   └── ...
+│
+├── data/reference/                        # Reference data for name validation
+│   ├── ssa_first_names.csv                # 100K SSA baby names (name, total_count, rank)
+│   ├── census_surnames.csv                # 162K Census 2010 surnames (name, count, rank)
+│   ├── non_names.txt                      # Curated non-name English words
+│   ├── removed_names.json                 # Names removed via suspect review (runtime)
+│   └── junk_test_set.csv                  # Labeled test set for precision/recall benchmarking
+│
 ├── dashboard/                             # Render dashboard (standalone Flask app)
 │   ├── app/
 │   │   ├── __init__.py                    # Flask app factory
@@ -687,8 +737,11 @@ church scrapes/
 │   │   ├── routes/
 │   │   │   ├── main.py                    # Home page — state picker
 │   │   │   ├── mass_times.py              # State → church → services + calendar + CSV download
-│   │   │   └── bulletin.py                # State → filterable names DataTable
+│   │   │   └── bulletin.py                # State → filterable names DataTable + suspect review + removal API
 │   │   ├── templates/                     # Jinja2 templates (Bootstrap 5 + DataTables)
+│   │   │   ├── bulletin/state.html        # Per-state names with confidence score badges + filter
+│   │   │   ├── bulletin/suspect.html      # Low-confidence names review with remove buttons
+│   │   │   ├── bulletin/removed.html      # View removed names for research
 │   │   │   ├── mass_times/calendar.html   # Dated activities calendar with filters
 │   │   └── static/css/style.css
 │   ├── requirements.txt
@@ -755,6 +808,7 @@ These inform the lookup table contents in the database schema:
 12. **502 Bad Gateway on large bulletin states:** Illinois (223K names) and Michigan (75MB response) caused gunicorn 120s timeout on `/bulletin/<state>/`. **Fixed:** Added 50K row cap with truncation warning in `bulletin.py`. Server-side pre-filtering applies `?church=` and `?city=` query params before the cap, so filtered views show full results. Commit `1b047ec`.
 14. **Missing city column in bulletin_names.csv:** The CSV had `church_slug` but no `city` column, requiring a join to `church_details.jsonl` to get city. Also, the dashboard "Unique Names" stat used `person_name.nunique()` which undercounted — "John Smith" at 9 churches in 9 cities was counted as 1 unique name. **Fixed:** Added `city` column to CSV output (denormalized from JSONL slug→city mapping). Dashboard stat now counts `(person_name, city)` pairs. Backfilled all 17 existing states. Commit `05fb3ab`.
 15. **Bulletin junk names passing filters (0.4% rate):** ~425 non-name entries like "Pasta Salad", "Fall Alert", "Adobe Acrobat", "Primera Comuni" were passing the `is_valid_name()` filter. **Fixed:** Added ~65 words to `non_name_words` (food, commercial, tech, bulletin text categories) and ~30 multi-word phrases to `FALSE_POSITIVE_NAMES`. Junk rate was only 0.4% — the existing ~180-word blocklist + ~150 phrase list was already catching 99.6%. Commit `05fb3ab`.
+16. **Bulletin junk names — 26% rate across 10 states (deeper analysis):** Expanded analysis of 787K rows across 10 states revealed much higher junk rate than the original 0.4% estimate. Top categories: newline contamination (15.5%), nouns/verbs (9.6%), merged names (1.6%), commercial/org names (1.4%). **Fixed:** Dictionary-based validation using SSA baby names (100K) + Census 2010 surnames (162K), numeric confidence scoring (0.0–1.0), newline contamination fix (keep first line only), merged name detection/splitting, expanded non_name_words. Dashboard updated with score badges, confidence filter, and suspect name review page. Branch `feature/junk-filter-confidence-scoring`, commit `6364142`.
 13. **Stale deploys from batch scripts:** Batch/parallel scripts (`run_bulletin_batch.sh`, `run_parallel_bulletins.sh`, `auto_commit_bulletins.sh`, `auto_commit_progress.sh`, `auto_pipeline.sh`) did `git commit && git push` without pulling first. When dashboard code fixes were pushed separately, the batch script's data commit sat on an older parent, so Render auto-deployed a snapshot missing the latest dashboard code (e.g. the 502 fix). **Fixed:** Added `git pull --rebase` before every `git push` in all 5 scripts, so every deploy always includes the newest dashboard and route code. Commit `6ea4028`. **IMPORTANT: Any new script that does `git push` must include `git pull --rebase` first.**
 
 ---
@@ -877,6 +931,19 @@ python run_bulletin_scraper.py extract arizona     # Extract text + names
 
 # Re-try churches that got 0 PDFs with Playwright headless browser:
 python run_bulletin_scraper.py all arizona --retry-no-pdfs
+
+# Re-clean and re-score names with dictionary validation:
+python run_bulletin_scraper.py clean arizona --rescore
+python run_bulletin_scraper.py clean all --rescore   # all states
+```
+
+### Name validation reference data
+```bash
+# Download SSA baby names + Census surnames (one-time setup):
+python scripts/prepare_name_reference.py
+
+# Build labeled test dataset (2K names from 10 states):
+python scripts/build_junk_test_set.py
 ```
 
 ### Run full auto-pipeline (resolve URLs + scrape bulletins for all states)
