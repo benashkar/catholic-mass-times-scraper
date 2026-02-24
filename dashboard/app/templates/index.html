@@ -11,7 +11,7 @@
 
 <!-- Summary stats -->
 <div class="row mb-4 g-3">
-    <div class="col-md-4">
+    <div class="col-6 col-md">
         <div class="card text-center border-primary">
             <div class="card-body">
                 <h2 class="card-title text-primary mb-0">{{ "{:,}".format(total_churches) }}</h2>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-6 col-md">
         <div class="card text-center border-success">
             <div class="card-body">
                 <h2 class="card-title text-success mb-0">{{ total_states }}</h2>
@@ -27,11 +27,27 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-6 col-md">
         <div class="card text-center border-warning">
             <div class="card-body">
                 <h2 class="card-title text-warning mb-0">{{ bulletin_states }}</h2>
-                <p class="card-text text-muted">States with Bulletin Names</p>
+                <p class="card-text text-muted">States with Bulletins</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md">
+        <div class="card text-center border-info">
+            <div class="card-body">
+                <h2 class="card-title text-info mb-0">{{ "{:,}".format(total_names) }}</h2>
+                <p class="card-text text-muted">Total Names Extracted</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md">
+        <div class="card text-center border-dark">
+            <div class="card-body">
+                <h2 class="card-title mb-0">{{ "{:,}".format(total_unique) }}</h2>
+                <p class="card-text text-muted">Unique Names</p>
             </div>
         </div>
     </div>
