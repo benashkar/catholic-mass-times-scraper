@@ -99,7 +99,7 @@
                         {% endif %}
                         {% if s.has_bulletin %}
                         <a href="{{ url_for('bulletin.state_view', state=s.state_dir) }}" class="btn btn-sm btn-outline-warning">
-                            <i class="bi bi-people"></i> Names
+                            <i class="bi bi-people"></i> Names <span class="badge bg-warning text-dark">{{ "{:,}".format(s.unique_names) }}</span>
                         </a>
                         {% endif %}
                     </td>
