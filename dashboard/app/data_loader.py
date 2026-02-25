@@ -590,6 +590,10 @@ def get_bulletin_names_page(
     if df is None or df.empty:
         return [], 0, 0
 
+    # If numeric confidence_score column exists, use it for the confidence display
+    if "confidence_score" in df.columns:
+        df["confidence"] = df["confidence_score"]
+
     total_records = len(df)
 
     # --- Apply filters ---

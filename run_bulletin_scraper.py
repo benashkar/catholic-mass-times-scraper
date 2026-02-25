@@ -2063,7 +2063,318 @@ FALSE_POSITIVE_NAMES = {
     "Christian Service",
     "Christian Community",
     "Christian Life",
+    # Additional false-positive phrases (org names, bulletin phrases)
+    "Thank You",
+    "God Bless",
+    "Altar Servers",
+    "Altar Society",
+    "Church Name",
+    "Parish Name",
+    "Office Hours",
+    "Bulletin Sponsor",
+    "Weekly Collection",
+    "Mass Schedule",
+    "Faith Formation",
+    "Religious Ed",
+    "Choir Practice",
+    "Youth Group",
+    "Knights Columbus",
+    "Ladies Auxiliary",
+    "Sanctuary Lamp",
+    "Eternal Rest",
+    "Rest Peace",
 }
+
+
+# ── Reference Data & Scoring ─────────────────────────────────────────────────
+
+# Lazy singleton for SSA + Census reference data
+_ssa_names = None
+_census_surnames = None
+
+
+def _load_reference_data():
+    """Load SSA first names and Census surnames into module-level dicts.
+
+    Returns (ssa_dict, census_dict) where each maps UPPER-cased name -> rank.
+    Loaded once and cached for the process lifetime.
+    """
+    global _ssa_names, _census_surnames
+    if _ssa_names is not None and _census_surnames is not None:
+        return _ssa_names, _census_surnames
+
+    ref_dir = Path(__file__).resolve().parent / "data" / "reference"
+
+    # SSA first names: name,total_count,rank
+    _ssa_names = {}
+    ssa_path = ref_dir / "ssa_first_names.csv"
+    if ssa_path.exists():
+        with open(ssa_path, encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                name = (row.get("name") or "").strip().upper()
+                try:
+                    rank = int(row.get("rank") or "0")
+                except ValueError:
+                    rank = 999999
+                if name:
+                    _ssa_names[name] = rank
+        logger.info(f"Loaded {len(_ssa_names):,} SSA first names from {ssa_path}")
+    else:
+        logger.warning(f"SSA first names file not found: {ssa_path}")
+
+    # Census surnames: name,count,rank
+    _census_surnames = {}
+    census_path = ref_dir / "census_surnames.csv"
+    if census_path.exists():
+        with open(census_path, encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                name = (row.get("name") or "").strip().upper()
+                try:
+                    rank = int(row.get("rank") or "0")
+                except ValueError:
+                    rank = 999999
+                if name:
+                    _census_surnames[name] = rank
+        logger.info(f"Loaded {len(_census_surnames):,} Census surnames from {census_path}")
+    else:
+        logger.warning(f"Census surnames file not found: {census_path}")
+
+    return _ssa_names, _census_surnames
+
+
+def score_name_confidence(person_name, category="", role="", title=""):
+    """Score a name's likelihood of being a real person (0.0 to 1.0).
+
+    Uses SSA first-name and Census surname dictionaries for data-driven
+    validation, plus heuristic penalties for common junk patterns.
+    """
+    if not person_name or not person_name.strip():
+        return 0.0
+
+    ssa, census = _load_reference_data()
+    parts = person_name.strip().split()
+    if not parts:
+        return 0.0
+
+    # Skip title prefixes when identifying first/last name words
+    title_prefixes_set = {"fr.", "rev.", "dr.", "sr.", "msgr.", "dcn.", "deacon", "father", "sister", "brother"}
+    name_parts = [p for p in parts if p.lower().rstrip(".") not in {t.rstrip(".") for t in title_prefixes_set}]
+    if not name_parts:
+        name_parts = parts  # fallback if all words are titles
+
+    first_word = name_parts[0].upper()
+    last_word = name_parts[-1].upper()
+    score = 0.0
+
+    # --- Bonuses ---
+
+    # First name in SSA
+    first_in_ssa = first_word in ssa
+    if first_in_ssa:
+        score += 0.30
+
+    # Last name in Census
+    last_in_census = last_word in census
+    if last_in_census:
+        score += 0.30
+
+    # 2-word name bonus (most common real-name pattern)
+    if len(name_parts) == 2:
+        score += 0.10
+
+    # Top-1000 first name bonus
+    if first_in_ssa and ssa.get(first_word, 999999) <= 1000:
+        score += 0.10
+
+    # Top-1000 surname bonus
+    if last_in_census and census.get(last_word, 999999) <= 1000:
+        score += 0.10
+
+    # Category boost for high-signal categories
+    cat_lower = (category or "").lower()
+    if cat_lower in ("clergy_staff", "mass_intention"):
+        score += 0.15
+
+    # Title prefix bonus (from the title field OR detected in person_name)
+    has_title = False
+    title_str = (title or "").strip()
+    if title_str:
+        if title_str.lower().rstrip(".") in {t.rstrip(".") for t in title_prefixes_set}:
+            has_title = True
+    if not has_title and parts[0].lower().rstrip(".") in {t.rstrip(".") for t in title_prefixes_set}:
+        has_title = True
+    if has_title:
+        score += 0.05
+
+    # --- Penalties ---
+
+    # Non-name word check (reuse the blocklist from is_valid_name)
+    non_name_words = _get_non_name_words()
+    if any(p.lower() in non_name_words for p in parts):
+        score -= 0.40
+
+    # Newline artifact
+    if "\n" in person_name:
+        score -= 0.30
+
+    # Truncation: last word < 3 chars and not an initial
+    if len(last_word) < 3 and not re.match(r"^[A-Z]\.?$", name_parts[-1]):
+        score -= 0.25
+
+    # Merged name detection: 3+ words where last word is SSA-only (not Census)
+    if len(name_parts) >= 3 and last_word in ssa and last_word not in census:
+        # Last word looks like a first name, not a surname — likely merged
+        if ssa.get(last_word, 999999) <= 5000:
+            score -= 0.20
+
+    # Org pattern: "X of Y", "X for Y"
+    name_lower = person_name.lower()
+    org_preps = [" of ", " for ", " de "]
+    if any(prep in name_lower for prep in org_preps):
+        score -= 0.15
+
+    # First name NOT in SSA and NOT in Census
+    if first_word not in ssa and first_word not in census:
+        score -= 0.20
+
+    # Last name NOT in Census and NOT in SSA
+    if last_word not in census and last_word not in ssa:
+        score -= 0.20
+
+    # Clamp to [0.0, 1.0]
+    return max(0.0, min(1.0, score))
+
+
+def confidence_label(score):
+    """Convert numeric confidence score to categorical label."""
+    if score >= 0.7:
+        return "high"
+    elif score >= 0.4:
+        return "medium"
+    else:
+        return "low"
+
+
+def split_merged_name(person_name):
+    """For 3+ word names, drop trailing first-name that was merged from next row.
+
+    E.g. "Kevin Steinkamp Cynthia" -> "Kevin Steinkamp"
+    (Cynthia is a common first name but not a surname)
+    """
+    parts = person_name.strip().split()
+    if len(parts) < 3:
+        return person_name
+
+    ssa, census = _load_reference_data()
+    last_word = parts[-1].upper()
+
+    # If last word is a top-5000 SSA first name but NOT a Census surname, drop it
+    if last_word in ssa and ssa.get(last_word, 999999) <= 5000 and last_word not in census:
+        return " ".join(parts[:-1])
+
+    return person_name
+
+
+# Cache the non_name_words set so scoring can reuse it without re-creating
+_non_name_words_cache = None
+
+
+def _get_non_name_words():
+    """Return the non_name_words set (cached after first call)."""
+    global _non_name_words_cache
+    if _non_name_words_cache is not None:
+        return _non_name_words_cache
+    # Build the set — must match the set inside is_valid_name()
+    _non_name_words_cache = {
+        "the", "and", "for", "from", "with", "that", "this", "are", "was",
+        "has", "have", "had", "their", "there", "where", "when", "what",
+        "which", "also", "than", "them", "not", "out", "who", "how", "its",
+        "may", "can", "you", "your",
+        "church", "parish", "school", "center", "hall", "room", "chapel",
+        "sunday", "monday", "tuesday", "wednesday", "thursday", "saturday",
+        "january", "february", "march", "april", "june", "july", "august",
+        "september", "october", "november", "december",
+        "mass", "masses", "confession", "communion", "lent", "easter",
+        "christmas", "daily", "weekly", "monthly", "annual", "weekday",
+        "weekend", "morning", "evening", "night",
+        "table", "prayer", "music", "director", "ministers", "eucharistic",
+        "servers", "rentals", "maintenance", "hour",
+        "holy", "blessed", "sacred", "saint", "our", "rite", "catholic",
+        "initiation", "adults", "stations", "cross", "rosary", "adoration",
+        "benediction", "tree", "garden", "office", "online", "giving",
+        "live", "stream", "please", "contact", "call", "email", "visit",
+        "registration", "information", "schedule", "calendar",
+        "baptism", "confirmation", "marriage", "funeral", "anointing",
+        "communion", "collection", "offertory", "budget", "total",
+        "choir", "band", "ensemble", "group", "youth", "children", "family",
+        "women", "men", "deacon", "priest", "bishop", "pastor", "vicar",
+        "domingo", "tiempo", "ordinario", "semana", "consejo", "matrimonial",
+        "president", "vice", "chairman", "secretary", "treasurer", "members",
+        "lectors", "counters", "volunteer", "principal", "coordinator",
+        "gift", "shop", "sick", "opportunity", "invitation", "tech", "degree",
+        "exemplification", "assembly", "mtg", "chaplet", "spiritual", "dcn", "alone",
+        "activities", "picnic", "proceeds", "novena", "drive", "sale", "bake",
+        "pancake", "fry", "pantry", "store", "bank", "kitchen", "shawl",
+        "food", "soup", "thrift",
+        "day", "year", "time", "new", "old", "first", "second", "labor",
+        "memorial", "thanksgiving", "happy", "jubilee",
+        "gospel", "amen", "ordinary", "heavenly", "immaculate", "conception",
+        "souls", "saints", "departed", "reconciliation", "testament",
+        "sacrament", "intention", "special",
+        "manager", "property", "development", "finance", "liaison",
+        "bookkeeper", "case", "assistant", "needed", "volunteers", "members",
+        "council", "meeting", "fund", "retirement", "environment", "safe",
+        "street", "address", "mailing", "place", "house", "open", "sign",
+        "reading", "word", "river", "america", "latin",
+        "ad", "dear", "high", "middle", "pro", "right", "respect", "cardinal",
+        "pope", "doctor", "anniversary", "feast", "world", "society", "news",
+        "knight", "knights", "life", "active", "ministries", "ministry",
+        "cultural", "community", "ushers", "wheelchair", "disciples",
+        "committee", "basketball",
+        "lector", "usher", "sacristan", "presider", "cantor", "greeters",
+        "greeter", "server", "reader", "families", "deceased", "formation",
+        "welcome", "education", "lenten", "university", "club", "program",
+        "service", "services", "parishioners", "dinner", "divine", "bulletin",
+        "bible", "road", "retreat", "care", "join", "ladies", "health",
+        "class", "classes", "living", "sacramental", "social", "study",
+        "baptisms", "english", "spanish", "baby", "need", "cemetery", "good",
+        "team", "county", "upcoming", "book", "avenue", "liturgical",
+        "stewardship", "hospitality", "raffle", "liturgy", "gifts", "events",
+        "american", "parochial", "college", "financial", "support", "national",
+        "banns", "confessions", "help", "association", "training", "eucharist",
+        "senior", "grade", "south", "north", "eternal", "phone", "child",
+        "conference", "heart", "project", "guild", "outreach", "student",
+        "students", "baptismal", "today", "staff", "bread", "nursing",
+        "event", "campus", "scholarship", "scripture", "death", "perpetual",
+        "rehearsal", "blvd", "extraordinary", "recently", "central", "lunch",
+        "gathering", "abuse", "weddings", "vocations", "commission", "party",
+        "general", "golf", "order", "tickets", "blessings", "clergy", "scout",
+        "coffee", "req", "god", "christ", "wedding", "pastoral", "diocesan",
+        "intentions", "feb", "mar", "jun", "jul", "aug", "sep", "oct", "nov",
+        "dec", "tues", "thurs", "ave", "mrs", "rev", "ext", "padre",
+        "familia", "por", "los", "san", "santa", "santo",
+        "salad", "pasta", "pizza", "chicken", "sausage", "pork", "beef",
+        "taco", "tamale", "tamales", "donut", "doughnut", "popcorn",
+        "chocolate", "cocoa", "dessert", "recipe", "catering", "menu",
+        "insurance", "attorney", "realtor", "plumbing", "roofing", "heating",
+        "cooling", "conditioning", "dental", "pharmacy", "flooring", "carpet",
+        "landscaping", "towing", "electrician", "remodeling", "locksmith",
+        "furnace", "discount", "coupon",
+        "adobe", "acrobat", "download", "facebook", "instagram", "twitter",
+        "phishing", "scam", "flocknote", "myparish",
+        "donation", "donations", "contribution", "statement", "statements",
+        "suggested", "connected", "handbook", "brochure", "quartet", "fiesta",
+        "session", "sessions", "requested", "strips", "rates", "repair",
+        "alert", "serving", "expert", "experts",
+        # Additional bulletin-specific words
+        "altar", "thank", "father", "cathedral", "basilica", "shrine",
+        "academy", "newsletter", "announcement", "offering", "tithing",
+        "catechesis", "celebration", "mission", "pilgrimage",
+        "enrollment",
+    }
+    return _non_name_words_cache
 
 
 def clean_extracted_name(name: str) -> str:
@@ -2659,6 +2970,23 @@ def is_valid_name(name: str) -> bool:
         "serving",
         "expert",
         "experts",
+        # Additional bulletin-specific words
+        "altar",
+        "thank",
+        "father",
+        "cathedral",
+        "basilica",
+        "shrine",
+        "academy",
+        "newsletter",
+        "announcement",
+        "offering",
+        "tithing",
+        "catechesis",
+        "celebration",
+        "mission",
+        "pilgrimage",
+        "enrollment",
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
@@ -3065,6 +3393,12 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
 
                     church_name_count += 1
                     total_names += 1
+                    cat = name_info["category"]
+                    n_title = name_info.get("title", "")
+                    n_role = name_info.get("role", "")
+                    conf_score = score_name_confidence(
+                        person_name, category=cat, role=n_role, title=n_title
+                    )
                     all_names.append(
                         {
                             "church_name": church_name,
@@ -3075,13 +3409,14 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                             "pdf_url": pdf_url,
                             "pdf_date": pdf_date,
                             "person_name": person_name,
-                            "title": name_info.get("title", ""),
+                            "title": n_title,
                             "first_name": name_info.get("first_name", ""),
                             "middle_name": name_info.get("middle_name", ""),
                             "last_name": name_info.get("last_name", ""),
-                            "role": name_info.get("role", ""),
-                            "category": name_info["category"],
-                            "confidence": CONFIDENCE_MAP.get(name_info["category"], "low"),
+                            "role": n_role,
+                            "category": cat,
+                            "confidence": confidence_label(conf_score),
+                            "confidence_score": f"{conf_score:.2f}",
                             "context": name_info["context"][:100],
                         }
                     )
@@ -3112,6 +3447,7 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                     "role",
                     "category",
                     "confidence",
+                    "confidence_score",
                     "context",
                 ],
             )
@@ -3194,6 +3530,16 @@ def run_clean(state_name: str, state_dir: Path):
             entry["last_name"] = name_parts.get("last_name", "")
             entry["title"] = name_parts.get("title", "")
 
+        # Score the name
+        conf_score = score_name_confidence(
+            entry["person_name"],
+            category=entry.get("category", ""),
+            role=entry.get("role", ""),
+            title=entry.get("title", ""),
+        )
+        entry["confidence_score"] = f"{conf_score:.2f}"
+        entry["confidence"] = confidence_label(conf_score)
+
         cleaned_names.append(entry)
 
     # Write cleaned CSV
@@ -3218,6 +3564,7 @@ def run_clean(state_name: str, state_dir: Path):
                     "role",
                     "category",
                     "confidence",
+                    "confidence_score",
                     "context",
                 ],
             )
