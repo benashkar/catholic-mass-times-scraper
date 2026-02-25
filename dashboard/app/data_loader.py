@@ -594,6 +594,12 @@ def get_bulletin_names_page(
     if "confidence_score" in df.columns:
         df["confidence"] = df["confidence_score"]
 
+    # Deduplicate rows that look identical in the displayed columns.
+    # Different church_slugs can share the same church_name (e.g. airport chapels),
+    # producing rows that are visually indistinguishable in the UI.
+    dedup_cols = [c for c in _BULLETIN_PAGE_COLS if c in df.columns]
+    df = df.drop_duplicates(subset=dedup_cols)
+
     total_records = len(df)
 
     # --- Apply filters ---
