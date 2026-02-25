@@ -2210,10 +2210,10 @@ def score_name_confidence(person_name, category="", role="", title=""):
 
     # --- Penalties ---
 
-    # Non-name word check (reuse the blocklist from is_valid_name)
+    # Non-name word check — any blocklist word means guaranteed removal
     non_name_words = _get_non_name_words()
     if any(p.lower() in non_name_words for p in parts):
-        score -= 0.40
+        score -= 1.0
 
     # Newline artifact
     if "\n" in person_name:
