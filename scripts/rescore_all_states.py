@@ -145,8 +145,10 @@ def main():
     parser.add_argument("states", nargs="*", help="Specific states to process (default: all)")
     parser.add_argument("--dry-run", action="store_true", help="Preview without modifying files")
     parser.add_argument(
-        "--threshold", type=float, default=0.25,
-        help="Minimum confidence score to keep (default: 0.25)"
+        "--threshold",
+        type=float,
+        default=0.25,
+        help="Minimum confidence score to keep (default: 0.25)",
     )
     args = parser.parse_args()
 
@@ -173,7 +175,9 @@ def main():
     total_score = 0
     total_cleaned = 0
 
-    print(f"{'State':<20} {'Before':>10} {'After':>10} {'Cleaned':>10} {'Org Rm':>10} {'Score Rm':>10} {'Total Rm':>10} {'Pct':>7}")
+    print(
+        f"{'State':<20} {'Before':>10} {'After':>10} {'Cleaned':>10} {'Org Rm':>10} {'Score Rm':>10} {'Total Rm':>10} {'Pct':>7}"
+    )
     print("-" * 97)
 
     for state_dir in state_dirs:
