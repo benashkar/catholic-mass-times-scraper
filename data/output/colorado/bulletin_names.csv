@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 St. Peter - St. Rosa Mission,us-co-arboles-st-peter-st-rosa-mission-437725eb,Arboles,http://stignatiuschurchignacio.com,us-co-arboles-st-peter-st-rosa-mission-437725eb_47aa4fad.pdf,https://stignatiuschurchignacio.com/wp-content/uploads/2026/02/bulletin-02.22.2026-1.pdf,2026-02-01,Joseph Lawrence,Fr.,Joseph,,Lawrence,Priest,clergy_staff,high,"ealing for Kathleen Thomas by
 Fr. Joseph Lawrence, HGN
 Mar. 08 Tara Vigil Hilda"
@@ -10230,9 +10230,6 @@ St. Peter,us-co-greeley-st-peter-7d6a2c0c,Greeley,https://www.stpetergreeley.org
 St. Peter,us-co-greeley-st-peter-7d6a2c0c,Greeley,https://www.stpetergreeley.org/,us-co-greeley-st-peter-7d6a2c0c_20240520_dcc78be3.pdf,https://stpetergreeley.org/wp-content/uploads/2024/05/2024.06.02.pdf,2024-05-20,You have given,,You,have,given,Priest,clergy_staff,high,"ucharist shapes our
 Priest: You have given them Bread from heaven.
 relat"
-St. Peter,us-co-greeley-st-peter-7d6a2c0c,Greeley,https://www.stpetergreeley.org/,us-co-greeley-st-peter-7d6a2c0c_20240520_dcc78be3.pdf,https://stpetergreeley.org/wp-content/uploads/2024/05/2024.06.02.pdf,2024-05-20,of about,,of,,about,Director,clergy_staff,high,"ition Assisting the Director of
-about the Knights of Columbus,
-Educatio"
 St. Peter,us-co-greeley-st-peter-7d6a2c0c,Greeley,https://www.stpetergreeley.org/,us-co-greeley-st-peter-7d6a2c0c_20240520_dcc78be3.pdf,https://stpetergreeley.org/wp-content/uploads/2024/05/2024.06.02.pdf,2024-05-20,Loyola Press,,Loyola,,Press,,mass_intention,high,"the day program
 or from Loyola Press.
 • Volunteers to pr"
@@ -13329,7 +13326,6 @@ St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http:
 St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http://www.strafkadenver.org/,us-co-lakewood-saint-rafka-maronite-e3b2c590_955418a4.pdf,https://www.strafkadenver.org/s/June-23-2024.pdf,2024-06-23,in Jerusalem,,in,,Jerusalem,priest,clergy_staff,high,"ne 25)
 Zechariah, a priest in Jerusalem, encountered an extraordinary"
 St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http://www.strafkadenver.org/,us-co-lakewood-saint-rafka-maronite-e3b2c590_955418a4.pdf,https://www.strafkadenver.org/s/June-23-2024.pdf,2024-06-23,Mary Kellow,,Mary,,Kellow,,mass_intention,high,"ss at 10 am for the repose of the soul of Mary Kellow, a relative of Hiba"
-St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http://www.strafkadenver.org/,us-co-lakewood-saint-rafka-maronite-e3b2c590_a14b6507.pdf,https://www.strafkadenver.org/s/June-16-2024.pdf,2024-06-16,Learning About,,Learning,,About,,ministry_contextual,medium,baptism
 St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http://www.strafkadenver.org/,us-co-lakewood-saint-rafka-maronite-e3b2c590_6888ea3b.pdf,https://www.strafkadenver.org/s/June-9-2024.pdf,2024-06-09,Knowing Jesus,,Knowing,,Jesus,,ministry_contextual,medium,contact
 St. Rafka (Maronite),us-co-lakewood-saint-rafka-maronite-e3b2c590,Lakewood,http://www.strafkadenver.org/,us-co-lakewood-saint-rafka-maronite-e3b2c590_b8289b7b.pdf,https://www.strafkadenver.org/s/May-26-2024.pdf,2024-05-26,of Median,,of,,Median,priest,clergy_staff,high,"-in-Law Jethro- the priest
 of Median in a bush that was on fire but w"

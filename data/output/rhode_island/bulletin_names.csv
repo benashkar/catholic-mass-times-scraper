@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 Holy Angels,us-ri-barrington-holy-angels-1b380c26,Barrington,http://www.holyangelschurchri.org/,us-ri-barrington-holy-angels-1b380c26_3101b7bf.pdf,https://www.holyangelschurchri.org/uploads/1/3/6/6/136604749/jan_25.pdf,,EMERITUS Rev,,EMERITUS,,Rev,PASTOR,clergy_staff,high,".org - 401.245.7743
 PASTOR EMERITUS
 Rev. Raymond Ferrick
@@ -551,8 +551,6 @@ St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugenesc
 St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_c932d71e.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-5-19-2024-click-here-1.pdf,2024-05-19,Peanut Butte,,Peanut,,Butte,,ministry_contextual,medium,welcome
 St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_025fa16b.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-5-12-2024-1.pdf,2024-05-12,Friday Acts,,Friday,,Acts,,ministry_contextual,medium,baptism
 St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_28ac08c9.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-5-5-2024-click-here-1.pdf,2024-05-05,Budgets Used,,Budgets,,Used,,ministry_contextual,medium,baptism
-St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_e23f1db7.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-4-28-2024-click-here-1.pdf,2024-04-28,about it,,about,,it,priest,clergy_staff,high,"urn to speak to the priest about it the
-following day. The gentleman"
 St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_e23f1db7.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-4-28-2024-click-here-1.pdf,2024-04-28,that he had,,that,he,had,priest,clergy_staff,high,"he reported to the priest
 that he had trouble. The priest, asking w"
 St. Eugene,us-ri-chepachet-st-eugene-d041552c,Chepachet,http://www.sainteugeneschurch.org/,us-ri-chepachet-st-eugene-d041552c_e23f1db7.pdf,https://sainteugeneschurch.com/wp-content/uploads/2024/06/Bulletin-for-Sunday-4-28-2024-click-here-1.pdf,2024-04-28,Parish Life Fair,,Parish,Life,Fair,pastor,clergy_staff,high,erience. The priest/pastor Parish Life Fair (to make the members of our p
@@ -2707,9 +2705,6 @@ Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_707db663.pdf,https://olmparish.org/s/Wev-41424.pdf,,Monchi Martinez Quibus,,Monchi,Martinez,Quibus,,ministry_contextual,medium,music director
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_707db663.pdf,https://olmparish.org/s/Wev-41424.pdf,,Mariakutty Peter,,Mariakutty,,Peter,,ministry_contextual,medium,choir
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_707db663.pdf,https://olmparish.org/s/Wev-41424.pdf,,Monsignor Ronald,Monsignor,Ronald,,,,ministry_contextual,medium,baptism
-Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_f595bcec.pdf,https://olmparish.org/s/Web-4724.pdf,,And finally,,And,,finally,maintenance,clergy_staff,high,"d
-and our dedicated maintenance And finally, we thank our
-when Christians"
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_f595bcec.pdf,https://olmparish.org/s/Web-4724.pdf,,Maria Dichario,,Maria,,Dichario,,ministry_contextual,medium,music director
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_f595bcec.pdf,https://olmparish.org/s/Web-4724.pdf,,Why Pews,,Why,,Pews,,ministry_contextual,medium,music director
 Our Lady of Mercy,us-ri-east-greenwich-our-lady-of-mercy-18120d6a,East Greenwich,http://olmparish.org/,us-ri-east-greenwich-our-lady-of-mercy-18120d6a_f595bcec.pdf,https://olmparish.org/s/Web-4724.pdf,,Dylan Ribon Hazel,,Dylan,Ribon,Hazel,,ministry_contextual,medium,baptism

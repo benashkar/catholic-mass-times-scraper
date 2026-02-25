@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 St. Anne,us-ar-berryville-st-anne-09061d5b,Berryville,http://stannesberryville.com/,us-ar-berryville-st-anne-09061d5b_16d8bc45.pdf,https://stannesberryville.com/sites/anne/files/uploads/bulletins/2-22-2026_bulletin_web_email.pdf,2026-02-22,Emergency Number,,Emergency,,Number,Pastor,clergy_staff,high,"annesberryville.com
 Pastor Emergency Number:
 (870) 929-6374
@@ -3150,8 +3150,6 @@ St. Scholastica Monastery,us-ar-fort-smith-st-scholastica-monastery-866a149d,For
 group our Alumnae co-chair Barbara Hug Anhalt was not with us. This weekend"
 St. Scholastica Monastery,us-ar-fort-smith-st-scholastica-monastery-866a149d,Fort Smith,http://www.stscho.org/prayer-schedule-prayer-request/,us-ar-fort-smith-st-scholastica-monastery-866a149d_c607b6ad.pdf,https://www.stscho.org/wp-content/uploads/2024/04/Alumnator-2024-Feb.pdf,2024-04-01,and Manager,,and,,Manager,Director,clergy_staff,high,"ly serves as Oblate Director and Manager of the
 monastery gift shop. We a"
-St. Scholastica Monastery,us-ar-fort-smith-st-scholastica-monastery-866a149d,Fort Smith,http://www.stscho.org/prayer-schedule-prayer-request/,us-ar-fort-smith-st-scholastica-monastery-866a149d_c607b6ad.pdf,https://www.stscho.org/wp-content/uploads/2024/04/Alumnator-2024-Feb.pdf,2024-04-01,person get about,,person,get,about,maintenance,clergy_staff,high,"the sisters and our maintenance
-person get about the property. We still mainta"
 St. Scholastica Monastery,us-ar-fort-smith-st-scholastica-monastery-866a149d,Fort Smith,http://www.stscho.org/prayer-schedule-prayer-request/,us-ar-fort-smith-st-scholastica-monastery-866a149d_c607b6ad.pdf,https://www.stscho.org/wp-content/uploads/2024/04/Alumnator-2024-Feb.pdf,2024-04-01,Mildred Dunn,Sr.,Mildred,,Dunn,Sister,clergy_staff,high,"St. Scholastica Alma Mater
 by Sr. Mildred Dunn dedicated to Sr. Julia Heim a"
 St. Scholastica Monastery,us-ar-fort-smith-st-scholastica-monastery-866a149d,Fort Smith,http://www.stscho.org/prayer-schedule-prayer-request/,us-ar-fort-smith-st-scholastica-monastery-866a149d_c607b6ad.pdf,https://www.stscho.org/wp-content/uploads/2024/04/Alumnator-2024-Feb.pdf,2024-04-01,Julia Heim,Sr.,Julia,,Heim,Sister,clergy_staff,high,"Sr. Mildred Dunn dedicated to Sr. Julia Heim and the Palestrina Choir.

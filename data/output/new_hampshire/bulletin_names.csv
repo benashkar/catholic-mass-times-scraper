@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 Immaculate Conception Mission,us-nh-andover-immaculate-conception-mission-c55438e1,Andover,http://www.olfic.org/,us-nh-andover-immaculate-conception-mission-c55438e1_20260222_e226c1eb.pdf,http://www.olfic.org/site/assets/files/1526/20260222b.pdf,2026-02-22,Gregory McGinn,Deacon,Gregory,,McGinn,Permanent Deacon,clergy_staff,high,"on
 pastor@olfic.org
 Permanent Deacon Deacon Gregory McGinn
@@ -1153,9 +1153,6 @@ St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont
 St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont.org,us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf,https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf,,and founded,,and,,founded,priest,clergy_staff,high,o his homeland as a priest and founded the Acts 6: 8-10; 7: 54-59; Ps 31
 St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont.org,us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf,https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf,,of Sacred Heart,,of,Sacred,Heart,pastor,clergy_staff,high,"Fr. Francis Wawer, pastor of Sacred Heart Church in Bellows Falls,
 Verm"
-St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont.org,us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf,https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf,,for about,,for,,about,pastor,clergy_staff,high,"plain, as the first
-pastor for about forty families.
-In July of 1921, th"
 St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont.org,us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf,https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf,,was assigned,,was,,assigned,pastor,clergy_staff,high,year when the first pastor was assigned and our Parish was founded. The f
 St. Joseph,us-nh-claremont-st-joseph-bd835466,Claremont,http://stjosephclaremont.org,us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf,https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf,,Francis Wawer,Fr.,Francis,,Wawer,Priest,clergy_staff,high,"Roman Catholic
 heritage. Rev. Fr. Francis Wawer, pastor of Sacred Heart Churc"

@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 St. James the Greater Church (St. Kateri Tekakwitha Parish),us-me-baileyville-st-james-the-greater-church-st-kateri-tekakwitha-parish-65bb1eea,Baileyville,http://sktparish.org/,us-me-baileyville-st-james-the-greater-church-st-kateri-tekakwitha-parish-65bb1eea_20180603_3aefe2de.pdf,https://files.ecatholic.com/20250/bulletins/20180603.pdf?t=1527806871000,2018-06-03,Kevin J. Martin,Father,Kevin,J.,Martin,Priest,clergy_staff,high,"ducts. (cid:1)
 Pastor (cid:1) Father Kevin J. Martin(cid:1)
 (cid:1)
@@ -2806,8 +2806,6 @@ St. Joseph [Maronite],us-me-waterville-saint-joseph-maronite-6813a76d,Waterville
 St. Joseph [Maronite],us-me-waterville-saint-joseph-maronite-6813a76d,Waterville,http://sjmaronite.org/index.php/en-us/,us-me-waterville-saint-joseph-maronite-6813a76d_20211225_adfac94a.pdf,http://sjmaronite.org/files/Christmas--20211225.pdf,2021-12-25,Chorbishop Eid,,Chorbishop,,Eid,,ministry_contextual,medium,welcome
 St. Joseph [Maronite],us-me-waterville-saint-joseph-maronite-6813a76d,Waterville,http://sjmaronite.org/index.php/en-us/,us-me-waterville-saint-joseph-maronite-6813a76d_20211218_c1f888d6.pdf,http://sjmaronite.org/files/Genealogy_Sunday--20211218.pdf,2021-12-18,would pretty much,,would,pretty,much,chaplain,clergy_staff,high,"ey are them and the chaplain would pretty much have to chaplain
 sincere abou"
-St. Joseph [Maronite],us-me-waterville-saint-joseph-maronite-6813a76d,Waterville,http://sjmaronite.org/index.php/en-us/,us-me-waterville-saint-joseph-maronite-6813a76d_20211218_c1f888d6.pdf,http://sjmaronite.org/files/Genealogy_Sunday--20211218.pdf,2021-12-18,sincere about,,sincere,,about,chaplain,clergy_staff,high,"pretty much have to chaplain
-sincere about their own love of God, their own we"
 St. Joseph [Maronite],us-me-waterville-saint-joseph-maronite-6813a76d,Waterville,http://sjmaronite.org/index.php/en-us/,us-me-waterville-saint-joseph-maronite-6813a76d_20211218_c1f888d6.pdf,http://sjmaronite.org/files/Genealogy_Sunday--20211218.pdf,2021-12-18,who would encourage,,who,would,encourage,chaplain,clergy_staff,high,"gift card has a
 The chaplain who would encourage these two groups
 list of opti"

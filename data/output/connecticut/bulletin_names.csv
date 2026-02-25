@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,context
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_9415226e.pdf,https://stsppucc.org/files/6.16.24-Bulletin.pdf,,Edward Canon,,Edward,,Canon,priest,clergy_staff,high,"c.org
 Very Rev. Archpriest Edward Canon Young, Pastor
 FOURTH SUNDAY AFTER P"
@@ -183,7 +183,7 @@ JESUS by P"
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,Honey Cookies,,Honey,,Cookies,,ministry_contextual,medium,contact
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,Father Edward Young,Father,Edward,,Young,,ministry_contextual,medium,contact
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,Wine Offering,,Wine,,Offering,,ministry_contextual,medium,baptism
-Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,None Offered,,None,,Offered,,ministry_contextual,medium,baptism
+Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,None Offered,,,,Offered,,ministry_contextual,medium,baptism
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,Fast Free,,Fast,,Free,,ministry_contextual,medium,baptism
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,True Light,,True,,Light,,ministry_contextual,medium,baptism
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_fc7ae5d4.pdf,https://stsppucc.org/files/bull-01-07-2024ws.pdf,2024-01-07,Free Nation,,Free,,Nation,,ministry_contextual,medium,funeral
@@ -20940,10 +20940,6 @@ St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_90345d31.pdf,https://spsact.org/wp-content/uploads/2026/01/January-25-2026-Bulletin-for-web.pdf,2026-01-01,Grieving Paren,,Grieving,,Paren,,ministry_contextual,medium,contact
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_90345d31.pdf,https://spsact.org/wp-content/uploads/2026/01/January-25-2026-Bulletin-for-web.pdf,2026-01-01,Manuel Da Costa,,Manuel,Da,Costa,,ministry_contextual,medium,welcome
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_90345d31.pdf,https://spsact.org/wp-content/uploads/2026/01/January-25-2026-Bulletin-for-web.pdf,2026-01-01,Costa Masks,,Costa,,Masks,,ministry_contextual,medium,welcome
-St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_a72d746a.pdf,https://spsact.org/wp-content/uploads/2026/01/January-18-2026-Bulletin-for-web.pdf,2026-01-01,And from John,,And,from,John,Pastor,clergy_staff,high,", O.F.M.
-Father...""
-Pastor
-And from John the Baptist we hear: ""Behold,"
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_a72d746a.pdf,https://spsact.org/wp-content/uploads/2026/01/January-18-2026-Bulletin-for-web.pdf,2026-01-01,of Communi,,of,,Communi,Director,clergy_staff,high,Please contact our Director of Communi- You are not alone. Perhaps y
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_a72d746a.pdf,https://spsact.org/wp-content/uploads/2026/01/January-18-2026-Bulletin-for-web.pdf,2026-01-01,Bob Butler,Fr.,Bob,,Butler,Priest,clergy_staff,high,"ullaney, Mary B. Mullaney and Fr. Bob Butler,
  In Memory of Maggie Kelly"
@@ -22070,7 +22066,6 @@ Early ""Mothers of the Church"" Call"
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,Oscar Romero,Archbishop,Oscar,,Romero,Archbishop,clergy_staff,high,"ar. This was nine years after Archbishop Oscar Romero was Friday, August 16, 2024
 m"
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,Poor Clares,,Poor,,Clares,,ministry_contextual,medium,ladies
-St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,About Christine Schenk,,About,Christine,Schenk,,ministry_contextual,medium,ladies
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,Her Sisters,,Her,,Sisters,,ministry_contextual,medium,ladies
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,Early Christianity,,Early,,Christianity,,ministry_contextual,medium,ladies
 St. Patrick–St. Anthony,us-ct-hartford-st-patrick-st-anthony-cfa86dc4,Hartford,http://www.spsact.org/,us-ct-hartford-st-patrick-st-anthony-cfa86dc4_20240890_4f7971ef.pdf,https://spsact.org/wp-content/uploads/2024/08/9019-August-11-2024-Bulletin-for-web.pdf,2024-08-01,Joan Picone,,Joan,,Picone,,ministry_contextual,medium,committee
@@ -25476,7 +25471,7 @@ Holy Cross Church,us-ct-new-britain-holy-cross-church-7c9f3303,New Britain,http:
 11:30AMP † Lucian Mlynarczyk od zony Zofii
 
 MAY"
-Holy Cross Church,us-ct-new-britain-holy-cross-church-7c9f3303,New Britain,http://holycrosschurchnb.org/,us-ct-new-britain-holy-cross-church-7c9f3303_20240505_836d6f48.pdf,https://holycrosschurchnb.org/uploads/files/bulletins/2024/05-05-2024.pdf,2024-05-05,REJESTRACJA DZIECI NA,,REJESTRACJA,DZIECI,NA,Priest,clergy_staff,high,"Damien de Veuster, Priest
+Holy Cross Church,us-ct-new-britain-holy-cross-church-7c9f3303,New Britain,http://holycrosschurchnb.org/,us-ct-new-britain-holy-cross-church-7c9f3303_20240505_836d6f48.pdf,https://holycrosschurchnb.org/uploads/files/bulletins/2024/05-05-2024.pdf,2024-05-05,REJESTRACJA DZIECI NA,,REJESTRACJA,DZIECI,,Priest,clergy_staff,high,"Damien de Veuster, Priest
 REJESTRACJA DZIECI NA RELIGIE ROK 2024-2025
 Proszę"
 Holy Cross Church,us-ct-new-britain-holy-cross-church-7c9f3303,New Britain,http://holycrosschurchnb.org/,us-ct-new-britain-holy-cross-church-7c9f3303_20240505_836d6f48.pdf,https://holycrosschurchnb.org/uploads/files/bulletins/2024/05-05-2024.pdf,2024-05-05,Karolina Popek,,Karolina,,Popek,,mass_intention,high,"iny Klecha
@@ -30263,7 +30258,6 @@ counted toward the major. Up"
 Yale University - St. Thomas More Chapel,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c,New Haven,https://www.yale.edu/stm/home/,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c_5b40617a.pdf,https://bulletin.yale.edu/sites/default/files/ycps-2025-2026.pdf,,Theresa Schenker,,Theresa,,Schenker,director,clergy_staff,high,"); Language program director: Theresa Schenker
 (theresa.schenker@yale.edu)
 T"
-Yale University - St. Thomas More Chapel,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c,New Haven,https://www.yale.edu/stm/home/,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c_5b40617a.pdf,https://bulletin.yale.edu/sites/default/files/ycps-2025-2026.pdf,,for advice about,,for,advice,about,director,clergy_staff,high,he language program director for advice about placement and about language
 Yale University - St. Thomas More Chapel,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c,New Haven,https://www.yale.edu/stm/home/,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c_5b40617a.pdf,https://bulletin.yale.edu/sites/default/files/ycps-2025-2026.pdf,,and chair,,and,,chair,director,clergy_staff,high,"Certificate
 Program director and chair: Catherine Panter-Brick; (cat"
 Yale University - St. Thomas More Chapel,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c,New Haven,https://www.yale.edu/stm/home/,us-ct-new-haven-yale-university-st-thomas-more-chapel-d323cf2c_5b40617a.pdf,https://bulletin.yale.edu/sites/default/files/ycps-2025-2026.pdf,,Shawkat M,,Shawkat,,M,director,clergy_staff,high,"ificate
@@ -32114,9 +32108,6 @@ St. Joseph,us-ct-norwich-st-joseph-e30703a9,Norwich,http://saintjosephnorwich.co
 Monthly Maintenance
 Archbishop Coyne
 SANCTUARY CANDLE On Sunday, February 16th, St."
-St. Joseph,us-ct-norwich-st-joseph-e30703a9,Norwich,http://saintjosephnorwich.com/,us-ct-norwich-st-joseph-e30703a9_20250202_756303a1.pdf,https://saintjosephnorwich.com/bulletins/2024-2025YearC/2025-02-02 The Presentation of the Lord.pdf,2025-02-02,And Safe Environments,,And,Safe,Environments,Coordinator,clergy_staff,high,"US!
-Faith Formation Coordinator And Safe Environments Child Advocate
-Kasia (Czyzews"
 St. Joseph,us-ct-norwich-st-joseph-e30703a9,Norwich,http://saintjosephnorwich.com/,us-ct-norwich-st-joseph-e30703a9_20250202_756303a1.pdf,https://saintjosephnorwich.com/bulletins/2024-2025YearC/2025-02-02 The Presentation of the Lord.pdf,2025-02-02,Amaris Salata,Sr.,Amaris,,Salata,Sister,clergy_staff,high,"mas
 From Rosary Society
 Finn, Sr. Amaris Salata, FSE and Sr. Catherine Mary C"
@@ -32934,11 +32925,6 @@ David Walko requested by Francine Walko Lectors
 10:30 a.m. Rev. M."
 Our Lady of Mercy Church,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6,Plainville,https://olmct.org/,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6_20250928_24942bd0.pdf,https://files.ecatholic.com/5471/bulletins/20250928.pdf?t=1759262617000,2025-09-28,Robert Anderson David,,Robert,Anderson,David,,ministry_contextual,medium,lector
 Our Lady of Mercy Church,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6,Plainville,https://olmct.org/,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6_20250928_24942bd0.pdf,https://files.ecatholic.com/5471/bulletins/20250928.pdf?t=1759262617000,2025-09-28,Baked Potato,,Baked,,Potato,,ministry_contextual,medium,volunteer
-Our Lady of Mercy Church,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6,Plainville,https://olmct.org/,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6_20250921_6fa30de7.pdf,https://files.ecatholic.com/5471/bulletins/20250921.pdf?t=1758740235000,2025-09-21,about it sometime,,about,it,sometime,pastor,clergy_staff,high,"please talk to your pastor about it sometime to explore options.
- Vacatio"
-Our Lady of Mercy Church,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6,Plainville,https://olmct.org/,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6_20250921_6fa30de7.pdf,https://files.ecatholic.com/5471/bulletins/20250921.pdf?t=1758740235000,2025-09-21,in advance about,,in,advance,about,pastor,clergy_staff,high,"ou can talk to your pastor in advance about rare special
-circumstance.
-"
 Our Lady of Mercy Church,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6,Plainville,https://olmct.org/,us-ct-plainville-our-lady-of-mercy-catholic-church-c5fc6cb6_20250921_6fa30de7.pdf,https://files.ecatholic.com/5471/bulletins/20250921.pdf?t=1758740235000,2025-09-21,Janice Gauvin Diane,,Janice,Gauvin,Diane,,mass_intention,high,".m. David Wierbicki requested by Janice Gauvin
 Diane & Bob Poplawski
 Wed"
@@ -36285,8 +36271,6 @@ St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-f
 St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Head Start Biblical,,Head,Start,Biblical,,ministry_contextual,medium,volunteer
 St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Lady Queen,,Lady,,Queen,,ministry_contextual,medium,volunteer
 St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Victoria Jarvis Chri,,Victoria,Jarvis,Chri,,ministry_contextual,medium,welcome
-St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,shares more about,,shares,more,about,pastor,clergy_staff,high,"The letter from our pastor shares more about our
-to a hospital to anoint a"
 St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,Ed Przygocki,Father,Ed,,Przygocki,Priest,clergy_staff,high,"ntention on their behalf. All
 Father Ed Przygocki, MSA forms will be placed on"
 St Francis of Assisi Church (St. Junipero Serra Parish),us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-francis-of-assisi-church-st-junipero-serra-parish-66e1c4a0_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,Leanne Harriss,,Leanne,,Harriss,,ministry_contextual,medium,choir
@@ -36993,8 +36977,6 @@ St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-marg
 St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Head Start Biblical,,Head,Start,Biblical,,ministry_contextual,medium,volunteer
 St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Lady Queen,,Lady,,Queen,,ministry_contextual,medium,volunteer
 St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_28b8a712.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-1WK-advent.pdf,2025-11-01,Victoria Jarvis Chri,,Victoria,Jarvis,Chri,,ministry_contextual,medium,welcome
-St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,shares more about,,shares,more,about,pastor,clergy_staff,high,"The letter from our pastor shares more about our
-to a hospital to anoint a"
 St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,Ed Przygocki,Father,Ed,,Przygocki,Priest,clergy_staff,high,"ntention on their behalf. All
 Father Ed Przygocki, MSA forms will be placed on"
 St. Margaret Mary Church (St. Junipero Serra Parish),us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6,South Windsor,http://www.saintjuniperoserra.org/,us-ct-south-windsor-st-margaret-mary-church-st-junipero-serra-parish-458a1bf6_3f69f799.pdf,https://www.saintjuniperoserra.org/wp-content/uploads/2025/11/SJS-Bull-Nov-23.pdf,2025-11-01,Leanne Harriss,,Leanne,,Harriss,,ministry_contextual,medium,choir
@@ -39400,7 +39382,6 @@ Welc ome Sr. Regina Mgbakor IHM. Sister will share inform"
 Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_e23c48b6.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-Bull-July-21.pdf,2024-07-01,John Paul,,John,,Paul,,ministry_contextual,medium,council
 Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_d15dad47.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-Bull-July-14-15OT.pdf,2024-07-01,busine ss,,busine,,ss,Religious Ed,clergy_staff,high,"ecessary to conduct Religious Ed busine ss.
 divorce, or separation. We a"
-Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_d15dad47.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-Bull-July-14-15OT.pdf,2024-07-01,about it,,about,,it,priest,clergy_staff,high,r dream of asking a priest about it. For a moment I thought of in
 Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_d15dad47.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-Bull-July-14-15OT.pdf,2024-07-01,Joseph Travelling,,Joseph,,Travelling,,ministry_contextual,medium,welcome
 Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_e1778693.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-July-7-OT14.pdf,2024-07-01,says next,,says,,next,priest,clergy_staff,high,e of the prayer the priest says next (as you are moving into a kne
 Sacred Heart,us-ct-suffield-sacred-heart-d4bbdc7e,Suffield,https://www.sacredheartct.com,us-ct-suffield-sacred-heart-d4bbdc7e_e1778693.pdf,https://www.sacredheartct.com/wp-content/uploads/2024/07/SH-July-7-OT14.pdf,2024-07-01,Ryan Pickerill,Sr.,Ryan,,Pickerill,Sister,clergy_staff,high,"July 9
@@ -44722,8 +44703,6 @@ Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.o
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,of Christian,,of,,Christian,Grand Knight,clergy_staff,high,"nights of Columbus:
 Grand Knight—
 of Christian Initiation of Adults invites all inquire"
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,about returning,,about,,returning,priest,clergy_staff,high,"203-762-7503
-with a priest about returning to active participation with his"
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,Robertt Mattheww Ligourii,,Robertt,Mattheww,Ligourii,,ministry_contextual,medium,choir
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,Alyssaa Rusbamm,,Alyssaa,,Rusbamm,,ministry_contextual,medium,choir
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,Come Mike Healy,,Come,Mike,Healy,,ministry_contextual,medium,knight
@@ -44738,8 +44717,6 @@ Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.o
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_52987675.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08242025+OLF.pdf,,Marcelo Fajardo Mark,,Marcelo,Fajardo,Mark,,ministry_contextual,medium,welcome
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_07a60362.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08172025+OLF.pdf,,will be heading,,will,be,heading,Pastor,clergy_staff,high,"r. Paul (Pawel) our Pastor will be heading back to
 Poland to see his fam"
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_07a60362.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08172025+OLF.pdf,,about what is,,about,what,is,priest,clergy_staff,high,"/her to talk with a priest about what is standing in Social Media:
-soc"
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_07a60362.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin+08172025+OLF.pdf,,Kevin Black,Sr.,Kevin,,Black,Sister,clergy_staff,high,"evitalstretch.com
 Kevin Black Sr.
 Kevin Black Jr. 203-529-6897
@@ -44941,11 +44918,6 @@ Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.o
 We welcome the newly
 Fr. Pawel M. Hrebenko
 B"
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_d89f4f3b.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_04202025_OLF.pdf,,Mike Healy about,,Mike,Healy,about,Grand Knight,clergy_staff,high,"im or her questions Grand Knight—
-Mike Healy
-about the experience. Keep in mind"
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_d89f4f3b.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_04202025_OLF.pdf,,about returning Respect,,about,returning,Respect,priest,clergy_staff,high,"them to talk with a priest about returning Respect Life:
-to active participation"
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_d89f4f3b.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_04202025_OLF.pdf,,Pawel M. Hrebenko,Fr.,Pawel,M.,Hrebenko,Priest,clergy_staff,high,"h Pastor
 We welcome the newly
 Fr. Pawel M. Hrebenko
@@ -45020,7 +44992,6 @@ Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.o
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_4779b79d.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03162025_OLF.pdf,,Ouuur Laaddddyy,,Ouuur,,Laaddddyy,,ministry_contextual,medium,choir
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_4779b79d.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03162025_OLF.pdf,,George Maunz,,George,,Maunz,,ministry_contextual,medium,knight
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_4779b79d.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03162025_OLF.pdf,,Brings Change Donate,,Brings,Change,Donate,,ministry_contextual,medium,chair
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_887a471e.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03092_OLF.pdf,,about why,,about,,why,priest,clergy_staff,high,e them to contact a priest about why they have been away. You may roons
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_887a471e.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03092_OLF.pdf,,of us is,,of,us,is,Grand Knight,clergy_staff,high,"nights of Columbus:
 Grand Knight—
 of us is called to evangelize. Pope Fr"
@@ -45057,8 +45028,6 @@ Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.o
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_069f759a.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_03022025_OLF.pdf,,Katherine Drexel,,Katherine,,Drexel,,ministry_contextual,medium,deceased
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_3bdffc37.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_02232025_OLF.pdf,,OLF JV,,OLF,,JV,Pastor,clergy_staff,high,"Fr. Pawel Hrebenko, Pastor OLF
 JV = Fr. James Vattakunnel, Stam"
-Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_3bdffc37.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_02232025_OLF.pdf,,to talk about,,to,talk,about,priest,clergy_staff,high,"ty:
-adult to call a priest to talk about why he or she left Jeannie Ru"
 Our Lady of Fatima,us-ct-wilton-our-lady-of-fatima-47411cf4,Wilton,https://www.olfwilton.org/,us-ct-wilton-our-lady-of-fatima-47411cf4_3bdffc37.pdf,https://irp.cdn-website.com/87cddcc2/files/uploaded/Bulletin_02232025_OLF.pdf,,someone who fits,,someone,who,fits,Grand Knight,clergy_staff,high,"you who might know
 Grand Knight—
 someone who fits one of the above descriptions"
