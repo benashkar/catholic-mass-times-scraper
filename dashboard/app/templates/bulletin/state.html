@@ -111,17 +111,18 @@
         <table class="table table-hover table-striped table-sm mb-0 bulletin-table" id="namesTable" style="width:100%; table-layout:fixed;">
             <thead class="table-light">
                 <tr>
-                    <th style="width:13%">Name</th>
-                    <th style="width:9%">Role</th>
+                    <th style="width:12%">Name</th>
+                    <th style="width:7%">Role</th>
                     <th style="width:4%">Title</th>
-                    <th style="width:7%">First</th>
-                    <th style="width:7%">Last</th>
-                    <th style="width:18%">Church</th>
-                    <th style="width:9%">City</th>
+                    <th style="width:6%">First</th>
+                    <th style="width:6%">Last</th>
+                    <th style="width:14%">Church</th>
+                    <th style="width:12%">Slug</th>
+                    <th style="width:8%">City</th>
                     <th style="width:8%">Category</th>
-                    <th style="width:8%">Conf.</th>
+                    <th style="width:7%">Conf.</th>
                     <th style="width:3%">PDF</th>
-                    <th style="width:7%">Date</th>
+                    <th style="width:6%">Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -180,14 +181,15 @@ $(document).ready(function() {
             { data: 3 },
             { data: 4 },
             { data: 5 },
-            { data: 6 },
-            { data: 7, render: function(d) { return categoryBadge(d); } },
-            { data: 8, className: 'text-center', render: function(d) { return confBadge(d); } },
-            { data: 9, className: 'text-center', orderable: false, render: function(d) {
+            { data: 6, render: function(d) { return '<small class="text-muted">' + $('<span>').text(d).html() + '</small>'; } },
+            { data: 7 },
+            { data: 8, render: function(d) { return categoryBadge(d); } },
+            { data: 9, className: 'text-center', render: function(d) { return confBadge(d); } },
+            { data: 10, className: 'text-center', orderable: false, render: function(d) {
                 if (d) return '<a href="' + $('<span>').text(d).html() + '" target="_blank" rel="noopener" title="View source PDF"><i class="bi bi-file-earmark-pdf"></i></a>';
                 return '';
             }},
-            { data: 10 }
+            { data: 11 }
         ],
         pageLength: 50,
         order: [[0, 'asc']],
@@ -195,19 +197,19 @@ $(document).ready(function() {
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
         autoWidth: false,
         columnDefs: [
-            { targets: [9], orderable: false },  // PDF column not sortable
+            { targets: [10], orderable: false },  // PDF column not sortable
             { targets: [2], className: 'text-center' },  // Title centered
-            { targets: [8], className: 'text-center' },  // Confidence centered
-            { targets: [9], className: 'text-center' }   // PDF centered
+            { targets: [9], className: 'text-center' },  // Confidence centered
+            { targets: [10], className: 'text-center' }   // PDF centered
         ]
     });
 
-    // Custom filter: City (column index 6)
+    // Custom filter: City (column index 7)
     $('#filterCity').on('change', function() {
-        table.column(6).search(this.value, false, false).draw();
+        table.column(7).search(this.value, false, false).draw();
     });
 
-    // Custom filter: Church (column index 5) — with optional city (column 6)
+    // Custom filter: Church (column index 5) — with optional city (column 7)
     $('#filterChurch').on('change', function() {
         var churchVal = this.value;
         var cityVal = $(this).find(':selected').data('city') || '';
@@ -217,32 +219,32 @@ $(document).ready(function() {
             table.column(5).search('', false, false);
         }
         if (cityVal) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
+            table.column(7).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
         } else if (churchVal) {
             // Don't reset city if we have a church selected
         } else {
-            table.column(6).search('', false, false);
+            table.column(7).search('', false, false);
         }
         table.draw();
     });
 
-    // Custom filter: Category (column index 7)
+    // Custom filter: Category (column index 8)
     $('#filterCategory').on('change', function() {
-        table.column(7).search(this.value, false, false).draw();
+        table.column(8).search(this.value, false, false).draw();
     });
 
-    // Custom filter: Confidence (column index 8)
+    // Custom filter: Confidence (column index 9)
     $('#filterConfidence').on('change', function() {
         var val = this.value;
         if (val === 'high') {
-            table.column(8).search('High', false, false).draw();
+            table.column(9).search('High', false, false).draw();
         } else if (val === 'medium') {
             // Show High + Med (exclude Low)
-            table.column(8).search('High|Med', true, false).draw();
+            table.column(9).search('High|Med', true, false).draw();
         } else if (val === 'low') {
-            table.column(8).search('Low', false, false).draw();
+            table.column(9).search('Low', false, false).draw();
         } else {
-            table.column(8).search('', false, false).draw();
+            table.column(9).search('', false, false).draw();
         }
     });
 
@@ -252,7 +254,7 @@ $(document).ready(function() {
     if (prefilterChurch) {
         table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(prefilterChurch) + '$', true, false);
         if (prefilterCity) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
+            table.column(7).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
             $('#filterChurch option').each(function() {
                 if ($(this).val() === prefilterChurch && $(this).data('city') === prefilterCity) {
                     $(this).prop('selected', true);

@@ -561,6 +561,7 @@ _BULLETIN_PAGE_COLS = [
     "first_name",
     "last_name",
     "church_name",
+    "church_slug",
     "city",
     "category",
     "confidence",
