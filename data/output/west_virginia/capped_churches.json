@@ -1,37 +1,16 @@
 [
   {
-    "slug": "us-wv-loveberry-mission-of-st-bernard-f0e9ab0e",
-    "church_name": "Mission of St. Bernard",
-    "total_pdfs_available": 526,
-    "pdfs_downloaded": 100,
-    "remaining_pdfs": 426
-  },
-  {
-    "slug": "us-wv-roanoke-mission-of-st-bridget-4887528b",
-    "church_name": "Mission of St. Bridget",
-    "total_pdfs_available": 526,
-    "pdfs_downloaded": 100,
-    "remaining_pdfs": 426
-  },
-  {
     "slug": "us-wv-triadelphia-our-lady-of-seven-dolors-mission-6935393f",
     "church_name": "Our Lady of Seven Dolors Mission",
-    "total_pdfs_available": 191,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 91
-  },
-  {
-    "slug": "us-wv-weston-st-patrick-79492854",
-    "church_name": "St. Patrick",
-    "total_pdfs_available": 526,
-    "pdfs_downloaded": 100,
-    "remaining_pdfs": 426
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-wv-wheeling-st-vincent-de-paul-872078eb",
     "church_name": "St. Vincent de Paul",
-    "total_pdfs_available": 191,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 91
+    "remaining_pdfs": 0
   }
 ]
