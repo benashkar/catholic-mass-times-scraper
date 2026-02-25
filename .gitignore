@@ -56,6 +56,7 @@ data/output/*/bulletin_texts/
 data/output/*/bulletin_names.json
 data/output/*/bulletin_discovery.json
 data/output/*/bulletin_progress.json
+data/output/*/rescrape_progress.json
 # Root-level aggregates (rebuilt from per-state files)
 data/output/all_services.csv
 data/output/all_churches_detail.json

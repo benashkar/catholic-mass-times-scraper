@@ -79,6 +79,7 @@ logger = get_logger(__name__)
 REQUEST_DELAY = 1.0  # seconds between requests to same domain
 REQUEST_TIMEOUT = 15  # seconds
 MAX_PDFS_PER_CHURCH = 100  # download all available bulletins (most churches have 20-52 weeks)
+_pdf_cap_override = None  # Set to 0 for unlimited; None = use MAX_PDFS_PER_CHURCH
 MAX_PDF_SIZE_MB = 25  # skip PDFs larger than 25MB
 PROGRESS_SAVE_INTERVAL = 10  # save progress every N churches
 
@@ -93,6 +94,14 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
 }
+
+
+def _effective_pdf_cap():
+    """Return the active per-church PDF cap. 0 means unlimited."""
+    if _pdf_cap_override is not None:
+        return _pdf_cap_override
+    return MAX_PDFS_PER_CHURCH
+
 
 # Common bulletin page URL paths to try (most common first)
 BULLETIN_PATHS = [
@@ -419,7 +428,8 @@ def _extract_pdfs_with_browser(url: str):
             except Exception:
                 pass
 
-    return pdfs[:MAX_PDFS_PER_CHURCH]
+    cap = _effective_pdf_cap()
+    return pdfs[:cap] if cap else pdfs
 
 
 # ── Phase 1: Bulletin Discovery ───────────────────────────────────────────────
@@ -690,7 +700,7 @@ def try_discovermass_fallback(church_name: str, city: str, state_code: str):
 
     return {
         "bulletin_page_url": dm_url,
-        "pdf_urls": unique_pdfs[:MAX_PDFS_PER_CHURCH],
+        "pdf_urls": unique_pdfs[: _effective_pdf_cap()] if _effective_pdf_cap() else unique_pdfs,
         "source": "discovermass_fallback",
         "lpi_parish_id": None,
     }
@@ -887,7 +897,9 @@ def extract_pdf_links(soup, page_url: str):
     # Sort by date (most recent first)
     pdf_links.sort(key=lambda x: x["date_score"], reverse=True)
 
-    return [p["url"] for p in pdf_links[:MAX_PDFS_PER_CHURCH]]
+    cap = _effective_pdf_cap()
+    urls = [p["url"] for p in pdf_links]
+    return urls[:cap] if cap else urls
 
 
 def extract_date_score(url: str, text: str):
@@ -1020,7 +1032,8 @@ def extract_discovermass_pdfs(dm_url: str):
             pdfs.append(url)
 
     logger.debug(f"  DiscoverMass scan: found {len(pdfs)} bulletin PDFs")
-    return pdfs[:MAX_PDFS_PER_CHURCH]
+    cap = _effective_pdf_cap()
+    return pdfs[:cap] if cap else pdfs
 
 
 def extract_lpi_pdfs(lpi_url: str):
@@ -1050,7 +1063,8 @@ def extract_lpi_pdfs(lpi_url: str):
         if browser_pdfs:
             pdfs.extend(browser_pdfs)
 
-    return pdfs[:MAX_PDFS_PER_CHURCH]
+    cap = _effective_pdf_cap()
+    return pdfs[:cap] if cap else pdfs
 
 
 def extract_lpi_pdfs_from_widget(parish_id: str):
@@ -1114,7 +1128,8 @@ def extract_lpi_pdfs_from_widget(parish_id: str):
 
     if pdfs:
         logger.debug(f"  LPi widget HTTP scan for {parish_id}: found {len(pdfs)} PDFs")
-        return pdfs[:MAX_PDFS_PER_CHURCH]
+        cap = _effective_pdf_cap()
+        return pdfs[:cap] if cap else pdfs
 
     # Fallback: use Playwright headless browser to render the JS widget
     if HAS_PLAYWRIGHT:
@@ -1125,7 +1140,8 @@ def extract_lpi_pdfs_from_widget(parish_id: str):
         browser_pdfs = _extract_pdfs_with_browser(widget_url)
         if browser_pdfs:
             logger.debug(f"  LPi widget Playwright for {parish_id}: found {len(browser_pdfs)} PDFs")
-            return browser_pdfs[:MAX_PDFS_PER_CHURCH]
+            cap = _effective_pdf_cap()
+            return browser_pdfs[:cap] if cap else browser_pdfs
 
     logger.debug(f"  LPi widget scan for {parish_id}: found 0 PDFs")
     return []
