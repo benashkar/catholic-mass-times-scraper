@@ -2385,8 +2385,10 @@ def clean_extracted_name(name: str) -> str:
     """
     if not name:
         return name
-    # Remove newlines (PDF column bleed)
-    name = name.replace("\n", " ").strip()
+    # Keep only first line (newlines are PDF column bleed artifacts)
+    if "\n" in name:
+        name = name.split("\n")[0]
+    name = name.strip()
     # Collapse multiple spaces
     name = re.sub(r"\s+", " ", name)
     # Strip trailing day abbreviations (PDF column bleed from mass schedules)
@@ -2428,6 +2430,8 @@ def clean_extracted_name(name: str) -> str:
     name = " ".join(parts)
     # Strip leading/trailing punctuation
     name = name.strip(".,;:!?()[]{}\"'-/")
+    # Split merged names (e.g. "Kevin Steinkamp Cynthia" -> "Kevin Steinkamp")
+    name = split_merged_name(name)
     return name
 
 
@@ -2460,6 +2464,9 @@ def is_valid_name(name: str) -> bool:
             return False
         # Reject all-caps (except 1-2 letter abbreviations like initials)
         if part.isupper() and len(part) > 2:
+            return False
+        # Reject merged PDF artifacts (words >15 chars are never real name parts)
+        if len(part) > 15:
             return False
 
     # Check against false positives blocklist
