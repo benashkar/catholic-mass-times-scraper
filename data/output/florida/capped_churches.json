@@ -2,72 +2,72 @@
   {
     "slug": "us-fl-coral-gables-church-of-the-little-flower-0ead21df",
     "church_name": "Little Flower",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 371,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 271
   },
   {
     "slug": "us-fl-fort-pierce-san-juan-diego-1f8d86a6",
     "church_name": "Centro Pastoral Hispano San Juan Diego",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 304,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 204
   },
   {
     "slug": "us-fl-fort-pierce-st-anastasia-4c93c498",
     "church_name": "St. Anastasia",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 304,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 204
   },
   {
     "slug": "us-fl-hialeah-saint-john-the-apostle-3b3b8426",
     "church_name": "St. John the Apostle",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 112,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 12
   },
   {
     "slug": "us-fl-indiantown-holy-cross-46e75766",
     "church_name": "Holy Cross",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 364,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 264
   },
   {
     "slug": "us-fl-jacksonville-st-james-chair-of-st-peter-f8a5f8d6",
     "church_name": "St. James  (Chair of St. Peter)",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 118,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 18
   },
   {
     "slug": "us-fl-jacksonville-st-james-catholic-church-1b9ed4cc",
     "church_name": "St. James Catholic Church",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 118,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 18
   },
   {
     "slug": "us-fl-miami-gesu-cd2075ce",
     "church_name": "Gesu",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 159,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 59
   },
   {
     "slug": "us-fl-miami-st-raymond-of-pe\u00f1afort-1a58f055",
     "church_name": "St. Raymond",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 298,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 198
   },
   {
     "slug": "us-fl-orlando-blessed-trinity-catholic-church-875470d6",
     "church_name": "Blessed Trinity",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 473,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 373
   },
   {
     "slug": "us-fl-panama-city-saint-dominic-847edc7a",
@@ -79,22 +79,22 @@
   {
     "slug": "us-fl-saint-petersburg-blessed-trinity-369e0b6b",
     "church_name": "Blessed Trinity",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 165,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 65
   },
   {
     "slug": "us-fl-sarasota-st-martha-7642781d",
     "church_name": "St. Martha",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 163,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 63
   },
   {
     "slug": "us-fl-sebring-st-catherine-a7eb72ae",
     "church_name": "St. Catherine",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 565,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 465
   }
 ]

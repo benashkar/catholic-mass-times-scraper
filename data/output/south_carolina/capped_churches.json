@@ -2,29 +2,29 @@
   {
     "slug": "us-sc-chapin-our-lady-of-the-lake-7eabd08c",
     "church_name": "Our Lady of the Lake",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 554,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 454
   },
   {
     "slug": "us-sc-gantt-our-lady-of-the-rosary-catholic-church-8bcef475",
     "church_name": "Our Lady of the Rosary Catholic Church",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 164,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 64
   },
   {
     "slug": "us-sc-greenville-our-lady-of-the-rosary-e5980901",
     "church_name": "Our Lady of the Rosary",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 164,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 64
   },
   {
     "slug": "us-sc-north-augusta-saint-edward-the-confessor-8bde3b64",
     "church_name": "St. Edward",
-    "total_pdfs_available": 100,
+    "total_pdfs_available": 122,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 0
+    "remaining_pdfs": 22
   }
 ]
