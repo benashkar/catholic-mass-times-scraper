@@ -3829,16 +3829,10 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                 except (json.JSONDecodeError, KeyError):
                     pass
 
-    # Confidence mapping: based on whether this is likely a real person connected to the church
+    # Confidence mapping (computed via confidence_label()):
     # HIGH = clearly a named individual (staff, parishioner mentioned by name, someone prayed for)
     # MEDIUM = likely a real name but found via looser contextual matching
     # LOW = might be a false positive (generic text near a ministry keyword)
-    CONFIDENCE_MAP = {
-        "clergy_staff": "high",  # Named staff: Fr. John Smith, Pastor: Jane Doe
-        "mass_intention": "high",  # Named in Mass intentions: real person (living or deceased)
-        "prayer_list": "high",  # Named on prayer/sick list: real parishioner
-        "ministry_contextual": "medium",  # Name found near a ministry keyword: likely real but looser match
-    }
 
     # Track unique names PER CHURCH (not statewide) — each church has its own seen-names set
     # This way a name appearing at 5 different churches shows up 5 times (once per church)

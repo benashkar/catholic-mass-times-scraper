@@ -21,14 +21,13 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from run_bulletin_scraper import (
-    score_name_confidence,
-    confidence_label,
-    split_merged_name,
+from run_bulletin_scraper import (  # noqa: E402
     clean_extracted_name,
+    confidence_label,
     is_valid_name,
+    score_name_confidence,
+    split_merged_name,
 )
-
 
 # Org-pattern prepositions to detect org names
 ORG_PREPS = [" of ", " for ", " de "]
