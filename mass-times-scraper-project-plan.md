@@ -112,7 +112,7 @@
 | `service_note_tag` | Parsed tags from notes (M2M) | service_id, tag_code |
 | `scrape_log` | Audit trail of scrape runs | scrape_type, started_at, status, churches_scraped, errors |
 
-### Convenience Views (4 views)
+### Convenience Views (5 views)
 
 | View | Purpose |
 |------|---------|
@@ -120,6 +120,13 @@
 | `v_weekly_schedule` | Full weekly schedule organized by church → day → time |
 | `v_confession_times` | All active confession times with relative-time support |
 | `v_church_summary` | Dashboard: all churches with computed service counts |
+| `v_clergy_activity` | High-confidence clergy with activity tracking by year (active_2026/2025/2024), church counts, and date ranges — derived from bulletin_name + bulletin_pdf join |
+
+### Interactive ERD Reference (`database/schema_erd.html`)
+- Standalone HTML file with Mermaid ERD diagram + full schema reference
+- Shows all 19 tables with data types, PK/FK/NOT NULL/UNIQUE/INDEX constraint badges
+- Color-coded: lookup tables (blue), entity tables (green), junction tables (orange)
+- View at: `database/schema_erd.html` (open in any browser)
 
 ### ETL Transformer Module (`src/etl/transformers.py`)
 
@@ -468,6 +475,21 @@ Analysis across 10 states (787K rows, 499K unique names) found a 26% junk rate. 
 | Medium (0.4–0.69) | 247,392 | 27.0% |
 | Low (< 0.4) | 66,910 | 7.3% |
 
+**All-caps name filtering (Feb 2026):**
+Bulletin text often contains all-caps section headers (e.g., "AVISO IMPORTANTE", "ASSOCIATE PASTOR", "HOLY ASSUMPTION") that were incorrectly passing through as names. Fix:
+- `is_valid_name()` now strips title prefix (Fr./Rev./etc.) and rejects any remaining all-caps phrase > 3 chars
+- Real all-caps names (e.g., NARESH GALI, FRANKLIN OPARA) are rescued via SSA/Census cross-validation in the clergy activity generator
+- Added Spanish bulletin junk words: aviso, importante, intenciones, misa, vivir, liturgia, etc.
+- Added 7 new unit tests for all-caps rejection and Spanish junk words (69 total tests)
+
+**Clergy activity tracking (`scripts/generate_clergy_activity.py` + `data/clergy_activity.csv`):**
+Generates a high-confidence clergy member dataset from all 50 states' `bulletin_names.csv` files:
+- Filters: `category=clergy_staff` + `confidence=high` + has clergy title (Fr., Rev., Deacon, etc.) or clergy role (pastor, priest, deacon, etc.)
+- Uses `pdf_date` as activity signal: `active_2026`, `active_2025`, `active_2024` flags
+- SSA/Census validation rescues real all-caps names and title-cases them
+- Tracks: churches served, cities, states, date ranges, primary role
+- **Results (2026-02-26):** 49,749 unique clergy records, 6,992 active in 2026, 14,165 active in 2025, 18,636 appearing at 2+ churches
+
 **False positive handling:** Maintained blocklist of common non-name phrases (Holy Spirit, Sacred Heart, etc.) and non-name words (Church, Parish, Sunday, etc.). Numeric confidence score + dictionary validation allows precise downstream filtering. Dashboard supports `?min_confidence=0.7` to show only high-confidence names. Removed names saved to `data/reference/removed_names.json` for research. Cross-state auto-removed names saved to `data/reference/auto_removed_low_conf_3states.txt` (1,076 entries).
 
 **Test dataset:** `python scripts/build_junk_test_set.py` samples 2,000 names from 10 diverse states (200/state, 50/50 clean/junk split) for precision/recall benchmarking. Output: `data/reference/junk_test_set.csv` with `manual_label` column for human review.
@@ -575,21 +597,22 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 **CI Pipeline (GitHub Actions):**
 - `.github/workflows/ci.yml` — runs on push to master and PRs to master
 - **Lint job**: `ruff format --check` + `ruff check` (formatting + linting)
-- **Test job**: `pytest` with coverage — 63 unit tests for scoring/filtering functions (`score_name_confidence`, `confidence_label`, `split_merged_name`, `clean_extracted_name`, `is_valid_name`)
+- **Test job**: `pytest` with coverage — 69 unit tests for scoring/filtering functions (`score_name_confidence`, `confidence_label`, `split_merged_name`, `clean_extracted_name`, `is_valid_name`) including all-caps rejection and Spanish bulletin junk word tests
 - Lint and test jobs run in parallel (test no longer depends on lint)
 - Branch protection on master requires `test` status check to pass before merging
+- **Status (2026-02-26):** Both lint and test jobs passing ✅
 
-**Status (2026-02-24):**
+**Status (2026-02-26):**
 
 | Status | States | Count |
 |--------|--------|-------|
-| **DONE** (names extracted) | AL, AK, AZ, AR, CA, CO, CT, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TX, VT, WA, WV, WI, WY | 47 |
-| **IN PROGRESS** | TN, UT, VA | 3 |
+| **DONE** (names extracted) | All 50 states | 50 |
 
 - All 23,046 church URLs resolved (0 failures)
-- **2,224,663 total extracted names** across 47 states
-- Batch orchestrator (`run_bulletin_batch.py`) runs 2 states in parallel, cycling through remaining states continuously
-- Render cron jobs (Tue–Sat batches) will take over weekly refreshes once initial run completes
+- **120,116 unique bulletin PDFs** downloaded across all 50 states
+- **49,749 high-confidence clergy members** tracked in `data/clergy_activity.csv` (6,992 active in 2026)
+- Render cron jobs (Tue–Sat batches) handle weekly bulletin refreshes
+- CI fully green: lint + 69 bulletin name tests + full test suite passing
 
 ### Phase 8: Docker / Containerization
 **Goal:** Containerize both the church scrape pipeline and the bulletin/PDF pipeline as separate Docker services sharing the same data volume.
@@ -645,7 +668,7 @@ nohup bash auto_pipeline.sh > auto_pipeline.log 2>&1 &
 | Rate limiting | Custom (`src/utils/http.py`, 1.5s between requests) | Exponential backoff on retries, no retry on 404s |
 | Logging | Python `logging` module (`src/utils/logger.py`) | Console (INFO) + file (DEBUG) dual output to `logs/scrape_YYYY-MM-DD.log` |
 | Address parser | `src/parsers/address_parser.py` | Token-based street segmentation (43 tests) |
-| Testing | `pytest` (172 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) + address parser (43) + bulletin names (63) |
+| Testing | `pytest` (178 tests passing) | RSC extractor (22) + smoke (3) + ETL transformers (41) + address parser (43) + bulletin names (69) |
 | CI | GitHub Actions (`.github/workflows/ci.yml`) | Lint (ruff) + Test (pytest) on push to master and PRs |
 | US city data | 29,880 cities across 52 states | Source: github.com/kelvins/US-Cities-Database |
 | Output generation | Python (CSV, Markdown, or direct layout format) | Per-market newspaper listings |
@@ -672,7 +695,8 @@ church scrapes/
 │   └── settings.py                        # Central config: paths, URLs, target communities, statewide settings
 │
 ├── database/
-│   └── schema.sql                         # PostgreSQL schema (11 lookup + 8 entity tables + 4 views)
+│   ├── schema.sql                         # PostgreSQL schema (11 lookup + 8 entity tables + 5 views)
+│   └── schema_erd.html                    # Interactive ERD diagram + full schema reference (Mermaid)
 │
 ├── src/
 │   ├── __init__.py
@@ -700,7 +724,7 @@ church scrapes/
 │   ├── test_rsc_extractor.py              # 22 RSC extractor tests
 │   ├── test_transformers.py               # 41 ETL transformer tests
 │   ├── test_address_parser.py             # 43 address parser tests
-│   └── test_bulletin_names.py             # 63 bulletin name scoring/filtering tests
+│   └── test_bulletin_names.py             # 69 bulletin name scoring/filtering tests (incl. all-caps + Spanish junk words)
 │
 ├── data/
 │   ├── city_lists/
@@ -743,6 +767,8 @@ church scrapes/
 │
 ├── scripts/
 │   ├── prepare_name_reference.py          # Download SSA baby names + Census surnames for name validation
+│   ├── generate_clergy_activity.py        # Generate clergy_activity.csv from bulletin data (all 50 states)
+│   ├── rescore_all_states.py              # Re-score existing bulletin_names.csv with updated confidence logic
 │   ├── build_junk_test_set.py             # Build labeled test dataset (2K names from 10 states) for benchmarking
 │   ├── junk_analysis.py                   # Analysis scripts for junk rate measurement
 │   └── ...
@@ -753,6 +779,8 @@ church scrapes/
 │   ├── non_names.txt                      # Curated non-name English words
 │   ├── removed_names.json                 # Names removed via suspect review (runtime)
 │   └── junk_test_set.csv                  # Labeled test set for precision/recall benchmarking
+│
+├── data/clergy_activity.csv               # 49,749 high-confidence clergy with activity tracking (generated)
 │
 ├── dashboard/                             # Render dashboard (standalone Flask app)
 │   ├── app/
