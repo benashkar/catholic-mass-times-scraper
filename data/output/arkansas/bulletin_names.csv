@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Anne,us-ar-berryville-st-anne-09061d5b,Berryville,http://stannesberryville.com/,us-ar-berryville-st-anne-09061d5b_16d8bc45.pdf,https://stannesberryville.com/sites/anne/files/uploads/bulletins/2-22-2026_bulletin_web_email.pdf,2026-02-22,Emergency Number,,Emergency,,Number,Pastor,clergy_staff,low,0.00,"annesberryville.com
 Pastor Emergency Number:
 (870) 929-6374

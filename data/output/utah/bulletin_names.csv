@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Saint Olaf Catholic Church,us-ut-bountiful-saint-olaf-catholic-church-175a296f,Bountiful,https://www.stolafut.org/,us-ut-bountiful-saint-olaf-catholic-church-175a296f_83a86265.pdf,https://img1.wsimg.com/blobby/go/702db7db-106f-46b7-af97-2d838af4325c/2026%20February%2022.pdf,,Andrzej Skrzypiec,Father,Andrzej,,Skrzypiec,Priest,clergy_staff,high,0.90,"at St. Vincent's DePaul. $20. Father Andrzej Skrzypiec, Pastor
 Speaker, opportunity"
 Saint Olaf Catholic Church,us-ut-bountiful-saint-olaf-catholic-church-175a296f,Bountiful,https://www.stolafut.org/,us-ut-bountiful-saint-olaf-catholic-church-175a296f_83a86265.pdf,https://img1.wsimg.com/blobby/go/702db7db-106f-46b7-af97-2d838af4325c/2026%20February%2022.pdf,,Scott Dodge,Deacon,Scott,,Dodge,Deacon,clergy_staff,high,1.00,"lk. Deadline Sunday, March 8. Deacon Scott Dodge

@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Chapel of the Sacred Heart,us-wy-alta-chapel-of-the-sacred-heart-80a26f2f,Alta,https://olmcatholic.org/,us-wy-alta-chapel-of-the-sacred-heart-80a26f2f_20260222_e766ecbb.pdf,https://olmcatholic.org/wp-content/uploads/2026/02/OLM-Bulletin-2026-02-22-26.pdf,2026-02-22,Position Our Lady,,Position,Our,Lady,Maintenance,clergy_staff,low,0.00,"n.
 
 Advertising for Maintenance Position

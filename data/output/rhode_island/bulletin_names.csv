@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Holy Angels,us-ri-barrington-holy-angels-1b380c26,Barrington,http://www.holyangelschurchri.org/,us-ri-barrington-holy-angels-1b380c26_3101b7bf.pdf,https://www.holyangelschurchri.org/uploads/1/3/6/6/136604749/jan_25.pdf,,EMERITUS Rev,,EMERITUS,,Rev,PASTOR,clergy_staff,low,0.00,".org - 401.245.7743
 PASTOR EMERITUS
 Rev. Raymond Ferrick

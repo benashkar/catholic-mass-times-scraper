@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Mission of St. John Berchmans,us-mt-arlee-st-john-berchmans-fd231438,Arlee,http://stignatiusmission.org/,us-mt-arlee-st-john-berchmans-fd231438_c72e5466.pdf,http://stignatiusmission.org/s/022226-Bulletin.pdf,,Victor Cancino,Fr.,Victor,,Cancino,Priest,clergy_staff,high,1.00,"tending to this relationship
 Fr. Victor Cancino, SJ relationship with others"
 Mission of St. John Berchmans,us-mt-arlee-st-john-berchmans-fd231438,Arlee,http://stignatiusmission.org/,us-mt-arlee-st-john-berchmans-fd231438_c72e5466.pdf,http://stignatiusmission.org/s/022226-Bulletin.pdf,,Edith M. Schnell,Sr.,Edith,M.,Schnell,Sister,clergy_staff,high,0.90,"e notion that, as we struggle

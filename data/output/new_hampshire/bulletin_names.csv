@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Immaculate Conception Mission,us-nh-andover-immaculate-conception-mission-c55438e1,Andover,http://www.olfic.org/,us-nh-andover-immaculate-conception-mission-c55438e1_20260222_e226c1eb.pdf,http://www.olfic.org/site/assets/files/1526/20260222b.pdf,2026-02-22,Gregory McGinn,Deacon,Gregory,,McGinn,Permanent Deacon,clergy_staff,high,1.00,"on
 pastor@olfic.org
 Permanent Deacon Deacon Gregory McGinn

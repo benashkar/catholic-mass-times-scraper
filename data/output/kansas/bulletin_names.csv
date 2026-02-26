@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Andrew,us-ks-abilene-st-andrew-5fb454a2,Abilene,http://sacabilene.com,us-ks-abilene-st-andrew-5fb454a2_20260202_98fa79bd.pdf,https://sacabilene.com/wp-content/uploads/2026/02/02-22-26-Bulletin.pdf,2026-02-02,JoEllen Whitehair,,JoEllen,,Whitehair,Director of Religious Education,clergy_staff,high,0.85,"ffice Coordinator
 • Director of Religious Education JoEllen Whitehair, Secretary officead@sacabilen"
 St. Andrew,us-ks-abilene-st-andrew-5fb454a2,Abilene,http://sacabilene.com,us-ks-abilene-st-andrew-5fb454a2_20260202_98fa79bd.pdf,https://sacabilene.com/wp-content/uploads/2026/02/02-22-26-Bulletin.pdf,2026-02-02,Kade Megaffin,Fr.,Kade,,Megaffin,Priest,clergy_staff,medium,0.40,": Monday, Wednesday, Thursday

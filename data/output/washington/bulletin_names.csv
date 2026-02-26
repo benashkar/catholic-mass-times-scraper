@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Mary,us-wa-aberdeen-st-mary-72c2290c,Aberdeen,https://www.ghcatholic.org/,us-wa-aberdeen-st-mary-72c2290c_e2200287.pdf,https://www.ghcatholic.org/documents/bulletins/sunday_bulletin.pdf,,Theresa Wright,,Theresa,,Wright,Parochial Vicar,clergy_staff,high,1.00,"Maximiliano Muñoz, Parochial Vicar
 Theresa Wright, Pastoral Assistant for Admin"
 St. Mary,us-wa-aberdeen-st-mary-72c2290c,Aberdeen,https://www.ghcatholic.org/,us-wa-aberdeen-st-mary-72c2290c_e2200287.pdf,https://www.ghcatholic.org/documents/bulletins/sunday_bulletin.pdf,,para ni,,para,,ni,Pastor,clergy_staff,medium,0.60,"ienes recibieron el Pastor para niños de 3 a 6 años.

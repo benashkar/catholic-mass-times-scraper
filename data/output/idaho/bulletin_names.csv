@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Ann,us-id-bonners-ferry-st-ann-ee97be52,Bonners Ferry,http://www.stannbonnersferry.org/,us-id-bonners-ferry-st-ann-ee97be52_c158e0a3.pdf,https://www.stannbonnersferry.org/__static/629b73b30faadeaa6d2a6eac002a181f/bf-bl-b30-7-4-21(2).pdf?dl=1,,Roger Fernando,Fr.,Roger,,Fernando,PASTOR,clergy_staff,high,1.00,"gs to the poor....""
 PASTOR: Fr. Roger Fernando
 MASS SCHEDULE FIRST FRIDAY,

@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Elizabeth,us-hi-aiea-st-elizabeth-1f3ea1cf,Aiea,https://www.stelizabethaiea.com,us-hi-aiea-st-elizabeth-1f3ea1cf_414309dc.pdf,https://www.catholichawaii.org/media/276452/Funerals-ForWeb.pdf,,can preside,,can,,preside,pastor,clergy_staff,low,0.00,"commissioned by the pastor can preside at a Funeral
 Liturgy outside of"
 St. Elizabeth,us-hi-aiea-st-elizabeth-1f3ea1cf,Aiea,https://www.stelizabethaiea.com,us-hi-aiea-st-elizabeth-1f3ea1cf_414309dc.pdf,https://www.catholichawaii.org/media/276452/Funerals-ForWeb.pdf,,first meets,,first,,meets,minister,clergy_staff,low,0.00,"words

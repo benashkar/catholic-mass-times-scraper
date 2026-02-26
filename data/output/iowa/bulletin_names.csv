@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Mary,us-ia-ackley-st-mary-9b0ea02d,Ackley,http://franklinhardincatholic.org/,us-ia-ackley-st-mary-9b0ea02d_9f0f6623.pdf,https://franklinhardincatholic.org/wp-content/uploads/February-22-2026.pdf,2026-02-22,Kevin Earleywine,Father,Kevin,,Earleywine,Priest,clergy_staff,high,1.00,"nel: Franklin Hardin Catholic
 Father Kevin Earleywine k.earleywine@dbqarch.org Hamp"
 St. Mary,us-ia-ackley-st-mary-9b0ea02d,Ackley,http://franklinhardincatholic.org/,us-ia-ackley-st-mary-9b0ea02d_9f0f6623.pdf,https://franklinhardincatholic.org/wp-content/uploads/February-22-2026.pdf,2026-02-22,Cindy Richtsmeier,,Cindy,,Richtsmeier,Lector,clergy_staff,high,0.95,"-847-2329 Lector : Cindy Richtsmeier, Katelyn Porter

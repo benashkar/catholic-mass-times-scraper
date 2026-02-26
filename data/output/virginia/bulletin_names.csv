@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Corpus Christi Catholic Church,us-va-aldie-corpus-christi-catholic-church-16594243,Aldie,https://www.corpuschristisr.org,us-va-aldie-corpus-christi-catholic-church-16594243_20260222_d86719ed.pdf,http://sponsors.bonventure.net/pdfs/3172/2026-02-22.pdf,2026-02-22,Jerry Wooton,Rev.,Jerry,,Wooton,Parochial Vicar,clergy_staff,high,1.00,"Devan) Arockiasamy, Parochial Vicar
 Rev. Jerry Wooton, In Residence
 Rev. Jonathan F"

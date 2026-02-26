@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Therese Little Flower ,us-nd-balta-st-therese-little-flower-9b621276,Balta,http://www.littleflowerrugby.org,us-nd-balta-st-therese-little-flower-9b621276_cbaa42ec.pdf,http://www.littleflowerrugby.org/uploads/8/9/0/7/89072058/february_22_2026.pdf,2026-02-22,before birth,,before,,birth,priest,clergy_staff,low,0.35,"ends
 Please contact priest before birth or selecting
 on your active resp"

@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. John Capistran,us-ne-amherst-st-john-capistran-997334b7,Amherst,https://icelmcreek.wordpress.com/,us-ne-amherst-st-john-capistran-997334b7_b4ad77ea.pdf,https://icelmcreek.wordpress.com/wp-content/uploads/2019/10/bulletin-october-27-2019f.pdf,2019-10-01,Jeannette Taubenheim,,Jeannette,,Taubenheim,Secretary,clergy_staff,high,0.95,"len Pingel Parishes Secretary
 Jeannette Taubenheim Religious Ed Grade School – Amherst
 app"

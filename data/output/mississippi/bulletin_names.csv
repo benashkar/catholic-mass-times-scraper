@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 St. Ann,us-ms-bay-saint-louis-st-ann-a3360586,Bay Saint Louis,http://stannstjosephparish.org/,us-ms-bay-saint-louis-st-ann-a3360586_736fb77e.pdf,"https://storage.googleapis.com/production-bluehost-v1-0-8/758/1288758/gtThXwwP/9487d1f5da2f488f958a2224029c8da5?fileName=Feb 22, 2026  First Sunday of Lent.pdf",2026-02-22,Rusty Bohn Paul,,Rusty,Bohn,Paul,Minister,clergy_staff,high,0.85,"4-5,7-8; Mt 5:43-48
 Minister: Rusty Bohn Paul Pitts Mar 1st Insurance
 Let u"

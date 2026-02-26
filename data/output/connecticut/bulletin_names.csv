@@ -1,4 +1,4 @@
-church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
+﻿church_name,church_slug,city,church_url,pdf_file,pdf_url,pdf_date,person_name,title,first_name,middle_name,last_name,role,category,confidence,confidence_score,context
 Ss. Peter and Paul (Ukrainian),us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300,Ansonia,http://stsppucc.org/,us-ct-ansonia-ss-peter-and-paul-ukrainian-d5bb9300_9415226e.pdf,https://stsppucc.org/files/6.16.24-Bulletin.pdf,,Edward Canon,,Edward,,Canon,priest,clergy_staff,high,0.95,"c.org
 Very Rev. Archpriest Edward Canon Young, Pastor
 FOURTH SUNDAY AFTER P"
