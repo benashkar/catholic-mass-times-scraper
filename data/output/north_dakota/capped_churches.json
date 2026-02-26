@@ -2,78 +2,78 @@
   {
     "slug": "us-nd-bismarck-corpus-christi-0a3bbdfd",
     "church_name": "Corpus Christi",
-    "total_pdfs_available": 530,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 430
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-ellendale-st-helena-45c66a02",
     "church_name": "St. Helena",
-    "total_pdfs_available": 326,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 226
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-fargo-saint-mary-33dd5b33",
     "church_name": "Cathedral of St. Mary",
-    "total_pdfs_available": 129,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 29
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-forman-st-mary-0b968344",
     "church_name": "St. Mary",
-    "total_pdfs_available": 314,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 214
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-fullerton-st-patrick-8d9a35d0",
     "church_name": "St. Patrick",
-    "total_pdfs_available": 326,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 226
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-grafton-st-john-the-evangelist-0d500e54",
     "church_name": "St. John the Evangelist",
-    "total_pdfs_available": 517,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 417
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-manvel-st-timothy-77728780",
     "church_name": "St. Timothy",
-    "total_pdfs_available": 114,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 14
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-new-salem-st-pius-v-39efc5c3",
     "church_name": "St. Pius V",
-    "total_pdfs_available": 260,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 160
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-oakes-st-charles-borromeo-e178c64b",
     "church_name": "St. Charles Borromeo",
-    "total_pdfs_available": 314,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 214
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-oakwood-sacred-heart-40b50bad",
     "church_name": "Sacred Heart ",
-    "total_pdfs_available": 517,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 417
+    "remaining_pdfs": 0
   },
   {
     "slug": "us-nd-west-fargo-blessed-sacrament-d9dd384d",
     "church_name": "Blessed Sacrament",
-    "total_pdfs_available": 335,
+    "total_pdfs_available": 100,
     "pdfs_downloaded": 100,
-    "remaining_pdfs": 235
+    "remaining_pdfs": 0
   }
 ]
