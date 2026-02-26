@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catholic Mass Times Scraper - Database Schema &amp; ERD</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 0; text-align: center; }
+  .header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 1.05rem; opacity: 0.85; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
+  .stats-bar { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 30px; }
+  .stat-card { flex: 1; min-width: 180px; background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .stat-card .number { font-size: 2rem; font-weight: 800; color: #0f3460; }
+  .stat-card .label { font-size: 0.85rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+  .section { background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 30px; overflow: hidden; }
+  .section-header { background: #f0f4ff; padding: 18px 24px; border-bottom: 1px solid #e2e8f0; }
+  .section-header h2 { font-size: 1.3rem; color: #1a1a2e; }
+  .section-header p { font-size: 0.9rem; color: #555; margin-top: 4px; }
+  .section-body { padding: 24px; overflow-x: auto; }
+  .erd-container { text-align: center; overflow-x: auto; }
+  .table-group { margin-bottom: 32px; }
+  .table-group h3 { font-size: 1.1rem; color: #0f3460; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid #e2e8f0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table thead th { background: #f7f9fc; text-align: left; padding: 10px 14px; font-weight: 600; color: #334155; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
+  table tbody td { padding: 8px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  table tbody tr:hover { background: #f8faff; }
+  .col-name { font-family: 'Consolas', 'Fira Code', monospace; font-weight: 600; color: #1e293b; }
+  .col-type { font-family: 'Consolas', 'Fira Code', monospace; color: #7c3aed; font-size: 0.85rem; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.3px; }
+  .badge-pk { background: #fef3c7; color: #92400e; }
+  .badge-fk { background: #dbeafe; color: #1e40af; }
+  .badge-uk { background: #ede9fe; color: #5b21b6; }
+  .badge-idx { background: #ecfdf5; color: #065f46; }
+  .badge-nn { background: #fce7f3; color: #9d174d; }
+  .badge-def { background: #f1f5f9; color: #475569; }
+  .nullable { color: #94a3b8; font-style: italic; }
+  .footer { text-align: center; padding: 30px; color: #888; font-size: 0.85rem; }
+  .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+  .toc a { display: block; padding: 8px 12px; background: #f7f9fc; border-radius: 6px; color: #0f3460; text-decoration: none; font-size: 0.88rem; transition: background 0.2s; }
+  .toc a:hover { background: #e0e7ff; }
+  .toc a .type-tag { font-size: 0.7rem; color: #888; display: block; }
+  @media print {
+    body { background: white; }
+    .header { background: #1a1a2e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Catholic Mass Times Scraper</h1>
+  <p>PostgreSQL Database Schema &amp; Entity Relationship Diagram</p>
+  <p style="opacity:0.6; font-size:0.85rem; margin-top:8px;">Generated 2026-02-26 | 19 tables | 4 views</p>
+</div>
+
+<div class="container">
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-card"><div class="number">11</div><div class="label">Lookup Tables</div></div>
+  <div class="stat-card"><div class="number">8</div><div class="label">Entity Tables</div></div>
+  <div class="stat-card"><div class="number">4</div><div class="label">Views</div></div>
+  <div class="stat-card"><div class="number">120,116</div><div class="label">Unique PDFs</div></div>
+  <div class="stat-card"><div class="number">23,046</div><div class="label">Churches</div></div>
+</div>
+
+<!-- Table of Contents -->
+<div class="section">
+  <div class="section-header">
+    <h2>Table of Contents</h2>
+  </div>
+  <div class="section-body">
+    <div class="toc">
+      <a href="#erd">Entity Relationship Diagram<span class="type-tag">Visual ERD</span></a>
+      <a href="#lk_state">lk_state<span class="type-tag">Lookup</span></a>
+      <a href="#lk_diocese">lk_diocese<span class="type-tag">Lookup</span></a>
+      <a href="#lk_service_category">lk_service_category<span class="type-tag">Lookup</span></a>
+      <a href="#lk_schedule_type">lk_schedule_type<span class="type-tag">Lookup</span></a>
+      <a href="#lk_language">lk_language<span class="type-tag">Lookup</span></a>
+      <a href="#lk_day_of_week">lk_day_of_week<span class="type-tag">Lookup</span></a>
+      <a href="#lk_recurrence_pattern">lk_recurrence_pattern<span class="type-tag">Lookup</span></a>
+      <a href="#lk_time_relation">lk_time_relation<span class="type-tag">Lookup</span></a>
+      <a href="#lk_clergy_role">lk_clergy_role<span class="type-tag">Lookup</span></a>
+      <a href="#lk_note_tag">lk_note_tag<span class="type-tag">Lookup</span></a>
+      <a href="#community">community<span class="type-tag">Entity</span></a>
+      <a href="#church">church<span class="type-tag">Entity (Core)</span></a>
+      <a href="#church_community">church_community<span class="type-tag">Junction</span></a>
+      <a href="#clergy">clergy<span class="type-tag">Entity</span></a>
+      <a href="#clergy_assignment">clergy_assignment<span class="type-tag">Junction</span></a>
+      <a href="#service">service<span class="type-tag">Entity (Core)</span></a>
+      <a href="#service_note_tag">service_note_tag<span class="type-tag">Junction</span></a>
+      <a href="#scrape_log">scrape_log<span class="type-tag">Entity</span></a>
+      <a href="#bulletin_source">bulletin_source<span class="type-tag">Entity</span></a>
+      <a href="#bulletin_pdf">bulletin_pdf<span class="type-tag">Entity</span></a>
+      <a href="#bulletin_name">bulletin_name<span class="type-tag">Entity</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- ERD Diagram -->
+<div class="section" id="erd">
+  <div class="section-header">
+    <h2>Entity Relationship Diagram</h2>
+    <p>All tables and their foreign key relationships. Lookup tables (lk_*) on the left, core entities on the right, bulletin pipeline at the bottom.</p>
+  </div>
+  <div class="section-body erd-container">
+    <pre class="mermaid">
+erDiagram
+    lk_state {
+        CHAR_2 state_code PK
+        VARCHAR_50 state_name UK
+    }
+    lk_diocese {
+        SERIAL diocese_id PK
+        VARCHAR_150 diocese_name UK
+        CHAR_2 state_code FK
+        VARCHAR_500 website
+    }
+    lk_service_category {
+        VARCHAR_20 category_code PK
+        VARCHAR_50 display_name UK
+        SMALLINT sort_order
+    }
+    lk_schedule_type {
+        VARCHAR_20 schedule_type_code PK
+        VARCHAR_50 display_name UK
+        TEXT description
+    }
+    lk_language {
+        VARCHAR_20 language_code PK
+        VARCHAR_50 display_name UK
+        CHAR_2 iso_639_1
+    }
+    lk_day_of_week {
+        CHAR_3 day_code PK
+        VARCHAR_10 day_name UK
+        SMALLINT sort_order UK
+        BOOLEAN is_weekend
+    }
+    lk_recurrence_pattern {
+        VARCHAR_50 pattern_code PK
+        VARCHAR_100 display_name UK
+        TEXT description
+    }
+    lk_time_relation {
+        VARCHAR_10 relation_code PK
+        VARCHAR_20 display_name UK
+    }
+    lk_clergy_role {
+        VARCHAR_30 role_code PK
+        VARCHAR_50 display_name UK
+        SMALLINT sort_order
+    }
+    lk_note_tag {
+        VARCHAR_30 tag_code PK
+        VARCHAR_100 display_name UK
+        TEXT description
+    }
+    community {
+        SERIAL community_id PK
+        VARCHAR_100 name
+        VARCHAR_50 county
+        CHAR_2 state_code FK
+        VARCHAR_50 zip_codes
+        DECIMAL latitude
+        DECIMAL longitude
+        BOOLEAN is_active
+        TIMESTAMPTZ created_at
+        TIMESTAMPTZ updated_at
+    }
+    church {
+        SERIAL church_id PK
+        VARCHAR_200 slug UK
+        VARCHAR_200 name
+        VARCHAR_100 city
+        CHAR_2 state_code FK
+        INTEGER diocese_id FK
+        DECIMAL latitude
+        DECIMAL longitude
+        VARCHAR_500 website_url
+        BOOLEAN is_active
+        TIMESTAMPTZ created_at
+        TIMESTAMPTZ updated_at
+    }
+    church_community {
+        INTEGER church_id PK_FK
+        INTEGER community_id PK_FK
+        DECIMAL distance_miles
+    }
+    clergy {
+        SERIAL clergy_id PK
+        VARCHAR_100 first_name
+        VARCHAR_100 last_name
+        VARCHAR_20 prefix
+        BOOLEAN is_active
+    }
+    clergy_assignment {
+        SERIAL assignment_id PK
+        INTEGER clergy_id FK
+        INTEGER church_id FK
+        VARCHAR_30 role_code FK
+        DATE effective_date
+        DATE end_date
+        BOOLEAN is_current
+    }
+    service {
+        SERIAL service_id PK
+        INTEGER church_id FK
+        VARCHAR_20 category_code FK
+        VARCHAR_20 schedule_type_code FK
+        CHAR_3 day_code FK
+        TIME time_start
+        TIME time_end
+        DATE event_date
+        VARCHAR_20 language_code FK
+        VARCHAR_50 pattern_code FK
+        VARCHAR_10 relation_code FK
+        VARCHAR_200 display_name
+        BOOLEAN is_active
+    }
+    service_note_tag {
+        INTEGER service_id PK_FK
+        VARCHAR_30 tag_code PK_FK
+    }
+    scrape_log {
+        SERIAL scrape_id PK
+        VARCHAR_30 scrape_type
+        VARCHAR_20 status
+        TIMESTAMPTZ started_at
+        TIMESTAMPTZ completed_at
+    }
+    bulletin_source {
+        SERIAL bulletin_source_id PK
+        INTEGER church_id FK
+        TEXT bulletin_page_url
+        VARCHAR_30 discovery_source
+        BOOLEAN is_active
+    }
+    bulletin_pdf {
+        SERIAL bulletin_pdf_id PK
+        INTEGER bulletin_source_id FK
+        TEXT pdf_url
+        DATE pdf_date
+        VARCHAR_255 local_filename
+        BOOLEAN text_extracted
+    }
+    bulletin_name {
+        SERIAL bulletin_name_id PK
+        INTEGER bulletin_pdf_id FK
+        VARCHAR_100 person_name
+        VARCHAR_50 first_name
+        VARCHAR_50 last_name
+        VARCHAR_30 category
+        VARCHAR_10 confidence
+        BOOLEAN is_verified
+        BOOLEAN is_suspect
+    }
+
+    lk_state ||--o{ lk_diocese : "has dioceses"
+    lk_state ||--o{ community : "has communities"
+    lk_state ||--o{ church : "has churches"
+    lk_diocese ||--o{ church : "oversees"
+    church ||--o{ church_community : ""
+    community ||--o{ church_community : ""
+    church ||--o{ clergy_assignment : ""
+    clergy ||--o{ clergy_assignment : ""
+    lk_clergy_role ||--o{ clergy_assignment : ""
+    church ||--o{ service : "offers"
+    lk_service_category ||--o{ service : "categorizes"
+    lk_schedule_type ||--o{ service : "schedules"
+    lk_day_of_week ||--o{ service : "day"
+    lk_language ||--o{ service : "language"
+    lk_recurrence_pattern ||--o{ service : "recurrence"
+    lk_time_relation ||--o{ service : "relative time"
+    service ||--o{ service_note_tag : ""
+    lk_note_tag ||--o{ service_note_tag : ""
+    church ||--o| bulletin_source : "has bulletin"
+    bulletin_source ||--o{ bulletin_pdf : "contains"
+    bulletin_pdf ||--o{ bulletin_name : "yields names"
+    </pre>
+  </div>
+</div>
+
+<!-- ======================== LOOKUP TABLES ======================== -->
+
+<div class="section" id="lk_state">
+  <div class="section-header"><h2>lk_state</h2><p>US states and territories. 2-letter USPS code as natural primary key. Prevents "Ohio" vs "OH" vs "ohio" inconsistencies.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">state_code</td><td class="col-type">CHAR(2)</td><td><span class="badge badge-pk">PK</span></td><td>"OH", "PA", "IN", etc.</td></tr>
+        <tr><td class="col-name">state_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Ohio", "Pennsylvania", etc.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_diocese">
+  <div class="section-header"><h2>lk_diocese</h2><p>Catholic dioceses. A diocese is a geographic district under a bishop's jurisdiction. Every church belongs to exactly one.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">diocese_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing surrogate key</td></tr>
+        <tr><td class="col-name">diocese_name</td><td class="col-type">VARCHAR(150)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Diocese of Columbus"</td></tr>
+        <tr><td class="col-name">state_code</td><td class="col-type">CHAR(2)</td><td><span class="badge badge-fk">FK &rarr; lk_state</span></td><td>State this diocese is in</td></tr>
+        <tr><td class="col-name">website</td><td class="col-type">VARCHAR(500)</td><td class="nullable">nullable</td><td>Diocese website URL</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_service_category">
+  <div class="section-header"><h2>lk_service_category</h2><p>Service types: Mass, Confession, Adoration, Devotions, Education, Community, Other.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">category_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-pk">PK</span></td><td>"mass", "confession", "adoration", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Mass", "Confession", etc.</td></tr>
+        <tr><td class="col-name">sort_order</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 99</span></td><td>Display ordering</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_schedule_type">
+  <div class="section-header"><h2>lk_schedule_type</h2><p>Recurrence type: sunday, saturday, weekday, specific_weekday, monthly, special_event, parish_event, other.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">schedule_type_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-pk">PK</span></td><td>"sunday", "weekday", "monthly", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Sunday", "Weekday", etc.</td></tr>
+        <tr><td class="col-name">description</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>Explanation of the schedule pattern</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_language">
+  <div class="section-header"><h2>lk_language</h2><p>Service language. NULL = English (default). Found: en, es, la, bi, vi, ko, pl, pt.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">language_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-pk">PK</span></td><td>"en", "es", "la", "bi", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"English", "Spanish", "Latin", etc.</td></tr>
+        <tr><td class="col-name">iso_639_1</td><td class="col-type">CHAR(2)</td><td class="nullable">nullable</td><td>Standard ISO language code (NULL for "Bilingual")</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_day_of_week">
+  <div class="section-header"><h2>lk_day_of_week</h2><p>Days of the week with integer sort key for easy ordering. 3-letter codes match CatholicIndex.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">day_code</td><td class="col-type">CHAR(3)</td><td><span class="badge badge-pk">PK</span></td><td>"Mon", "Tue", ..., "Sun"</td></tr>
+        <tr><td class="col-name">day_name</td><td class="col-type">VARCHAR(10)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Monday", "Tuesday", etc.</td></tr>
+        <tr><td class="col-name">sort_order</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>1=Mon ... 7=Sun</td></tr>
+        <tr><td class="col-name">is_weekend</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT FALSE</span></td><td>TRUE for Sat/Sun</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_recurrence_pattern">
+  <div class="section-header"><h2>lk_recurrence_pattern</h2><p>Monthly/periodic patterns: first_friday, first_saturday, first_sunday, third_sunday, etc.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">pattern_code</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-pk">PK</span></td><td>"first_friday", "first_saturday", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"First Friday", etc.</td></tr>
+        <tr><td class="col-name">description</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>"First Friday of each month"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_time_relation">
+  <div class="section-header"><h2>lk_time_relation</h2><p>Relative time: "before" or "after" (e.g., "Confession: after 08:30 Mass").</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">relation_code</td><td class="col-type">VARCHAR(10)</td><td><span class="badge badge-pk">PK</span></td><td>"before", "after"</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Before", "After"</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_clergy_role">
+  <div class="section-header"><h2>lk_clergy_role</h2><p>Roles for parish leaders: pastor, parochial_vicar, deacon, administrator, etc.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">role_code</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-pk">PK</span></td><td>"pastor", "deacon", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Pastor", "Deacon", etc.</td></tr>
+        <tr><td class="col-name">sort_order</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 99</span></td><td>Display ordering</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="lk_note_tag">
+  <div class="section-header"><h2>lk_note_tag</h2><p>Structured tags parsed from free-text service notes: vigil, by_appointment, 24_hours, school_mass, etc.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">tag_code</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-pk">PK</span></td><td>"vigil", "by_appointment", "24_hours", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>"Vigil Mass", "By Appointment", etc.</td></tr>
+        <tr><td class="col-name">description</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>Explanation of the tag</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ======================== CORE ENTITY TABLES ======================== -->
+
+<div class="section" id="community">
+  <div class="section-header"><h2>community</h2><p>Target communities (neighborhoods, townships, cities). Each may be served by many churches (M:N via church_community).</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">community_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>"Grove City"</td></tr>
+        <tr><td class="col-name">county</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>"Franklin"</td></tr>
+        <tr><td class="col-name">state_code</td><td class="col-type">CHAR(2)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; lk_state</span></td><td>State code</td></tr>
+        <tr><td class="col-name">zip_codes</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>"43123" (comma-separated if multiple)</td></tr>
+        <tr><td class="col-name">fallback_city</td><td class="col-type">VARCHAR(100)</td><td class="nullable">nullable</td><td>"Columbus" (if no CatholicIndex page for this community)</td></tr>
+        <tr><td class="col-name">latitude</td><td class="col-type">DECIMAL(10,7)</td><td class="nullable">nullable</td><td>Center point latitude</td></tr>
+        <tr><td class="col-name">longitude</td><td class="col-type">DECIMAL(10,7)</td><td class="nullable">nullable</td><td>Center point longitude</td></tr>
+        <tr><td class="col-name">is_active</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT TRUE</span></td><td>Soft delete flag</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time (UTC)</td></tr>
+        <tr><td class="col-name">updated_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Last update time (UTC)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;"><span class="badge badge-uk">UNIQUE</span> (name, state_code) &nbsp;|&nbsp; <span class="badge badge-idx">INDEX</span> idx_community_geo (latitude, longitude)</p>
+  </div>
+</div>
+
+<div class="section" id="church">
+  <div class="section-header"><h2>church</h2><p>Core entity. Each row = one physical Catholic church location. The CatholicIndex slug is the natural key for deduplication.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">church_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">slug</td><td class="col-type">VARCHAR(200)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-uk">UNIQUE</span></td><td>CatholicIndex URL slug (natural key)</td></tr>
+        <tr><td class="col-name">name</td><td class="col-type">VARCHAR(200)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>Church name</td></tr>
+        <tr><td class="col-name">street</td><td class="col-type">VARCHAR(200)</td><td class="nullable">nullable</td><td>Street address</td></tr>
+        <tr><td class="col-name">city</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>City name</td></tr>
+        <tr><td class="col-name">state_code</td><td class="col-type">CHAR(2)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; lk_state</span></td><td>State code</td></tr>
+        <tr><td class="col-name">postal_code</td><td class="col-type">VARCHAR(20)</td><td class="nullable">nullable</td><td>ZIP code</td></tr>
+        <tr><td class="col-name">latitude</td><td class="col-type">DECIMAL(10,7)</td><td class="nullable">nullable</td><td>Latitude</td></tr>
+        <tr><td class="col-name">longitude</td><td class="col-type">DECIMAL(10,7)</td><td class="nullable">nullable</td><td>Longitude</td></tr>
+        <tr><td class="col-name">phone</td><td class="col-type">VARCHAR(30)</td><td class="nullable">nullable</td><td>Phone number</td></tr>
+        <tr><td class="col-name">website_url</td><td class="col-type">VARCHAR(500)</td><td class="nullable">nullable</td><td>Church website (resolved from CatholicIndex redirect)</td></tr>
+        <tr><td class="col-name">livestream_url</td><td class="col-type">VARCHAR(500)</td><td class="nullable">nullable</td><td>Livestream URL</td></tr>
+        <tr><td class="col-name">diocese_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-fk">FK &rarr; lk_diocese</span></td><td>Diocese this church belongs to</td></tr>
+        <tr><td class="col-name">has_perpetual_adoration</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT FALSE</span></td><td>Flagged in CatholicIndex</td></tr>
+        <tr><td class="col-name">has_livestream</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT FALSE</span></td><td>Derived from livestream_url</td></tr>
+        <tr><td class="col-name">is_active</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT TRUE</span></td><td>Soft delete flag</td></tr>
+        <tr><td class="col-name">mass_count</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 0</span></td><td>Summary mass count from discovery</td></tr>
+        <tr><td class="col-name">confession_count</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 0</span></td><td>Summary confession count</td></tr>
+        <tr><td class="col-name">adoration_count</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 0</span></td><td>Summary adoration count</td></tr>
+        <tr><td class="col-name">stream_count</td><td class="col-type">SMALLINT</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 0</span></td><td>Summary livestream count</td></tr>
+        <tr><td class="col-name">schedule_updated_at</td><td class="col-type">TIMESTAMPTZ</td><td class="nullable">nullable</td><td>When CatholicIndex last updated schedule</td></tr>
+        <tr><td class="col-name">source_url</td><td class="col-type">VARCHAR(500)</td><td class="nullable">nullable</td><td>CatholicIndex page URL</td></tr>
+        <tr><td class="col-name">community_insights</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>User-submitted reviews from CatholicIndex</td></tr>
+        <tr><td class="col-name">last_scraped_at</td><td class="col-type">TIMESTAMPTZ</td><td class="nullable">nullable</td><td>When we last pulled data</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time (UTC)</td></tr>
+        <tr><td class="col-name">updated_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Last update time (UTC)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;">
+      <span class="badge badge-idx">INDEX</span> idx_church_city (city) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_church_state (state_code) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_church_diocese (diocese_id) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_church_geo (latitude, longitude) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_church_name (name) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_church_postal (postal_code)
+    </p>
+  </div>
+</div>
+
+<div class="section" id="church_community">
+  <div class="section-header"><h2>church_community</h2><p>Many-to-many junction: which churches serve which communities. A church within 25 miles of a community center is considered to serve it.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">church_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-pk">PK</span> <span class="badge badge-fk">FK &rarr; church</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">community_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-pk">PK</span> <span class="badge badge-fk">FK &rarr; community</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">distance_miles</td><td class="col-type">DECIMAL(5,1)</td><td class="nullable">nullable</td><td>Straight-line distance from community center to church</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="clergy">
+  <div class="section-header"><h2>clergy</h2><p>Priests, deacons, and parish leaders. NOT YET POPULATED &mdash; ready for future clergy data source (diocese announcements, directories, parish websites).</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">clergy_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">prefix</td><td class="col-type">VARCHAR(20)</td><td class="nullable">nullable</td><td>"Rev.", "Msgr.", "Deacon"</td></tr>
+        <tr><td class="col-name">first_name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>First name</td></tr>
+        <tr><td class="col-name">middle_name</td><td class="col-type">VARCHAR(100)</td><td class="nullable">nullable</td><td>Middle name</td></tr>
+        <tr><td class="col-name">last_name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>Last name</td></tr>
+        <tr><td class="col-name">suffix</td><td class="col-type">VARCHAR(20)</td><td class="nullable">nullable</td><td>"Jr.", "III", etc.</td></tr>
+        <tr><td class="col-name">is_active</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT TRUE</span></td><td>Active flag</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+        <tr><td class="col-name">updated_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Last update time</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;"><span class="badge badge-uk">UNIQUE</span> (first_name, last_name, prefix) &nbsp;|&nbsp; <span class="badge badge-idx">INDEX</span> idx_clergy_name (last_name, first_name)</p>
+  </div>
+</div>
+
+<div class="section" id="clergy_assignment">
+  <div class="section-header"><h2>clergy_assignment</h2><p>Tracks clergy assignments to churches over time. A priest can move between parishes; we track effective dates.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">assignment_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">clergy_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; clergy</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">church_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; church</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">role_code</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; lk_clergy_role</span></td><td>Role at this parish</td></tr>
+        <tr><td class="col-name">effective_date</td><td class="col-type">DATE</td><td class="nullable">nullable</td><td>When assignment started</td></tr>
+        <tr><td class="col-name">end_date</td><td class="col-type">DATE</td><td class="nullable">nullable</td><td>NULL = currently assigned</td></tr>
+        <tr><td class="col-name">is_current</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT TRUE</span></td><td>Currently active assignment</td></tr>
+        <tr><td class="col-name">source</td><td class="col-type">VARCHAR(200)</td><td class="nullable">nullable</td><td>Where we got this info (URL, etc.)</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+        <tr><td class="col-name">updated_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Last update time</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;">
+      <span class="badge badge-idx">INDEX</span> idx_clergy_assignment_church (church_id, is_current) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_clergy_assignment_clergy (clergy_id, is_current)
+    </p>
+  </div>
+</div>
+
+<div class="section" id="service">
+  <div class="section-header"><h2>service</h2><p>The BIG table. Every mass time, confession slot, adoration hour, rosary, novena, etc. is one row. Unique per (church_id, source_service_id).</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">service_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">church_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; church</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">source_service_id</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>CatholicIndex service ID (for dedup on re-scrape)</td></tr>
+        <tr><td class="col-name">category_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; lk_service_category</span></td><td>mass, confession, adoration, etc.</td></tr>
+        <tr><td class="col-name">schedule_type_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-fk">FK &rarr; lk_schedule_type</span></td><td>sunday, weekday, monthly, etc.</td></tr>
+        <tr><td class="col-name">day_code</td><td class="col-type">CHAR(3)</td><td><span class="badge badge-fk">FK &rarr; lk_day_of_week</span></td><td>NULL for special events</td></tr>
+        <tr><td class="col-name">time_start</td><td class="col-type">TIME</td><td class="nullable">nullable</td><td>NULL if relative-time only</td></tr>
+        <tr><td class="col-name">time_end</td><td class="col-type">TIME</td><td class="nullable">nullable</td><td>NULL if no defined end time</td></tr>
+        <tr><td class="col-name">event_date</td><td class="col-type">DATE</td><td class="nullable">nullable</td><td>For one-time special events; NULL for recurring</td></tr>
+        <tr><td class="col-name">language_code</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-fk">FK &rarr; lk_language</span></td><td>NULL = English (default)</td></tr>
+        <tr><td class="col-name">pattern_code</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-fk">FK &rarr; lk_recurrence_pattern</span></td><td>For monthly services</td></tr>
+        <tr><td class="col-name">relation_code</td><td class="col-type">VARCHAR(10)</td><td><span class="badge badge-fk">FK &rarr; lk_time_relation</span></td><td>"before"/"after" for relative-time services</td></tr>
+        <tr><td class="col-name">reference_service</td><td class="col-type">VARCHAR(50)</td><td class="nullable">nullable</td><td>"Mass" &mdash; what this is relative to</td></tr>
+        <tr><td class="col-name">offset_minutes</td><td class="col-type">SMALLINT</td><td class="nullable">nullable</td><td>Minutes before/after reference</td></tr>
+        <tr><td class="col-name">location</td><td class="col-type">VARCHAR(200)</td><td class="nullable">nullable</td><td>"Church", "School Gym", etc.</td></tr>
+        <tr><td class="col-name">display_name</td><td class="col-type">VARCHAR(200)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>"Holy Mass", "Vigil", "Rosary", etc.</td></tr>
+        <tr><td class="col-name">notes_raw</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>Original notes string from CatholicIndex (audit trail)</td></tr>
+        <tr><td class="col-name">is_active</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT TRUE</span></td><td>Soft delete flag</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+        <tr><td class="col-name">updated_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Last update time</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;">
+      <span class="badge badge-uk">UNIQUE</span> (church_id, source_service_id) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_category &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_day &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_church &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_schedule &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_language &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_event_date (WHERE event_date IS NOT NULL) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_active (WHERE is_active = TRUE) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_service_cat_day_active (category_code, day_code, is_active) WHERE is_active = TRUE
+    </p>
+  </div>
+</div>
+
+<div class="section" id="service_note_tag">
+  <div class="section-header"><h2>service_note_tag</h2><p>Many-to-many junction: structured tags parsed from service notes. More flexible than booleans on the service table.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">service_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-pk">PK</span> <span class="badge badge-fk">FK &rarr; service</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">tag_code</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-pk">PK</span> <span class="badge badge-fk">FK &rarr; lk_note_tag</span></td><td>Tag code</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;"><span class="badge badge-idx">INDEX</span> idx_service_note_tag_tag (tag_code)</p>
+  </div>
+</div>
+
+<div class="section" id="scrape_log">
+  <div class="section-header"><h2>scrape_log</h2><p>Audit trail of every scrape run. Tracks when, what, and whether it succeeded.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">scrape_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">scrape_type</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>'discovery', 'detail', 'full_refresh'</td></tr>
+        <tr><td class="col-name">started_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT NOW()</span></td><td>When the scrape started</td></tr>
+        <tr><td class="col-name">completed_at</td><td class="col-type">TIMESTAMPTZ</td><td class="nullable">nullable</td><td>When it finished (NULL if still running)</td></tr>
+        <tr><td class="col-name">status</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT 'running'</span></td><td>'running', 'success', 'failed', 'partial'</td></tr>
+        <tr><td class="col-name">communities_scraped</td><td class="col-type">SMALLINT</td><td><span class="badge badge-def">DEFAULT 0</span></td><td>Count of communities processed</td></tr>
+        <tr><td class="col-name">churches_scraped</td><td class="col-type">SMALLINT</td><td><span class="badge badge-def">DEFAULT 0</span></td><td>Count of churches processed</td></tr>
+        <tr><td class="col-name">services_upserted</td><td class="col-type">INTEGER</td><td><span class="badge badge-def">DEFAULT 0</span></td><td>Count of services inserted/updated</td></tr>
+        <tr><td class="col-name">errors</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>JSON array of error messages</td></tr>
+        <tr><td class="col-name">notes</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>Free-text notes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ======================== BULLETIN TABLES ======================== -->
+
+<div class="section" id="bulletin_source">
+  <div class="section-header"><h2>bulletin_source</h2><p>Bulletin discovery results: which churches have bulletin pages and how we found them. One-to-one with church (UNIQUE church_id).</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">bulletin_source_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">church_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-fk">FK &rarr; church</span> <span class="badge badge-uk">UNIQUE</span></td><td>ON DELETE CASCADE. One bulletin source per church.</td></tr>
+        <tr><td class="col-name">bulletin_page_url</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>URL of the bulletin page on the church website</td></tr>
+        <tr><td class="col-name">discovery_source</td><td class="col-type">VARCHAR(30)</td><td class="nullable">nullable</td><td>'direct_path', 'homepage_link', 'lpi_embed', etc.</td></tr>
+        <tr><td class="col-name">lpi_parish_id</td><td class="col-type">VARCHAR(20)</td><td class="nullable">nullable</td><td>LPi/ParishesOnline.com parish ID</td></tr>
+        <tr><td class="col-name">is_active</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-def">DEFAULT TRUE</span></td><td>Active flag</td></tr>
+        <tr><td class="col-name">discovered_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-def">DEFAULT NOW()</span></td><td>Discovery timestamp</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section" id="bulletin_pdf">
+  <div class="section-header"><h2>bulletin_pdf</h2><p>Downloaded bulletin PDFs. Each row = one PDF file. Linked to its bulletin_source (church). 120,116 unique PDFs across 50 states.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">bulletin_pdf_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">bulletin_source_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-fk">FK &rarr; bulletin_source</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">pdf_url</td><td class="col-type">TEXT</td><td><span class="badge badge-nn">NOT NULL</span></td><td>Original download URL (provenance)</td></tr>
+        <tr><td class="col-name">pdf_date</td><td class="col-type">DATE</td><td class="nullable">nullable</td><td>Date extracted from filename (e.g., 2026-02-22)</td></tr>
+        <tr><td class="col-name">local_filename</td><td class="col-type">VARCHAR(255)</td><td class="nullable">nullable</td><td>Local file name in bulletins/ directory</td></tr>
+        <tr><td class="col-name">file_size_bytes</td><td class="col-type">INTEGER</td><td class="nullable">nullable</td><td>File size</td></tr>
+        <tr><td class="col-name">text_extracted</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-def">DEFAULT FALSE</span></td><td>Has text been extracted from this PDF?</td></tr>
+        <tr><td class="col-name">downloaded_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-def">DEFAULT NOW()</span></td><td>Download timestamp</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;"><span class="badge badge-idx">INDEX</span> idx_bulletin_pdf_date (pdf_date)</p>
+  </div>
+</div>
+
+<div class="section" id="bulletin_name">
+  <div class="section-header"><h2>bulletin_name</h2><p>Extracted names from bulletin PDFs. Names split into structured parts (title, first, middle, last) for matching. ~1.29M rows across 50 states.</p></div>
+  <div class="section-body">
+    <table>
+      <thead><tr><th>Column</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td class="col-name">bulletin_name_id</td><td class="col-type">SERIAL</td><td><span class="badge badge-pk">PK</span></td><td>Auto-incrementing ID</td></tr>
+        <tr><td class="col-name">bulletin_pdf_id</td><td class="col-type">INTEGER</td><td><span class="badge badge-fk">FK &rarr; bulletin_pdf</span></td><td>ON DELETE CASCADE</td></tr>
+        <tr><td class="col-name">person_name</td><td class="col-type">VARCHAR(100)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>Full extracted name: "Fr. John M. Smith"</td></tr>
+        <tr><td class="col-name">title</td><td class="col-type">VARCHAR(20)</td><td><span class="badge badge-def">DEFAULT ''</span></td><td>"Fr.", "Dr.", "Rev.", "Dcn.", etc.</td></tr>
+        <tr><td class="col-name">first_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT ''</span></td><td>"John"</td></tr>
+        <tr><td class="col-name">middle_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-def">DEFAULT ''</span></td><td>"M." or "Michael"</td></tr>
+        <tr><td class="col-name">last_name</td><td class="col-type">VARCHAR(50)</td><td><span class="badge badge-nn">NOT NULL</span> <span class="badge badge-def">DEFAULT ''</span></td><td>"Smith"</td></tr>
+        <tr><td class="col-name">category</td><td class="col-type">VARCHAR(30)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>clergy_staff, mass_intention, prayer_list, ministry_contextual</td></tr>
+        <tr><td class="col-name">confidence</td><td class="col-type">VARCHAR(10)</td><td><span class="badge badge-nn">NOT NULL</span></td><td>high, medium, low</td></tr>
+        <tr><td class="col-name">context</td><td class="col-type">TEXT</td><td class="nullable">nullable</td><td>Surrounding text snippet for verification</td></tr>
+        <tr><td class="col-name">is_verified</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-def">DEFAULT FALSE</span></td><td>Manually verified as a real name?</td></tr>
+        <tr><td class="col-name">is_suspect</td><td class="col-type">BOOLEAN</td><td><span class="badge badge-def">DEFAULT FALSE</span></td><td>Flagged as possible false positive</td></tr>
+        <tr><td class="col-name">created_at</td><td class="col-type">TIMESTAMPTZ</td><td><span class="badge badge-def">DEFAULT NOW()</span></td><td>Row creation time</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;font-size:0.82rem;color:#888;">
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_person (person_name) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_first (first_name) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_last (last_name) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_first_last (first_name, last_name) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_confidence (confidence) &nbsp;|&nbsp;
+      <span class="badge badge-idx">INDEX</span> idx_bulletin_name_category (category)
+    </p>
+  </div>
+</div>
+
+<!-- ======================== VIEWS ======================== -->
+
+<div class="section">
+  <div class="section-header"><h2>Database Views (4)</h2><p>Pre-joined queries for common use cases. No stored data &mdash; just saved queries.</p></div>
+  <div class="section-body">
+    <div class="table-group">
+      <h3>v_sunday_masses</h3>
+      <p style="margin-bottom:12px;color:#555;">All active Sunday masses with church details. The bread-and-butter query for newspaper listings. Joins: service &rarr; church &rarr; lk_state &rarr; lk_language.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_weekly_schedule</h3>
+      <p style="margin-bottom:12px;color:#555;">Full weekly recurring schedule for all churches, organized by church &rarr; category &rarr; day &rarr; time. Excludes one-time events.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_confession_times</h3>
+      <p style="margin-bottom:12px;color:#555;">All active confession times with relative-time support (e.g., "after 08:30 Mass").</p>
+    </div>
+    <div class="table-group">
+      <h3>v_church_summary</h3>
+      <p style="margin-bottom:12px;color:#555;">Dashboard view: each church with aggregated service counts (mass, confession, adoration, devotion, total) and serving communities.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_bulletin_summary</h3>
+      <p style="margin-bottom:12px;color:#555;">State-level bulletin stats: total churches, churches with bulletins, PDFs downloaded, names extracted, avg/median unique names per church.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_bulletin_names_detail</h3>
+      <p style="margin-bottom:12px;color:#555;">Full provenance for every extracted name: who, from what PDF, at what church, with split name fields for matching.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_bulletin_church_stats</h3>
+      <p style="margin-bottom:12px;color:#555;">Per-church bulletin stats: total PDFs, name counts by confidence and category, earliest/latest bulletin dates.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_bulletin_ui_names</h3>
+      <p style="margin-bottom:12px;color:#555;">Flat denormalized view for the UI name explorer. Filterable by state, city, church, name, confidence, category.</p>
+    </div>
+    <div class="table-group">
+      <h3>v_bulletin_ui_city_summary</h3>
+      <p style="margin-bottom:12px;color:#555;">City-level rollup for the UI sidebar: church count and name counts per city per state.</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Catholic Mass Times Scraper &mdash; Database Schema v1.0 &mdash; Generated 2026-02-26<br>
+  19 tables &bull; 9 views &bull; 120,116 unique PDFs &bull; 23,046 churches &bull; 50 states
+</div>
+
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#e0e7ff',
+      primaryTextColor: '#1e293b',
+      primaryBorderColor: '#6366f1',
+      lineColor: '#94a3b8',
+      secondaryColor: '#f0fdf4',
+      tertiaryColor: '#fef3c7',
+      fontSize: '13px'
+    },
+    er: {
+      diagramPadding: 30,
+      layoutDirection: 'TB',
+      minEntityWidth: 120,
+      entityPadding: 12,
+      useMaxWidth: true
+    }
+  });
+</script>
+
+</body>
+</html>
