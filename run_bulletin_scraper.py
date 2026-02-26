@@ -2813,6 +2813,28 @@ def _get_non_name_words():
         "mission",
         "pilgrimage",
         "enrollment",
+        # Spanish bulletin section headers / phrases (bilingual parishes)
+        "aviso",
+        "importante",
+        "intenciones",
+        "misa",
+        "vivir",
+        "liturgia",
+        "cuarto",
+        "registro",
+        "natividad",
+        "senor",
+        "nuevo",
+        "convocacion",
+        "misiones",
+        "palms",
+        "distributed",
+        "foundations",
+        "citizen",
+        "candle",
+        "santuary",
+        "sanctuary",
+        "bridge",
     }
     return _non_name_words_cache
 
@@ -2885,6 +2907,9 @@ def is_valid_name(name: str) -> bool:
 
     Also rejects truncated/fragmented names from PDF column bleed
     (e.g. "Teresa Mu", "Carlos Ze", "Kathleen Shils").
+
+    All-caps phrases (e.g. "AVISO IMPORTANTE", "HOLY ASSUMPTION") are
+    rejected — these are bulletin section headers, not person names.
     """
     if not name or len(name) < 4:
         return False
@@ -2896,6 +2921,17 @@ def is_valid_name(name: str) -> bool:
     # Must have at least a first and last name
     parts = name.split()
     if len(parts) < 2 or len(parts) > 4:
+        return False
+
+    # Reject fully all-caps phrases — these are section headers/titles,
+    # not person names. Strip any known title prefix first so that
+    # "FR. JOHN SMITH" is evaluated on "JOHN SMITH" (still all-caps → rejected).
+    _title_strip = re.compile(
+        r"^(Fr\.|Rev\.|Deacon|Father|Msgr\.|Sr\.|Sister|Bishop|Dcn\.|Br\.)\s+",
+        re.IGNORECASE,
+    )
+    name_without_title = _title_strip.sub("", name).strip()
+    if name_without_title == name_without_title.upper() and len(name_without_title) > 3:
         return False
 
     # Each part should be capitalized
@@ -3434,6 +3470,29 @@ def is_valid_name(name: str) -> bool:
         "mission",
         "pilgrimage",
         "enrollment",
+        # Spanish bulletin section headers / phrases (bilingual parishes)
+        "aviso",
+        "importante",
+        "intenciones",
+        "misa",
+        "vivir",
+        "liturgia",
+        "cuarto",
+        "domingo",
+        "registro",
+        "natividad",
+        "senor",
+        "nuevo",
+        "convocacion",
+        "misiones",
+        "palms",
+        "distributed",
+        "foundations",
+        "citizen",
+        "candle",
+        "santuary",
+        "sanctuary",
+        "bridge",
     }
     if any(p.lower() in non_name_words for p in parts):
         return False

@@ -386,3 +386,31 @@ class TestIsValidName:
     def test_rejects_non_name_starter_of(self):
         """'Of' as first word should be rejected."""
         assert is_valid_name("Of Jensen") is False
+
+    # --- Rejected: all-caps section headers ---
+
+    def test_rejects_allcaps_section_header(self):
+        """All-caps phrases like 'AVISO IMPORTANTE' should be rejected."""
+        assert is_valid_name("AVISO IMPORTANTE") is False
+
+    def test_rejects_allcaps_with_title_prefix(self):
+        """All-caps with a title prefix should still be rejected."""
+        assert is_valid_name("ASSOCIATE PASTOR") is False
+
+    def test_rejects_allcaps_religious_phrase(self):
+        """All-caps religious phrases should be rejected."""
+        assert is_valid_name("HOLY ASSUMPTION") is False
+
+    # --- Non-name words: Spanish bulletin terms ---
+
+    def test_rejects_spanish_bulletin_word_aviso(self):
+        """'Aviso' should be rejected as a non-name word."""
+        assert is_valid_name("Aviso Smith") is False
+
+    def test_rejects_spanish_bulletin_word_importante(self):
+        """'Importante' should be rejected as a non-name word."""
+        assert is_valid_name("John Importante") is False
+
+    def test_rejects_sanctuary_candle(self):
+        """'Sanctuary' and 'Candle' should be rejected as non-name words."""
+        assert is_valid_name("John Sanctuary") is False

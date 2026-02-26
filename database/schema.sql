@@ -927,6 +927,44 @@ ORDER BY c.state_code, unique_names DESC;
 
 
 -- =============================================================================
+-- CLERGY ACTIVITY VIEW (derived from bulletin PDF dates)
+-- =============================================================================
+-- Uses pdf_date as an activity signal: if a clergy member's name appears in
+-- a bulletin dated 2026, they were active at that parish in 2026.
+-- This view provides a per-clergy-member activity summary across all churches.
+-- =============================================================================
+
+CREATE OR REPLACE VIEW v_clergy_activity AS
+SELECT
+    bn.person_name,
+    bn.title,
+    bn.first_name,
+    bn.middle_name,
+    bn.last_name,
+    COUNT(DISTINCT c.church_id) AS church_count,
+    STRING_AGG(DISTINCT c.name, '; ' ORDER BY c.name) AS church_names,
+    STRING_AGG(DISTINCT c.city, '; ' ORDER BY c.city) AS cities,
+    STRING_AGG(DISTINCT c.state_code, '; ' ORDER BY c.state_code) AS states,
+    COUNT(DISTINCT bp.bulletin_pdf_id) AS pdf_count,
+    COUNT(DISTINCT bp.bulletin_pdf_id) FILTER (WHERE bp.pdf_date IS NOT NULL) AS pdfs_with_date,
+    MIN(bp.pdf_date) AS earliest_bulletin,
+    MAX(bp.pdf_date) AS latest_bulletin,
+    BOOL_OR(bp.pdf_date >= '2026-01-01') AS active_2026,
+    BOOL_OR(bp.pdf_date >= '2025-01-01' AND bp.pdf_date < '2026-01-01') AS active_2025,
+    BOOL_OR(bp.pdf_date >= '2024-01-01' AND bp.pdf_date < '2025-01-01') AS active_2024,
+    bn.confidence
+FROM bulletin_name bn
+JOIN bulletin_pdf bp    ON bp.bulletin_pdf_id = bn.bulletin_pdf_id
+JOIN bulletin_source bs ON bs.bulletin_source_id = bp.bulletin_source_id
+JOIN church c           ON c.church_id = bs.church_id
+WHERE bn.category = 'clergy_staff'
+  AND bn.confidence = 'high'
+GROUP BY bn.person_name, bn.title, bn.first_name, bn.middle_name,
+         bn.last_name, bn.confidence
+ORDER BY bn.last_name, bn.first_name;
+
+
+-- =============================================================================
 -- MAPPING FUNCTIONS (for ETL pipeline)
 -- =============================================================================
 -- These functions help the Python ETL code map CatholicIndex values to our
