@@ -1,0 +1,1880 @@
+{
+  "discovered": {
+    "us-nv-amargosa-valley-christ-of-the-desert-mission-church-14190ce8": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Christ Of The Desert Catholic Mission Church",
+      "church_url": "http://ourladyofthevalleypahrump.org/amargosa"
+    },
+    "us-nv-battle-mountain-st-john-bosco-bfe1238b": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. John Bosco",
+      "church_url": "http://www.stjohnboscocatholicparish.org/"
+    },
+    "us-nv-boulder-city-st-andrew-roman-catholic-church-779f5f94": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St Andrew's Catholic Church",
+      "church_url": "https://www.standrewbc.org"
+    },
+    "us-nv-carlin-sacred-heart-e0bb99fe": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Sacred Heart",
+      "church_url": "http://stjoech.org/sacred-heart-parish"
+    },
+    "us-nv-carson-city-corpus-christi-ce75d507": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Corpus Christi",
+      "church_url": "http://www.ccchurchcc.org/"
+    },
+    "us-nv-carson-city-st-teresa-of-avila-13fbc55f": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Teresa of Avila",
+      "church_url": "http://www.stteresaofavila.net/"
+    },
+    "us-nv-dayton-st-ann-70f52f52": {
+      "status": "found",
+      "bulletin_page": "https://stannsdayton.com/bulletin",
+      "pdfs": [
+        "https://img1.wsimg.com/blobby/go/d24c8140-93cb-489b-bf83-61ab930c4802/stannbull02222026.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Ann",
+      "church_url": "http://stannsdayton.com/"
+    },
+    "us-nv-elko-st-joseph-73546dda": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph",
+      "church_url": "http://stjoech.org/"
+    },
+    "us-nv-ely-sacred-heart-02357958": {
+      "status": "found",
+      "bulletin_page": "https://sacredheartchurchely.org/bulletins",
+      "pdfs": [
+        "https://files.ecatholic.com/24983/bulletins/20260222.pdf?t=1771624555000",
+        "https://files.ecatholic.com/24983/bulletins/20260215.pdf?t=1770924425000",
+        "https://files.ecatholic.com/24983/bulletins/20260208.pdf?t=1770334903000",
+        "https://files.ecatholic.com/24983/bulletins/20260201.pdf?t=1769644480000",
+        "https://files.ecatholic.com/24983/bulletins/20260125.pdf?t=1769113626000",
+        "https://files.ecatholic.com/24983/bulletins/20260118.pdf?t=1768510946000",
+        "https://files.ecatholic.com/24983/bulletins/20260111.pdf?t=1767912633000",
+        "https://files.ecatholic.com/24983/bulletins/20260104.pdf?t=1767229213000",
+        "https://files.ecatholic.com/24983/bulletins/20251228.pdf?t=1766538501000",
+        "https://files.ecatholic.com/24983/bulletins/20251221.pdf?t=1766085182000",
+        "https://files.ecatholic.com/24983/bulletins/20251214.pdf?t=1765494723000",
+        "https://files.ecatholic.com/24983/bulletins/20251207.pdf?t=1764798339000",
+        "https://files.ecatholic.com/24983/bulletins/20251130.pdf?t=1764189456000",
+        "https://files.ecatholic.com/24983/bulletins/20251123.pdf?t=1763593435000",
+        "https://files.ecatholic.com/24983/bulletins/20251116.pdf?t=1763073295000",
+        "https://files.ecatholic.com/24983/bulletins/20251109.pdf?t=1762468893000",
+        "https://files.ecatholic.com/24983/bulletins/20251102.pdf?t=1761931945000",
+        "https://files.ecatholic.com/24983/bulletins/20251026.pdf?t=1761248244000",
+        "https://files.ecatholic.com/24983/bulletins/20251019.pdf?t=1760559756000",
+        "https://files.ecatholic.com/24983/bulletins/20251012.pdf?t=1759952615000",
+        "https://files.ecatholic.com/24983/bulletins/20251005.pdf?t=1759445640000",
+        "https://files.ecatholic.com/24983/bulletins/20250928.pdf?t=1758833743000",
+        "https://files.ecatholic.com/24983/bulletins/20250921.pdf?t=1758219170000",
+        "https://files.ecatholic.com/24983/bulletins/20250914.pdf?t=1757536656000",
+        "https://files.ecatholic.com/24983/bulletins/20250907.pdf?t=1756942130000",
+        "https://files.ecatholic.com/24983/bulletins/20250831.pdf?t=1756404443000",
+        "https://files.ecatholic.com/24983/bulletins/20250824.pdf?t=1755805803000",
+        "https://files.ecatholic.com/24983/bulletins/20250817.pdf?t=1755124459000",
+        "https://files.ecatholic.com/24983/bulletins/20250810.pdf?t=1754593849000",
+        "https://files.ecatholic.com/24983/bulletins/20250803.pdf?t=1753989031000",
+        "https://files.ecatholic.com/24983/bulletins/20250727.pdf?t=1753400645000",
+        "https://files.ecatholic.com/24983/bulletins/20250720.pdf?t=1752706353000",
+        "https://files.ecatholic.com/24983/bulletins/20250713.pdf?t=1752256313000",
+        "https://files.ecatholic.com/24983/bulletins/20250706.pdf?t=1751564926000",
+        "https://files.ecatholic.com/24983/bulletins/20250629.pdf?t=1751046388000",
+        "https://files.ecatholic.com/24983/bulletins/20250622.pdf?t=1750439347000",
+        "https://files.ecatholic.com/24983/bulletins/20250615.pdf?t=1749771665000",
+        "https://files.ecatholic.com/24983/bulletins/20250608.pdf?t=1749165275000",
+        "https://files.ecatholic.com/24983/bulletins/20250601.pdf?t=1748624745000",
+        "https://files.ecatholic.com/24983/bulletins/20250525.pdf?t=1747953538000",
+        "https://files.ecatholic.com/24983/bulletins/20250518.pdf?t=1747344324000",
+        "https://files.ecatholic.com/24983/bulletins/20250511.pdf?t=1746648696000",
+        "https://files.ecatholic.com/24983/bulletins/20250504.pdf?t=1746052683000",
+        "https://files.ecatholic.com/24983/bulletins/20250427.pdf?t=1745534383000",
+        "https://files.ecatholic.com/24983/bulletins/20250420.pdf?t=1744919904000",
+        "https://files.ecatholic.com/24983/bulletins/20250413.pdf?t=1744225326000",
+        "https://files.ecatholic.com/24983/bulletins/20250406.pdf?t=1743623312000",
+        "https://files.ecatholic.com/24983/bulletins/20250330.pdf?t=1743101814000",
+        "https://files.ecatholic.com/24983/bulletins/20250323.pdf?t=1742505069000",
+        "https://files.ecatholic.com/24983/bulletins/20250316.pdf?t=1741905593000",
+        "https://files.ecatholic.com/24983/bulletins/20250309.pdf?t=1741309157000",
+        "https://files.ecatholic.com/24983/bulletins/20250302.pdf?t=1740699491000",
+        "https://files.ecatholic.com/24983/bulletins/20250223.pdf?t=1740092721000",
+        "https://files.ecatholic.com/24983/bulletins/20250216.pdf?t=1739570824000",
+        "https://files.ecatholic.com/24983/bulletins/20250208.pdf?t=1739572675000",
+        "https://files.ecatholic.com/24983/bulletins/20250126.pdf?t=1739572609000",
+        "https://files.ecatholic.com/24983/bulletins/20250119.pdf?t=1737057292000",
+        "https://files.ecatholic.com/24983/bulletins/20250112.pdf?t=1736452272000",
+        "https://files.ecatholic.com/24983/bulletins/20250105.pdf?t=1735949980000",
+        "https://files.ecatholic.com/24983/bulletins/20241229.pdf?t=1735338941000",
+        "https://files.ecatholic.com/24983/bulletins/20241222.pdf?t=1734638932000",
+        "https://files.ecatholic.com/24983/bulletins/20241215.pdf?t=1734032599000",
+        "https://files.ecatholic.com/24983/bulletins/20241208.pdf?t=1733431195000",
+        "https://files.ecatholic.com/24983/bulletins/20241201.pdf?t=1732740309000",
+        "https://files.ecatholic.com/24983/bulletins/20241124.pdf?t=1732318670000",
+        "https://files.ecatholic.com/24983/bulletins/20241117.pdf?t=1731634167000",
+        "https://files.ecatholic.com/24983/bulletins/20241110.pdf?t=1731705614000",
+        "https://files.ecatholic.com/24983/bulletins/20241103.pdf?t=1730418012000",
+        "https://files.ecatholic.com/24983/bulletins/20241027.pdf?t=1729880647000",
+        "https://files.ecatholic.com/24983/bulletins/20241020.pdf?t=1729197347000",
+        "https://files.ecatholic.com/24983/bulletins/20241013.pdf?t=1728602221000",
+        "https://files.ecatholic.com/24983/bulletins/20241006.pdf?t=1727987618000",
+        "https://files.ecatholic.com/24983/bulletins/20240929.pdf?t=1727386925000",
+        "https://files.ecatholic.com/24983/bulletins/20240922.pdf?t=1726791353000",
+        "https://files.ecatholic.com/24983/bulletins/20240915.pdf?t=1726180888000",
+        "https://files.ecatholic.com/24983/bulletins/20240908.pdf?t=1725488382000",
+        "https://files.ecatholic.com/24983/bulletins/20240901.pdf?t=1724974832000",
+        "https://files.ecatholic.com/24983/bulletins/20240825.pdf?t=1724372848000",
+        "https://files.ecatholic.com/24983/bulletins/20240818.pdf?t=1723675557000",
+        "https://files.ecatholic.com/24983/bulletins/20240811.pdf?t=1723152080000",
+        "https://files.ecatholic.com/24983/bulletins/20240804.pdf?t=1722557231000",
+        "https://files.ecatholic.com/24983/bulletins/20240728.pdf?t=1721945265000",
+        "https://files.ecatholic.com/24983/bulletins/20240721.pdf?t=1721349607000",
+        "https://files.ecatholic.com/24983/bulletins/20240714.pdf?t=1720742719000",
+        "https://files.ecatholic.com/24983/bulletins/20240707.pdf?t=1720200922000",
+        "https://files.ecatholic.com/24983/bulletins/20240630.pdf?t=1719530235000",
+        "https://files.ecatholic.com/24983/bulletins/20240623.pdf?t=1718928870000",
+        "https://files.ecatholic.com/24983/bulletins/20240616.pdf?t=1718317558000",
+        "https://files.ecatholic.com/24983/bulletins/20240609.pdf?t=1717720433000",
+        "https://files.ecatholic.com/24983/bulletins/20240602.pdf?t=1717100746000",
+        "https://files.ecatholic.com/24983/bulletins/20240526.pdf?t=1716416472000",
+        "https://files.ecatholic.com/24983/bulletins/20240519.pdf?t=1715889384000",
+        "https://files.ecatholic.com/24983/bulletins/20240512.pdf?t=1715379279000",
+        "https://files.ecatholic.com/24983/bulletins/20240505.pdf?t=1714690950000",
+        "https://files.ecatholic.com/24983/bulletins/20240428.pdf?t=1713988994000",
+        "https://files.ecatholic.com/24983/bulletins/20240421.pdf?t=1713477741000",
+        "https://files.ecatholic.com/24983/bulletins/20240414.pdf?t=1712789144000",
+        "https://files.ecatholic.com/24983/bulletins/20240407.pdf?t=1712271573000",
+        "https://files.ecatholic.com/24983/bulletins/20240331.pdf?t=1711651530000",
+        "https://files.ecatholic.com/24983/bulletins/20240324.pdf?t=1711133638000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Sacred Heart",
+      "church_url": "http://sacredheartchurchely.org/"
+    },
+    "us-nv-eureka-st-brendan-263582da": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Brendan",
+      "church_url": "http://stjoech.org/st-brendans-parish"
+    },
+    "us-nv-fallon-st-patrick-9db2be1d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Patrick",
+      "church_url": "http://stpatricksparish.org/"
+    },
+    "us-nv-fernley-st-robert-bellarmine-66af3e0a": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Robert Bellarmine",
+      "church_url": "https://www.strobertbellarmine.org"
+    },
+    "us-nv-gardnerville-st-gall-119c42a9": {
+      "status": "found",
+      "bulletin_page": "http://www.saintgall.org/weekly_bulletin_new",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-gall-catholic-church?selectedPublication=https://container.parishesonline.com/bulletins/05/4205/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-gall-catholic-church?selectedPublication=https://container.parishesonline.com/bulletins/05/4205/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-gall-catholic-church?selectedPublication=https://container.parishesonline.com/bulletins/05/4205/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-gall-catholic-church?selectedPublication=https://container.parishesonline.com/bulletins/05/4205/20260208B.pdf"
+      ],
+      "source": "homepage_link_lpi_widget",
+      "lpi_parish_id": "0018000000Qx81FAAR",
+      "church_name": "St. Gall",
+      "church_url": "http://www.saintgall.org/"
+    },
+    "us-nv-hawthorne-our-lady-of-perpetual-help-81c139ee": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of Perpetual Help",
+      "church_url": "https://catholicreno.org//"
+    },
+    "us-nv-henderson-st-francis-of-assisi-080043bb": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Francis of Assisi",
+      "church_url": "https://www.sfahdnv.org"
+    },
+    "us-nv-henderson-saint-john-paul-ii-3935eb15": {
+      "status": "found",
+      "bulletin_page": "https://www.jp2nv.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-john-paul-ii-parish-89044?selectedPublication=https://container.parishesonline.com/bulletins/05/2004/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-john-paul-ii-parish-89044?selectedPublication=https://container.parishesonline.com/bulletins/05/2004/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-john-paul-ii-parish-89044?selectedPublication=https://container.parishesonline.com/bulletins/05/2004/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-john-paul-ii-parish-89044?selectedPublication=https://container.parishesonline.com/bulletins/05/2004/20260208B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "001RP00000D9QAHYA3",
+      "church_name": "St. John Paul II",
+      "church_url": "http://jp2nv.org/"
+    },
+    "us-nv-henderson-st-mother-teresa-syro-malabar-df8317f7": {
+      "status": "found",
+      "bulletin_page": "http://motherteresalv.com/home/weeklybulletins",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Mother Teresa (Syro-Malabar)",
+      "church_url": "http://motherteresalv.com/home/index"
+    },
+    "us-nv-henderson-st-peter-the-apostle-roman-catholic-church-5f913927": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Peter the Apostle Roman Catholic Church",
+      "church_url": "http://stpeterhenderson.com/"
+    },
+    "us-nv-henderson-st-thomas-more-catholic-community-c6bd8f8d": {
+      "status": "found",
+      "bulletin_page": "https://www.stmlv.org/publications",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260201B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260125B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260118B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260111B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20260104B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20251228B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20251221B.pdf",
+        "https://parishesonline.com/publication-page/st-thomas-more-church-89074?selectedPublication=https://container.parishesonline.com/bulletins/05/0437/20251214B.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": "89074",
+      "church_name": "St. Thomas More Catholic Community",
+      "church_url": "https://www.stmlv.org/"
+    },
+    "us-nv-incline-village-st-francis-of-assisi-de31b3cf": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Francis of Assisi",
+      "church_url": "http://sftahoe.org/"
+    },
+    "us-nv-jackpot-our-lady-of-guadalupe-mission-05d96573": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "OUR LADY OF GUADALUPE MISSION",
+      "church_url": "http://stjoech.org/mission-parishes"
+    },
+    "us-nv-las-vegas-christ-the-king-59a57bbf": {
+      "status": "found",
+      "bulletin_page": "https://www.ctklv.org/bulletins",
+      "pdfs": [
+        "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-17-2022.pdf",
+        "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-10-2022.pdf",
+        "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-03-2022.pdf",
+        "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Small%20Church%20Groups-English.pdf",
+        "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Small%20Church%20Group%20-%20Spanish.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Christ the King",
+      "church_url": "https://www.ctklv.org"
+    },
+    "us-nv-las-vegas-guardian-angel-cathedral-6c968b0e": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Guardian Angel Cathedral",
+      "church_url": "http://www.gaclv.org"
+    },
+    "us-nv-las-vegas-holy-family-dbf73655": {
+      "status": "found",
+      "bulletin_page": "http://www.holyfamilylv.org/lucy_rodriguez",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Holy Family",
+      "church_url": "http://www.holyfamilylv.org"
+    },
+    "us-nv-las-vegas-holy-spirit-7953e788": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Holy Spirit",
+      "church_url": "https://www.holyspiritlv.org/"
+    },
+    "us-nv-las-vegas-holy-spirit-catholic-church-ad9850b0": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Holy Spirit Catholic Church",
+      "church_url": "http://www.holyspiritlv.org/"
+    },
+    "us-nv-las-vegas-saint-sharbel-maronite-fe1c7981": {
+      "status": "found",
+      "bulletin_page": "https://www.stsharbellasvegas.org/bulletins",
+      "pdfs": [
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January+2026.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February+2026.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June_2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December+2025.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January 2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February 2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March 2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April 2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December_2024.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June 2023 (1).pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December 2023.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March%202022%20%281%29.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July%202022%20%281%29.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November%202022.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December%202022.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202021.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202021.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November%202021.pdf",
+        "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December%202021.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November%202020.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December%202020.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202019.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202019.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March%202019.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May%202019-1.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June%20%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July%20%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October%202019.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November%202019%20Monthly%20Newsletter.pdf",
+        "https://irp-cdn.multiscreensite.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December%202019.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April%202018%20%281%29.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September%202018%20%281%29.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November%202018.pdf",
+        "https://cdn.website.thryv.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December%202018.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Mission of St. Sharbel (Maronite)",
+      "church_url": "http://www.stsharbellasvegas.org/"
+    },
+    "us-nv-las-vegas-our-lady-of-la-vang-vietnamese-87bdc00d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of La Vang (Vietnamese)",
+      "church_url": "http://lavanglasvegas.com/"
+    },
+    "us-nv-las-vegas-our-lady-of-las-vegas-886a04da": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of Las Vegas Church",
+      "church_url": "https://www.ollvchurch.org"
+    },
+    "us-nv-las-vegas-our-lady-of-wisdom-italo-greek-byzantine-b926bfc8": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of Wisdom [Italo-Greek Byzantine]",
+      "church_url": "http://ourladyofwisdom.net/"
+    },
+    "us-nv-las-vegas-prince-of-peace-28094383": {
+      "status": "found",
+      "bulletin_page": "https://www.princeofpeacelasvegas.org/bulletin",
+      "pdfs": [
+        "https://www.princeofpeacelasvegas.org/_files/ugd/aefd62_14c3e649608f4f3aa6e909bd842e9d35.pdf",
+        "https://www.princeofpeacelasvegas.org/_files/ugd/aefd62_0945cf01d5d8441b817f4bde967b2e17.pdf",
+        "https://www.princeofpeacelasvegas.org/_files/ugd/aefd62_e891686b17bc4d3baa767332294bf103.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Prince of Peace",
+      "church_url": "http://www.princeofpeacelasvegas.org/"
+    },
+    "us-nv-las-vegas-shrine-of-the-most-holy-redeemer-0c49887b": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Shrine of the Most Holy Redeemer",
+      "church_url": "http://mostholyredeemer.tripod.com"
+    },
+    "us-nv-las-vegas-st-paul-jung-ha-sang-korean-45c9a210": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St Paul Jung-Ha-Sang Korean",
+      "church_url": "http://lvkoreancatholic.org/"
+    },
+    "us-nv-las-vegas-st-viator-catholic-community-c3b58011": {
+      "status": "found",
+      "bulletin_page": "https://www.stviator.org/bulletins.html",
+      "pdfs": [
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/jan_11_2026.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/jan_4.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/jan_18.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/jan_25.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/feb1.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/feb_8.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/feb_15.pdf",
+        "https://www.stviator.org/uploads/7/8/1/5/78151700/feb_22.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St Viator Catholic Church",
+      "church_url": "https://www.stviator.org/"
+    },
+    "us-nv-las-vegas-st-anne-c4a8b1be": {
+      "status": "found",
+      "bulletin_page": "http://stannelvnv.org/event",
+      "pdfs": [
+        "http://stannelvnv.org/uploads/docs/bulletins/20260222.pdf",
+        "http://stannelvnv.org/uploads/docs/bulletins/20260215.pdf",
+        "http://stannelvnv.org/uploads/docs/bulletins/20260208.pdf",
+        "http://stannelvnv.org/uploads/docs/bulletins/20260201.pdf",
+        "http://stannelvnv.org/uploads/docs/bulletins/20260125.pdf",
+        "http://stannelvnv.org/uploads/docs/bulletins/20260118.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Anne",
+      "church_url": "http://stannelvnv.org/"
+    },
+    "us-nv-las-vegas-st-anthony-of-padua-48b7bccd": {
+      "status": "found",
+      "bulletin_page": "https://www.saplv.com/2019/12/05/bulletin-for-second-sunday-of-advent-sunday-december-8-2019/",
+      "pdfs": [
+        "http://www.saplv.com/wp-content/uploads/2019/12/49SAPLV-Dec.-8.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": "st-anthony-of-padua-89130",
+      "church_name": "St. Anthony of Padua",
+      "church_url": "https://www.saplv.com"
+    },
+    "us-nv-las-vegas-saint-barbara-chaldean-f3832c5d": {
+      "status": "found",
+      "bulletin_page": "https://www.saintbarbarachurch.com/news/bulletin",
+      "pdfs": [],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Barbara (Chaldean)",
+      "church_url": "https://www.saintbarbarachurch.com"
+    },
+    "us-nv-las-vegas-st-bridget-812dbcd6": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Bridget",
+      "church_url": "http://stbridgetlasvegas.org/"
+    },
+    "us-nv-las-vegas-st-elizabeth-ann-seton-7c2caaac": {
+      "status": "found",
+      "bulletin_page": "http://www.seaslv.org/weeklybulletins.html",
+      "pdfs": [
+        "http://www.seaslv.org/images/0501284_SEAS_Bulletin_February_22_2026_REDUCED...with_ads.pdf",
+        "http://www.seaslv.org/images/0501284_SEAS_Bulletin_February_15_2026...with_ads.pdf",
+        "http://www.seaslv.org/images/0501284_SEAS_Bulletin_February_8_2026_with_ads.pdf",
+        "http://www.seaslv.org/images/0501284_SEAS_Bulletin_February_1_2026...with_ads.pdf",
+        "http://www.seaslv.org/images/January_4_2026_ads.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Elizabeth Ann Seton Church",
+      "church_url": "http://www.seaslv.org"
+    },
+    "us-nv-las-vegas-st-francis-de-sales-2c395d15": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Francis de Sales",
+      "church_url": "https://stfrancisdesaleslv.org/"
+    },
+    "us-nv-las-vegas-st-gabriel-the-archangel-ruthenian-cec39b36": {
+      "status": "found",
+      "bulletin_page": "https://stgabrielbyzantinecatholicchurch.org/bulletins",
+      "pdfs": [
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/7ce2557a-d475-4bf5-a5f3-43073de47003/3-01-2026%20Bulletin.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/c53469cb-182c-4d2e-b898-aa707064fe98/2-22-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/f543b59a-513b-40b7-ae54-3297a7fe2a8e/2-15-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/eb7ca209-c555-4dbf-82ad-4541b8f412ef/2-01-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/6bf2e751-0c3f-4699-90f0-393c24529fdb/1-25-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/bcdbba59-3a85-4184-8a14-8c9fbf815787/1-18-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/a9cbde2e-8316-44fa-a11e-2158da94ef27/1-11-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/9d8638c9-2fb0-460b-8130-519ed75fe1c8/New%20Year%201-04-2026%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/c2551833-fae1-4860-80d4-726b64d3c478/12-28-2025%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/c797f33f-ccaa-44be-b98d-cbe6ff8ddb96/12-21-2025%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/ffbac44b-2d25-43a2-8849-b3f2a27cd9b4/12-14-2025%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/de812755-985c-4797-878a-bcf1d51775f1/12-7-2025%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/5cd5573c-ab07-4fe5-b917-22d3a141c029/11-30-2025%20w_%20byzantine%20Bulletin.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/9f5c97e6-10cb-41c5-bbe8-e82878f4410c/11-23-2025%20Bulletin%20w%20Byzantin%20Poster.pdf.pdf?ver=1771889792424",
+        "https://img1.wsimg.com/blobby/go/133b39e9-3dcd-4929-85df-e375d77d7ca4/downloads/3834f99c-270a-41c9-a25b-3cfc0dd0b819/11-16-2025%20%20Poster%20Bulletin.pdf.pdf?ver=1771889792424"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Gabriel the Archangel (Ruthenian)",
+      "church_url": "http://stgabrielbyzantinecatholicchurch.org/"
+    },
+    "us-nv-las-vegas-st-james-the-apostle-fb3cabd7": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. James the Apostle",
+      "church_url": "http://sjtac.org/"
+    },
+    "us-nv-las-vegas-st-joan-of-arc-7a774036": {
+      "status": "found",
+      "bulletin_page": "https://stjoanlv.org/bulletin",
+      "pdfs": [
+        "https://files.ecatholic.com/5602/documents/2026/2/Bulletin_FEB.22 2026.pdf?t=1771873975000",
+        "https://files.ecatholic.com/5602/documents/2026/2/Bulletin_FEB.15 2026.pdf?t=1771622740000",
+        "https://files.ecatholic.com/5602/documents/2026/2/Bulletin_FEB.8 2026.pdf?t=1770767673000",
+        "https://files.ecatholic.com/5602/documents/2026/2/Bulletin_FEB.1 2026.pdf?t=1770051584000",
+        "https://files.ecatholic.com/5602/documents/2026/1/Bulletin_JAN. 25 2026.pdf?t=1769537391000",
+        "https://files.ecatholic.com/5602/documents/2026/1/Bulletin_JAN. 18 2026.pdf?t=1768959732000",
+        "https://files.ecatholic.com/5602/documents/2026/1/Bulletin_JAN. 11 2026.pdf?t=1768501584000",
+        "https://files.ecatholic.com/5602/documents/2026/1/Bulletin_JAN. 4 2026.pdf?t=1767841093000",
+        "https://files.ecatholic.com/5602/documents/2026/1/Bulletin_DEC 28 2025.pdf?t=1767841191000",
+        "https://files.ecatholic.com/5602/documents/2025/12/Bulletin_DEC 7 2025.pdf?t=1765409032000",
+        "https://files.ecatholic.com/5602/documents/2025/12/Bulletin_DEC 14 2025.pdf?t=1765821196000",
+        "https://files.ecatholic.com/5602/documents/2025/12/Bulletin_DEC 21 2025.pdf?t=1766347281000",
+        "https://files.ecatholic.com/5602/documents/2025/12/Bulletin_NOV 30 2025.pdf?t=1764608054000",
+        "https://files.ecatholic.com/5602/documents/2025/11/Bulletin_NOV 2 2025.pdf?t=1762206466000",
+        "https://files.ecatholic.com/5602/documents/2025/11/Bulletin_NOV 9 2025.pdf?t=1762711864000",
+        "https://files.ecatholic.com/5602/documents/2025/11/Bulletin_NOV 16 2025.pdf?t=1763407508000",
+        "https://files.ecatholic.com/5602/documents/2025/11/Bulletin_NOV 23 2025.pdf?t=1764095317000",
+        "https://files.ecatholic.com/5602/documents/2025/10/Bulletin_Oct 5 2025.pdf?t=1759693472000",
+        "https://files.ecatholic.com/5602/documents/2025/10/Bulletin_Oct 12 2025.pdf?t=1760377050000",
+        "https://files.ecatholic.com/5602/documents/2025/10/Bulletin_Oct 19 2025.pdf?t=1760724003000",
+        "https://files.ecatholic.com/5602/documents/2025/10/Bulletin_Oct 26 2025.pdf?t=1761603296000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Joan of Arc",
+      "church_url": "http://stjoanlv.org/"
+    },
+    "us-nv-las-vegas-st-joseph-husband-of-mary-ef0b4884": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph, Husband of Mary",
+      "church_url": "http://www.stjosephhom.org"
+    },
+    "us-nv-las-vegas-st-thomas-aquinas-catholic-newman-community-univ-of-lv-ca307b31": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Thomas Aquinas Newman Center (Univ. of LV)",
+      "church_url": "https://unlvnewman.com/"
+    },
+    "us-nv-laughlin-st-john-the-baptist-f44dad17": {
+      "status": "found",
+      "bulletin_page": "https://www.laughlincatholic.com/bulletin",
+      "pdfs": [
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF02222026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF02152026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF02082026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF02012026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF01252026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF01182026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF01112026.pdf",
+        "https://irp.cdn-website.com/09e27055/files/uploaded/NBF01042026.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. John the Baptist",
+      "church_url": "https://www.laughlincatholic.com/"
+    },
+    "us-nv-logandale-st-john-the-evangelist-45f0a7ed": {
+      "status": "found",
+      "bulletin_page": "http://www.stjohnoverton.org/news/bulletin",
+      "pdfs": [],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. John the Evangelist",
+      "church_url": "http://www.stjohnoverton.org/"
+    },
+    "us-nv-mc-gill-st-michael-d7e7d069": {
+      "status": "found",
+      "bulletin_page": "https://sacredheartchurchely.org/bulletins",
+      "pdfs": [
+        "https://files.ecatholic.com/24983/bulletins/20260222.pdf?t=1771624555000",
+        "https://files.ecatholic.com/24983/bulletins/20260215.pdf?t=1770924425000",
+        "https://files.ecatholic.com/24983/bulletins/20260208.pdf?t=1770334903000",
+        "https://files.ecatholic.com/24983/bulletins/20260201.pdf?t=1769644480000",
+        "https://files.ecatholic.com/24983/bulletins/20260125.pdf?t=1769113626000",
+        "https://files.ecatholic.com/24983/bulletins/20260118.pdf?t=1768510946000",
+        "https://files.ecatholic.com/24983/bulletins/20260111.pdf?t=1767912633000",
+        "https://files.ecatholic.com/24983/bulletins/20260104.pdf?t=1767229213000",
+        "https://files.ecatholic.com/24983/bulletins/20251228.pdf?t=1766538501000",
+        "https://files.ecatholic.com/24983/bulletins/20251221.pdf?t=1766085182000",
+        "https://files.ecatholic.com/24983/bulletins/20251214.pdf?t=1765494723000",
+        "https://files.ecatholic.com/24983/bulletins/20251207.pdf?t=1764798339000",
+        "https://files.ecatholic.com/24983/bulletins/20251130.pdf?t=1764189456000",
+        "https://files.ecatholic.com/24983/bulletins/20251123.pdf?t=1763593435000",
+        "https://files.ecatholic.com/24983/bulletins/20251116.pdf?t=1763073295000",
+        "https://files.ecatholic.com/24983/bulletins/20251109.pdf?t=1762468893000",
+        "https://files.ecatholic.com/24983/bulletins/20251102.pdf?t=1761931945000",
+        "https://files.ecatholic.com/24983/bulletins/20251026.pdf?t=1761248244000",
+        "https://files.ecatholic.com/24983/bulletins/20251019.pdf?t=1760559756000",
+        "https://files.ecatholic.com/24983/bulletins/20251012.pdf?t=1759952615000",
+        "https://files.ecatholic.com/24983/bulletins/20251005.pdf?t=1759445640000",
+        "https://files.ecatholic.com/24983/bulletins/20250928.pdf?t=1758833743000",
+        "https://files.ecatholic.com/24983/bulletins/20250921.pdf?t=1758219170000",
+        "https://files.ecatholic.com/24983/bulletins/20250914.pdf?t=1757536656000",
+        "https://files.ecatholic.com/24983/bulletins/20250907.pdf?t=1756942130000",
+        "https://files.ecatholic.com/24983/bulletins/20250831.pdf?t=1756404443000",
+        "https://files.ecatholic.com/24983/bulletins/20250824.pdf?t=1755805803000",
+        "https://files.ecatholic.com/24983/bulletins/20250817.pdf?t=1755124459000",
+        "https://files.ecatholic.com/24983/bulletins/20250810.pdf?t=1754593849000",
+        "https://files.ecatholic.com/24983/bulletins/20250803.pdf?t=1753989031000",
+        "https://files.ecatholic.com/24983/bulletins/20250727.pdf?t=1753400645000",
+        "https://files.ecatholic.com/24983/bulletins/20250720.pdf?t=1752706353000",
+        "https://files.ecatholic.com/24983/bulletins/20250713.pdf?t=1752256313000",
+        "https://files.ecatholic.com/24983/bulletins/20250706.pdf?t=1751564926000",
+        "https://files.ecatholic.com/24983/bulletins/20250629.pdf?t=1751046388000",
+        "https://files.ecatholic.com/24983/bulletins/20250622.pdf?t=1750439347000",
+        "https://files.ecatholic.com/24983/bulletins/20250615.pdf?t=1749771665000",
+        "https://files.ecatholic.com/24983/bulletins/20250608.pdf?t=1749165275000",
+        "https://files.ecatholic.com/24983/bulletins/20250601.pdf?t=1748624745000",
+        "https://files.ecatholic.com/24983/bulletins/20250525.pdf?t=1747953538000",
+        "https://files.ecatholic.com/24983/bulletins/20250518.pdf?t=1747344324000",
+        "https://files.ecatholic.com/24983/bulletins/20250511.pdf?t=1746648696000",
+        "https://files.ecatholic.com/24983/bulletins/20250504.pdf?t=1746052683000",
+        "https://files.ecatholic.com/24983/bulletins/20250427.pdf?t=1745534383000",
+        "https://files.ecatholic.com/24983/bulletins/20250420.pdf?t=1744919904000",
+        "https://files.ecatholic.com/24983/bulletins/20250413.pdf?t=1744225326000",
+        "https://files.ecatholic.com/24983/bulletins/20250406.pdf?t=1743623312000",
+        "https://files.ecatholic.com/24983/bulletins/20250330.pdf?t=1743101814000",
+        "https://files.ecatholic.com/24983/bulletins/20250323.pdf?t=1742505069000",
+        "https://files.ecatholic.com/24983/bulletins/20250316.pdf?t=1741905593000",
+        "https://files.ecatholic.com/24983/bulletins/20250309.pdf?t=1741309157000",
+        "https://files.ecatholic.com/24983/bulletins/20250302.pdf?t=1740699491000",
+        "https://files.ecatholic.com/24983/bulletins/20250223.pdf?t=1740092721000",
+        "https://files.ecatholic.com/24983/bulletins/20250216.pdf?t=1739570824000",
+        "https://files.ecatholic.com/24983/bulletins/20250208.pdf?t=1739572675000",
+        "https://files.ecatholic.com/24983/bulletins/20250126.pdf?t=1739572609000",
+        "https://files.ecatholic.com/24983/bulletins/20250119.pdf?t=1737057292000",
+        "https://files.ecatholic.com/24983/bulletins/20250112.pdf?t=1736452272000",
+        "https://files.ecatholic.com/24983/bulletins/20250105.pdf?t=1735949980000",
+        "https://files.ecatholic.com/24983/bulletins/20241229.pdf?t=1735338941000",
+        "https://files.ecatholic.com/24983/bulletins/20241222.pdf?t=1734638932000",
+        "https://files.ecatholic.com/24983/bulletins/20241215.pdf?t=1734032599000",
+        "https://files.ecatholic.com/24983/bulletins/20241208.pdf?t=1733431195000",
+        "https://files.ecatholic.com/24983/bulletins/20241201.pdf?t=1732740309000",
+        "https://files.ecatholic.com/24983/bulletins/20241124.pdf?t=1732318670000",
+        "https://files.ecatholic.com/24983/bulletins/20241117.pdf?t=1731634167000",
+        "https://files.ecatholic.com/24983/bulletins/20241110.pdf?t=1731705614000",
+        "https://files.ecatholic.com/24983/bulletins/20241103.pdf?t=1730418012000",
+        "https://files.ecatholic.com/24983/bulletins/20241027.pdf?t=1729880647000",
+        "https://files.ecatholic.com/24983/bulletins/20241020.pdf?t=1729197347000",
+        "https://files.ecatholic.com/24983/bulletins/20241013.pdf?t=1728602221000",
+        "https://files.ecatholic.com/24983/bulletins/20241006.pdf?t=1727987618000",
+        "https://files.ecatholic.com/24983/bulletins/20240929.pdf?t=1727386925000",
+        "https://files.ecatholic.com/24983/bulletins/20240922.pdf?t=1726791353000",
+        "https://files.ecatholic.com/24983/bulletins/20240915.pdf?t=1726180888000",
+        "https://files.ecatholic.com/24983/bulletins/20240908.pdf?t=1725488382000",
+        "https://files.ecatholic.com/24983/bulletins/20240901.pdf?t=1724974832000",
+        "https://files.ecatholic.com/24983/bulletins/20240825.pdf?t=1724372848000",
+        "https://files.ecatholic.com/24983/bulletins/20240818.pdf?t=1723675557000",
+        "https://files.ecatholic.com/24983/bulletins/20240811.pdf?t=1723152080000",
+        "https://files.ecatholic.com/24983/bulletins/20240804.pdf?t=1722557231000",
+        "https://files.ecatholic.com/24983/bulletins/20240728.pdf?t=1721945265000",
+        "https://files.ecatholic.com/24983/bulletins/20240721.pdf?t=1721349607000",
+        "https://files.ecatholic.com/24983/bulletins/20240714.pdf?t=1720742719000",
+        "https://files.ecatholic.com/24983/bulletins/20240707.pdf?t=1720200922000",
+        "https://files.ecatholic.com/24983/bulletins/20240630.pdf?t=1719530235000",
+        "https://files.ecatholic.com/24983/bulletins/20240623.pdf?t=1718928870000",
+        "https://files.ecatholic.com/24983/bulletins/20240616.pdf?t=1718317558000",
+        "https://files.ecatholic.com/24983/bulletins/20240609.pdf?t=1717720433000",
+        "https://files.ecatholic.com/24983/bulletins/20240602.pdf?t=1717100746000",
+        "https://files.ecatholic.com/24983/bulletins/20240526.pdf?t=1716416472000",
+        "https://files.ecatholic.com/24983/bulletins/20240519.pdf?t=1715889384000",
+        "https://files.ecatholic.com/24983/bulletins/20240512.pdf?t=1715379279000",
+        "https://files.ecatholic.com/24983/bulletins/20240505.pdf?t=1714690950000",
+        "https://files.ecatholic.com/24983/bulletins/20240428.pdf?t=1713988994000",
+        "https://files.ecatholic.com/24983/bulletins/20240421.pdf?t=1713477741000",
+        "https://files.ecatholic.com/24983/bulletins/20240414.pdf?t=1712789144000",
+        "https://files.ecatholic.com/24983/bulletins/20240407.pdf?t=1712271573000",
+        "https://files.ecatholic.com/24983/bulletins/20240331.pdf?t=1711651530000",
+        "https://files.ecatholic.com/24983/bulletins/20240324.pdf?t=1711133638000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Michael",
+      "church_url": "http://sacredheartchurchely.org/"
+    },
+    "us-nv-mesquite-la-virgen-de-guadalupe-612d104d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Iglesia La Virgen de Guadalupe",
+      "church_url": "https://www.catholicchurches89027.org"
+    },
+    "us-nv-north-las-vegas-st-christopher-b058e8ff": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Christopher",
+      "church_url": "http://o1o2ya.sites.ecatholic.com/contact-us"
+    },
+    "us-nv-north-las-vegas-st-john-neumann-7b6e9e65": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. John Neumann",
+      "church_url": "https://www.sjnc.org/"
+    },
+    "us-nv-pahrump-our-lady-of-the-valley-22e73f64": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of the Valley",
+      "church_url": "http://ourladyofthevalleypahrump.org/"
+    },
+    "us-nv-reno-oratory-of-st-joseph-35c46842": {
+      "status": "found",
+      "bulletin_page": "https://institute-christ-king.org/bulletins",
+      "pdfs": [
+        "https://institute-christ-king.org/images/sulphur/bulletins/03-05-2023.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/02-26-2023.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/02-19-2023_.pdf",
+        "https://institute-christ-king.org/images/institute/files/Audiovisual-Media-Policy-20210916.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-02-15.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-02-08.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-02-01.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-01-26.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-01-18.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-01-11.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2026-01-04.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-12-28.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-12-21.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-12-14.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-12-07.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-11-30.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-11-25.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-11-16.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-11-09.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-10-26.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-10-19.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-10-12.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-10-05.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-09-28.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-09-21.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-09-14.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-09-07.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-08-31.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-08-24.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-08-17.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-08-10.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-08-03.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-07-20.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-07-13.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-07-06.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-06-29.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-06-22.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-06-15.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-06-08.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-06-01.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-05-18.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-05-11.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-05-04.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-04-27.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-04-20.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-04-13.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-04-06.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-03-30.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-03-23.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-03-16.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-03-09.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-03-02.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-02-23.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-02-16.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-02-09.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-02-02.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-01-26.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-01-19.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-01-12.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2025-01-05.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-12-22.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-12-08.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-11-24.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-12-01.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-11-17.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-11-03.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-10-27.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-10-20.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-10-12.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-10-06.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-09-29.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-09-22.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-09-15.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-09-01.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-08-24.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-08-18.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-08-11.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-08-04.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-07-28.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-07-21.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-07-14.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-07-07.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-06-23.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-06-16.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-06-02.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-05-26.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-05-12.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-05-05.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-04-21.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-04-14.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-04-07.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-03-31.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-03-24.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-03-17.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-03-10.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-03-03.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-02-25.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-02-18.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-02-04.pdf",
+        "https://institute-christ-king.org/images/sulphur/bulletins/2024-01-21.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Oratory of St Joseph",
+      "church_url": "http://www.institute-christ-king.org/reno-home"
+    },
+    "us-nv-reno-our-lady-of-the-snows-2c17c3fd": {
+      "status": "found",
+      "bulletin_page": "http://www.olsparish.com/bulletin/",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/our-lady-of-the-snows-church-89509?selectedPublication=https://container.parishesonline.com/bulletins/05/4208/20260222B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-snows-church-89509?selectedPublication=https://container.parishesonline.com/bulletins/05/4208/20260215B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-snows-church-89509?selectedPublication=https://container.parishesonline.com/bulletins/05/4208/20260208B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-snows-church-89509?selectedPublication=https://container.parishesonline.com/bulletins/05/4208/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qx81UAAR",
+      "church_name": "Our Lady of the Snows",
+      "church_url": "http://olsparish.com/"
+    },
+    "us-nv-reno-st-albert-the-great-768d0161": {
+      "status": "found",
+      "bulletin_page": "https://www.stalbertreno.org/bulletin",
+      "pdfs": [
+        "https://irp.cdn-website.com/da7f33c2/files/uploaded/2025.11.29-30+Full.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Albert the Great",
+      "church_url": "http://www.stalbertreno.org/"
+    },
+    "us-nv-reno-st-michael-7c7e0d8a": {
+      "status": "found",
+      "bulletin_page": "https://www.stmichaelreno.org",
+      "pdfs": [
+        "https://stmichaelreno.org/docs/bulletins/Bulletin.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Michael",
+      "church_url": "https://www.stmichaelreno.org"
+    },
+    "us-nv-reno-st-rose-of-lima-1f13e643": {
+      "status": "found",
+      "bulletin_page": "https://www.strosereno.com/bulletins",
+      "pdfs": [
+        "https://files.ecatholic.com/11073/bulletins/20260222.pdf?t=1771460466000",
+        "https://files.ecatholic.com/11073/bulletins/20260215.pdf?t=1771017843000",
+        "https://files.ecatholic.com/11073/bulletins/20260208.pdf?t=1770405097000",
+        "https://files.ecatholic.com/11073/bulletins/20260201.pdf?t=1769801348000",
+        "https://files.ecatholic.com/11073/bulletins/20260125.pdf?t=1769105914000",
+        "https://files.ecatholic.com/11073/bulletins/20260118.pdf?t=1768948770000",
+        "https://files.ecatholic.com/11073/bulletins/20260111.pdf?t=1768329403000",
+        "https://files.ecatholic.com/11073/bulletins/20260104.pdf?t=1768329389000",
+        "https://files.ecatholic.com/11073/bulletins/20251228.pdf?t=1767201731000",
+        "https://files.ecatholic.com/11073/bulletins/20251221.pdf?t=1767201721000",
+        "https://files.ecatholic.com/11073/bulletins/20251214.pdf?t=1765992795000",
+        "https://files.ecatholic.com/11073/bulletins/20251207.pdf?t=1765217350000",
+        "https://files.ecatholic.com/11073/bulletins/20251130.pdf?t=1765217340000",
+        "https://files.ecatholic.com/11073/bulletins/20251123.pdf?t=1763676083000",
+        "https://files.ecatholic.com/11073/bulletins/20251116.pdf?t=1763054010000",
+        "https://files.ecatholic.com/11073/bulletins/20251109.pdf?t=1762457772000",
+        "https://files.ecatholic.com/11073/bulletins/20251102.pdf?t=1762457720000",
+        "https://files.ecatholic.com/11073/bulletins/20251026.pdf?t=1761491266000",
+        "https://files.ecatholic.com/11073/bulletins/20251019.pdf?t=1760822192000",
+        "https://files.ecatholic.com/11073/bulletins/20251012.pdf?t=1760215564000",
+        "https://files.ecatholic.com/11073/bulletins/20251005.pdf?t=1759771219000",
+        "https://files.ecatholic.com/11073/bulletins/20250928.pdf?t=1759012285000",
+        "https://files.ecatholic.com/11073/bulletins/20250921.pdf?t=1758412424000",
+        "https://files.ecatholic.com/11073/bulletins/20250914.pdf?t=1757800986000",
+        "https://files.ecatholic.com/11073/bulletins/20250907.pdf?t=1757194543000",
+        "https://files.ecatholic.com/11073/bulletins/20250831.pdf?t=1756650935000",
+        "https://files.ecatholic.com/11073/bulletins/20250824.pdf?t=1756397755000",
+        "https://files.ecatholic.com/11073/bulletins/20250817.pdf?t=1755445146000",
+        "https://files.ecatholic.com/11073/bulletins/20250810.pdf?t=1754844393000",
+        "https://files.ecatholic.com/11073/bulletins/20250803.pdf?t=1754232155000",
+        "https://files.ecatholic.com/11073/bulletins/20250727.pdf?t=1753806279000",
+        "https://files.ecatholic.com/11073/bulletins/20250720.pdf?t=1753029211000",
+        "https://files.ecatholic.com/11073/bulletins/20250713.pdf?t=1752598404000",
+        "https://files.ecatholic.com/11073/bulletins/20250706.pdf?t=1751823734000",
+        "https://files.ecatholic.com/11073/bulletins/20250629.pdf?t=1751386169000",
+        "https://files.ecatholic.com/11073/bulletins/20250622.pdf?t=1750705820000",
+        "https://files.ecatholic.com/11073/bulletins/20250615.pdf?t=1749998367000",
+        "https://files.ecatholic.com/11073/bulletins/20250608.pdf?t=1749393286000",
+        "https://files.ecatholic.com/11073/bulletins/20250601.pdf?t=1748797657000",
+        "https://files.ecatholic.com/11073/bulletins/20250525.pdf?t=1748197452000",
+        "https://files.ecatholic.com/11073/bulletins/20250518.pdf?t=1747592577000",
+        "https://files.ecatholic.com/11073/bulletins/20250511.pdf?t=1747166459000",
+        "https://files.ecatholic.com/11073/bulletins/20250504.pdf?t=1746378372000",
+        "https://files.ecatholic.com/11073/bulletins/20250427.pdf?t=1745944173000",
+        "https://files.ecatholic.com/11073/bulletins/20250420.pdf?t=1745339553000",
+        "https://files.ecatholic.com/11073/bulletins/20250413.pdf?t=1744741133000",
+        "https://files.ecatholic.com/11073/bulletins/20250406.pdf?t=1743962986000",
+        "https://files.ecatholic.com/11073/bulletins/20250330.pdf?t=1743356816000",
+        "https://files.ecatholic.com/11073/bulletins/20250323.pdf?t=1743356738000",
+        "https://files.ecatholic.com/11073/bulletins/20250316.pdf?t=1743356706000",
+        "https://files.ecatholic.com/11073/bulletins/20250309.pdf?t=1741474048000",
+        "https://files.ecatholic.com/11073/bulletins/20250302.pdf?t=1741217224000",
+        "https://files.ecatholic.com/11073/bulletins/20250223.pdf?t=1740415901000",
+        "https://files.ecatholic.com/11073/bulletins/20250216.pdf?t=1740415729000",
+        "https://files.ecatholic.com/11073/bulletins/20250209.pdf?t=1739205745000",
+        "https://files.ecatholic.com/11073/bulletins/20250202.pdf?t=1738602863000",
+        "https://files.ecatholic.com/11073/bulletins/20250126.pdf?t=1737995306000",
+        "https://files.ecatholic.com/11073/bulletins/20250119.pdf?t=1737478249000",
+        "https://files.ecatholic.com/11073/bulletins/20250112.pdf?t=1736786871000",
+        "https://files.ecatholic.com/11073/bulletins/20250105.pdf?t=1736180935000",
+        "https://files.ecatholic.com/11073/bulletins/20241229.pdf?t=1736180837000",
+        "https://files.ecatholic.com/11073/bulletins/20241222.pdf?t=1734971507000",
+        "https://files.ecatholic.com/11073/bulletins/20241215.pdf?t=1734368813000",
+        "https://files.ecatholic.com/11073/bulletins/20241208.pdf?t=1733848342000",
+        "https://files.ecatholic.com/11073/bulletins/20241201.pdf?t=1733159156000",
+        "https://files.ecatholic.com/11073/bulletins/20241124.pdf?t=1732559466000",
+        "https://files.ecatholic.com/11073/bulletins/20241117.pdf?t=1731948878000",
+        "https://files.ecatholic.com/11073/bulletins/20241110.pdf?t=1731948633000",
+        "https://files.ecatholic.com/11073/bulletins/20241103.pdf?t=1730738169000",
+        "https://files.ecatholic.com/11073/bulletins/20241027.pdf?t=1730130850000",
+        "https://files.ecatholic.com/11073/bulletins/20241020.pdf?t=1729525541000",
+        "https://files.ecatholic.com/11073/bulletins/20241013.pdf?t=1728921399000",
+        "https://files.ecatholic.com/11073/bulletins/20241006.pdf?t=1728316822000",
+        "https://files.ecatholic.com/11073/bulletins/20240929.pdf?t=1727716989000",
+        "https://files.ecatholic.com/11073/bulletins/20240922.pdf?t=1727192591000",
+        "https://files.ecatholic.com/11073/bulletins/20240915.pdf?t=1726503868000",
+        "https://files.ecatholic.com/11073/bulletins/20240908.pdf?t=1725904228000",
+        "https://files.ecatholic.com/11073/bulletins/20240901.pdf?t=1725376750000",
+        "https://files.ecatholic.com/11073/bulletins/20240825.pdf?t=1724687936000",
+        "https://files.ecatholic.com/11073/bulletins/20240818.pdf?t=1724082067000",
+        "https://files.ecatholic.com/11073/bulletins/20240811.pdf?t=1723478917000",
+        "https://files.ecatholic.com/11073/bulletins/20240804.pdf?t=1722959623000",
+        "https://files.ecatholic.com/11073/bulletins/20240728.pdf?t=1722266230000",
+        "https://files.ecatholic.com/11073/bulletins/20240721.pdf?t=1721663601000",
+        "https://files.ecatholic.com/11073/bulletins/20240714.pdf?t=1721063116000",
+        "https://files.ecatholic.com/11073/bulletins/20240707.pdf?t=1720546889000",
+        "https://files.ecatholic.com/11073/bulletins/20240630.pdf?t=1719848558000",
+        "https://files.ecatholic.com/11073/bulletins/20240623.pdf?t=1719246396000",
+        "https://files.ecatholic.com/11073/bulletins/20240616.pdf?t=1718640140000",
+        "https://files.ecatholic.com/11073/bulletins/20240609.pdf?t=1718034273000",
+        "https://files.ecatholic.com/11073/bulletins/20240602.pdf?t=1717089857000",
+        "https://files.ecatholic.com/11073/bulletins/20240526.pdf?t=1716911030000",
+        "https://files.ecatholic.com/11073/bulletins/20240519.pdf?t=1716220629000",
+        "https://files.ecatholic.com/11073/bulletins/20240512.pdf?t=1715615618000",
+        "https://files.ecatholic.com/11073/bulletins/20240505.pdf?t=1715010618000",
+        "https://files.ecatholic.com/11073/bulletins/20240428.pdf?t=1714405099000",
+        "https://files.ecatholic.com/11073/bulletins/20240421.pdf?t=1713800217000",
+        "https://files.ecatholic.com/11073/bulletins/20240414.pdf?t=1713368354000",
+        "https://files.ecatholic.com/11073/bulletins/20240407.pdf?t=1712590733000",
+        "https://files.ecatholic.com/11073/bulletins/20240331.pdf?t=1711992678000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Rose of Lima",
+      "church_url": "http://www.strosereno.com/"
+    },
+    "us-nv-reno-st-therese-of-the-little-flower-41ed5fe9": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Therese Church of the Little Flower",
+      "church_url": "http://www.littleflowerchurchreno.org/"
+    },
+    "us-nv-reno-st-thomas-aquinas-cathedral-8ea46e2f": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Thomas Aquinas Cathedral",
+      "church_url": "http://stacathedral.com/"
+    },
+    "us-nv-reno-our-lady-of-wisdom-1cb1e9eb": {
+      "status": "found",
+      "bulletin_page": "https://wolfpackcatholic.com/",
+      "pdfs": [
+        "https://bismarckdiocese.com/documents/Adult%20Faith%20Formatio/Examin-College%20Students.pdf"
+      ],
+      "source": "direct_path_extended_wordpress",
+      "lpi_parish_id": null,
+      "church_name": "University Catholic Community of Our Lady of Wisdom",
+      "church_url": "http://www.wolfpackcatholic.com"
+    },
+    "us-az-scenic-la-santisima-trinidad-mission-5dd9c220": {
+      "status": "found",
+      "bulletin_page": "https://dphx.org/parish-newsletter/",
+      "pdfs": [],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "La Santisima Trinidad Mission",
+      "church_url": "https://dphx.org/parish/la-santisima-trinidad-catholic-mission-scenic/"
+    },
+    "us-nv-smith-valley-st-john-the-baptist-d5da80d6": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Mission of St. John the Baptist",
+      "church_url": "http://www.catholicmission.biz/"
+    },
+    "us-nv-sparks-holy-cross-b80583c3": {
+      "status": "found",
+      "bulletin_page": "https://www.holycrosssparks.com/bulletin",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Holy Cross",
+      "church_url": "http://www.holycrosssparks.com/"
+    },
+    "us-nv-sparks-holy-cross-catholic-church-51d67145": {
+      "status": "found",
+      "bulletin_page": "https://www.holycrosssparks.com/bulletin",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Holy Cross Catholic Church",
+      "church_url": "https://www.holycrosssparks.com/"
+    },
+    "us-nv-sparks-immaculate-conception-79429689": {
+      "status": "found",
+      "bulletin_page": "https://parishesonline.com/organization/immaculate-conception-church-89431#subscribe",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260222B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260215B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260208B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260201B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260125B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260118B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260111B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20260104B.pdf",
+        "https://parishesonline.com/publication-page/immaculate-conception-church-89431?selectedPublication=https://container.parishesonline.com/bulletins/05/1157/20251228B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "Immaculate Conception",
+      "church_url": "http://icsparks.org/"
+    },
+    "us-nv-virginia-city-st-mary-in-the-mountains-f46ed6d2": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Mary In the Mountains",
+      "church_url": "http://stmarysvc.org/"
+    },
+    "us-nv-wells-st-thomas-aquinas-ab6fcff2": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Thomas Aquinas Church",
+      "church_url": "http://stjoech.org/st-thomas-aquinas-parish"
+    },
+    "us-nv-zephyr-cove-our-lady-of-tahoe-87a2ea21": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of Tahoe",
+      "church_url": "http://ourladyoftahoe.org/"
+    }
+  },
+  "downloaded": {
+    "us-nv-dayton-st-ann-70f52f52": {
+      "church_name": "St. Ann",
+      "files": [
+        {
+          "url": "https://img1.wsimg.com/blobby/go/d24c8140-93cb-489b-bf83-61ab930c4802/stannbull02222026.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-dayton-st-ann-70f52f52_25fea079.pdf",
+          "size_bytes": 3984420
+        }
+      ],
+      "capped": false,
+      "total_available": 1
+    },
+    "us-nv-ely-sacred-heart-02357958": {
+      "church_name": "Sacred Heart",
+      "files": [
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260222.pdf?t=1771624555000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260222_7d436db2.pdf",
+          "size_bytes": 3099591
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260215.pdf?t=1770924425000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260215_0cef57b5.pdf",
+          "size_bytes": 3139874
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260208.pdf?t=1770334903000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260208_a2631ddb.pdf",
+          "size_bytes": 3198461
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260201.pdf?t=1769644480000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260201_f68425c7.pdf",
+          "size_bytes": 3079370
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260125.pdf?t=1769113626000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260125_b733fc81.pdf",
+          "size_bytes": 3000676
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260118.pdf?t=1768510946000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260118_61eb858a.pdf",
+          "size_bytes": 3019254
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260111.pdf?t=1767912633000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260111_89e2d519.pdf",
+          "size_bytes": 3037973
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20260104.pdf?t=1767229213000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20260104_b3a1067f.pdf",
+          "size_bytes": 2984028
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251228.pdf?t=1766538501000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251228_7bfed84a.pdf",
+          "size_bytes": 2977060
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251221.pdf?t=1766085182000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251221_27067195.pdf",
+          "size_bytes": 3042855
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251214.pdf?t=1765494723000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251214_e73a149b.pdf",
+          "size_bytes": 3035220
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251207.pdf?t=1764798339000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251207_8179242c.pdf",
+          "size_bytes": 2952526
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251130.pdf?t=1764189456000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251130_b1c52dae.pdf",
+          "size_bytes": 3077035
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251123.pdf?t=1763593435000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251123_c70136b9.pdf",
+          "size_bytes": 3077683
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251116.pdf?t=1763073295000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251116_eae420e7.pdf",
+          "size_bytes": 3147641
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251109.pdf?t=1762468893000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251109_b6effdc6.pdf",
+          "size_bytes": 3289163
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251102.pdf?t=1761931945000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251102_82311a32.pdf",
+          "size_bytes": 3089447
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251026.pdf?t=1761248244000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251026_ab6a92d5.pdf",
+          "size_bytes": 3079013
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251019.pdf?t=1760559756000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251019_274ec1c2.pdf",
+          "size_bytes": 3025855
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251012.pdf?t=1759952615000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251012_b4e58235.pdf",
+          "size_bytes": 2991899
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20251005.pdf?t=1759445640000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20251005_b5621c15.pdf",
+          "size_bytes": 3029085
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250928.pdf?t=1758833743000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250928_8f4b3ed9.pdf",
+          "size_bytes": 2993563
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250921.pdf?t=1758219170000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250921_ac84297c.pdf",
+          "size_bytes": 3018657
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250914.pdf?t=1757536656000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250914_6afbc48c.pdf",
+          "size_bytes": 3149762
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250907.pdf?t=1756942130000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250907_e90bda14.pdf",
+          "size_bytes": 3112309
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250831.pdf?t=1756404443000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250831_60508179.pdf",
+          "size_bytes": 2992004
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250824.pdf?t=1755805803000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250824_8e43b936.pdf",
+          "size_bytes": 3303356
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250817.pdf?t=1755124459000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250817_9154d636.pdf",
+          "size_bytes": 3002600
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250810.pdf?t=1754593849000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250810_16aa8a80.pdf",
+          "size_bytes": 2974165
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250803.pdf?t=1753989031000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250803_e8a2bd35.pdf",
+          "size_bytes": 3129261
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250727.pdf?t=1753400645000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250727_5d31087d.pdf",
+          "size_bytes": 2974249
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250720.pdf?t=1752706353000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250720_b0e81a20.pdf",
+          "size_bytes": 3058306
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250713.pdf?t=1752256313000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250713_6566e7a7.pdf",
+          "size_bytes": 3193588
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250706.pdf?t=1751564926000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250706_5382d9a2.pdf",
+          "size_bytes": 3101430
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250629.pdf?t=1751046388000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250629_bc1400de.pdf",
+          "size_bytes": 3048205
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250622.pdf?t=1750439347000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250622_d5f7b61d.pdf",
+          "size_bytes": 3097707
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250615.pdf?t=1749771665000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250615_ca4b308b.pdf",
+          "size_bytes": 3130801
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250608.pdf?t=1749165275000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250608_be096c3e.pdf",
+          "size_bytes": 4502754
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250601.pdf?t=1748624745000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250601_fedfd9c3.pdf",
+          "size_bytes": 3243670
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250525.pdf?t=1747953538000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250525_ccb36186.pdf",
+          "size_bytes": 5493058
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250518.pdf?t=1747344324000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250518_c0eecd5b.pdf",
+          "size_bytes": 3150664
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250511.pdf?t=1746648696000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250511_5109220c.pdf",
+          "size_bytes": 3148146
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250504.pdf?t=1746052683000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250504_651ea5a5.pdf",
+          "size_bytes": 3101633
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250427.pdf?t=1745534383000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250427_0a3399bb.pdf",
+          "size_bytes": 2930944
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250420.pdf?t=1744919904000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250420_7ca73f9f.pdf",
+          "size_bytes": 3086673
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250413.pdf?t=1744225326000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250413_7dcbde00.pdf",
+          "size_bytes": 2897645
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250406.pdf?t=1743623312000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250406_51d27ab1.pdf",
+          "size_bytes": 2953003
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250330.pdf?t=1743101814000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250330_a5a76d41.pdf",
+          "size_bytes": 2892260
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250323.pdf?t=1742505069000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250323_5eeb708a.pdf",
+          "size_bytes": 3077436
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250316.pdf?t=1741905593000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250316_1d98fd4f.pdf",
+          "size_bytes": 3225160
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250309.pdf?t=1741309157000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250309_28c2d0c6.pdf",
+          "size_bytes": 3124123
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250302.pdf?t=1740699491000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250302_2dab6240.pdf",
+          "size_bytes": 3139628
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250223.pdf?t=1740092721000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250223_d4a9ae50.pdf",
+          "size_bytes": 3174961
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250216.pdf?t=1739570824000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250216_68eae52f.pdf",
+          "size_bytes": 3153620
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250208.pdf?t=1739572675000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250208_3bb86908.pdf",
+          "size_bytes": 3208805
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250126.pdf?t=1739572609000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250126_00141c92.pdf",
+          "size_bytes": 3162592
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250119.pdf?t=1737057292000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250119_e91aeecd.pdf",
+          "size_bytes": 3408770
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250112.pdf?t=1736452272000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250112_a0f0f447.pdf",
+          "size_bytes": 3140216
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20250105.pdf?t=1735949980000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20250105_da2d3021.pdf",
+          "size_bytes": 3209768
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241229.pdf?t=1735338941000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241229_2fea8636.pdf",
+          "size_bytes": 3237111
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241222.pdf?t=1734638932000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241222_54755881.pdf",
+          "size_bytes": 3231182
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241215.pdf?t=1734032599000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241215_3cc6d7f2.pdf",
+          "size_bytes": 3212196
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241208.pdf?t=1733431195000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241208_2a367a07.pdf",
+          "size_bytes": 3258879
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241201.pdf?t=1732740309000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241201_1876dbe3.pdf",
+          "size_bytes": 3379529
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241124.pdf?t=1732318670000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241124_6467a928.pdf",
+          "size_bytes": 3316436
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241117.pdf?t=1731634167000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241117_4803975b.pdf",
+          "size_bytes": 3451456
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241110.pdf?t=1731705614000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241110_82cd8922.pdf",
+          "size_bytes": 3452496
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241103.pdf?t=1730418012000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241103_01bbecac.pdf",
+          "size_bytes": 3816112
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241027.pdf?t=1729880647000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241027_be6a3606.pdf",
+          "size_bytes": 3749147
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241020.pdf?t=1729197347000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241020_cbf3f44c.pdf",
+          "size_bytes": 3545623
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241013.pdf?t=1728602221000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241013_4abbe2ae.pdf",
+          "size_bytes": 3544850
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20241006.pdf?t=1727987618000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20241006_6abf8b4d.pdf",
+          "size_bytes": 3536749
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240929.pdf?t=1727386925000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240929_389e2705.pdf",
+          "size_bytes": 3697237
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240922.pdf?t=1726791353000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240922_79486103.pdf",
+          "size_bytes": 3641733
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240915.pdf?t=1726180888000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240915_5478abb5.pdf",
+          "size_bytes": 3665790
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240908.pdf?t=1725488382000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240908_037178f9.pdf",
+          "size_bytes": 3531534
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240901.pdf?t=1724974832000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240901_6e77ffde.pdf",
+          "size_bytes": 3290461
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240825.pdf?t=1724372848000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240825_91cbefe8.pdf",
+          "size_bytes": 3834488
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240818.pdf?t=1723675557000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240818_6a1e217a.pdf",
+          "size_bytes": 3467315
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240811.pdf?t=1723152080000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240811_e622b501.pdf",
+          "size_bytes": 3603428
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240804.pdf?t=1722557231000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240804_98aa7747.pdf",
+          "size_bytes": 4155800
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240728.pdf?t=1721945265000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240728_94185121.pdf",
+          "size_bytes": 4074679
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240721.pdf?t=1721349607000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240721_3aa7c5a1.pdf",
+          "size_bytes": 3700015
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240714.pdf?t=1720742719000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240714_2452b246.pdf",
+          "size_bytes": 3690665
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240707.pdf?t=1720200922000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240707_afe2af5b.pdf",
+          "size_bytes": 3717749
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240630.pdf?t=1719530235000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240630_033fad51.pdf",
+          "size_bytes": 3758368
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240623.pdf?t=1718928870000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240623_b8f2396e.pdf",
+          "size_bytes": 4296471
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240616.pdf?t=1718317558000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240616_1602000c.pdf",
+          "size_bytes": 3860233
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240609.pdf?t=1717720433000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240609_1b2bd10c.pdf",
+          "size_bytes": 3871137
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240602.pdf?t=1717100746000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240602_2655a2c1.pdf",
+          "size_bytes": 3790345
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240526.pdf?t=1716416472000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240526_868b8766.pdf",
+          "size_bytes": 3814620
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240519.pdf?t=1715889384000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240519_484805e1.pdf",
+          "size_bytes": 3776424
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240512.pdf?t=1715379279000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240512_773da0f6.pdf",
+          "size_bytes": 3706632
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240505.pdf?t=1714690950000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240505_d0f40f12.pdf",
+          "size_bytes": 3749728
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240428.pdf?t=1713988994000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240428_ca4b466e.pdf",
+          "size_bytes": 4243240
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240421.pdf?t=1713477741000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240421_be3e75b1.pdf",
+          "size_bytes": 3854356
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240414.pdf?t=1712789144000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240414_ad4bdbbd.pdf",
+          "size_bytes": 3813512
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240407.pdf?t=1712271573000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240407_991d009b.pdf",
+          "size_bytes": 3751920
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240331.pdf?t=1711651530000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240331_2789d87e.pdf",
+          "size_bytes": 3828720
+        },
+        {
+          "url": "https://files.ecatholic.com/24983/bulletins/20240324.pdf?t=1711133638000",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-ely-sacred-heart-02357958_20240324_77e27fe0.pdf",
+          "size_bytes": 3879955
+        }
+      ],
+      "capped": true,
+      "total_available": 100
+    },
+    "us-nv-gardnerville-st-gall-119c42a9": {
+      "church_name": "St. Gall",
+      "files": [],
+      "capped": false,
+      "total_available": 4
+    },
+    "us-nv-henderson-saint-john-paul-ii-3935eb15": {
+      "church_name": "St. John Paul II",
+      "files": [],
+      "capped": false,
+      "total_available": 4
+    },
+    "us-nv-henderson-st-thomas-more-catholic-community-c6bd8f8d": {
+      "church_name": "St. Thomas More Catholic Community",
+      "files": [],
+      "capped": false,
+      "total_available": 12
+    },
+    "us-nv-las-vegas-christ-the-king-59a57bbf": {
+      "church_name": "Christ the King",
+      "files": [
+        {
+          "url": "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-17-2022.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-christ-the-king-59a57bbf_b58ad18b.pdf",
+          "size_bytes": 1920285
+        },
+        {
+          "url": "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-10-2022.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-christ-the-king-59a57bbf_eb585f3c.pdf",
+          "size_bytes": 1846644
+        },
+        {
+          "url": "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Bulletins/07-03-2022.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-christ-the-king-59a57bbf_938238b6.pdf",
+          "size_bytes": 1976477
+        },
+        {
+          "url": "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Small%20Church%20Groups-English.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-christ-the-king-59a57bbf_599c497a.pdf",
+          "size_bytes": 182159
+        },
+        {
+          "url": "https://uploads.weconnect.com/mce/cb8f7e8cdf016fda78397b236386b9e815332249/Small%20Church%20Group%20-%20Spanish.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-christ-the-king-59a57bbf_2ae0301c.pdf",
+          "size_bytes": 225107
+        }
+      ],
+      "capped": false,
+      "total_available": 5
+    },
+    "us-nv-las-vegas-saint-sharbel-maronite-fe1c7981": {
+      "church_name": "Mission of St. Sharbel (Maronite)",
+      "files": [
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January+2026.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_87f01849.pdf",
+          "size_bytes": 3532005
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February+2026.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_9c8a750a.pdf",
+          "size_bytes": 3747694
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_f5f99591.pdf",
+          "size_bytes": 3794525
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_064c61d9.pdf",
+          "size_bytes": 3882961
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_47f0b08d.pdf",
+          "size_bytes": 3231324
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_5745a9a7.pdf",
+          "size_bytes": 3438407
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_169463ec.pdf",
+          "size_bytes": 3379701
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June_2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_f362832f.pdf",
+          "size_bytes": 3756073
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_17446c1a.pdf",
+          "size_bytes": 3126194
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_2836dbee.pdf",
+          "size_bytes": 3324707
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_05f1f55c.pdf",
+          "size_bytes": 3468403
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_e2a4ccc7.pdf",
+          "size_bytes": 3660709
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_fe84c550.pdf",
+          "size_bytes": 3430315
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December+2025.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_b7197998.pdf",
+          "size_bytes": 3461597
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January 2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_216bcd74.pdf",
+          "size_bytes": 3407522
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February 2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_3e92202a.pdf",
+          "size_bytes": 3673699
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/March 2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_caa62041.pdf",
+          "size_bytes": 3404396
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/April 2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_a2ec5018.pdf",
+          "size_bytes": 2982739
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/May_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_eb3d5cc8.pdf",
+          "size_bytes": 3443803
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/June_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_7bc64816.pdf",
+          "size_bytes": 3744000
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/July_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_46760033.pdf",
+          "size_bytes": 3699932
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/August_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_3e030793.pdf",
+          "size_bytes": 3318468
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/September_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_d94a8525.pdf",
+          "size_bytes": 3761474
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/October_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_2825319b.pdf",
+          "size_bytes": 3453907
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/November_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_64769178.pdf",
+          "size_bytes": 3921641
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/December_2024.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_77595ba9.pdf",
+          "size_bytes": 3663514
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/January%202023.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_173b2839.pdf",
+          "size_bytes": 3083060
+        },
+        {
+          "url": "https://irp.cdn-website.com/9efc067d85144866ac84d9d214d4a8f2/files/uploaded/February%202023.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\nevada\\bulletins\\us-nv-las-vegas-saint-sharbel-maronite-fe1c7981_c6b6d2db.pdf"

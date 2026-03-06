@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "us-nm-abo-san-lorenzo-mission-27a44429",
+    "church_name": "San Lorenzo",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  },
+  {
+    "slug": "us-nm-albuquerque-our-lady-of-the-annunciation-2bbb32d6",
+    "church_name": "Our Lady of the Annunciation",
+    "total_pdfs_available": 287,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 187
+  },
+  {
+    "slug": "us-nm-albuquerque-our-lady-of-the-assumption-90e4b7fa",
+    "church_name": "Our Lady of the Assumption",
+    "total_pdfs_available": 306,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 206
+  },
+  {
+    "slug": "us-nm-albuquerque-san-ignacio-de-loyola-historic-church-b472163f",
+    "church_name": "San Ignacio de Loyola (Historic Church)",
+    "total_pdfs_available": 179,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 79
+  },
+  {
+    "slug": "us-nm-clayton-st-francis-xavier-34cb74bc",
+    "church_name": "St. Francis Xavier",
+    "total_pdfs_available": 419,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 319
+  },
+  {
+    "slug": "us-nm-des-moines-our-lady-of-guadalupe-mission-2e3fef40",
+    "church_name": "Our Lady of Guadalupe",
+    "total_pdfs_available": 419,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 319
+  },
+  {
+    "slug": "us-nm-folsom-st-joseph-mission-cdb92e60",
+    "church_name": "St. Joseph",
+    "total_pdfs_available": 419,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 319
+  },
+  {
+    "slug": "us-nm-manzano-nuestra-se\u00f1ora-de-dolores-mission-b2a18c11",
+    "church_name": "Nuestra Se\u00f1ora de Dolores",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  },
+  {
+    "slug": "us-nm-mountainair-st-alice-2fa66584",
+    "church_name": "St. Alice",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  },
+  {
+    "slug": "us-nm-punta-de-agua-st-vincent-de-paul-mission-cdd5266e",
+    "church_name": "St. Vincent de Paul",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  },
+  {
+    "slug": "us-nm-torreon-st-anthony-mission-87d59f3c",
+    "church_name": "St. Anthony Mission",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  },
+  {
+    "slug": "us-nm-willard-our-lady-of-sorrows-mission-fb587e78",
+    "church_name": "Our Lady of Sorrows",
+    "total_pdfs_available": 183,
+    "pdfs_downloaded": 100,
+    "remaining_pdfs": 83
+  }
+]

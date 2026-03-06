@@ -1,0 +1,2029 @@
+{
+  "discovered": {
+    "us-nh-alton-st-katharine-drexel-70327ee9": {
+      "status": "found",
+      "bulletin_page": "https://www.stkdrexel.org/bulletins",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-katharine-drexel-parish-03809?selectedPublication=https://container.parishesonline.com/bulletins/03/1183/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-katharine-drexel-parish-03809?selectedPublication=https://container.parishesonline.com/bulletins/03/1183/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-katharine-drexel-parish-03809?selectedPublication=https://container.parishesonline.com/bulletins/03/1183/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-katharine-drexel-parish-03809?selectedPublication=https://container.parishesonline.com/bulletins/03/1183/20260208B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000gKtxjAAC",
+      "church_name": "St Katharine Drexel Parish",
+      "church_url": "http://www.stkdrexel.org/"
+    },
+    "us-nh-andover-immaculate-conception-mission-c55438e1": {
+      "status": "found",
+      "bulletin_page": "http://www.olfic.org/",
+      "pdfs": [
+        "http://www.olfic.org/site/assets/files/1526/20260222b.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "Immaculate Conception Mission",
+      "church_url": "http://www.olfic.org/"
+    },
+    "us-nh-auburn-st-peter-e65958b6": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Peter",
+      "church_url": "http://www.stpeteraub.org/"
+    },
+    "us-nh-barrington-chapel-of-the-nativity-1e8815e3": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Chapel of the Nativity",
+      "church_url": "https://poadovernh.org/"
+    },
+    "us-nh-barrington-mission-chapel-of-the-nativity-parish-of-the-assumption-44486d3f": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Mission Chapel of the Nativity (Parish of the Assumption)",
+      "church_url": "http://poadovernh.org"
+    },
+    "us-nh-bedford-st-elizabeth-seton-21bbbe57": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Elizabeth Seton",
+      "church_url": "http://www.stelizabethsetonchurch.org/"
+    },
+    "us-nh-bretton-woods-our-lady-of-the-mountains-shrine-gate-of-heaven-parish-45187fd9": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of the Mountains Shrine (Gate of Heaven Parish)",
+      "church_url": "http://www.gateofheavennh.org"
+    },
+    "us-nh-bristol-our-lady-of-grace-chapel-holy-trinity-parish-73e63d7d": {
+      "status": "found",
+      "bulletin_page": "http://www.htpcatholic.church/upcoming-events",
+      "pdfs": [
+        "https://irp.cdn-website.com/1cc19f1f/files/uploaded/20260215B.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Chapel of Our Lady of Grace (Holy Trinity Parish)",
+      "church_url": "http://www.htpcatholic.church"
+    },
+    "us-nh-canaan-st-mary-mission-church-a5b5a3c4": {
+      "status": "found",
+      "bulletin_page": "http://www.sthstm.org/bulletins.html",
+      "pdfs": [
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260118_second_sunday_in_ordinary_time-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260111_the_baptism_of_the_lord-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260104_the_epiphany_of_the_lord-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251228_the_holy_family_of_jesus_mary_and_joseph-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251221_fourth_sunday_of_advent_and_christmas-compressed.pdf",
+        "https://www.jppc.net/onlinebulletins/943template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Mary Catholic Church",
+      "church_url": "http://www.sthstm.org"
+    },
+    "us-nh-center-ossipee-st-joseph-0268e3bc": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph",
+      "church_url": "http://www.stanthonystjoseph.org"
+    },
+    "us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43": {
+      "status": "found",
+      "bulletin_page": "http://www.allsaintsparishnh.com/Bulletin.htm",
+      "pdfs": [
+        "http://www.allsaintsparishnh.com/Bulletin.pdf",
+        "http://www.allsaintsparishnh.com/lastweek.pdf",
+        "http://www.allsaintsparishnh.com/2weeksago.pdf",
+        "http://www.allsaintsparishnh.com/3weeksago.pdf",
+        "https://www.jppc.net/onlinebulletins/9014template.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Catherine of Siena",
+      "church_url": "http://www.allsaintsparishnh.com/"
+    },
+    "us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885": {
+      "status": "found",
+      "bulletin_page": "http://www.allsaintsparishnh.com/Bulletin.htm",
+      "pdfs": [
+        "http://www.allsaintsparishnh.com/Bulletin.pdf",
+        "http://www.allsaintsparishnh.com/lastweek.pdf",
+        "http://www.allsaintsparishnh.com/2weeksago.pdf",
+        "http://www.allsaintsparishnh.com/3weeksago.pdf",
+        "https://www.jppc.net/onlinebulletins/9014template.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Catherine of Siena [All Saints Parish]",
+      "church_url": "http://www.allsaintsparishnh.com/"
+    },
+    "us-nh-claremont-st-joseph-bd835466": {
+      "status": "found",
+      "bulletin_page": "https://stjosephclaremont.org/bulletin-archive/",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/9021template.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-81-2.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-82-2.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-83.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-84-3.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-85.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-86.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-87.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-87-1.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-03-02.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-03-09.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-03-16.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-03-23-2.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-03-30.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-04-06.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-04-13.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-04-20.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-04-27.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-05-04.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-05-11.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-05-18.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-05-25.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-06-01.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-06-08.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-06-15.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-06-22.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-06-29.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-07-06.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-07-20.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-07-27.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-08-03.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-08-10.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-08-17.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-08-24.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-08-31.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-09-07.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-09-14.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-09-21.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-09-28.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-10-05.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-10-12.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-10-19.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-10-26.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-11-02.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-11-09.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-11-16.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-11-23.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-11-30.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-12-07.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-12-14.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-12-21.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2025-12-28.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-76.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-77.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-78.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-80.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-75.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-74.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-73.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-72.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-71.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-70.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-69.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-68.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-67.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-66.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-65.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-64.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-63.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-62-1.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-61.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/2024-08-11.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-59.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-58.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-57.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-56-1.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-55.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-54.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-53.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-52.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-51.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-50-2.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-49.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-48.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-47.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-46.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-45.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-44.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-43.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-42.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-41.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-40.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-39.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-38.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-37.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-36.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-35.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-34.pdf",
+        "https://stjosephclaremont.org/wp-content/uploads/9021template-33.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph",
+      "church_url": "http://stjosephclaremont.org"
+    },
+    "us-nh-claremont-st-mary-53465ada": {
+      "status": "found",
+      "bulletin_page": "https://www.stmaryparishnh.org/Our-Parish/Gods-House-Our-Home/Campaign-Newsletter",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Mary",
+      "church_url": "http://www.stmaryparishnh.org/"
+    },
+    "us-nh-claremont-st-mary-catholic-church-7104b056": {
+      "status": "found",
+      "bulletin_page": "https://www.stmaryparishnh.org/Our-Parish/Gods-House-Our-Home/Campaign-Newsletter",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Mary Catholic Church",
+      "church_url": "https://www.stmaryparishnh.org/"
+    },
+    "us-nh-colebrook-st-brendan-north-american-martyrs-parish-0e1cab4d": {
+      "status": "found",
+      "bulletin_page": "https://www.nampnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260222B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260215B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260208B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000QxA0lAAF",
+      "church_name": "St. Brendan [North American Martyrs Parish]",
+      "church_url": "http://www.nampnh.org/"
+    },
+    "us-nh-concord-carmelite-monastery-3059ddca": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Carmelite Monastery",
+      "church_url": "http://www.concordcarmel.org"
+    },
+    "us-nh-concord-christ-the-king-parish-st-john-the-evangelist-church-15948797": {
+      "status": "found",
+      "bulletin_page": "http://www.christthekingnh.org/",
+      "pdfs": [
+        "http://www.christthekingnh.org/s/22226.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "Christ the King Parish -St. John The Evangelist Church",
+      "church_url": "http://www.christthekingnh.org/"
+    },
+    "us-nh-concord-immaculate-heart-of-mary-8d586e47": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Immaculate Heart of Mary",
+      "church_url": "http://ihmnh.org"
+    },
+    "us-nh-derry-church-of-the-holy-cross-a3dcf8f9": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Holy Cross",
+      "church_url": "http://www.holycrossderry.org"
+    },
+    "us-nh-derry-st-thomas-aquinas-67ec194b": {
+      "status": "found",
+      "bulletin_page": "https://www.stthomasderry.org/bulletin",
+      "pdfs": [
+        "https://irp-cdn.multiscreensite.com/f8675124/files/uploaded/date-of-sunday.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": "saint-thomas-aquinas-catholic-community",
+      "church_name": "St. Thomas Aquinas",
+      "church_url": "http://www.stthomasderry.org/"
+    },
+    "us-nh-dover-saint-george-maronite-97736ac4": {
+      "status": "found",
+      "bulletin_page": "http://www.stgeorgemaronite.org/monthly-bulletin",
+      "pdfs": [
+        "http://www.stgeorgemaronite.org/s/August-2023-2.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. George (Maronite)",
+      "church_url": "http://www.stgeorgemaronite.org/"
+    },
+    "us-nh-dover-st-joseph-parish-of-the-assumption-073e8f12": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph (Parish of the Assumption)",
+      "church_url": "http://poadovernh.org"
+    },
+    "us-nh-dover-st-mary-parish-of-the-assumption-2f0b4c20": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Mary Catholic Church (Parish of the Assumption)",
+      "church_url": "http://poadovernh.org"
+    },
+    "us-nh-durham-st-thomas-more-75d92b17": {
+      "status": "found",
+      "bulletin_page": "http://www.stmdurham.org/sunday-bulletin",
+      "pdfs": [
+        "http://www.stmdurham.org/images/pdf/Matching%20Donation%20Challenge%20-%201-13-2025.pdf",
+        "https://www.stmdurham.org/images/pdf/history.pdf",
+        "http://www.stmdurham.org/images/pdf/giftstock2024.pdf",
+        "http://www.stmdurham.org/images/pdf/STM_parish_registration2021.pdf",
+        "http://www.stmdurham.org/images/pdf/matchinggifts2024-2025.pdf",
+        "http://www.stmdurham.org/images/pdf/MatchingGift2025.pdf",
+        "http://www.stmdurham.org/images/pdf/bulletincover1025.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Thomas More",
+      "church_url": "http://www.stmdurham.org"
+    },
+    "us-nh-enfield-st-helena-33235217": {
+      "status": "found",
+      "bulletin_page": "http://www.sthstm.org/bulletins.html",
+      "pdfs": [
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260118_second_sunday_in_ordinary_time-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260111_the_baptism_of_the_lord-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260104_the_epiphany_of_the_lord-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251228_the_holy_family_of_jesus_mary_and_joseph-compressed.pdf",
+        "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251221_fourth_sunday_of_advent_and_christmas-compressed.pdf",
+        "https://www.jppc.net/onlinebulletins/943template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Helena",
+      "church_url": "http://www.sthstm.org/"
+    },
+    "us-nh-epping-st-joseph-c5e5876d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph",
+      "church_url": "http://www.stjosepheppingnh.com"
+    },
+    "us-nh-errol-st-pius-x-mission-chapel-north-american-martyrs-parish-856ec441": {
+      "status": "found",
+      "bulletin_page": "https://www.nampnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260222B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260215B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260208B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000QxA0lAAF",
+      "church_name": "Mission of St. Pius X (North American Martyrs Parish)",
+      "church_url": "http://www.nampnh.org/"
+    },
+    "us-nh-exeter-st-michael-110904b2": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Michael",
+      "church_url": "http://www.stmichaelparish.org"
+    },
+    "us-nh-farmington-st-peter-st-mary-st-peter-parishes-d852f68a": {
+      "status": "found",
+      "bulletin_page": "https://www.stmstpnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2AaAAJ",
+      "church_name": "St. Peter (St. Mary & St. Peter Parishes)",
+      "church_url": "http://www.stmstpnh.org"
+    },
+    "us-nh-franconia-our-lady-of-the-snows-mission-0301e55e": {
+      "status": "found",
+      "bulletin_page": "https://strosechurchnh.org/our-parish/bulletin/",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2S3AAJ",
+      "church_name": "Our Lady of the Snows",
+      "church_url": "http://strosechurchnh.org/"
+    },
+    "us-nh-franklin-st-paul-st-gabriel-parish-91c24f49": {
+      "status": "found",
+      "bulletin_page": "http://stgabrielnh.org/news/bulletin",
+      "pdfs": [],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Paul (St. Gabriel Parish)",
+      "church_url": "http://stgabrielnh.org/"
+    },
+    "us-nh-goffstown-st-lawrence-090666e1": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Lawrence",
+      "church_url": "http://www.stlawrencegoffstown.org"
+    },
+    "us-nh-gonic-st-leo-35fa5d72": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Leo",
+      "church_url": "http://www.hrsl.org"
+    },
+    "us-nh-gorham-holy-family-16342e31": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Holy Family",
+      "church_url": "http://www.berlingorhamcatholics.org"
+    },
+    "us-nh-groveton-st-francis-xavier-st-marguerite-dyouville-parish-6f9cbe2f": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Francis Xavier",
+      "church_url": "http://stmargueritedygroveton.org/"
+    },
+    "us-nh-hampstead-st-anne-0fb239e7": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Anne",
+      "church_url": "http://www.saintannechurchnh.org"
+    },
+    "us-nh-hampton-our-lady-of-the-miraculous-medal-b81dbbb9": {
+      "status": "found",
+      "bulletin_page": "https://parishesonline.com/find/our-lady-of-the-miraculous-medal",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260301B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260222B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260215B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260208B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260201B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260125B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260118B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260111B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260104B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "Our Lady of the Miraculous Medal",
+      "church_url": "http://www.olmmparish.org"
+    },
+    "us-nh-hampton-beach-st-patrick-mission-77a3d19a": {
+      "status": "found",
+      "bulletin_page": "https://www.stpatsnh.org/bulletin",
+      "pdfs": [
+        "https://irp-cdn.multiscreensite.com/f8675124/files/uploaded/date-of-sunday.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Chapel of St. Patrick",
+      "church_url": "http://www.stpatsnh.org/"
+    },
+    "us-nh-hanover-aquinas-house-at-dartmouth-college-672f15ab": {
+      "status": "found",
+      "bulletin_page": "https://drive.google.com/file/d/143Rtmyo24nO09pf-GXlebx_kseSSUAjB/view?usp=drive_link",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Aquinas House at Dartmouth College",
+      "church_url": "http://www.dartmouthcatholic.com"
+    },
+    "us-nh-hanover-st-denis-fc77da79": {
+      "status": "found",
+      "bulletin_page": "https://saintdenischurch.org/bulletin/",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-denis-church-03755?selectedPublication=https://container.parishesonline.com/bulletins/03/1279/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-denis-church-03755?selectedPublication=https://container.parishesonline.com/bulletins/03/1279/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-denis-church-03755?selectedPublication=https://container.parishesonline.com/bulletins/03/1279/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-denis-church-03755?selectedPublication=https://container.parishesonline.com/bulletins/03/1279/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc1I5AAJ",
+      "church_name": "St. Denis",
+      "church_url": "http://saintdenischurch.org"
+    },
+    "us-nh-henniker-st-theresa-4b59cff1": {
+      "status": "found",
+      "bulletin_page": "https://www.showerofroses.org/bulletins",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260208B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2V9AAJ",
+      "church_name": "St. Theresa",
+      "church_url": "http://www.showerofroses.org"
+    },
+    "us-nh-hillsboro-st-mary-b01b0e69": {
+      "status": "found",
+      "bulletin_page": "https://www.showerofroses.org/bulletins",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260301B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03242?selectedPublication=https://container.parishesonline.com/bulletins/04/0904/20260208B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2V9AAJ",
+      "church_name": "St. Mary",
+      "church_url": "http://www.showerofroses.org"
+    },
+    "us-nh-hinsdale-st-joseph-parish-of-the-holy-spirit-3bc6c0f2": {
+      "status": "found",
+      "bulletin_page": "https://www.swnhcatholics.com/bulletin",
+      "pdfs": [
+        "https://www.swnhcatholics.com/_files/ugd/e6487c_bc3a8779c8594ed9a6fa465988ad0c8b.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph (Parish of the Holy Spirit)",
+      "church_url": "http://www.swnhcatholics.com"
+    },
+    "us-nh-hooksett-holy-rosary-0d4cbcac": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Holy Rosary",
+      "church_url": "https://www.holyrosaryhooksett.org/"
+    },
+    "us-nh-hudson-st-john-the-evangelist-st-john-xxiii-parish-cfa98d2d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. John the Evangelist (St. John XXIII Parish)",
+      "church_url": "http://www.stjohnxxiiinh.org"
+    },
+    "us-nh-hudson-st-kathryn-3b6099bd": {
+      "status": "found",
+      "bulletin_page": "https://discovermass.com/church/st-kathryn-hudson-/",
+      "pdfs": [
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF8%2Buu0ZqA9td8e2i%2FV2eP2SpjY51q6inAyHMMivJzzy6padYhB%2BVpy%2FSkuuvQ%2B8be5KyqXijuuNS%2BlhQq34qrjc%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF0Fo%2FXHe3XdFiFjlZgXfvlxouANGh7oETiaQAunKd4PvggVuzGYLeuPDw6LwMa%2BanL90DBpY0AjVzkeXEdEjS8s%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF69wvBOng%2FTUj3XwhVasMhQgsZFIX3pfguINHlH3xcfjl5ypFM7SxKwzXrMC2rpEAXc%2FQ2oKl21mHPyjeHYNhkc%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF%2BNWkR0oQ2pMpFfhbxFPTWJXOioaz48%2B2aQPXhr%2FlxyQiF70ZlNZQeZTlKy0xxy5zUVXpmhqNue5C6wMLz%2B41z4%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLFxBNbh%2FpBGd5hF%2BIctW20ob37knzCWEmc3wMfD6QpydJI%2FizYYjKaFsUaZad7xlfL%2FmKWjosXJn5fm8a9eS3HJc%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF600sBZQm9olJ%2B6B6uBUbVuhT02%2BmtJwczrl%2FsX9HgmmRa82u6f%2BcuCSzgN9f%2Bw9IDjzYjCLFWnI6%2Ft%2BN7p%2FCeE%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLFzEK%2BjVY2zjWl2e%2FHHJTSxpKspCaTbx9JKuyMjpHPn6LKtkjbAb2iuNhy8rt%2FqIW93o0G198misvoPFUnGwt9HY%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF6DOfuJH%2FumHj2xOgAmCFg4vIWck3yvRa6sVnFERyAvQDi2HWkNeBSZ0%2FQalLRIEgWkK9AcAfsj7rQ0vtb%2BQVsw%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLFzAyoMXLXzuHY2rpdyATbSPJzUsbeGlEXI7fL4T30YY6mK2Cyl%2BnyfU41mn%2FkFZyMBLBXLushUqW3Oof6WhEMYE%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLF%2BAwtFb0SsBOo9%2FAKia91SFFE9tlM%2BNphuKdw9OBLQ%2F5c4ufbvaDxxR1vww6NWmmS%2B4nsSIkLuj3zX4rm%2Fe%2BOjI%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLFw6DHP2JJEnsqJdaFBu%2FJFqaZ3l1%2F4t7TLYGnD3LIZP8oKNUBOJzONz4aCQwArE7u%2BWYgsh%2Bz%2FzlBd1uEsAj37k%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=TDTTZiIbuxUtfoMzj6aLFzqLhZvVDXC%2B70on8rZybBXg4aqheonspNI4yd4LYuCF1s6lquU10ocP6HUVPbed6UuvD6DzBcGPTOCLBY7shxY%3D"
+      ],
+      "source": "discovermass_fallback",
+      "lpi_parish_id": null,
+      "church_name": "St. Kathryn",
+      "church_url": "http://www.stkathryns.org"
+    },
+    "us-nh-jaffrey-st-patrick-177c9bb0": {
+      "status": "found",
+      "bulletin_page": "https://www.parishesonline.com/find/st-patrick-church-03452",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260201B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260125B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260118B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260111B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20260104B.pdf",
+        "https://parishesonline.com/publication-page/st-patrick-church-03452?selectedPublication=https://container.parishesonline.com/bulletins/03/0883/20251228B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Patrick",
+      "church_url": "http://stpatricksjaffrey.com"
+    },
+    "us-nh-jefferson-st-agnes-mission-gate-of-heaven-parish-ab067869": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Mission of St. Agnes (Gate of Heaven Parish)",
+      "church_url": "http://www.gateofheavennh.org"
+    },
+    "us-nh-keene-st-bernard-parish-of-the-holy-spirit-78308f5a": {
+      "status": "found",
+      "bulletin_page": "https://www.swnhcatholics.com/bulletin",
+      "pdfs": [
+        "https://www.swnhcatholics.com/_files/ugd/e6487c_bc3a8779c8594ed9a6fa465988ad0c8b.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Bernard (Parish of the Holy Spirit)",
+      "church_url": "http://www.swnhcatholics.com/"
+    },
+    "us-nh-keene-st-margaret-mary-parish-of-the-holy-spirit-5cc3542a": {
+      "status": "found",
+      "bulletin_page": "https://www.swnhcatholics.com/bulletin",
+      "pdfs": [
+        "https://www.swnhcatholics.com/_files/ugd/e6487c_bc3a8779c8594ed9a6fa465988ad0c8b.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Margaret Mary [Parish of the Holy Spirit]",
+      "church_url": "http://www.swnhcatholics.com"
+    },
+    "us-nh-laconia-st-andr\u00e9-bessette-parish-sacred-heart-church-3a5d28dd": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Andr\u00e9 Bessette Parish -Sacred Heart Church",
+      "church_url": "http://www.standrebessette.org"
+    },
+    "us-nh-lancaster-all-saints-gate-of-heaven-parish-f40eed99": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "All Saints (Gate of Heaven Parish)",
+      "church_url": "http://www.gateofheavennh.org"
+    },
+    "us-nh-lebanon-sacred-heart-a2981260": {
+      "status": "found",
+      "bulletin_page": "https://www.sacredheartlebanon.org/bulletins.html",
+      "pdfs": [
+        "https://www.sacredheartlebanon.org/uploads/5/5/0/6/55066979/0943_20260208_fifth_sunday_in_ordinary_time-compressed.pdf",
+        "https://www.sacredheartlebanon.org/uploads/5/5/0/6/55066979/0943_20260201_fourth_sunday_in_ordinary_time-compressed.pdf",
+        "https://www.sacredheartlebanon.org/uploads/5/5/0/6/55066979/0943_20260125_third_sunday_in_ordinary_time-compressed.pdf",
+        "https://www.sacredheartlebanon.org/uploads/5/5/0/6/55066979/0943_20260118_second_sunday_in_ordinary_time-compressed.pdf",
+        "https://www.sacredheartlebanon.org/uploads/5/5/0/6/55066979/0943_20260111_the_baptism_of_the_lord-compressed.pdf",
+        "https://www.jppc.net/onlinebulletins/943template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Sacred Heart",
+      "church_url": "http://www.sacredheartlebanon.org"
+    },
+    "us-nh-lincoln-st-joseph-b28d4d19": {
+      "status": "found",
+      "bulletin_page": "https://www.stjosephlincoln.org/our-parish/bulletin/",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/941template.pdf",
+        "http://www.jppc.net/onlinebulletins/941template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph",
+      "church_url": "http://www.stjosephlincoln.org"
+    },
+    "us-nh-lisbon-st-catherine-of-siena-c734e1fb": {
+      "status": "found",
+      "bulletin_page": "http://stjoseph-stcatherine.org",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/975template.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Catherine of Siena",
+      "church_url": "http://stjoseph-stcatherine.org"
+    },
+    "us-nh-litchfield-st-francis-of-assisi-595f3a1c": {
+      "status": "found",
+      "bulletin_page": "https://www.stfrancisofassisi.net/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-francis-of-assisi-church-03052?selectedPublication=https://container.parishesonline.com/bulletins/03/1217/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-francis-of-assisi-church-03052?selectedPublication=https://container.parishesonline.com/bulletins/03/1217/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-francis-of-assisi-church-03052?selectedPublication=https://container.parishesonline.com/bulletins/03/1217/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-francis-of-assisi-church-03052?selectedPublication=https://container.parishesonline.com/bulletins/03/1217/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000QxA0TAAV",
+      "church_name": "St. Francis of Assisi",
+      "church_url": "http://www.stfrancisofassisi.net"
+    },
+    "us-nh-littleton-daughters-of-the-charity-of-the-sacred-heart-of-jesus-convent-47506488": {
+      "status": "found",
+      "bulletin_page": "https://www.catholicnh.org/about/stay-informed/bulletin/",
+      "pdfs": [
+        "https://www.evangelizeboston.com/wp-content/uploads/2025/11/WYD-2027-General-Flyer.pdf",
+        "https://www.catholicnh.org/assets/Documents/About/Bishop/PAL-ResponsetToAggression-2026.01.26.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-2026VocationEvents.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-Immigration-USCCB-Handout-2025.1210.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-TotusTuusMissionaries-2026.pdf",
+        "https://www.catholicnh.org/assets/Documents/Child-Safety/Bulletins-ChildSafety2023.pdf",
+        "https://www.catholicnh.org/assets/Documents/Worship/Our-Faith/Prayers/VocationIntercessionsCycleC2024-5.pdf",
+        "https://www.catholicnh.org/about/stay-informed/bulletin/assets/extranet-documents/2025-2026-Vocation-General-Intercessions-Year-A.pdf",
+        "https://www.catholicnh.org/assets/Documents/Worship/Our-Faith/Prayers/VocationBulletin-CycleC2024-5.pdf",
+        "https://www.catholicnh.org/about/stay-informed/bulletin/assets/extranet-documents/2025-2026-Vocation-Bulletin-Blurbs-Cycle-A.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Daughters of the Charity of the Sacred Heart of Jesus Convent",
+      "church_url": "https://www.catholicnh.org/worship-and-sacraments/vocations/religious/women-religious-communities/"
+    },
+    "us-nh-littleton-st-rose-of-lima-20962367": {
+      "status": "found",
+      "bulletin_page": "https://strosechurchnh.org/our-parish/bulletin/",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-rose-of-lima-church-03561?selectedPublication=https://container.parishesonline.com/bulletins/04/0478/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2S3AAJ",
+      "church_name": "St. Rose of Lima",
+      "church_url": "http://strosechurchnh.org/"
+    },
+    "us-nh-londonderry-st-jude-69a353b1": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Jude",
+      "church_url": "http://www.stjudenh.com"
+    },
+    "us-nh-londonderry-st-mark-the-evangelist-c922a785": {
+      "status": "found",
+      "bulletin_page": "https://www.stmarksnh.org/bulletin",
+      "pdfs": [
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks070625c.pdf?t=1752066083000",
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks062925.pdf?t=1752066053000",
+        "https://files.ecatholic.com/1536/documents/2026/2/0944stmarks02082026.pdf?t=1770146038000",
+        "https://files.ecatholic.com/1536/documents/2026/2/0944stmarks02012026.pdf?t=1770146003000",
+        "https://files.ecatholic.com/1536/documents/2026/2/0944stmarks01252026.pdf?t=1770145937000",
+        "https://files.ecatholic.com/1536/documents/2026/1/0944stmarks01182026.pdf?t=1768332283000",
+        "https://files.ecatholic.com/1536/documents/2026/1/0944stmarks01112026.pdf?t=1767799371000",
+        "https://files.ecatholic.com/1536/documents/2025/12/0944stmarks01042026.pdf?t=1767021542000",
+        "https://files.ecatholic.com/1536/documents/2025/12/0944stmarks122825.pdf?t=1767021505000",
+        "https://files.ecatholic.com/1536/documents/2025/12/0944stmarks122125.pdf?t=1767021480000",
+        "https://files.ecatholic.com/1536/documents/2025/12/0944stmarks121425 .pdf?t=1765805850000",
+        "https://files.ecatholic.com/1536/documents/2025/12/0944stmarks120725 .pdf?t=1764972675000",
+        "https://files.ecatholic.com/1536/documents/2025/11/0944stmarks113025.pdf?t=1764162504000",
+        "https://files.ecatholic.com/1536/documents/2025/11/0944stmarks111625.pdf?t=1762980225000",
+        "https://files.ecatholic.com/1536/documents/2025/11/0944stmarks110925.pdf?t=1762980196000",
+        "https://files.ecatholic.com/1536/documents/2025/10/0944stmarks110225-1.pdf?t=1761747320000",
+        "https://files.ecatholic.com/1536/documents/2025/10/944template.pdf?t=1761155669000",
+        "https://files.ecatholic.com/1536/documents/2025/10/0944stmarks101925.pdf?t=1760537906000",
+        "https://files.ecatholic.com/1536/documents/2025/10/0944stmarks101225.pdf?t=1759862605000",
+        "https://files.ecatholic.com/1536/documents/2025/10/0944stmarks100525.pdf?t=1759862584000",
+        "https://files.ecatholic.com/1536/documents/2025/9/0944stmarks092825.pdf?t=1758733276000",
+        "https://files.ecatholic.com/1536/documents/2025/9/0944stmarks092125.pdf?t=1758119130000",
+        "https://files.ecatholic.com/1536/documents/2025/9/0944stmarks091425.pdf?t=1757514066000",
+        "https://files.ecatholic.com/1536/documents/2025/9/0944stmarks090725.pdf?t=1757514041000",
+        "https://files.ecatholic.com/1536/documents/2025/9/0944stmarks083125.pdf?t=1757514011000",
+        "https://files.ecatholic.com/1536/documents/2025/8/0944stmarks082425PDF.pdf?t=1755711796000",
+        "https://files.ecatholic.com/1536/documents/2025/8/0944stmarks081725.pdf?t=1755521329000",
+        "https://files.ecatholic.com/1536/documents/2025/8/0944stmarks081025final.pdf?t=1754912633000",
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks080325.pdf?t=1753965172000",
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks072725minimized.pdf?t=1753703765000",
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks072025.pdf?t=1753099610000",
+        "https://files.ecatholic.com/1536/documents/2025/7/0944stmarks071325.pdf?t=1752066108000",
+        "https://files.ecatholic.com/1536/documents/2025/6/0944stmarks062225.pdf?t=1750254752000",
+        "https://files.ecatholic.com/1536/documents/2025/6/0944stmarks061525.pdf?t=1750252698000",
+        "https://files.ecatholic.com/1536/documents/2025/6/0944stmarks060825.pdf?t=1749127899000",
+        "https://files.ecatholic.com/1536/documents/2025/6/0944stmarks06012025.pdf?t=1749127878000",
+        "https://files.ecatholic.com/1536/documents/2025/5/0944stmarks05252025.pdf?t=1747763528000",
+        "https://files.ecatholic.com/1536/documents/2025/5/0944stmarks05182025.pdf?t=1747324921000",
+        "https://files.ecatholic.com/1536/documents/2025/5/0944stmarks05112025.pdf?t=1746708372000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks05042025.pdf?t=1746030940000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks04272025 PDF.pdf?t=1745343014000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks04202025.pdf?t=1745246145000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks04132025.pdf?t=1744638825000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks04062025.pdf?t=1743620672000",
+        "https://files.ecatholic.com/1536/documents/2025/4/0944stmarks03302025.pdf?t=1743620636000",
+        "https://files.ecatholic.com/1536/documents/2025/3/0944stmarks03232025.pdf?t=1742395450000",
+        "https://files.ecatholic.com/1536/documents/2025/3/0944stmarks03162025.pdf?t=1742395483000",
+        "https://files.ecatholic.com/1536/documents/2025/3/0944stmarks03092025.pdf?t=1741197659000",
+        "https://files.ecatholic.com/1536/documents/2025/2/0944stmarks03022025.pdf?t=1740585464000",
+        "https://files.ecatholic.com/1536/documents/2025/2/0944stmarks02232025.pdf?t=1739996415000",
+        "https://files.ecatholic.com/1536/documents/2025/2/0944stmarks02162025-1.pdf?t=1739301355000",
+        "https://files.ecatholic.com/1536/documents/2025/2/0944stmarks02092025.pdf?t=1739300782000",
+        "https://files.ecatholic.com/1536/documents/2025/1/0944stmarks02022025.pdf?t=1738346167000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Mark the Evangelist",
+      "church_url": "http://www.stmarksnh.org"
+    },
+    "us-nh-manchester-blessed-sacrament-a1b1a6ea": {
+      "status": "found",
+      "bulletin_page": "https://www.blessedsacramentnh.org/bulletin",
+      "pdfs": [
+        "https://www.blessedsacramentnh.org/images/bulletins/20260222.pdf",
+        "https://www.blessedsacramentnh.org/images/bulletins/bulletin_5_23_2021.pdf",
+        "https://www.blessedsacramentnh.org/images/bulletins/DOC112925-11292025142319.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Blessed Sacrament",
+      "church_url": "http://www.blessedsacramentnh.org"
+    },
+    "us-nh-manchester-monastery-of-the-precious-blood-4954ea2d": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Monastery of the Precious Blood",
+      "church_url": "https://srspreciousbloodnh.org/"
+    },
+    "us-nh-manchester-our-lady-of-the-cedars-melkite-316e1f0a": {
+      "status": "found",
+      "bulletin_page": "https://www.olocnh.org/bulletin",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Our Lady of the Cedars (Melkite)",
+      "church_url": "http://www.olocnh.org/"
+    },
+    "us-nh-manchester-parish-of-the-transfiguration-4d445bf9": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Parish of the Transfiguration",
+      "church_url": "http://www.transfigurationparish.org/"
+    },
+    "us-nh-manchester-protection-of-blessed-virgin-mary-ukrainian-c50aaf0b": {
+      "status": "found",
+      "bulletin_page": "https://img1.wsimg.com/blobby/go/63538bbc-8d1a-4372-a75b-f0d6fbbcfee5/downloads/721586ef-ff62-4a42-bf5f-21342dc4e84e/February%2022%2C%202026%20Bulletin.pdf?ver=1771774126583",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Protection of Blessed Virgin Mary (Ukrainian)",
+      "church_url": "https://www.pbvmnh.org"
+    },
+    "us-nh-manchester-sacred-heart-d56fe239": {
+      "status": "found",
+      "bulletin_page": "https://www.sacredheartchurch-nh.com/sunday-bulletin",
+      "pdfs": [
+        "https://www.sacredheartchurch-nh.com/_files/ugd/15e28f_e09156125bf04e5dbee6d8fe315421ab.pdf",
+        "https://www.sacredheartchurch-nh.com/_files/ugd/15e28f_3eeb4584a1bc45ba91248aab221f9b32.pdf",
+        "https://www.sacredheartchurch-nh.com/_files/ugd/15e28f_193b226293b840d3ac2f291404909c7c.pdf",
+        "https://www.sacredheartchurch-nh.com/_files/ugd/15e28f_ab2fb6f8e79c4c9181c73c5456bf277c.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Sacred Heart",
+      "church_url": "http://www.sacredheartchurch-nh.com"
+    },
+    "us-nh-manchester-saint-anselm-abbey-d3c9d312": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Anselm Abbey",
+      "church_url": "http://www.saintanselmabbey.org/"
+    },
+    "us-nh-manchester-st-anthony-of-padua-72ef5447": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Anthony of Padua",
+      "church_url": "http://www.stanthonyofpaduanh.org"
+    },
+    "us-nh-manchester-st-anne-st-augustin-9169f80c": {
+      "status": "found",
+      "bulletin_page": "https://www.catholicnh.org/about/stay-informed/",
+      "pdfs": [
+        "https://www.evangelizeboston.com/wp-content/uploads/2025/11/WYD-2027-General-Flyer.pdf",
+        "https://www.catholicnh.org/assets/Documents/About/Bishop/PAL-ResponsetToAggression-2026.01.26.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-2026VocationEvents.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-Immigration-USCCB-Handout-2025.1210.pdf",
+        "https://www.catholicnh.org/assets/Documents/Flyers/Flyer-TotusTuusMissionaries-2026.pdf",
+        "https://www.catholicnh.org/assets/Documents/Child-Safety/Bulletins-ChildSafety2023.pdf",
+        "https://www.catholicnh.org/assets/Documents/Worship/Our-Faith/Prayers/VocationIntercessionsCycleC2024-5.pdf",
+        "https://www.catholicnh.org/about/stay-informed/bulletin/assets/extranet-documents/2025-2026-Vocation-General-Intercessions-Year-A.pdf",
+        "https://www.catholicnh.org/assets/Documents/Worship/Our-Faith/Prayers/VocationBulletin-CycleC2024-5.pdf",
+        "https://www.catholicnh.org/about/stay-informed/bulletin/assets/extranet-documents/2025-2026-Vocation-Bulletin-Blurbs-Cycle-A.pdf",
+        "https://www.catholicnh.org/assets/Documents/About/FAQ/Ltr-CDF-PAL.pdf",
+        "https://www.catholicnh.org/assets/Documents/About/FAQ/Ltr-CDF-SBC.pdf",
+        "https://www.catholicnh.org/assets/Documents/About/FAQ/Decree-Precepts-StBenedictCtr.pdf"
+      ],
+      "source": "homepage_link_wordpress",
+      "lpi_parish_id": null,
+      "church_name": "St. Augustin",
+      "church_url": "http://directory.catholicnh.org/parishsearch/view/50"
+    },
+    "us-nh-manchester-st-catherine-of-siena-702ebc30": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Catherine of Siena Parish",
+      "church_url": "http://saintcatherineparishnh.com/"
+    },
+    "us-nh-manchester-st-hedwig-004e55c6": {
+      "status": "found",
+      "bulletin_page": "https://www.sainthedwignh.org/bulletins.html",
+      "pdfs": [
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/february_15_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/february_1_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/january_25_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/january_18_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/january_11_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/january_4_2026_bulletin.pdf",
+        "https://www.sainthedwignh.org/uploads/1/0/8/4/108446835/february_8_2025_bulletin.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Hedwig",
+      "church_url": "http://www.sainthedwignh.org/"
+    },
+    "us-nh-manchester-st-joseph-cathedral-12c9edf8": {
+      "status": "found",
+      "bulletin_page": "https://www.stjosephcathedralnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-joseph-cathedral-03104?selectedPublication=https://container.parishesonline.com/bulletins/03/0468/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-joseph-cathedral-03104?selectedPublication=https://container.parishesonline.com/bulletins/03/0468/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-joseph-cathedral-03104?selectedPublication=https://container.parishesonline.com/bulletins/03/0468/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-joseph-cathedral-03104?selectedPublication=https://container.parishesonline.com/bulletins/03/0468/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc1S1AAJ",
+      "church_name": "St. Joseph Cathedral",
+      "church_url": "http://www.stjosephcathedralnh.org"
+    },
+    "us-nh-manchester-st-pius-x-51a36f6e": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Pius X",
+      "church_url": "http://saintpiusxnh.org"
+    },
+    "us-nh-manchester-st-raphael-44f1860d": {
+      "status": "found",
+      "bulletin_page": "https://st-raphael-parish.org/bulletin-archives/",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/947template.pdf",
+        "https://st-raphael-parish.org/wp-content/uploads/2025-08-10.pdf",
+        "https://st-raphael-parish.org/wp-content/uploads/Holy-Days-of-Obligation.SRP_-7.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Raphael",
+      "church_url": "http://st-raphael-parish.org"
+    },
+    "us-nh-manchester-ste-marie-113f5843": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Ste. Marie",
+      "church_url": "http://www.enterthenarrowgate.org"
+    },
+    "us-nh-meredith-st-charles-borromeo-dc287c13": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Charles Borromeo",
+      "church_url": "http://www.stcharlesnh.org"
+    },
+    "us-nh-merrimack-our-lady-of-mercy-50e6cb22": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of Mercy",
+      "church_url": "http://www.olmnh.org"
+    },
+    "us-nh-merrimack-st-john-neumann-cf04d0f1": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. John Neumann",
+      "church_url": "http://www.sjnnh.org"
+    },
+    "us-nh-merrimack-thomas-more-college-of-liberal-arts-a795502d": {
+      "status": "found",
+      "bulletin_page": "https://thomasmorecollege.edu/communitas/",
+      "pdfs": [
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-Summer-2025-web.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Student-Issue-2025.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Fall-Winter-2024_web.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2024_web.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Students-2024.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Fall-2023_for-web.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2023.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Fall-2022.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2022.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring2021.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/Communitas-Winter-2021.pdf",
+        "http://thomasmorecollege.edu/wp-content/uploads/CSFinal.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2019-Thomas-More-Tear-Out.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Communitas-Fall-2018-no-printers-marks.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2018.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Communitas-Spring-2016-040816.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Communitas-Fall-2015.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/fall-2011.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/fall-2010.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/winter-2009.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/Fall-2008.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/spring-2008.pdf",
+        "https://thomasmorecollege.edu/wp-content/uploads/spring2007.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "Thomas More College of Liberal Arts",
+      "church_url": "http://thomasmorecollege.edu/new-hamp/spiritual-life/"
+    },
+    "us-nh-milford-st-patrick-cced1995": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Patrick",
+      "church_url": "http://www.saintpatrickmilfordnh.org/ "
+    },
+    "us-nh-nashua-immaculate-conception-b6573a76": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Immaculate Conception Church",
+      "church_url": "http://www.iccnashuanh.org"
+    },
+    "us-nh-nashua-infant-jesus-st-john-xxiii-parish-29c8ef16": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Infant Jesus (St. John XXIII Parish)",
+      "church_url": "http://www.stjohnxxiiinh.org/"
+    },
+    "us-nh-nashua-parish-of-the-resurrection-435d23b8": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Parish of the Resurrection",
+      "church_url": "http://www.parishoftheresurrection.org/"
+    },
+    "us-nh-nashua-st-aloysius-of-gonzaga-e7ba20cd": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Aloysius of Gonzaga",
+      "church_url": "http://stlouisnashua.org/"
+    },
+    "us-nh-nashua-st-christopher-a7a40b1b": {
+      "status": "found",
+      "bulletin_page": "https://www.stchrisparishnh.org/bulletins",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-christopher-parish-03064?selectedPublication=https://container.parishesonline.com/bulletins/03/1393/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-christopher-parish-03064?selectedPublication=https://container.parishesonline.com/bulletins/03/1393/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-christopher-parish-03064?selectedPublication=https://container.parishesonline.com/bulletins/03/1393/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-christopher-parish-03064?selectedPublication=https://container.parishesonline.com/bulletins/03/1393/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc1HKAAZ",
+      "church_name": "St. Christopher",
+      "church_url": "http://www.stchrisparishnh.org"
+    },
+    "us-nh-nashua-st-joseph-hospital-chapel-88e0e47c": {
+      "status": "found",
+      "bulletin_page": "https://stjosephhospital.com/newsletter/",
+      "pdfs": [
+        "https://stjosephhospital.com/wp-content/uploads/2026/02/Covenant-Health-ACE-Notice-of-Privacy-Practices.pdf",
+        "https://stjosephhospital.com/wp-content/uploads/2024/10/CH_non-descrimination-posters-11x17_print_SJNashua.pdf"
+      ],
+      "source": "direct_path_extended",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph Hospital Chapel",
+      "church_url": "http://stjosephhospital.com/our-mission/"
+    },
+    "us-nh-nashua-st-joseph-the-worker-25780a8c": {
+      "status": "found",
+      "bulletin_page": "https://www.stjoenash.org/weekly-bulletins",
+      "pdfs": [
+        "https://www.stjoenash.org/_files/ugd/aa138e_cb09335e33114315b7fc7e4931d866f0.pdf",
+        "https://www.stjoenash.org/_files/ugd/aa138e_e9063a4ee93e4c4294493bd6545e1afc.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_116dd878ebab4877a9e7b319eb5a70d5.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_8cafe250dbdf4fabbeb711372eff1a32.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_507afdd518e8412a9535b2763ae58e32.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_b89c14a6e8cc470886f731486fdeba1b.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_8634a58380224342a374786d45288410.pdf",
+        "https://53998fdf-f0f1-462a-91c3-980b490a9cb5.usrfiles.com/ugd/53998f_d2da1d70c67749eea3ad4776a20e9bee.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_ab648ab6e21e4ac999e04c342e3491a9.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_cc28bccd31ef43c992529572970c29f2.pdf",
+        "https://www.stjoenash.org/_files/ugd/53998f_a5da30a1689b4276b1cdf65d580bdfe1.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph the Worker",
+      "church_url": "http://www.stjoenash.org"
+    },
+    "us-nh-nashua-st-patrick-0bc7a2c3": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Patrick",
+      "church_url": "http://www.stpatricksnashua.org"
+    },
+    "us-nh-nashua-st-stanislaus-ddccbd4b": {
+      "status": "found",
+      "bulletin_page": "https://www.latinmassnashua.org/bulletin",
+      "pdfs": [],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Stanislaus",
+      "church_url": "http://www.latinmassnashua.org/"
+    },
+    "us-nh-new-london-our-lady-of-fatima-b0ee1258": {
+      "status": "found",
+      "bulletin_page": "http://www.olfic.org",
+      "pdfs": [
+        "http://www.olfic.org/site/assets/files/1526/20260222b.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "Our Lady of Fatima",
+      "church_url": "http://www.olfic.org"
+    },
+    "us-nh-newmarket-st-mary-665f663c": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Mary",
+      "church_url": "http://www.stmarynh.org"
+    },
+    "us-nh-newport-st-patrick-64094298": {
+      "status": "found",
+      "bulletin_page": "https://discovermass.com/church/st-patrick-newport-nh/#bulletins",
+      "pdfs": [
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFrBTFIaBDdulV5XQuDoERf4drr%2BrgKZCluohpLbjLJE0tY6NqFCLBafJA9nygD2Sqt8R7yE3qBd8i1%2FLiy2V6ic%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFmPjcMkmGeDa%2FLt9KOHmVPFCCjQaHus%2Fj8gDV39QqOY71jX8V%2BcjXt5G7jb9Vi1ilyJBl5ryBOtfzVzgUp%2Bl0As%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFmgZqgQWoU42D3woh%2BGasxCJMfjGUDCMs7lF46n%2F%2FttT21A6xiVmps7qapARDUY5%2FT4jUj08%2BS17tuKBQxWRzjM%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFuYjTEYm2BlhVkVSfsWshyPXXqOQTz35QRkaqbE6wZlcJKnesMG%2BgI6BcB1pMGyNR0Ne7URyGyK2mVbPu5C%2Fpuo%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFnV6IJsydF%2BLOdusFfAD22ttQsNvwkSsY5NhQbYAHR5tc1ar1bEsKyKx2Xvgv4zFLrUSnwvxbrEvUYjnyQIzylU%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFljWyNVIihRLDEQNe9me6XgG65%2FlhjQlIJZCvA9OIilcfNj5fnlcodL%2FMsKRTxKPaqM7jFPLmV44YUNGCJ3sVx4%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFnZmXwrk6skNeGKrwooURaHQ%2BkLlmlI0TN%2F499HFDjenhQl9Sn%2BcA0ND3jDjXSojf%2FoYLaW%2FQSrS9Ost9UwctAY%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFsLdsgApCHvrnMw1EFs9Sl%2FERtnlYeqULnAtp11isGXhX1w4bJZQtBntE0JipJWF2q7dPoT5IbHr7dzUACxLU2g%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFma%2FIkQ37%2FkcZBvfhytu20kB7gCecOqN%2BzHrJK9wpoD%2BR8O4Pk%2FmLvlT5grsSimFX018Dq09BM1BYdtuA1rlc0s%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFhhhg7zktWGRHo%2BBZDXrb1tpHvY6T2DHxLO%2BzPCh%2Fzgw4aoFG2Ab1NkSNIHuuc8K6IgF%2BiqPHt28ULsWqUcrZFw%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFoWMyDaSUhb4xhK%2FmzcFYL82rb3c%2FXFL1D42dTc41%2FwSMadD6akrBAp9JMz0zPKpeo%2BTX0xB2uqNnW1bWGJch6c%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=D%2B5cdvxrDdFkG%2BkT0HlpFhpkxxvPO%2BhBAsY7fVzxxp5ukN%2Bd9fXkphm23X5jr9r9Gbo8etWodDyhaNOiyVQtLwM%2BTDOpzqhvD3sZKW7HWYs%3D"
+      ],
+      "source": "discovermass_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Patrick",
+      "church_url": "http://www.saintpatrickparish.net"
+    },
+    "us-nh-newton-mary-mother-of-the-church-st-luke-the-evangelist-parish-44689252": {
+      "status": "found",
+      "bulletin_page": "https://stlukenh.org/bulletins/",
+      "pdfs": [
+        "https://stlukenh.org/wp-content/uploads/20260222.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260215.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260208.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260201.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260125.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260118.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260111-1.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260104.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251228.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251221.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251214.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251207.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251130.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251123.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251116.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251109.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251102.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251026.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251019.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251012.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251005.pdf",
+        "http://www.jppc.net/onlinebulletins/957template.pdf",
+        "https://stlukenh.org/wp-content/uploads/RegistrationForm.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Mary, Mother of the Church (St. Luke the Evangelist Parish)",
+      "church_url": "http://stlukenh.org/"
+    },
+    "us-nh-north-conway-our-lady-of-the-mountains-6c0f19e9": {
+      "status": "found",
+      "bulletin_page": "http://www.ourladyofthemountainsnh.org/publications",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260222B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260215B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260208B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260201B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260125B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260118B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260111B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20260104B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20251228B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20251221B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20251214B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-mountains-church?selectedPublication=https://container.parishesonline.com/bulletins/03/0613/20251207B.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": "our-lady-of-the-mountains-church",
+      "church_name": "Our Lady of the Mountains",
+      "church_url": "http://www.ourladyofthemountainsnh.org"
+    },
+    "us-nh-north-stratford-sacred-heart-st-marguerite-dyouville-parish-c69494db": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Sacred Heart (St. Marguerite d'Youville Parish)",
+      "church_url": "http://stmargueritedygroveton.org/"
+    },
+    "us-nh-north-walpole-st-peter-all-saints-parish-1788c041": {
+      "status": "found",
+      "bulletin_page": "http://www.allsaintsparishnh.com/Bulletin.htm",
+      "pdfs": [
+        "http://www.allsaintsparishnh.com/Bulletin.pdf",
+        "http://www.allsaintsparishnh.com/lastweek.pdf",
+        "http://www.allsaintsparishnh.com/2weeksago.pdf",
+        "http://www.allsaintsparishnh.com/3weeksago.pdf",
+        "https://www.jppc.net/onlinebulletins/9014template.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Peter (All Saints Parish)",
+      "church_url": "http://www.allsaintsparishnh.com"
+    },
+    "us-nh-northwood-st-joseph-mission-f0eaa926": {
+      "status": "found",
+      "bulletin_page": "https://www.ourladyoflourdes-stjosephs.org/bulletins",
+      "pdfs": [
+        "https://files.ecatholic.com/5003/bulletins/20260222.pdf?t=1771529379000",
+        "https://files.ecatholic.com/5003/bulletins/20260215.pdf?t=1771003244000",
+        "https://files.ecatholic.com/5003/bulletins/20260208.pdf?t=1770302110000",
+        "https://files.ecatholic.com/5003/bulletins/20260201.pdf?t=1769652804000",
+        "https://files.ecatholic.com/5003/bulletins/20251228.pdf?t=1766667346000",
+        "https://files.ecatholic.com/5003/bulletins/20251221.pdf?t=1766102088000",
+        "https://files.ecatholic.com/5003/bulletins/20251214.pdf?t=1765334447000",
+        "https://files.ecatholic.com/5003/bulletins/20251207.pdf?t=1764980214000",
+        "https://files.ecatholic.com/5003/bulletins/20241229.pdf?t=1735315946000",
+        "https://files.ecatholic.com/5003/bulletins/20241222.pdf?t=1734639551000",
+        "https://files.ecatholic.com/5003/bulletins/20241215.pdf?t=1734115430000",
+        "https://files.ecatholic.com/5003/bulletins/20241208.pdf?t=1733861422000",
+        "https://files.ecatholic.com/5003/bulletins/20231231.pdf?t=1703702260000",
+        "https://files.ecatholic.com/5003/bulletins/20231224.pdf?t=1703283277000",
+        "https://files.ecatholic.com/5003/bulletins/20231217.pdf?t=1702684802000",
+        "https://files.ecatholic.com/5003/bulletins/20231210.pdf?t=1702164840000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Mission of St. Joseph",
+      "church_url": "http://www.ourladyoflourdes-stjosephs.org"
+    },
+    "us-nh-pelham-st-patrick-83ea4e41": {
+      "status": "found",
+      "bulletin_page": "https://stpatricks-pelham.com/bulletin/",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/956template.pdf",
+        "https://stpatricks-pelham.com/wp-content/uploads/Totus-Tuus-Participant-Registration-Form.pdf-26-27.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Patrick",
+      "church_url": "http://stpatricks-pelham.com"
+    },
+    "us-nh-penacook-immaculate-conception-477d063e": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Immaculate Conception Parish",
+      "church_url": "http://www.icpenacook.org"
+    },
+    "us-nh-peterborough-divine-mercy-447b1c08": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Divine Mercy",
+      "church_url": "http://www.divinemercynh.org/"
+    },
+    "us-nh-pittsfield-our-lady-of-lourdes-cf03a3e0": {
+      "status": "found",
+      "bulletin_page": "https://www.ourladyoflourdes-stjosephs.org/bulletins",
+      "pdfs": [
+        "https://files.ecatholic.com/5003/bulletins/20260222.pdf?t=1771529379000",
+        "https://files.ecatholic.com/5003/bulletins/20260215.pdf?t=1771003244000",
+        "https://files.ecatholic.com/5003/bulletins/20260208.pdf?t=1770302110000",
+        "https://files.ecatholic.com/5003/bulletins/20260201.pdf?t=1769652804000",
+        "https://files.ecatholic.com/5003/bulletins/20251228.pdf?t=1766667346000",
+        "https://files.ecatholic.com/5003/bulletins/20251221.pdf?t=1766102088000",
+        "https://files.ecatholic.com/5003/bulletins/20251214.pdf?t=1765334447000",
+        "https://files.ecatholic.com/5003/bulletins/20251207.pdf?t=1764980214000",
+        "https://files.ecatholic.com/5003/bulletins/20241229.pdf?t=1735315946000",
+        "https://files.ecatholic.com/5003/bulletins/20241222.pdf?t=1734639551000",
+        "https://files.ecatholic.com/5003/bulletins/20241215.pdf?t=1734115430000",
+        "https://files.ecatholic.com/5003/bulletins/20241208.pdf?t=1733861422000",
+        "https://files.ecatholic.com/5003/bulletins/20231231.pdf?t=1703702260000",
+        "https://files.ecatholic.com/5003/bulletins/20231224.pdf?t=1703283277000",
+        "https://files.ecatholic.com/5003/bulletins/20231217.pdf?t=1702684802000",
+        "https://files.ecatholic.com/5003/bulletins/20231210.pdf?t=1702164840000"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Our Lady of Lourdes",
+      "church_url": "http://www.ourladyoflourdes-stjosephs.org"
+    },
+    "us-nh-plaistow-holy-angels-church-st-luke-the-evangelist-parish-35058e4d": {
+      "status": "found",
+      "bulletin_page": "https://stlukenh.org/bulletins/",
+      "pdfs": [
+        "https://stlukenh.org/wp-content/uploads/20260222.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260215.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260208.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260201.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260125.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260118.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260111-1.pdf",
+        "https://stlukenh.org/wp-content/uploads/20260104.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251228.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251221.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251214.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251207.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251130.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251123.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251116.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251109.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251102.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251026.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251019.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251012.pdf",
+        "https://stlukenh.org/wp-content/uploads/20251005.pdf",
+        "http://www.jppc.net/onlinebulletins/957template.pdf",
+        "https://stlukenh.org/wp-content/uploads/RegistrationForm.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Holy Angels (St. Luke the Evangelist Parish)",
+      "church_url": "http://stlukenh.org"
+    },
+    "us-nh-plymouth-st-matthew-holy-trinity-parish-0a5e0140": {
+      "status": "found",
+      "bulletin_page": "http://www.holytrinityparishnh.org/upcoming-events",
+      "pdfs": [
+        "https://irp.cdn-website.com/1cc19f1f/files/uploaded/20260215B.pdf"
+      ],
+      "source": "homepage_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Matthew (Holy Trinity Parish)",
+      "church_url": "http://www.holytrinityparishnh.org"
+    },
+    "us-nh-portsmouth-immaculate-conception-corpus-christi-parish-4954d6f6": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Immaculate Conception",
+      "church_url": "http://www.corpuschristinh.org"
+    },
+    "us-nh-richmond-st-benedict-center-5a0dad15": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Benedict Center",
+      "church_url": "https://catholicism.org/category/saint-benedict-center-in-richmond-new-hampshire"
+    },
+    "us-nh-rochester-our-lady-of-the-holy-rosary-bcbcb73c": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Our Lady of the Holy Rosary",
+      "church_url": "http://www.hrsl.org"
+    },
+    "us-nh-rochester-st-mary-st-mary-st-peter-parishes-dd678b21": {
+      "status": "found",
+      "bulletin_page": "https://www.stmstpnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-mary-st-peter-church?selectedPublication=https://container.parishesonline.com/bulletins/04/0983/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000Qc2AaAAJ",
+      "church_name": "St. Mary [St. Mary & St. Peter Parishes]",
+      "church_url": "http://www.stmstpnh.org"
+    },
+    "us-nh-rollinsford-st-mary-667d65ef": {
+      "status": "found",
+      "bulletin_page": "https://www.stignatius-stmary.org/bulletin",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/991template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Mary",
+      "church_url": "http://www.stignatius-stmary.org/"
+    },
+    "us-nh-rye-beach-st-theresa-eb0caad1": {
+      "status": "found",
+      "bulletin_page": "https://www.parishesonline.com/find/st-theresa-church-03871",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260201B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260125B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260118B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260111B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20260104B.pdf",
+        "https://parishesonline.com/publication-page/st-theresa-church-03871?selectedPublication=https://container.parishesonline.com/bulletins/04/1240/20251228B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Theresa",
+      "church_url": "http://www.sainttheresachurchrye.org/"
+    },
+    "us-nh-salem-mary-queen-of-peace-sts-mary-and-joseph-parish-b004ce8c": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Mary, Queen of Peace (Sts. Mary and Joseph Parish)",
+      "church_url": "http://www.saintsmaryandjoseph.org"
+    },
+    "us-nh-sanbornville-st-anthony-b9184949": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Anthony",
+      "church_url": "http://www.stanthonystjoseph.org"
+    },
+    "us-nh-seabrook-st-elizabeth-of-hungary-mission-67c3ffa8": {
+      "status": "found",
+      "bulletin_page": "https://parishesonline.com/find/our-lady-of-the-miraculous-medal",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260301B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260222B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260215B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260208B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260201B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260125B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260118B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260111B.pdf",
+        "https://parishesonline.com/publication-page/our-lady-of-the-miraculous-medal?selectedPublication=https://container.parishesonline.com/bulletins/04/0771/20260104B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "Mission of St. Elizabeth of Hungary",
+      "church_url": "http://www.olmmparish.org/"
+    },
+    "us-nh-somersworth-holy-trinity-st-ignatius-of-loyola-parish-f20181c4": {
+      "status": "found",
+      "bulletin_page": "https://www.stignatius-stmary.org/bulletin",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/991template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "Holy Trinity [St. Ignatius of Loyola Parish]",
+      "church_url": "http://www.stignatius-stmary.org/"
+    },
+    "us-nh-somersworth-st-martin-of-tours-st-ignatius-of-loyola-parish-a4857887": {
+      "status": "found",
+      "bulletin_page": "https://www.stignatius-stmary.org/bulletin",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/991template.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Martin (St. Ignatius of Loyola Parish)",
+      "church_url": "http://www.stignatius-stmary.org/"
+    },
+    "us-nh-sunapee-st-joachim-mission-6962bc96": {
+      "status": "found",
+      "bulletin_page": "https://discovermass.com/church/st-patrick-newport-nh/#bulletins",
+      "pdfs": [
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa2A5JKvYcKtknFoyga6Z0Vanr1SzvGSO9vrL0S4s7MeTUaWeDYawIMF2ZTu3FfOJT9sNERlX0cuhOPnD5PFgvIA%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa63Y1YEjXj1H%2BC8wCpOOGUwl9XMe2FBrR1LtTqf%2FlN00hWhPwyGVbEOW1z3vuQIATiOKpupa81%2FBx4EDxAJEy6c%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa1KlTLqtbkpjMZ2DyeWmCZdH3zTs9Jok0FUAH3V1koZ%2FcGBP6rcjfUDOXDhfnhTDX9A8lLg%2FPSzn51DdMLuMWXE%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa%2FiCgR01twOkcAQbjpxsH6UxmId2cyQouGKgzDZVGBIfMLsjrFDO%2FeNp8VTHGl8zg9mUn9SSbl7prHnJ5cQEgfE%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa8eEKDX98Y5fqt7daW%2FWuyq90jrLMxfFTNFdQA8XBrih3hU%2BD1PJWzE4aWh%2BPdMNN1Hg%2FdqPuUAXr6tRWDrhLJU%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa2RTUyUItAPxwVSoCYJI%2BKIG6yWoVplPbVnVEFsBP6xCEZ%2FC%2F46Dbz1fBfxBEXkZcPE7XrgcLOBnahxYSq5%2BiG4%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fax5KTW1tW6tsIXN9WcTdXRdCR%2BNTZ5ht33jZt5XXKVRH1S0%2Bxa39klTZXOViEza5rmRE2vyoG8DzwPhU%2BROGKas%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa%2B4uzmJetLFc1hjG8eNr%2FmTFf555kNdCVNWsKXkIZBYqAM1j4idK%2BUXDZULMuII%2FpCAdkw5vfbuNjv044ytAfw4%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa%2Fhtv4bnjYtUNYs9fLDW%2FCa8u66vK21vzc4ncR%2Bh%2Fstooj4cfOhte6Ia9zwXlS8uKO7VTO06GvWrs9XeYvhXXoI%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2FawFg6wOOUmZaJx9Fco1zcxGGZHQN7ES73GIzTfTPgS5MOV8aKgVhIf9Z81eU9IVp8o9Ku6RvQcR4fxtzkpMhQ4M%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Faz5vaS%2BwgwkLGhU7qdYUaLcBly4ssHLGECCBfwqLB5Z70sWa6YJWAKub%2B5Tmd7eIsZSr8%2BLmJ6Hytx6UG9x1%2FN4%3D",
+        "https://bulletins.discovermass.com/download.php?bulletin=ARZeOCN70Sy2r2BAdJW%2Fa43OJ6wBkXV036SuPIeQDDY0BaGFuBgViyS2qEB0HdsOEPTeSKPqfoFzBTwqkuSWrrQDNayZZYpROrmw7F6Uscw%3D"
+      ],
+      "source": "discovermass_link",
+      "lpi_parish_id": null,
+      "church_name": "St Joachim Mission",
+      "church_url": "http://www.saintpatrickparish.net/"
+    },
+    "us-nh-suncook-st-john-the-baptist-4dc744d6": {
+      "status": "found",
+      "bulletin_page": "https://www.catholicsuncook.org/bulletin",
+      "pdfs": [
+        "https://irp.cdn-website.com/4e2a7c9e/files/uploaded/Bishop+letter+012626.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": "0018000000QxA0kAAF",
+      "church_name": "St. John the Baptist",
+      "church_url": "http://www.catholicsuncook.org/"
+    },
+    "us-nh-twin-mountain-st-patrick-mission-gate-of-heaven-parish-cc4b33a8": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "Mission of St. Patrick (Gate of Heaven Parish)",
+      "church_url": "http://www.gateofheavennh.org/"
+    },
+    "us-nh-west-stewartstown-st-albert-north-american-martyrs-parish-77d1af33": {
+      "status": "found",
+      "bulletin_page": "https://www.nampnh.org/bulletin",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260222B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260215B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260208B.pdf",
+        "https://parishesonline.com/publication-page/north-american-martyrs-parish-03576?selectedPublication=https://container.parishesonline.com/bulletins/03/1123/20260201B.pdf"
+      ],
+      "source": "direct_path_lpi_widget",
+      "lpi_parish_id": "0018000000QxA0lAAF",
+      "church_name": "St. Albert Church -North American Martyrs Parish",
+      "church_url": "http://www.nampnh.org"
+    },
+    "us-nh-whitefield-st-matthew-gate-of-heaven-parish-cef04338": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Matthew [Gate of Heaven Parish]",
+      "church_url": "http://gateofheavennh.org/"
+    },
+    "us-nh-winchester-st-stanislaus-c9757f7e": {
+      "status": "found",
+      "bulletin_page": "https://www.winchesterlatinmass.com/bulletins",
+      "pdfs": [
+        "https://www.winchesterlatinmass.com/_files/ugd/f4c8e4_633785705ae146b28bd538ed94ed4e0e.pdf",
+        "https://www.winchesterlatinmass.com/_files/ugd/bf21a6_d3b70d1ca29f4aab965d719c71730686.pdf",
+        "https://www.winchesterlatinmass.com/_files/ugd/bf21a6_bc61c8afde704ed4b11a00844eb174e6.pdf",
+        "https://www.winchesterlatinmass.com/_files/ugd/bf21a6_32ff5ccf8ed0428391b1855460cfe379.pdf",
+        "https://www.winchesterlatinmass.com/_files/ugd/bf21a6_3970b246c303464a8e72d012d7aad080.pdf"
+      ],
+      "source": "direct_path",
+      "lpi_parish_id": null,
+      "church_name": "St. Stanislaus",
+      "church_url": "http://www.winchesterlatinmass.com"
+    },
+    "us-nh-windham-st-matthew-14e69efe": {
+      "status": "found",
+      "bulletin_page": "https://www.parishesonline.com/organization/st-matthew-church",
+      "pdfs": [
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260222B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260215B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260208B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260201B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260125B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260118B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260111B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20260104B.pdf",
+        "https://parishesonline.com/publication-page/st-matthew-church?selectedPublication=https://container.parishesonline.com/bulletins/03/1169/20251228B.pdf"
+      ],
+      "source": "lpi_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Matthew",
+      "church_url": "http://www.stmatthew-nh.org"
+    },
+    "us-nh-woodsville-st-joseph-59a39105": {
+      "status": "found",
+      "bulletin_page": "http://stjoseph-stcatherine.org",
+      "pdfs": [
+        "https://www.jppc.net/onlinebulletins/975template.pdf"
+      ],
+      "source": "homepage_pdf_link",
+      "lpi_parish_id": null,
+      "church_name": "St. Joseph",
+      "church_url": "http://stjoseph-stcatherine.org"
+    },
+    "us-nh-belmont-st-joseph-48f82c1f": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph",
+      "church_url": "http://www.stjosephbelmont.org"
+    },
+    "us-nh-berlin-good-shepherd-parish-st-anne-church-d9f04de2": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Anne",
+      "church_url": "http://berlingorhamcatholics.org/"
+    },
+    "us-nh-salem-st-joseph-sts-mary-and-joseph-parish-94458b3a": {
+      "status": "not_found",
+      "bulletin_page": null,
+      "pdfs": [],
+      "church_name": "St. Joseph (Sts. Mary and Joseph Parish)",
+      "church_url": "http://www.saintsmaryandjoseph.org"
+    }
+  },
+  "downloaded": {
+    "us-nh-alton-st-katharine-drexel-70327ee9": {
+      "church_name": "St Katharine Drexel Parish",
+      "files": [],
+      "capped": false,
+      "total_available": 4
+    },
+    "us-nh-andover-immaculate-conception-mission-c55438e1": {
+      "church_name": "Immaculate Conception Mission",
+      "files": [
+        {
+          "url": "http://www.olfic.org/site/assets/files/1526/20260222b.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-andover-immaculate-conception-mission-c55438e1_20260222_e226c1eb.pdf",
+          "size_bytes": 4421324
+        }
+      ],
+      "capped": false,
+      "total_available": 1
+    },
+    "us-nh-bristol-our-lady-of-grace-chapel-holy-trinity-parish-73e63d7d": {
+      "church_name": "Chapel of Our Lady of Grace (Holy Trinity Parish)",
+      "files": [
+        {
+          "url": "https://irp.cdn-website.com/1cc19f1f/files/uploaded/20260215B.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-bristol-our-lady-of-grace-chapel-holy-trinity-parish-73e63d7d_20260215_2860f301.pdf",
+          "size_bytes": 2236306
+        }
+      ],
+      "capped": false,
+      "total_available": 1
+    },
+    "us-nh-canaan-st-mary-mission-church-a5b5a3c4": {
+      "church_name": "St. Mary Catholic Church",
+      "files": [
+        {
+          "url": "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260118_second_sunday_in_ordinary_time-compressed.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-canaan-st-mary-mission-church-a5b5a3c4_20260118_bf7341b2.pdf",
+          "size_bytes": 545158
+        },
+        {
+          "url": "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260111_the_baptism_of_the_lord-compressed.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-canaan-st-mary-mission-church-a5b5a3c4_20260111_b649179c.pdf",
+          "size_bytes": 546692
+        },
+        {
+          "url": "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20260104_the_epiphany_of_the_lord-compressed.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-canaan-st-mary-mission-church-a5b5a3c4_20260104_180ee91e.pdf",
+          "size_bytes": 516420
+        },
+        {
+          "url": "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251228_the_holy_family_of_jesus_mary_and_joseph-compressed.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-canaan-st-mary-mission-church-a5b5a3c4_20251228_f69d81f4.pdf",
+          "size_bytes": 570581
+        },
+        {
+          "url": "http://www.sthstm.org/uploads/5/5/0/6/55066979/0943_20251221_fourth_sunday_of_advent_and_christmas-compressed.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-canaan-st-mary-mission-church-a5b5a3c4_20251221_2f90a8d3.pdf",
+          "size_bytes": 593060
+        }
+      ],
+      "capped": false,
+      "total_available": 6
+    },
+    "us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43": {
+      "church_name": "St. Catherine of Siena",
+      "files": [
+        {
+          "url": "http://www.allsaintsparishnh.com/Bulletin.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43_da59d441.pdf",
+          "size_bytes": 11491
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/lastweek.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43_1ecf380c.pdf",
+          "size_bytes": 348396
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/2weeksago.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43_2bed2cef.pdf",
+          "size_bytes": 344203
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/3weeksago.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-church-of-st-catherine-of-siena-281d1b43_c88f7e4c.pdf",
+          "size_bytes": 15031
+        }
+      ],
+      "capped": false,
+      "total_available": 5
+    },
+    "us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885": {
+      "church_name": "St. Catherine of Siena [All Saints Parish]",
+      "files": [
+        {
+          "url": "http://www.allsaintsparishnh.com/Bulletin.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885_da59d441.pdf",
+          "size_bytes": 11491
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/lastweek.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885_1ecf380c.pdf",
+          "size_bytes": 348396
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/2weeksago.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885_2bed2cef.pdf",
+          "size_bytes": 344203
+        },
+        {
+          "url": "http://www.allsaintsparishnh.com/3weeksago.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-charlestown-st-catherine-of-siena-all-saints-parish-83f08885_c88f7e4c.pdf",
+          "size_bytes": 15031
+        }
+      ],
+      "capped": false,
+      "total_available": 5
+    },
+    "us-nh-claremont-st-joseph-bd835466": {
+      "church_name": "St. Joseph",
+      "files": [
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-81-2.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_226b9421.pdf",
+          "size_bytes": 1615151
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-82-2.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_77a371b4.pdf",
+          "size_bytes": 1478775
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-83.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_6ff05990.pdf",
+          "size_bytes": 1504538
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-84-3.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_3b15c542.pdf",
+          "size_bytes": 1441119
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-85.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_a5c55886.pdf",
+          "size_bytes": 1489765
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-86.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_a96b501b.pdf",
+          "size_bytes": 2557662
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-87.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_1bbc29fe.pdf",
+          "size_bytes": 1532191
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-87-1.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_46674c8c.pdf",
+          "size_bytes": 1532191
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-03-02.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250302_08ceb86a.pdf",
+          "size_bytes": 1511906
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-03-09.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250309_ef426fb2.pdf",
+          "size_bytes": 1510343
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-03-16.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250316_43f80b3e.pdf",
+          "size_bytes": 1530992
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-03-23-2.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250323_e12da41d.pdf",
+          "size_bytes": 1548037
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-03-30.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250330_d3bdcbbd.pdf",
+          "size_bytes": 1527288
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-04-06.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250406_b0616ef8.pdf",
+          "size_bytes": 1557802
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-04-13.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250413_82788d7d.pdf",
+          "size_bytes": 1570638
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-04-20.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250420_9cfd9f7d.pdf",
+          "size_bytes": 1706928
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-04-27.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250427_8eea2873.pdf",
+          "size_bytes": 1541902
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-05-04.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250504_d9b8c8b3.pdf",
+          "size_bytes": 1605978
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-05-11.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250511_0d34dec7.pdf",
+          "size_bytes": 1630064
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-05-18.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250518_319ac1e7.pdf",
+          "size_bytes": 1559970
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-05-25.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250525_84248d9f.pdf",
+          "size_bytes": 1817359
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-06-01.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250601_c9438030.pdf",
+          "size_bytes": 1650503
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-06-08.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250608_5947b12f.pdf",
+          "size_bytes": 2697609
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-06-15.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250615_305715a9.pdf",
+          "size_bytes": 1580612
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-06-22.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250622_fb793398.pdf",
+          "size_bytes": 1784159
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-06-29.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250629_7fe9bc6d.pdf",
+          "size_bytes": 2960258
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-07-06.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250706_939327c9.pdf",
+          "size_bytes": 1715636
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-07-20.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250720_b8bb824f.pdf",
+          "size_bytes": 2855260
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-07-27.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250727_670ce50a.pdf",
+          "size_bytes": 1664572
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-08-03.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250803_f11e67bd.pdf",
+          "size_bytes": 2785351
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-08-10.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250810_2cc4ed5a.pdf",
+          "size_bytes": 1720071
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-08-17.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250817_b74ee973.pdf",
+          "size_bytes": 1750360
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-08-24.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250824_91f44f7b.pdf",
+          "size_bytes": 1837360
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-08-31.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250831_7fe18ddc.pdf",
+          "size_bytes": 1810728
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-09-07.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250907_65095104.pdf",
+          "size_bytes": 2793182
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-09-14.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250914_68331e72.pdf",
+          "size_bytes": 1603641
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-09-21.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250921_939c8299.pdf",
+          "size_bytes": 1708290
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-09-28.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20250928_54a5f3d3.pdf",
+          "size_bytes": 1548362
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-10-05.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251005_f22bd0d9.pdf",
+          "size_bytes": 1570648
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-10-12.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251012_d14f80e1.pdf",
+          "size_bytes": 1639955
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-10-19.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251019_e48da27d.pdf",
+          "size_bytes": 2866226
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-10-26.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251026_86ee05bf.pdf",
+          "size_bytes": 1691374
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-11-02.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251102_5e40f860.pdf",
+          "size_bytes": 1665705
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-11-09.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251109_7848e47b.pdf",
+          "size_bytes": 1679129
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-11-16.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251116_945720ac.pdf",
+          "size_bytes": 1766524
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-11-23.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251123_1da660df.pdf",
+          "size_bytes": 1732046
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-11-30.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251130_a9a62ec3.pdf",
+          "size_bytes": 1925184
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-12-07.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251207_247b9276.pdf",
+          "size_bytes": 1920544
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-12-14.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251214_f245e6be.pdf",
+          "size_bytes": 2852824
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-12-21.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251221_eadc3d9a.pdf",
+          "size_bytes": 2981146
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/2025-12-28.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_20251228_b9928259.pdf",
+          "size_bytes": 1809441
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-76.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_7bce4662.pdf",
+          "size_bytes": 1457880
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-77.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_d1a635f9.pdf",
+          "size_bytes": 1473013
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-78.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_98b675e1.pdf",
+          "size_bytes": 3223219
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-79.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_5c58ee82.pdf",
+          "size_bytes": 1458385
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-80.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_93121ee2.pdf",
+          "size_bytes": 1394375
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-75.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_14e23781.pdf",
+          "size_bytes": 2618780
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-74.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_09a3e320.pdf",
+          "size_bytes": 1714921
+        },
+        {
+          "url": "https://stjosephclaremont.org/wp-content/uploads/9021template-73.pdf",
+          "local_path": "C:\\Users\\cashk\\OneDrive\\Projects\\church scrapes\\data\\output\\new_hampshire\\bulletins\\us-nh-claremont-st-joseph-bd835466_c1d95266.pdf"
