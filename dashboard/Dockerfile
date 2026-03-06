@@ -11,7 +11,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY dashboard/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # Copy dashboard application code
 COPY dashboard/app/ /app/app/
