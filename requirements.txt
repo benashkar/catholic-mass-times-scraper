@@ -23,7 +23,9 @@ pytest-cov==6.0.*         # Measures how much of the code is covered by tests
 # --- Logging ---
 # Python's built-in `logging` module is used (no extra package needed)
 
-# --- Future / Phase 5+ ---
-# psycopg2-binary==2.9.*  # PostgreSQL database driver (uncomment when moving to DB)
-# flask==3.1.*            # Web dashboard (uncomment for Improvement 3)
+# --- Database (db99 sync) ---
+pymysql>=1.1              # MySQL driver for db99 RDS sync
+boto3>=1.35               # AWS Secrets Manager for DB credentials
+
+# --- Browser Automation ---
 playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, eCatholic)

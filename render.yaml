@@ -1,22 +1,47 @@
-# render.yaml — Catholic Church Dashboard
-# Uses native Python runtime (not Docker) for simplicity.
-# The entire repo is cloned, so data/output/ CSVs are available.
+# render.yaml -- Catholic Church Scraper + Dashboard
+# All services use Docker runtime per global rules.
+# Region: Ohio (low latency to db99 RDS in us-east-1).
 
 services:
+  # Dashboard: Flask web app serving mass times + bulletin names
   - type: web
     name: catholic-church-dashboard
-    runtime: python
+    runtime: docker
+    dockerfilePath: dashboard/Dockerfile
     region: ohio
     plan: starter
-    rootDir: dashboard
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 120 --preload "app:create_app()"
     envVars:
       - key: FLASK_APP
         value: app
       - key: DATA_DIR
-        value: ../data/output
+        value: /app/data/output
       - key: SECRET_KEY
         generateValue: true
-      - key: PYTHON_VERSION
-        value: "3.12.0"
+
+  # Weekly pipeline: scrape -> extract -> sync to db99 -> redeploy dashboard
+  # Runs every Tuesday at 3 AM UTC
+  - type: cron_job
+    name: church-tuesday-pipeline
+    runtime: docker
+    dockerfilePath: Dockerfile.cron
+    region: ohio
+    plan: starter
+    schedule: "0 3 * * 2"
+    startCommand: "python run_weekly_pipeline.py"
+    envVars:
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        value: us-east-1
+      - key: RENDER_API_KEY
+        sync: false
+      - key: GIT_AUTHOR_NAME
+        value: "Ben Ashkar"
+      - key: GIT_AUTHOR_EMAIL
+        sync: false
+      - key: GIT_COMMITTER_NAME
+        value: "Ben Ashkar"
+      - key: GIT_COMMITTER_EMAIL
+        sync: false
