@@ -1,22 +1,26 @@
 # render.yaml -- Catholic Church Scraper + Dashboard
 # All services use Docker runtime per global rules.
-# Region: Ohio (low latency to db99 RDS in us-east-1).
+# Region: Virginia (co-located with db99 RDS in us-east-1).
 
 services:
-  # Dashboard: Flask web app serving mass times + bulletin names
+  # Dashboard: Flask web app serving mass times + bulletin names from db99
   - type: web
     name: catholic-church-dashboard
     runtime: docker
     dockerfilePath: dashboard/Dockerfile
-    region: ohio
+    region: virginia
     plan: starter
     envVars:
       - key: FLASK_APP
         value: app
-      - key: DATA_DIR
-        value: /app/data/output
       - key: SECRET_KEY
         generateValue: true
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        value: us-east-1
 
   # Weekly pipeline: scrape -> extract -> sync to db99 -> redeploy dashboard
   # Runs every Tuesday at 3 AM UTC
@@ -24,7 +28,7 @@ services:
     name: church-tuesday-pipeline
     runtime: docker
     dockerfilePath: Dockerfile.cron
-    region: ohio
+    region: virginia
     plan: starter
     schedule: "0 3 * * 2"
     startCommand: "python run_weekly_pipeline.py"

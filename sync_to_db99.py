@@ -687,6 +687,29 @@ def main():
             cur.execute(f"SELECT COUNT(*) as cnt FROM {table}")
             count = cur.fetchone()["cnt"]
             print(f"  {table}: {count:,} rows")
+
+        # Refresh the pre-computed bulletin stats table used by the dashboard
+        print("\n  Refreshing bulletin_state_stats...")
+        try:
+            cur.execute("TRUNCATE TABLE bulletin_state_stats")
+            cur.execute("""
+                INSERT INTO bulletin_state_stats
+                    (state_code, total_names, unique_names, church_count, city_count)
+                SELECT c.state_code,
+                       COUNT(*) AS total_names,
+                       COUNT(DISTINCT bn.person_name) AS unique_names,
+                       COUNT(DISTINCT bs.church_id) AS church_count,
+                       COUNT(DISTINCT c.city) AS city_count
+                FROM bulletin_name bn
+                JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+                JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+                JOIN church c ON bs.church_id = c.church_id
+                GROUP BY c.state_code
+            """)
+            conn.commit()
+            print("  [OK] bulletin_state_stats refreshed")
+        except Exception as e:
+            print(f"  [--] Failed to refresh bulletin_state_stats: {e}")
         cur.close()
 
     conn.close()

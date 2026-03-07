@@ -1,27 +1,33 @@
 """
-Data Loader — Reads CSV/JSONL data from the data/output/ directory.
+Data Loader — Reads data from db99 MySQL (church_scrapes database).
 
-STRATEGY:
-  - On startup: Load all parsed_addresses.csv files into one DataFrame (master church list)
-  - On demand: Load all_services.csv and bulletin_names.csv per state (lazy, LRU cached)
-
-This avoids needing a database for the POC while keeping memory usage manageable.
+Replaces the CSV-based data loading with direct database queries.
+All data comes from the church_scrapes database on db99.rds.blockshopper.com.
 """
 
+import json
+import logging
 import os
-import re
+import threading
+from collections import defaultdict
 from functools import lru_cache
 
 import pandas as pd
+import pymysql
 
-# Module-level globals set during init_data()
+logger = logging.getLogger(__name__)
+
+# ── Module-level globals set during init_data() ─────────────────────────
+_state_list = None
+_bulletin_stats_cache = {}
+_bulletin_filters_cache = {}
+
+# Keep DATA_DIR for backward compat (calendar_download imports it).
+# Set to None since we no longer use CSV files.
 DATA_DIR = None
-_churches_df = None  # Master church list (all states, ~23K rows, ~4 MB)
-_state_list = None  # Cached list of state dicts
-_bulletin_stats_cache = {}  # Pre-computed stats per state (avoids CSV reload on every request)
-_bulletin_filters_cache = {}  # Pre-computed filter dropdowns per state (cities + church options)
 
-# Maps state directory names to expected state name in addresses
+# ── State code mappings ─────────────────────────────────────────────────
+
 STATE_DIR_TO_NAME = {
     "alabama": "Alabama",
     "alaska": "Alaska",
@@ -75,7 +81,6 @@ STATE_DIR_TO_NAME = {
     "wyoming": "Wyoming",
 }
 
-# Also map abbreviations
 STATE_ABBREV_TO_DIR = {
     "AL": "alabama",
     "AK": "alaska",
@@ -129,191 +134,233 @@ STATE_ABBREV_TO_DIR = {
     "WY": "wyoming",
 }
 
+STATE_DIR_TO_CODE = {v: k for k, v in STATE_ABBREV_TO_DIR.items()}
 
-def _extract_state_from_address(address):
-    """Extract state name from an address like '123 Main St, City, State 12345'."""
-    if not isinstance(address, str):
-        return None
-    # Try full state name pattern: ", StateName 12345"
-    m = re.search(r",\s*([A-Za-z]+(?:\s+[A-Za-z]+)*)\s+\d{5}", address)
-    if m:
-        return m.group(1).strip()
-    # Try abbreviation pattern: ", ST 12345"
-    m = re.search(r",\s*([A-Z]{2})\s+\d{5}", address)
-    if m:
-        abbrev = m.group(1)
-        state_dir = STATE_ABBREV_TO_DIR.get(abbrev)
-        if state_dir:
-            return STATE_DIR_TO_NAME.get(state_dir)
-    return None
+# ── Database connection ─────────────────────────────────────────────────
+
+_SECRET_ID = "/ben/ai-tool/db99"
+_DATABASE = "church_scrapes"
+_secrets_cache = {}
 
 
-def _clean_nan(df):
-    """Replace all NaN/None values with empty strings for display.
-    Pandas float('nan') is truthy, so Jinja2 'or' doesn't catch it."""
-    return df.fillna("")
+def _get_secret():
+    """Retrieve DB credentials from AWS Secrets Manager (cached, 5s timeout)."""
+    if _SECRET_ID in _secrets_cache:
+        return _secrets_cache[_SECRET_ID]
+
+    result = [None]
+
+    def _fetch():
+        try:
+            import boto3
+            from botocore.config import Config
+
+            config = Config(connect_timeout=3, read_timeout=3, retries={"max_attempts": 0})
+            client = boto3.client("secretsmanager", region_name="us-east-1", config=config)
+            resp = client.get_secret_value(SecretId=_SECRET_ID)
+            result[0] = json.loads(resp["SecretString"])
+        except Exception:
+            pass
+
+    t = threading.Thread(target=_fetch, daemon=True)
+    t.start()
+    t.join(timeout=5)
+
+    if result[0]:
+        _secrets_cache[_SECRET_ID] = result[0]
+    return result[0]
+
+
+def _get_credentials():
+    """Get DB credentials: AWS Secrets Manager first, then env fallback."""
+    secret = _get_secret()
+    if secret:
+        user = secret.get("username") or secret.get("DB_USER") or ""
+        password = secret.get("password") or secret.get("DB_PASSWORD") or ""
+        if user and password:
+            return user, password
+
+    user = os.getenv("DB_USER", "")
+    password = os.getenv("DB_PASSWORD", "")
+    if user and password:
+        return user, password
+
+    raise ValueError(
+        "Database credentials not found. Check AWS Secrets Manager access "
+        "or set DB_USER/DB_PASSWORD in environment."
+    )
+
+
+def _get_db_connection():
+    """Create a new MySQL connection to church_scrapes on db99."""
+    host = os.getenv("DB_HOST", "db99.rds.blockshopper.com")
+    port = int(os.getenv("DB_PORT", "3306"))
+    user, password = _get_credentials()
+
+    return pymysql.connect(
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        database=_DATABASE,
+        connect_timeout=30,
+        read_timeout=300,
+        write_timeout=300,
+        autocommit=True,
+        charset="utf8mb4",
+        cursorclass=pymysql.cursors.DictCursor,
+    )
+
+
+# ── Helpers ─────────────────────────────────────────────────────────────
+
+
+def _format_time(td):
+    """Format MySQL TIME (timedelta) as 'H:MM AM/PM' to match original CSV format."""
+    if td is None or (isinstance(td, float) and pd.isna(td)) or pd.isna(td):
+        return ""
+    try:
+        total_seconds = int(td.total_seconds())
+    except (ValueError, AttributeError):
+        return ""
+    if total_seconds < 0:
+        return ""
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    period = "AM" if hours < 12 else "PM"
+    display_hour = hours % 12 or 12
+    return f"{display_hour}:{minutes:02d} {period}"
+
+
+def _state_code(state_dir):
+    """Convert state_dir (e.g. 'ohio') to state_code (e.g. 'OH')."""
+    return STATE_DIR_TO_CODE.get(state_dir)
+
+
+# ── Initialization ──────────────────────────────────────────────────────
 
 
 def init_data(app):
     """
-    Called once on app startup. Loads the master church directory
-    from all states' parsed_addresses.csv files.
+    Called once on app startup. Builds state list and pre-computes
+    bulletin stats/filters from db99.
     """
-    global DATA_DIR, _churches_df, _state_list
-    DATA_DIR = app.config["DATA_DIR"]
+    global _state_list, _bulletin_stats_cache, _bulletin_filters_cache
 
-    app.logger.info(f"Loading church data from: {DATA_DIR}")
+    app.logger.info("Loading church data from db99...")
 
-    frames = []
-    for state_dir in sorted(os.listdir(DATA_DIR)):
-        state_path = os.path.join(DATA_DIR, state_dir)
-        if not os.path.isdir(state_path):
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+
+        # 1. State list with church counts
+        cur.execute("""
+            SELECT c.state_code, s.state_name, COUNT(*) as church_count
+            FROM church c
+            JOIN lk_state s ON c.state_code = s.state_code
+            GROUP BY c.state_code, s.state_name
+            ORDER BY s.state_name
+        """)
+        state_rows = cur.fetchall()
+
+        # 2. States that have services (use mass_count on church for speed)
+        cur.execute("""
+            SELECT DISTINCT state_code
+            FROM church
+            WHERE mass_count > 0 OR confession_count > 0 OR adoration_count > 0
+        """)
+        states_with_services = {r["state_code"] for r in cur.fetchall()}
+
+        # 3. Bulletin stats from pre-computed summary table (instant)
+        cur.execute("SELECT * FROM bulletin_state_stats")
+        bulletin_summary = {r["state_code"]: r for r in cur.fetchall()}
+
+        # 5. Church/city combos for filter dropdowns (churches with bulletin sources)
+        cur.execute("""
+            SELECT c.state_code, c.name AS church_name, COALESCE(c.city, 'Unknown') AS city
+            FROM church c
+            INNER JOIN bulletin_source bs ON c.church_id = bs.church_id
+            ORDER BY c.state_code, c.name, c.city
+        """)
+        filter_rows = cur.fetchall()
+
+        conn.close()
+    except Exception as e:
+        app.logger.error(f"Failed to load data from db99: {e}")
+        _state_list = []
+        return
+
+    # Build state list
+    _state_list = []
+    for row in state_rows:
+        sc = row["state_code"]
+        state_dir = STATE_ABBREV_TO_DIR.get(sc)
+        if not state_dir:
             continue
-        addr_path = os.path.join(state_path, "parsed_addresses.csv")
-        if os.path.isfile(addr_path):
-            try:
-                df = pd.read_csv(addr_path, encoding="utf-8-sig")
-                df["state_dir"] = state_dir  # e.g., "arizona"
-                frames.append(df)
-            except Exception as e:
-                app.logger.warning(f"Failed to load {addr_path}: {e}")
-
-    if frames:
-        _churches_df = pd.concat(frames, ignore_index=True)
-        # Fill NaN cities with empty string
-        _churches_df["city"] = _churches_df["city"].fillna("Unknown")
-        _churches_df["state_code"] = _churches_df["state_code"].fillna("")
-        app.logger.info(
-            f"Loaded {len(_churches_df)} churches across {_churches_df['state_dir'].nunique()} states"
-        )
-    else:
-        _churches_df = pd.DataFrame()
-        app.logger.warning("No church data found!")
-
-    # Pre-compute state list with counts
-    _state_list = _build_state_list()
-
-    # Pre-compute bulletin stats AND filter dropdowns at startup.
-    # This avoids loading all CSVs per request and makes bulletin pages load instantly.
-    global _bulletin_stats_cache, _bulletin_filters_cache
-    for state_dir in sorted(os.listdir(DATA_DIR)):
-        csv_path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
-        if not os.path.isfile(csv_path):
-            continue
-        try:
-            total = _count_csv_lines(csv_path)
-            # Read ALL rows (no nrows cap) for accurate unique counts.
-            # Only narrow columns so even 365K rows is fine for one-time startup.
-            df = pd.read_csv(
-                csv_path,
-                encoding="utf-8-sig",
-                usecols=lambda c: c in ("person_name", "church_name", "church_slug", "city"),
-            )
-
-            # If CSV lacks usable city data, join with churches to get cities
-            has_csv_city = "city" in df.columns and df["city"].notna().any()
-            if not has_csv_city and "church_slug" in df.columns:
-                # Drop the all-NaN city column first to avoid city_x/city_y
-                # conflict when merging with churches that also have a city col
-                if "city" in df.columns:
-                    df = df.drop(columns=["city"])
-                churches = get_churches_for_state(state_dir)
-                if not churches.empty and "slug" in churches.columns and "city" in churches.columns:
-                    slug_city = churches[["slug", "city"]].drop_duplicates("slug")
-                    df = df.merge(slug_city, left_on="church_slug", right_on="slug", how="left")
-                    df["city"] = df["city"].fillna("Unknown")
-                    has_csv_city = df["city"].notna().any()
-
-            if has_csv_city:
-                unique = df.groupby(["person_name", "city"], dropna=False).ngroups
-            else:
-                unique = df["person_name"].nunique()
-            _bulletin_stats_cache[state_dir] = {
-                "total_names": total,
-                "unique_names": unique,
-                "church_count": df["church_name"].nunique() if "church_name" in df.columns else 0,
-                "city_count": df["city"].nunique() if "city" in df.columns else 0,
-            }
-
-            # Pre-compute filter dropdown data (cities + church options)
-            cities = sorted(df["city"].dropna().unique().tolist()) if "city" in df.columns else []
-            church_options = []
-            if "church_name" in df.columns:
-                church_names = sorted(df["church_name"].dropna().unique().tolist())
-                if "city" in df.columns and df["city"].notna().any():
-                    church_city_pairs = (
-                        df[df["church_name"].notna() & df["city"].notna()]
-                        .groupby("church_name")["city"]
-                        .apply(lambda x: sorted(x.unique().tolist()))
-                        .to_dict()
-                    )
-                else:
-                    church_city_pairs = {}
-                for name in church_names:
-                    cities_for = church_city_pairs.get(name, [])
-                    if len(cities_for) > 1:
-                        for city in cities_for:
-                            church_options.append(
-                                {"label": f"{name} ({city})", "church": name, "city": city}
-                            )
-                    else:
-                        church_options.append({"label": name, "church": name, "city": ""})
-            _bulletin_filters_cache[state_dir] = {
-                "cities": cities,
-                "church_options": church_options,
-            }
-        except Exception as e:
-            app.logger.warning(f"Failed to compute bulletin stats for {state_dir}: {e}")
-    app.logger.info(
-        f"Pre-computed bulletin stats and filters for {len(_bulletin_stats_cache)} states"
-    )
-
-    # Pre-warm the AJAX data cache for the largest states so the first
-    # DataTable request after a deploy doesn't block on CSV parsing.
-    warm_states = sorted(
-        _bulletin_stats_cache.items(), key=lambda x: x[1]["total_names"], reverse=True
-    )[:5]
-    for state_dir, stats in warm_states:
-        try:
-            get_bulletin_names(state_dir)
-            app.logger.info(
-                f"Pre-warmed bulletin cache: {state_dir} ({stats['total_names']:,} rows)"
-            )
-        except Exception as e:
-            app.logger.warning(f"Failed to pre-warm cache for {state_dir}: {e}")
-
-
-def _build_state_list():
-    """Build a sorted list of states with church counts and bulletin availability."""
-    if _churches_df is None or _churches_df.empty:
-        return []
-
-    state_counts = (
-        _churches_df.groupby("state_dir")
-        .agg(
-            church_count=("slug", "count"),
-            state_code=("state_code", "first"),
-        )
-        .reset_index()
-    )
-
-    result = []
-    for _, row in state_counts.iterrows():
-        state_dir = row["state_dir"]
-        has_bulletin = os.path.isfile(os.path.join(DATA_DIR, state_dir, "bulletin_names.csv"))
-        has_services = os.path.isfile(os.path.join(DATA_DIR, state_dir, "all_services.csv"))
-        result.append(
+        _state_list.append(
             {
                 "state_dir": state_dir,
-                "state_code": row["state_code"] or state_dir[:2].upper(),
-                "display_name": state_dir.replace("_", " ").title(),
+                "state_code": sc,
+                "display_name": row["state_name"],
                 "church_count": int(row["church_count"]),
-                "has_bulletin": has_bulletin,
-                "has_services": has_services,
+                "has_bulletin": sc in bulletin_summary,
+                "has_services": sc in states_with_services,
             }
         )
+    _state_list.sort(key=lambda x: x["display_name"])
 
-    return sorted(result, key=lambda x: x["display_name"])
+    total_churches = sum(s["church_count"] for s in _state_list)
+    app.logger.info(f"Loaded {total_churches} churches across {len(_state_list)} states")
+
+    # Build bulletin stats cache from bulletin_state_stats table
+    for sc, bs in bulletin_summary.items():
+        state_dir = STATE_ABBREV_TO_DIR.get(sc)
+        if not state_dir:
+            continue
+        _bulletin_stats_cache[state_dir] = {
+            "total_names": int(bs["total_names"]),
+            "unique_names": int(bs["unique_names"]),
+            "church_count": int(bs["church_count"]),
+            "city_count": int(bs["city_count"]),
+        }
+
+    app.logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
+
+    # Build bulletin filters cache
+    state_churches = defaultdict(list)
+    for row in filter_rows:
+        state_dir = STATE_ABBREV_TO_DIR.get(row["state_code"])
+        if state_dir:
+            state_churches[state_dir].append((row["church_name"], row["city"]))
+
+    for state_dir, pairs in state_churches.items():
+        cities = sorted({city for _, city in pairs})
+
+        church_city_map = defaultdict(list)
+        for name, city in pairs:
+            if city not in church_city_map[name]:
+                church_city_map[name].append(city)
+
+        church_options = []
+        for name in sorted(church_city_map.keys()):
+            cities_for = sorted(church_city_map[name])
+            if len(cities_for) > 1:
+                for city in cities_for:
+                    church_options.append(
+                        {"label": f"{name} ({city})", "church": name, "city": city}
+                    )
+            else:
+                church_options.append({"label": name, "church": name, "city": ""})
+
+        _bulletin_filters_cache[state_dir] = {
+            "cities": cities,
+            "church_options": church_options,
+        }
+
+    app.logger.info(f"Pre-computed bulletin filters for {len(_bulletin_filters_cache)} states")
+
+
+# ── Public API ──────────────────────────────────────────────────────────
 
 
 def get_states():
@@ -322,85 +369,111 @@ def get_states():
 
 
 def get_states_with_bulletins():
-    """Return list of state dicts that have bulletin_names.csv."""
+    """Return list of state dicts that have bulletin name data."""
     return [s for s in _state_list if s["has_bulletin"]]
 
 
 def get_churches_for_state(state_dir):
     """Return DataFrame of churches for a given state."""
-    if _churches_df is None or _churches_df.empty:
+    sc = _state_code(state_dir)
+    if not sc:
         return pd.DataFrame()
-    return _churches_df[_churches_df["state_dir"] == state_dir].copy()
+
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT church_id, slug, name, street, city, state_code, postal_code AS zip5,
+                   phone, website_url,
+                   CONCAT_WS(', ', NULLIF(street, ''), city,
+                             CONCAT(state_code, ' ', postal_code)) AS full_street
+            FROM church
+            WHERE state_code = %s
+            ORDER BY name
+            """,
+            (sc,),
+        )
+        rows = cur.fetchall()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Error loading churches for {state_dir}: {e}")
+        return pd.DataFrame()
+
+    if not rows:
+        return pd.DataFrame()
+
+    df = pd.DataFrame(rows)
+    df["state_dir"] = state_dir
+    df["city"] = df["city"].fillna("Unknown")
+    df["state_code"] = df["state_code"].fillna("")
+    return df
 
 
 @lru_cache(maxsize=3)
 def get_services(state_dir):
     """
     Load and return services DataFrame for a state.
-    Cached for the 5 most recently accessed states.
-    Filters out cross-state contamination (churches whose address
-    doesn't match the expected state).
+    Returns columns matching the original CSV format expected by routes:
+    Church, Address, Phone, Category, Day, Time Start, Time End,
+    Service Name, church_slug, city, church_display.
     """
-    path = os.path.join(DATA_DIR, state_dir, "all_services.csv")
-    if not os.path.isfile(path):
+    sc = _state_code(state_dir)
+    if not sc:
         return pd.DataFrame()
 
-    df = pd.read_csv(path, encoding="utf-8-sig")
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT
+                c.name                                          AS `Church`,
+                c.slug                                          AS church_slug,
+                CONCAT_WS(', ', NULLIF(c.street, ''), c.city,
+                          CONCAT(c.state_code, ' ', c.postal_code))  AS `Address`,
+                COALESCE(c.phone, '')                           AS `Phone`,
+                COALESCE(c.city, 'Unknown')                     AS city,
+                COALESCE(lcat.display_name, 'Other')            AS `Category`,
+                COALESCE(d.day_name, '')                        AS `Day`,
+                s.time_start                                    AS time_start_raw,
+                s.time_end                                      AS time_end_raw,
+                COALESCE(s.display_name, '')                    AS `Service Name`,
+                COALESCE(lst.display_name, '')                  AS `Schedule Type`,
+                COALESCE(ll.display_name, '')                   AS `Language`,
+                COALESCE(s.location, '')                        AS `Location`,
+                COALESCE(s.notes_raw, '')                       AS `Notes`
+            FROM service s
+            JOIN church c ON s.church_id = c.church_id
+            LEFT JOIN lk_service_category lcat ON s.category_code = lcat.category_code
+            LEFT JOIN lk_day_of_week d ON s.day_code = d.day_code
+            LEFT JOIN lk_schedule_type lst ON s.schedule_type_code = lst.schedule_type_code
+            LEFT JOIN lk_language ll ON s.language_code = ll.language_code
+            WHERE c.state_code = %s
+              AND s.is_active = 1
+              AND s.event_date IS NULL
+            ORDER BY c.name, COALESCE(lcat.sort_order, 99),
+                     COALESCE(d.sort_order, 99), s.time_start
+            """,
+            (sc,),
+        )
+        rows = cur.fetchall()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Error loading services for {state_dir}: {e}")
+        return pd.DataFrame()
 
-    # Parse city and address_state from Address: "street, City, State Zip"
-    if "Address" in df.columns:
-        parts = df["Address"].str.split(",")
-        # City is usually the second part; state+zip is the third
-        df["city"] = parts.str[1].str.strip()
-        df["city"] = df["city"].fillna("Unknown")
+    if not rows:
+        return pd.DataFrame()
 
-        # Filter: only keep rows whose address state matches this state_dir
-        expected_state = STATE_DIR_TO_NAME.get(state_dir, "")
-        if expected_state:
-            df["_addr_state"] = df["Address"].apply(_extract_state_from_address)
-            before = len(df)
-            # Keep rows where address state matches OR where we couldn't parse state
-            df = df[
-                (df["_addr_state"].isna())
-                | (df["_addr_state"] == "")
-                | (df["_addr_state"].str.lower() == expected_state.lower())
-            ].copy()
-            removed = before - len(df)
-            if removed > 0:
-                import logging
+    df = pd.DataFrame(rows)
 
-                logging.getLogger(__name__).info(
-                    f"Filtered {removed} cross-state services from {state_dir} " f"(kept {len(df)})"
-                )
-            df.drop(columns=["_addr_state"], inplace=True, errors="ignore")
-    else:
-        df["city"] = "Unknown"
+    # Format time columns to match CSV format ("9:00 AM")
+    df["Time Start"] = df["time_start_raw"].apply(_format_time)
+    df["Time End"] = df["time_end_raw"].apply(_format_time)
+    df.drop(columns=["time_start_raw", "time_end_raw"], inplace=True)
 
-    # Join services to slugs from parsed_addresses for unique identification
-    churches_df = get_churches_for_state(state_dir)
-    if not churches_df.empty and "Church" in df.columns and "city" in df.columns:
-        # Build lookup: (name, city) -> slug, and name -> slug (fallback)
-        slug_by_name_city = {}
-        slug_by_name = {}
-        for _, row in churches_df.iterrows():
-            name = str(row.get("name", "")).strip()
-            city = str(row.get("city", "")).strip()
-            slug = str(row.get("slug", "")).strip()
-            if name and slug:
-                slug_by_name_city[(name, city)] = slug
-                if name not in slug_by_name:
-                    slug_by_name[name] = slug
-
-        def _lookup_slug(row):
-            name = str(row.get("Church", "")).strip()
-            city = str(row.get("city", "")).strip()
-            return slug_by_name_city.get((name, city)) or slug_by_name.get(name, "")
-
-        df["church_slug"] = df.apply(_lookup_slug, axis=1)
-    else:
-        df["church_slug"] = ""
-
-    # Create display name: "Church Name (City)" for duplicate names
+    # Build church_display: "Church Name (City)" for duplicate names
     if "Church" in df.columns and "city" in df.columns:
         name_counts = df.groupby("Church")["city"].nunique()
         dup_names = set(name_counts[name_counts > 1].index)
@@ -411,8 +484,8 @@ def get_services(state_dir):
     else:
         df["church_display"] = df.get("Church", "")
 
-    # Clean all NaN values for display
-    df = _clean_nan(df)
+    # Fill NaN for display
+    df = df.fillna("")
 
     return df
 
@@ -420,140 +493,67 @@ def get_services(state_dir):
 @lru_cache(maxsize=8)
 def get_bulletin_names(state_dir):
     """
-    Load and return bulletin names DataFrame for a state.
-    Joins with parsed_addresses to add city/address info.
-    Returns None if no bulletin data exists.
+    Load and return bulletin names DataFrame for a state from v_bulletin_ui_names.
+    Returns None if no bulletin data exists. Capped at 50,000 rows.
     """
-    path = os.path.join(DATA_DIR, state_dir, "bulletin_names.csv")
-    if not os.path.isfile(path):
+    sc = _state_code(state_dir)
+    if not sc or state_dir not in _bulletin_stats_cache:
         return None
 
-    df = pd.read_csv(path, encoding="utf-8-sig", nrows=50_000, dtype={"confidence_score": "str"})
-
-    # If CSV already has city column (new format), use it directly
-    if "city" in df.columns and df["city"].notna().any():
-        df["city"] = df["city"].fillna("Unknown")
-        # Still try to join for full_street if available
-        churches = get_churches_for_state(state_dir)
-        if not churches.empty and "church_slug" in df.columns:
-            addr_cols = [
-                c for c in ["slug", "full_street", "state_code", "zip5"] if c in churches.columns
-            ]
-            if addr_cols:
-                merged = df.merge(
-                    churches[addr_cols],
-                    left_on="church_slug",
-                    right_on="slug",
-                    how="left",
-                    suffixes=("", "_addr"),
-                )
-                merged["full_street"] = merged.get("full_street", pd.Series("")).fillna("")
-                return merged
-        return df
-
-    # Legacy: CSV without city column — join with churches to get city + full_street
-    churches = get_churches_for_state(state_dir)
-    if not churches.empty and "church_slug" in df.columns:
-        merged = df.merge(
-            churches[["slug", "city", "full_street", "state_code", "zip5"]],
-            left_on="church_slug",
-            right_on="slug",
-            how="left",
-            suffixes=("", "_addr"),
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT
+                person_name,
+                COALESCE(title, '')                         AS title,
+                COALESCE(first_name, '')                    AS first_name,
+                COALESCE(middle_name, '')                   AS middle_name,
+                COALESCE(last_name, '')                     AS last_name,
+                COALESCE(category, '')                      AS category,
+                COALESCE(confidence, '')                    AS confidence,
+                is_suspect,
+                is_verified,
+                COALESCE(church_name, '')                   AS church_name,
+                COALESCE(church_city, 'Unknown')            AS city,
+                COALESCE(church_street, '')                 AS full_street,
+                COALESCE(state_code, '')                    AS state_code,
+                COALESCE(church_zip, '')                    AS zip5,
+                COALESCE(pdf_url, '')                       AS pdf_url,
+                bulletin_date                               AS pdf_date,
+                church_id
+            FROM v_bulletin_ui_names
+            WHERE state_code = %s
+            LIMIT 50000
+            """,
+            (sc,),
         )
-        merged["city"] = merged["city"].fillna("Unknown")
-        merged["full_street"] = merged["full_street"].fillna("")
-        return merged
+        rows = cur.fetchall()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Error loading bulletin names for {state_dir}: {e}")
+        return None
 
+    if not rows:
+        return None
+
+    df = pd.DataFrame(rows)
     return df
 
 
-def _count_csv_lines(path):
-    """Count data rows in a CSV file (excluding header). Fast, no pandas."""
-    try:
-        with open(path, "rb") as f:
-            return sum(1 for _ in f) - 1  # subtract header
-    except Exception:
-        return 0
-
-
 def get_bulletin_stats(state_dir):
-    """Return summary stats for bulletin names in a state.
-    Uses pre-computed cache from init_data() for fast lookups."""
+    """Return summary stats for bulletin names in a state (pre-computed)."""
     return _bulletin_stats_cache.get(state_dir)
 
 
 def get_bulletin_filters(state_dir):
-    """Return pre-computed filter dropdown data (cities + church options) for a state.
-    Uses pre-computed cache from init_data() for instant page loads."""
+    """Return pre-computed filter dropdown data (cities + church options)."""
     return _bulletin_filters_cache.get(state_dir)
 
 
-@lru_cache(maxsize=3)
-def _load_church_details_jsonl(state_dir):
-    """Load church_details.jsonl and build a lookup by church name.
-    Returns dict mapping church name -> {website_resolved, slug}.
-    """
-    import json as _json
+# ── Bulletin names server-side pagination (SQL) ─────────────────────────
 
-    path = os.path.join(DATA_DIR, state_dir, "church_details.jsonl")
-    if not os.path.isfile(path):
-        return {}
-
-    lookup = {}
-    try:
-        with open(path, encoding="utf-8") as f:
-            for line in f:
-                entry = _json.loads(line)
-                church = entry.get("church", {})
-                name = church.get("name", "").strip()
-                slug = church.get("slug", "")
-                website = entry.get("website_resolved") or church.get("website_resolved", "") or ""
-                if name:
-                    lookup[name] = {"website": website, "slug": slug or ""}
-    except Exception:
-        pass
-    return lookup
-
-
-def get_church_website(state_dir, church_name):
-    """Look up a church's resolved website URL from JSONL data."""
-    lookup = _load_church_details_jsonl(state_dir)
-    info = lookup.get(church_name, {})
-    return info.get("website", "")
-
-
-def get_church_slug(state_dir, church_name):
-    """Look up a church's slug from JSONL data."""
-    lookup = _load_church_details_jsonl(state_dir)
-    info = lookup.get(church_name, {})
-    return info.get("slug", "")
-
-
-@lru_cache(maxsize=3)
-def get_dated_services(state_dir):
-    """
-    Load and return dated services DataFrame for a state.
-    Cached for the 5 most recently accessed states.
-    """
-    path = os.path.join(DATA_DIR, state_dir, "dated_services.csv")
-    if not os.path.isfile(path):
-        return pd.DataFrame()
-
-    df = pd.read_csv(path, encoding="utf-8-sig")
-    df = _clean_nan(df)
-    return df
-
-
-def church_has_bulletin_names(state_dir, church_name):
-    """Check if a church has any bulletin-extracted names."""
-    df = get_bulletin_names(state_dir)
-    if df is None or df.empty:
-        return False
-    return (df["church_name"] == church_name).any()
-
-
-# Columns served to the DataTables AJAX endpoint (order matters — matches column indices)
 _BULLETIN_PAGE_COLS = [
     "person_name",
     "role",
@@ -567,6 +567,21 @@ _BULLETIN_PAGE_COLS = [
     "pdf_url",
     "pdf_date",
 ]
+
+# Map DataTables column index → SQL column name in v_bulletin_ui_names
+_COL_INDEX_TO_SQL = {
+    0: "person_name",
+    1: "title",       # "role" doesn't exist; sort by title instead
+    2: "title",
+    3: "first_name",
+    4: "last_name",
+    5: "church_name",
+    6: "church_city",
+    7: "category",
+    8: "confidence",
+    9: "pdf_url",
+    10: "bulletin_date",
+}
 
 
 def get_bulletin_names_page(
@@ -582,54 +597,223 @@ def get_bulletin_names_page(
 ):
     """
     Return a page of bulletin names for DataTables server-side processing.
-
-    Returns (rows_list, total_records, filtered_records) where rows_list
-    is a list of lists (one per row, columns in _BULLETIN_PAGE_COLS order).
+    Uses SQL LIMIT/OFFSET for efficiency instead of loading all rows.
+    Returns (rows_list, total_records, filtered_records).
     """
-    df = get_bulletin_names(state_dir)
-    if df is None or df.empty:
+    sc = _state_code(state_dir)
+    if not sc:
         return [], 0, 0
 
-    # If numeric confidence_score column exists, use it for the confidence display
-    if "confidence_score" in df.columns:
-        df["confidence"] = df["confidence_score"]
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
 
-    total_records = len(df)
+        # Base filter
+        where = ["state_code = %s"]
+        params = [sc]
 
-    # --- Apply filters ---
-    if church_filter and "church_name" in df.columns:
-        df = df[df["church_name"] == church_filter]
-    if city_filter and "city" in df.columns:
-        df = df[df["city"] == city_filter]
-    if category_filter and "category" in df.columns:
-        df = df[df["category"] == category_filter]
+        if church_filter:
+            where.append("church_name = %s")
+            params.append(church_filter)
+        if city_filter:
+            where.append("church_city = %s")
+            params.append(city_filter)
+        if category_filter:
+            where.append("category = %s")
+            params.append(category_filter)
 
-    # Global search across all display columns
-    if search:
-        search_lower = search.lower()
-        available = [c for c in _BULLETIN_PAGE_COLS if c in df.columns and c != "pdf_url"]
-        mask = pd.Series(False, index=df.index)
-        for col in available:
-            mask = mask | df[col].astype(str).str.lower().str.contains(search_lower, na=False)
-        df = df[mask]
+        # Total count (unfiltered for this state)
+        cur.execute(
+            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s",
+            (sc,),
+        )
+        total_records = cur.fetchone()["cnt"]
 
-    filtered_records = len(df)
+        # Search across text columns
+        if search:
+            search_like = f"%{search}%"
+            search_cols = [
+                "person_name", "title", "first_name", "last_name",
+                "church_name", "church_city", "category", "confidence",
+            ]
+            search_clause = " OR ".join(f"{c} LIKE %s" for c in search_cols)
+            where.append(f"({search_clause})")
+            params.extend([search_like] * len(search_cols))
 
-    # --- Sort ---
-    available_cols = [c for c in _BULLETIN_PAGE_COLS if c in df.columns]
-    if 0 <= order_col < len(available_cols):
-        sort_col = available_cols[order_col]
-        ascending = order_dir != "desc"
-        df = df.sort_values(sort_col, ascending=ascending, na_position="last")
+        where_sql = " AND ".join(where)
 
-    # --- Paginate ---
-    page = df.iloc[start : start + length]
+        # Filtered count
+        cur.execute(
+            f"SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE {where_sql}",
+            params,
+        )
+        filtered_records = cur.fetchone()["cnt"]
 
-    # Build list-of-lists with only available columns (fill missing with "")
-    rows = []
-    for _, row in page.iterrows():
-        rows.append(
-            [str(row.get(c, "") if pd.notna(row.get(c, "")) else "") for c in _BULLETIN_PAGE_COLS]
+        # Order — whitelist column names to prevent injection
+        sort_col = _COL_INDEX_TO_SQL.get(order_col, "person_name")
+        sort_dir = "DESC" if order_dir == "desc" else "ASC"
+
+        # Fetch page
+        cur.execute(
+            f"""
+            SELECT person_name, title, first_name, last_name,
+                   church_name, church_city, category, confidence,
+                   pdf_url, bulletin_date
+            FROM v_bulletin_ui_names
+            WHERE {where_sql}
+            ORDER BY {sort_col} {sort_dir}
+            LIMIT %s OFFSET %s
+            """,
+            params + [length, start],
         )
 
-    return rows, total_records, filtered_records
+        rows = []
+        for r in cur.fetchall():
+            rows.append(
+                [
+                    r["person_name"] or "",
+                    "",  # role (not in DB)
+                    r["title"] or "",
+                    r["first_name"] or "",
+                    r["last_name"] or "",
+                    r["church_name"] or "",
+                    r["church_city"] or "",
+                    r["category"] or "",
+                    r["confidence"] or "",
+                    r["pdf_url"] or "",
+                    str(r["bulletin_date"]) if r["bulletin_date"] else "",
+                ]
+            )
+
+        conn.close()
+        return rows, total_records, filtered_records
+
+    except Exception as e:
+        logger.error(f"Error in get_bulletin_names_page: {e}")
+        return [], 0, 0
+
+
+# ── Dated services (calendar) ──────────────────────────────────────────
+
+
+@lru_cache(maxsize=3)
+def get_dated_services(state_dir):
+    """Load and return dated services DataFrame for a state (services with event_date)."""
+    sc = _state_code(state_dir)
+    if not sc:
+        return pd.DataFrame()
+
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT
+                DATE_FORMAT(s.event_date, '%%a, %%b %%e, %%Y')  AS `Date`,
+                DATE_FORMAT(s.event_date, '%%Y-%%m-%%d')         AS `Date Sort`,
+                COALESCE(d.day_name, '')                         AS `Day`,
+                c.name                                           AS `Church`,
+                CONCAT_WS(', ', NULLIF(c.street, ''), c.city)   AS `Address`,
+                COALESCE(c.phone, '')                            AS `Phone`,
+                COALESCE(lcat.display_name, 'Other')             AS `Category`,
+                s.time_start                                     AS time_raw,
+                s.time_end                                       AS time_end_raw,
+                COALESCE(s.display_name, '')                     AS `Service Name`,
+                COALESCE(ll.display_name, '')                    AS `Language`,
+                COALESCE(s.location, '')                         AS `Location`,
+                COALESCE(s.notes_raw, '')                        AS `Notes`
+            FROM service s
+            JOIN church c ON s.church_id = c.church_id
+            LEFT JOIN lk_service_category lcat ON s.category_code = lcat.category_code
+            LEFT JOIN lk_day_of_week d ON s.day_code = d.day_code
+            LEFT JOIN lk_language ll ON s.language_code = ll.language_code
+            WHERE c.state_code = %s
+              AND s.event_date IS NOT NULL
+              AND s.is_active = 1
+            ORDER BY s.event_date, s.time_start
+            """,
+            (sc,),
+        )
+        rows = cur.fetchall()
+        conn.close()
+    except Exception as e:
+        logger.error(f"Error loading dated services for {state_dir}: {e}")
+        return pd.DataFrame()
+
+    if not rows:
+        return pd.DataFrame()
+
+    df = pd.DataFrame(rows)
+    df["Time"] = df["time_raw"].apply(_format_time)
+    df["End Time"] = df["time_end_raw"].apply(_format_time)
+    df.drop(columns=["time_raw", "time_end_raw"], inplace=True)
+    df = df.fillna("")
+    return df
+
+
+def generate_dated_services_csv(state_dir):
+    """Generate CSV content string for dated services download."""
+    df = get_dated_services(state_dir)
+    if df.empty:
+        return None
+    return df.to_csv(index=False)
+
+
+# ── Church lookups ──────────────────────────────────────────────────────
+
+
+@lru_cache(maxsize=8)
+def _load_church_details_jsonl(state_dir):
+    """
+    Load church details from db99. Returns dict mapping
+    church name -> {"website": url, "slug": slug}.
+
+    Function name kept for backward compat with mass_times.py import.
+    """
+    sc = _state_code(state_dir)
+    if not sc:
+        return {}
+
+    try:
+        conn = _get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT name, COALESCE(website_url, '') AS website_url, slug "
+            "FROM church WHERE state_code = %s",
+            (sc,),
+        )
+        lookup = {}
+        for row in cur.fetchall():
+            name = (row["name"] or "").strip()
+            if name:
+                lookup[name] = {
+                    "website": row["website_url"] or "",
+                    "slug": row["slug"] or "",
+                }
+        conn.close()
+        return lookup
+    except Exception as e:
+        logger.error(f"Error loading church details for {state_dir}: {e}")
+        return {}
+
+
+def get_church_website(state_dir, church_name):
+    """Look up a church's resolved website URL."""
+    lookup = _load_church_details_jsonl(state_dir)
+    info = lookup.get(church_name, {})
+    return info.get("website", "")
+
+
+def get_church_slug(state_dir, church_name):
+    """Look up a church's slug."""
+    lookup = _load_church_details_jsonl(state_dir)
+    info = lookup.get(church_name, {})
+    return info.get("slug", "")
+
+
+def church_has_bulletin_names(state_dir, church_name):
+    """Check if a church has any bulletin-extracted names."""
+    df = get_bulletin_names(state_dir)
+    if df is None or df.empty:
+        return False
+    return (df["church_name"] == church_name).any()

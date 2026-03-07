@@ -1,6 +1,5 @@
 # Dockerfile for Catholic Church Dashboard
-# Build context should be the REPO ROOT (not dashboard/)
-# Render sets rootDir in render.yaml but Docker needs repo root for data access
+# Reads all data from db99 MySQL (no CSV files needed)
 
 FROM python:3.12-slim
 
@@ -16,13 +15,8 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 # Copy dashboard application code
 COPY dashboard/app/ /app/app/
 
-# Copy ONLY the CSV data files we need (not raw PDFs, texts, etc.)
-# Each state folder has: parsed_addresses.csv, all_services.csv, bulletin_names.csv
-COPY data/output/ /app/data/output/
-
 # Environment
 ENV FLASK_APP=app
-ENV DATA_DIR=/app/data/output
 ENV SECRET_KEY=change-me-in-production
 
 EXPOSE 10000

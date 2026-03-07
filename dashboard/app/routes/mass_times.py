@@ -236,17 +236,12 @@ def calendar_view(state):
 
 @bp.route("/<state>/calendar/download/")
 def calendar_download(state):
-    """Download dated_services.csv as a file."""
-    import os
+    """Download dated services as a CSV file."""
+    from app.data_loader import generate_dated_services_csv
 
-    from app.data_loader import DATA_DIR
-
-    path = os.path.join(DATA_DIR, state, "dated_services.csv")
-    if not os.path.isfile(path):
+    csv_content = generate_dated_services_csv(state)
+    if csv_content is None:
         abort(404)
-
-    with open(path, encoding="utf-8-sig") as f:
-        csv_content = f.read()
 
     return Response(
         csv_content,
