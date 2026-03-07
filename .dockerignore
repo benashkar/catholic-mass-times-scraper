@@ -1,0 +1,18 @@
+# Keep Docker build context small for cron jobs
+.git
+.github
+.claude
+.coverage
+*.png
+*.xlsx
+*.log
+logs/
+data/output/*/bulletins/
+data/output/*/bulletin_texts/
+data/output/*-BenAcer.*
+data/reference/
+data/diocese_parishes/
+tests/
+scripts/
+*.md
+!requirements.txt

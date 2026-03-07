@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-# System dependencies: git (for commit/push), curl (for Render API), chromium (for Playwright)
+# System dependencies: git (for commit/push), curl (for Render API/health checks)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
@@ -13,10 +13,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir pymysql boto3
 
-# Install Playwright Chromium browser
-RUN playwright install --with-deps chromium
-
-# Copy project source
+# Copy project source (see .dockerignore for exclusions)
 COPY . .
 
 # Default: run the weekly pipeline

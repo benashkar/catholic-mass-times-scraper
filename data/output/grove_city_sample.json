@@ -14,8 +14,8 @@
         "latitude": 39.88751302,
         "longitude": -83.08795897,
         "phone": "(614) 875-3322",
-        "website": "/api/out?id=us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf&type=website&t=1771618441443&sig=ofh2MrK4zbCPhzWSwIEvV6dr1jOOk38v5pXCb3iCh8w",
-        "livestreamUrl": "/api/out?id=us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf&type=livestream&t=1771618441443&sig=MTat05pI_CjRPwOb4N2fD7krDxkuqHzzaxGMIiG2g1c",
+        "website": "/api/out?id=us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf&type=website&t=1771618415102&sig=nda-92Zv4s88lJl8i9eIdQ0QDzvOgnICFPwXYiKGcMo",
+        "livestreamUrl": "/api/out?id=us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf&type=livestream&t=1771618415103&sig=GYXgN5Tyspos159q45Ur1DpAqU_kDYcVgNJHarVdCXQ",
         "updatedAt": "2026-02-17T23:18:28.730Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -323,7 +323,7 @@
       "totalServices": 17,
       "communityInsights": "• Sunday Masses are often packed, so it's a good idea to arrive early to secure a good seat.\n• The homilies are generally good, and the Masses are reverent, following the proper order without ad-libbed parts.\n• The music ministry is impressive, featuring a mix of familiar hymns, engaging chants, and contemporary pieces that still feel appropriate for sacred worship, with beautiful choir and organ performances.\n• The community is very welcoming and supportive, making everyone feel accepted and providing many opportunities for involvement in ministerial life and community events like Fish Fries and a parish festival.\n• The church offers an incredible blessing of a 24-hour chapel for Eucharistic adoration.\n• Father Joe and Karen Cook are noted for being very welcoming and open to questions about the Christian faith, especially through the incredible RCIA program.",
       "source_url": "https://catholicindex.org/churches/us-oh-grove-city-our-lady-of-perpetual-help-7815f1cf",
-      "last_scraped": "2026-02-20T20:14:01.598636+00:00"
+      "last_scraped": "2026-02-20T20:13:35.266823+00:00"
     },
     {
       "church": {
@@ -336,8 +336,8 @@
         "latitude": 39.93005467,
         "longitude": -83.10610051,
         "phone": "(614) 272-5206",
-        "website": "/api/out?id=us-oh-columbus-st-stephen-the-martyr-03ceb9a2&type=website&t=1771618443097&sig=2-3y3rTQxlQU_zgZIuVJqUreBGOGSwn8v6nd8llmI2U",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-st-stephen-the-martyr-03ceb9a2&type=livestream&t=1771618443097&sig=NWiCvNSL-iAnqXINwZ6yf9J1UquGo6qEGQIu6dnWx0Q",
+        "website": "/api/out?id=us-oh-columbus-st-stephen-the-martyr-03ceb9a2&type=website&t=1771618416375&sig=CT1U-zvaFVsKsA-y92SAEIR9rc7RSQcNDZIWgD83u5Q",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-st-stephen-the-martyr-03ceb9a2&type=livestream&t=1771618416375&sig=V_fHFs0IgoRqx4p9ONvcJ_kgL0qy_e2LHnPcR1CM9JM",
         "updatedAt": "2026-02-13T08:43:47.799Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -420,7 +420,7 @@
       "totalServices": 4,
       "communityInsights": "• The church is described as beautiful and a great place to feel closer to God.\n• The priests and staff are noted for being very kind, attentive, and having excellent vocations.\n• Visitors appreciate the very good attention received from the priest and collaborators.\n• The community is known for having very nice people and a welcoming atmosphere.\n• The church embraces diversity among its family members in Christ.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-st-stephen-the-martyr-03ceb9a2",
-      "last_scraped": "2026-02-20T20:14:03.254549+00:00"
+      "last_scraped": "2026-02-20T20:13:36.528690+00:00"
     },
     {
       "church": {
@@ -433,8 +433,8 @@
         "latitude": 39.93935717,
         "longitude": -83.06070285,
         "phone": "(614) 276-5413",
-        "website": "/api/out?id=us-oh-columbus-st-agnes-527e1a71&type=website&t=1771618444563&sig=XWFPYvrhIOJiXG7ivzHsa787BjhGrfYlRjJzvWc-4QU",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-st-agnes-527e1a71&type=livestream&t=1771618444563&sig=Ppk2IA4mEVC1Tu6L1s38aBJmJhKnCz0oaEY9qP57z6Q",
+        "website": "/api/out?id=us-oh-columbus-st-agnes-527e1a71&type=website&t=1771618417757&sig=HCDsahiJTYVU4Ej75inx2hCOEdvrz0eX8X6i-MtNcCs",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-st-agnes-527e1a71&type=livestream&t=1771618417757&sig=mSICZzeLVWL7sAmfdgwndjeowOLBbx8XEmBYo8BPXxI",
         "updatedAt": "2025-10-11T09:03:11.578Z",
         "watchSlug": "us-oh-columbus-st-agnes-527e1a71",
         "streamCount": 53,
@@ -617,7 +617,7 @@
       "totalServices": 10,
       "communityInsights": "• The church offers Masses in Spanish.\n• Visitors consistently describe the people as very nice and friendly.\n• Many express love for the priest.\n• The community is known for being welcoming and helpful.\n• The facilities are clean.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-st-agnes-527e1a71",
-      "last_scraped": "2026-02-20T20:14:04.723684+00:00"
+      "last_scraped": "2026-02-20T20:13:37.908046+00:00"
     },
     {
       "church": {
@@ -630,8 +630,8 @@
         "latitude": 39.9453099,
         "longitude": -83.07735612,
         "phone": "(614) 274-1121",
-        "website": "/api/out?id=us-oh-columbus-saint-mary-magdalene-32c4a553&type=website&t=1771618446052&sig=cPYJ2IFz9CiNmih3BynbXUDpfsESddR-cGaNBB6lDA8",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-mary-magdalene-32c4a553&type=livestream&t=1771618446052&sig=uh2RWq2mi-g_xHL6odmeeWVoaaZOp09Z9NgYkvTJ9C0",
+        "website": "/api/out?id=us-oh-columbus-saint-mary-magdalene-32c4a553&type=website&t=1771618419272&sig=ufHzFpVhOL2PCTiEfE91IV0S0Hin0i2KACd7MAGGn2c",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-mary-magdalene-32c4a553&type=livestream&t=1771618419272&sig=tZKn-isTfWyWLTrA1gHutGQik1t3kcuuglce8J23z4U",
         "updatedAt": "2026-02-17T12:48:49.942Z",
         "watchSlug": "us-oh-columbus-saint-mary-magdalene-32c4a553",
         "streamCount": 66,
@@ -992,7 +992,7 @@
       "totalServices": 20,
       "communityInsights": "INSUFFICIENT_DATA",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-saint-mary-magdalene-32c4a553",
-      "last_scraped": "2026-02-20T20:14:06.212945+00:00"
+      "last_scraped": "2026-02-20T20:13:39.434185+00:00"
     },
     {
       "church": {
@@ -1005,8 +1005,8 @@
         "latitude": 39.94233321,
         "longitude": -83.14154768,
         "phone": "(614) 878-5353",
-        "website": "/api/out?id=us-oh-columbus-saint-cecilia-3e50952b&type=website&t=1771618447522&sig=HA-gBfC_WjT-aHJ8llZOUumDrnI6GShUy3VswrzgRgw",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-cecilia-3e50952b&type=livestream&t=1771618447522&sig=LySCj3dLd0h8SKZpAuZwt3zok7Tk_KGreRpEmyZC_R8",
+        "website": "/api/out?id=us-oh-columbus-saint-cecilia-3e50952b&type=website&t=1771618420769&sig=fWwvJMKrTpfflXmr74VQI8d5NPgerqcUApok2i0XSWY",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-cecilia-3e50952b&type=livestream&t=1771618420769&sig=RW1EWTNvisFRuqX0JPj4BDF8jTEsNH5uibywfuPbMgs",
         "updatedAt": "2026-02-17T11:46:44.762Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -1261,7 +1261,7 @@
       "totalServices": 14,
       "communityInsights": "• The church hosts a great festival, with visitors appreciating the amazing job done by those involved.\n• The pastor is described as friendly, contributing to a welcoming atmosphere.\n• For those who prefer it, you can request a Mass in Spanish.\n• The Bell Choir is superb, adding to the beauty of the services.\n• The church is beautiful and offers plenty of seating, even while observing pandemic precautions.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-saint-cecilia-3e50952b",
-      "last_scraped": "2026-02-20T20:14:07.683368+00:00"
+      "last_scraped": "2026-02-20T20:13:40.922169+00:00"
     },
     {
       "church": {
@@ -1274,7 +1274,7 @@
         "latitude": 39.95542476,
         "longitude": -83.05823,
         "phone": "(614) 276-6587",
-        "website": "/api/out?id=us-oh-columbus-saint-aloysius-ca20c757&type=website&t=1771618448983&sig=Mdi6gum7xkl0hxJbNgNZnmCY1TPLw1HwBYtsxs_72S0",
+        "website": "/api/out?id=us-oh-columbus-saint-aloysius-ca20c757&type=website&t=1771618422210&sig=qiHy7diY6qOOewJ3hKksV9xyC93E5BcqQbu5pqKXTbE",
         "livestreamUrl": "#",
         "updatedAt": "2026-02-17T19:34:31.061Z",
         "watchSlug": null,
@@ -1411,7 +1411,7 @@
       "totalServices": 7,
       "communityInsights": "• Father Toner is consistently praised as a wonderful, amazing, and holy leader.\n• Sermons are described as beautifully unraveling scripture, offering deep insights into passages like Paul's words on increasing in love and holiness.\n• The community is noted for its welcoming atmosphere, with free food available on Sundays from 2 PM to 5 PM.\n• The church building itself is considered beautiful, with a unique historical note as the first in Columbus built without interior columns.\n• Many visitors express a strong sense of spiritual connection, calling it their spiritual home and an incredibly beautiful place to pray.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-saint-aloysius-ca20c757",
-      "last_scraped": "2026-02-20T20:14:09.130707+00:00"
+      "last_scraped": "2026-02-20T20:13:42.365725+00:00"
     },
     {
       "church": {
@@ -1435,7 +1435,7 @@
       "totalServices": 0,
       "communityInsights": "• The community is known for being wonderful, generous, sweet, and friendly, creating a lovely and upbeat atmosphere.\n• Father Vince is highlighted as an inspirational speaker, suggesting engaging sermons.\n• The church is described as a relaxing, giving, and loving godly place, especially for the less fortunate.\n• There is a nice food pantry available, which is appreciated by visitors.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-church-of-st-ladislas-fa52bd1e",
-      "last_scraped": "2026-02-20T20:14:10.619375+00:00"
+      "last_scraped": "2026-02-20T20:13:44.003293+00:00"
     },
     {
       "church": {
@@ -1448,8 +1448,8 @@
         "latitude": 39.93644334,
         "longitude": -82.98903823,
         "phone": "614-443-7685",
-        "website": "/api/out?id=us-oh-columbus-st-leo-oratory-a361d18f&type=website&t=1771618452313&sig=LcLUil-Ap4vCCw-CmhDSvRIyUyCfI5fO_ZQsXaLWraE",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-st-leo-oratory-a361d18f&type=livestream&t=1771618452313&sig=SEr_gt9HR0CzxyQ1HOOEnCO_Kb69Pv-bUc6UMJlwTGI",
+        "website": "/api/out?id=us-oh-columbus-st-leo-oratory-a361d18f&type=website&t=1771618425333&sig=GxhEHbeZ2QGtgEBXLhOt3X-rtJnFoRsFHy_aUFJF10g",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-st-leo-oratory-a361d18f&type=livestream&t=1771618425333&sig=Et4yA8otJ7d0YqkY8MenwFvTiBQchRYK6n5_R9-bQmk",
         "updatedAt": "2026-02-17T12:08:09.008Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -2014,7 +2014,7 @@
       "totalServices": 32,
       "communityInsights": "• The church is described as a beautiful place with stunning artwork, historic architecture, and detailed wood and stone work, making it a wonderful spot for prayer and meditation.\n• Visitors consistently praise the reverent Traditional Latin Mass, noting its sacred tranquility and dignity, often describing it as \"Heaven on Earth.\"\n• The priests are highly regarded, with specific mention of Rev. Canon David N. Silvey as an excellent, godly, and dedicated model of fatherly humility.\n• The liturgy is beautiful and reverent, offering a true foretaste of heaven and a proper, sanctified worship experience.\n• The community is welcoming, and the parish is seen as a blessing for the city, providing a true traditional Catholic parish.\n• The church is considered one of the most beautiful in Columbus, Ohio.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-st-leo-oratory-a361d18f",
-      "last_scraped": "2026-02-20T20:14:12.464870+00:00"
+      "last_scraped": "2026-02-20T20:13:45.490050+00:00"
     },
     {
       "church": {
@@ -2027,8 +2027,8 @@
         "latitude": 39.9606323,
         "longitude": -83.01658,
         "phone": "(614) 221-4323",
-        "website": "/api/out?id=us-oh-columbus-holy-family-9acc7962&type=website&t=1771618453508&sig=9U7DeyHMp408X_8Q7yaZoFEEI-G2eREOkdXOPRPp8J4",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-holy-family-9acc7962&type=livestream&t=1771618453508&sig=Qg5iFhkmS2UACcfb9g4KUW6JttE3j-94Y41GaoW84RI",
+        "website": "/api/out?id=us-oh-columbus-holy-family-9acc7962&type=website&t=1771618426807&sig=niA0njjYasKd4kcqIMGGcPVfrwd-53SFT9NA4R1B4Bo",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-holy-family-9acc7962&type=livestream&t=1771618426807&sig=hbqZGDIN0tsUlsuCD9sosxsk5uw3GIW1iXTmMQo1k00",
         "updatedAt": "2026-02-17T10:19:36.735Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -2527,7 +2527,7 @@
       "totalServices": 28,
       "communityInsights": "• The church is beautiful, especially after recent renovations, and offers a traditional Mass, including some in Latin.\n• Visitors appreciate the warm and welcoming community at Holy Family Church.\n• Homilies are well-regarded, with specific mention of good homilies from Fr. Stash Dailey and the Mercedarians.\n• Confession is a priority, and there's a convenient late Sunday Mass option at 8 PM (2000hrs), as well as on holidays.\n• The church hosts a meaningful Good Friday vigil with continuous rosaries until Holy Saturday morning.\n• Parking can be limited, so arriving early is recommended, though there is plenty of seating available.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-holy-family-9acc7962",
-      "last_scraped": "2026-02-20T20:14:14.221431+00:00"
+      "last_scraped": "2026-02-20T20:13:46.965355+00:00"
     },
     {
       "church": {
@@ -2540,8 +2540,8 @@
         "latitude": 39.94875057,
         "longitude": -82.99480048,
         "phone": "(614) 445-9668",
-        "website": "/api/out?id=us-oh-columbus-saint-mary-44634f7c&type=website&t=1771618454987&sig=Z9CGfLVmeA1JCZ-9wwaTbVNOPlrR30T9CGGug_AL-mo",
-        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-mary-44634f7c&type=livestream&t=1771618454987&sig=bbwfk6Xs2_z-AwYMjwCHOoPOkgefK3F5rXwpZg-1KVg",
+        "website": "/api/out?id=us-oh-columbus-saint-mary-44634f7c&type=website&t=1771618428418&sig=Sw_-EfBWN8sM-Eb6gEAkCJQgKwkgI4d-hdF5EEuSgtY",
+        "livestreamUrl": "/api/out?id=us-oh-columbus-saint-mary-44634f7c&type=livestream&t=1771618428418&sig=AJDIAeh74hHvLZbZ7Y_nmThyj5CtsbmBh3IPV6q8y40",
         "updatedAt": "2026-02-17T19:14:14.401Z",
         "watchSlug": null,
         "streamCount": 0,
@@ -2972,7 +2972,7 @@
       "totalServices": 24,
       "communityInsights": "• The church is known for its beautiful sermons every Sunday and an awesome choir.\n• Visitors appreciate the fantastic music and great homilies, with some specifically mentioning Deacon Roger and Father Dan.\n• The community feels welcoming, with Father Dan emphasizing acceptance for all.\n• The church is described as absolutely gorgeous, both inside and out, with beautiful paintings on the ceiling and evident German heritage in the artwork.\n• Father Lynch is the new Pastor, and Father Dan is a beloved priest.",
       "source_url": "https://catholicindex.org/churches/us-oh-columbus-saint-mary-44634f7c",
-      "last_scraped": "2026-02-20T20:14:15.158526+00:00"
+      "last_scraped": "2026-02-20T20:13:48.571623+00:00"
     }
   ]
 }
