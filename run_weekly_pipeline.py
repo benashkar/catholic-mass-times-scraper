@@ -211,7 +211,7 @@ def step_redeploy_dashboard():
     log("=" * 60)
 
     api_key = os.environ.get("RENDER_API_KEY", "")
-    dashboard_id = "srv-d6dqdtkr85hc73c2smng"
+    dashboard_id = "srv-d6li8dtm5p6s73chuh7g"
 
     if not api_key:
         log("  [--] RENDER_API_KEY not set, skipping redeploy trigger")
