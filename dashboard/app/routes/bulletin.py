@@ -59,7 +59,7 @@ def suspect_names():
 
     suspect = []
     for s in states:
-        df = get_bulletin_names(s["state_dir"])
+        df = get_bulletin_names(s["state_dir"], include_low=True)
         if df is None:
             continue
 

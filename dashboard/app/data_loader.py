@@ -490,21 +490,28 @@ def get_services(state_dir):
     return df
 
 
-@lru_cache(maxsize=8)
-def get_bulletin_names(state_dir):
+@lru_cache(maxsize=16)
+def get_bulletin_names(state_dir, include_low=False):
     """
     Load and return bulletin names DataFrame for a state from v_bulletin_ui_names.
     Returns None if no bulletin data exists. Capped at 50,000 rows.
+
+    By default filters to medium+high confidence non-suspect names.
+    Pass include_low=True for the suspect review page.
     """
     sc = _state_code(state_dir)
     if not sc or state_dir not in _bulletin_stats_cache:
         return None
 
+    confidence_filter = ""
+    if not include_low:
+        confidence_filter = "AND confidence IN ('high', 'medium') AND is_suspect = 0"
+
     try:
         conn = _get_db_connection()
         cur = conn.cursor()
         cur.execute(
-            """
+            f"""
             SELECT
                 person_name,
                 COALESCE(title, '')                         AS title,
@@ -525,6 +532,7 @@ def get_bulletin_names(state_dir):
                 church_id
             FROM v_bulletin_ui_names
             WHERE state_code = %s
+            {confidence_filter}
             LIMIT 50000
             """,
             (sc,),
@@ -608,8 +616,12 @@ def get_bulletin_names_page(
         conn = _get_db_connection()
         cur = conn.cursor()
 
-        # Base filter
-        where = ["state_code = %s"]
+        # Base filter — only medium+high confidence, non-suspect names
+        where = [
+            "state_code = %s",
+            "confidence IN ('high', 'medium')",
+            "is_suspect = 0",
+        ]
         params = [sc]
 
         if church_filter:
@@ -622,9 +634,9 @@ def get_bulletin_names_page(
             where.append("category = %s")
             params.append(category_filter)
 
-        # Total count (unfiltered for this state)
+        # Total count (medium+high confidence for this state)
         cur.execute(
-            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s",
+            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0",
             (sc,),
         )
         total_records = cur.fetchone()["cnt"]

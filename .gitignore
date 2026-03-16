@@ -68,3 +68,30 @@ data/output/dated_services.csv
 # --- OS files ---
 nul
 desktop.ini
+
+# --- Claude Code ---
+.claude/
+
+# --- Backup/conflict files (BenAcer laptop merge artifacts) ---
+*-BenAcer*
+
+# --- One-off analysis scripts (not part of pipeline) ---
+analyze_*.py
+check_*.py
+monitor_scrapes.py
+generate_removal_review.py
+scrape_diocese_parishes.py
+
+# --- Review/analysis data ---
+*_review.csv
+*_review*.xlsx
+blocklist_*.csv
+
+# --- Screenshots & temp notes ---
+*.png
+*.xlsx
+recent claude code desktop chat.txt
+retstart instructions for url resolver.txt
+
+# --- Diocese parishes (experimental scrape, not in pipeline) ---
+data/diocese_parishes/

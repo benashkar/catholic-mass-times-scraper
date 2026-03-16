@@ -689,7 +689,7 @@ def main():
             print(f"  {table}: {count:,} rows")
 
         # Refresh the pre-computed bulletin stats table used by the dashboard
-        print("\n  Refreshing bulletin_state_stats...")
+        print("\n  Refreshing bulletin_state_stats (medium+high confidence only)...")
         try:
             cur.execute("TRUNCATE TABLE bulletin_state_stats")
             cur.execute("""
@@ -704,6 +704,8 @@ def main():
                 JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
                 JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
                 JOIN church c ON bs.church_id = c.church_id
+                WHERE bn.confidence IN ('high', 'medium')
+                  AND bn.is_suspect = 0
                 GROUP BY c.state_code
             """)
             conn.commit()
