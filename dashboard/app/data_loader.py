@@ -144,30 +144,41 @@ _secrets_cache = {}
 
 
 def _get_secret():
-    """Retrieve DB credentials from AWS Secrets Manager (cached, 5s timeout)."""
+    """Retrieve DB credentials from AWS Secrets Manager (cached, 30s timeout).
+
+    Uses a thread with generous timeout to avoid blocking forever on cold starts
+    while still allowing enough time for boto3 import + API call on slow instances.
+    """
     if _SECRET_ID in _secrets_cache:
         return _secrets_cache[_SECRET_ID]
 
     result = [None]
+    error = [None]
 
     def _fetch():
         try:
             import boto3
             from botocore.config import Config
 
-            config = Config(connect_timeout=3, read_timeout=3, retries={"max_attempts": 0})
+            config = Config(connect_timeout=5, read_timeout=10, retries={"max_attempts": 1})
             client = boto3.client("secretsmanager", region_name="us-east-1", config=config)
             resp = client.get_secret_value(SecretId=_SECRET_ID)
             result[0] = json.loads(resp["SecretString"])
-        except Exception:
-            pass
+        except Exception as e:
+            error[0] = str(e)
 
     t = threading.Thread(target=_fetch, daemon=True)
     t.start()
-    t.join(timeout=5)
+    t.join(timeout=30)
 
     if result[0]:
         _secrets_cache[_SECRET_ID] = result[0]
+    else:
+        logger.error(
+            "Failed to fetch secret %s: %s",
+            _SECRET_ID,
+            error[0] or "thread timed out after 30s",
+        )
     return result[0]
 
 
