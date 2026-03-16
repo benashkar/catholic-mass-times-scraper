@@ -69,8 +69,9 @@ def _get_credentials():
 
 def get_connection(database=_DATABASE, autocommit=False):
     """Get a MySQL connection to church_scrapes on db99."""
-    host = os.getenv("DB_HOST", "db99.rds.blockshopper.com")
-    port = int(os.getenv("DB_PORT", "3306"))
+    secret = _get_secret() or {}
+    host = secret.get("DB_HOST") or os.getenv("DB_HOST", "db99.rds.blockshopper.com")
+    port = int(secret.get("DB_PORT") or os.getenv("DB_PORT", "3306"))
     user, password = _get_credentials()
 
     return pymysql.connect(
