@@ -77,6 +77,73 @@ Code exists in `names_people_matcher/name_engine/pdf_columns.py`. Tested on Geor
 | `run_bulletin_scraper.py:extract_names_from_text()` | 6 regex pattern groups for name extraction |
 | `names_people_matcher/rescore_db99.py` | SQL-based rescoring script |
 
+## NEXT: Husband+Wife Couple Name Detection
+
+### Problem
+3-word names like "John Mary Smith" are ambiguous — could be one person (first-middle-last)
+or a married couple (John Smith + Mary Smith). Church bulletins frequently list couples this way
+in mass intentions, prayer lists, and parishioner directories.
+
+### Signal: Gender Contrast
+If word 1 is **strongly male** AND word 2 is **strongly female** (or vice versa) AND word 3 is
+a Census surname → it's a couple. Same-gender words → first-middle-last.
+
+### Algorithm
+```
+1. Get male_ratio for word1 and word2 from SSA data (0.0 = female, 1.0 = male)
+2. Check word3 is in Census surnames
+3. If word1 male_ratio > 0.90 AND word2 male_ratio < 0.10 → COUPLE
+4. If word1 male_ratio < 0.10 AND word2 male_ratio > 0.90 → COUPLE
+5. Otherwise → first-middle-last (not a couple)
+```
+
+### Examples
+- "John Mary Smith" → male(0.99) + female(0.01) → **COUPLE** → "John Smith" + "Mary Smith"
+- "John Robert Smith" → male(0.99) + male(0.99) → **NOT couple** (first-middle-last)
+- "Mary Ann Johnson" → female(0.01) + female(0.02) → **NOT couple** (middle name)
+
+### Implementation Steps
+1. **Modify `scripts/prepare_name_reference.py`** (line 330)
+   - Stop discarding the sex column from SSA data
+   - Compute `male_ratio = male_count / (male_count + female_count)` per name
+   - Output new `ssa_first_names_gendered.csv` with columns: name, rank, male_ratio
+
+2. **Add `detect_couple_name()` to `names_people_matcher`**
+   - Input: 3-word name string
+   - Uses gendered SSA data + Census surnames
+   - Returns original name or tuple of two split names
+   - Conservative threshold (0.90) to avoid false splits
+
+3. **Integrate into extraction pipeline**
+   - Post-processing step after `clean_extracted_name()`
+   - When couple detected, produce TWO bulletin_name records
+   - Add `name_type` field: "individual" vs "couple_split"
+
+4. **Also fix "&" / "and" separator patterns**
+   - `run_bulletin_scraper.py` line 1597 splits on `[,&\n]+` in section headers
+   - Extend to mass intentions: "requested by John & Mary Smith" → two records
+
+### No new dependencies needed
+- SSA raw data already has M/F gender (currently discarded at line 330)
+- `names-dataset` (already installed) as fallback for international names
+
+## NEXT: Junk Name Blocklist (SQL-based)
+
+### Completed Cleanups (2026-03-17)
+Removed ~62K junk records from db99 using SQL blocklist:
+- All-lowercase names (9,260)
+- Lowercase first names (22,728)
+- Day/month abbreviations as first names: Wed, Tue, Mon, Jan, etc.
+- Common English words: or, and, the, for, but, all, his, her, etc.
+- Religious terms: Alzheimer, Cancer, Hospice, Fish Fry, Sacrament, etc.
+- Place names as last names: City, County, Church, Academy, Avenue, etc.
+- Religious figures: Christ Jesus, Virgin Mary, Infant Jesus, Mother Teresa
+
+### Remaining Issues
+- 3-word merged column names still present (needs column detection fix)
+- Some church/saint names slipping through
+- Pattern 6 (ministry_contextual) still too loose — produces most false positives
+
 ## Render Services
 
 | Service | ID | Type | Schedule |
