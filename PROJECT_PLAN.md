@@ -6,42 +6,76 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - **Database**: `church_scrapes` on db99 (MySQL, us-east-1 Virginia, private IP `10.10.0.8`)
 - **Dashboard**: Render web service (Virginia, Docker), reads from db99 via AWS Secrets Manager
 - **Pipeline**: Two Render cron jobs — daily mass times + weekly bulletins
+- **Name Engine**: `benashkar/names_people_matcher` (`C:\Users\cashk\OneDrive\names_people_matcher`)
 
-## Current Status (2026-03-16)
+## Current Status (2026-03-17)
 
 ### COMPLETED
 1. **Data in db99** — 23,046 churches, 280K services, 1.3M bulletin names, 259K PDFs
-2. **Dashboard reads from db99** — All 14 query functions converted from CSV to MySQL (commit `0443093`)
-3. **Confidence filtering** — Dashboard only shows medium+high confidence names; suspect review page shows all
-4. **bulletin_state_stats** — Pre-computed stats count only medium+high confidence, non-suspect names
-5. **Daily cron job** (`church-daily-scrape`) — Mon-Sun excl Tue, 3 AM UTC, `--skip-bulletins`
-6. **Weekly cron job** (`church-weekly-bulletins`) — Tuesdays 3 AM UTC, full pipeline with bulletin extraction
-7. **Old cron suspended** — `church-tuesday-pipeline` suspended, replaced by daily+weekly
-8. **No Render PostgreSQL** — Decommissioned, all data on db99
-9. **Pushed to GitHub** — All commits pushed including CSV→db99 conversion, confidence filtering, cron split
-10. **Dashboard deployed on Render** — Virginia, Docker, live (but no data until PrivateLink fixed)
-11. **.gitignore updated** — Analysis scripts, backup files, screenshots, Claude config all ignored
-12. **Pipeline service ID fixed** — `run_weekly_pipeline.py` redeploy step uses correct dashboard ID
-13. **Secrets Manager timeout** — Increased from 5s to 30s for cold starts, added error logging
-14. **DB connection** — Reads host from env var (priority), then Secrets Manager, then fallback
+2. **Dashboard reads from db99** — All 14 query functions converted from CSV to MySQL
+3. **Confidence filtering** — Dashboard shows medium+high confidence, non-suspect names
+4. **SQL-based re-scoring** — All 1.3M names re-scored in 22 seconds using `ref_ssa_names` + `ref_census_surnames` lookup tables on db99
+5. **Daily cron** (`church-daily-scrape`) — Mon-Sun excl Tue, 3 AM UTC, `--skip-bulletins`
+6. **Weekly cron** (`church-weekly-bulletins`) — Tuesdays 3 AM UTC, full pipeline
+7. **Old cron suspended** — `church-tuesday-pipeline` replaced
+8. **PrivateLink fixed** — Ops team updated VPC endpoint after RDS upgrade
+9. **DB_HOST env vars removed** — Services use VPC endpoint from Secrets Manager
+10. **Reference tables on db99** — `ref_ssa_names` (100K), `ref_census_surnames` (162K)
+11. **Name engine package** — `benashkar/names_people_matcher` scaffolded with 3 engines + column detection
 
-### BLOCKER: db99 PrivateLink
-After RDS upgrade, the VPC endpoint service (`vpce-svc-00a7fca302afe04af`) no longer routes to db99.
-Ops team needs to update the NLB target group to new IP `10.10.0.8:3306`.
-Reference: pipeline-core PrivateLink (`vpce-svc-0fffcbe7aac42ba3e`) works correctly.
+### CURRENT DATA (medium+high, non-suspect)
+- **821,800 unique people** across 50 states (1,229,453 total records)
+- Top states: CA 96K, IL 81K, NY 69K, TX 44K, OH 41K
 
-**Workaround in place:** `DB_HOST=10.10.0.8` set as Render env var on all 3 services.
-Will work once PrivateLink is fixed and private IP is routable from Render.
-
-### AFTER PRIVATELINK FIX
-- [ ] Verify `/health` shows `states_loaded > 0`
-- [ ] Test all dashboard routes (home, mass times, bulletin, suspect)
-- [ ] Confirm bulletin names DataTable shows NO low-confidence entries
-- [ ] Confirm suspect page still shows low-confidence names
-- [ ] Trigger test run of daily cron (`--states ohio`)
-- [ ] Trigger test run of weekly cron
+### VERIFY (after PrivateLink fix)
+- [ ] `/health` shows `states_loaded > 0` and `db: connected`
+- [ ] Dashboard routes work (home, mass times, bulletin, suspect)
+- [ ] Trigger test run of daily cron
 - [ ] Delete suspended old cron `crn-d6liockr85hc73a8a110`
-- [ ] Update AWS secret DB_HOST once PrivateLink works, remove DB_HOST env var from Render
+
+## NEXT: Column Detection (Fix Merged Names)
+
+### Problem
+pdfplumber reads multi-column PDFs linearly, merging names across columns:
+- "Jaiden Harris Aba" = "Jaiden Harris" (col 1) + "Aba" (col 2)
+- Our Lady of Lourdes Atlanta alone has 645+ merged 3-word names
+- These score "high" because all words are real SSA/Census names individually
+
+### Solution: Column-Aware PDF Extraction
+Code exists in `names_people_matcher/name_engine/pdf_columns.py`. Tested on Georgia bulletins — correctly detects 2-3 column layouts.
+
+### Implementation Steps
+1. **Integrate column detection into `run_bulletin_scraper.py`**
+   - Replace `page.extract_text()` calls with `extract_text_by_columns()`
+   - Extract names per-column instead of per-page
+   - File: `run_bulletin_scraper.py`, function `extract_text_from_pdf()` (~line 1200)
+
+2. **Re-extract Georgia as test case**
+   - Run bulletin pipeline on Georgia only with column detection
+   - Compare name counts before/after
+   - Verify merged names eliminated
+
+3. **Re-score with SQL after re-extraction**
+   - Run SQL UPDATE on db99 using ref tables (22 seconds)
+   - Refresh `bulletin_state_stats`
+
+4. **Roll out to all 50 states**
+   - Run weekly pipeline with column detection enabled
+   - Monitor for regressions
+
+5. **Add spaCy NER engine (requires Python 3.12 Docker)**
+   - Third scoring engine validates names in context
+   - Catches "Silver Angels Meet", "Everything Athens" etc.
+   - Can't run on local Python 3.14, but works in Docker
+
+### Key Files
+| File | Purpose |
+|------|---------|
+| `names_people_matcher/name_engine/pdf_columns.py` | Column detection code (ready) |
+| `run_bulletin_scraper.py` | Bulletin pipeline (~4100 lines, needs column integration) |
+| `run_bulletin_scraper.py:extract_text_from_pdf()` | Where to plug in column detection |
+| `run_bulletin_scraper.py:extract_names_from_text()` | 6 regex pattern groups for name extraction |
+| `names_people_matcher/rescore_db99.py` | SQL-based rescoring script |
 
 ## Render Services
 
@@ -66,10 +100,11 @@ Will work once PrivateLink is fixed and private IP is routable from Render.
 `python run_weekly_pipeline.py`
 1. Scrape mass times (all 50 states)
 2. Regenerate 12-week dated services
-3. **Bulletin pipeline**: discover → download → extract text → parse names → confidence score
+3. **Bulletin pipeline**: discover → download → extract text (column-aware) → parse names → confidence score
 4. Sync to db99 (UPSERT churches + services + bulletin names)
-5. Git commit + push
-6. Trigger dashboard redeploy
+5. SQL rescore using ref tables
+6. Git commit + push
+7. Trigger dashboard redeploy
 
 ### Deduplication
 - Churches: UPSERT by `slug` (unique key)
@@ -86,16 +121,53 @@ Will work once PrivateLink is fixed and private IP is routable from Render.
 | bulletin_name | 1,343,227 | Extracted names from PDFs |
 | bulletin_pdf | 259,102 | Downloaded bulletin PDFs |
 | bulletin_source | 5,583 | Churches with bulletin pages |
-| bulletin_state_stats | 50 | Pre-computed stats (medium+high confidence only) |
+| bulletin_state_stats | 50 | Pre-computed stats (medium+high, non-suspect) |
+| ref_ssa_names | 100,364 | SSA baby names reference |
+| ref_census_surnames | 162,254 | Census 2010 surnames reference |
 | scrape_log | — | Pipeline run tracking |
 | + 10 views | — | v_bulletin_ui_names, v_weekly_schedule, etc. |
 
-## Key Files
-| File | Purpose |
-|------|---------|
-| `dashboard/app/data_loader.py` | All DB query functions with confidence filtering |
-| `dashboard/app/routes/bulletin.py` | Bulletin routes, suspect page uses `include_low=True` |
-| `render.yaml` | Render service definitions (daily + weekly cron) |
-| `run_weekly_pipeline.py` | Pipeline orchestrator with `--skip-bulletins` flag |
-| `sync_to_db99.py` | UPSERT to db99, refreshes bulletin_state_stats |
-| `src/utils/db_connection.py` | Shared DB connection (env var > secret > fallback) |
+## Useful Queries
+
+### Unique people by state (medium+high)
+```sql
+SELECT c.state_code,
+       COUNT(DISTINCT CONCAT(bn.first_name, ' ', bn.last_name)) AS unique_people
+FROM bulletin_name bn
+JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+JOIN church c ON bs.church_id = c.church_id
+WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
+  AND bn.first_name != '' AND bn.last_name != ''
+GROUP BY c.state_code ORDER BY unique_people DESC;
+```
+
+### People details for a state
+```sql
+-- Change 'GA' to any state. Change IN ('high') to IN ('high','medium') for medium too.
+SELECT DISTINCT bn.first_name, bn.middle_name, bn.last_name,
+       c.name AS church_name, c.city AS church_city, c.state_code
+FROM bulletin_name bn
+JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+JOIN church c ON bs.church_id = c.church_id
+WHERE c.state_code = 'GA'
+  AND bn.confidence IN ('high')  -- Add 'medium' for medium matches
+  AND bn.is_suspect = 0
+  AND bn.first_name != '' AND bn.last_name != ''
+ORDER BY bn.last_name, bn.first_name;
+```
+
+### Unique people by city by state
+```sql
+SELECT c.state_code, c.city,
+       COUNT(DISTINCT CONCAT(bn.first_name, ' ', bn.last_name)) AS unique_people
+FROM bulletin_name bn
+JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+JOIN church c ON bs.church_id = c.church_id
+WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
+  AND bn.first_name != '' AND bn.last_name != ''
+GROUP BY c.state_code, c.city
+ORDER BY c.state_code, unique_people DESC;
+```
