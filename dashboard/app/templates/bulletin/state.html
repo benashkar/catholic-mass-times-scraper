@@ -190,10 +190,37 @@ $(document).ready(function() {
             { data: 10 }
         ],
         pageLength: 50,
-        order: [[0, 'asc']],
+        order: [[8, 'desc']],  // Sort by confidence descending (high first)
         language: { search: "Search names:" },
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
         autoWidth: false,
+        stateSave: true,  // Remember page/sort/search in URL hash
+        stateSaveCallback: function(settings, data) {
+            // Save DataTable state to URL hash for shareable links
+            var params = new URLSearchParams();
+            if (data.start) params.set('start', data.start);
+            if (data.length && data.length !== 50) params.set('length', data.length);
+            if (data.search && data.search.search) params.set('q', data.search.search);
+            if (data.order && data.order.length) params.set('sort', data.order[0][0] + ',' + data.order[0][1]);
+            var hash = params.toString();
+            if (hash) window.history.replaceState(null, '', '#' + hash);
+            else window.history.replaceState(null, '', window.location.pathname);
+        },
+        stateLoadCallback: function(settings) {
+            // Load DataTable state from URL hash
+            var hash = window.location.hash.substring(1);
+            if (!hash) return null;
+            var params = new URLSearchParams(hash);
+            var state = { time: Date.now(), start: 0, length: 50, order: [[8, 'desc']], search: { search: '' } };
+            if (params.has('start')) state.start = parseInt(params.get('start'));
+            if (params.has('length')) state.length = parseInt(params.get('length'));
+            if (params.has('q')) state.search = { search: params.get('q'), regex: false, smart: true, caseInsensitive: true };
+            if (params.has('sort')) {
+                var parts = params.get('sort').split(',');
+                state.order = [[parseInt(parts[0]), parts[1] || 'desc']];
+            }
+            return state;
+        },
         columnDefs: [
             { targets: [9], orderable: false },  // PDF column not sortable
             { targets: [2], className: 'text-center' },  // Title centered
