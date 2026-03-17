@@ -214,6 +214,16 @@ def step_git_push():
     return run_cmd(["git", "push"], "Git push")
 
 
+def step_validate():
+    """Step 4c: Run health checks to verify data quality."""
+    log("=" * 60)
+    log("STEP 4c: Post-sync health check")
+    log("=" * 60)
+
+    cmd = [sys.executable, "tests/test_pipeline_health.py", "--quick"]
+    return run_cmd(cmd, "Pipeline health check", timeout_seconds=60)
+
+
 def step_redeploy_dashboard():
     """Step 6: Trigger Render dashboard redeploy via API."""
     log("=" * 60)
@@ -269,6 +279,7 @@ def main():
     if args.sync_only:
         results["sync_db"] = step_sync_db()
         results["rescore"] = step_rescore_names()
+        results["validate"] = step_validate()
         results["redeploy"] = step_redeploy_dashboard()
     elif args.scrape_only:
         results["scrape_details"] = step_scrape_details(states)
@@ -278,6 +289,7 @@ def main():
     elif args.skip_scrape:
         results["sync_db"] = step_sync_db()
         results["rescore"] = step_rescore_names()
+        results["validate"] = step_validate()
         results["git_push"] = step_git_push()
         results["redeploy"] = step_redeploy_dashboard()
     else:
@@ -288,6 +300,7 @@ def main():
             results["bulletins"] = step_bulletins(states)
         results["sync_db"] = step_sync_db()
         results["rescore"] = step_rescore_names()
+        results["validate"] = step_validate()
         results["git_push"] = step_git_push()
         results["redeploy"] = step_redeploy_dashboard()
 
