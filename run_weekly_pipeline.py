@@ -155,6 +155,16 @@ def step_sync_db():
     return run_cmd(cmd, "Sync to db99", timeout_seconds=600)
 
 
+def step_rescore_names():
+    """Step 4b: Re-score names and clean junk using SQL on db99."""
+    log("=" * 60)
+    log("STEP 4b: Re-score names + junk cleanup (SQL)")
+    log("=" * 60)
+
+    cmd = [sys.executable, "rescore_names_sql.py"]
+    return run_cmd(cmd, "Re-score names via SQL", timeout_seconds=300)
+
+
 def step_git_push():
     """Step 5: Git commit updated data and push to trigger dashboard deploy."""
     log("=" * 60)
@@ -258,6 +268,7 @@ def main():
 
     if args.sync_only:
         results["sync_db"] = step_sync_db()
+        results["rescore"] = step_rescore_names()
         results["redeploy"] = step_redeploy_dashboard()
     elif args.scrape_only:
         results["scrape_details"] = step_scrape_details(states)
@@ -266,6 +277,7 @@ def main():
             results["bulletins"] = step_bulletins(states)
     elif args.skip_scrape:
         results["sync_db"] = step_sync_db()
+        results["rescore"] = step_rescore_names()
         results["git_push"] = step_git_push()
         results["redeploy"] = step_redeploy_dashboard()
     else:
@@ -275,6 +287,7 @@ def main():
         if not args.skip_bulletins:
             results["bulletins"] = step_bulletins(states)
         results["sync_db"] = step_sync_db()
+        results["rescore"] = step_rescore_names()
         results["git_push"] = step_git_push()
         results["redeploy"] = step_redeploy_dashboard()
 
