@@ -517,7 +517,7 @@ def get_bulletin_names(state_dir, include_low=False):
 
     confidence_filter = ""
     if not include_low:
-        confidence_filter = "AND confidence IN ('high', 'medium') AND is_suspect = 0"
+        confidence_filter = "AND confidence = 'high' AND is_suspect = 0"
 
     try:
         conn = _get_db_connection()
@@ -628,10 +628,10 @@ def get_bulletin_names_page(
         conn = _get_db_connection()
         cur = conn.cursor()
 
-        # Base filter — only medium+high confidence, non-suspect names
+        # Base filter — only high confidence, non-suspect names
         where = [
             "state_code = %s",
-            "confidence IN ('high', 'medium')",
+            "confidence = 'high'",
             "is_suspect = 0",
         ]
         params = [sc]
@@ -646,9 +646,9 @@ def get_bulletin_names_page(
             where.append("category = %s")
             params.append(category_filter)
 
-        # Total count (medium+high confidence for this state)
+        # Total count (high confidence for this state)
         cur.execute(
-            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0",
+            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence = 'high' AND is_suspect = 0",
             (sc,),
         )
         total_records = cur.fetchone()["cnt"]
