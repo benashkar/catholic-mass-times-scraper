@@ -167,7 +167,7 @@ def extract_names_from_new_pdfs(
             if len(ds) == 8:
                 pdf_date = f"{ds[:4]}-{ds[4:6]}-{ds[6:8]}"
 
-        text = rbs.extract_text_from_pdf(pdf_path)
+        text, column_texts = rbs.extract_text_from_pdf(pdf_path)
         if not text:
             continue
 
@@ -175,7 +175,11 @@ def extract_names_from_new_pdfs(
         text_path = text_dir / (pdf_path.stem + ".txt")
         text_path.write_text(text, encoding="utf-8")
 
-        names = rbs.extract_names_from_text(text, church_name)
+        # Extract names from each column separately to prevent cross-column merging
+        names = []
+        for col_text in column_texts:
+            col_names = rbs.extract_names_from_text(col_text, church_name)
+            names.extend(col_names)
         if not names:
             continue
 

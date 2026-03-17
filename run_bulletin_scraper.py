@@ -1222,21 +1222,37 @@ def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
 
 
 def extract_text_from_pdf(pdf_path: Path):
-    """Extract all text from a PDF using pdfplumber."""
+    """Extract all text from a PDF using column-aware extraction.
+
+    Uses column detection to prevent cross-column name merging in multi-column
+    bulletin layouts. Each column's text is kept separate for name extraction.
+
+    Returns:
+        Tuple of (full_text, column_texts) where:
+        - full_text: all text concatenated (for saving to .txt)
+        - column_texts: list of per-column strings (for name extraction)
+    """
     if not HAS_PDFPLUMBER:
-        return ""
+        return "", []
 
     try:
+        from src.utils.pdf_columns import extract_columns_from_page
+
         with pdfplumber.open(str(pdf_path)) as pdf:
-            texts = []
+            all_column_texts = []
+            page_texts = []
             for page in pdf.pages:
-                text = page.extract_text()
-                if text:
-                    texts.append(text)
-            return "\n\n".join(texts)
+                columns = extract_columns_from_page(page)
+                if columns:
+                    all_column_texts.extend(columns)
+                    # Join columns with separator for the saved text file
+                    page_texts.append("\n\n".join(columns))
+
+            full_text = "\n\n".join(page_texts)
+            return full_text, all_column_texts
     except Exception as e:
         logger.debug(f"PDF extraction failed for {pdf_path.name}: {e}")
-        return ""
+        return "", []
 
 
 def parse_name_parts(full_name: str) -> dict:
@@ -3867,8 +3883,8 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
                 if len(ds) == 8:
                     pdf_date = f"{ds[:4]}-{ds[4:6]}-{ds[6:8]}"
 
-            # Extract text
-            text = extract_text_from_pdf(pdf_path)
+            # Extract text (column-aware to prevent cross-column merging)
+            text, column_texts = extract_text_from_pdf(pdf_path)
             if not text:
                 logger.debug(f"  No text extracted from {pdf_path.name}")
                 continue
@@ -3877,8 +3893,13 @@ def run_extract(state_name: str, state_dir: Path, downloaded: dict, progress: di
             text_path = text_dir / (pdf_path.stem + ".txt")
             text_path.write_text(text, encoding="utf-8")
 
-            # Extract names
-            names = extract_names_from_text(text, church_name)
+            # Extract names from each column separately to prevent
+            # cross-column name merging (e.g., "John Smith Jane Doe"
+            # when "John Smith" is in col 1 and "Jane Doe" in col 2)
+            names = []
+            for col_text in column_texts:
+                col_names = extract_names_from_text(col_text, church_name)
+                names.extend(col_names)
 
             if names:
                 for name_info in names:
