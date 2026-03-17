@@ -1821,11 +1821,18 @@ def extract_names_from_text(text: str, church_name: str = ""):
         "welcome",
     ]
 
+    # Split text into lines for line-based proximity matching
+    text_lines = text.split("\n")
+
     for kw in context_keywords:
-        # Find the keyword in text and look for names nearby
-        for m in re.finditer(re.escape(kw), text, re.IGNORECASE):
-            nearby = text[max(0, m.start() - 100) : m.end() + 200]
-            # Find capitalized name patterns in the nearby text
+        kw_lower = kw.lower()
+        for line_idx, line in enumerate(text_lines):
+            if kw_lower not in line.lower():
+                continue
+            # Look at this line + the next 5 lines (not 200 chars away)
+            search_lines = text_lines[line_idx : line_idx + 6]
+            nearby = "\n".join(search_lines)
+            # Find capitalized name patterns in nearby lines
             for name_match in re.finditer(
                 r"([A-Z][a-z]{1,15}\s+[A-Z][a-z]{1,20}(?:\s+[A-Z][a-z]{1,20})?)", nearby
             ):
