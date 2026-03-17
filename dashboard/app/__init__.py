@@ -33,11 +33,22 @@ def create_app(config_class=Config):
 
     @app.route("/health")
     def health():
-        from app.data_loader import _state_list, _bulletin_stats_cache
-        return {
+        from app.data_loader import _state_list, _bulletin_stats_cache, _get_db_connection
+        result = {
             "status": "ok",
             "states_loaded": len(_state_list) if _state_list else 0,
             "bulletin_states": len(_bulletin_stats_cache),
-        }, 200
+        }
+        # Live DB check
+        try:
+            conn = _get_db_connection()
+            cur = conn.cursor()
+            cur.execute("SELECT COUNT(*) AS cnt FROM church")
+            result["db_churches"] = cur.fetchone()["cnt"]
+            result["db"] = "connected"
+            conn.close()
+        except Exception as e:
+            result["db"] = f"error: {str(e)[:200]}"
+        return result, 200
 
     return app
