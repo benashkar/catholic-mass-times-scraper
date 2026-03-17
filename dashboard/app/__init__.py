@@ -40,19 +40,4 @@ def create_app(config_class=Config):
             "bulletin_states": len(_bulletin_stats_cache),
         }, 200
 
-    @app.route("/debug/db")
-    def debug_db():
-        """One-time diagnostic — test db99 connectivity."""
-        import traceback
-        from app.data_loader import _get_db_connection
-        try:
-            conn = _get_db_connection()
-            cur = conn.cursor()
-            cur.execute("SELECT COUNT(*) AS cnt FROM church")
-            count = cur.fetchone()["cnt"]
-            conn.close()
-            return {"db": "ok", "church_count": count}, 200
-        except Exception as e:
-            return {"db": "error", "error": str(e), "trace": traceback.format_exc()}, 500
-
     return app
