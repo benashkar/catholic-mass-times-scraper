@@ -169,8 +169,8 @@ def state_view(state):
 @bp.route("/<state>/api/names")
 def api_names(state):
     """DataTables server-side AJAX endpoint for bulletin names."""
-    df = get_bulletin_names(state)
-    if df is None:
+    stats = get_bulletin_stats(state)
+    if stats is None:
         abort(404)
 
     # DataTables parameters

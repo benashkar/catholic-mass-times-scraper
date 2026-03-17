@@ -646,9 +646,9 @@ def get_bulletin_names_page(
             where.append("category = %s")
             params.append(category_filter)
 
-        # Total count (deduplicated, medium+high confidence for this state)
+        # Total count (medium+high confidence for this state)
         cur.execute(
-            "SELECT COUNT(*) AS cnt FROM (SELECT DISTINCT first_name, last_name, church_name, church_city FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0) deduped",
+            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0",
             (sc,),
         )
         total_records = cur.fetchone()["cnt"]
@@ -666,12 +666,9 @@ def get_bulletin_names_page(
 
         where_sql = " AND ".join(where)
 
-        # Filtered count (deduplicated by first/last/church/city)
+        # Filtered count
         cur.execute(
-            f"""SELECT COUNT(*) AS cnt FROM (
-                SELECT DISTINCT first_name, last_name, church_name, church_city
-                FROM v_bulletin_ui_names WHERE {where_sql}
-            ) deduped""",
+            f"SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE {where_sql}",
             params,
         )
         filtered_records = cur.fetchone()["cnt"]
@@ -680,7 +677,7 @@ def get_bulletin_names_page(
         sort_col = _COL_INDEX_TO_SQL.get(order_col, "person_name")
         sort_dir = "DESC" if order_dir == "desc" else "ASC"
 
-        # Fetch page (deduplicated — one row per unique person+church+city)
+        # Fetch page
         cur.execute(
             f"""
             SELECT person_name, title, first_name, last_name,
@@ -688,7 +685,6 @@ def get_bulletin_names_page(
                    pdf_url, bulletin_date
             FROM v_bulletin_ui_names
             WHERE {where_sql}
-            GROUP BY first_name, last_name, church_name, church_city
             ORDER BY {sort_col} {sort_dir}
             LIMIT %s OFFSET %s
             """,
