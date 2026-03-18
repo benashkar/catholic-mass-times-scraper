@@ -12,7 +12,6 @@ data/output/*/bulletin_texts/
 data/output/*-BenAcer.*
 data/reference/
 data/diocese_parishes/
-tests/
 scripts/
 *.md
 !requirements.txt
