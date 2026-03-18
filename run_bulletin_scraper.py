@@ -67,6 +67,100 @@ try:
 except ImportError:
     HAS_PLAYWRIGHT = False
 
+try:
+    from nameparser import HumanName
+    from nameparser.config import CONSTANTS as _NP_CONSTANTS
+    _NP_CONSTANTS.titles.add("fr", "dcn", "msgr", "sr", "br", "rev")
+    HAS_NAMEPARSER = True
+except ImportError:
+    HAS_NAMEPARSER = False
+
+try:
+    import probablepeople as pp
+    HAS_PROBABLEPEOPLE = True
+except ImportError:
+    HAS_PROBABLEPEOPLE = False
+
+# NER veto gate — lazy-loaded spaCy model
+_ner_nlp = None
+_ner_tried = False
+
+
+def _get_ner_nlp():
+    """Lazy-load spaCy model for NER veto gate."""
+    global _ner_nlp, _ner_tried
+    if _ner_tried:
+        return _ner_nlp
+    _ner_tried = True
+    try:
+        import spacy
+        try:
+            _ner_nlp = spacy.load("en_core_web_lg")
+        except OSError:
+            _ner_nlp = spacy.load("en_core_web_sm")
+    except Exception:
+        _ner_nlp = None
+    return _ner_nlp
+
+
+def ner_veto(name, context=""):
+    """Returns True if NER confirms this looks like a person name."""
+    nlp = _get_ner_nlp()
+    if nlp is None:
+        return True  # Pass through if NER unavailable
+    text = context if context else name
+    doc = nlp(text)
+    name_lower = name.lower().strip()
+    for ent in doc.ents:
+        if ent.label_ == "PERSON":
+            if name_lower in ent.text.lower() or ent.text.lower() in name_lower:
+                return True
+    return False
+
+
+def ner_veto_batch(names, contexts=None):
+    """Batch NER veto — returns list of bools (True = confirmed person)."""
+    nlp = _get_ner_nlp()
+    if nlp is None:
+        return [True] * len(names)
+    contexts = contexts or [""] * len(names)
+    texts = [c if c else n for c, n in zip(contexts, names)]
+    results = []
+    docs = list(nlp.pipe(texts, batch_size=50))
+    for name, doc in zip(names, docs):
+        name_lower = name.lower().strip()
+        is_person = False
+        for ent in doc.ents:
+            if ent.label_ == "PERSON":
+                if name_lower in ent.text.lower() or ent.text.lower() in name_lower:
+                    is_person = True
+                    break
+        results.append(is_person)
+    return results
+
+
+def detect_couple(name):
+    """Split couple names into two individuals using probablepeople.
+
+    Returns list of (name, split_type) tuples.
+    """
+    if not HAS_PROBABLEPEOPLE:
+        return [(name, "individual")]
+    try:
+        parsed, name_type = pp.tag(name)
+        if name_type == "Household":
+            first = parsed.get("GivenName", "")
+            second = parsed.get("SecondGivenName", "")
+            surname = parsed.get("Surname", "")
+            if first and second and surname:
+                return [
+                    (f"{first} {surname}", "couple_split"),
+                    (f"{second} {surname}", "couple_split"),
+                ]
+    except Exception:
+        pass
+    return [(name, "individual")]
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config.settings import OUTPUT_DIR
@@ -1221,11 +1315,15 @@ def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
 # ── Phase 3: Text Extraction + Name Recognition ──────────────────────────────
 
 
-def extract_text_from_pdf(pdf_path: Path):
+def extract_text_from_pdf(pdf_path_or_bytes):
     """Extract all text from a PDF using column-aware extraction.
 
     Uses column detection to prevent cross-column name merging in multi-column
     bulletin layouts. Each column's text is kept separate for name extraction.
+
+    Args:
+        pdf_path_or_bytes: Path to PDF file, or bytes/BytesIO of PDF content.
+            Accepts Path, str, bytes, or io.BytesIO.
 
     Returns:
         Tuple of (full_text, column_texts) where:
@@ -1236,9 +1334,18 @@ def extract_text_from_pdf(pdf_path: Path):
         return "", []
 
     try:
+        import io
         from src.utils.pdf_columns import extract_columns_from_page
 
-        with pdfplumber.open(str(pdf_path)) as pdf:
+        # Accept bytes, BytesIO, Path, or str
+        if isinstance(pdf_path_or_bytes, bytes):
+            pdf_source = io.BytesIO(pdf_path_or_bytes)
+        elif isinstance(pdf_path_or_bytes, io.BytesIO):
+            pdf_source = pdf_path_or_bytes
+        else:
+            pdf_source = str(pdf_path_or_bytes)
+
+        with pdfplumber.open(pdf_source) as pdf:
             all_column_texts = []
             page_texts = []
             for page in pdf.pages:
@@ -1251,13 +1358,18 @@ def extract_text_from_pdf(pdf_path: Path):
             full_text = "\n\n".join(page_texts)
             return full_text, all_column_texts
     except Exception as e:
-        logger.debug(f"PDF extraction failed for {pdf_path.name}: {e}")
+        name = getattr(pdf_path_or_bytes, 'name', str(pdf_path_or_bytes)[:80])
+        logger.debug(f"PDF extraction failed for {name}: {e}")
         return "", []
 
 
 def parse_name_parts(full_name: str) -> dict:
     """
     Split a full name into structured parts: title, first, middle, last.
+
+    Uses the nameparser library when available for robust parsing of complex
+    names (handles "Fr. John M. Smith Jr." correctly). Falls back to manual
+    splitting when nameparser is not installed.
 
     The 'title' field captures HONORIFIC prefixes only (Fr., Rev., Dr., etc.).
     Positional roles (Pastor, Chairman, etc.) are captured separately via the
@@ -1274,6 +1386,16 @@ def parse_name_parts(full_name: str) -> dict:
     if not full_name:
         return result
 
+    # Use nameparser library if available (handles complex names better)
+    if HAS_NAMEPARSER:
+        hn = HumanName(full_name)
+        result["title"] = hn.title
+        result["first_name"] = hn.first
+        result["middle_name"] = hn.middle
+        result["last_name"] = hn.last
+        return result
+
+    # Fallback: manual parsing
     parts = full_name.strip().split()
     if not parts:
         return result

@@ -312,10 +312,14 @@ def prepare_ssa_names(zip_bytes):
 
     Each file inside the zip is yobYYYY.txt with format: name,sex,count
     We sum counts across all years per name (case-insensitive) and write
-    a CSV with columns: name, total_count, rank.
+    a CSV with columns: name, total_count, rank, male_count, female_count, male_ratio.
+
+    Gender data enables husband+wife couple detection:
+    If male_ratio > 0.90, the name is almost exclusively male.
+    If male_ratio < 0.10, the name is almost exclusively female.
     """
     print("\nProcessing SSA baby names...")
-    name_counts = {}  # lowercase name -> {display_name, total_count}
+    name_counts = {}  # lowercase name -> {display_name, total_count, male_count, female_count}
 
     with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
         txt_files = [f for f in zf.namelist() if f.startswith("yob") and f.endswith(".txt")]
@@ -327,20 +331,30 @@ def prepare_ssa_names(zip_bytes):
                 for row in reader:
                     if len(row) < 3:
                         continue
-                    name, _sex, count = row[0], row[1], int(row[2])
+                    name, sex, count = row[0], row[1], int(row[2])
                     key = name.lower()
                     if key not in name_counts:
-                        name_counts[key] = {"name": name, "total_count": 0}
+                        name_counts[key] = {"name": name, "total_count": 0,
+                                            "male_count": 0, "female_count": 0}
                     name_counts[key]["total_count"] += count
+                    if sex.upper() == "M":
+                        name_counts[key]["male_count"] += count
+                    else:
+                        name_counts[key]["female_count"] += count
 
     # Sort by total count descending and assign rank
     sorted_names = sorted(name_counts.values(), key=lambda x: -x["total_count"])
     out_path = REFERENCE_DIR / "ssa_first_names.csv"
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["name", "total_count", "rank"])
+        writer.writerow(["name", "total_count", "rank", "male_count", "female_count", "male_ratio"])
         for rank, entry in enumerate(sorted_names, 1):
-            writer.writerow([entry["name"], entry["total_count"], rank])
+            total = entry["total_count"]
+            male_ratio = round(entry["male_count"] / total, 4) if total > 0 else 0.5
+            writer.writerow([
+                entry["name"], entry["total_count"], rank,
+                entry["male_count"], entry["female_count"], male_ratio,
+            ])
 
     print(f"  Wrote {len(sorted_names):,} unique first names to {out_path}")
     return len(sorted_names)
@@ -350,7 +364,8 @@ def prepare_ssa_names_from_text(text_bytes):
     """Parse SSA alldata.txt (GitHub mirror format): name,sex,count,year
 
     Same deduplication logic as prepare_ssa_names() but reads a flat text file
-    instead of a zip of per-year files.
+    instead of a zip of per-year files. Includes gender data (male_count,
+    female_count, male_ratio) for couple detection.
     """
     print("\nProcessing SSA baby names (from GitHub mirror)...")
     name_counts = {}
@@ -364,19 +379,30 @@ def prepare_ssa_names_from_text(text_bytes):
         if len(parts) < 3:
             continue
         name = parts[0]
+        sex = parts[1] if len(parts) > 1 else ""
         count = int(parts[2])
         key = name.lower()
         if key not in name_counts:
-            name_counts[key] = {"name": name, "total_count": 0}
+            name_counts[key] = {"name": name, "total_count": 0,
+                                "male_count": 0, "female_count": 0}
         name_counts[key]["total_count"] += count
+        if sex.upper() == "M":
+            name_counts[key]["male_count"] += count
+        else:
+            name_counts[key]["female_count"] += count
 
     sorted_names = sorted(name_counts.values(), key=lambda x: -x["total_count"])
     out_path = REFERENCE_DIR / "ssa_first_names.csv"
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["name", "total_count", "rank"])
+        writer.writerow(["name", "total_count", "rank", "male_count", "female_count", "male_ratio"])
         for rank, entry in enumerate(sorted_names, 1):
-            writer.writerow([entry["name"], entry["total_count"], rank])
+            total = entry["total_count"]
+            male_ratio = round(entry["male_count"] / total, 4) if total > 0 else 0.5
+            writer.writerow([
+                entry["name"], entry["total_count"], rank,
+                entry["male_count"], entry["female_count"], male_ratio,
+            ])
 
     print(f"  Wrote {len(sorted_names):,} unique first names to {out_path}")
     return len(sorted_names)

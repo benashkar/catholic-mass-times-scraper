@@ -29,3 +29,11 @@ boto3>=1.35               # AWS Secrets Manager for DB credentials
 
 # --- Browser Automation ---
 playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, eCatholic)
+
+# --- Name Quality Engine ---
+nameparser>=1.1           # Robust name parsing (handles titles, suffixes, compound names)
+probablepeople>=0.5       # CRF-based name parser — detects couple/household names
+spacy>=3.7                # NER-based name validation (en_core_web_lg model)
+
+# --- PDF Extraction ---
+pdfplumber>=0.10          # PDF text extraction with bounding boxes (column-aware)

@@ -1,8 +1,8 @@
 """
 run_daily_pipeline.py — Daily pipeline for Render cron (stateless).
 
-Scrapes mass times directly to db99 (no local files), then rescores
-and triggers dashboard redeploy.
+Scrapes mass times and extracts bulletin names directly to db99
+(no local files), then rescores and triggers dashboard redeploy.
 
 Usage:
     python run_daily_pipeline.py                    # All states
@@ -71,19 +71,28 @@ def main():
             scrape_cmd += ["--limit", str(args.limit)]
         results["scrape"] = run_cmd(scrape_cmd, "Scrape mass times to db99", timeout_seconds=3600)
 
-    # Step 2: Rescore names + junk cleanup (skip full rescore on daily, just cleanup)
+    # Step 2: Extract bulletin names directly to db99
+    if not args.skip_scrape:
+        bulletin_cmd = [sys.executable, "extract_bulletins_to_db99.py"]
+        if args.state:
+            bulletin_cmd += ["--state", args.state]
+        if args.limit:
+            bulletin_cmd += ["--limit", str(args.limit)]
+        results["bulletins"] = run_cmd(bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200)
+
+    # Step 3: Rescore names + junk cleanup (skip full rescore on daily, just cleanup)
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--cleanup-only"],
         "Junk cleanup (SQL)", timeout_seconds=1200,
     )
 
-    # Step 3: Health check
+    # Step 4: Health check
     results["health"] = run_cmd(
         [sys.executable, "tests/test_pipeline_health.py", "--quick"],
         "Health check", timeout_seconds=60,
     )
 
-    # Step 4: Redeploy dashboard
+    # Step 5: Redeploy dashboard
     api_key = os.environ.get("RENDER_API_KEY", "")
     dashboard_id = "srv-d6li8dtm5p6s73chuh7g"
     if api_key:
