@@ -12,7 +12,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir pymysql boto3 \
-    && python -m spacy download en_core_web_lg
+    && python -m spacy download en_core_web_sm
 
 # Copy project source (see .dockerignore for exclusions)
 COPY . .
