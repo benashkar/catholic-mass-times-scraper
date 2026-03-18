@@ -51,4 +51,21 @@ def create_app(config_class=Config):
             result["db"] = f"error: {str(e)[:200]}"
         return result, 200
 
+    @app.route("/debug/logs")
+    def debug_logs():
+        """Show recent scrape_log entries for debugging cron job failures."""
+        from app.data_loader import _get_db_connection
+        try:
+            conn = _get_db_connection()
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT scrape_log_id, scrape_type, completed_at, status, notes "
+                "FROM scrape_log ORDER BY completed_at DESC LIMIT 10"
+            )
+            rows = cur.fetchall()
+            conn.close()
+            return {"logs": rows}, 200
+        except Exception as e:
+            return {"error": str(e)[:500]}, 500
+
     return app
