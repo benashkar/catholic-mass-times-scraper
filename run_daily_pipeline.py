@@ -74,7 +74,7 @@ def main():
     # Step 2: Rescore names + junk cleanup (skip full rescore on daily, just cleanup)
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--cleanup-only"],
-        "Junk cleanup (SQL)", timeout_seconds=300,
+        "Junk cleanup (SQL)", timeout_seconds=1200,
     )
 
     # Step 3: Health check
