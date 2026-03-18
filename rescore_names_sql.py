@@ -71,35 +71,35 @@ def main():
     if not args.cleanup_only:
         # Step 1: SQL rescore using reference tables (SLOW — ~11 min on 2.6M rows)
         print("  Step 1: Rescore using ref_ssa_names + ref_census_surnames...")
-    cur.execute("""
-        UPDATE bulletin_name bn
-        LEFT JOIN ref_ssa_names ssa ON LOWER(
-            CASE WHEN LOCATE(' ', bn.person_name) > 0
-                 THEN SUBSTRING_INDEX(bn.person_name, ' ', 1)
-                 ELSE bn.person_name
+        cur.execute("""
+            UPDATE bulletin_name bn
+            LEFT JOIN ref_ssa_names ssa ON LOWER(
+                CASE WHEN LOCATE(' ', bn.person_name) > 0
+                     THEN SUBSTRING_INDEX(bn.person_name, ' ', 1)
+                     ELSE bn.person_name
+                END
+            ) = ssa.name
+            LEFT JOIN ref_census_surnames cen ON LOWER(
+                CASE WHEN LOCATE(' ', bn.person_name) > 0
+                     THEN SUBSTRING_INDEX(bn.person_name, ' ', -1)
+                     ELSE ''
+                END
+            ) = cen.name
+            SET bn.confidence = CASE
+                WHEN ssa.name IS NOT NULL AND cen.name IS NOT NULL THEN 'high'
+                WHEN ssa.name IS NOT NULL OR cen.name IS NOT NULL THEN 'medium'
+                ELSE 'low'
+            END,
+            bn.is_suspect = CASE
+                WHEN LOCATE(' ', TRIM(bn.person_name)) = 0 THEN 1
+                WHEN LENGTH(bn.person_name) - LENGTH(REPLACE(bn.person_name, ' ', '')) >= 2
+                     AND ssa.name IS NOT NULL
+                     AND LOWER(SUBSTRING_INDEX(bn.person_name, ' ', -1)) IN (SELECT name FROM ref_ssa_names)
+                     AND cen.name IS NULL
+                THEN 1
+                ELSE 0
             END
-        ) = ssa.name
-        LEFT JOIN ref_census_surnames cen ON LOWER(
-            CASE WHEN LOCATE(' ', bn.person_name) > 0
-                 THEN SUBSTRING_INDEX(bn.person_name, ' ', -1)
-                 ELSE ''
-            END
-        ) = cen.name
-        SET bn.confidence = CASE
-            WHEN ssa.name IS NOT NULL AND cen.name IS NOT NULL THEN 'high'
-            WHEN ssa.name IS NOT NULL OR cen.name IS NOT NULL THEN 'medium'
-            ELSE 'low'
-        END,
-        bn.is_suspect = CASE
-            WHEN LOCATE(' ', TRIM(bn.person_name)) = 0 THEN 1
-            WHEN LENGTH(bn.person_name) - LENGTH(REPLACE(bn.person_name, ' ', '')) >= 2
-                 AND ssa.name IS NOT NULL
-                 AND LOWER(SUBSTRING_INDEX(bn.person_name, ' ', -1)) IN (SELECT name FROM ref_ssa_names)
-                 AND cen.name IS NULL
-            THEN 1
-            ELSE 0
-        END
-    """)
+        """)
         print(f"    [OK] {cur.rowcount:,} rows rescored")
     else:
         print("  Step 1: SKIPPED (cleanup-only mode)")
