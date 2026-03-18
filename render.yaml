@@ -50,16 +50,16 @@ services:
       - key: GIT_COMMITTER_EMAIL
         sync: false
 
-  # Weekly pipeline: full scrape + bulletin PDF extraction -> sync to db99 -> redeploy
+  # Weekly pipeline: full scrape + rescore + redeploy
   # Runs every Tuesday at 3 AM UTC
   - type: cron_job
     name: church-weekly-bulletins
     runtime: docker
     dockerfilePath: Dockerfile.cron
     region: virginia
-    plan: starter
+    plan: standard
     schedule: "0 3 * * 2"
-    startCommand: "python run_weekly_pipeline.py"
+    startCommand: "python run_daily_pipeline.py"
     envVars:
       - key: AWS_ACCESS_KEY_ID
         sync: false
