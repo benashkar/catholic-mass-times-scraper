@@ -71,10 +71,10 @@ def main():
             scrape_cmd += ["--limit", str(args.limit)]
         results["scrape"] = run_cmd(scrape_cmd, "Scrape mass times to db99", timeout_seconds=3600)
 
-    # Step 2: Rescore names + junk cleanup
+    # Step 2: Rescore names + junk cleanup (skip full rescore on daily, just cleanup)
     results["rescore"] = run_cmd(
-        [sys.executable, "rescore_names_sql.py"],
-        "Rescore names (SQL)", timeout_seconds=300,
+        [sys.executable, "rescore_names_sql.py", "--cleanup-only"],
+        "Junk cleanup (SQL)", timeout_seconds=300,
     )
 
     # Step 3: Health check

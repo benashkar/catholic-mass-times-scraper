@@ -55,14 +55,22 @@ def get_connection():
 
 
 def main():
-    print("[OK] Starting SQL rescore...")
+    import argparse
+    parser = argparse.ArgumentParser(description="Rescore bulletin names")
+    parser.add_argument("--cleanup-only", action="store_true",
+                        help="Skip full rescore, just apply blocklist + cleanup + refresh stats")
+    args = parser.parse_args()
+
+    mode = "cleanup-only" if args.cleanup_only else "full"
+    print(f"[OK] Starting SQL rescore (mode={mode})...")
     t = time.time()
 
     conn = get_connection()
     cur = conn.cursor()
 
-    # Step 1: SQL rescore using reference tables
-    print("  Step 1: Rescore using ref_ssa_names + ref_census_surnames...")
+    if not args.cleanup_only:
+        # Step 1: SQL rescore using reference tables (SLOW — ~11 min on 2.6M rows)
+        print("  Step 1: Rescore using ref_ssa_names + ref_census_surnames...")
     cur.execute("""
         UPDATE bulletin_name bn
         LEFT JOIN ref_ssa_names ssa ON LOWER(
@@ -92,7 +100,9 @@ def main():
             ELSE 0
         END
     """)
-    print(f"    [OK] {cur.rowcount:,} rows rescored")
+        print(f"    [OK] {cur.rowcount:,} rows rescored")
+    else:
+        print("  Step 1: SKIPPED (cleanup-only mode)")
 
     # Step 2: Junk blocklist
     print("  Step 2: Applying junk blocklist...")
