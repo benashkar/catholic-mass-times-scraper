@@ -59,7 +59,7 @@ def create_app(config_class=Config):
             conn = _get_db_connection()
             cur = conn.cursor()
             cur.execute(
-                "SELECT * FROM scrape_log ORDER BY completed_at DESC LIMIT 10"
+                "SELECT * FROM scrape_log ORDER BY completed_at DESC LIMIT 20"
             )
             rows = cur.fetchall()
             conn.close()
