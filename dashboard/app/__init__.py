@@ -54,13 +54,24 @@ def create_app(config_class=Config):
     @app.route("/debug/logs")
     def debug_logs():
         """Show recent scrape_log entries for debugging cron job failures."""
+        from flask import request
         from app.data_loader import _get_db_connection
         try:
             conn = _get_db_connection()
             cur = conn.cursor()
-            cur.execute(
-                "SELECT * FROM scrape_log ORDER BY completed_at DESC LIMIT 20"
-            )
+            scrape_type = request.args.get("type")
+            limit = min(int(request.args.get("limit", 20)), 100)
+            if scrape_type:
+                cur.execute(
+                    "SELECT * FROM scrape_log WHERE scrape_type = %s "
+                    "ORDER BY completed_at DESC LIMIT %s",
+                    (scrape_type, limit),
+                )
+            else:
+                cur.execute(
+                    "SELECT * FROM scrape_log ORDER BY completed_at DESC LIMIT %s",
+                    (limit,),
+                )
             rows = cur.fetchall()
             conn.close()
             return {"logs": rows}, 200
