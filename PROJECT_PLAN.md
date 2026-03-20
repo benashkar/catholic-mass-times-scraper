@@ -8,101 +8,118 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - **Pipeline**: Two Render cron jobs — daily mass times + weekly bulletins
 - **Name Engine**: `benashkar/names_people_matcher` (`C:\Users\cashk\OneDrive\names_people_matcher`)
 
-## Current Status (2026-03-18)
+## Current Status (2026-03-19)
 
 ### COMPLETED
 1. **Dashboard live** — 50 states, medium+high confidence names, shareable page URLs
 2. **SQL rescore** — ref_ssa_names + ref_census_surnames on db99, junk blocklist, lowercase cleanup
-3. **Junk cleanup** — ~62K records removed (Alzheimer, Fish Fry, lowercase, day names, religious terms, etc.)
-4. **Column detection** — Integrated into `run_bulletin_scraper.py` via `src/utils/pdf_columns.py`
-5. **Pattern 6 fix** — Changed from 200-char proximity to line-based matching (keyword line + next 5 lines)
-6. **Direct-to-db99 scraper** — `scrape_to_db99.py` reads church list from db99, scrapes CatholicIndex, UPSERTs directly. No local files needed.
-7. **Daily pipeline** — `run_daily_pipeline.py` orchestrates: scrape → rescore → health check → redeploy
-8. **Health checks** — 7 automated checks (table counts, confidence distribution, junk rate, lowercase, etc.)
-9. **PrivateLink fixed** — VPC endpoint works from Render
-10. **max_connect_errors** — Set to 1M by ops team (prevents host blocking)
-11. **Old cron deleted** — `church-tuesday-pipeline` removed
-
-### VERIFIED ON RENDER
-- `rescore_names_sql.py` — succeeded (11 min)
-- `scrape_to_db99.py` — succeeded locally (3 Ohio churches in 9s, wrote to db99)
-- `run_daily_pipeline.py --state OH --limit 10` — **testing now on Render**
-- Weekly cron standard plan — upgraded for 1-hour runtime
+3. **Column detection** — Integrated into `run_bulletin_scraper.py` via `src/utils/pdf_columns.py`
+4. **Pattern 6 fix** — Changed from 200-char proximity to line-based matching (keyword line + next 5 lines)
+5. **Direct-to-db99 mass times** — `scrape_to_db99.py` reads church list from db99, scrapes CatholicIndex, UPSERTs directly
+6. **Direct-to-db99 bulletins** — `extract_bulletins_to_db99.py` discovers bulletin PDFs, downloads to memory (BytesIO), extracts text with column-aware pdfplumber, runs 6 regex patterns + NER veto + couple detection, inserts names directly to db99. Fully stateless.
+7. **Daily pipeline** — `run_daily_pipeline.py` orchestrates: mass times scrape → bulletin extraction → rescore → health check → redeploy
+8. **Multi-model name quality engine** (Phase 1-2 complete):
+   - **nameparser** library replaces hand-rolled `parse_name_parts()` — handles "Fr. John M. Smith Jr." correctly
+   - **probablepeople** detects couple names ("John & Mary Smith") → splits into two records
+   - **NER veto gate** (spaCy en_core_web_lg) — names NER doesn't recognize as PERSON get downgraded to low/suspect
+   - **SSA gender data** — male_count, female_count, male_ratio columns for husband+wife detection
+   - **Expanded SQL blocklist** — ~100+ additional junk terms
+9. **NER rescore of all existing data** (Phase 4 complete):
+   - 2,339,934 names checked across 50 states
+   - 1,556,276 false positives eliminated (66.5%)
+   - ~783,658 quality names remaining on dashboard
+   - Ran as 49 individual state jobs on Render (each 10s-30min depending on state size)
+10. **Health checks** — 7 automated checks (table counts, confidence distribution, junk rate, etc.)
+11. **PrivateLink fixed** — VPC endpoint works from Render
+12. **Debug endpoint** — `/debug/logs` on dashboard for cron job visibility (Render API lacks job log access)
 
 ### CURRENT DATA
-- 2.6M bulletin_name rows total, ~1.2M medium+high after cleanup
+- 2.6M bulletin_name rows total
+- ~784K medium+high confidence (dashboard-visible) — down from ~1.2M after NER cleanup
 - 23,046 churches, 280K services
-- ref_ssa_names (100K), ref_census_surnames (162K) on db99
+- ref_ssa_names (100K with gender data), ref_census_surnames (162K) on db99
 
 ## Render Services
 
 | Service | ID | Type | Plan | Command |
 |---------|-----|------|------|---------|
 | catholic-church-dashboard | `srv-d6li8dtm5p6s73chuh7g` | web | starter | gunicorn |
-| church-daily-scrape | `crn-d6s8st3uibrs73e7b740` | cron (daily excl Tue) | starter | `python run_daily_pipeline.py` |
-| church-weekly-bulletins | `crn-d6s8t02a214c73bt62s0` | cron (Tue 3AM) | **standard** | `python run_weekly_pipeline.py` |
+| church-daily-scrape | `crn-d6s8st3uibrs73e7b740` | cron (daily excl Tue) | **standard** (2GB) | `python run_daily_pipeline.py` |
+| church-weekly-bulletins | `crn-d6s8t02a214c73bt62s0` | cron (Tue 3AM) | standard | `python run_weekly_pipeline.py` |
 
 ## Pipeline Architecture
 
-### Daily (stateless, scrapes directly to db99)
+### Daily (stateless → db99)
 `python run_daily_pipeline.py`
-1. Read church list from db99
-2. Scrape each church from CatholicIndex.org
-3. UPSERT church + services directly to db99 (no local files)
-4. Rescore names via SQL
-5. Health check
-6. Trigger dashboard redeploy
+1. Scrape mass times from CatholicIndex → UPSERT to db99
+2. Extract bulletin names → discover PDFs → download to memory → extract text → NER veto → UPSERT to db99
+3. Rescore names via SQL (cleanup-only mode)
+4. Health check
+5. Trigger dashboard redeploy
 
-### Weekly (needs refactor — currently uses local files)
+### Weekly (Tue 3AM)
 `python run_weekly_pipeline.py`
 1. Scrape mass times (all 50 states)
-2. Regenerate dated services
-3. Bulletin pipeline: discover → download → extract → parse names
-4. Sync local files to db99
-5. Rescore names via SQL
-6. Health check
-7. Git push + redeploy
+2. Bulletin extraction (all states via `extract_bulletins_to_db99.py`)
+3. Full SQL rescore
+4. Health check + redeploy
 
-**TODO:** Weekly pipeline also needs direct-to-db99 refactor for bulletin names.
+### Name Quality Pipeline (per extracted name)
+```
+1. Extract via 6 regex patterns (staff, honorific, section-header, ministry, intention, prayer)
+2. nameparser: parse into first/middle/last/title/suffix
+3. probablepeople: detect couple → split if Household type
+4. Dictionary score: SSA first + Census last (fast lookup)
+5. NER veto: spaCy en_core_web_lg — downgrade if not PERSON entity
+6. Consensus: dictionary + NER agreement → high/medium/low
+7. SQL blocklist cleanup (runs after sync)
+```
+
+## Key Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scrape_to_db99.py` | Mass times: CatholicIndex → db99 (stateless) |
+| `extract_bulletins_to_db99.py` | Bulletins: discover → download → extract → NER → db99 (stateless) |
+| `run_daily_pipeline.py` | Orchestrates daily: scrape + bulletins + rescore + health + redeploy |
+| `run_weekly_pipeline.py` | Orchestrates weekly: all states, full rescore |
+| `rescore_names_sql.py` | SQL-based rescore + blocklist + stats refresh |
+| `rescore_with_ner.py` | One-time NER rescore of existing names (ran 2026-03-19) |
+| `run_bulletin_scraper.py` | Original file-based bulletin pipeline (local use) |
+| `run_job.py` | Wrapper that captures stdout/stderr → logs to db99 scrape_log |
+| `scripts/prepare_name_reference.py` | Regenerate SSA (with gender) + Census reference data |
 
 ## NEXT TASKS (priority order)
 
-### 1. Optimize rescore to only score new/changed names
-Current rescore hits all 2.6M names every run — wasteful.
-Fix: Only rescore names where `updated_at > last_rescore_at` or add a `rescored_at` column.
-Alternative: Run rescore only on the states that were scraped in this run.
+### 1. Couple detection on existing data
+- `probablepeople` is installed in Docker but couple detection pass failed due to missing `role` column
+- Fix: check actual db99 column names for bulletin_name and update `rescore_with_ner.py`
+- Then re-run `--couples-only` to split "John & Mary Smith" names
 
-### 2. Re-extract Georgia bulletins with new code
-- Column detection + Pattern 6 line-based fix are in place
-- Run: `python run_bulletin_scraper.py all georgia` (will re-extract from existing PDFs)
-- Compare 3-word name count before/after
-- Note: Our Lady of Lourdes (GA) PDFs are image-based — needs OCR, not column detection
+### 2. Downgrade cron plan after stabilization
+- Daily cron upgraded to standard (2GB, $25/mo) for NER rescore
+- Can downgrade to starter ($7/mo) if weekly NER batches fit in 512MB
+- Test: run one weekly cycle on starter and monitor memory
 
-### 3. Husband+wife name splitting
-- Signal: word 1 is strongly male + word 2 is strongly female + word 3 is Census surname
-- SSA data already has M/F gender at line 330 of prepare_name_reference.py (currently discarded)
-- Implementation plan documented in previous version of this file
+### 3. Re-extract states with updated code
+- Column detection + Pattern 6 + NER are now in the extraction pipeline
+- Re-running `extract_bulletins_to_db99.py` on states will apply all improvements to new PDFs
+- Existing PDFs won't be re-processed (tracked by `bulletin_pdf.extracted_at`)
 
 ### 4. Mass times data cleanup
 - Events/locations returning junk in the dashboard
 - Need to review and clean up service display_names
-- Add blocklist for service-level junk (similar to bulletin name blocklist)
 
-### 5. Weekly pipeline direct-to-db99 refactor
-- Bulletin names need same treatment as mass times
-- Extract names from PDF → UPSERT directly to db99
-- Eliminates need for local files and persistent storage
-
-### 6. Pattern 6 further improvements
-- Current: line-based (keyword line + next 5 lines)
-- Testing showed column merging is mostly from Pattern 6, not PDF layout
-- Consider: require name to be the ONLY content on its line (list format)
-- Consider: reduce from 6 lines to 3 lines proximity
+### 5. Optimize rescore to only score new/changed names
+- Current rescore hits all 2.6M names every run
+- Fix: Only rescore names where `updated_at > last_rescore_at` or track by batch
 
 ## DB Local Access
 - **Always use** `DB_HOST=10.10.0.8` env var for local connections
 - VPC endpoint from Secrets Manager doesn't work locally (only from Render)
 - Example: `DB_HOST=10.10.0.8 python tests/test_pipeline_health.py`
 
-## Useful Queries
-See bottom of previous PROJECT_PLAN.md version (queries for unique people by state, by city, by church)
+## Debug
+- `/debug/logs` on dashboard: shows recent scrape_log entries
+- `/debug/logs?type=ner_rescore&limit=50`: filter by type
+- `run_job.py` wrapper: captures stdout/stderr from any script → logs to db99
