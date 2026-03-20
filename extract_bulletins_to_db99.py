@@ -8,8 +8,8 @@ back to db99.
 
 Progress tracked via db99 tables (not local files):
   - bulletin_source: discovery progress (church has been checked)
-  - bulletin_pdf.extracted_at: extraction progress (PDF has been processed)
-  - Resume = SELECT * FROM bulletin_pdf WHERE extracted_at IS NULL
+  - bulletin_pdf.text_extracted: extraction progress (PDF has been processed)
+  - Resume = SELECT * FROM bulletin_pdf WHERE text_extracted = 0
 
 Usage:
     python extract_bulletins_to_db99.py                    # All states
@@ -83,6 +83,23 @@ def get_connection():
 
 
 # ---------------------------------------------------------------------------
+# Schema migration (idempotent)
+# ---------------------------------------------------------------------------
+
+def ensure_schema(cur):
+    """Add columns that our code needs but may not exist on db99 yet."""
+    cur.execute("""
+        SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = 'church_scrapes'
+          AND TABLE_NAME = 'bulletin_name'
+          AND COLUMN_NAME = 'role'
+    """)
+    if not cur.fetchone():
+        cur.execute("ALTER TABLE bulletin_name ADD COLUMN role VARCHAR(100) DEFAULT ''")
+        print("  [OK] Added column bulletin_name.role")
+
+
+# ---------------------------------------------------------------------------
 # Bulletin extraction pipeline
 # ---------------------------------------------------------------------------
 
@@ -125,12 +142,12 @@ def process_church(cur, church):
 
     # UPSERT bulletin_source
     cur.execute("""
-        INSERT INTO bulletin_source (church_id, source_type, source_url, last_scraped_at)
+        INSERT INTO bulletin_source (church_id, discovery_source, bulletin_page_url, discovered_at)
         VALUES (%s, %s, %s, NOW())
         ON DUPLICATE KEY UPDATE
-            source_type = VALUES(source_type),
-            source_url = VALUES(source_url),
-            last_scraped_at = NOW()
+            discovery_source = VALUES(discovery_source),
+            bulletin_page_url = VALUES(bulletin_page_url),
+            discovered_at = NOW()
     """, (church_id, source_type[:30], bulletin_page_url[:2048]))
 
     if not pdf_urls:
@@ -152,12 +169,12 @@ def process_church(cur, church):
 
         # Check if already extracted
         cur.execute(
-            "SELECT bulletin_pdf_id, extracted_at FROM bulletin_pdf "
-            "WHERE bulletin_source_id = %s AND url = %s LIMIT 1",
+            "SELECT bulletin_pdf_id, text_extracted FROM bulletin_pdf "
+            "WHERE bulletin_source_id = %s AND pdf_url = %s LIMIT 1",
             (bulletin_source_id, pdf_url[:2048]),
         )
         existing_pdf = cur.fetchone()
-        if existing_pdf and existing_pdf.get("extracted_at"):
+        if existing_pdf and existing_pdf.get("text_extracted"):
             continue
 
         stats["pdfs_found"] += 1
@@ -172,7 +189,7 @@ def process_church(cur, church):
             bulletin_pdf_id = existing_pdf["bulletin_pdf_id"]
         else:
             cur.execute("""
-                INSERT INTO bulletin_pdf (bulletin_source_id, url, downloaded_at)
+                INSERT INTO bulletin_pdf (bulletin_source_id, pdf_url, downloaded_at)
                 VALUES (%s, %s, NOW())
             """, (bulletin_source_id, pdf_url[:2048]))
             bulletin_pdf_id = cur.lastrowid
@@ -184,7 +201,7 @@ def process_church(cur, church):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET extracted_at = NOW(), text_length = 0 "
+                "UPDATE bulletin_pdf SET text_extracted = 1 "
                 "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
@@ -255,13 +272,16 @@ def process_church(cur, church):
                 cur.execute("""
                     INSERT INTO bulletin_name
                         (bulletin_pdf_id, person_name, first_name, last_name,
-                         confidence, is_suspect, role, context, extracted_context_category)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                         title, middle_name,
+                         confidence, is_suspect, role, context, category)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     bulletin_pdf_id,
                     individual_name[:100],
                     first_name[:50],
                     last_name[:50],
+                    (parts.get("title") or "")[:20],
+                    (parts.get("middle_name") or "")[:50],
                     conf,
                     is_suspect,
                     (name_dict.get("role") or "")[:100],
@@ -275,9 +295,9 @@ def process_church(cur, church):
 
         # Mark PDF as extracted
         cur.execute(
-            "UPDATE bulletin_pdf SET extracted_at = NOW(), text_length = %s "
+            "UPDATE bulletin_pdf SET text_extracted = 1 "
             "WHERE bulletin_pdf_id = %s",
-            (len(full_text), bulletin_pdf_id),
+            (bulletin_pdf_id,),
         )
 
     return stats
@@ -289,12 +309,12 @@ def process_unextracted_pdfs(cur):
     Returns dict of stats.
     """
     cur.execute("""
-        SELECT bp.bulletin_pdf_id, bp.url, bp.bulletin_source_id,
+        SELECT bp.bulletin_pdf_id, bp.pdf_url, bp.bulletin_source_id,
                bs.church_id, c.name AS church_name
         FROM bulletin_pdf bp
         JOIN bulletin_source bs ON bs.bulletin_source_id = bp.bulletin_source_id
         JOIN church c ON c.church_id = bs.church_id
-        WHERE bp.extracted_at IS NULL
+        WHERE bp.text_extracted = 0
         ORDER BY bp.downloaded_at DESC
         LIMIT 500
     """)
@@ -308,13 +328,13 @@ def process_unextracted_pdfs(cur):
 
     for row in rows:
         bulletin_pdf_id = row["bulletin_pdf_id"]
-        pdf_url = row["url"]
+        pdf_url = row["pdf_url"]
         church_name = row["church_name"] or ""
 
         pdf_bytes = download_pdf_to_memory(pdf_url)
         if not pdf_bytes:
             cur.execute(
-                "UPDATE bulletin_pdf SET extracted_at = NOW(), text_length = 0 "
+                "UPDATE bulletin_pdf SET text_extracted = 1 "
                 "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
@@ -323,7 +343,7 @@ def process_unextracted_pdfs(cur):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET extracted_at = NOW(), text_length = 0 "
+                "UPDATE bulletin_pdf SET text_extracted = 1 "
                 "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
@@ -382,13 +402,16 @@ def process_unextracted_pdfs(cur):
                 cur.execute("""
                     INSERT INTO bulletin_name
                         (bulletin_pdf_id, person_name, first_name, last_name,
-                         confidence, is_suspect, role, context, extracted_context_category)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                         title, middle_name,
+                         confidence, is_suspect, role, context, category)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """, (
                     bulletin_pdf_id,
                     individual_name[:100],
                     first_name[:50],
                     last_name[:50],
+                    (parts.get("title") or "")[:20],
+                    (parts.get("middle_name") or "")[:50],
                     conf,
                     is_suspect,
                     (name_dict.get("role") or "")[:100],
@@ -401,9 +424,9 @@ def process_unextracted_pdfs(cur):
         stats["pdfs_extracted"] += 1
 
         cur.execute(
-            "UPDATE bulletin_pdf SET extracted_at = NOW(), text_length = %s "
+            "UPDATE bulletin_pdf SET text_extracted = 1 "
             "WHERE bulletin_pdf_id = %s",
-            (len(full_text), bulletin_pdf_id),
+            (bulletin_pdf_id,),
         )
 
     return stats
@@ -430,6 +453,7 @@ def main():
 
     conn = get_connection()
     cur = conn.cursor()
+    ensure_schema(cur)
 
     # If skip-discovery, just process unextracted PDFs and exit
     if args.skip_discovery:
@@ -479,13 +503,13 @@ def main():
         # Check if recently processed (skip fresh churches)
         if args.days_fresh > 0:
             cur.execute(
-                "SELECT last_scraped_at FROM bulletin_source "
-                "WHERE church_id = %s ORDER BY last_scraped_at DESC LIMIT 1",
+                "SELECT discovered_at FROM bulletin_source "
+                "WHERE church_id = %s ORDER BY discovered_at DESC LIMIT 1",
                 (church_id,),
             )
             existing = cur.fetchone()
-            if existing and existing.get("last_scraped_at"):
-                scraped_at = existing["last_scraped_at"]
+            if existing and existing.get("discovered_at"):
+                scraped_at = existing["discovered_at"]
                 if hasattr(scraped_at, 'replace'):
                     scraped_at = scraped_at.replace(tzinfo=timezone.utc)
                 days_ago = (datetime.now(timezone.utc) - scraped_at).days

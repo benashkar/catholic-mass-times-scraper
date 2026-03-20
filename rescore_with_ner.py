@@ -205,7 +205,7 @@ def run_couple_detection(cur, args):
 
     cur.execute(f"""
         SELECT bn.bulletin_name_id, bn.bulletin_pdf_id, bn.person_name,
-               bn.role, bn.context, bn.extracted_context_category
+               bn.role, bn.context, bn.category
         FROM bulletin_name bn
         {where}
         ORDER BY bn.bulletin_name_id
@@ -243,7 +243,7 @@ def run_couple_detection(cur, args):
 
             raw_score = score_name_confidence(
                 individual_name,
-                category=row.get("extracted_context_category") or "",
+                category=row.get("category") or "",
                 role=row.get("role") or "",
                 title=parts.get("title") or "",
             )
@@ -261,18 +261,21 @@ def run_couple_detection(cur, args):
             cur.execute("""
                 INSERT INTO bulletin_name
                     (bulletin_pdf_id, person_name, first_name, last_name,
-                     confidence, is_suspect, role, context, extracted_context_category)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                     title, middle_name,
+                     confidence, is_suspect, role, context, category)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, (
                 row["bulletin_pdf_id"],
                 individual_name[:100],
                 first_name[:50],
                 last_name[:50],
+                (parts.get("title") or "")[:20],
+                (parts.get("middle_name") or "")[:50],
                 conf,
                 0,
                 (row.get("role") or "")[:100],
                 (row.get("context") or "")[:500],
-                (row.get("extracted_context_category") or "")[:30],
+                (row.get("category") or "")[:30],
             ))
             records_inserted += cur.rowcount
 
