@@ -23,7 +23,7 @@
     <div class="col-6 col-md-3">
         <div class="card text-center">
             <div class="card-body py-2">
-                <h4 class="mb-0 text-primary">{{ "{:,}".format(stats.total_names) }}</h4>
+                <h4 class="mb-0 text-primary" id="statTotal">{{ "{:,}".format(stats.total_names) }}</h4>
                 <small class="text-muted">Total Names</small>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <div class="col-6 col-md-3">
         <div class="card text-center">
             <div class="card-body py-2">
-                <h4 class="mb-0 text-success">{{ "{:,}".format(stats.unique_names) }}</h4>
+                <h4 class="mb-0 text-success" id="statUnique">{{ "{:,}".format(stats.unique_names) }}</h4>
                 <small class="text-muted">Unique Names</small>
             </div>
         </div>
@@ -82,13 +82,16 @@
             <option value="ministry_contextual">Ministry/Contextual</option>
         </select>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <select id="filterConfidence" class="form-select form-select-sm">
             <option value="">All Confidence</option>
-            <option value="high" {% if min_confidence == '0.7' %}selected{% endif %}>High only (&ge; 0.7)</option>
-            <option value="medium" {% if min_confidence == '0.4' %}selected{% endif %}>Medium+ (&ge; 0.4)</option>
-            <option value="low">Low (&lt; 0.4)</option>
+            <option value="high" {% if min_confidence == 'high' %}selected{% endif %}>High only (&ge; 0.7)</option>
+            <option value="medium" {% if min_confidence == 'medium' %}selected{% endif %}>Medium+ (&ge; 0.4)</option>
+            <option value="low" {% if min_confidence == 'low' %}selected{% endif %}>Low (&lt; 0.4)</option>
         </select>
+    </div>
+    <div class="col-md-1 text-end">
+        <a id="csvDownload" href="#" class="btn btn-outline-secondary btn-sm" title="Download CSV"><i class="bi bi-download"></i> CSV</a>
     </div>
 </div>
 
@@ -157,12 +160,49 @@ function confBadge(d) {
     if (s.toLowerCase() === 'medium') return '<span class="badge bg-warning text-dark">Med</span>';
     return '<span class="badge bg-danger">' + $('<span>').text(s).html() + '</span>';
 }
+
+/* Build query string from current filter state */
+function currentFilters() {
+    var p = {};
+    var v;
+    v = $('#filterCity').val();        if (v) p.city = v;
+    v = $('#filterChurch').val();      if (v) p.church = v;
+    v = $('#filterCategory').val();    if (v) p.category = v;
+    v = $('#filterConfidence').val();  if (v) p.confidence = v;
+    return p;
+}
+
+/* Sync filters into URL query params (shareable link) */
+function syncUrl() {
+    var params = new URLSearchParams();
+    var f = currentFilters();
+    for (var k in f) params.set(k, f[k]);
+    var search = table ? table.search() : '';
+    if (search) params.set('q', search);
+    var qs = params.toString();
+    var url = window.location.pathname + (qs ? '?' + qs : '');
+    window.history.replaceState(null, '', url);
+    // Update CSV download link
+    var csvParams = new URLSearchParams(params);
+    $('#csvDownload').attr('href', '/bulletin/{{ state }}/api/names.csv' + (csvParams.toString() ? '?' + csvParams.toString() : ''));
+}
+
+var table;
+
 $(document).ready(function() {
     // Enable Bootstrap tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.forEach(function(el) { new bootstrap.Tooltip(el); });
 
-    var table = $('#namesTable').DataTable({
+    // Restore filters from URL query params
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('city'))       $('#filterCity').val(urlParams.get('city'));
+    if (urlParams.has('church'))     $('#filterChurch').val(urlParams.get('church'));
+    if (urlParams.has('category'))   $('#filterCategory').val(urlParams.get('category'));
+    if (urlParams.has('confidence')) $('#filterConfidence').val(urlParams.get('confidence'));
+    var initialSearch = urlParams.get('q') || '';
+
+    table = $('#namesTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
@@ -171,8 +211,17 @@ $(document).ready(function() {
                 d.church = $('#filterChurch').val();
                 d.city = $('#filterCity').val();
                 d.category = $('#filterCategory').val();
+                d.confidence = $('#filterConfidence').val();
+            },
+            dataFilter: function(raw) {
+                /* Update stat cards from server response */
+                var json = JSON.parse(raw);
+                $('#statTotal').text(Number(json.recordsFiltered).toLocaleString());
+                $('#statUnique').text(Number(json.uniqueFiltered).toLocaleString());
+                return raw;
             }
         },
+        search: { search: initialSearch },
         columns: [
             { data: 0, render: function(d) { return '<strong>' + $('<span>').text(d).html() + '</strong>'; } },
             { data: 1 },
@@ -190,110 +239,49 @@ $(document).ready(function() {
             { data: 10 }
         ],
         pageLength: 50,
-        order: [[8, 'desc']],  // Sort by confidence descending (high first)
+        order: [[8, 'desc']],
         language: { search: "Search names:" },
         dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
         autoWidth: false,
-        stateSave: true,  // Remember page/sort/search in URL hash
-        stateSaveCallback: function(settings, data) {
-            // Save DataTable state to URL hash for shareable links
-            var params = new URLSearchParams();
-            if (data.start) params.set('start', data.start);
-            if (data.length && data.length !== 50) params.set('length', data.length);
-            if (data.search && data.search.search) params.set('q', data.search.search);
-            if (data.order && data.order.length) params.set('sort', data.order[0][0] + ',' + data.order[0][1]);
-            var hash = params.toString();
-            if (hash) window.history.replaceState(null, '', '#' + hash);
-            else window.history.replaceState(null, '', window.location.pathname);
-        },
-        stateLoadCallback: function(settings) {
-            // Load DataTable state from URL hash
-            var hash = window.location.hash.substring(1);
-            if (!hash) return null;
-            var params = new URLSearchParams(hash);
-            var state = { time: Date.now(), start: 0, length: 50, order: [[8, 'desc']], search: { search: '' } };
-            if (params.has('start')) state.start = parseInt(params.get('start'));
-            if (params.has('length')) state.length = parseInt(params.get('length'));
-            if (params.has('q')) state.search = { search: params.get('q'), regex: false, smart: true, caseInsensitive: true };
-            if (params.has('sort')) {
-                var parts = params.get('sort').split(',');
-                state.order = [[parseInt(parts[0]), parts[1] || 'desc']];
-            }
-            return state;
-        },
         columnDefs: [
-            { targets: [9], orderable: false },  // PDF column not sortable
-            { targets: [2], className: 'text-center' },  // Title centered
-            { targets: [8], className: 'text-center' },  // Confidence centered
-            { targets: [9], className: 'text-center' }   // PDF centered
+            { targets: [9], orderable: false },
+            { targets: [2], className: 'text-center' },
+            { targets: [8], className: 'text-center' },
+            { targets: [9], className: 'text-center' }
         ]
     });
 
-    // Custom filter: City (column index 6)
+    // Sync URL after every draw
+    table.on('draw', function() { syncUrl(); });
+
+    // Custom filter: City
     $('#filterCity').on('change', function() {
-        table.column(6).search(this.value, false, false).draw();
-    });
-
-    // Custom filter: Church (column index 5) — with optional city (column 6)
-    $('#filterChurch').on('change', function() {
-        var churchVal = this.value;
-        var cityVal = $(this).find(':selected').data('city') || '';
-        if (churchVal) {
-            table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(churchVal) + '$', true, false);
-        } else {
-            table.column(5).search('', false, false);
-        }
-        if (cityVal) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(cityVal) + '$', true, false);
-        } else if (churchVal) {
-            // Don't reset city if we have a church selected
-        } else {
-            table.column(6).search('', false, false);
-        }
-        table.draw();
-    });
-
-    // Custom filter: Category (column index 7)
-    $('#filterCategory').on('change', function() {
-        table.column(7).search(this.value, false, false).draw();
-    });
-
-    // Custom filter: Confidence (column index 8)
-    $('#filterConfidence').on('change', function() {
-        var val = this.value;
-        if (val === 'high') {
-            table.column(8).search('High', false, false).draw();
-        } else if (val === 'medium') {
-            // Show High + Med (exclude Low)
-            table.column(8).search('High|Med', true, false).draw();
-        } else if (val === 'low') {
-            table.column(8).search('Low', false, false).draw();
-        } else {
-            table.column(8).search('', false, false).draw();
-        }
-    });
-
-    // Auto-apply ?church= and ?city= prefilters from URL
-    var prefilterChurch = {{ prefilter_church|tojson }};
-    var prefilterCity = {{ prefilter_city|tojson }};
-    if (prefilterChurch) {
-        table.column(5).search('^' + $.fn.dataTable.util.escapeRegex(prefilterChurch) + '$', true, false);
-        if (prefilterCity) {
-            table.column(6).search('^' + $.fn.dataTable.util.escapeRegex(prefilterCity) + '$', true, false);
-            $('#filterChurch option').each(function() {
-                if ($(this).val() === prefilterChurch && $(this).data('city') === prefilterCity) {
-                    $(this).prop('selected', true);
-                }
-            });
-            $('#filterCity').val(prefilterCity);
-        } else {
-            $('#filterChurch option').filter(function() {
-                return $(this).val() === prefilterChurch;
-            }).first().prop('selected', true);
-        }
-        // Reload with the prefilter applied
         table.ajax.reload();
-    }
+    });
+
+    // Custom filter: Church — also set city from data attribute
+    $('#filterChurch').on('change', function() {
+        var cityVal = $(this).find(':selected').data('city') || '';
+        if (cityVal) {
+            $('#filterCity').val(cityVal);
+        } else if (!this.value) {
+            $('#filterCity').val('');
+        }
+        table.ajax.reload();
+    });
+
+    // Custom filter: Category
+    $('#filterCategory').on('change', function() {
+        table.ajax.reload();
+    });
+
+    // Custom filter: Confidence (server-side)
+    $('#filterConfidence').on('change', function() {
+        table.ajax.reload();
+    });
+
+    // Initial CSV link
+    syncUrl();
 });
 </script>
 {% endblock %}

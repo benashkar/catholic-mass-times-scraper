@@ -614,27 +614,38 @@ def get_bulletin_names_page(
     church_filter="",
     city_filter="",
     category_filter="",
+    confidence_filter="",
 ):
     """
     Return a page of bulletin names for DataTables server-side processing.
     Uses SQL LIMIT/OFFSET for efficiency instead of loading all rows.
-    Returns (rows_list, total_records, filtered_records).
+    Returns (rows_list, total_records, filtered_records, unique_filtered).
     """
     sc = _state_code(state_dir)
     if not sc:
-        return [], 0, 0
+        return [], 0, 0, 0
 
     try:
         conn = _get_db_connection()
         cur = conn.cursor()
 
-        # Base filter — medium+high confidence, non-suspect names
+        # Base filter — non-suspect names
         where = [
             "state_code = %s",
-            "confidence IN ('high', 'medium')",
             "is_suspect = 0",
         ]
         params = [sc]
+
+        # Confidence filter (server-side)
+        if confidence_filter == "high":
+            where.append("confidence = 'high'")
+        elif confidence_filter == "medium":
+            where.append("confidence IN ('high', 'medium')")
+        elif confidence_filter == "low":
+            where.append("confidence = 'low'")
+        else:
+            # Default: medium+high
+            where.append("confidence IN ('high', 'medium')")
 
         if church_filter:
             where.append("church_name = %s")
@@ -646,7 +657,7 @@ def get_bulletin_names_page(
             where.append("category = %s")
             params.append(category_filter)
 
-        # Total count (medium+high confidence for this state)
+        # Total count (medium+high confidence for this state — unfiltered baseline)
         cur.execute(
             "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0",
             (sc,),
@@ -666,12 +677,16 @@ def get_bulletin_names_page(
 
         where_sql = " AND ".join(where)
 
-        # Filtered count
+        # Filtered count + unique names count
         cur.execute(
-            f"SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE {where_sql}",
+            f"""SELECT COUNT(*) AS cnt,
+                       COUNT(DISTINCT CONCAT(first_name, '|', last_name)) AS uniq
+                FROM v_bulletin_ui_names WHERE {where_sql}""",
             params,
         )
-        filtered_records = cur.fetchone()["cnt"]
+        counts = cur.fetchone()
+        filtered_records = counts["cnt"]
+        unique_filtered = counts["uniq"]
 
         # Order — whitelist column names to prevent injection
         sort_col = _COL_INDEX_TO_SQL.get(order_col, "person_name")
@@ -696,7 +711,7 @@ def get_bulletin_names_page(
             rows.append(
                 [
                     r["person_name"] or "",
-                    "",  # role (not in DB)
+                    "",  # role (not in DB yet)
                     r["title"] or "",
                     r["first_name"] or "",
                     r["last_name"] or "",
@@ -710,11 +725,11 @@ def get_bulletin_names_page(
             )
 
         conn.close()
-        return rows, total_records, filtered_records
+        return rows, total_records, filtered_records, unique_filtered
 
     except Exception as e:
         logger.error(f"Error in get_bulletin_names_page: {e}")
-        return [], 0, 0
+        return [], 0, 0, 0
 
 
 # ── Dated services (calendar) ──────────────────────────────────────────

@@ -3,10 +3,12 @@ Bulletin Names Browser — View extracted names from church bulletins.
 Filterable by state, city, church, confidence. Shows full provenance (PDF link, date).
 """
 
+import csv
+import io
 import json
 import os
 
-from flask import Blueprint, abort, jsonify, render_template, request
+from flask import Blueprint, Response, abort, jsonify, render_template, request
 
 from app.data_loader import (
     get_bulletin_filters,
@@ -146,10 +148,10 @@ def state_view(state):
     filters = get_bulletin_filters(state)
     display_name = state.replace("_", " ").title()
 
-    # Read ?church= and ?city= query params for pre-filtering from mass-times page
+    # Read query params for pre-filtering (shareable URLs)
     prefilter_church = request.args.get("church", "")
     prefilter_city = request.args.get("city", "")
-    min_confidence = request.args.get("min_confidence", "")
+    min_confidence = request.args.get("confidence", "")
 
     return render_template(
         "bulletin/state.html",
@@ -185,8 +187,9 @@ def api_names(state):
     church = request.args.get("church", "")
     city = request.args.get("city", "")
     category = request.args.get("category", "")
+    confidence = request.args.get("confidence", "")
 
-    rows, total, filtered = get_bulletin_names_page(
+    rows, total, filtered, unique_filtered = get_bulletin_names_page(
         state,
         start=start,
         length=length,
@@ -196,6 +199,7 @@ def api_names(state):
         church_filter=church,
         city_filter=city,
         category_filter=category,
+        confidence_filter=confidence,
     )
 
     return jsonify(
@@ -203,6 +207,54 @@ def api_names(state):
             "draw": draw,
             "recordsTotal": total,
             "recordsFiltered": filtered,
+            "uniqueFiltered": unique_filtered,
             "data": rows,
         }
+    )
+
+
+@bp.route("/<state>/api/names.csv")
+def api_names_csv(state):
+    """Download filtered bulletin names as CSV."""
+    stats = get_bulletin_stats(state)
+    if stats is None:
+        abort(404)
+
+    church = request.args.get("church", "")
+    city = request.args.get("city", "")
+    category = request.args.get("category", "")
+    confidence = request.args.get("confidence", "")
+    search = request.args.get("q", "")
+
+    rows, _total, _filtered, _unique = get_bulletin_names_page(
+        state,
+        start=0,
+        length=50000,
+        search=search,
+        order_col=8,
+        order_dir="desc",
+        church_filter=church,
+        city_filter=city,
+        category_filter=category,
+        confidence_filter=confidence,
+    )
+
+    buf = io.StringIO()
+    writer = csv.writer(buf)
+    writer.writerow([
+        "Name", "Role", "Title", "First", "Last",
+        "Church", "City", "Category", "Confidence", "PDF URL", "Date",
+    ])
+    writer.writerows(rows)
+
+    display = state.replace("_", " ").title()
+    filename = f"bulletin_names_{state}"
+    if confidence:
+        filename += f"_{confidence}"
+    filename += ".csv"
+
+    return Response(
+        buf.getvalue(),
+        mimetype="text/csv",
+        headers={"Content-Disposition": f"attachment; filename={filename}"},
     )
