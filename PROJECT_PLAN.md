@@ -8,7 +8,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - **Pipeline**: Two Render cron jobs — daily mass times + weekly bulletins
 - **Name Engine**: `benashkar/names_people_matcher` (`C:\Users\cashk\OneDrive\names_people_matcher`)
 
-## Current Status (2026-03-19)
+## Current Status (2026-03-21)
 
 ### COMPLETED
 1. **Dashboard live** — 50 states, medium+high confidence names, shareable page URLs
@@ -32,6 +32,8 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 10. **Health checks** — 7 automated checks (table counts, confidence distribution, junk rate, etc.)
 11. **PrivateLink fixed** — VPC endpoint works from Render
 12. **Debug endpoint** — `/debug/logs` on dashboard for cron job visibility (Render API lacks job log access)
+13. **Fix column mismatch** — `extract_bulletins_to_db99.py` and `rescore_with_ner.py` had wrong column names vs actual db99 schema (written against PG schema, but db99 tables created by `sync_to_db99.py` have different names). Fixed: `source_type`→`discovery_source`, `source_url`→`bulletin_page_url`, `url`→`pdf_url`, `extracted_at`→`text_extracted`, `extracted_context_category`→`category`, `last_scraped_at`→`discovered_at`. Added `title`+`middle_name` to INSERTs. Idempotent `ensure_schema()` auto-adds `role` column on first Render run.
+14. **Dashboard: dynamic stats + CSV export + shareable filter URLs** — Stats cards (Total Names, Unique Names) now update live when any filter changes. Confidence filter moved to server-side SQL for correct paginated results. CSV download button exports filtered view. All filters (confidence, city, church, category, search) sync to URL query params for shareable links (e.g. `/bulletin/ohio/?confidence=high&city=Columbus`).
 
 ### CURRENT DATA
 - 2.6M bulletin_name rows total
@@ -91,10 +93,10 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 
 ## NEXT TASKS (priority order)
 
-### 1. Couple detection on existing data
-- `probablepeople` is installed in Docker but couple detection pass failed due to missing `role` column
-- Fix: check actual db99 column names for bulletin_name and update `rescore_with_ner.py`
-- Then re-run `--couples-only` to split "John & Mary Smith" names
+### 1. Run couple detection pass
+- Column mismatch fixed (2026-03-21), `role` column auto-added by `ensure_schema()`
+- Run: `python rescore_with_ner.py --couples-only --state GA` to test, then all states
+- Trigger via Render cron or manual job
 
 ### 2. Downgrade cron plan after stabilization
 - Daily cron upgraded to standard (2GB, $25/mo) for NER rescore
@@ -104,7 +106,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 ### 3. Re-extract states with updated code
 - Column detection + Pattern 6 + NER are now in the extraction pipeline
 - Re-running `extract_bulletins_to_db99.py` on states will apply all improvements to new PDFs
-- Existing PDFs won't be re-processed (tracked by `bulletin_pdf.extracted_at`)
+- Existing PDFs won't be re-processed (tracked by `bulletin_pdf.text_extracted`)
 
 ### 4. Mass times data cleanup
 - Events/locations returning junk in the dashboard
