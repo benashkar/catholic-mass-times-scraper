@@ -80,10 +80,10 @@ def main():
             bulletin_cmd += ["--limit", str(args.limit)]
         results["bulletins"] = run_cmd(bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200)
 
-    # Step 3: Rescore names + junk cleanup (skip full rescore on daily, just cleanup)
+    # Step 3: Rescore only new names + junk cleanup + refresh stats
     results["rescore"] = run_cmd(
-        [sys.executable, "rescore_names_sql.py", "--cleanup-only"],
-        "Junk cleanup (SQL)", timeout_seconds=1200,
+        [sys.executable, "rescore_names_sql.py", "--new-only"],
+        "Rescore new names (SQL)", timeout_seconds=1200,
     )
 
     # Step 4: Health check

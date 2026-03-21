@@ -59,19 +59,36 @@ def main():
     parser = argparse.ArgumentParser(description="Rescore bulletin names")
     parser.add_argument("--cleanup-only", action="store_true",
                         help="Skip full rescore, just apply blocklist + cleanup + refresh stats")
+    parser.add_argument("--new-only", action="store_true",
+                        help="Only rescore names not yet scored (confidence IS NULL or 'unscored')")
     args = parser.parse_args()
 
-    mode = "cleanup-only" if args.cleanup_only else "full"
+    mode = "cleanup-only" if args.cleanup_only else ("new-only" if args.new_only else "full")
     print(f"[OK] Starting SQL rescore (mode={mode})...")
     t = time.time()
 
     conn = get_connection()
     cur = conn.cursor()
 
+    # Build WHERE clause for new-only mode (use bulletin_name_id watermark)
+    new_filter = ""
+    if args.new_only:
+        cur.execute(
+            "SELECT COALESCE(MAX(CAST(notes AS UNSIGNED)), 0) AS watermark "
+            "FROM scrape_log WHERE scrape_type = 'rescore_sql_watermark'"
+        )
+        row = cur.fetchone()
+        watermark = int(row["watermark"]) if row and row["watermark"] else 0
+        if watermark > 0:
+            new_filter = f" AND bn.bulletin_name_id > {watermark}"
+            print(f"  Rescoring names with bulletin_name_id > {watermark:,}")
+        else:
+            print("  No watermark found — rescoring all names")
+
     if not args.cleanup_only:
-        # Step 1: SQL rescore using reference tables (SLOW — ~11 min on 2.6M rows)
+        # Step 1: SQL rescore using reference tables
         print("  Step 1: Rescore using ref_ssa_names + ref_census_surnames...")
-        cur.execute("""
+        cur.execute(f"""
             UPDATE bulletin_name bn
             LEFT JOIN ref_ssa_names ssa ON LOWER(
                 CASE WHEN LOCATE(' ', bn.person_name) > 0
@@ -99,12 +116,13 @@ def main():
                 THEN 1
                 ELSE 0
             END
+            WHERE 1=1{new_filter}
         """)
         print(f"    [OK] {cur.rowcount:,} rows rescored")
     else:
         print("  Step 1: SKIPPED (cleanup-only mode)")
 
-    # Step 2: Junk blocklist
+    # Step 2: Junk blocklist (always runs on all medium+high, not just new — catches edge cases)
     print("  Step 2: Applying junk blocklist...")
     blocklist = [
         "Alzheimer", "Cancer", "Diabetes", "Parkinson", "Dementia", "Hospice",
@@ -278,6 +296,22 @@ def main():
     print(f"    [OK] Stats refreshed")
 
     elapsed = time.time() - t
+
+    # Log the run
+    cur.execute("""
+        INSERT INTO scrape_log (scrape_type, completed_at, status, notes)
+        VALUES ('rescore_sql', NOW(), 'completed', %s)
+    """, (f"mode={mode} in {elapsed:.0f}s",))
+
+    # Save watermark (max bulletin_name_id) for --new-only next run
+    if not args.cleanup_only:
+        cur.execute("SELECT MAX(bulletin_name_id) AS max_id FROM bulletin_name")
+        max_id = cur.fetchone()["max_id"] or 0
+        cur.execute("""
+            INSERT INTO scrape_log (scrape_type, completed_at, status, notes)
+            VALUES ('rescore_sql_watermark', NOW(), 'completed', %s)
+        """, (str(max_id),))
+
     print(f"\n[OK] Rescore complete in {elapsed:.0f}s")
 
     conn.close()
