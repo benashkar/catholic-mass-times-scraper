@@ -91,30 +91,42 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 | `run_job.py` | Wrapper that captures stdout/stderr → logs to db99 scrape_log |
 | `scripts/prepare_name_reference.py` | Regenerate SSA (with gender) + Census reference data |
 
+## RECENTLY COMPLETED (2026-03-21)
+
+### Couple detection pass (Task 1)
+- Column mismatch fixed, `role` column auto-added by `ensure_schema()`
+- Triggered one-off job on weekly cron: `python rescore_with_ner.py --couples-only`
+- Job ID: `job-d6vj5e7diees73d45cn0` — running on Render
+
+### Downgrade daily cron (Task 2)
+- Daily cron downgraded from standard ($25/mo) to starter ($7/mo)
+- Dashboard upgraded to standard (2GB) — was crashing on starter (OOM)
+
+### Re-extract states (Task 3)
+- Already handled by weekly pipeline — `extract_bulletins_to_db99.py` runs every Tuesday
+- Existing PDFs tracked by `text_extracted` boolean, won't be reprocessed
+- New PDFs get column detection + Pattern 6 + NER veto automatically
+
+### Optimize rescore (Task 5)
+- Added `--new-only` flag to `rescore_names_sql.py` — uses `bulletin_name_id` watermark
+- Daily pipeline switched from `--cleanup-only` to `--new-only`
+- Full rescore (~11 min on 2.6M rows) only on weekly; daily rescores just new names (seconds)
+
 ## NEXT TASKS (priority order)
 
-### 1. Run couple detection pass
-- Column mismatch fixed (2026-03-21), `role` column auto-added by `ensure_schema()`
-- Run: `python rescore_with_ner.py --couples-only --state GA` to test, then all states
-- Trigger via Render cron or manual job
+### 1. Mass times data normalization
+- Events/locations returning junk — some events don't take place at the church
+- Need to identify address per event or weed out off-site events
+- See plan below
 
-### 2. Downgrade cron plan after stabilization
-- Daily cron upgraded to standard (2GB, $25/mo) for NER rescore
-- Can downgrade to starter ($7/mo) if weekly NER batches fit in 512MB
-- Test: run one weekly cycle on starter and monitor memory
+### 2. Monitor couple detection results
+- Check job `job-d6vj5e7diees73d45cn0` completion
+- Verify split couples appear correctly on dashboard
 
-### 3. Re-extract states with updated code
-- Column detection + Pattern 6 + NER are now in the extraction pipeline
-- Re-running `extract_bulletins_to_db99.py` on states will apply all improvements to new PDFs
-- Existing PDFs won't be re-processed (tracked by `bulletin_pdf.text_extracted`)
-
-### 4. Mass times data cleanup
-- Events/locations returning junk in the dashboard
-- Need to review and clean up service display_names
-
-### 5. Optimize rescore to only score new/changed names
-- Current rescore hits all 2.6M names every run
-- Fix: Only rescore names where `updated_at > last_rescore_at` or track by batch
+### 3. Add role column data to dashboard
+- `role` column now exists on db99 (added by `ensure_schema`)
+- Dashboard table has role column (index 1) but currently shows empty string
+- Update `data_loader.py` to SELECT role from view, update view if needed
 
 ## DB Local Access
 - **Always use** `DB_HOST=10.10.0.8` env var for local connections
