@@ -70,8 +70,8 @@ def main():
     conn = get_connection()
     cur = conn.cursor()
 
-    # Build WHERE clause for new-only mode (use bulletin_name_id watermark)
-    new_filter = ""
+    # Resolve watermark for new-only mode
+    watermark = 0
     if args.new_only:
         cur.execute(
             "SELECT COALESCE(MAX(CAST(notes AS UNSIGNED)), 0) AS watermark "
@@ -80,7 +80,6 @@ def main():
         row = cur.fetchone()
         watermark = int(row["watermark"]) if row and row["watermark"] else 0
         if watermark > 0:
-            new_filter = f" AND bn.bulletin_name_id > {watermark}"
             print(f"  Rescoring names with bulletin_name_id > {watermark:,}")
         else:
             print("  No watermark found — rescoring all names")
@@ -88,7 +87,7 @@ def main():
     if not args.cleanup_only:
         # Step 1: SQL rescore using reference tables
         print("  Step 1: Rescore using ref_ssa_names + ref_census_surnames...")
-        cur.execute(f"""
+        rescore_sql = """
             UPDATE bulletin_name bn
             LEFT JOIN ref_ssa_names ssa ON LOWER(
                 CASE WHEN LOCATE(' ', bn.person_name) > 0
@@ -116,8 +115,12 @@ def main():
                 THEN 1
                 ELSE 0
             END
-            WHERE 1=1{new_filter}
-        """)
+        """
+        if watermark > 0:
+            rescore_sql += " WHERE bn.bulletin_name_id > %s"
+            cur.execute(rescore_sql, (watermark,))
+        else:
+            cur.execute(rescore_sql)
         print(f"    [OK] {cur.rowcount:,} rows rescored")
     else:
         print("  Step 1: SKIPPED (cleanup-only mode)")
@@ -208,31 +211,40 @@ def main():
         "Christian Initiation", "Christian Service",
         "Christian Community", "Christian Life",
     ]
-    blocked = 0
-    for term in blocklist:
-        cur.execute(
-            "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
-            "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
-            "AND person_name LIKE %s",
-            (f"%{term}%",),
-        )
-        blocked += cur.rowcount
+    like_clauses = " OR ".join(["person_name LIKE %s"] * len(blocklist))
+    like_params = [f"%{term}%" for term in blocklist]
+    block_sql = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        f"AND ({like_clauses})"
+    )
+    if watermark > 0:
+        block_sql += " AND bulletin_name_id > %s"
+        like_params.append(watermark)
+    cur.execute(block_sql, like_params)
+    blocked = cur.rowcount
     print(f"    [OK] {blocked:,} junk records blocked")
 
     # Step 3: Lowercase cleanup
     print("  Step 3: Removing lowercase names...")
-    cur.execute("""
-        UPDATE bulletin_name SET confidence = 'low', is_suspect = 1
-        WHERE confidence IN ('high','medium') AND is_suspect = 0
-        AND person_name = BINARY LOWER(person_name) AND person_name REGEXP '^[a-z]'
-    """)
+    wm_clause = " AND bulletin_name_id > %s" if watermark > 0 else ""
+    wm_params = [watermark] if watermark > 0 else []
+    cur.execute(
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND person_name = BINARY LOWER(person_name) AND person_name REGEXP '^[a-z]'"
+        + wm_clause,
+        wm_params,
+    )
     lc1 = cur.rowcount
-    cur.execute("""
-        UPDATE bulletin_name SET confidence = 'low', is_suspect = 1
-        WHERE confidence IN ('high','medium') AND is_suspect = 0
-        AND first_name = BINARY LOWER(first_name) AND first_name != ''
-        AND first_name REGEXP '^[a-z]'
-    """)
+    cur.execute(
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND first_name = BINARY LOWER(first_name) AND first_name != '' "
+        "AND first_name REGEXP '^[a-z]'"
+        + wm_clause,
+        wm_params,
+    )
     lc2 = cur.rowcount
     print(f"    [OK] {lc1 + lc2:,} lowercase names removed")
 
@@ -256,22 +268,27 @@ def main():
         "Street", "Road", "Avenue", "Boulevard", "Lane", "Way",
         "Code", "Page", "Form", "Link", "Site", "Line",
     ]
-    jw = 0
-    for word in junk_first:
-        cur.execute(
-            "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
-            "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
-            "AND first_name = %s",
-            (word,),
-        )
+    first_in = ",".join(["%s"] * len(junk_first))
+    last_in = ",".join(["%s"] * len(junk_last))
+    jw_sql_first = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        f"WHERE confidence IN ('high','medium') AND is_suspect = 0 AND first_name IN ({first_in})"
+    )
+    jw_sql_last = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        f"WHERE confidence IN ('high','medium') AND is_suspect = 0 AND last_name IN ({last_in})"
+    )
+    if watermark > 0:
+        jw_sql_first += " AND bulletin_name_id > %s"
+        jw_sql_last += " AND bulletin_name_id > %s"
+        cur.execute(jw_sql_first, junk_first + [watermark])
+        jw = cur.rowcount
+        cur.execute(jw_sql_last, junk_last + [watermark])
         jw += cur.rowcount
-    for word in junk_last:
-        cur.execute(
-            "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
-            "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
-            "AND last_name = %s",
-            (word,),
-        )
+    else:
+        cur.execute(jw_sql_first, junk_first)
+        jw = cur.rowcount
+        cur.execute(jw_sql_last, junk_last)
         jw += cur.rowcount
     print(f"    [OK] {jw:,} junk first/last words removed")
 

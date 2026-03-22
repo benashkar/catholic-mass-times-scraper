@@ -247,7 +247,6 @@ def api_names_csv(state):
     ])
     writer.writerows(rows)
 
-    display = state.replace("_", " ").title()
     filename = f"bulletin_names_{state}"
     if confidence:
         filename += f"_{confidence}"
