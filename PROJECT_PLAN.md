@@ -8,7 +8,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - **Pipeline**: Two Render cron jobs — daily mass times + weekly bulletins
 - **Name Engine**: `benashkar/names_people_matcher` (`C:\Users\cashk\OneDrive\names_people_matcher`)
 
-## Current Status (2026-03-21)
+## Current Status (2026-03-22)
 
 ### COMPLETED
 1. **Dashboard live** — 50 states, medium+high confidence names, shareable page URLs
@@ -34,6 +34,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 12. **Debug endpoint** — `/debug/logs` on dashboard for cron job visibility (Render API lacks job log access)
 13. **Fix column mismatch** — `extract_bulletins_to_db99.py` and `rescore_with_ner.py` had wrong column names vs actual db99 schema (written against PG schema, but db99 tables created by `sync_to_db99.py` have different names). Fixed: `source_type`→`discovery_source`, `source_url`→`bulletin_page_url`, `url`→`pdf_url`, `extracted_at`→`text_extracted`, `extracted_context_category`→`category`, `last_scraped_at`→`discovered_at`. Added `title`+`middle_name` to INSERTs. Idempotent `ensure_schema()` auto-adds `role` column on first Render run.
 14. **Dashboard: dynamic stats + CSV export + shareable filter URLs** — Stats cards (Total Names, Unique Names) now update live when any filter changes. Confidence filter moved to server-side SQL for correct paginated results. CSV download button exports filtered view. All filters (confidence, city, church, category, search) sync to URL query params for shareable links (e.g. `/bulletin/ohio/?confidence=high&city=Columbus`).
+15. **Code quality cleanup** — Fixed SQL injection in rescore watermark (f-string → parameterized query). Consolidated 190 individual blocklist UPDATEs into single query. Consolidated 70 junk first/last word UPDATEs into 2 IN() queries. All cleanup steps scoped to watermark in `--new-only` mode.
 
 ### CURRENT DATA
 - 2.6M bulletin_name rows total
