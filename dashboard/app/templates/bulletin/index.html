@@ -28,17 +28,21 @@
                     </a>
                 </h5>
                 <div class="row text-center mt-3">
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="fw-bold text-primary">{{ "{:,}".format(s.total_names or 0) }}</div>
                         <small class="text-muted">Names</small>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="fw-bold text-success">{{ "{:,}".format(s.unique_names or 0) }}</div>
                         <small class="text-muted">Unique</small>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <div class="fw-bold text-warning">{{ s.church_count or 0 }}</div>
                         <small class="text-muted">Churches</small>
+                    </div>
+                    <div class="col-3">
+                        <div class="fw-bold {% if s.last_updated and s.last_updated >= seven_days_ago %}text-success{% elif s.last_updated %}text-danger{% else %}text-muted{% endif %}">{{ s.last_updated or "—" }}</div>
+                        <small class="text-muted">Last Updated</small>
                     </div>
                 </div>
             </div>

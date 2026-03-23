@@ -43,13 +43,15 @@ def _save_removed_names(removed):
 @bp.route("/")
 def index():
     """Show states that have bulletin name data."""
+    from datetime import date, timedelta
+
     states = get_states_with_bulletins()
-    # Get stats for each state
     state_stats = []
     for s in states:
         stats = get_bulletin_stats(s["state_dir"])
         state_stats.append({**s, **(stats or {})})
-    return render_template("bulletin/index.html", states=state_stats)
+    seven_days_ago = str(date.today() - timedelta(days=7))
+    return render_template("bulletin/index.html", states=state_stats, seven_days_ago=seven_days_ago)
 
 
 @bp.route("/suspect/")

@@ -287,7 +287,18 @@ def init_data(app):
         cur.execute("SELECT * FROM bulletin_state_stats")
         bulletin_summary = {r["state_code"]: r for r in cur.fetchall()}
 
-        # 5. Church/city combos for filter dropdowns (churches with bulletin sources)
+        # 5. Last PDF extraction date per state (for monitoring pipeline freshness)
+        cur.execute("""
+            SELECT c.state_code, MAX(bp.downloaded_at) AS last_updated
+            FROM bulletin_pdf bp
+            JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+            JOIN church c ON bs.church_id = c.church_id
+            WHERE bp.text_extracted = 1
+            GROUP BY c.state_code
+        """)
+        last_updated_by_state = {r["state_code"]: r["last_updated"] for r in cur.fetchall()}
+
+        # 6. Church/city combos for filter dropdowns (churches with bulletin sources)
         cur.execute("""
             SELECT c.state_code, c.name AS church_name, COALESCE(c.city, 'Unknown') AS city
             FROM church c
@@ -329,11 +340,13 @@ def init_data(app):
         state_dir = STATE_ABBREV_TO_DIR.get(sc)
         if not state_dir:
             continue
+        lu = last_updated_by_state.get(sc)
         _bulletin_stats_cache[state_dir] = {
             "total_names": int(bs["total_names"]),
             "unique_names": int(bs["unique_names"]),
             "church_count": int(bs["church_count"]),
             "city_count": int(bs["city_count"]),
+            "last_updated": str(lu.date()) if lu else "",
         }
 
     app.logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
