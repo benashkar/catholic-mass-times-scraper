@@ -231,7 +231,7 @@ def api_names_csv(state):
     rows, _total, _filtered, _unique = get_bulletin_names_page(
         state,
         start=0,
-        length=50000,
+        length=500000,
         search=search,
         order_col=8,
         order_dir="desc",
