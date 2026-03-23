@@ -1,5 +1,9 @@
 """Tests for the mass_times routes."""
 
+import pytest
+
+pytestmark = pytest.mark.requires_db
+
 
 class TestMassTimesStateView:
     def test_returns_200(self, client):

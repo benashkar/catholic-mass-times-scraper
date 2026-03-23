@@ -31,6 +31,7 @@ def _get_secret():
         try:
             import boto3
             from botocore.config import Config
+
             config = Config(connect_timeout=3, read_timeout=3, retries={"max_attempts": 0})
             client = boto3.client("secretsmanager", region_name="us-east-1", config=config)
             resp = client.get_secret_value(SecretId=_SECRET_ID)

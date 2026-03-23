@@ -12,6 +12,7 @@ requires-python = ">=3.11"
 # Run with coverage:  pytest --cov=src --cov=dashboard/app
 testpaths = ["tests"]
 pythonpath = [".", "dashboard"]
+markers = ["requires_db: test needs db99 connection (skipped in CI)"]
 
 [tool.coverage.run]
 # Which source directories to measure code coverage for

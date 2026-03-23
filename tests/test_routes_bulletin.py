@@ -1,5 +1,9 @@
 """Tests for the bulletin routes."""
 
+import pytest
+
+pytestmark = pytest.mark.requires_db
+
 
 class TestBulletinIndex:
     def test_returns_200(self, client):

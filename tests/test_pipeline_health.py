@@ -18,8 +18,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def get_connection():
     """Connect to db99."""
     import pymysql
+
     try:
         import boto3
+
         client = boto3.client("secretsmanager", region_name="us-east-1")
         resp = client.get_secret_value(SecretId="/ben/ai-tool/db99")
         secret = json.loads(resp["SecretString"])
@@ -32,8 +34,13 @@ def get_connection():
         password = os.getenv("DB_PASSWORD", "")
 
     return pymysql.connect(
-        host=host, port=3306, user=user, password=password,
-        database="church_scrapes", connect_timeout=10, autocommit=True,
+        host=host,
+        port=3306,
+        user=user,
+        password=password,
+        database="church_scrapes",
+        connect_timeout=10,
+        autocommit=True,
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -42,13 +49,13 @@ def check_table_counts(cur):
     """Verify core tables have expected row counts."""
     print("\n1. TABLE COUNTS")
     tables = {
-        "church": 20000,           # Expect 20K+ churches
-        "service": 200000,         # Expect 200K+ services
+        "church": 20000,  # Expect 20K+ churches
+        "service": 200000,  # Expect 200K+ services
         "bulletin_name": 1000000,  # Expect 1M+ names
-        "bulletin_pdf": 200000,    # Expect 200K+ PDFs
-        "bulletin_source": 4000,   # Expect 4K+ sources
+        "bulletin_pdf": 200000,  # Expect 200K+ PDFs
+        "bulletin_source": 4000,  # Expect 4K+ sources
         "bulletin_state_stats": 40,  # Expect 40+ states
-        "ref_ssa_names": 90000,    # Expect 90K+ SSA names
+        "ref_ssa_names": 90000,  # Expect 90K+ SSA names
         "ref_census_surnames": 150000,  # Expect 150K+ Census names
     }
     issues = []
@@ -122,8 +129,15 @@ def check_known_junk_still_present(cur):
     """Verify known junk terms are not in high/medium confidence."""
     print("\n4. KNOWN JUNK CHECK")
     junk_terms = [
-        "Alzheimer", "Fish Fry", "Cancer", "Access Code", "Full Page",
-        "Bulletin", "Sacrament", "Committee", "Receptionist",
+        "Alzheimer",
+        "Fish Fry",
+        "Cancer",
+        "Access Code",
+        "Full Page",
+        "Bulletin",
+        "Sacrament",
+        "Committee",
+        "Receptionist",
     ]
     issues = []
     for term in junk_terms:

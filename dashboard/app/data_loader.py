@@ -604,7 +604,7 @@ _BULLETIN_PAGE_COLS = [
 # Map DataTables column index → SQL column name in v_bulletin_ui_names
 _COL_INDEX_TO_SQL = {
     0: "person_name",
-    1: "title",       # "role" doesn't exist; sort by title instead
+    1: "title",  # "role" doesn't exist; sort by title instead
     2: "title",
     3: "first_name",
     4: "last_name",
@@ -681,8 +681,14 @@ def get_bulletin_names_page(
         if search:
             search_like = f"%{search}%"
             search_cols = [
-                "person_name", "title", "first_name", "last_name",
-                "church_name", "church_city", "category", "confidence",
+                "person_name",
+                "title",
+                "first_name",
+                "last_name",
+                "church_name",
+                "church_city",
+                "category",
+                "confidence",
             ]
             search_clause = " OR ".join(f"{c} LIKE %s" for c in search_cols)
             where.append(f"({search_clause})")

@@ -243,10 +243,21 @@ def api_names_csv(state):
 
     buf = io.StringIO()
     writer = csv.writer(buf)
-    writer.writerow([
-        "Name", "Role", "Title", "First", "Last",
-        "Church", "City", "Category", "Confidence", "PDF URL", "Date",
-    ])
+    writer.writerow(
+        [
+            "Name",
+            "Role",
+            "Title",
+            "First",
+            "Last",
+            "Church",
+            "City",
+            "Category",
+            "Confidence",
+            "PDF URL",
+            "Date",
+        ]
+    )
     writer.writerows(rows)
 
     filename = f"bulletin_names_{state}"

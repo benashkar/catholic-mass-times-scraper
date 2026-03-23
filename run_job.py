@@ -1,4 +1,5 @@
 """Wrapper to run any script and log errors to db99 scrape_log."""
+
 import subprocess
 import sys
 import os
@@ -28,13 +29,19 @@ try:
     try:
         import pymysql
         import boto3
+
         client = boto3.client("secretsmanager", region_name="us-east-1")
         resp = client.get_secret_value(SecretId="/ben/ai-tool/db99")
         secret = json.loads(resp["SecretString"])
         host = os.getenv("DB_HOST") or secret.get("DB_HOST") or "10.10.0.8"
         conn = pymysql.connect(
-            host=host, port=3306, user=secret["DB_USER"], password=secret["DB_PASSWORD"],
-            database="church_scrapes", autocommit=True, charset="utf8mb4",
+            host=host,
+            port=3306,
+            user=secret["DB_USER"],
+            password=secret["DB_PASSWORD"],
+            database="church_scrapes",
+            autocommit=True,
+            charset="utf8mb4",
             cursorclass=pymysql.cursors.DictCursor,
         )
         cur = conn.cursor()

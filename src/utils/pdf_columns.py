@@ -36,8 +36,10 @@ def _detect_columns(words, gap_threshold=None):
         return [x_positions[0]] if x_positions else [0]
 
     # Calculate gaps between adjacent x positions
-    gaps = [(x_positions[i + 1] - x_positions[i], x_positions[i + 1])
-            for i in range(len(x_positions) - 1)]
+    gaps = [
+        (x_positions[i + 1] - x_positions[i], x_positions[i + 1])
+        for i in range(len(x_positions) - 1)
+    ]
 
     if not gaps:
         return [x_positions[0]]

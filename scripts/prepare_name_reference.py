@@ -334,8 +334,12 @@ def prepare_ssa_names(zip_bytes):
                     name, sex, count = row[0], row[1], int(row[2])
                     key = name.lower()
                     if key not in name_counts:
-                        name_counts[key] = {"name": name, "total_count": 0,
-                                            "male_count": 0, "female_count": 0}
+                        name_counts[key] = {
+                            "name": name,
+                            "total_count": 0,
+                            "male_count": 0,
+                            "female_count": 0,
+                        }
                     name_counts[key]["total_count"] += count
                     if sex.upper() == "M":
                         name_counts[key]["male_count"] += count
@@ -351,10 +355,16 @@ def prepare_ssa_names(zip_bytes):
         for rank, entry in enumerate(sorted_names, 1):
             total = entry["total_count"]
             male_ratio = round(entry["male_count"] / total, 4) if total > 0 else 0.5
-            writer.writerow([
-                entry["name"], entry["total_count"], rank,
-                entry["male_count"], entry["female_count"], male_ratio,
-            ])
+            writer.writerow(
+                [
+                    entry["name"],
+                    entry["total_count"],
+                    rank,
+                    entry["male_count"],
+                    entry["female_count"],
+                    male_ratio,
+                ]
+            )
 
     print(f"  Wrote {len(sorted_names):,} unique first names to {out_path}")
     return len(sorted_names)
@@ -383,8 +393,7 @@ def prepare_ssa_names_from_text(text_bytes):
         count = int(parts[2])
         key = name.lower()
         if key not in name_counts:
-            name_counts[key] = {"name": name, "total_count": 0,
-                                "male_count": 0, "female_count": 0}
+            name_counts[key] = {"name": name, "total_count": 0, "male_count": 0, "female_count": 0}
         name_counts[key]["total_count"] += count
         if sex.upper() == "M":
             name_counts[key]["male_count"] += count
@@ -399,10 +408,16 @@ def prepare_ssa_names_from_text(text_bytes):
         for rank, entry in enumerate(sorted_names, 1):
             total = entry["total_count"]
             male_ratio = round(entry["male_count"] / total, 4) if total > 0 else 0.5
-            writer.writerow([
-                entry["name"], entry["total_count"], rank,
-                entry["male_count"], entry["female_count"], male_ratio,
-            ])
+            writer.writerow(
+                [
+                    entry["name"],
+                    entry["total_count"],
+                    rank,
+                    entry["male_count"],
+                    entry["female_count"],
+                    male_ratio,
+                ]
+            )
 
     print(f"  Wrote {len(sorted_names):,} unique first names to {out_path}")
     return len(sorted_names)

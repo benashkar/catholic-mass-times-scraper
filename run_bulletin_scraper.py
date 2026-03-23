@@ -70,6 +70,7 @@ except ImportError:
 try:
     from nameparser import HumanName
     from nameparser.config import CONSTANTS as _NP_CONSTANTS
+
     _NP_CONSTANTS.titles.add("fr", "dcn", "msgr", "sr", "br", "rev")
     HAS_NAMEPARSER = True
 except ImportError:
@@ -77,6 +78,7 @@ except ImportError:
 
 try:
     import probablepeople as pp
+
     HAS_PROBABLEPEOPLE = True
 except ImportError:
     HAS_PROBABLEPEOPLE = False
@@ -94,6 +96,7 @@ def _get_ner_nlp():
     _ner_tried = True
     try:
         import spacy
+
         try:
             _ner_nlp = spacy.load("en_core_web_lg")
         except OSError:
@@ -160,6 +163,7 @@ def detect_couple(name):
     except Exception:
         pass
     return [(name, "individual")]
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -1358,7 +1362,7 @@ def extract_text_from_pdf(pdf_path_or_bytes):
             full_text = "\n\n".join(page_texts)
             return full_text, all_column_texts
     except Exception as e:
-        name = getattr(pdf_path_or_bytes, 'name', str(pdf_path_or_bytes)[:80])
+        name = getattr(pdf_path_or_bytes, "name", str(pdf_path_or_bytes)[:80])
         logger.debug(f"PDF extraction failed for {name}: {e}")
         return "", []
 

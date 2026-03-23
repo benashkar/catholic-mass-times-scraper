@@ -7,6 +7,8 @@ import pytest
 
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures", "data_output")
 
+pytestmark = pytest.mark.requires_db
+
 
 @pytest.fixture(autouse=True)
 def _setup_data_dir(app):
@@ -191,7 +193,7 @@ class TestGetBulletinNamesPage:
     def test_returns_tuple(self):
         from app.data_loader import get_bulletin_names_page
 
-        rows, total, filtered = get_bulletin_names_page("ohio")
+        rows, total, filtered, _unique = get_bulletin_names_page("ohio")
         assert isinstance(rows, list)
         assert isinstance(total, int)
         assert isinstance(filtered, int)
@@ -199,32 +201,32 @@ class TestGetBulletinNamesPage:
     def test_total_matches_data(self):
         from app.data_loader import get_bulletin_names_page
 
-        _, total, _ = get_bulletin_names_page("ohio")
+        _, total, _, _ = get_bulletin_names_page("ohio")
         assert total == 3
 
     def test_pagination(self):
         from app.data_loader import get_bulletin_names_page
 
-        rows, _, _ = get_bulletin_names_page("ohio", start=0, length=2)
+        rows, _, _, _ = get_bulletin_names_page("ohio", start=0, length=2)
         assert len(rows) == 2
 
     def test_search_filters(self):
         from app.data_loader import get_bulletin_names_page
 
-        rows, _, filtered = get_bulletin_names_page("ohio", search="John")
+        rows, _, filtered, _ = get_bulletin_names_page("ohio", search="John")
         assert filtered >= 1
         assert len(rows) >= 1
 
     def test_church_filter(self):
         from app.data_loader import get_bulletin_names_page
 
-        rows, _, filtered = get_bulletin_names_page("ohio", church_filter="St. Mary")
+        rows, _, filtered, _ = get_bulletin_names_page("ohio", church_filter="St. Mary")
         assert filtered == 2  # Fr. John Smith and Jane Doe
 
     def test_nonexistent_state_returns_empty(self):
         from app.data_loader import get_bulletin_names_page
 
-        rows, total, filtered = get_bulletin_names_page("nonexistent")
+        rows, total, filtered, _unique = get_bulletin_names_page("nonexistent")
         assert rows == []
         assert total == 0
 

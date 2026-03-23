@@ -34,6 +34,7 @@ def create_app(config_class=Config):
     @app.route("/health")
     def health():
         from app.data_loader import _state_list, _bulletin_stats_cache, _get_db_connection
+
         result = {
             "status": "ok",
             "states_loaded": len(_state_list) if _state_list else 0,
@@ -56,6 +57,7 @@ def create_app(config_class=Config):
         """Show recent scrape_log entries for debugging cron job failures."""
         from flask import request
         from app.data_loader import _get_db_connection
+
         try:
             conn = _get_db_connection()
             cur = conn.cursor()

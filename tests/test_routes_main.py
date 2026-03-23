@@ -1,15 +1,19 @@
 """Tests for the main routes (homepage and health endpoint)."""
 
+import pytest
+
 
 class TestHomePage:
     def test_homepage_returns_200(self, client):
         response = client.get("/")
         assert response.status_code == 200
 
+    @pytest.mark.requires_db
     def test_homepage_contains_state_name(self, client):
         response = client.get("/")
         assert b"Ohio" in response.data
 
+    @pytest.mark.requires_db
     def test_homepage_shows_church_count(self, client):
         response = client.get("/")
         # We have 3 churches in our fixture data

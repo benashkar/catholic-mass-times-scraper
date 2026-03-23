@@ -33,40 +33,90 @@ DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "out
 BATCH_SIZE = 1000
 
 DIR_TO_STATE_CODE = {
-    "alabama": "AL", "alaska": "AK", "arizona": "AZ", "arkansas": "AR",
-    "california": "CA", "colorado": "CO", "connecticut": "CT", "delaware": "DE",
-    "florida": "FL", "georgia": "GA", "hawaii": "HI", "idaho": "ID",
-    "illinois": "IL", "indiana": "IN", "iowa": "IA", "kansas": "KS",
-    "kentucky": "KY", "louisiana": "LA", "maine": "ME", "maryland": "MD",
-    "massachusetts": "MA", "michigan": "MI", "minnesota": "MN",
-    "mississippi": "MS", "missouri": "MO", "montana": "MT", "nebraska": "NE",
-    "nevada": "NV", "new_hampshire": "NH", "new_jersey": "NJ",
-    "new_mexico": "NM", "new_york": "NY", "north_carolina": "NC",
-    "north_dakota": "ND", "ohio": "OH", "oklahoma": "OK", "oregon": "OR",
-    "pennsylvania": "PA", "rhode_island": "RI", "south_carolina": "SC",
-    "south_dakota": "SD", "tennessee": "TN", "texas": "TX", "utah": "UT",
-    "vermont": "VT", "virginia": "VA", "washington": "WA",
-    "west_virginia": "WV", "wisconsin": "WI", "wyoming": "WY",
+    "alabama": "AL",
+    "alaska": "AK",
+    "arizona": "AZ",
+    "arkansas": "AR",
+    "california": "CA",
+    "colorado": "CO",
+    "connecticut": "CT",
+    "delaware": "DE",
+    "florida": "FL",
+    "georgia": "GA",
+    "hawaii": "HI",
+    "idaho": "ID",
+    "illinois": "IL",
+    "indiana": "IN",
+    "iowa": "IA",
+    "kansas": "KS",
+    "kentucky": "KY",
+    "louisiana": "LA",
+    "maine": "ME",
+    "maryland": "MD",
+    "massachusetts": "MA",
+    "michigan": "MI",
+    "minnesota": "MN",
+    "mississippi": "MS",
+    "missouri": "MO",
+    "montana": "MT",
+    "nebraska": "NE",
+    "nevada": "NV",
+    "new_hampshire": "NH",
+    "new_jersey": "NJ",
+    "new_mexico": "NM",
+    "new_york": "NY",
+    "north_carolina": "NC",
+    "north_dakota": "ND",
+    "ohio": "OH",
+    "oklahoma": "OK",
+    "oregon": "OR",
+    "pennsylvania": "PA",
+    "rhode_island": "RI",
+    "south_carolina": "SC",
+    "south_dakota": "SD",
+    "tennessee": "TN",
+    "texas": "TX",
+    "utah": "UT",
+    "vermont": "VT",
+    "virginia": "VA",
+    "washington": "WA",
+    "west_virginia": "WV",
+    "wisconsin": "WI",
+    "wyoming": "WY",
 }
 
 STATE_CODE_TO_NAME = {v: k.replace("_", " ").title() for k, v in DIR_TO_STATE_CODE.items()}
 
 CATEGORY_MAP = {
-    "Mass": "mass", "Confession": "confession", "Adoration": "adoration",
-    "Devotions": "devotions", "Education": "education", "Community": "community",
+    "Mass": "mass",
+    "Confession": "confession",
+    "Adoration": "adoration",
+    "Devotions": "devotions",
+    "Education": "education",
+    "Community": "community",
     "Other": "other",
 }
 
 SCHEDULE_TYPE_MAP = {
-    "sunday": "sunday", "saturday": "saturday", "weekday": "weekday",
-    "specific_weekday": "specific_weekday", "monthly": "monthly",
-    "special_event": "special_event", "parish_event": "parish_event",
+    "sunday": "sunday",
+    "saturday": "saturday",
+    "weekday": "weekday",
+    "specific_weekday": "specific_weekday",
+    "monthly": "monthly",
+    "special_event": "special_event",
+    "parish_event": "parish_event",
     "other": "other",
 }
 
 LANGUAGE_MAP = {
-    "english": "en", "spanish": "es", "latin": "la", "bilingual": "bi",
-    "vietnamese": "vi", "korean": "ko", "polish": "pl", "portuguese": "pt",
+    "english": "en",
+    "spanish": "es",
+    "latin": "la",
+    "bilingual": "bi",
+    "vietnamese": "vi",
+    "korean": "ko",
+    "polish": "pl",
+    "portuguese": "pt",
 }
 
 PATTERN_MAP = {
@@ -80,9 +130,13 @@ PATTERN_MAP = {
 
 # Category code -> proper display name (for sanitization fallback)
 CATEGORY_DISPLAY = {
-    "mass": "Mass", "confession": "Confession", "adoration": "Adoration",
-    "devotions": "Devotions", "education": "Education",
-    "community": "Community", "other": "Other",
+    "mass": "Mass",
+    "confession": "Confession",
+    "adoration": "Adoration",
+    "devotions": "Devotions",
+    "education": "Education",
+    "community": "Community",
+    "other": "Other",
 }
 
 # ---------------------------------------------------------------------------
@@ -182,9 +236,9 @@ def load_churches(cur, state_dir, state_code, dry_run=False):
             last_scraped_at = None
             if record.get("last_scraped"):
                 try:
-                    last_scraped_at = datetime.fromisoformat(
-                        record["last_scraped"]
-                    ).strftime("%Y-%m-%d %H:%M:%S")
+                    last_scraped_at = datetime.fromisoformat(record["last_scraped"]).strftime(
+                        "%Y-%m-%d %H:%M:%S"
+                    )
                 except (ValueError, AttributeError):
                     pass
 
@@ -198,14 +252,31 @@ def load_churches(cur, state_dir, state_code, dry_run=False):
             confession_count = len(services_dict.get("Confession", []))
             adoration_count = len(services_dict.get("Adoration", []))
 
-            church_rows.append((
-                slug, name, street, city, state_code, postal_code,
-                lat, lng, phone, website_url, livestream_url,
-                has_perp_adoration, has_livestream,
-                mass_count, confession_count, adoration_count, stream_count,
-                schedule_updated_at, source_url, community_insights,
-                last_scraped_at
-            ))
+            church_rows.append(
+                (
+                    slug,
+                    name,
+                    street,
+                    city,
+                    state_code,
+                    postal_code,
+                    lat,
+                    lng,
+                    phone,
+                    website_url,
+                    livestream_url,
+                    has_perp_adoration,
+                    has_livestream,
+                    mass_count,
+                    confession_count,
+                    adoration_count,
+                    stream_count,
+                    schedule_updated_at,
+                    source_url,
+                    community_insights,
+                    last_scraped_at,
+                )
+            )
             slugs.append(slug)
 
     if parse_errors:
@@ -257,12 +328,9 @@ def load_churches(cur, state_dir, state_code, dry_run=False):
     """
 
     for i in range(0, len(church_rows), BATCH_SIZE):
-        cur.executemany(CHURCH_SQL, church_rows[i:i + BATCH_SIZE])
+        cur.executemany(CHURCH_SQL, church_rows[i : i + BATCH_SIZE])
 
-    cur.execute(
-        "SELECT slug, church_id FROM church WHERE state_code = %s",
-        (state_code,)
-    )
+    cur.execute("SELECT slug, church_id FROM church WHERE state_code = %s", (state_code,))
     slug_to_id = {row["slug"]: row["church_id"] for row in cur.fetchall()}
 
     loaded = sum(1 for s in slugs if s in slug_to_id)
@@ -306,9 +374,7 @@ def load_services(cur, state_dir, state_code, slug_to_id, dry_run=False):
                         continue
 
                     category_code = CATEGORY_MAP.get(category_name, "other")
-                    schedule_type = SCHEDULE_TYPE_MAP.get(
-                        svc.get("scheduleType", ""), "other"
-                    )
+                    schedule_type = SCHEDULE_TYPE_MAP.get(svc.get("scheduleType", ""), "other")
                     day_code = svc.get("dayOfWeek")
                     time_start = svc.get("timeStart")
                     time_end = svc.get("timeEnd")
@@ -324,20 +390,35 @@ def load_services(cur, state_dir, state_code, slug_to_id, dry_run=False):
                     language_code = LANGUAGE_MAP.get(lang_raw, None) if lang_raw else None
 
                     pattern_raw = svc.get("pattern")
-                    pattern_code = PATTERN_MAP.get(pattern_raw, pattern_raw) if pattern_raw else None
+                    pattern_code = (
+                        PATTERN_MAP.get(pattern_raw, pattern_raw) if pattern_raw else None
+                    )
 
                     relation_code = svc.get("timeRelation")
                     reference_service = svc.get("referenceService")
                     offset_minutes = svc.get("offsetMinutes")
                     location = svc.get("location")
 
-                    service_rows.append((
-                        church_id, service_id_src, category_code,
-                        schedule_type, day_code, time_start, time_end,
-                        event_date, language_code, pattern_code,
-                        relation_code, reference_service, offset_minutes,
-                        location, display_name, notes_raw
-                    ))
+                    service_rows.append(
+                        (
+                            church_id,
+                            service_id_src,
+                            category_code,
+                            schedule_type,
+                            day_code,
+                            time_start,
+                            time_end,
+                            event_date,
+                            language_code,
+                            pattern_code,
+                            relation_code,
+                            reference_service,
+                            offset_minutes,
+                            location,
+                            display_name,
+                            notes_raw,
+                        )
+                    )
 
     if dry_run:
         print(f"  [OK] Services validated: {len(service_rows)} ({sanitized_count} names sanitized)")
@@ -372,7 +453,7 @@ def load_services(cur, state_dir, state_code, slug_to_id, dry_run=False):
     """
 
     for i in range(0, len(service_rows), BATCH_SIZE):
-        cur.executemany(SERVICE_SQL, service_rows[i:i + BATCH_SIZE])
+        cur.executemany(SERVICE_SQL, service_rows[i : i + BATCH_SIZE])
 
     print(f"  [OK] Services upserted: {len(service_rows)} ({sanitized_count} names sanitized)")
 
@@ -407,10 +488,7 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
             names_total += 1
 
             if slug not in churches_data:
-                churches_data[slug] = {
-                    "church_url": row.get("church_url", ""),
-                    "pdfs": {}
-                }
+                churches_data[slug] = {"church_url": row.get("church_url", ""), "pdfs": {}}
 
             pdf_url = row.get("pdf_url", "")
             pdf_file = row.get("pdf_file", "")
@@ -421,19 +499,21 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
                     "pdf_url": pdf_url,
                     "pdf_date": row.get("pdf_date") or None,
                     "pdf_file": pdf_file,
-                    "names": []
+                    "names": [],
                 }
 
-            churches_data[slug]["pdfs"][pdf_key]["names"].append({
-                "person_name": person_name,
-                "title": row.get("title", ""),
-                "first_name": row.get("first_name", ""),
-                "middle_name": row.get("middle_name", ""),
-                "last_name": row.get("last_name", ""),
-                "category": row.get("category", ""),
-                "confidence": row.get("confidence", ""),
-                "context": row.get("context", ""),
-            })
+            churches_data[slug]["pdfs"][pdf_key]["names"].append(
+                {
+                    "person_name": person_name,
+                    "title": row.get("title", ""),
+                    "first_name": row.get("first_name", ""),
+                    "middle_name": row.get("middle_name", ""),
+                    "last_name": row.get("last_name", ""),
+                    "category": row.get("category", ""),
+                    "confidence": row.get("confidence", ""),
+                    "context": row.get("context", ""),
+                }
+            )
 
     if dry_run:
         print(f"  [OK] Bulletin names validated: {names_total}, skipped: {names_skipped}")
@@ -449,7 +529,7 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
         for i in range(0, len(source_rows), BATCH_SIZE):
             cur.executemany(
                 "INSERT IGNORE INTO bulletin_source (church_id, bulletin_page_url, discovery_source) VALUES (%s, %s, %s)",
-                source_rows[i:i + BATCH_SIZE]
+                source_rows[i : i + BATCH_SIZE],
             )
 
     # Build source_id cache
@@ -458,11 +538,11 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
     source_cache = {}
     if church_ids:
         for i in range(0, len(church_ids), BATCH_SIZE):
-            batch_ids = church_ids[i:i + BATCH_SIZE]
+            batch_ids = church_ids[i : i + BATCH_SIZE]
             placeholders = ",".join(["%s"] * len(batch_ids))
             cur.execute(
                 f"SELECT church_id, bulletin_source_id FROM bulletin_source WHERE church_id IN ({placeholders})",
-                batch_ids
+                batch_ids,
             )
             for row in cur.fetchall():
                 slug = cid_to_slug.get(row["church_id"])
@@ -476,15 +556,14 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
             continue
         source_id = source_cache[slug]
         for pdf_key, pdf_data in data["pdfs"].items():
-            pdf_rows.append((
-                source_id, pdf_data["pdf_url"], pdf_data["pdf_date"],
-                pdf_data["pdf_file"], 1
-            ))
+            pdf_rows.append(
+                (source_id, pdf_data["pdf_url"], pdf_data["pdf_date"], pdf_data["pdf_file"], 1)
+            )
 
     for i in range(0, len(pdf_rows), BATCH_SIZE):
         cur.executemany(
             "INSERT IGNORE INTO bulletin_pdf (bulletin_source_id, pdf_url, pdf_date, local_filename, text_extracted) VALUES (%s, %s, %s, %s, %s)",
-            pdf_rows[i:i + BATCH_SIZE]
+            pdf_rows[i : i + BATCH_SIZE],
         )
 
     # Build pdf_id cache
@@ -493,11 +572,11 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
     if source_ids:
         sid_to_slug = {sid: slug for slug, sid in source_cache.items()}
         for i in range(0, len(source_ids), BATCH_SIZE):
-            batch_sids = source_ids[i:i + BATCH_SIZE]
+            batch_sids = source_ids[i : i + BATCH_SIZE]
             placeholders = ",".join(["%s"] * len(batch_sids))
             cur.execute(
                 f"SELECT bulletin_pdf_id, bulletin_source_id, pdf_url, local_filename FROM bulletin_pdf WHERE bulletin_source_id IN ({placeholders})",
-                batch_sids
+                batch_sids,
             )
             for row in cur.fetchall():
                 slug = sid_to_slug.get(row["bulletin_source_id"])
@@ -517,20 +596,31 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
                 continue
             pdf_id = pdf_cache[cache_key]
             for n in pdf_data["names"]:
-                name_rows.append((
-                    pdf_id, n["person_name"], n["title"], n["first_name"],
-                    n["middle_name"], n["last_name"], n["category"],
-                    n["confidence"], n["context"]
-                ))
+                name_rows.append(
+                    (
+                        pdf_id,
+                        n["person_name"],
+                        n["title"],
+                        n["first_name"],
+                        n["middle_name"],
+                        n["last_name"],
+                        n["category"],
+                        n["confidence"],
+                        n["context"],
+                    )
+                )
                 names_loaded += 1
 
     for i in range(0, len(name_rows), BATCH_SIZE):
-        cur.executemany("""
+        cur.executemany(
+            """
             INSERT IGNORE INTO bulletin_name (
                 bulletin_pdf_id, person_name, title, first_name,
                 middle_name, last_name, category, confidence, context
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, name_rows[i:i + BATCH_SIZE])
+        """,
+            name_rows[i : i + BATCH_SIZE],
+        )
 
     print(f"  [OK] Bulletin names upserted: {names_loaded}, skipped: {names_skipped}")
 
@@ -540,27 +630,29 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
 # ---------------------------------------------------------------------------
 def log_scrape_run(cur, states_processed, states_failed, elapsed_seconds):
     """Write an entry to scrape_log for audit trail."""
-    notes = (
-        f"States OK: {len(states_processed)}, Failed: {len(states_failed)}"
-        + (f" [{', '.join(states_failed)}]" if states_failed else "")
+    notes = f"States OK: {len(states_processed)}, Failed: {len(states_failed)}" + (
+        f" [{', '.join(states_failed)}]" if states_failed else ""
     )
     errors = ", ".join(states_failed) if states_failed else None
 
-    cur.execute("""
+    cur.execute(
+        """
         INSERT INTO scrape_log (
             scrape_type, completed_at, status,
             communities_scraped, churches_scraped, services_upserted,
             errors, notes
         ) VALUES (%s, NOW(), %s, %s, %s, %s, %s, %s)
-    """, (
-        "weekly_pipeline",
-        "completed" if not states_failed else "partial",
-        len(states_processed),
-        None,
-        None,
-        errors,
-        notes,
-    ))
+    """,
+        (
+            "weekly_pipeline",
+            "completed" if not states_failed else "partial",
+            len(states_processed),
+            None,
+            None,
+            errors,
+            notes,
+        ),
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -634,20 +726,20 @@ def main():
 
     # Ensure all states in lookup table
     rows = [(code, name) for code, name in STATE_CODE_TO_NAME.items()]
-    cur.executemany(
-        "INSERT IGNORE INTO lk_state (state_code, state_name) VALUES (%s, %s)",
-        rows
-    )
+    cur.executemany("INSERT IGNORE INTO lk_state (state_code, state_name) VALUES (%s, %s)", rows)
     conn.commit()
     cur.close()
 
     if args.state:
         states = [args.state.lower().replace(" ", "_")]
     else:
-        states = sorted([
-            d for d in os.listdir(DATA_DIR)
-            if os.path.isdir(os.path.join(DATA_DIR, d)) and d in DIR_TO_STATE_CODE
-        ])
+        states = sorted(
+            [
+                d
+                for d in os.listdir(DATA_DIR)
+                if os.path.isdir(os.path.join(DATA_DIR, d)) and d in DIR_TO_STATE_CODE
+            ]
+        )
 
     print(f"\nStates to sync: {len(states)}")
 

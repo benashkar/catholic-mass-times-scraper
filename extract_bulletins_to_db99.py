@@ -58,10 +58,12 @@ MAX_PDFS_PER_CHURCH = 100
 # DB connection
 # ---------------------------------------------------------------------------
 
+
 def get_connection():
     """Connect to db99."""
     try:
         import boto3
+
         client = boto3.client("secretsmanager", region_name="us-east-1")
         resp = client.get_secret_value(SecretId="/ben/ai-tool/db99")
         secret = json.loads(resp["SecretString"])
@@ -74,10 +76,16 @@ def get_connection():
         password = os.getenv("DB_PASSWORD", "")
 
     return pymysql.connect(
-        host=host, port=3306, user=user, password=password,
+        host=host,
+        port=3306,
+        user=user,
+        password=password,
         database="church_scrapes",
-        connect_timeout=30, read_timeout=300, write_timeout=300,
-        autocommit=True, charset="utf8mb4",
+        connect_timeout=30,
+        read_timeout=300,
+        write_timeout=300,
+        autocommit=True,
+        charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -85,6 +93,7 @@ def get_connection():
 # ---------------------------------------------------------------------------
 # Schema migration (idempotent)
 # ---------------------------------------------------------------------------
+
 
 def ensure_schema(cur):
     """Add columns that our code needs but may not exist on db99 yet."""
@@ -102,6 +111,7 @@ def ensure_schema(cur):
 # ---------------------------------------------------------------------------
 # Bulletin extraction pipeline
 # ---------------------------------------------------------------------------
+
 
 def download_pdf_to_memory(url, timeout=30):
     """Download a PDF into memory (no disk). Returns bytes or None."""
@@ -141,14 +151,17 @@ def process_church(cur, church):
     source_type = result.get("source") or "not_found"
 
     # UPSERT bulletin_source
-    cur.execute("""
+    cur.execute(
+        """
         INSERT INTO bulletin_source (church_id, discovery_source, bulletin_page_url, discovered_at)
         VALUES (%s, %s, %s, NOW())
         ON DUPLICATE KEY UPDATE
             discovery_source = VALUES(discovery_source),
             bulletin_page_url = VALUES(bulletin_page_url),
             discovered_at = NOW()
-    """, (church_id, source_type[:30], bulletin_page_url[:2048]))
+    """,
+        (church_id, source_type[:30], bulletin_page_url[:2048]),
+    )
 
     if not pdf_urls:
         return stats
@@ -188,10 +201,13 @@ def process_church(cur, church):
         if existing_pdf:
             bulletin_pdf_id = existing_pdf["bulletin_pdf_id"]
         else:
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO bulletin_pdf (bulletin_source_id, pdf_url, downloaded_at)
                 VALUES (%s, %s, NOW())
-            """, (bulletin_source_id, pdf_url[:2048]))
+            """,
+                (bulletin_source_id, pdf_url[:2048]),
+            )
             bulletin_pdf_id = cur.lastrowid
 
         if not bulletin_pdf_id:
@@ -201,8 +217,7 @@ def process_church(cur, church):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 "
-                "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -269,25 +284,28 @@ def process_church(cur, church):
                 if cur.fetchone():
                     continue
 
-                cur.execute("""
+                cur.execute(
+                    """
                     INSERT INTO bulletin_name
                         (bulletin_pdf_id, person_name, first_name, last_name,
                          title, middle_name,
                          confidence, is_suspect, role, context, category)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """, (
-                    bulletin_pdf_id,
-                    individual_name[:100],
-                    first_name[:50],
-                    last_name[:50],
-                    (parts.get("title") or "")[:20],
-                    (parts.get("middle_name") or "")[:50],
-                    conf,
-                    is_suspect,
-                    (name_dict.get("role") or "")[:100],
-                    (name_dict.get("context") or "")[:500],
-                    (name_dict.get("category") or "")[:30],
-                ))
+                """,
+                    (
+                        bulletin_pdf_id,
+                        individual_name[:100],
+                        first_name[:50],
+                        last_name[:50],
+                        (parts.get("title") or "")[:20],
+                        (parts.get("middle_name") or "")[:50],
+                        conf,
+                        is_suspect,
+                        (name_dict.get("role") or "")[:100],
+                        (name_dict.get("context") or "")[:500],
+                        (name_dict.get("category") or "")[:30],
+                    ),
+                )
                 names_inserted += cur.rowcount
 
         stats["names_inserted"] += names_inserted
@@ -295,8 +313,7 @@ def process_church(cur, church):
 
         # Mark PDF as extracted
         cur.execute(
-            "UPDATE bulletin_pdf SET text_extracted = 1 "
-            "WHERE bulletin_pdf_id = %s",
+            "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
             (bulletin_pdf_id,),
         )
 
@@ -334,8 +351,7 @@ def process_unextracted_pdfs(cur):
         pdf_bytes = download_pdf_to_memory(pdf_url)
         if not pdf_bytes:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 "
-                "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -343,8 +359,7 @@ def process_unextracted_pdfs(cur):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 "
-                "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -399,33 +414,35 @@ def process_unextracted_pdfs(cur):
                 if cur.fetchone():
                     continue
 
-                cur.execute("""
+                cur.execute(
+                    """
                     INSERT INTO bulletin_name
                         (bulletin_pdf_id, person_name, first_name, last_name,
                          title, middle_name,
                          confidence, is_suspect, role, context, category)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-                """, (
-                    bulletin_pdf_id,
-                    individual_name[:100],
-                    first_name[:50],
-                    last_name[:50],
-                    (parts.get("title") or "")[:20],
-                    (parts.get("middle_name") or "")[:50],
-                    conf,
-                    is_suspect,
-                    (name_dict.get("role") or "")[:100],
-                    (name_dict.get("context") or "")[:500],
-                    (name_dict.get("category") or "")[:30],
-                ))
+                """,
+                    (
+                        bulletin_pdf_id,
+                        individual_name[:100],
+                        first_name[:50],
+                        last_name[:50],
+                        (parts.get("title") or "")[:20],
+                        (parts.get("middle_name") or "")[:50],
+                        conf,
+                        is_suspect,
+                        (name_dict.get("role") or "")[:100],
+                        (name_dict.get("context") or "")[:500],
+                        (name_dict.get("category") or "")[:30],
+                    ),
+                )
                 names_inserted += cur.rowcount
 
         stats["names_inserted"] += names_inserted
         stats["pdfs_extracted"] += 1
 
         cur.execute(
-            "UPDATE bulletin_pdf SET text_extracted = 1 "
-            "WHERE bulletin_pdf_id = %s",
+            "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
             (bulletin_pdf_id,),
         )
 
@@ -436,15 +453,25 @@ def process_unextracted_pdfs(cur):
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main():
     parser = argparse.ArgumentParser(description="Extract bulletin names directly to db99")
     parser.add_argument("--state", type=str, help="One state code (e.g. OH)")
     parser.add_argument("--limit", type=int, default=0, help="Max churches per state (0=all)")
-    parser.add_argument("--batch-size", type=int, default=5, help="Churches between progress prints")
-    parser.add_argument("--days-fresh", type=int, default=7,
-                        help="Skip churches discovered within N days (0=process all)")
-    parser.add_argument("--skip-discovery", action="store_true",
-                        help="Only extract from already-discovered PDFs (no new web crawling)")
+    parser.add_argument(
+        "--batch-size", type=int, default=5, help="Churches between progress prints"
+    )
+    parser.add_argument(
+        "--days-fresh",
+        type=int,
+        default=7,
+        help="Skip churches discovered within N days (0=process all)",
+    )
+    parser.add_argument(
+        "--skip-discovery",
+        action="store_true",
+        help="Only extract from already-discovered PDFs (no new web crawling)",
+    )
     args = parser.parse_args()
 
     print("=" * 60)
@@ -486,14 +513,18 @@ def main():
     )
     churches = cur.fetchall()
     if args.limit:
-        churches = churches[:args.limit]
+        churches = churches[: args.limit]
 
     print(f"Churches to process: {len(churches)}")
 
     start = time.time()
     totals = {
-        "discovered": 0, "pdfs_found": 0, "pdfs_extracted": 0,
-        "names_inserted": 0, "skipped": 0, "errors": 0,
+        "discovered": 0,
+        "pdfs_found": 0,
+        "pdfs_extracted": 0,
+        "names_inserted": 0,
+        "skipped": 0,
+        "errors": 0,
     }
 
     for i, church in enumerate(churches):
@@ -510,7 +541,7 @@ def main():
             existing = cur.fetchone()
             if existing and existing.get("discovered_at"):
                 scraped_at = existing["discovered_at"]
-                if hasattr(scraped_at, 'replace'):
+                if hasattr(scraped_at, "replace"):
                     scraped_at = scraped_at.replace(tzinfo=timezone.utc)
                 days_ago = (datetime.now(timezone.utc) - scraped_at).days
                 if days_ago < args.days_fresh:
@@ -547,23 +578,26 @@ def main():
     elapsed = time.time() - start
 
     # Log the run
-    cur.execute("""
+    cur.execute(
+        """
         INSERT INTO scrape_log (
             scrape_type, completed_at, status,
             communities_scraped, churches_scraped, services_upserted,
             errors, notes
         ) VALUES (%s, NOW(), %s, %s, %s, %s, %s, %s)
-    """, (
-        "bulletin_extraction",
-        "completed" if totals["errors"] == 0 else "partial",
-        len(set(c["state_code"] for c in churches)),
-        totals["discovered"],
-        totals["names_inserted"],
-        str(totals["errors"]) if totals["errors"] else None,
-        f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
-        f"names={totals['names_inserted']} skip={totals['skipped']} "
-        f"err={totals['errors']} in {elapsed:.0f}s",
-    ))
+    """,
+        (
+            "bulletin_extraction",
+            "completed" if totals["errors"] == 0 else "partial",
+            len(set(c["state_code"] for c in churches)),
+            totals["discovered"],
+            totals["names_inserted"],
+            str(totals["errors"]) if totals["errors"] else None,
+            f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
+            f"names={totals['names_inserted']} skip={totals['skipped']} "
+            f"err={totals['errors']} in {elapsed:.0f}s",
+        ),
+    )
 
     print(f"\n{'='*60}")
     print(f"  BULLETIN EXTRACTION SUMMARY")

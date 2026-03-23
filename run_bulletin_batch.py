@@ -22,11 +22,29 @@ LOG_DIR.mkdir(exist_ok=True)
 
 # States that need the full pipeline (no bulletin data at all)
 STATES = [
-    "idaho", "kansas", "kentucky", "maine", "maryland", "mississippi",
-    "missouri", "montana", "nevada", "new_hampshire", "north_carolina",
-    "north_dakota", "oregon", "rhode_island", "south_carolina",
-    "south_dakota", "tennessee", "utah", "vermont", "virginia",
-    "washington", "west_virginia", "wyoming",
+    "idaho",
+    "kansas",
+    "kentucky",
+    "maine",
+    "maryland",
+    "mississippi",
+    "missouri",
+    "montana",
+    "nevada",
+    "new_hampshire",
+    "north_carolina",
+    "north_dakota",
+    "oregon",
+    "rhode_island",
+    "south_carolina",
+    "south_dakota",
+    "tennessee",
+    "utah",
+    "vermont",
+    "virginia",
+    "washington",
+    "west_virginia",
+    "wyoming",
 ]
 
 MAX_PARALLEL = 2
@@ -51,9 +69,13 @@ def commit_and_push(state):
         return
 
     files_to_add = []
-    for fname in ["bulletin_names.csv", "bulletin_names.json",
-                   "bulletin_progress.json", "bulletin_discovery.json",
-                   "capped_churches.json"]:
+    for fname in [
+        "bulletin_names.csv",
+        "bulletin_names.json",
+        "bulletin_progress.json",
+        "bulletin_discovery.json",
+        "capped_churches.json",
+    ]:
         fpath = state_dir / fname
         if fpath.exists():
             files_to_add.append(str(fpath))
@@ -61,26 +83,25 @@ def commit_and_push(state):
     if not files_to_add:
         return
 
-    subprocess.run(["git", "add"] + files_to_add,
-                    cwd=str(PROJECT_DIR), capture_output=True)
+    subprocess.run(["git", "add"] + files_to_add, cwd=str(PROJECT_DIR), capture_output=True)
 
     # Check if anything staged
-    result = subprocess.run(["git", "diff", "--cached", "--quiet"],
-                            cwd=str(PROJECT_DIR), capture_output=True)
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"], cwd=str(PROJECT_DIR), capture_output=True
+    )
     if result.returncode == 0:
         print(f"  [{state}] No new changes to commit.")
         return
 
     name_count = count_names(state)
-    msg = (f"Add bulletin names for {state} ({name_count} names extracted)\n\n"
-           f"Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>")
+    msg = (
+        f"Add bulletin names for {state} ({name_count} names extracted)\n\n"
+        f"Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
+    )
 
-    subprocess.run(["git", "commit", "-m", msg],
-                    cwd=str(PROJECT_DIR), capture_output=True)
-    subprocess.run(["git", "pull", "--rebase"],
-                    cwd=str(PROJECT_DIR), capture_output=True)
-    subprocess.run(["git", "push"],
-                    cwd=str(PROJECT_DIR), capture_output=True)
+    subprocess.run(["git", "commit", "-m", msg], cwd=str(PROJECT_DIR), capture_output=True)
+    subprocess.run(["git", "pull", "--rebase"], cwd=str(PROJECT_DIR), capture_output=True)
+    subprocess.run(["git", "push"], cwd=str(PROJECT_DIR), capture_output=True)
     print(f"  [{state}] Committed + pushed ({name_count} names).")
 
 

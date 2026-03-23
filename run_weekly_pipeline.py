@@ -29,16 +29,56 @@ os.chdir(PROJECT_ROOT)
 
 # All 50 states
 ALL_STATES = [
-    "alabama", "alaska", "arizona", "arkansas", "california", "colorado",
-    "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho",
-    "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana",
-    "maine", "maryland", "massachusetts", "michigan", "minnesota",
-    "mississippi", "missouri", "montana", "nebraska", "nevada",
-    "new_hampshire", "new_jersey", "new_mexico", "new_york",
-    "north_carolina", "north_dakota", "ohio", "oklahoma", "oregon",
-    "pennsylvania", "rhode_island", "south_carolina", "south_dakota",
-    "tennessee", "texas", "utah", "vermont", "virginia", "washington",
-    "west_virginia", "wisconsin", "wyoming",
+    "alabama",
+    "alaska",
+    "arizona",
+    "arkansas",
+    "california",
+    "colorado",
+    "connecticut",
+    "delaware",
+    "florida",
+    "georgia",
+    "hawaii",
+    "idaho",
+    "illinois",
+    "indiana",
+    "iowa",
+    "kansas",
+    "kentucky",
+    "louisiana",
+    "maine",
+    "maryland",
+    "massachusetts",
+    "michigan",
+    "minnesota",
+    "mississippi",
+    "missouri",
+    "montana",
+    "nebraska",
+    "nevada",
+    "new_hampshire",
+    "new_jersey",
+    "new_mexico",
+    "new_york",
+    "north_carolina",
+    "north_dakota",
+    "ohio",
+    "oklahoma",
+    "oregon",
+    "pennsylvania",
+    "rhode_island",
+    "south_carolina",
+    "south_dakota",
+    "tennessee",
+    "texas",
+    "utah",
+    "vermont",
+    "virginia",
+    "washington",
+    "west_virginia",
+    "wisconsin",
+    "wyoming",
 ]
 
 # States per batch for bulletin scraping (10 states per batch, 3 parallel)
@@ -83,6 +123,7 @@ def run_cmd(cmd, description, timeout_seconds=None):
 # Pipeline steps
 # ---------------------------------------------------------------------------
 
+
 def step_scrape_details(states):
     """Step 1: Re-scrape church detail pages for all states."""
     log("=" * 60)
@@ -94,12 +135,8 @@ def step_scrape_details(states):
     all_ok = True
 
     for i in range(0, len(states), batch_size):
-        batch = states[i:i + batch_size]
-        cmd = [
-            sys.executable, "run_statewide.py",
-            *batch,
-            "--detail-only", "--resume"
-        ]
+        batch = states[i : i + batch_size]
+        cmd = [sys.executable, "run_statewide.py", *batch, "--detail-only", "--resume"]
         # 2 hours per batch of 5 states
         ok = run_cmd(cmd, f"Detail scrape: {', '.join(batch)}", timeout_seconds=7200)
         if not ok:
@@ -128,14 +165,11 @@ def step_bulletins(states):
     all_ok = True
 
     for i in range(0, len(states), BULLETIN_BATCH_SIZE):
-        batch = states[i:i + BULLETIN_BATCH_SIZE]
+        batch = states[i : i + BULLETIN_BATCH_SIZE]
         # Run bulletin scraper for each state in this batch sequentially
         # (the scraper itself handles one state at a time)
         for state in batch:
-            cmd = [
-                sys.executable, "run_bulletin_scraper.py",
-                "all", state, "--resume"
-            ]
+            cmd = [sys.executable, "run_bulletin_scraper.py", "all", state, "--resume"]
             # 2 hours per state max
             ok = run_cmd(cmd, f"Bulletins: {state}", timeout_seconds=7200)
             if not ok:
@@ -175,21 +209,21 @@ def step_git_push():
 
     # Stage data files (CSVs and JSONL, not PDFs or progress files)
     run_cmd(
-        ["git", "add",
-         "data/output/*/all_services.csv",
-         "data/output/*/dated_services.csv",
-         "data/output/*/church_details.jsonl",
-         "data/output/*/parsed_addresses.csv",
-         "data/output/*/bulletin_names.csv",
-         "data/churches/"],
-        "Git add data files"
+        [
+            "git",
+            "add",
+            "data/output/*/all_services.csv",
+            "data/output/*/dated_services.csv",
+            "data/output/*/church_details.jsonl",
+            "data/output/*/parsed_addresses.csv",
+            "data/output/*/bulletin_names.csv",
+            "data/churches/",
+        ],
+        "Git add data files",
     )
 
     # Check if there are staged changes
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--quiet"],
-        cwd=PROJECT_ROOT
-    )
+    result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=PROJECT_ROOT)
 
     if result.returncode == 0:
         log("  No changes to commit")
@@ -202,10 +236,7 @@ def step_git_push():
         f"Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>"
     )
 
-    ok = run_cmd(
-        ["git", "commit", "-m", commit_msg],
-        "Git commit"
-    )
+    ok = run_cmd(["git", "commit", "-m", commit_msg], "Git commit")
     if not ok:
         return False
 
@@ -238,11 +269,17 @@ def step_redeploy_dashboard():
         return True
 
     cmd = [
-        "curl", "-s", "-X", "POST",
+        "curl",
+        "-s",
+        "-X",
+        "POST",
         f"https://api.render.com/v1/services/{dashboard_id}/deploys",
-        "-H", f"Authorization: Bearer {api_key}",
-        "-H", "Content-Type: application/json",
-        "-d", '{"clearCache":"do_not_clear"}'
+        "-H",
+        f"Authorization: Bearer {api_key}",
+        "-H",
+        "Content-Type: application/json",
+        "-d",
+        '{"clearCache":"do_not_clear"}',
     ]
     return run_cmd(cmd, "Trigger dashboard redeploy")
 
@@ -251,18 +288,22 @@ def step_redeploy_dashboard():
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main():
     parser = argparse.ArgumentParser(description="Weekly Tuesday pipeline orchestrator")
-    parser.add_argument("--scrape-only", action="store_true",
-                        help="Run scrape steps only (1-3), skip DB sync")
-    parser.add_argument("--sync-only", action="store_true",
-                        help="Run DB sync only (step 4)")
-    parser.add_argument("--skip-bulletins", action="store_true",
-                        help="Skip bulletin scraping (step 3)")
-    parser.add_argument("--skip-scrape", action="store_true",
-                        help="Skip scraping (steps 1-3), run sync + deploy")
-    parser.add_argument("--states", nargs="+", default=None,
-                        help="Specific states to process (default: all 50)")
+    parser.add_argument(
+        "--scrape-only", action="store_true", help="Run scrape steps only (1-3), skip DB sync"
+    )
+    parser.add_argument("--sync-only", action="store_true", help="Run DB sync only (step 4)")
+    parser.add_argument(
+        "--skip-bulletins", action="store_true", help="Skip bulletin scraping (step 3)"
+    )
+    parser.add_argument(
+        "--skip-scrape", action="store_true", help="Skip scraping (steps 1-3), run sync + deploy"
+    )
+    parser.add_argument(
+        "--states", nargs="+", default=None, help="Specific states to process (default: all 50)"
+    )
     args = parser.parse_args()
 
     states = args.states if args.states else ALL_STATES

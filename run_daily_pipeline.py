@@ -78,18 +78,22 @@ def main():
             bulletin_cmd += ["--state", args.state]
         if args.limit:
             bulletin_cmd += ["--limit", str(args.limit)]
-        results["bulletins"] = run_cmd(bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200)
+        results["bulletins"] = run_cmd(
+            bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200
+        )
 
     # Step 3: Rescore only new names + junk cleanup + refresh stats
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--new-only"],
-        "Rescore new names (SQL)", timeout_seconds=1200,
+        "Rescore new names (SQL)",
+        timeout_seconds=1200,
     )
 
     # Step 4: Health check
     results["health"] = run_cmd(
         [sys.executable, "tests/test_pipeline_health.py", "--quick"],
-        "Health check", timeout_seconds=60,
+        "Health check",
+        timeout_seconds=60,
     )
 
     # Step 5: Redeploy dashboard
@@ -97,11 +101,19 @@ def main():
     dashboard_id = "srv-d6li8dtm5p6s73chuh7g"
     if api_key:
         results["redeploy"] = run_cmd(
-            ["curl", "-s", "-X", "POST",
-             f"https://api.render.com/v1/services/{dashboard_id}/deploys",
-             "-H", f"Authorization: Bearer {api_key}",
-             "-H", "Content-Type: application/json",
-             "-d", '{"clearCache":"do_not_clear"}'],
+            [
+                "curl",
+                "-s",
+                "-X",
+                "POST",
+                f"https://api.render.com/v1/services/{dashboard_id}/deploys",
+                "-H",
+                f"Authorization: Bearer {api_key}",
+                "-H",
+                "Content-Type: application/json",
+                "-d",
+                '{"clearCache":"do_not_clear"}',
+            ],
             "Trigger dashboard redeploy",
         )
     else:

@@ -40,10 +40,12 @@ from run_bulletin_scraper import (
 # DB connection
 # ---------------------------------------------------------------------------
 
+
 def get_connection():
     """Connect to db99."""
     try:
         import boto3
+
         client = boto3.client("secretsmanager", region_name="us-east-1")
         resp = client.get_secret_value(SecretId="/ben/ai-tool/db99")
         secret = json.loads(resp["SecretString"])
@@ -56,10 +58,16 @@ def get_connection():
         password = os.getenv("DB_PASSWORD", "")
 
     return pymysql.connect(
-        host=host, port=3306, user=user, password=password,
+        host=host,
+        port=3306,
+        user=user,
+        password=password,
         database="church_scrapes",
-        connect_timeout=30, read_timeout=600, write_timeout=600,
-        autocommit=True, charset="utf8mb4",
+        connect_timeout=30,
+        read_timeout=600,
+        write_timeout=600,
+        autocommit=True,
+        charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -67,6 +75,7 @@ def get_connection():
 # ---------------------------------------------------------------------------
 # NER veto pass
 # ---------------------------------------------------------------------------
+
 
 def run_ner_veto_pass(cur, args):
     """Run NER veto on all high/medium confidence names.
@@ -109,13 +118,16 @@ def run_ner_veto_pass(cur, args):
     start = time.time()
 
     while True:
-        cur.execute(f"""
+        cur.execute(
+            f"""
             SELECT bn.bulletin_name_id, bn.person_name, bn.context
             FROM bulletin_name bn
             {where}
             ORDER BY bn.bulletin_name_id
             LIMIT %s OFFSET %s
-        """, params + [batch_size, offset])
+        """,
+            params + [batch_size, offset],
+        )
 
         rows = cur.fetchall()
         if not rows:
@@ -135,11 +147,14 @@ def run_ner_veto_pass(cur, args):
         if ids_to_downgrade and not args.dry_run:
             # Batch update
             placeholders = ",".join(["%s"] * len(ids_to_downgrade))
-            cur.execute(f"""
+            cur.execute(
+                f"""
                 UPDATE bulletin_name
                 SET confidence = 'low', is_suspect = 1
                 WHERE bulletin_name_id IN ({placeholders})
-            """, ids_to_downgrade)
+            """,
+                ids_to_downgrade,
+            )
 
         checked += len(rows)
         downgraded += len(ids_to_downgrade)
@@ -169,6 +184,7 @@ def run_ner_veto_pass(cur, args):
 # ---------------------------------------------------------------------------
 # Couple detection pass
 # ---------------------------------------------------------------------------
+
 
 def run_couple_detection(cur, args):
     """Detect and split couple names ("John & Mary Smith" → two records).
@@ -203,14 +219,17 @@ def run_couple_detection(cur, args):
 
     limit_clause = f"LIMIT {args.limit}" if args.limit else ""
 
-    cur.execute(f"""
+    cur.execute(
+        f"""
         SELECT bn.bulletin_name_id, bn.bulletin_pdf_id, bn.person_name,
                bn.role, bn.context, bn.category
         FROM bulletin_name bn
         {where}
         ORDER BY bn.bulletin_name_id
         {limit_clause}
-    """, params)
+    """,
+        params,
+    )
     rows = cur.fetchall()
 
     print(f"  Candidate couple names: {len(rows):,}")
@@ -258,25 +277,28 @@ def run_couple_detection(cur, args):
             if cur.fetchone():
                 continue
 
-            cur.execute("""
+            cur.execute(
+                """
                 INSERT INTO bulletin_name
                     (bulletin_pdf_id, person_name, first_name, last_name,
                      title, middle_name,
                      confidence, is_suspect, role, context, category)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """, (
-                row["bulletin_pdf_id"],
-                individual_name[:100],
-                first_name[:50],
-                last_name[:50],
-                (parts.get("title") or "")[:20],
-                (parts.get("middle_name") or "")[:50],
-                conf,
-                0,
-                (row.get("role") or "")[:100],
-                (row.get("context") or "")[:500],
-                (row.get("category") or "")[:30],
-            ))
+            """,
+                (
+                    row["bulletin_pdf_id"],
+                    individual_name[:100],
+                    first_name[:50],
+                    last_name[:50],
+                    (parts.get("title") or "")[:20],
+                    (parts.get("middle_name") or "")[:50],
+                    conf,
+                    0,
+                    (row.get("role") or "")[:100],
+                    (row.get("context") or "")[:500],
+                    (row.get("category") or "")[:30],
+                ),
+            )
             records_inserted += cur.rowcount
 
         # Mark original couple record as suspect (keep it but flag it)
@@ -286,15 +308,22 @@ def run_couple_detection(cur, args):
         )
 
     print(f"  Couples found: {couples_found:,}, records inserted: {records_inserted:,}")
-    return {"candidates": len(rows), "couples_found": couples_found, "records_inserted": records_inserted}
+    return {
+        "candidates": len(rows),
+        "couples_found": couples_found,
+        "records_inserted": records_inserted,
+    }
 
 
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Re-score existing names with NER + couple detection")
+    parser = argparse.ArgumentParser(
+        description="Re-score existing names with NER + couple detection"
+    )
     parser.add_argument("--state", type=str, help="One state code (e.g. GA)")
     parser.add_argument("--limit", type=int, default=0, help="Max names to process (0=all)")
     parser.add_argument("--batch-size", type=int, default=500, help="Names per NER batch")
@@ -360,33 +389,40 @@ def main():
     if not args.dry_run:
         ner_info = results.get("ner", {})
         couple_info = results.get("couples", {})
-        cur.execute("""
+        cur.execute(
+            """
             INSERT INTO scrape_log (
                 scrape_type, completed_at, status,
                 communities_scraped, churches_scraped, services_upserted,
                 errors, notes
             ) VALUES (%s, NOW(), %s, %s, %s, %s, %s, %s)
-        """, (
-            "ner_rescore",
-            "completed",
-            None,
-            ner_info.get("checked", 0),
-            couple_info.get("records_inserted", 0),
-            None,
-            f"NER: {ner_info.get('checked', 0)} checked, {ner_info.get('downgraded', 0)} downgraded. "
-            f"Couples: {couple_info.get('couples_found', 0)} found, {couple_info.get('records_inserted', 0)} inserted. "
-            f"Time: {elapsed:.0f}s",
-        ))
+        """,
+            (
+                "ner_rescore",
+                "completed",
+                None,
+                ner_info.get("checked", 0),
+                couple_info.get("records_inserted", 0),
+                None,
+                f"NER: {ner_info.get('checked', 0)} checked, {ner_info.get('downgraded', 0)} downgraded. "
+                f"Couples: {couple_info.get('couples_found', 0)} found, {couple_info.get('records_inserted', 0)} inserted. "
+                f"Time: {elapsed:.0f}s",
+            ),
+        )
 
     # Summary
     print(f"\n{'='*60}")
     print(f"  RESCORE SUMMARY")
     print(f"{'='*60}")
     if "ner" in results:
-        print(f"  NER: {results['ner']['checked']:,} checked, {results['ner']['downgraded']:,} downgraded")
+        print(
+            f"  NER: {results['ner']['checked']:,} checked, {results['ner']['downgraded']:,} downgraded"
+        )
     if "couples" in results:
-        print(f"  Couples: {results['couples']['couples_found']:,} found, "
-              f"{results['couples']['records_inserted']:,} new records")
+        print(
+            f"  Couples: {results['couples']['couples_found']:,} found, "
+            f"{results['couples']['records_inserted']:,} new records"
+        )
     print(f"  Time: {elapsed:.0f}s ({elapsed/60:.1f} min)")
     if args.dry_run:
         print("  (DRY RUN — no changes written)")
