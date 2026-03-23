@@ -25,7 +25,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -178,8 +178,6 @@ def process_church(cur, church):
 
     # Phase 2: Process each PDF
     for pdf_url in pdf_urls[:MAX_PDFS_PER_CHURCH]:
-        uhash = url_hash(pdf_url)
-
         # Check if already extracted
         cur.execute(
             "SELECT bulletin_pdf_id, text_extracted FROM bulletin_pdf "
@@ -542,8 +540,8 @@ def main():
             if existing and existing.get("discovered_at"):
                 scraped_at = existing["discovered_at"]
                 if hasattr(scraped_at, "replace"):
-                    scraped_at = scraped_at.replace(tzinfo=timezone.utc)
-                days_ago = (datetime.now(timezone.utc) - scraped_at).days
+                    scraped_at = scraped_at.replace(tzinfo=UTC)
+                days_ago = (datetime.now(UTC) - scraped_at).days
                 if days_ago < args.days_fresh:
                     totals["skipped"] += 1
                     continue
@@ -600,7 +598,7 @@ def main():
     )
 
     print(f"\n{'='*60}")
-    print(f"  BULLETIN EXTRACTION SUMMARY")
+    print("  BULLETIN EXTRACTION SUMMARY")
     print(f"{'='*60}")
     print(f"  Churches discovered: {totals['discovered']}")
     print(f"  PDFs found: {totals['pdfs_found']}")

@@ -22,7 +22,7 @@ import os
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.chdir(PROJECT_ROOT)
@@ -87,7 +87,7 @@ BULLETIN_MAX_PARALLEL = 3
 
 
 def log(msg):
-    ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
     print(f"[{ts}] {msg}", flush=True)
 
 
@@ -205,7 +205,7 @@ def step_git_push():
     log("STEP 5: Git commit + push")
     log("=" * 60)
 
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    timestamp = datetime.now(UTC).strftime("%Y-%m-%d")
 
     # Stage data files (CSVs and JSONL, not PDFs or progress files)
     run_cmd(

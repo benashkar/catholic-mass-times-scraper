@@ -1,6 +1,6 @@
 import csv
-import re
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 
@@ -30,7 +30,7 @@ for st in STATES:
     if not os.path.exists(path):
         print(f"WARNING: {path} not found, skipping")
         continue
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
+    with open(path, encoding="utf-8", errors="replace") as f:
         reader = csv.DictReader(f)
         rows = list(reader)
         state_counts[st] = len(rows)
@@ -39,7 +39,7 @@ for st in STATES:
 print(f"{'='*80}")
 print(f"JUNK / NON-NAME ANALYSIS ACROSS {len(state_counts)} STATES")
 print(f"{'='*80}")
-print(f"\nRows loaded per state:")
+print("\nRows loaded per state:")
 for st, ct in sorted(state_counts.items()):
     print(f"  {st:15s}: {ct:>7,}")
 print(f"  {'TOTAL':15s}: {sum(state_counts.values()):>7,}")
@@ -1434,7 +1434,7 @@ pct_junk = 100.0 * len(all_junk) / len(unique_names) if unique_names else 0
 print(f"  Junk rate (of unique names):          {pct_junk:>9.1f}%")
 print(f"  Clean names remaining:                {len(unique_names) - len(all_junk):>10,}")
 
-print(f"\n  Junk breakdown by category:")
+print("\n  Junk breakdown by category:")
 for cat_key in sorted(categories.keys()):
     cat = categories[cat_key]
     ct = len(cat["matches"])
@@ -1479,7 +1479,7 @@ for word, ct in all_triggers.most_common(40):
     print(f"  {word:40s}: {ct:>5,} names")
 
 # ── RANDOM SAMPLE OF JUNK FOR REVIEW ───────────────────────────────────
-import random
+import random  # noqa: E402
 
 random.seed(42)
 print(f"\n{'─'*80}")

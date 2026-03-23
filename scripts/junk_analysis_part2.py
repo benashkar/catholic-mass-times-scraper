@@ -1,8 +1,8 @@
 import csv
-import re
 import os
+import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -25,7 +25,7 @@ for st in STATES:
     path = os.path.join(BASE, st, "bulletin_names.csv")
     if not os.path.exists(path):
         continue
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
+    with open(path, encoding="utf-8", errors="replace") as f:
         reader = csv.DictReader(f)
         for r in reader:
             all_rows.append((r, st))
@@ -61,7 +61,7 @@ upper_count = sum(1 for _, _, _, is_up in single_mid_examples if is_up)
 lower_count = sum(1 for _, _, _, is_up in single_mid_examples if not is_up)
 print(f"  Uppercase (initials, excluded from junk): {upper_count}")
 print(f"  Lowercase (flagged as junk): {lower_count}")
-print(f"\n  Sample lowercase single-char middle words:")
+print("\n  Sample lowercase single-char middle words:")
 lower_examples = [(n, c, i) for n, c, i, iu in single_mid_examples if not iu][:20]
 for n, c, i in lower_examples:
     print(f"    '{c}' in: {n}")
@@ -347,11 +347,11 @@ last_name_counter = Counter()
 for n in merged:
     last_name_counter[n.split()[-1].lower()] += 1
 
-print(f"\n  Most common 'appended' first names:")
+print("\n  Most common 'appended' first names:")
 for name, ct in last_name_counter.most_common(20):
     print(f"    {name:15s}: {ct:>4,}")
 
-print(f"\n  Sample 4+ word merged names:")
+print("\n  Sample 4+ word merged names:")
 for n in sorted(four_plus)[:15]:
     print(f"    {n}")
 
@@ -545,12 +545,12 @@ for n in unique_names:
             high_junk.append(n)
             break
 
-import random
+import random  # noqa: E402
 
 random.seed(123)
 random.shuffle(high_junk)
 print(f"  High-confidence names with noun/verb words: {len(high_junk)}")
-print(f"\n  Random sample of 25:")
+print("\n  Random sample of 25:")
 for n in high_junk[:25]:
     print(f"    {n}")
 

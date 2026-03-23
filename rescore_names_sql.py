@@ -547,7 +547,7 @@ def main():
           AND bn.first_name != '' AND bn.last_name != ''
         GROUP BY c.state_code
     """)
-    print(f"    [OK] Stats refreshed")
+    print("    [OK] Stats refreshed")
 
     elapsed = time.time() - t
 

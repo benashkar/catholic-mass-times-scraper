@@ -170,7 +170,7 @@ def check_lowercase_names(cur):
         print(f"  [WARN] {cnt:,} all-lowercase names in high/medium")
         issues.append(f"{cnt:,} lowercase names still scored high/medium")
     else:
-        print(f"  [OK] No all-lowercase names in high/medium")
+        print("  [OK] No all-lowercase names in high/medium")
     return issues
 
 
@@ -212,7 +212,7 @@ def check_empty_names(cur):
         print(f"  [WARN] {cnt:,} high/medium names with empty first or last name")
         issues.append(f"{cnt:,} names missing first/last in high/medium")
     else:
-        print(f"  [OK] All high/medium names have first and last")
+        print("  [OK] All high/medium names have first and last")
     return issues
 
 

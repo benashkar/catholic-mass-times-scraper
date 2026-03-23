@@ -33,7 +33,7 @@ def create_app(config_class=Config):
 
     @app.route("/health")
     def health():
-        from app.data_loader import _state_list, _bulletin_stats_cache, _get_db_connection
+        from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list
 
         result = {
             "status": "ok",
@@ -56,6 +56,7 @@ def create_app(config_class=Config):
     def debug_logs():
         """Show recent scrape_log entries for debugging cron job failures."""
         from flask import request
+
         from app.data_loader import _get_db_connection
 
         try:

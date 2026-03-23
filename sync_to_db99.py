@@ -19,11 +19,10 @@ import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import pymysql
 from src.utils.db_connection import get_connection
 
 # ---------------------------------------------------------------------------
@@ -191,7 +190,7 @@ def load_churches(cur, state_dir, state_code, dry_run=False):
     slugs = []
     parse_errors = 0
 
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -350,7 +349,7 @@ def load_services(cur, state_dir, state_code, slug_to_id, dry_run=False):
     service_rows = []
     sanitized_count = 0
 
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    with open(jsonl_path, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:
@@ -472,7 +471,7 @@ def load_bulletins(cur, state_dir, state_code, slug_to_id, dry_run=False):
     names_total = 0
     names_skipped = 0
 
-    with open(csv_path, "r", encoding="utf-8") as f:
+    with open(csv_path, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             slug = row.get("church_slug", "")
@@ -718,7 +717,7 @@ def main():
     print("=" * 60)
     print("  Church Scrapes -> db99 Sync")
     print(f"  Mode: {'DRY RUN' if args.dry_run else 'LIVE'}")
-    print(f"  Target: db99.rds.blockshopper.com / church_scrapes")
+    print("  Target: db99.rds.blockshopper.com / church_scrapes")
     print("=" * 60)
 
     conn = get_connection()
@@ -768,7 +767,7 @@ def main():
 
     # Summary
     print(f"\n{'='*60}")
-    print(f"  SYNC SUMMARY")
+    print("  SYNC SUMMARY")
     print(f"{'='*60}")
     print(f"  States: {len(success_states)} succeeded, {len(failed_states)} failed")
     print(f"  Total time: {total_elapsed:.1f}s ({total_elapsed/60:.1f} min)")

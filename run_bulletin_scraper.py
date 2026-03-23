@@ -167,8 +167,8 @@ def detect_couple(name):
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config.settings import OUTPUT_DIR
-from src.utils.logger import get_logger
+from config.settings import OUTPUT_DIR  # noqa: E402
+from src.utils.logger import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 
@@ -1339,6 +1339,7 @@ def extract_text_from_pdf(pdf_path_or_bytes):
 
     try:
         import io
+
         from src.utils.pdf_columns import extract_columns_from_page
 
         # Accept bytes, BytesIO, Path, or str

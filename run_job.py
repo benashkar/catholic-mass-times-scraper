@@ -1,9 +1,9 @@
 """Wrapper to run any script and log errors to db99 scrape_log."""
 
+import json
+import os
 import subprocess
 import sys
-import os
-import json
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,8 +27,8 @@ try:
 
     # Log to db99
     try:
-        import pymysql
         import boto3
+        import pymysql
 
         client = boto3.client("secretsmanager", region_name="us-east-1")
         resp = client.get_secret_value(SecretId="/ben/ai-tool/db99")

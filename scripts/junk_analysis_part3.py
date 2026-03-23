@@ -1,8 +1,8 @@
 import csv
-import re
 import os
+import re
 import sys
-from collections import Counter, defaultdict
+from collections import Counter
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -25,7 +25,7 @@ for st in STATES:
     path = os.path.join(BASE, st, "bulletin_names.csv")
     if not os.path.exists(path):
         continue
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
+    with open(path, encoding="utf-8", errors="replace") as f:
         reader = csv.DictReader(f)
         for r in reader:
             all_rows.append((r, st))
@@ -58,7 +58,7 @@ print(
 nl_conf = Counter()
 for n in newline_names:
     nl_conf[name_to_confidence.get(n, "?")] += 1
-print(f"\n  Newline names by confidence:")
+print("\n  Newline names by confidence:")
 for c, ct in nl_conf.most_common():
     print(f"    {c}: {ct:,}")
 
@@ -67,7 +67,7 @@ line_counts = Counter()
 for n in newline_names:
     lines = n.count("\n") + 1
     line_counts[lines] += 1
-print(f"\n  Number of lines in newline names:")
+print("\n  Number of lines in newline names:")
 for lc in sorted(line_counts.keys()):
     print(f"    {lc} lines: {line_counts[lc]:,} names")
 
@@ -97,11 +97,11 @@ print(f"  First line looks like a name:  {first_line_looks_like_name:,}")
 print(f"  Second line also looks like a name: {second_line_has_name:,}")
 
 # Examples of what the newline splits look like
-import random
+import random  # noqa: E402
 
 random.seed(99)
 sample_nl = random.sample(sorted(newline_names), min(30, len(newline_names)))
-print(f"\n  30 random newline-name examples (lines separated by | ):")
+print("\n  30 random newline-name examples (lines separated by | ):")
 for n in sample_nl:
     parts = [p.strip() for p in re.split(r"[\n\r]+", n) if p.strip()]
     conf = name_to_confidence.get(n, "?")
@@ -137,7 +137,7 @@ for n, wc in long_names:
     long_conf[name_to_confidence.get(n, "?")] += 1
 print(f"  By confidence: {dict(long_conf)}")
 
-print(f"\n  Longest 25:")
+print("\n  Longest 25:")
 for n, wc in long_names[:25]:
     conf = name_to_confidence.get(n, "?")
     display = re.sub(r"[\n\r]+", " | ", n)
@@ -153,7 +153,7 @@ sw_conf = Counter()
 for n in single_word:
     sw_conf[name_to_confidence.get(n, "?")] += 1
 print(f"  By confidence: {dict(sw_conf)}")
-print(f"\n  Sample:")
+print("\n  Sample:")
 for n in sorted(single_word)[:30]:
     conf = name_to_confidence.get(n, "?")
     print(f"    [{conf}] {n}")
@@ -181,16 +181,16 @@ all_junk = set()
 # All-caps: counted above
 # 5+ word names: counted above
 
-print(f"\n  Category                               Unique Names")
-print(f"  " + "-" * 55)
+print("\n  Category                               Unique Names")
+print("  " + "-" * 55)
 print(f"  Names with embedded newlines:          {len(newline_names):>8,}")
 print(f"  All-caps multi-word (headings):        {len(all_caps):>8,}")
 print(f"  5+ word names (phrases):               {len(long_names):>8,}")
 print(f"  Single-word names:                     {len(single_word):>8,}")
-print(f"  (Original 10 categories from Part 1):   ~73,155")
-print(f"")
-print(f"  NOTE: These categories overlap significantly.")
-print(f"  Many newline names also trigger noun/verb or merged-name detection.")
+print("  (Original 10 categories from Part 1):   ~73,155")
+print("")
+print("  NOTE: These categories overlap significantly.")
+print("  Many newline names also trigger noun/verb or merged-name detection.")
 
 # Combined unique junk: union of newline + all_caps + long + single_word
 structural_junk = newline_names | all_caps | set(n for n, wc in long_names) | single_word

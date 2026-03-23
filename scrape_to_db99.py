@@ -17,13 +17,13 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import pymysql
-from src.scrapers.catholic_index import scrape_church_detail
 
+from src.scrapers.catholic_index import scrape_church_detail
 
 # ---------------------------------------------------------------------------
 # DB connection
@@ -166,7 +166,7 @@ def upsert_church(cur, detail, state_code):
         except (ValueError, AttributeError):
             pass
 
-    last_scraped_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    last_scraped_at = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S")
     source_url = detail.get("source_url")
 
     services_dict = detail.get("services", {})
@@ -393,11 +393,11 @@ def main():
     )
 
     print(f"\n{'='*60}")
-    print(f"  SCRAPE SUMMARY")
+    print("  SCRAPE SUMMARY")
     print(f"{'='*60}")
     print(f"  Churches: {success} ok, {skipped} skipped, {failed} failed")
     print(f"  Time: {elapsed:.0f}s ({elapsed/60:.1f} min)")
-    print(f"[OK] Done!")
+    print("[OK] Done!")
 
     conn.close()
     return 0 if failed == 0 else 1

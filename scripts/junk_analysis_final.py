@@ -1,6 +1,6 @@
 import csv
-import re
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 
@@ -26,7 +26,7 @@ for st in STATES:
     path = os.path.join(BASE, st, "bulletin_names.csv")
     if not os.path.exists(path):
         continue
-    with open(path, "r", encoding="utf-8", errors="replace") as f:
+    with open(path, encoding="utf-8", errors="replace") as f:
         reader = csv.DictReader(f)
         rows = list(reader)
         state_counts[st] = len(rows)
@@ -1213,25 +1213,25 @@ print("CONSOLIDATED JUNK/NON-NAME ANALYSIS: FINAL REPORT")
 print(f"10 States: {', '.join(sorted(state_counts.keys()))}")
 print("=" * 80)
 
-print(f"\n  DATASET SIZE")
+print("\n  DATASET SIZE")
 print(f"  Total rows loaded:       {sum(state_counts.values()):>10,}")
 print(f"  Total unique names:      {len(unique_names):>10,}")
 
-print(f"\n  CONFIDENCE DISTRIBUTION (all rows)")
+print("\n  CONFIDENCE DISTRIBUTION (all rows)")
 conf_counter = Counter()
 for r, st in all_rows:
     conf_counter[r.get("confidence", "").strip().lower()] += 1
 for c, ct in conf_counter.most_common():
     print(f"    {c:10s}: {ct:>8,}  ({100.0*ct/len(all_rows):5.1f}%)")
 
-print(f"\n" + "=" * 80)
+print("\n" + "=" * 80)
 print(
     f"  JUNK DETECTION: {len(all_junk):,} of {len(unique_names):,} unique names flagged ({100.0*len(all_junk)/len(unique_names):.1f}%)"
 )
 print(
     f"  Clean names remaining: {len(all_clean):,} ({100.0*len(all_clean)/len(unique_names):.1f}%)"
 )
-print(f"=" * 80)
+print("=" * 80)
 
 # Category counts
 cat_counts = Counter()
@@ -1252,8 +1252,8 @@ cat_labels = {
     "MERGED_NAMES": "Two person names merged (FN Surname FN pattern)",
 }
 
-print(f"\n  JUNK BY CATEGORY (categories overlap; names can appear in multiple):")
-print(f"  " + "-" * 75)
+print("\n  JUNK BY CATEGORY (categories overlap; names can appear in multiple):")
+print("  " + "-" * 75)
 for cat, label in cat_labels.items():
     ct = cat_counts.get(cat, 0)
     pct = 100.0 * ct / len(unique_names)
@@ -1264,14 +1264,14 @@ multi_counter = Counter()
 for name, cats in name_categories.items():
     multi_counter[len(cats)] += 1
 
-print(f"\n  OVERLAP ANALYSIS (how many categories per flagged name):")
+print("\n  OVERLAP ANALYSIS (how many categories per flagged name):")
 for n_cats in sorted(multi_counter.keys()):
     ct = multi_counter[n_cats]
     print(f"    {n_cats} category/ies: {ct:>7,} names")
 
 # ── CONFIDENCE vs JUNK ─────────────────────────────────────────────────
-print(f"\n  CONFIDENCE vs JUNK RATE:")
-print(f"  " + "-" * 55)
+print("\n  CONFIDENCE vs JUNK RATE:")
+print("  " + "-" * 55)
 for conf_level in ["high", "medium"]:
     total = sum(1 for n in unique_names if name_to_confidence.get(n) == conf_level)
     junk = sum(1 for n in all_junk if name_to_confidence.get(n) == conf_level)
@@ -1282,8 +1282,8 @@ for conf_level in ["high", "medium"]:
     )
 
 # ── STATE-LEVEL BREAKDOWN ─────────────────────────────────────────────
-print(f"\n  JUNK RATE BY STATE:")
-print(f"  " + "-" * 75)
+print("\n  JUNK RATE BY STATE:")
+print("  " + "-" * 75)
 print(f"  {'State':15s} {'Rows':>8s} {'Unique':>8s} {'Junk':>7s} {'Rate':>7s} {'Clean':>8s}")
 for st in sorted(state_counts.keys()):
     st_names = set()
@@ -1300,11 +1300,11 @@ for st in sorted(state_counts.keys()):
     )
 
 # ── NEWLINE-SPECIFIC BREAKDOWN ─────────────────────────────────────────
-print(f"\n  NEWLINE NAMES: DEEPER LOOK")
-print(f"  " + "-" * 75)
+print("\n  NEWLINE NAMES: DEEPER LOOK")
+print("  " + "-" * 75)
 newline_names = {n for n in unique_names if "\n" in n or "\r" in n}
 print(f"    Total with newlines: {len(newline_names):,}")
-print(f"    100% are medium confidence (newlines never appear in high-confidence names)")
+print("    100% are medium confidence (newlines never appear in high-confidence names)")
 
 # Newline names that are ALSO flagged by content-based categories
 nl_also_content = sum(1 for n in newline_names if len(name_categories.get(n, set())) > 1)
@@ -1324,10 +1324,10 @@ for n in newline_names:
 print(
     f"    First line looks like valid 2-3 word name: {first_line_clean:,} ({100.0*first_line_clean/len(newline_names):.1f}%)"
 )
-print(f"    These may be salvageable by splitting on newline and keeping first line.")
+print("    These may be salvageable by splitting on newline and keeping first line.")
 
 # ── FINAL KEY FINDINGS ─────────────────────────────────────────────────
-print(f"\n" + "=" * 80)
+print("\n" + "=" * 80)
 print("KEY FINDINGS")
 print("=" * 80)
 

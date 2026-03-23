@@ -21,7 +21,6 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -34,7 +33,6 @@ from run_bulletin_scraper import (
     parse_name_parts,
     score_name_confidence,
 )
-
 
 # ---------------------------------------------------------------------------
 # DB connection
@@ -107,8 +105,6 @@ def run_ner_veto_pass(cur, args):
 
     if total == 0:
         return {"checked": 0, "downgraded": 0}
-
-    limit_clause = f"LIMIT {args.limit}" if args.limit else ""
 
     # Process in batches
     batch_size = args.batch_size
@@ -344,7 +340,7 @@ def main():
     mode = ", ".join(mode_parts) if mode_parts else "full"
 
     print("=" * 60)
-    print(f"  Re-score with NER + Couple Detection")
+    print("  Re-score with NER + Couple Detection")
     print(f"  State: {state_label}  Mode: {mode}")
     print("=" * 60)
 
@@ -412,7 +408,7 @@ def main():
 
     # Summary
     print(f"\n{'='*60}")
-    print(f"  RESCORE SUMMARY")
+    print("  RESCORE SUMMARY")
     print(f"{'='*60}")
     if "ner" in results:
         print(
