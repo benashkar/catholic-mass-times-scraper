@@ -31,6 +31,53 @@ def create_app(config_class=Config):
     app.register_blueprint(mass_times_bp)
     app.register_blueprint(bulletin_bp)
 
+    @app.route("/schema")
+    def schema():
+        """Show database schema, ERD, and connection info."""
+        from flask import render_template
+
+        from app.data_loader import _get_db_connection
+
+        table_info = [
+            ("church", "Catholic churches with location, contact, service counts"),
+            ("service", "Mass times, confessions, adoration — recurring and one-time"),
+            ("bulletin_source", "Which churches have bulletin pages (one per church)"),
+            ("bulletin_pdf", "Downloaded bulletin PDFs with extraction status"),
+            ("bulletin_name", "Names extracted from bulletins with confidence scores"),
+            ("bulletin_state_stats", "Pre-computed stats per state (dashboard cards)"),
+            ("ref_ssa_names", "SSA first names with gender data (scoring reference)"),
+            ("ref_census_surnames", "Census last names with frequency (scoring reference)"),
+            ("scrape_log", "Audit trail of every pipeline run"),
+            ("lk_state", "US state codes and names"),
+        ]
+        tables = []
+        try:
+            conn = _get_db_connection()
+            cur = conn.cursor()
+            for name, desc in table_info:
+                try:
+                    cur.execute(f"SELECT COUNT(*) AS cnt FROM {name}")
+                    count = cur.fetchone()["cnt"]
+                except Exception:
+                    count = 0
+                tables.append({"name": name, "count": count, "description": desc})
+            conn.close()
+        except Exception:
+            for name, desc in table_info:
+                tables.append({"name": name, "count": 0, "description": desc})
+
+        return render_template("schema.html", tables=tables)
+
+    @app.route("/schema/erd.html")
+    def schema_erd():
+        """Serve standalone ERD HTML file."""
+        import os
+
+        from flask import send_from_directory
+
+        docs_dir = os.path.join(os.path.dirname(__file__), "..", "..", "docs")
+        return send_from_directory(os.path.abspath(docs_dir), "erd.html")
+
     @app.route("/health")
     def health():
         from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list

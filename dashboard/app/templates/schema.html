@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %}Schema & ERD — Church Dashboard{% endblock %}
+
+{% block extra_head %}
+<style>
+.conn-card { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.85rem; }
+.conn-card code { color: #d63384; }
+.mermaid { background: #1a1a2e; border-radius: 8px; padding: 20px; overflow-x: auto; }
+.table-list th { white-space: nowrap; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row mb-3 align-items-center">
+    <div class="col">
+        <h2><i class="bi bi-diagram-3"></i> Database Schema</h2>
+        <p class="text-muted mb-0">Entity Relationship Diagram + connection info for <code>church_scrapes</code> on db99</p>
+    </div>
+    <div class="col-auto">
+        <a href="/schema/erd.html" target="_blank" class="btn btn-outline-primary btn-sm"><i class="bi bi-arrows-fullscreen"></i> Full-Screen ERD</a>
+    </div>
+</div>
+
+<!-- Connection Info -->
+<div class="row mb-4 g-3">
+    <div class="col-md-6">
+        <div class="card conn-card">
+            <div class="card-header"><i class="bi bi-cloud"></i> From Render (Production)</div>
+            <div class="card-body">
+                <p class="mb-1"><strong>Host:</strong> <code>AWS Secrets Manager</code> <span class="text-muted">(/ben/ai-tool/db99)</span></p>
+                <p class="mb-1"><strong>Port:</strong> <code>3306</code></p>
+                <p class="mb-1"><strong>Database:</strong> <code>church_scrapes</code></p>
+                <p class="mb-1"><strong>Engine:</strong> MySQL 8.4</p>
+                <p class="mb-0"><strong>Connection:</strong> PrivateLink (VPC Endpoint)</p>
+                <hr>
+                <p class="mb-0 text-muted small">Credentials loaded at runtime via <code>boto3</code>. Never stored in env vars or code.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card conn-card">
+            <div class="card-header"><i class="bi bi-pc-display"></i> Local Dev (VPN Required)</div>
+            <div class="card-body">
+                <p class="mb-1"><strong>Host:</strong> <code>10.10.0.8</code></p>
+                <p class="mb-1"><strong>Port:</strong> <code>3306</code></p>
+                <p class="mb-1"><strong>Database:</strong> <code>church_scrapes</code></p>
+                <p class="mb-1"><strong>User:</strong> <code>bashkar</code></p>
+                <p class="mb-0"><strong>Tool:</strong> MySQL Workbench, DBeaver, or <code>pymysql</code></p>
+                <hr>
+                <p class="mb-0 text-muted small">Set <code>DB_HOST=10.10.0.8</code> in .env. VPC endpoint hostname times out locally.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Python Quick Start -->
+<div class="card mb-4">
+    <div class="card-header"><i class="bi bi-code-slash"></i> Quick Start (Python)</div>
+    <div class="card-body">
+<pre class="mb-0"><code>import json, boto3, pymysql
+
+# Option A: From Render (uses Secrets Manager)
+client = boto3.client("secretsmanager", region_name="us-east-1")
+secret = json.loads(client.get_secret_value(SecretId="/ben/ai-tool/db99")["SecretString"])
+conn = pymysql.connect(host=secret["DB_HOST"], port=3306, user=secret["DB_USER"],
+                       password=secret["DB_PASSWORD"], database="church_scrapes",
+                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
+
+# Option B: Local dev (VPN required)
+conn = pymysql.connect(host="10.10.0.8", port=3306, user="bashkar",
+                       password="...", database="church_scrapes",
+                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
+
+cur = conn.cursor()
+cur.execute("SELECT COUNT(*) AS cnt FROM church")
+print(cur.fetchone())</code></pre>
+    </div>
+</div>
+
+<!-- ERD Diagram -->
+<div class="card mb-4">
+    <div class="card-header"><i class="bi bi-diagram-3"></i> Entity Relationship Diagram</div>
+    <div class="card-body p-2">
+        <pre class="mermaid">
+erDiagram
+    lk_state {
+        CHAR2 state_code PK
+        VARCHAR state_name
+    }
+    church {
+        INT church_id PK
+        VARCHAR slug UK
+        VARCHAR name
+        VARCHAR street
+        VARCHAR city
+        CHAR2 state_code FK
+        VARCHAR postal_code
+        DECIMAL latitude
+        DECIMAL longitude
+        VARCHAR phone
+        VARCHAR website_url
+        INT mass_count
+        INT confession_count
+        INT adoration_count
+    }
+    service {
+        INT service_id PK
+        INT church_id FK
+        VARCHAR source_service_id
+        VARCHAR category_code FK
+        VARCHAR schedule_type_code FK
+        CHAR3 day_code FK
+        TIME time_start
+        TIME time_end
+        DATE event_date
+        VARCHAR language_code FK
+        VARCHAR location
+        VARCHAR display_name
+        TEXT notes_raw
+    }
+    bulletin_source {
+        INT bulletin_source_id PK
+        INT church_id FK "UNIQUE"
+        TEXT bulletin_page_url
+        VARCHAR discovery_source
+        DATETIME discovered_at
+    }
+    bulletin_pdf {
+        INT bulletin_pdf_id PK
+        INT bulletin_source_id FK
+        TEXT pdf_url
+        DATE pdf_date
+        BOOL text_extracted
+        DATETIME downloaded_at
+    }
+    bulletin_name {
+        INT bulletin_name_id PK
+        INT bulletin_pdf_id FK
+        VARCHAR person_name
+        VARCHAR title
+        VARCHAR first_name
+        VARCHAR middle_name
+        VARCHAR last_name
+        VARCHAR role
+        VARCHAR category
+        VARCHAR confidence
+        TEXT context
+        BOOL is_suspect
+    }
+    bulletin_state_stats {
+        CHAR2 state_code PK
+        INT total_names
+        INT unique_names
+        INT church_count
+        INT city_count
+    }
+    ref_ssa_names {
+        VARCHAR name PK
+        INT male_count
+        INT female_count
+        FLOAT male_ratio
+    }
+    ref_census_surnames {
+        VARCHAR name PK
+        FLOAT frequency
+    }
+    scrape_log {
+        INT scrape_id PK
+        VARCHAR scrape_type
+        DATETIME completed_at
+        VARCHAR status
+        INT churches_scraped
+        INT services_upserted
+        TEXT notes
+    }
+
+    lk_state ||--o{ church : "state_code"
+    church ||--o{ service : "church_id"
+    church ||--o| bulletin_source : "church_id"
+    bulletin_source ||--o{ bulletin_pdf : "bulletin_source_id"
+    bulletin_pdf ||--o{ bulletin_name : "bulletin_pdf_id"
+        </pre>
+    </div>
+</div>
+
+<!-- Table Summary -->
+<div class="card mb-4">
+    <div class="card-header"><i class="bi bi-table"></i> Table Summary</div>
+    <div class="card-body p-0">
+        <table class="table table-sm table-striped mb-0 table-list">
+            <thead class="table-light">
+                <tr><th>Table</th><th>Rows</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+                {% for t in tables %}
+                <tr>
+                    <td><code>{{ t.name }}</code></td>
+                    <td class="text-end">{{ "{:,}".format(t.count) }}</td>
+                    <td class="text-muted">{{ t.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Views -->
+<div class="card mb-4">
+    <div class="card-header"><i class="bi bi-eye"></i> Key Views</div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4"><code>v_bulletin_ui_names</code></dt>
+            <dd class="col-sm-8">Dashboard query view: joins bulletin_name &rarr; bulletin_pdf &rarr; bulletin_source &rarr; church. Columns: person_name, title, first_name, last_name, church_name, church_city, category, confidence, pdf_url, bulletin_date, state_code, is_suspect.</dd>
+            <dt class="col-sm-4"><code>v_sunday_masses</code></dt>
+            <dd class="col-sm-8">All active Sunday masses with church details, sorted by time.</dd>
+            <dt class="col-sm-4"><code>v_weekly_schedule</code></dt>
+            <dd class="col-sm-8">Full weekly schedule for all churches (recurring services only).</dd>
+            <dt class="col-sm-4"><code>v_confession_times</code></dt>
+            <dd class="col-sm-8">All active confession times with church and day info.</dd>
+        </dl>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({theme: 'dark', securityLevel: 'loose'});</script>
+{% endblock %}

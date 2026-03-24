@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>church_scrapes ERD — db99</title>
+<style>
+body { margin: 0; background: #1a1a2e; color: #e0e0e0; font-family: system-ui; }
+h1 { text-align: center; padding: 20px 0 0; font-size: 1.4rem; color: #8be9fd; }
+.subtitle { text-align: center; color: #6272a4; font-size: 0.9rem; margin-bottom: 20px; }
+.mermaid { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.legend { max-width: 800px; margin: 20px auto; padding: 15px; background: #16213e; border-radius: 8px; font-size: 0.85rem; }
+.legend h3 { color: #8be9fd; margin-top: 0; }
+.legend code { color: #ff79c6; }
+</style>
+</head>
+<body>
+<h1>church_scrapes — Entity Relationship Diagram</h1>
+<p class="subtitle">Database: church_scrapes on db99 (MySQL 8.4, AWS us-east-1) | Updated: 2026-03-24</p>
+
+<pre class="mermaid">
+erDiagram
+    lk_state {
+        CHAR2 state_code PK
+        VARCHAR state_name
+    }
+    church {
+        INT church_id PK
+        VARCHAR slug UK
+        VARCHAR name
+        VARCHAR street
+        VARCHAR city
+        CHAR2 state_code FK
+        VARCHAR postal_code
+        DECIMAL latitude
+        DECIMAL longitude
+        VARCHAR phone
+        VARCHAR website_url
+        INT mass_count
+        INT confession_count
+        INT adoration_count
+    }
+    service {
+        INT service_id PK
+        INT church_id FK
+        VARCHAR source_service_id
+        VARCHAR category_code
+        VARCHAR schedule_type_code
+        CHAR3 day_code
+        TIME time_start
+        TIME time_end
+        DATE event_date
+        VARCHAR language_code
+        VARCHAR location
+        VARCHAR display_name
+        TEXT notes_raw
+    }
+    bulletin_source {
+        INT bulletin_source_id PK
+        INT church_id FK "UNIQUE"
+        TEXT bulletin_page_url
+        VARCHAR discovery_source
+        DATETIME discovered_at
+    }
+    bulletin_pdf {
+        INT bulletin_pdf_id PK
+        INT bulletin_source_id FK
+        TEXT pdf_url
+        DATE pdf_date
+        BOOL text_extracted
+        DATETIME downloaded_at
+    }
+    bulletin_name {
+        INT bulletin_name_id PK
+        INT bulletin_pdf_id FK
+        VARCHAR person_name
+        VARCHAR title
+        VARCHAR first_name
+        VARCHAR middle_name
+        VARCHAR last_name
+        VARCHAR role
+        VARCHAR category
+        VARCHAR confidence
+        TEXT context
+        BOOL is_suspect
+    }
+    bulletin_state_stats {
+        CHAR2 state_code PK
+        INT total_names
+        INT unique_names
+        INT church_count
+        INT city_count
+    }
+    ref_ssa_names {
+        VARCHAR name PK
+        INT male_count
+        INT female_count
+        FLOAT male_ratio
+    }
+    ref_census_surnames {
+        VARCHAR name PK
+        FLOAT frequency
+    }
+    scrape_log {
+        INT scrape_id PK
+        VARCHAR scrape_type
+        DATETIME completed_at
+        VARCHAR status
+        INT churches_scraped
+        INT services_upserted
+        TEXT notes
+    }
+
+    lk_state ||--o{ church : "state_code"
+    church ||--o{ service : "church_id"
+    church ||--o| bulletin_source : "church_id"
+    bulletin_source ||--o{ bulletin_pdf : "bulletin_source_id"
+    bulletin_pdf ||--o{ bulletin_name : "bulletin_pdf_id"
+</pre>
+
+<div class="legend">
+<h3>Connection Info</h3>
+<p><strong>Production (Render):</strong> Credentials from AWS Secrets Manager <code>/ben/ai-tool/db99</code> via PrivateLink. <code>pymysql</code> + <code>boto3</code>.</p>
+<p><strong>Local dev:</strong> <code>DB_HOST=10.10.0.8</code>, port <code>3306</code>, user <code>bashkar</code>. Requires VPN to db99 VPC.</p>
+<p><strong>Key tables:</strong> <code>church</code> (23K), <code>service</code> (280K), <code>bulletin_name</code> (2.6M), <code>bulletin_pdf</code>, <code>bulletin_source</code>.</p>
+<p><strong>Reference tables:</strong> <code>ref_ssa_names</code> (100K SSA first names with gender), <code>ref_census_surnames</code> (162K Census last names).</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({theme: 'dark', securityLevel: 'loose'});</script>
+</body>
+</html>
