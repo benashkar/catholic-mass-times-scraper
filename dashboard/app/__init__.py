@@ -99,6 +99,29 @@ def create_app(config_class=Config):
             result["db"] = f"error: {str(e)[:200]}"
         return result, 200
 
+    @app.route("/debug/query")
+    def debug_query():
+        """Run a read-only SQL query for data exploration."""
+        from flask import jsonify, request
+
+        from app.data_loader import _get_db_connection
+
+        sql = request.args.get("sql", "")
+        if not sql:
+            return jsonify({"error": "?sql= required"}), 400
+        sql_lower = sql.strip().lower()
+        if not sql_lower.startswith("select"):
+            return jsonify({"error": "SELECT only"}), 400
+        try:
+            conn = _get_db_connection()
+            cur = conn.cursor()
+            cur.execute(sql)
+            rows = cur.fetchall()
+            conn.close()
+            return jsonify({"rows": rows, "count": len(rows)})
+        except Exception as e:
+            return jsonify({"error": str(e)[:500]}), 500
+
     @app.route("/debug/logs")
     def debug_logs():
         """Show recent scrape_log entries for debugging cron job failures."""
