@@ -1,177 +1,120 @@
 {% extends "base.html" %}
-{% block title %}Schema & ERD — Church Dashboard{% endblock %}
-
-{% block extra_head %}
-<style>
-.conn-card { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 0.85rem; }
-.conn-card code { color: #d63384; }
-.mermaid { background: #1a1a2e; border-radius: 8px; padding: 20px; overflow-x: auto; }
-.table-list th { white-space: nowrap; }
-</style>
-{% endblock %}
+{% block title %}Database Schema - ERD{% endblock %}
 
 {% block content %}
-<div class="row mb-3 align-items-center">
-    <div class="col">
-        <h2><i class="bi bi-diagram-3"></i> Database Schema</h2>
-        <p class="text-muted mb-0">Entity Relationship Diagram + connection info for <code>church_scrapes</code> on db99</p>
-    </div>
-    <div class="col-auto">
-        <a href="/schema/erd.html" target="_blank" class="btn btn-outline-primary btn-sm"><i class="bi bi-arrows-fullscreen"></i> Full-Screen ERD</a>
-    </div>
-</div>
+<h2>Database Schema</h2>
+<p class="text-muted">church_scrapes on db99 (MySQL) | {{ tables|length }} tables</p>
 
-<!-- Connection Info -->
-<div class="row mb-4 g-3">
-    <div class="col-md-6">
-        <div class="card conn-card">
-            <div class="card-header"><i class="bi bi-cloud"></i> From Render (Production)</div>
-            <div class="card-body">
-                <p class="mb-1"><strong>Host:</strong> <code>AWS Secrets Manager</code> <span class="text-muted">(/ben/ai-tool/db99)</span></p>
-                <p class="mb-1"><strong>Port:</strong> <code>3306</code></p>
-                <p class="mb-1"><strong>Database:</strong> <code>church_scrapes</code></p>
-                <p class="mb-1"><strong>Engine:</strong> MySQL 8.4</p>
-                <p class="mb-0"><strong>Connection:</strong> PrivateLink (VPC Endpoint)</p>
-                <hr>
-                <p class="mb-0 text-muted small">Credentials loaded at runtime via <code>boto3</code>. Never stored in env vars or code.</p>
-            </div>
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Entity Relationship Diagram</strong>
+            <small class="text-muted ms-2">Scroll to zoom, drag to pan</small>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-outline-secondary" onclick="downloadSVG()">Download SVG</button>
+            <button class="btn btn-sm btn-outline-secondary ms-1" onclick="downloadPNG()">Download PNG</button>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card conn-card">
-            <div class="card-header"><i class="bi bi-pc-display"></i> Local Dev (VPN Required)</div>
-            <div class="card-body">
-                <p class="mb-1"><strong>Host:</strong> <code>10.10.0.8</code></p>
-                <p class="mb-1"><strong>Port:</strong> <code>3306</code></p>
-                <p class="mb-1"><strong>Database:</strong> <code>church_scrapes</code></p>
-                <p class="mb-1"><strong>User:</strong> <code>bashkar</code></p>
-                <p class="mb-0"><strong>Tool:</strong> MySQL Workbench, DBeaver, or <code>pymysql</code></p>
-                <hr>
-                <p class="mb-0 text-muted small">Set <code>DB_HOST=10.10.0.8</code> in .env. VPC endpoint hostname times out locally.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Python Quick Start -->
-<div class="card mb-4">
-    <div class="card-header"><i class="bi bi-code-slash"></i> Quick Start (Python)</div>
-    <div class="card-body">
-<pre class="mb-0"><code>import json, boto3, pymysql
-
-# Option A: From Render (uses Secrets Manager)
-client = boto3.client("secretsmanager", region_name="us-east-1")
-secret = json.loads(client.get_secret_value(SecretId="/ben/ai-tool/db99")["SecretString"])
-conn = pymysql.connect(host=secret["DB_HOST"], port=3306, user=secret["DB_USER"],
-                       password=secret["DB_PASSWORD"], database="church_scrapes",
-                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
-
-# Option B: Local dev (VPN required)
-conn = pymysql.connect(host="10.10.0.8", port=3306, user="bashkar",
-                       password="...", database="church_scrapes",
-                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
-
-cur = conn.cursor()
-cur.execute("SELECT COUNT(*) AS cnt FROM church")
-print(cur.fetchone())</code></pre>
-    </div>
-</div>
-
-<!-- ERD Diagram -->
-<div class="card mb-4">
-    <div class="card-header"><i class="bi bi-diagram-3"></i> Entity Relationship Diagram</div>
-    <div class="card-body p-2">
-        <pre class="mermaid">
+    <div class="card-body p-0" style="overflow:auto; background:#1a1a2e;">
+        <pre class="mermaid" style="min-height:600px;">
 erDiagram
     lk_state {
-        CHAR2 state_code PK
-        VARCHAR state_name
+        char2 state_code PK
+        varchar state_name
     }
     church {
-        INT church_id PK
-        VARCHAR slug UK
-        VARCHAR name
-        VARCHAR street
-        VARCHAR city
-        CHAR2 state_code FK
-        VARCHAR postal_code
-        DECIMAL latitude
-        DECIMAL longitude
-        VARCHAR phone
-        VARCHAR website_url
-        INT mass_count
-        INT confession_count
-        INT adoration_count
+        int church_id PK
+        varchar slug UK
+        varchar name
+        varchar street
+        varchar city
+        char2 state_code FK
+        varchar postal_code
+        decimal latitude
+        decimal longitude
+        varchar phone
+        varchar website_url
+        varchar livestream_url
+        smallint mass_count
+        smallint confession_count
+        smallint adoration_count
+        boolean is_active
+        datetime last_scraped_at
     }
     service {
-        INT service_id PK
-        INT church_id FK
-        VARCHAR source_service_id
-        VARCHAR category_code FK
-        VARCHAR schedule_type_code FK
-        CHAR3 day_code FK
-        TIME time_start
-        TIME time_end
-        DATE event_date
-        VARCHAR language_code FK
-        VARCHAR location
-        VARCHAR display_name
-        TEXT notes_raw
+        int service_id PK
+        int church_id FK
+        varchar source_service_id
+        varchar category_code
+        varchar schedule_type_code
+        char3 day_code
+        time time_start
+        time time_end
+        date event_date
+        varchar language_code
+        varchar pattern_code
+        varchar location
+        varchar display_name
+        text notes_raw
+        boolean is_active
     }
     bulletin_source {
-        INT bulletin_source_id PK
-        INT church_id FK "UNIQUE"
-        TEXT bulletin_page_url
-        VARCHAR discovery_source
-        DATETIME discovered_at
+        int bulletin_source_id PK
+        int church_id FK "UNIQUE"
+        text bulletin_page_url
+        varchar discovery_source
+        datetime discovered_at
     }
     bulletin_pdf {
-        INT bulletin_pdf_id PK
-        INT bulletin_source_id FK
-        TEXT pdf_url
-        DATE pdf_date
-        BOOL text_extracted
-        DATETIME downloaded_at
+        int bulletin_pdf_id PK
+        int bulletin_source_id FK
+        text pdf_url
+        date pdf_date
+        boolean text_extracted
+        datetime downloaded_at
     }
     bulletin_name {
-        INT bulletin_name_id PK
-        INT bulletin_pdf_id FK
-        VARCHAR person_name
-        VARCHAR title
-        VARCHAR first_name
-        VARCHAR middle_name
-        VARCHAR last_name
-        VARCHAR role
-        VARCHAR category
-        VARCHAR confidence
-        TEXT context
-        BOOL is_suspect
+        int bulletin_name_id PK
+        int bulletin_pdf_id FK
+        varchar person_name
+        varchar title
+        varchar first_name
+        varchar middle_name
+        varchar last_name
+        varchar role
+        varchar category
+        varchar confidence
+        text context
+        boolean is_suspect
+        datetime created_at
     }
     bulletin_state_stats {
-        CHAR2 state_code PK
-        INT total_names
-        INT unique_names
-        INT church_count
-        INT city_count
+        char2 state_code PK
+        int total_names
+        int unique_names
+        int church_count
+        int city_count
     }
     ref_ssa_names {
-        VARCHAR name PK
-        INT male_count
-        INT female_count
-        FLOAT male_ratio
+        varchar name PK
+        int male_count
+        int female_count
+        float male_ratio
     }
     ref_census_surnames {
-        VARCHAR name PK
-        FLOAT frequency
+        varchar name PK
+        float frequency
     }
     scrape_log {
-        INT scrape_id PK
-        VARCHAR scrape_type
-        DATETIME completed_at
-        VARCHAR status
-        INT churches_scraped
-        INT services_upserted
-        TEXT notes
+        int scrape_id PK
+        varchar scrape_type
+        datetime completed_at
+        varchar status
+        smallint churches_scraped
+        int services_upserted
+        text errors
+        text notes
     }
 
     lk_state ||--o{ church : "state_code"
@@ -183,14 +126,29 @@ erDiagram
     </div>
 </div>
 
-<!-- Table Summary -->
 <div class="card mb-4">
-    <div class="card-header"><i class="bi bi-table"></i> Table Summary</div>
+    <div class="card-header"><strong>Key Relationships</strong></div>
+    <div class="card-body">
+        <table class="table table-sm">
+            <thead><tr><th>From</th><th>To</th><th>Join</th><th>Description</th></tr></thead>
+            <tbody>
+                <tr><td>church</td><td>lk_state</td><td>state_code</td><td>Which state the church is in</td></tr>
+                <tr><td>service</td><td>church</td><td>church_id</td><td>Mass times, confessions, adoration for a church</td></tr>
+                <tr><td>bulletin_source</td><td>church</td><td>church_id (UNIQUE)</td><td>One bulletin source per church (discovery info)</td></tr>
+                <tr><td>bulletin_pdf</td><td>bulletin_source</td><td>bulletin_source_id</td><td>Downloaded PDFs for a church's bulletin page</td></tr>
+                <tr><td>bulletin_name</td><td>bulletin_pdf</td><td>bulletin_pdf_id</td><td>Names extracted from a specific PDF</td></tr>
+                <tr><td>bulletin_name</td><td>ref_ssa_names</td><td>LOWER(first_name) = name</td><td>SSA first name lookup for confidence scoring</td></tr>
+                <tr><td>bulletin_name</td><td>ref_census_surnames</td><td>LOWER(last_name) = name</td><td>Census surname lookup for confidence scoring</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header"><strong>Table Counts (Live)</strong></div>
     <div class="card-body p-0">
-        <table class="table table-sm table-striped mb-0 table-list">
-            <thead class="table-light">
-                <tr><th>Table</th><th>Rows</th><th>Description</th></tr>
-            </thead>
+        <table class="table table-sm mb-0">
+            <thead><tr><th>Table</th><th class="text-end">Rows</th><th>Description</th></tr></thead>
             <tbody>
                 {% for t in tables %}
                 <tr>
@@ -204,25 +162,120 @@ erDiagram
     </div>
 </div>
 
-<!-- Views -->
 <div class="card mb-4">
-    <div class="card-header"><i class="bi bi-eye"></i> Key Views</div>
+    <div class="card-header"><strong>Key Views</strong></div>
     <div class="card-body">
-        <dl class="row mb-0">
-            <dt class="col-sm-4"><code>v_bulletin_ui_names</code></dt>
-            <dd class="col-sm-8">Dashboard query view: joins bulletin_name &rarr; bulletin_pdf &rarr; bulletin_source &rarr; church. Columns: person_name, title, first_name, last_name, church_name, church_city, category, confidence, pdf_url, bulletin_date, state_code, is_suspect.</dd>
-            <dt class="col-sm-4"><code>v_sunday_masses</code></dt>
-            <dd class="col-sm-8">All active Sunday masses with church details, sorted by time.</dd>
-            <dt class="col-sm-4"><code>v_weekly_schedule</code></dt>
-            <dd class="col-sm-8">Full weekly schedule for all churches (recurring services only).</dd>
-            <dt class="col-sm-4"><code>v_confession_times</code></dt>
-            <dd class="col-sm-8">All active confession times with church and day info.</dd>
-        </dl>
+        <table class="table table-sm">
+            <thead><tr><th>View</th><th>Description</th><th>Used By</th></tr></thead>
+            <tbody>
+                <tr><td><code>v_bulletin_ui_names</code></td><td>Joins bulletin_name &rarr; bulletin_pdf &rarr; bulletin_source &rarr; church. Columns: person_name, title, first/last, church_name, city, category, confidence, pdf_url, date, state_code.</td><td>Dashboard DataTables API</td></tr>
+                <tr><td><code>v_sunday_masses</code></td><td>All active Sunday masses with church details, sorted by time</td><td>Mass times browser</td></tr>
+                <tr><td><code>v_weekly_schedule</code></td><td>Full weekly schedule (recurring services only), grouped by church/day</td><td>Church detail page</td></tr>
+                <tr><td><code>v_confession_times</code></td><td>All active confession times with church and day info</td><td>Mass times browser</td></tr>
+                <tr><td><code>v_church_summary</code></td><td>Churches with service counts and community associations</td><td>Home page state picker</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header"><strong>Connection Info</strong></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h6>From Render (Production)</h6>
+                <table class="table table-sm table-borderless mb-3">
+                    <tbody>
+                        <tr><td><code>Host</code></td><td>AWS Secrets Manager <small class="text-muted">(/ben/ai-tool/db99)</small></td></tr>
+                        <tr><td><code>Port</code></td><td>3306</td></tr>
+                        <tr><td><code>Database</code></td><td>church_scrapes</td></tr>
+                        <tr><td><code>Engine</code></td><td>MySQL 8.4</td></tr>
+                        <tr><td><code>Connection</code></td><td>PrivateLink (VPC Endpoint)</td></tr>
+                    </tbody>
+                </table>
+                <p class="text-muted small">Credentials loaded at runtime via <code>boto3</code>. Never in env vars or code.</p>
+            </div>
+            <div class="col-md-6">
+                <h6>Local Dev (VPN Required)</h6>
+                <table class="table table-sm table-borderless mb-3">
+                    <tbody>
+                        <tr><td><code>Host</code></td><td>10.10.0.8</td></tr>
+                        <tr><td><code>Port</code></td><td>3306</td></tr>
+                        <tr><td><code>Database</code></td><td>church_scrapes</td></tr>
+                        <tr><td><code>User</code></td><td>bashkar</td></tr>
+                        <tr><td><code>Tool</code></td><td>MySQL Workbench, DBeaver, or pymysql</td></tr>
+                    </tbody>
+                </table>
+                <p class="text-muted small">Set <code>DB_HOST=10.10.0.8</code> in .env. VPC endpoint times out locally.</p>
+            </div>
+        </div>
+        <h6>Python Quick Start</h6>
+<pre class="bg-dark text-light p-3 rounded" style="font-size:0.82rem;"><code>import json, boto3, pymysql
+
+# From Render (Secrets Manager)
+client = boto3.client("secretsmanager", region_name="us-east-1")
+secret = json.loads(client.get_secret_value(SecretId="/ben/ai-tool/db99")["SecretString"])
+conn = pymysql.connect(host=secret["DB_HOST"], port=3306, user=secret["DB_USER"],
+                       password=secret["DB_PASSWORD"], database="church_scrapes",
+                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)
+
+# Local dev (VPN required)
+conn = pymysql.connect(host="10.10.0.8", port=3306, user="bashkar",
+                       password="...", database="church_scrapes",
+                       charset="utf8mb4", cursorclass=pymysql.cursors.DictCursor)</code></pre>
     </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({theme: 'dark', securityLevel: 'loose'});</script>
+<script>
+mermaid.initialize({theme: 'dark', securityLevel: 'loose'});
+
+function downloadSVG() {
+    var svg = document.querySelector('.mermaid svg');
+    if (!svg) { alert('ERD not rendered yet'); return; }
+    var clone = svg.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    // Add dark background
+    var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('width', '100%');
+    bg.setAttribute('height', '100%');
+    bg.setAttribute('fill', '#1a1a2e');
+    clone.insertBefore(bg, clone.firstChild);
+    var blob = new Blob([clone.outerHTML], {type: 'image/svg+xml'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'church_scrapes_erd.svg';
+    a.click();
+}
+
+function downloadPNG() {
+    var svg = document.querySelector('.mermaid svg');
+    if (!svg) { alert('ERD not rendered yet'); return; }
+    var clone = svg.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    var bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('width', '100%');
+    bg.setAttribute('height', '100%');
+    bg.setAttribute('fill', '#1a1a2e');
+    clone.insertBefore(bg, clone.firstChild);
+    var svgData = new XMLSerializer().serializeToString(clone);
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function() {
+        canvas.width = img.width * 2;
+        canvas.height = img.height * 2;
+        ctx.fillStyle = '#1a1a2e';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'church_scrapes_erd.png';
+        a.click();
+    };
+    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+}
+</script>
 {% endblock %}
