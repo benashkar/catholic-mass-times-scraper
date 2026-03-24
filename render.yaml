@@ -50,8 +50,8 @@ services:
       - key: GIT_COMMITTER_EMAIL
         sync: false
 
-  # Weekly pipeline: full scrape + rescore + redeploy
-  # Runs every Tuesday at 3 AM UTC
+  # Weekly pipeline: bulletin PDF collection + NER + rescore + redeploy
+  # Runs every Tuesday at 3 AM UTC (mass times handled by daily cron)
   - type: cron_job
     name: church-weekly-bulletins
     runtime: docker
@@ -59,7 +59,7 @@ services:
     region: virginia
     plan: standard
     schedule: "0 3 * * 2"
-    startCommand: "python run_daily_pipeline.py"
+    startCommand: "python run_daily_pipeline.py --bulletins-only"
     envVars:
       - key: AWS_ACCESS_KEY_ID
         sync: false

@@ -53,6 +53,11 @@ def main():
     parser.add_argument("--state", type=str, help="One state code (e.g. OH)")
     parser.add_argument("--limit", type=int, default=0, help="Max churches per state")
     parser.add_argument("--skip-scrape", action="store_true", help="Just rescore + redeploy")
+    parser.add_argument(
+        "--bulletins-only",
+        action="store_true",
+        help="Skip mass times scrape, only run bulletins + rescore + redeploy",
+    )
     args = parser.parse_args()
 
     log("=" * 60)
@@ -63,7 +68,7 @@ def main():
     results = {}
 
     # Step 1: Scrape mass times directly to db99
-    if not args.skip_scrape:
+    if not args.skip_scrape and not args.bulletins_only:
         scrape_cmd = [sys.executable, "scrape_to_db99.py"]
         if args.state:
             scrape_cmd += ["--state", args.state]
