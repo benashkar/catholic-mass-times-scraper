@@ -529,8 +529,23 @@ def main():
         jw += cur.rowcount
     print(f"    [OK] {jw:,} junk first/last words removed")
 
-    # Step 5: Refresh stats
-    print("  Step 5: Refreshing bulletin_state_stats...")
+    # Step 5: Downgrade empty first/last name records
+    print("  Step 5: Downgrading names with empty first or last name...")
+    empty_sql = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND (first_name = '' OR last_name = '')"
+    )
+    if watermark > 0:
+        empty_sql += " AND bulletin_name_id > %s"
+        cur.execute(empty_sql, (watermark,))
+    else:
+        cur.execute(empty_sql)
+    empty_cnt = cur.rowcount
+    print(f"    [OK] {empty_cnt:,} empty-name records downgraded")
+
+    # Step 6: Refresh stats
+    print("  Step 6: Refreshing bulletin_state_stats...")
     cur.execute("TRUNCATE TABLE bulletin_state_stats")
     cur.execute("""
         INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)
@@ -572,7 +587,7 @@ def main():
             (str(max_id),),
         )
 
-    print(f"\n[OK] Rescore complete in {elapsed:.0f}s")
+    print(f"\n[OK] Rescore complete in {int(elapsed)}s")
 
     conn.close()
     return 0

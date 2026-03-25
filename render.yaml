@@ -22,10 +22,10 @@ services:
       - key: AWS_DEFAULT_REGION
         value: us-east-1
 
-  # Daily pipeline: scrape mass times -> sync to db99 -> redeploy dashboard
-  # Runs every day EXCEPT Tuesday at 3 AM UTC (Tuesday handled by weekly job)
+  # Mass times pipeline: scrape mass times -> sync to db99 -> redeploy dashboard
+  # Runs every day EXCEPT Tuesday at 3 AM UTC (Tuesday handled by bulletin job)
   - type: cron_job
-    name: church-daily-scrape
+    name: church-mass-times-cron
     runtime: docker
     dockerfilePath: Dockerfile.cron
     region: virginia
@@ -50,10 +50,10 @@ services:
       - key: GIT_COMMITTER_EMAIL
         sync: false
 
-  # Weekly pipeline: bulletin PDF collection + NER + rescore + redeploy
-  # Runs every Tuesday at 3 AM UTC (mass times handled by daily cron)
+  # Bulletin pipeline: bulletin PDF collection + NER + rescore + redeploy
+  # Runs every Tuesday at 3 AM UTC (mass times handled by mass-times cron)
   - type: cron_job
-    name: church-weekly-bulletins
+    name: church-bulletin-cron
     runtime: docker
     dockerfilePath: Dockerfile.cron
     region: virginia
