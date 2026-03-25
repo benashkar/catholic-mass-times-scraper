@@ -77,8 +77,11 @@ def main():
         results["scrape"] = run_cmd(scrape_cmd, "Scrape mass times to db99", timeout_seconds=3600)
 
     # Step 2: Extract bulletin names directly to db99
+    # --days-fresh 14: skip churches discovered in last 14 days to avoid
+    # re-crawling every church website each week (the slow part).
+    # PDF extraction itself already skips via text_extracted=1.
     if not args.skip_scrape:
-        bulletin_cmd = [sys.executable, "extract_bulletins_to_db99.py"]
+        bulletin_cmd = [sys.executable, "extract_bulletins_to_db99.py", "--days-fresh", "14"]
         if args.state:
             bulletin_cmd += ["--state", args.state]
         if args.limit:
