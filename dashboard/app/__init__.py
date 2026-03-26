@@ -122,6 +122,35 @@ def create_app(config_class=Config):
         except Exception as e:
             return jsonify({"error": str(e)[:500]}), 500
 
+    @app.route("/debug/audit")
+    def debug_audit():
+        """Return random high-confidence names for manual spot-checking."""
+        from flask import jsonify, request
+
+        from app.data_loader import _get_db_connection
+
+        try:
+            n = min(int(request.args.get("n", 50)), 200)
+            conn = _get_db_connection()
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT bn.bulletin_name_id, bn.person_name, bn.first_name, "
+                "bn.last_name, bn.confidence, bn.category, c.name AS church, "
+                "c.city, c.state_code "
+                "FROM bulletin_name bn "
+                "JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id "
+                "JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id "
+                "JOIN church c ON bs.church_id = c.church_id "
+                "WHERE bn.confidence IN ('high','medium') AND bn.is_suspect = 0 "
+                "ORDER BY RAND() LIMIT %s",
+                (n,),
+            )
+            rows = cur.fetchall()
+            conn.close()
+            return jsonify({"rows": rows, "count": len(rows)})
+        except Exception as e:
+            return jsonify({"error": str(e)[:500]}), 500
+
     @app.route("/debug/logs")
     def debug_logs():
         """Show recent scrape_log entries for debugging cron job failures."""

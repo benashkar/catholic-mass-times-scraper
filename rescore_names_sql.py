@@ -134,234 +134,14 @@ def main():
 
     # Step 2: Junk blocklist (always runs on all medium+high, not just new — catches edge cases)
     print("  Step 2: Applying junk blocklist...")
-    blocklist = [
-        "Alzheimer",
-        "Cancer",
-        "Diabetes",
-        "Parkinson",
-        "Dementia",
-        "Hospice",
-        "Fish Fry",
-        "Fish Frys",
-        "Access Code",
-        "Full Page",
-        "Awareness Month",
-        "Support Group",
-        "Bulletin",
-        "Stewardship",
-        "Registration",
-        "Sacrament",
-        "Committee",
-        "Office Hours",
-        "Mass Schedule",
-        "Holy Spirit",
-        "Sacred Heart",
-        "Holy Family",
-        "Blessed Mother",
-        "Corpus Christi",
-        "Divine Mercy",
-        "Blessed Sacrament",
-        "Blessed Virgin",
-        "Our Lady",
-        "Infant Jesus",
-        "Ice Cream",
-        "Craft Fair",
-        "Yard Sale",
-        "Blood Drive",
-        "Food Pantry",
-        "Thrift Store",
-        "Bake Sale",
-        "Rummage Sale",
-        "Garage Sale",
-        "Forever Young",
-        "Silver Angels",
-        "Golden Agers",
-        "Anointed",
-        "Baptism",
-        "Confirmation",
-        "Communion",
-        "Rosary",
-        "Novena",
-        "Liturgy",
-        "Eucharist",
-        "Adoration",
-        "Lenten",
-        "Advent",
-        "Easter",
-        "Christmas",
-        "Pentecost",
-        "Bible Study",
-        "Prayer Group",
-        "Prayer Chain",
-        "Choir Director",
-        "Music Director",
-        "Pancake",
-        "Spaghetti Dinner",
-        "Pot Luck",
-        "Potluck",
-        "Knights Columbus",
-        "Altar Society",
-        "Ladies Guild",
-        "Youth Group",
-        "Young Adults",
-        "Funeral Home",
-        "Wedding Anniversary",
-        "Volunteer",
-        "Coordinator",
-        "Administrator",
-        "Custodian",
-        "Receptionist",
-        "Bookkeeper",
-        "Secretary",
-        "Phone Number",
-        "Website",
-        "Business Manager",
-        "Pope Francis",
-        "Pope Benedict",
-        "Pope John",
-        "Mother Teresa",
-        "Saint Joseph",
-        "Saint Patrick",
-        "Saint Michael",
-        "Saint Mary",
-        "Helping Hands",
-        "Good Shepherd",
-        "Social Hall",
-        "Parish Hall",
-        "Gift Card",
-        "Amazon Smile",
-        "Online Giving",
-        "Open House",
-        "Welcome Back",
-        "Spring Break",
-        "Summer Camp",
-        "Vacation Bible",
-        "Fair Trade",
-        "Saint Vincent",
-        "de Paul",
-        "Rehab ",
-        # Additional patterns from data analysis
-        "Holy Hour",
-        "Holy Name",
-        "Holy Cross",
-        "Holy Rosary",
-        "Holy Trinity",
-        "First Reading",
-        "Second Reading",
-        "Gospel Reading",
-        "Ordinary Time",
-        "Jubilee Year",
-        "Feast Day",
-        "World Day",
-        "Memorial Day",
-        "Labor Day",
-        "Thanksgiving Day",
-        "New Year",
-        "Happy New",
-        "North America",
-        "Latin America",
-        "South America",
-        "High School",
-        "Middle School",
-        "Grade School",
-        "Main Street",
-        "Mailing Address",
-        "Auto Body",
-        "Auto Repair",
-        "Auto Insurance",
-        "Smart Roofing",
-        "Smart Driver",
-        "Ice Cream Social",
-        "Craft Bazaar",
-        "Yard Sale",
-        "Wine Pull",
-        "Beer Tent",
-        "Beer Dance",
-        "Pizza Villa",
-        "Pork Sausage",
-        "Fried Chicken",
-        "Ascension App",
-        "Sports App",
-        "Suggested Donation",
-        "Contribution Statement",
-        "Place Your Ad",
-        "Safe Environment",
-        "Dear Parishioners",
-        "Dear Friends",
-        "Immaculate Conception",
-        "Immaculate Heart",
-        "Virgin Mary",
-        "Blessed Virgin",
-        "Columbus Council",
-        "Columbus Meeting",
-        "Presbyteral Council",
-        "Diocesan Council",
-        "Finance Council",
-        "Pastoral Council",
-        "Lord Jesus",
-        "Lord Jesus Christ",
-        "The Knights",
-        "Paul Society",
-        "May God",
-        "Jordan River",
-        "Old Testament",
-        "New Testament",
-        "The Lord",
-        "The Diocese",
-        "The Epiphany",
-        "The St",
-        "Heavenly Father",
-        "Thomas Aquinas",
-        "Retirement Fund",
-        "First Reconciliation",
-        "Rice Bowl",
-        "Respect Life",
-        "Pro Life",
-        "Poor Souls",
-        "Faithful Departed",
-        "Deceased Members",
-        "Altar Server",
-        "Music Ministry",
-        "Shawl Ministry",
-        "English Ministry",
-        "Hispanic Ministry",
-        "Brother Knight",
-        "Grand Knight",
-        "Deputy Grand",
-        "Administrative Assistant",
-        "Property Manager",
-        "Development Manager",
-        "Case Manager",
-        "Extraordinary Minister",
-        "Eucharistic Minister",
-        "Volunteers Needed",
-        "Sign Up",
-        "Spring Alpha",
-        "Generation To",
-        "Doyle Vocal",
-        "Vocal Quartet",
-        "Stay Connected",
-        "More Info",
-        # Spanish/Latin liturgical phrases
-        "Primera Comuni",
-        "La Cuaresma",
-        "El Evangelio",
-        "Sacrosanctum Concilium",
-        "Nueve Domingos",
-        "El Comit",
-        "Arroz La",
-        # Will/Christian false positives
-        "Will Be ",
-        "Will Not ",
-        "Will Have ",
-        "Will Take ",
-        "Christian Education",
-        "Christian Formation",
-        "Christian Initiation",
-        "Christian Service",
-        "Christian Community",
-        "Christian Life",
-    ]
+    # Load blocklist from config/blocklist.csv (externalized for easy editing)
+    blocklist_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "blocklist.csv")
+    blocklist = []
+    with open(blocklist_path, "r", encoding="utf-8") as f:
+        import csv
+        reader = csv.DictReader(f)
+        for row in reader:
+            blocklist.append(row["term"])
     like_clauses = " OR ".join(["person_name LIKE %s"] * len(blocklist))
     like_params = [f"%{term}%" for term in blocklist]
     block_sql = (
@@ -454,6 +234,34 @@ def main():
         "God",
         "Lord",
         "Holy",
+        # Full day names
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+        "SUNDAY",
+        "SATURDAY",
+        # Full month names (May excluded — common first name)
+        "January",
+        "February",
+        "March",
+        "April",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+        "JANUARY",
+        "FEBRUARY",
+        "JULY",
+        # Other non-name starters
+        "Every",
+        "Each",
     ]
     junk_last = [
         "Guild",
@@ -504,6 +312,29 @@ def main():
         "Link",
         "Site",
         "Line",
+        # Contact/address artifacts
+        "Email",
+        "Fax",
+        "Phone",
+        # Organization/event suffixes
+        "Press",
+        "Institute",
+        "Station",
+        "Court",
+        "People",
+        "Flower",
+        "Missal",
+        "Gras",
+        "Confession",
+        "Evenings",
+        "Mornings",
+        "Throw",
+        "Meditation",
+        "Direction",
+        "Residence",
+        "Times",
+        "App",
+        "Day",
     ]
     first_in = ",".join(["%s"] * len(junk_first))
     last_in = ",".join(["%s"] * len(junk_last))
@@ -544,8 +375,53 @@ def main():
     empty_cnt = cur.rowcount
     print(f"    [OK] {empty_cnt:,} empty-name records downgraded")
 
-    # Step 6: Refresh stats
-    print("  Step 6: Refreshing bulletin_state_stats...")
+    # Step 6: ALL CAPS cleanup
+    print("  Step 6: Downgrading ALL CAPS names...")
+    caps_sql = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND BINARY person_name = UPPER(person_name) AND LENGTH(person_name) > 3"
+    )
+    if watermark > 0:
+        caps_sql += " AND bulletin_name_id > %s"
+        cur.execute(caps_sql, (watermark,))
+    else:
+        cur.execute(caps_sql)
+    caps_cnt = cur.rowcount
+    print(f"    [OK] {caps_cnt:,} ALL CAPS records downgraded")
+
+    # Step 7: Newline artifact cleanup
+    print("  Step 7: Downgrading newline artifacts...")
+    nl_sql = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND person_name LIKE '%\n%'"
+    )
+    if watermark > 0:
+        nl_sql += " AND bulletin_name_id > %s"
+        cur.execute(nl_sql, (watermark,))
+    else:
+        cur.execute(nl_sql)
+    nl_cnt = cur.rowcount
+    print(f"    [OK] {nl_cnt:,} newline artifacts downgraded")
+
+    # Step 8: Single-initial last name cleanup
+    print("  Step 8: Downgrading single-initial last names...")
+    init_sql = (
+        "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
+        "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
+        "AND LENGTH(last_name) = 1"
+    )
+    if watermark > 0:
+        init_sql += " AND bulletin_name_id > %s"
+        cur.execute(init_sql, (watermark,))
+    else:
+        cur.execute(init_sql)
+    init_cnt = cur.rowcount
+    print(f"    [OK] {init_cnt:,} single-initial last names downgraded")
+
+    # Step 9: Refresh stats
+    print("  Step 9: Refreshing bulletin_state_stats...")
     cur.execute("TRUNCATE TABLE bulletin_state_stats")
     cur.execute("""
         INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)

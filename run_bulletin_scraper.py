@@ -135,7 +135,10 @@ def ner_veto_batch(names, contexts=None):
         is_person = False
         for ent in doc.ents:
             if ent.label_ == "PERSON":
-                if name_lower in ent.text.lower() or ent.text.lower() in name_lower:
+                ent_lower = ent.text.lower().strip()
+                # Require full-name match (not substring) to reduce
+                # false confirmations like "John" in "John 3:16"
+                if name_lower == ent_lower or ent_lower == name_lower:
                     is_person = True
                     break
         results.append(is_person)
@@ -2249,6 +2252,38 @@ FALSE_POSITIVE_NAMES = {
     "Sanctuary Lamp",
     "Eternal Rest",
     "Rest Peace",
+    # Top false positives from data analysis (2026-03-25)
+    "Precious Blood",
+    "Canon Law",
+    "Mardi Gras",
+    "Faith Forma",
+    "Mount Carmel",
+    "Roman Missal",
+    "Young People",
+    "Ascension Press",
+    "Supreme Court",
+    "Little Flower",
+    "La Crosse",
+    "Columbus Free Throw",
+    "King Herod",
+    "Phone Fax",
+    "Bus Driver",
+    "Texas Roadhouse",
+    "Adult Faith",
+    "Mass Times",
+    "Gospel Meditation",
+    "Spiritual Direction",
+    "Spring Work",
+    "Parish Fund",
+    "In Residence",
+    "Same Day",
+    "Topsoil Mulch",
+    "Parish App",
+    "Fulton Sheen",
+    "Fulton J. Sheen",
+    "Martin Luther King",
+    "John Muir",
+    "Every Friday",
 }
 
 
@@ -2511,6 +2546,7 @@ def _get_non_name_words():
         "tuesday",
         "wednesday",
         "thursday",
+        "friday",
         "saturday",
         "january",
         "february",
@@ -3039,6 +3075,10 @@ def clean_extracted_name(name: str) -> str:
     # Strip trailing 'All' (from "Edwin Arthur All")
     if parts and parts[-1] == "All":
         parts.pop()
+    # Strip trailing contact words (from "Jessica Siemen Fax", "Joseph Keough Email")
+    contact_suffixes = {"Email", "email", "Fax", "fax", "Phone", "phone"}
+    while parts and parts[-1] in contact_suffixes:
+        parts.pop()
     name = " ".join(parts)
     # Strip leading/trailing punctuation
     name = name.strip(".,;:!?()[]{}\"'-/")
@@ -3155,6 +3195,7 @@ def is_valid_name(name: str) -> bool:
         "tuesday",
         "wednesday",
         "thursday",
+        "friday",
         "saturday",
         "january",
         "february",
@@ -3643,6 +3684,20 @@ def is_valid_name(name: str) -> bool:
         "santuary",
         "sanctuary",
         "bridge",
+        # Contact/address artifacts
+        "fax",
+        "residence",
+        # Organization/phrase words from top false positives
+        "press",
+        "institute",
+        "court",
+        "people",
+        "missal",
+        "topsoil",
+        "mulch",
+        "app",
+        "every",
+        "each",
     }
     if any(p.lower() in non_name_words for p in parts):
         return False
