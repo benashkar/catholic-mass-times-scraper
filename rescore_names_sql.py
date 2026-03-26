@@ -259,9 +259,26 @@ def main():
         "JANUARY",
         "FEBRUARY",
         "JULY",
+        # Plural day names
+        "Mondays",
+        "Tuesdays",
+        "Wednesdays",
+        "Thursdays",
+        "Fridays",
+        "Saturdays",
+        "Sundays",
         # Other non-name starters
         "Every",
         "Each",
+        "Holiday",
+        "Holidays",
+        "Birthday",
+        "Birthdays",
+        "Today",
+        "Everyday",
+        "Weekdays",
+        "Day",
+        "Days",
     ]
     junk_last = [
         "Guild",
