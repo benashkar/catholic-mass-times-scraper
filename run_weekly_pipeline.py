@@ -316,6 +316,10 @@ def main():
 
     pipeline_start = time.time()
     results = {}
+    # Non-critical steps: failures are logged but don't cause exit code 1.
+    # Git push needs credentials that may not exist in Docker containers,
+    # and dashboard redeploy is a convenience trigger.
+    non_critical = {"git_push", "redeploy"}
 
     if args.sync_only:
         results["sync_db"] = step_sync_db()
@@ -353,16 +357,20 @@ def main():
     log("PIPELINE SUMMARY")
     log("=" * 60)
     for step_name, ok in results.items():
-        status = "[OK]" if ok else "[ERR]"
-        log(f"  {status} {step_name}")
+        tag = "[OK]" if ok else ("[WARN]" if step_name in non_critical else "[ERR]")
+        log(f"  {tag} {step_name}")
     log(f"  Total time: {total_elapsed:.0f}s ({total_elapsed/3600:.1f} hours)")
 
-    failed = [k for k, v in results.items() if not v]
-    if failed:
-        log(f"  FAILED STEPS: {', '.join(failed)}")
+    critical_failed = [k for k, v in results.items() if not v and k not in non_critical]
+    warn_failed = [k for k, v in results.items() if not v and k in non_critical]
+
+    if warn_failed:
+        log(f"  NON-CRITICAL WARNINGS: {', '.join(warn_failed)}")
+    if critical_failed:
+        log(f"  FAILED STEPS: {', '.join(critical_failed)}")
         return 1
 
-    log("  All steps completed successfully!")
+    log("  All critical steps completed successfully!")
     return 0
 
 
