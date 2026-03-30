@@ -195,8 +195,8 @@ def step_rescore_names():
     log("STEP 4b: Re-score names + junk cleanup (SQL)")
     log("=" * 60)
 
-    cmd = [sys.executable, "rescore_names_sql.py"]
-    return run_cmd(cmd, "Re-score names via SQL", timeout_seconds=300)
+    cmd = [sys.executable, "rescore_names_sql.py", "--new-only"]
+    return run_cmd(cmd, "Re-score names via SQL", timeout_seconds=900)
 
 
 def step_git_push():
