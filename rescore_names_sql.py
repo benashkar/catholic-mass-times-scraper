@@ -10,7 +10,7 @@ Steps:
 3. Lowercase cleanup: Mark all-lowercase and lowercase-first names
 4. Refresh bulletin_state_stats
 
-Fast: ~30 seconds for all 1.3M names (all SQL, no Python loops).
+All SQL, no Python loops. Use --new-only for incremental runs.
 """
 
 import json
@@ -46,8 +46,8 @@ def get_connection():
         password=password,
         database="church_scrapes",
         connect_timeout=30,
-        read_timeout=300,
-        write_timeout=300,
+        read_timeout=900,
+        write_timeout=900,
         autocommit=True,
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor,
