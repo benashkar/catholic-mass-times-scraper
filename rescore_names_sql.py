@@ -54,6 +54,41 @@ def get_connection():
     )
 
 
+def refresh_stats_only():
+    """Rebuild bulletin_state_stats without rescoring or cleanup."""
+    import time
+
+    print("[OK] Refreshing bulletin_state_stats...")
+    t = time.time()
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("TRUNCATE TABLE bulletin_state_stats")
+    cur.execute("""
+        INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)
+        SELECT c.state_code,
+               COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name, '|', c.name, '|', c.city)) AS total_names,
+               COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name)) AS unique_names,
+               COUNT(DISTINCT bs.church_id) AS church_count,
+               COUNT(DISTINCT c.city) AS city_count
+        FROM bulletin_name bn
+        JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+        JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+        JOIN church c ON bs.church_id = c.church_id
+        WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
+          AND bn.first_name != '' AND bn.last_name != ''
+        GROUP BY c.state_code
+    """)
+    elapsed = time.time() - t
+    cur.execute(
+        "INSERT INTO scrape_log (scrape_type, completed_at, status, notes) "
+        "VALUES ('refresh_stats', NOW(), 'completed', %s)",
+        (f"rebuilt in {elapsed:.0f}s",),
+    )
+    conn.close()
+    print(f"[OK] Stats refreshed in {int(elapsed)}s")
+    return 0
+
+
 def main():
     import argparse
 
@@ -68,7 +103,15 @@ def main():
         action="store_true",
         help="Only rescore names not yet scored (confidence IS NULL or 'unscored')",
     )
+    parser.add_argument(
+        "--refresh-stats",
+        action="store_true",
+        help="Only rebuild bulletin_state_stats (skip all rescore/cleanup steps)",
+    )
     args = parser.parse_args()
+
+    if args.refresh_stats:
+        return refresh_stats_only()
 
     mode = "cleanup-only" if args.cleanup_only else ("new-only" if args.new_only else "full")
     print(f"[OK] Starting SQL rescore (mode={mode})...")

@@ -90,11 +90,18 @@ def main():
             bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200
         )
 
-    # Step 3: Rescore only new names + junk cleanup + refresh stats
+    # Step 3: Rescore only new names + junk cleanup
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--new-only"],
         "Rescore new names (SQL)",
         timeout_seconds=2400,
+    )
+
+    # Step 3b: Rebuild dashboard stats (--new-only skips this in rescore)
+    results["refresh_stats"] = run_cmd(
+        [sys.executable, "rescore_names_sql.py", "--refresh-stats"],
+        "Refresh bulletin_state_stats",
+        timeout_seconds=900,
     )
 
     # Step 4: Health check
