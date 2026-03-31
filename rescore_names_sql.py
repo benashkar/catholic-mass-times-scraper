@@ -490,5 +490,21 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        try:
+            conn = get_connection()
+            cur = conn.cursor()
+            cur.execute(
+                "INSERT INTO scrape_log (scrape_type, completed_at, status, errors) "
+                "VALUES ('rescore_sql', NOW(), 'failed', %s)",
+                (f"{type(e).__name__}: {e}"[:500],),
+            )
+            conn.close()
+        except Exception:
+            pass
+        sys.exit(1)
         sys.exit(1)
