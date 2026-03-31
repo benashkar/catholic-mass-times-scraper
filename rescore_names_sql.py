@@ -412,13 +412,13 @@ def main():
     nl_sql = (
         "UPDATE bulletin_name SET confidence = 'low', is_suspect = 1 "
         "WHERE confidence IN ('high','medium') AND is_suspect = 0 "
-        "AND person_name LIKE '%\n%'"
+        "AND person_name LIKE %s"
     )
     if watermark > 0:
         nl_sql += " AND bulletin_name_id > %s"
-        cur.execute(nl_sql, (watermark,))
+        cur.execute(nl_sql, ("%\n%", watermark))
     else:
-        cur.execute(nl_sql)
+        cur.execute(nl_sql, ("%\n%",))
     nl_cnt = cur.rowcount
     print(f"    [OK] {nl_cnt:,} newline artifacts downgraded")
 
