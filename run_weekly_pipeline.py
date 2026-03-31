@@ -317,10 +317,10 @@ def main():
     pipeline_start = time.time()
     results = {}
     # Non-critical steps: failures are logged but don't cause exit code 1.
-    # Git push needs credentials that may not exist in Docker containers,
-    # dashboard redeploy is a convenience trigger, and validate is a
-    # post-hoc check that shouldn't block an otherwise successful pipeline.
-    non_critical = {"git_push", "redeploy", "validate"}
+    # On Render, scrape/dates steps may fail (external HTTP to CatholicIndex)
+    # but sync still works from Docker-cached data. Git push needs credentials
+    # that may not exist in Docker containers.
+    non_critical = {"scrape_details", "regenerate_dates", "git_push", "redeploy", "validate"}
 
     if args.sync_only:
         results["sync_db"] = step_sync_db()
