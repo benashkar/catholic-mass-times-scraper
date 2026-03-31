@@ -94,7 +94,7 @@ def main():
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--new-only"],
         "Rescore new names (SQL)",
-        timeout_seconds=1200,
+        timeout_seconds=2400,
     )
 
     # Step 4: Health check
@@ -130,21 +130,29 @@ def main():
 
     elapsed = time.time() - start
 
+    # Non-critical steps: failures logged as warnings, don't cause exit code 1
+    non_critical = {"health", "redeploy"}
+
     # Summary
     log("")
     log("=" * 60)
     log("DAILY PIPELINE SUMMARY")
     log("=" * 60)
     for step, ok in results.items():
-        log(f"  {'[OK]' if ok else '[ERR]'} {step}")
+        tag = "[OK]" if ok else ("[WARN]" if step in non_critical else "[ERR]")
+        log(f"  {tag} {step}")
     log(f"  Total: {elapsed:.0f}s ({elapsed/60:.1f} min)")
 
-    failed = [k for k, v in results.items() if not v]
-    if failed:
-        log(f"  FAILED: {', '.join(failed)}")
+    critical_failed = [k for k, v in results.items() if not v and k not in non_critical]
+    warn_failed = [k for k, v in results.items() if not v and k in non_critical]
+
+    if warn_failed:
+        log(f"  NON-CRITICAL WARNINGS: {', '.join(warn_failed)}")
+    if critical_failed:
+        log(f"  FAILED: {', '.join(critical_failed)}")
         return 1
 
-    log("  All steps completed!")
+    log("  All critical steps completed!")
     return 0
 
 
