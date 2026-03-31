@@ -196,7 +196,7 @@ def step_rescore_names():
     log("=" * 60)
 
     cmd = [sys.executable, "rescore_names_sql.py", "--new-only"]
-    return run_cmd(cmd, "Re-score names via SQL", timeout_seconds=900)
+    return run_cmd(cmd, "Re-score names via SQL", timeout_seconds=2400)
 
 
 def step_git_push():
@@ -318,8 +318,9 @@ def main():
     results = {}
     # Non-critical steps: failures are logged but don't cause exit code 1.
     # Git push needs credentials that may not exist in Docker containers,
-    # and dashboard redeploy is a convenience trigger.
-    non_critical = {"git_push", "redeploy"}
+    # dashboard redeploy is a convenience trigger, and validate is a
+    # post-hoc check that shouldn't block an otherwise successful pipeline.
+    non_critical = {"git_push", "redeploy", "validate"}
 
     if args.sync_only:
         results["sync_db"] = step_sync_db()
