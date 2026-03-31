@@ -130,8 +130,9 @@ def main():
 
     elapsed = time.time() - start
 
-    # Non-critical steps: failures logged as warnings, don't cause exit code 1
-    non_critical = {"health", "redeploy"}
+    # Non-critical steps: failures logged as warnings, don't cause exit code 1.
+    # Bulletins may partially fail (some churches unreachable) but still extract names.
+    non_critical = {"bulletins", "health", "redeploy"}
 
     # Summary
     log("")
@@ -150,6 +151,24 @@ def main():
         log(f"  NON-CRITICAL WARNINGS: {', '.join(warn_failed)}")
     if critical_failed:
         log(f"  FAILED: {', '.join(critical_failed)}")
+
+    # Log step results to scrape_log for remote diagnosis
+    step_summary = ", ".join(f"{k}={'OK' if v else 'FAIL'}" for k, v in results.items())
+    try:
+        from rescore_names_sql import get_connection
+
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "INSERT INTO scrape_log (scrape_type, completed_at, status, notes) "
+            "VALUES ('daily_pipeline_steps', NOW(), %s, %s)",
+            ("failed" if critical_failed else "completed", step_summary[:500]),
+        )
+        conn.close()
+    except Exception:
+        pass
+
+    if critical_failed:
         return 1
 
     log("  All critical steps completed!")
