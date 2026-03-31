@@ -437,25 +437,28 @@ def main():
     init_cnt = cur.rowcount
     print(f"    [OK] {init_cnt:,} single-initial last names downgraded")
 
-    # Step 9: Refresh stats
-    print("  Step 9: Refreshing bulletin_state_stats...")
-    cur.execute("TRUNCATE TABLE bulletin_state_stats")
-    cur.execute("""
-        INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)
-        SELECT c.state_code,
-               COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name, '|', c.name, '|', c.city)) AS total_names,
-               COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name)) AS unique_names,
-               COUNT(DISTINCT bs.church_id) AS church_count,
-               COUNT(DISTINCT c.city) AS city_count
-        FROM bulletin_name bn
-        JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
-        JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
-        JOIN church c ON bs.church_id = c.church_id
-        WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
-          AND bn.first_name != '' AND bn.last_name != ''
-        GROUP BY c.state_code
-    """)
-    print("    [OK] Stats refreshed")
+    # Step 9: Refresh stats (skip in --new-only mode; sync_to_db99 already rebuilt stats)
+    if watermark > 0:
+        print("  Step 9: SKIPPED (sync_to_db99 already refreshed stats)")
+    else:
+        print("  Step 9: Refreshing bulletin_state_stats...")
+        cur.execute("TRUNCATE TABLE bulletin_state_stats")
+        cur.execute("""
+            INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)
+            SELECT c.state_code,
+                   COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name, '|', c.name, '|', c.city)) AS total_names,
+                   COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name)) AS unique_names,
+                   COUNT(DISTINCT bs.church_id) AS church_count,
+                   COUNT(DISTINCT c.city) AS city_count
+            FROM bulletin_name bn
+            JOIN bulletin_pdf bp ON bn.bulletin_pdf_id = bp.bulletin_pdf_id
+            JOIN bulletin_source bs ON bp.bulletin_source_id = bs.bulletin_source_id
+            JOIN church c ON bs.church_id = c.church_id
+            WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
+              AND bn.first_name != '' AND bn.last_name != ''
+            GROUP BY c.state_code
+        """)
+        print("    [OK] Stats refreshed")
 
     elapsed = time.time() - t
 
@@ -487,22 +490,5 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        sys.exit(main())
-    except Exception as e:
-        import traceback
-
-        traceback.print_exc()
-        # Log the error to scrape_log so we can see it from the database
-        try:
-            conn = get_connection()
-            cur = conn.cursor()
-            cur.execute(
-                "INSERT INTO scrape_log (scrape_type, completed_at, status, errors) "
-                "VALUES ('rescore_sql', NOW(), 'failed', %s)",
-                (f"{type(e).__name__}: {e}"[:500],),
-            )
-            conn.close()
-        except Exception:
-            pass
+    sys.exit(main())
         sys.exit(1)
