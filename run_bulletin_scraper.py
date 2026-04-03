@@ -68,6 +68,18 @@ except ImportError:
     HAS_PLAYWRIGHT = False
 
 try:
+    from src.parsers.bulletin_constants import (
+        FALSE_POSITIVE_NAMES as _SHARED_FP_NAMES,
+        HONORIFIC_TITLES as _SHARED_HONORIFICS,
+        MINISTRY_ROLES as _SHARED_MINISTRY_ROLES,
+        STAFF_ROLES as _SHARED_STAFF_ROLES,
+    )
+
+    _HAS_SHARED_CONSTANTS = True
+except ImportError:
+    _HAS_SHARED_CONSTANTS = False
+
+try:
     from nameparser import HumanName
     from nameparser.config import CONSTANTS as _NP_CONSTANTS
 
@@ -1510,34 +1522,27 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # ─────────────────────────────────────────────────────────────────────────
 
     # Comprehensive list of positional roles found in bulletin staff sections
-    STAFF_ROLES = (
-        # Clergy roles
+    STAFF_ROLES = _SHARED_STAFF_ROLES if _HAS_SHARED_CONSTANTS else (
         r"Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator"
         r"|Administrator|Priest|Rector|Chaplain|Celebrant"
-        # Deacon roles
         r"|Permanent Deacon|Transitional Deacon"
-        # Parish staff
         r"|Business Manager|Business Mgr\.|Office Manager|Parish Manager"
         r"|Parish Secretary|Parish Administrator|Administrative Assistant"
         r"|Bookkeeper|Assistant Bookkeeper|Receptionist"
         r"|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer"
-        # Education
         r"|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?"
         r"|Director of Faith Formation|Faith Formation Director"
         r"|School Principal|School Secretary|Principal"
         r"|Director of Youth Ministry|Youth Minister|Youth Director"
         r"|Director of Music|Music Director|Music Minister"
         r"|Liturgy Director|Liturgist|Worship Director"
-        # Facilities
         r"|Maintenance|Custodian|Facilities Manager|Facilities Director"
         r"|Maintenance Tech|Groundskeeper|Sexton"
-        # Ministry roles
         r"|Director|Coordinator|Minister|Moderator"
         r"|RCIA Director|RCIA Coordinator"
         r"|Sacristan|Organist|Cantor|Choir Director"
         r"|Stewardship Director|Communications Director"
         r"|Hispanic Ministry|Spanish Ministry"
-        # Council/board roles
         r"|Chairman|Co-Chairman|Chairperson|Co-Chair"
         r"|Vice Chairman|Vice Chairperson"
         r"|President|Vice President"
@@ -1805,7 +1810,7 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # Pattern: MinistryRole comma/colon Name [Phone]
     # ─────────────────────────────────────────────────────────────────────────
 
-    MINISTRY_ROLES = (
+    MINISTRY_ROLES = _SHARED_MINISTRY_ROLES if _HAS_SHARED_CONSTANTS else (
         r"Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?"
         r"|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?"
         r"|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?"
@@ -1984,7 +1989,8 @@ def extract_names_from_text(text: str, church_name: str = ""):
 
 
 # Common words that look like names but aren't
-FALSE_POSITIVE_NAMES = {
+# Canonical list is in src/parsers/bulletin_constants.py
+FALSE_POSITIVE_NAMES = _SHARED_FP_NAMES if _HAS_SHARED_CONSTANTS else {
     "Holy Spirit",
     "Holy Family",
     "Holy Cross",

@@ -43,6 +43,12 @@ from run_bulletin_scraper import (
     parse_name_parts,
     score_name_confidence,
 )
+from src.parsers.fallback_parsers import (
+    parse_category_from_context,
+    parse_first_last_from_person_name,
+    parse_role_from_context,
+    parse_title_from_person_name,
+)
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -257,12 +263,30 @@ def process_church(cur, church):
                 first_name = parts.get("first_name") or ""
                 last_name = parts.get("last_name") or ""
 
+                # Layer 1 fallback: try harder if primary parsing left blanks
+                if not first_name or not last_name:
+                    fb = parse_first_last_from_person_name(individual_name)
+                    first_name = first_name or fb.get("first_name", "")
+                    last_name = last_name or fb.get("last_name", "")
+
+                category = name_dict.get("category") or ""
+                if not category:
+                    category = parse_category_from_context(name_dict.get("context") or "")
+
+                role = name_dict.get("role") or ""
+                if not role:
+                    role = parse_role_from_context(name_dict.get("context") or "")
+
+                title = parts.get("title") or ""
+                if not title:
+                    title = parse_title_from_person_name(individual_name)
+
                 # Score confidence
                 raw_score = score_name_confidence(
                     individual_name,
-                    category=name_dict.get("category") or "",
-                    role=name_dict.get("role") or "",
-                    title=parts.get("title") or "",
+                    category=category,
+                    role=role,
+                    title=title,
                 )
 
                 # NER veto: downgrade if NER doesn't confirm PERSON
@@ -295,13 +319,13 @@ def process_church(cur, church):
                         individual_name[:100],
                         first_name[:50],
                         last_name[:50],
-                        (parts.get("title") or "")[:20],
+                        title[:20],
                         (parts.get("middle_name") or "")[:50],
                         conf,
                         is_suspect,
-                        (name_dict.get("role") or "")[:100],
+                        role[:100],
                         (name_dict.get("context") or "")[:500],
-                        (name_dict.get("category") or "")[:30],
+                        category[:30],
                     ),
                 )
                 names_inserted += cur.rowcount
@@ -390,11 +414,29 @@ def process_unextracted_pdfs(cur):
                 first_name = parts.get("first_name") or ""
                 last_name = parts.get("last_name") or ""
 
+                # Layer 1 fallback: try harder if primary parsing left blanks
+                if not first_name or not last_name:
+                    fb = parse_first_last_from_person_name(individual_name)
+                    first_name = first_name or fb.get("first_name", "")
+                    last_name = last_name or fb.get("last_name", "")
+
+                category = name_dict.get("category") or ""
+                if not category:
+                    category = parse_category_from_context(name_dict.get("context") or "")
+
+                role = name_dict.get("role") or ""
+                if not role:
+                    role = parse_role_from_context(name_dict.get("context") or "")
+
+                title = parts.get("title") or ""
+                if not title:
+                    title = parse_title_from_person_name(individual_name)
+
                 raw_score = score_name_confidence(
                     individual_name,
-                    category=name_dict.get("category") or "",
-                    role=name_dict.get("role") or "",
-                    title=parts.get("title") or "",
+                    category=category,
+                    role=role,
+                    title=title,
                 )
 
                 is_suspect = 0
@@ -425,13 +467,13 @@ def process_unextracted_pdfs(cur):
                         individual_name[:100],
                         first_name[:50],
                         last_name[:50],
-                        (parts.get("title") or "")[:20],
+                        title[:20],
                         (parts.get("middle_name") or "")[:50],
                         conf,
                         is_suspect,
-                        (name_dict.get("role") or "")[:100],
+                        role[:100],
                         (name_dict.get("context") or "")[:500],
-                        (name_dict.get("category") or "")[:30],
+                        category[:30],
                     ),
                 )
                 names_inserted += cur.rowcount

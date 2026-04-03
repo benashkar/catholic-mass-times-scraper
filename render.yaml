@@ -41,6 +41,10 @@ services:
         value: us-east-1
       - key: RENDER_API_KEY
         sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
       - key: GIT_AUTHOR_NAME
         value: "Ben Ashkar"
       - key: GIT_AUTHOR_EMAIL
@@ -68,6 +72,10 @@ services:
       - key: AWS_DEFAULT_REGION
         value: us-east-1
       - key: RENDER_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
         sync: false
       - key: GIT_AUTHOR_NAME
         value: "Ben Ashkar"

@@ -90,6 +90,13 @@ def main():
             bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200
         )
 
+    # Step 2b: Backfill empty fields from context (Layer 2 self-healing)
+    results["backfill"] = run_cmd(
+        [sys.executable, "backfill_empty_fields.py"],
+        "Backfill empty fields from context",
+        timeout_seconds=120,
+    )
+
     # Step 3: Rescore only new names + junk cleanup
     results["rescore"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--new-only"],
@@ -139,7 +146,7 @@ def main():
 
     # Non-critical steps: failures logged as warnings, don't cause exit code 1.
     # Bulletins may partially fail (some churches unreachable) but still extract names.
-    non_critical = {"bulletins", "health", "redeploy"}
+    non_critical = {"bulletins", "backfill", "health", "redeploy"}
 
     # Summary
     log("")

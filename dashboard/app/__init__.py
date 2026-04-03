@@ -80,22 +80,29 @@ def create_app(config_class=Config):
 
     @app.route("/health")
     def health():
+        """Full diagnostic health status for the pipeline and diagnostic agent."""
+        import sys
+        import os
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+        from flask import request
         from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list
+        from src.utils.health_checks import run_all_checks
+
+        quick = request.args.get("quick", "").lower() in ("1", "true", "yes")
 
         result = {
-            "status": "ok",
             "states_loaded": len(_state_list) if _state_list else 0,
             "bulletin_states": len(_bulletin_stats_cache),
         }
-        # Live DB check
         try:
             conn = _get_db_connection()
             cur = conn.cursor()
-            cur.execute("SELECT COUNT(*) AS cnt FROM church")
-            result["db_churches"] = cur.fetchone()["cnt"]
             result["db"] = "connected"
+            checks = run_all_checks(cur, quick=quick)
+            result.update(checks)
             conn.close()
         except Exception as e:
+            result["status"] = "error"
             result["db"] = f"error: {str(e)[:200]}"
         return result, 200
 
