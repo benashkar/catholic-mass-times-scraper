@@ -8,7 +8,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - **Pipeline**: Two Render cron jobs — daily mass times + weekly bulletins
 - **Name Engine**: `benashkar/names_people_matcher` (`C:\Users\cashk\OneDrive\names_people_matcher`)
 
-## Current Status (2026-03-22)
+## Current Status (2026-04-03)
 
 ### COMPLETED
 1. **Dashboard live** — 50 states, medium+high confidence names, shareable page URLs
@@ -29,7 +29,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
    - 1,556,276 false positives eliminated (66.5%)
    - ~783,658 quality names remaining on dashboard
    - Ran as 49 individual state jobs on Render (each 10s-30min depending on state size)
-10. **Health checks** — 7 automated checks (table counts, confidence distribution, junk rate, etc.)
+10. **Health checks** — 9 automated checks (table counts, confidence distribution, junk rate, known junk, lowercase names, scrape recency, empty names, backfill coverage, recent pipeline runs)
 11. **PrivateLink fixed** — VPC endpoint works from Render
 12. **Debug endpoint** — `/debug/logs` on dashboard for cron job visibility (Render API lacks job log access)
 13. **Fix column mismatch** — `extract_bulletins_to_db99.py` and `rescore_with_ner.py` had wrong column names vs actual db99 schema (written against PG schema, but db99 tables created by `sync_to_db99.py` have different names). Fixed: `source_type`→`discovery_source`, `source_url`→`bulletin_page_url`, `url`→`pdf_url`, `extracted_at`→`text_extracted`, `extracted_context_category`→`category`, `last_scraped_at`→`discovered_at`. Added `title`+`middle_name` to INSERTs. Idempotent `ensure_schema()` auto-adds `role` column on first Render run.
@@ -39,6 +39,12 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 17. **CSV export limit raised to 500K** — Was 50K, silently truncating large states (IL 253K, WI 64K).
 18. **Schema page** (`/schema`) — ERD diagram (Mermaid.js), connection info (Render + local), Python quick start, live table row counts, key views. Full-screen ERD at `/schema/erd.html`. Standalone `docs/erd.html` committed to repo per global rules.
 19. **Weekly cron deduplication** — Added `--bulletins-only` flag to `run_daily_pipeline.py`. Weekly Tuesday cron now skips mass times (already handled by daily cron), focuses on bulletin PDF collection + NER + rescore.
+20. **Self-healing scraper pattern (3 layers)** — Implemented 2026-04-03:
+    - **Layer 1 — Inline fallback parsers**: `src/parsers/fallback_parsers.py` with 4 functions (`parse_first_last_from_person_name`, `parse_category_from_context`, `parse_role_from_context`, `parse_title_from_person_name`). Called in `extract_bulletins_to_db99.py` after primary `parse_name_parts()` when fields are empty. Shared constants extracted to `src/parsers/bulletin_constants.py`.
+    - **Layer 2 — Auto-backfill**: `backfill_empty_fields.py` re-parses existing DB records with empty critical fields. Runs as Step 2b in `run_daily_pipeline.py` (non-critical, <60s target, 50K row limit).
+    - **Layer 3 — Diagnostic agent**: `/health` endpoint upgraded to comprehensive JSON with 9 structured checks. Claude Code scheduled trigger (`trig_013BWLSXWDbY4tFCXo9HiwDB`) runs at 5 AM UTC daily (except Tuesday). Fetches `/health`, diagnoses issues, opens fix PRs for blocklist additions, sends Telegram summary via Biscotcho bot.
+    - **Telegram integration**: `src/utils/telegram.py`, env vars set on both Render cron services.
+    - **38 tests** in `tests/test_fallback_parsers.py`.
 
 ### CURRENT DATA
 - 2.6M bulletin_name rows total
@@ -59,10 +65,13 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 ### Daily (stateless → db99)
 `python run_daily_pipeline.py`
 1. Scrape mass times from CatholicIndex → UPSERT to db99
-2. Extract bulletin names → discover PDFs → download to memory → extract text → NER veto → UPSERT to db99
-3. Rescore names via SQL (cleanup-only mode)
+2. Extract bulletin names → discover PDFs → download to memory → extract text → NER veto → UPSERT to db99 (with Layer 1 inline fallback parsers)
+2b. Backfill empty fields from context (Layer 2 self-healing)
+3. Rescore names via SQL (`--new-only`)
+3b. Refresh bulletin_state_stats
 4. Health check
 5. Trigger dashboard redeploy
++2h: Layer 3 diagnostic agent checks `/health`, sends Telegram summary
 
 ### Weekly (Tue 3AM)
 `python run_weekly_pipeline.py`
@@ -91,6 +100,7 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 | `run_daily_pipeline.py` | Orchestrates daily: scrape + bulletins + rescore + health + redeploy |
 | `run_weekly_pipeline.py` | Orchestrates weekly: all states, full rescore |
 | `rescore_names_sql.py` | SQL-based rescore + blocklist + stats refresh |
+| `backfill_empty_fields.py` | Layer 2: re-parse empty fields from person_name/context |
 | `rescore_with_ner.py` | One-time NER rescore of existing names (ran 2026-03-19) |
 | `run_bulletin_scraper.py` | Original file-based bulletin pipeline (local use) |
 | `run_job.py` | Wrapper that captures stdout/stderr → logs to db99 scrape_log |
