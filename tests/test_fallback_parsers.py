@@ -12,7 +12,6 @@ from src.parsers.fallback_parsers import (
     parse_title_from_person_name,
 )
 
-
 # ── parse_first_last_from_person_name ────────────────────────────────────────
 
 

@@ -360,7 +360,7 @@ def main():
     for step_name, ok in results.items():
         tag = "[OK]" if ok else ("[WARN]" if step_name in non_critical else "[ERR]")
         log(f"  {tag} {step_name}")
-    log(f"  Total time: {total_elapsed:.0f}s ({total_elapsed/3600:.1f} hours)")
+    log(f"  Total time: {total_elapsed:.0f}s ({total_elapsed / 3600:.1f} hours)")
 
     critical_failed = [k for k, v in results.items() if not v and k not in non_critical]
     warn_failed = [k for k, v in results.items() if not v and k in non_critical]

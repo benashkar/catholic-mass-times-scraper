@@ -165,7 +165,7 @@ def run_ner_veto_pass(cur, args):
         print(
             f"    [{checked:,}/{total:,}] ({pct:.0f}%) "
             f"downgraded={downgraded:,}{dr_label} "
-            f"({rate:.0f}/s, ~{remaining/60:.0f}min left)",
+            f"({rate:.0f}/s, ~{remaining / 60:.0f}min left)",
             flush=True,
         )
 
@@ -407,9 +407,9 @@ def main():
         )
 
     # Summary
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("  RESCORE SUMMARY")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     if "ner" in results:
         print(
             f"  NER: {results['ner']['checked']:,} checked, {results['ner']['downgraded']:,} downgraded"
@@ -419,7 +419,7 @@ def main():
             f"  Couples: {results['couples']['couples_found']:,} found, "
             f"{results['couples']['records_inserted']:,} new records"
         )
-    print(f"  Time: {elapsed:.0f}s ({elapsed/60:.1f} min)")
+    print(f"  Time: {elapsed:.0f}s ({elapsed / 60:.1f} min)")
     if args.dry_run:
         print("  (DRY RUN — no changes written)")
     print("[OK] Done!")

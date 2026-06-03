@@ -70,8 +70,11 @@ except ImportError:
 try:
     from src.parsers.bulletin_constants import (
         FALSE_POSITIVE_NAMES as _SHARED_FP_NAMES,
-        HONORIFIC_TITLES as _SHARED_HONORIFICS,
+    )
+    from src.parsers.bulletin_constants import (
         MINISTRY_ROLES as _SHARED_MINISTRY_ROLES,
+    )
+    from src.parsers.bulletin_constants import (
         STAFF_ROLES as _SHARED_STAFF_ROLES,
     )
 
@@ -1522,34 +1525,38 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # ─────────────────────────────────────────────────────────────────────────
 
     # Comprehensive list of positional roles found in bulletin staff sections
-    STAFF_ROLES = _SHARED_STAFF_ROLES if _HAS_SHARED_CONSTANTS else (
-        r"Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator"
-        r"|Administrator|Priest|Rector|Chaplain|Celebrant"
-        r"|Permanent Deacon|Transitional Deacon"
-        r"|Business Manager|Business Mgr\.|Office Manager|Parish Manager"
-        r"|Parish Secretary|Parish Administrator|Administrative Assistant"
-        r"|Bookkeeper|Assistant Bookkeeper|Receptionist"
-        r"|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer"
-        r"|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?"
-        r"|Director of Faith Formation|Faith Formation Director"
-        r"|School Principal|School Secretary|Principal"
-        r"|Director of Youth Ministry|Youth Minister|Youth Director"
-        r"|Director of Music|Music Director|Music Minister"
-        r"|Liturgy Director|Liturgist|Worship Director"
-        r"|Maintenance|Custodian|Facilities Manager|Facilities Director"
-        r"|Maintenance Tech|Groundskeeper|Sexton"
-        r"|Director|Coordinator|Minister|Moderator"
-        r"|RCIA Director|RCIA Coordinator"
-        r"|Sacristan|Organist|Cantor|Choir Director"
-        r"|Stewardship Director|Communications Director"
-        r"|Hispanic Ministry|Spanish Ministry"
-        r"|Chairman|Co-Chairman|Chairperson|Co-Chair"
-        r"|Vice Chairman|Vice Chairperson"
-        r"|President|Vice President"
-        r"|Secretary|Treasurer"
-        r"|Grand Knight|Deputy Grand Knight"
-        r"|Financial Secretary|Membership Director"
-        r"|ASCS Principal"
+    STAFF_ROLES = (
+        _SHARED_STAFF_ROLES
+        if _HAS_SHARED_CONSTANTS
+        else (
+            r"Pastor|Associate Pastor|Parochial Vicar|Parochial Administrator"
+            r"|Administrator|Priest|Rector|Chaplain|Celebrant"
+            r"|Permanent Deacon|Transitional Deacon"
+            r"|Business Manager|Business Mgr\.|Office Manager|Parish Manager"
+            r"|Parish Secretary|Parish Administrator|Administrative Assistant"
+            r"|Bookkeeper|Assistant Bookkeeper|Receptionist"
+            r"|Compliance(?:/Acct\.\s*Asst\.)?|Compliance Officer"
+            r"|Director of Religious (?:Education|Ed)|Religious Ed(?:ucation)?"
+            r"|Director of Faith Formation|Faith Formation Director"
+            r"|School Principal|School Secretary|Principal"
+            r"|Director of Youth Ministry|Youth Minister|Youth Director"
+            r"|Director of Music|Music Director|Music Minister"
+            r"|Liturgy Director|Liturgist|Worship Director"
+            r"|Maintenance|Custodian|Facilities Manager|Facilities Director"
+            r"|Maintenance Tech|Groundskeeper|Sexton"
+            r"|Director|Coordinator|Minister|Moderator"
+            r"|RCIA Director|RCIA Coordinator"
+            r"|Sacristan|Organist|Cantor|Choir Director"
+            r"|Stewardship Director|Communications Director"
+            r"|Hispanic Ministry|Spanish Ministry"
+            r"|Chairman|Co-Chairman|Chairperson|Co-Chair"
+            r"|Vice Chairman|Vice Chairperson"
+            r"|President|Vice President"
+            r"|Secretary|Treasurer"
+            r"|Grand Knight|Deputy Grand Knight"
+            r"|Financial Secretary|Membership Director"
+            r"|ASCS Principal"
+        )
     )
 
     # Name pattern: optional honorific + first [middle] last
@@ -1810,17 +1817,21 @@ def extract_names_from_text(text: str, church_name: str = ""):
     # Pattern: MinistryRole comma/colon Name [Phone]
     # ─────────────────────────────────────────────────────────────────────────
 
-    MINISTRY_ROLES = _SHARED_MINISTRY_ROLES if _HAS_SHARED_CONSTANTS else (
-        r"Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?"
-        r"|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?"
-        r"|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?"
-        r"|Jail Ministry|Knights? of Columbus|Ladies\s+Guild"
-        r"|Linens|Marriage Preparation|Money Counters?"
-        r"|Prayer Garden|Music Ministry|Choir"
-        r"|Baptism Class|Hispanic Spiritual Dir(?:ector)?"
-        r"|(?:You Are )?Not Alone|St\.?\s*Vincent de Paul"
-        r"|Religious Education|RCIA|Compliance Officer"
-        r"|Homebound Euch(?:aristic)?\.?\s*Ministers?"
+    MINISTRY_ROLES = (
+        _SHARED_MINISTRY_ROLES
+        if _HAS_SHARED_CONSTANTS
+        else (
+            r"Altar Servers?|Eucharistic Ministers?|Lectors?|Readers?"
+            r"|Ushers?(?:/Greeters?)?|Greeters?|Sacristans?"
+            r"|Gift Shop|Hospital Euch(?:aristic)?\.?\s*Ministers?"
+            r"|Jail Ministry|Knights? of Columbus|Ladies\s+Guild"
+            r"|Linens|Marriage Preparation|Money Counters?"
+            r"|Prayer Garden|Music Ministry|Choir"
+            r"|Baptism Class|Hispanic Spiritual Dir(?:ector)?"
+            r"|(?:You Are )?Not Alone|St\.?\s*Vincent de Paul"
+            r"|Religious Education|RCIA|Compliance Officer"
+            r"|Homebound Euch(?:aristic)?\.?\s*Ministers?"
+        )
     )
 
     # Match: MinistryRole [comma/colon] PersonName [PhoneNumber]
@@ -1990,307 +2001,311 @@ def extract_names_from_text(text: str, church_name: str = ""):
 
 # Common words that look like names but aren't
 # Canonical list is in src/parsers/bulletin_constants.py
-FALSE_POSITIVE_NAMES = _SHARED_FP_NAMES if _HAS_SHARED_CONSTANTS else {
-    "Holy Spirit",
-    "Holy Family",
-    "Holy Cross",
-    "Holy Rosary",
-    "Holy Trinity",
-    "Sacred Heart",
-    "Blessed Sacrament",
-    "Blessed Mother",
-    "Blessed Virgin",
-    "Our Lady",
-    "Our Father",
-    "Jesus Christ",
-    "Holy Name",
-    "Good Shepherd",
-    "Holy Communion",
-    "First Communion",
-    "Daily Mass",
-    "Sunday Mass",
-    "Mass Times",
-    "Mass Intentions",
-    "Divine Mercy",
-    "Eternal Rest",
-    "Saint Joseph",
-    "Saint Patrick",
-    "Saint Mary",
-    "Saint Peter",
-    "Saint Paul",
-    "Saint Michael",
-    "Saint Francis",
-    "Saint Thomas",
-    "Saint Elizabeth",
-    "Palm Sunday",
-    "Good Friday",
-    "Easter Sunday",
-    "Ash Wednesday",
-    "Office Hours",
-    "Parish Office",
-    "Faith Formation",
-    "Religious Education",
-    "Social Media",
-    "Weekly Bulletin",
-    "Parish Life",
-    "Parish Council",
-    "Ministry Schedule",
-    "Altar Society",
-    "Church Bulletin",
-    "North America",
-    "South America",
-    "New York",
-    "New Jersey",
-    "New Mexico",
-    "Al Smith",  # very common false positive
-    "Catholic Church",
-    "United States",
-    "Pope Francis",
-    "Dear Parishioners",
-    "Dear Friends",
-    "For More",
-    "Please Contact",
-    "High School",
-    "Middle School",
-    "Sign Up",
-    "Last Week",
-    "Next Week",
-    "This Week",
-    "Thank You",
-    "God Bless",
-    "Weekday Masses",
-    "Daily Mass",
-    "Sunday Mass",
-    "Altar Servers",
-    "Eucharistic Ministers",
-    "Music Director",
-    "Prayer Tree",
-    "Table Rentals",
-    "Holy Hour",
-    "Vincent De Paul",
-    "De Paul",
-    "Corpus Christi",
-    "Stations Cross",
-    "Bible Study",
-    "Choir Practice",
-    "Food Bank",
-    "Soup Kitchen",
-    "Thrift Store",
-    "Office Manager",
-    "Business Manager",
-    "Facilities Manager",
-    "Religious Ed",
-    "Youth Minister",
-    "Choir Director",
-    "Maintenance Director",
-    "Athletic Director",
-    "Pro Life",
-    "Right Life",
-    # Bulletin structural/calendar phrases that look like names
-    "Ordinary Time",
-    "By Appointment",
-    "Job Opportunity",
-    "Assembly Mtg",
-    "Council Mtg",
-    "Degree Exemplification",
-    "Money Counters",
-    "Compliance Officer",
-    "Mercy Chaplet",
-    "Del Tiempo",
-    "Domingo Del",
-    "Consejo Matrimonial",
-    "Grand Knight",
-    "Deputy Grand",
-    "Hospital Euch",
-    "Hispanic Spiritual",
-    "Tech I",
-    "Tech II",
-    # Common truncated/merged column artifacts from PDF extraction
-    "Are Not",
-    "You Are",
-    "Are Not Alone",
-    "Anderson Gift",
-    "Business Mgr",
-    "The Romo",
-    "Of Jensen",
-    # Top false positive phrases found in data analysis (751K names, 6 states)
-    "New Year",
-    "Immaculate Conception",
-    "Columbus Council",
-    "Finance Council",
-    "Pastoral Council",
-    "Pope Leo",
-    "Food Pantry",
-    "Fish Fry",
-    "All Souls",
-    "Wedding Anniversary",
-    "Ordinary Time",
-    "Second Vatican Council",
-    "Deceased Members",
-    "Volunteers Needed",
-    "All Souls Day",
-    "Lord Jesus Christ",
-    "The Knights",
-    "Paul Society",
-    "May God",
-    "Presbyteral Council",
-    "Lord Jesus",
-    "Good News",
-    "Administrative Assistant",
-    "The St",
-    "Special Intention",
-    "Memorial Day",
-    "Jubilee Year",
-    "Labor Day",
-    "Virgin Mary",
-    "Feast Day",
-    "World Day",
-    "Open House",
-    "St Mary",
-    "Jordan River",
-    "Bake Sale",
-    "Shawl Ministry",
-    "Pancake Breakfast",
-    "Latin America",
-    "Old Testament",
-    "The Lord",
-    "Happy New Year",
-    "Heavenly Father",
-    "Thomas Aquinas",
-    "Retirement Fund",
-    "First Reconciliation",
-    "Diocesan Council",
-    "First Reading",
-    "Place Your Ad",
-    "Safe Environment",
-    "Thanksgiving Day",
-    "Rice Bowl",
-    "The Diocese",
-    "Respect Life",
-    "Immaculate Heart",
-    "The Epiphany",
-    "Mailing Address",
-    "Poor Souls",
-    "Second Reading",
-    "Main Street",
-    "Columbus Meeting",
-    "Extraordinary Minister",
-    "Faithful Departed",
-    "Life Activities",
-    "New Testament",
-    "Property Manager",
-    "Development Manager",
-    "Case Managers",
-    "Sun Rehearsal",
-    "English Ministry",
-    "Brother Knight",
-    # Bulletin ad/event junk that passes word-level filters
-    "Auto Body",
-    "Auto Repair",
-    "Auto Insurance",
-    "Fall Alert",
-    "Craft Beer",
-    "Beer Tent",
-    "Beer Dance",
-    "Wine Bar",
-    "Wine Pull",
-    "Ice Cream",
-    "More Info",
-    "Stay Connected",
-    "Pork Sausage",
-    "Fried Chicken",
-    "Chicken Strips",
-    "Cake Donation",
-    "Smart Roofing",
-    "Smart Roof",
-    "Smart Driver",
-    "Pizza Villa",
-    "Sports App",
-    "Ascension App",
-    "Suggested Donation",
-    "Contribution Statement",
-    "Contribution Statements",
-    "Spring Alpha Session",
-    "Generation To Generation",
-    "Doyle Vocal Quartet",
-    "Vocal Quartet",
-    "Blood Drive",
-    "Craft Bazaar",
-    # Spanish/Latin liturgical phrases
-    "Primera Comuni",
-    "Primera Comunion",
-    "La Primera Comuni",
-    "La Cuaresma",
-    "El Evangelio",
-    "Sacrosanctum Concilium",
-    "Nueve Domingos",
-    "El Comit",
-    "Arroz La Cuaresma",
-    # Phrases using 'Will' and 'Christian' that aren't names
-    # (these words were unblocked because they're common real names)
-    "Will Be",
-    "Will Not",
-    "Will Have",
-    "Will Take",
-    "Christian Education",
-    "Christian Formation",
-    "Christian Initiation",
-    "Christian Service",
-    "Christian Community",
-    "Christian Life",
-    # Additional false-positive phrases (org names, bulletin phrases)
-    "Thank You",
-    "God Bless",
-    "Altar Servers",
-    "Altar Society",
-    "Church Name",
-    "Parish Name",
-    "Office Hours",
-    "Bulletin Sponsor",
-    "Weekly Collection",
-    "Mass Schedule",
-    "Faith Formation",
-    "Religious Ed",
-    "Choir Practice",
-    "Youth Group",
-    "Knights Columbus",
-    "Ladies Auxiliary",
-    "Sanctuary Lamp",
-    "Eternal Rest",
-    "Rest Peace",
-    # Top false positives from data analysis (2026-03-25)
-    "Precious Blood",
-    "Canon Law",
-    "Mardi Gras",
-    "Faith Forma",
-    "Mount Carmel",
-    "Roman Missal",
-    "Young People",
-    "Ascension Press",
-    "Supreme Court",
-    "Little Flower",
-    "La Crosse",
-    "Columbus Free Throw",
-    "King Herod",
-    "Phone Fax",
-    "Bus Driver",
-    "Texas Roadhouse",
-    "Adult Faith",
-    "Mass Times",
-    "Gospel Meditation",
-    "Spiritual Direction",
-    "Spring Work",
-    "Parish Fund",
-    "In Residence",
-    "Same Day",
-    "Topsoil Mulch",
-    "Parish App",
-    "Fulton Sheen",
-    "Fulton J. Sheen",
-    "Martin Luther King",
-    "John Muir",
-    "Every Friday",
-}
+FALSE_POSITIVE_NAMES = (
+    _SHARED_FP_NAMES
+    if _HAS_SHARED_CONSTANTS
+    else {
+        "Holy Spirit",
+        "Holy Family",
+        "Holy Cross",
+        "Holy Rosary",
+        "Holy Trinity",
+        "Sacred Heart",
+        "Blessed Sacrament",
+        "Blessed Mother",
+        "Blessed Virgin",
+        "Our Lady",
+        "Our Father",
+        "Jesus Christ",
+        "Holy Name",
+        "Good Shepherd",
+        "Holy Communion",
+        "First Communion",
+        "Daily Mass",
+        "Sunday Mass",
+        "Mass Times",
+        "Mass Intentions",
+        "Divine Mercy",
+        "Eternal Rest",
+        "Saint Joseph",
+        "Saint Patrick",
+        "Saint Mary",
+        "Saint Peter",
+        "Saint Paul",
+        "Saint Michael",
+        "Saint Francis",
+        "Saint Thomas",
+        "Saint Elizabeth",
+        "Palm Sunday",
+        "Good Friday",
+        "Easter Sunday",
+        "Ash Wednesday",
+        "Office Hours",
+        "Parish Office",
+        "Faith Formation",
+        "Religious Education",
+        "Social Media",
+        "Weekly Bulletin",
+        "Parish Life",
+        "Parish Council",
+        "Ministry Schedule",
+        "Altar Society",
+        "Church Bulletin",
+        "North America",
+        "South America",
+        "New York",
+        "New Jersey",
+        "New Mexico",
+        "Al Smith",  # very common false positive
+        "Catholic Church",
+        "United States",
+        "Pope Francis",
+        "Dear Parishioners",
+        "Dear Friends",
+        "For More",
+        "Please Contact",
+        "High School",
+        "Middle School",
+        "Sign Up",
+        "Last Week",
+        "Next Week",
+        "This Week",
+        "Thank You",
+        "God Bless",
+        "Weekday Masses",
+        "Daily Mass",
+        "Sunday Mass",
+        "Altar Servers",
+        "Eucharistic Ministers",
+        "Music Director",
+        "Prayer Tree",
+        "Table Rentals",
+        "Holy Hour",
+        "Vincent De Paul",
+        "De Paul",
+        "Corpus Christi",
+        "Stations Cross",
+        "Bible Study",
+        "Choir Practice",
+        "Food Bank",
+        "Soup Kitchen",
+        "Thrift Store",
+        "Office Manager",
+        "Business Manager",
+        "Facilities Manager",
+        "Religious Ed",
+        "Youth Minister",
+        "Choir Director",
+        "Maintenance Director",
+        "Athletic Director",
+        "Pro Life",
+        "Right Life",
+        # Bulletin structural/calendar phrases that look like names
+        "Ordinary Time",
+        "By Appointment",
+        "Job Opportunity",
+        "Assembly Mtg",
+        "Council Mtg",
+        "Degree Exemplification",
+        "Money Counters",
+        "Compliance Officer",
+        "Mercy Chaplet",
+        "Del Tiempo",
+        "Domingo Del",
+        "Consejo Matrimonial",
+        "Grand Knight",
+        "Deputy Grand",
+        "Hospital Euch",
+        "Hispanic Spiritual",
+        "Tech I",
+        "Tech II",
+        # Common truncated/merged column artifacts from PDF extraction
+        "Are Not",
+        "You Are",
+        "Are Not Alone",
+        "Anderson Gift",
+        "Business Mgr",
+        "The Romo",
+        "Of Jensen",
+        # Top false positive phrases found in data analysis (751K names, 6 states)
+        "New Year",
+        "Immaculate Conception",
+        "Columbus Council",
+        "Finance Council",
+        "Pastoral Council",
+        "Pope Leo",
+        "Food Pantry",
+        "Fish Fry",
+        "All Souls",
+        "Wedding Anniversary",
+        "Ordinary Time",
+        "Second Vatican Council",
+        "Deceased Members",
+        "Volunteers Needed",
+        "All Souls Day",
+        "Lord Jesus Christ",
+        "The Knights",
+        "Paul Society",
+        "May God",
+        "Presbyteral Council",
+        "Lord Jesus",
+        "Good News",
+        "Administrative Assistant",
+        "The St",
+        "Special Intention",
+        "Memorial Day",
+        "Jubilee Year",
+        "Labor Day",
+        "Virgin Mary",
+        "Feast Day",
+        "World Day",
+        "Open House",
+        "St Mary",
+        "Jordan River",
+        "Bake Sale",
+        "Shawl Ministry",
+        "Pancake Breakfast",
+        "Latin America",
+        "Old Testament",
+        "The Lord",
+        "Happy New Year",
+        "Heavenly Father",
+        "Thomas Aquinas",
+        "Retirement Fund",
+        "First Reconciliation",
+        "Diocesan Council",
+        "First Reading",
+        "Place Your Ad",
+        "Safe Environment",
+        "Thanksgiving Day",
+        "Rice Bowl",
+        "The Diocese",
+        "Respect Life",
+        "Immaculate Heart",
+        "The Epiphany",
+        "Mailing Address",
+        "Poor Souls",
+        "Second Reading",
+        "Main Street",
+        "Columbus Meeting",
+        "Extraordinary Minister",
+        "Faithful Departed",
+        "Life Activities",
+        "New Testament",
+        "Property Manager",
+        "Development Manager",
+        "Case Managers",
+        "Sun Rehearsal",
+        "English Ministry",
+        "Brother Knight",
+        # Bulletin ad/event junk that passes word-level filters
+        "Auto Body",
+        "Auto Repair",
+        "Auto Insurance",
+        "Fall Alert",
+        "Craft Beer",
+        "Beer Tent",
+        "Beer Dance",
+        "Wine Bar",
+        "Wine Pull",
+        "Ice Cream",
+        "More Info",
+        "Stay Connected",
+        "Pork Sausage",
+        "Fried Chicken",
+        "Chicken Strips",
+        "Cake Donation",
+        "Smart Roofing",
+        "Smart Roof",
+        "Smart Driver",
+        "Pizza Villa",
+        "Sports App",
+        "Ascension App",
+        "Suggested Donation",
+        "Contribution Statement",
+        "Contribution Statements",
+        "Spring Alpha Session",
+        "Generation To Generation",
+        "Doyle Vocal Quartet",
+        "Vocal Quartet",
+        "Blood Drive",
+        "Craft Bazaar",
+        # Spanish/Latin liturgical phrases
+        "Primera Comuni",
+        "Primera Comunion",
+        "La Primera Comuni",
+        "La Cuaresma",
+        "El Evangelio",
+        "Sacrosanctum Concilium",
+        "Nueve Domingos",
+        "El Comit",
+        "Arroz La Cuaresma",
+        # Phrases using 'Will' and 'Christian' that aren't names
+        # (these words were unblocked because they're common real names)
+        "Will Be",
+        "Will Not",
+        "Will Have",
+        "Will Take",
+        "Christian Education",
+        "Christian Formation",
+        "Christian Initiation",
+        "Christian Service",
+        "Christian Community",
+        "Christian Life",
+        # Additional false-positive phrases (org names, bulletin phrases)
+        "Thank You",
+        "God Bless",
+        "Altar Servers",
+        "Altar Society",
+        "Church Name",
+        "Parish Name",
+        "Office Hours",
+        "Bulletin Sponsor",
+        "Weekly Collection",
+        "Mass Schedule",
+        "Faith Formation",
+        "Religious Ed",
+        "Choir Practice",
+        "Youth Group",
+        "Knights Columbus",
+        "Ladies Auxiliary",
+        "Sanctuary Lamp",
+        "Eternal Rest",
+        "Rest Peace",
+        # Top false positives from data analysis (2026-03-25)
+        "Precious Blood",
+        "Canon Law",
+        "Mardi Gras",
+        "Faith Forma",
+        "Mount Carmel",
+        "Roman Missal",
+        "Young People",
+        "Ascension Press",
+        "Supreme Court",
+        "Little Flower",
+        "La Crosse",
+        "Columbus Free Throw",
+        "King Herod",
+        "Phone Fax",
+        "Bus Driver",
+        "Texas Roadhouse",
+        "Adult Faith",
+        "Mass Times",
+        "Gospel Meditation",
+        "Spiritual Direction",
+        "Spring Work",
+        "Parish Fund",
+        "In Residence",
+        "Same Day",
+        "Topsoil Mulch",
+        "Parish App",
+        "Fulton Sheen",
+        "Fulton J. Sheen",
+        "Martin Luther King",
+        "John Muir",
+        "Every Friday",
+    }
+)
 
 
 # ── Reference Data & Scoring ─────────────────────────────────────────────────
@@ -3815,7 +3830,7 @@ def run_discover(
             discovered[slug] = {"status": "no_url", "bulletin_page": None, "pdfs": []}
             continue
 
-        logger.info(f"[{i+1}/{len(churches)}] {church['name']} ({church['city']}): {url}")
+        logger.info(f"[{i + 1}/{len(churches)}] {church['name']} ({church['city']}): {url}")
 
         try:
             result = find_bulletin_page(url)
@@ -4376,9 +4391,9 @@ def main():
 
     for state_dir in state_dirs:
         state_name = state_dir.name
-        logger.info(f"\n{'='*60}")
+        logger.info(f"\n{'=' * 60}")
         logger.info(f"Processing {state_name.upper()}")
-        logger.info(f"{'='*60}")
+        logger.info(f"{'=' * 60}")
 
         # Clean phase: just re-filter existing data, no need for churches/progress
         if args.phase == "clean":

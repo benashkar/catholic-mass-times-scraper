@@ -423,9 +423,7 @@ def resolve_urls_for_state(
             rate = elapsed / processed_this_run
             remaining = total - done
             eta_min = (remaining * rate) / 60
-            logger.info(
-                f"[{done}/{total}] {name}: " f"{actual_url or 'FAILED'} | ETA: {eta_min:.1f}m"
-            )
+            logger.info(f"[{done}/{total}] {name}: {actual_url or 'FAILED'} | ETA: {eta_min:.1f}m")
 
         # Periodic progress save
         if processed_this_run % PROGRESS_SAVE_INTERVAL == 0:

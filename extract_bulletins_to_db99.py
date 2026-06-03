@@ -221,7 +221,7 @@ def process_church(cur, church):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -335,7 +335,7 @@ def process_church(cur, church):
 
         # Mark PDF as extracted
         cur.execute(
-            "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
+            "UPDATE bulletin_pdf SET text_extracted = 1 WHERE bulletin_pdf_id = %s",
             (bulletin_pdf_id,),
         )
 
@@ -373,7 +373,7 @@ def process_unextracted_pdfs(cur):
         pdf_bytes = download_pdf_to_memory(pdf_url)
         if not pdf_bytes:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -381,7 +381,7 @@ def process_unextracted_pdfs(cur):
         full_text, column_texts = extract_text_from_pdf(pdf_bytes)
         if not full_text:
             cur.execute(
-                "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
+                "UPDATE bulletin_pdf SET text_extracted = 1 WHERE bulletin_pdf_id = %s",
                 (bulletin_pdf_id,),
             )
             continue
@@ -482,7 +482,7 @@ def process_unextracted_pdfs(cur):
         stats["pdfs_extracted"] += 1
 
         cur.execute(
-            "UPDATE bulletin_pdf SET text_extracted = 1 " "WHERE bulletin_pdf_id = %s",
+            "UPDATE bulletin_pdf SET text_extracted = 1 WHERE bulletin_pdf_id = %s",
             (bulletin_pdf_id,),
         )
 
@@ -605,11 +605,11 @@ def main():
             rate = (i + 1) / elapsed if elapsed > 0 else 0
             remaining = (len(churches) - i - 1) / rate if rate > 0 else 0
             print(
-                f"  [{i+1}/{len(churches)}] {church.get('state_code', '')} "
+                f"  [{i + 1}/{len(churches)}] {church.get('state_code', '')} "
                 f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
                 f"names={totals['names_inserted']} skip={totals['skipped']} "
                 f"err={totals['errors']} "
-                f"({rate:.1f}/s, ~{remaining/60:.0f}min left)"
+                f"({rate:.1f}/s, ~{remaining / 60:.0f}min left)"
             )
 
         # Small delay between churches to avoid rate limiting
@@ -639,16 +639,16 @@ def main():
         ),
     )
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("  BULLETIN EXTRACTION SUMMARY")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"  Churches discovered: {totals['discovered']}")
     print(f"  PDFs found: {totals['pdfs_found']}")
     print(f"  PDFs extracted: {totals['pdfs_extracted']}")
     print(f"  Names inserted: {totals['names_inserted']}")
     print(f"  Skipped (fresh): {totals['skipped']}")
     print(f"  Errors: {totals['errors']}")
-    print(f"  Time: {elapsed:.0f}s ({elapsed/60:.1f} min)")
+    print(f"  Time: {elapsed:.0f}s ({elapsed / 60:.1f} min)")
     print("[OK] Done!")
 
     conn.close()

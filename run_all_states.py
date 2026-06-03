@@ -131,9 +131,9 @@ def is_state_done(state: str) -> bool:
 
 def run_state(state: str) -> bool:
     """Run statewide scrape for a single state. Returns True on success."""
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print(f"STARTING: {state.upper()} ({STATE_CODES.get(state, '??')})")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
     # Run statewide scrape
     result = subprocess.run(
@@ -181,7 +181,7 @@ def main():
 
     print(f"States remaining: {total}")
     for i, state in enumerate(remaining):
-        print(f"  {i+1}. {state}")
+        print(f"  {i + 1}. {state}")
 
     print(f"\nStarting sequential scrape of {total} states...")
 
@@ -189,19 +189,19 @@ def main():
     failed = []
 
     for i, state in enumerate(remaining):
-        print(f"\n[{i+1}/{total}] Processing {state}...")
+        print(f"\n[{i + 1}/{total}] Processing {state}...")
         success = run_state(state)
         if success:
             completed += 1
         else:
             failed.append(state)
 
-    print(f"\n{'='*70}")
+    print(f"\n{'=' * 70}")
     print("ALL STATES BATCH COMPLETE")
     print(f"Completed: {completed}/{total}")
     if failed:
         print(f"Failed: {', '.join(failed)}")
-    print(f"{'='*70}")
+    print(f"{'=' * 70}")
 
 
 if __name__ == "__main__":
