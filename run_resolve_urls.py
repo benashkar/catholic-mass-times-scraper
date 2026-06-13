@@ -31,6 +31,7 @@ EXPECTED RUNTIME:
 
 import argparse
 import json
+import os
 import re
 import sys
 import time
@@ -54,6 +55,11 @@ RESOLVE_DELAY = 1.5
 PROGRESS_SAVE_INTERVAL = 25
 REQUEST_TIMEOUT = 10
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+# Optional rotating residential proxy (shared PROXY_URL convention). When set,
+# redirect-resolution requests route through it; when unset, they go direct.
+PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
+PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
 _last_request_time = 0.0
 
@@ -187,6 +193,7 @@ def _rate_limited_get(url: str) -> requests.Response | None:
             url,
             timeout=REQUEST_TIMEOUT,
             headers={"User-Agent": USER_AGENT},
+            proxies=PROXIES,
         )
         return resp
     except requests.RequestException as e:

@@ -56,6 +56,11 @@ USER_AGENT = (
     "Chrome/131.0.0.0 Safari/537.36"
 )
 
+# Optional rotating residential proxy (shared PROXY_URL convention). When set,
+# PDF downloads route through it; when unset, requests go direct.
+PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
+PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
+
 MAX_PDF_SIZE_MB = 25
 MAX_PDFS_PER_CHURCH = 100
 
@@ -122,7 +127,9 @@ def ensure_schema(cur):
 def download_pdf_to_memory(url, timeout=30):
     """Download a PDF into memory (no disk). Returns bytes or None."""
     try:
-        resp = requests.get(url, timeout=timeout, headers={"User-Agent": USER_AGENT})
+        resp = requests.get(
+            url, timeout=timeout, headers={"User-Agent": USER_AGENT}, proxies=PROXIES
+        )
         if resp.status_code != 200:
             return None
         if len(resp.content) > MAX_PDF_SIZE_MB * 1024 * 1024:

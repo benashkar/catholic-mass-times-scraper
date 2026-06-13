@@ -57,11 +57,16 @@ SCRAPE_DELAY = float(os.getenv("SCRAPE_DELAY_SECONDS", "1.5"))
 MAX_RETRIES = int(os.getenv("MAX_RETRIES", "3"))
 
 # The User-Agent header tells the website who is making the request.
-# Being transparent about who we are is good etiquette and helps site admins
-# contact us if there's a problem, instead of just blocking our IP.
+# NOTE: CatholicIndex.org sits behind Cloudflare, which returns HTTP 403 to
+# self-identifying bot User-Agents. A realistic browser UA is required just to
+# be served the page at all. (Verified 2026-06-13: the honest
+# "CatholicMassTimesScraper/1.0" UA -> 403 Forbidden, while a Chrome UA -> 200
+# OK from the very same IP — so this is a UA block, not an IP block.)
 USER_AGENT = os.getenv(
     "USER_AGENT",
-    "CatholicMassTimesScraper/1.0 (CR Community News; contact: ben@healthyanalytics.com)",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/131.0.0.0 Safari/537.36",
 )
 
 # Standard headers sent with every HTTP request
@@ -74,6 +79,20 @@ REQUEST_HEADERS = {
 # HTTP request timeout in seconds — if a server doesn't respond in this time,
 # give up rather than hanging forever
 REQUEST_TIMEOUT = 30
+
+# ---------------------------------------------------------------------------
+# Outbound Proxy (optional)
+# ---------------------------------------------------------------------------
+# Rotating residential proxy used to bypass IP-reputation blocks (e.g. a
+# Cloudflare datacenter-IP ban that a browser UA alone can't get past).
+# Shared `PROXY_URL` convention across our scraper projects — a single
+# rotating 711proxy endpoint where each request gets a fresh US residential IP.
+#
+# When PROXY_URL is unset (the default), every request goes direct. Set it as a
+# Render env var on the church-scrape crons to route all scraper traffic
+# through the proxy. No code change needed to toggle it.
+PROXY_URL = os.getenv("PROXY_URL", "").strip() or None
+PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
 # ---------------------------------------------------------------------------
 # Data Source URLs

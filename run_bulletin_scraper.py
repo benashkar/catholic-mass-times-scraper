@@ -42,6 +42,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -207,6 +208,27 @@ HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.5",
 }
+
+# Optional rotating residential proxy (shared PROXY_URL convention). When set,
+# all HTTP + headless-browser requests route through it; else they go direct.
+PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
+PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
+
+
+def _playwright_proxy():
+    """Parse PROXY_URL into Playwright's launch-proxy dict, or None if unset."""
+    if not PROXY_URL:
+        return None
+    parsed = urlparse(PROXY_URL)
+    server = f"{parsed.scheme}://{parsed.hostname}"
+    if parsed.port:
+        server += f":{parsed.port}"
+    proxy = {"server": server}
+    if parsed.username:
+        proxy["username"] = parsed.username
+    if parsed.password:
+        proxy["password"] = parsed.password
+    return proxy
 
 
 def _effective_pdf_cap():
@@ -386,6 +408,8 @@ def resolve_state(name: str):
 _last_request_time = 0.0
 _session = requests.Session()
 _session.headers.update(HEADERS)
+if PROXIES:
+    _session.proxies.update(PROXIES)
 
 
 def _rate_limited_get(url: str, timeout: int = REQUEST_TIMEOUT, allow_redirects=True):
@@ -430,7 +454,11 @@ def _get_playwright_browser():
         return None
     if _browser_instance is None:
         _playwright_instance = sync_playwright().start()
-        _browser_instance = _playwright_instance.chromium.launch(headless=True)
+        launch_kwargs = {"headless": True}
+        proxy = _playwright_proxy()
+        if proxy:
+            launch_kwargs["proxy"] = proxy
+        _browser_instance = _playwright_instance.chromium.launch(**launch_kwargs)
     return _browser_instance
 
 

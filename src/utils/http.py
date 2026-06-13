@@ -34,6 +34,7 @@ import requests
 
 from config.settings import (
     MAX_RETRIES,
+    PROXIES,
     REQUEST_HEADERS,
     REQUEST_TIMEOUT,
     SCRAPE_DELAY,
@@ -99,11 +100,14 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
             # Record when we made this request (for rate limiting the NEXT request)
             _last_request_time = time.time()
 
-            # Make the actual HTTP request
+            # Make the actual HTTP request.
+            # PROXIES is None unless PROXY_URL is set in the env, in which case
+            # all requests route through the rotating residential proxy.
             response = requests.get(
                 url,
                 headers=headers,
                 timeout=REQUEST_TIMEOUT,
+                proxies=PROXIES,
             )
 
             # Log the HTTP status code and how long it took
