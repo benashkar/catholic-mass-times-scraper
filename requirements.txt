@@ -34,6 +34,8 @@ playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, 
 nameparser>=1.1           # Robust name parsing (handles titles, suffixes, compound names)
 probablepeople>=0.5       # CRF-based name parser — detects couple/household names
 spacy>=3.7                # NER-based name validation (en_core_web_lg model)
+click>=8.1                # Required by spacy's CLI (`spacy download`); newer typer/spacy
+                          # resolutions stopped pulling it transitively, breaking the build.
 
 # --- PDF Extraction ---
 pdfplumber>=0.10          # PDF text extraction with bounding boxes (column-aware)
