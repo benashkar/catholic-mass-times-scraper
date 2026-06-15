@@ -1,5 +1,7 @@
 # Church Scrapes — Project Plan
 
+_Last updated: 2026-06-14 (Cloudflare UA fix + dormant proxy wiring + cron build fix)._
+
 ## Overview
 Catholic church mass times, bulletins, and extracted names dashboard.
 - **Repo**: benashkar/catholic-mass-times-scraper
@@ -57,8 +59,10 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 | Service | ID | Type | Plan | Command |
 |---------|-----|------|------|---------|
 | catholic-church-dashboard | `srv-d6li8dtm5p6s73chuh7g` | web | starter | gunicorn |
-| church-daily-scrape | `crn-d6s8st3uibrs73e7b740` | cron (daily excl Tue) | **standard** (2GB) | `python run_daily_pipeline.py` |
+| church-mass-times-cron¹ | `crn-d6s8st3uibrs73e7b740` | cron (`0 3 * * 0,1,3,4,5,6`) | **standard** (2GB) | image CMD `python run_weekly_pipeline.py` (no startCommand override; use `--skip-bulletins` for mass-times only). autoDeploy=yes |
 | church-weekly-bulletins | `crn-d6s8t02a214c73bt62s0` | cron (Tue 3AM) | standard | `python run_weekly_pipeline.py` |
+
+¹ Render service display name is `church-mass-times-cron` (the original "church-daily-scrape" label is stale). Confirmed 2026-06-14.
 
 ## Pipeline Architecture
 
@@ -127,7 +131,25 @@ Catholic church mass times, bulletins, and extracted names dashboard.
 - Daily pipeline switched from `--cleanup-only` to `--new-only`
 - Full rescore (~11 min on 2.6M rows) only on weekly; daily rescores just new names (seconds)
 
+## RECENTLY COMPLETED (2026-06-13 / 06-14)
+
+### Cloudflare 403 fix — catholicindex.org (commit `1189922`)
+- **Root cause:** CatholicIndex.org sits behind Cloudflare, which returns **HTTP 403** to self-identifying bot User-Agents. Our honest `CatholicMassTimesScraper/1.0` UA was hard-403'd, silently breaking the mass-times scrape. Verified: honest UA → 403, Chrome UA → 200 (156 KB) **from the same IP** → a UA block, not an IP block.
+- **Fix:** switched `config/settings.py` `USER_AGENT` default to a realistic Chrome UA (used by `src/utils/http.py`). The bulletin paths already used a browser UA.
+- **Verified end-to-end on Render's datacenter IP:** one-off probe job succeeded (fetched >50 KB), then a real `run_weekly_pipeline.py --skip-bulletins` job ran ~6 min and **succeeded** through the db99 sync. So the datacenter IP is **not** IP-blocked once the UA is fixed.
+
+### Env-driven proxy support — wired but DORMANT (commit `1189922`)
+- Added optional rotating-residential-proxy support across **all** request paths: `src/utils/http.py`, `extract_bulletins_to_db99.py` (PDF downloads), `run_bulletin_scraper.py` (requests session **+ Playwright launch**), `run_resolve_urls.py`. Canonical `PROXY_URL`/`PROXIES` defined in `config/settings.py`.
+- **When `PROXY_URL` is unset (the default) everything goes direct** — this is a no-op until enabled on a Render cron. `PROXY_URL` is intentionally **NOT set** on the church crons because we confirmed we don't need it (UA fix alone works from Render).
+- To enable later: set `PROXY_URL` to the working 711 endpoint (the case-sensitive `-country-US` URL — see shared-proxy notes). Zero code change required.
+
+### Cron Docker build fix (commit `4ba2b8a`)
+- The cron image build was failing at `python -m spacy download en_core_web_lg` with `ModuleNotFoundError: No module named 'click'` — `spacy>=3.7` is unpinned and the resolved typer/spacy stack stopped pulling `click` transitively (last green build had been 2026-05-12). Added explicit `click>=8.1` to `requirements.txt`. Build is green again.
+
 ## NEXT TASKS (priority order)
+
+### 0. (watch) Re-pin spacy stack to prevent future build drift
+- The `click` fix is surgical; `spacy>=3.7` is still unpinned and could drift again. Consider pinning the spacy/typer/click stack to a known-good set.
 
 ### 1. Mass times data normalization
 - Events/locations returning junk — some events don't take place at the church
