@@ -33,9 +33,25 @@ playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, 
 # --- Name Quality Engine ---
 nameparser>=1.1           # Robust name parsing (handles titles, suffixes, compound names)
 probablepeople>=0.5       # CRF-based name parser — detects couple/household names
-spacy>=3.7                # NER-based name validation (en_core_web_lg model)
-click>=8.1                # Required by spacy's CLI (`spacy download`); newer typer/spacy
-                          # resolutions stopped pulling it transitively, breaking the build.
+
+# spaCy stack — EXACT PINS (do not loosen).
+# These are pinned to the known-good set that resolves on python:3.12-slim so the
+# cron Docker build (Dockerfile.cron -> `spacy download en_core_web_lg`) is
+# deterministic. Newer typer/spacy resolutions stopped pulling `click`
+# transitively, which broke the build with `ModuleNotFoundError: No module named
+# 'click'` (the 2026-06-13 cron build). Pinning click + the whole spaCy chain
+# prevents that drift from recurring. en_core_web_lg is installed separately in
+# Dockerfile.cron via `python -m spacy download` (model version tracks spacy).
+spacy==3.8.14             # NER-based name validation (en_core_web_lg model)
+thinc==8.3.13             # spaCy's ML backend (must match spacy's thinc<8.4,>=8.3.12)
+weasel==1.0.0             # spaCy project/CLI helper (pulls typer)
+typer==0.26.7             # spaCy/weasel CLI framework (imports click but no longer pins it)
+click==8.4.1              # Required by spacy's CLI (`spacy download`); pin so it is always installed
+spacy-loggers==1.0.5      # spaCy logging plugin
+srsly==2.5.3              # spaCy serialization (matches spacy's srsly>=2.5.3)
+catalogue==2.0.10         # spaCy registry/plugin discovery
+pydantic==2.13.4          # spaCy/thinc config validation (2.x line)
+numpy==2.2.6              # spaCy/thinc numeric backend
 
 # --- PDF Extraction ---
 pdfplumber>=0.10          # PDF text extraction with bounding boxes (column-aware)
