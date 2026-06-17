@@ -178,10 +178,13 @@ def main():
     # Step 2: Junk blocklist (always runs on all medium+high, not just new — catches edge cases)
     print("  Step 2: Applying junk blocklist...")
     # Load blocklist from config/blocklist.csv (externalized for easy editing)
-    blocklist_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "blocklist.csv")
+    blocklist_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "config", "blocklist.csv"
+    )
     blocklist = []
-    with open(blocklist_path, "r", encoding="utf-8") as f:
+    with open(blocklist_path, encoding="utf-8") as f:
         import csv
+
         reader = csv.DictReader(f)
         for row in reader:
             blocklist.append(row["term"])
@@ -537,6 +540,7 @@ if __name__ == "__main__":
         sys.exit(main())
     except Exception as e:
         import traceback
+
         traceback.print_exc()
         try:
             conn = get_connection()

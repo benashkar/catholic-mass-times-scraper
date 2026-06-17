@@ -1222,14 +1222,14 @@ conf_counter = Counter()
 for r, st in all_rows:
     conf_counter[r.get("confidence", "").strip().lower()] += 1
 for c, ct in conf_counter.most_common():
-    print(f"    {c:10s}: {ct:>8,}  ({100.0*ct/len(all_rows):5.1f}%)")
+    print(f"    {c:10s}: {ct:>8,}  ({100.0 * ct / len(all_rows):5.1f}%)")
 
 print("\n" + "=" * 80)
 print(
-    f"  JUNK DETECTION: {len(all_junk):,} of {len(unique_names):,} unique names flagged ({100.0*len(all_junk)/len(unique_names):.1f}%)"
+    f"  JUNK DETECTION: {len(all_junk):,} of {len(unique_names):,} unique names flagged ({100.0 * len(all_junk) / len(unique_names):.1f}%)"
 )
 print(
-    f"  Clean names remaining: {len(all_clean):,} ({100.0*len(all_clean)/len(unique_names):.1f}%)"
+    f"  Clean names remaining: {len(all_clean):,} ({100.0 * len(all_clean) / len(unique_names):.1f}%)"
 )
 print("=" * 80)
 
@@ -1322,7 +1322,7 @@ for n in newline_names:
         if 2 <= len(words) <= 3 and all(w[0].isupper() for w in words if w):
             first_line_clean += 1
 print(
-    f"    First line looks like valid 2-3 word name: {first_line_clean:,} ({100.0*first_line_clean/len(newline_names):.1f}%)"
+    f"    First line looks like valid 2-3 word name: {first_line_clean:,} ({100.0 * first_line_clean / len(newline_names):.1f}%)"
 )
 print("    These may be salvageable by splitting on newline and keeping first line.")
 
@@ -1334,7 +1334,7 @@ print("=" * 80)
 print(f"""
   1. SCALE: 499,185 unique person_name entries across 787,284 rows from 10 states.
 
-  2. JUNK RATE: {len(all_junk):,} names ({100.0*len(all_junk)/len(unique_names):.1f}%) flagged as likely junk/non-names.
+  2. JUNK RATE: {len(all_junk):,} names ({100.0 * len(all_junk) / len(unique_names):.1f}%) flagged as likely junk/non-names.
      After filtering: {len(all_clean):,} clean names remain.
 
   3. BIGGEST ISSUE - NEWLINE CONTAMINATION: {len(newline_names):,} names (15.5%) contain embedded
@@ -1348,16 +1348,16 @@ print(f"""
      Medium-confidence names account for 67.9% of rows but contain the vast
      majority of junk entries.
 
-  5. CONTENT-BASED JUNK: The largest content category is nouns/verbs ({cat_counts.get('NOUNS_VERBS',0):,}
+  5. CONTENT-BASED JUNK: The largest content category is nouns/verbs ({cat_counts.get("NOUNS_VERBS", 0):,}
      names containing words like "deceased", "ministry", "council", "committee",
      "wedding", "meeting", "festival"). These are bulletin section headers and
      event descriptions that were misidentified as person names.
 
-  6. MERGED NAMES: {cat_counts.get('MERGED_NAMES',0):,} entries appear to be two separate people
+  6. MERGED NAMES: {cat_counts.get("MERGED_NAMES", 0):,} entries appear to be two separate people
      merged into one entry (e.g., "Kevin Steinkamp Mary", "Barbara Schmidt Michael").
      Most common appended names: Mary (391), John (304), Michael (177), Mike (161).
 
-  7. COMMERCIAL LEAKAGE: {cat_counts.get('COMMERCIAL',0):,} entries contain business terms
+  7. COMMERCIAL LEAKAGE: {cat_counts.get("COMMERCIAL", 0):,} entries contain business terms
      (Knights of Columbus alone accounts for ~3,175 entries).
 
   8. STATE VARIATION: Junk rates vary significantly by state, from ~5.5% (Florida)

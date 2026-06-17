@@ -36,9 +36,9 @@ for st in STATES:
         state_counts[st] = len(rows)
         all_rows.extend([(r, st) for r in rows])
 
-print(f"{'='*80}")
+print(f"{'=' * 80}")
 print(f"JUNK / NON-NAME ANALYSIS ACROSS {len(state_counts)} STATES")
-print(f"{'='*80}")
+print(f"{'=' * 80}")
 print("\nRows loaded per state:")
 for st, ct in sorted(state_counts.items()):
     print(f"  {st:15s}: {ct:>7,}")
@@ -62,9 +62,9 @@ conf_counter = Counter()
 for r, st in all_rows:
     conf_counter[r.get("confidence", "").strip().lower()] += 1
 
-print(f"\n{'─'*80}")
+print(f"\n{'─' * 80}")
 print("CONFIDENCE LEVEL BREAKDOWN (all rows):")
-print(f"{'─'*80}")
+print(f"{'─' * 80}")
 total_rows = len(all_rows)
 for c, ct in conf_counter.most_common():
     pct = 100.0 * ct / total_rows
@@ -1378,9 +1378,9 @@ for name in unique_names:
                 )
 
 # ── OUTPUT RESULTS ──────────────────────────────────────────────────────
-print(f"\n{'='*80}")
+print(f"\n{'=' * 80}")
 print("JUNK DETECTION RESULTS BY CATEGORY")
-print(f"{'='*80}")
+print(f"{'=' * 80}")
 
 all_junk = set()
 for cat_key in sorted(categories.keys()):
@@ -1388,10 +1388,10 @@ for cat_key in sorted(categories.keys()):
     matches = cat["matches"]
     all_junk.update(matches.keys())
 
-    print(f"\n{'─'*80}")
+    print(f"\n{'─' * 80}")
     print(f"CATEGORY {cat_key}: {cat['desc']}")
     print(f"  Unique names matching: {len(matches):,}")
-    print(f"{'─'*80}")
+    print(f"{'─' * 80}")
 
     # Show up to 15 examples with trigger words, sorted by trigger variety
     sorted_matches = sorted(matches.keys())[:15]
@@ -1402,9 +1402,9 @@ for cat_key in sorted(categories.keys()):
         print(f"  [{conf:6s}] {nm:55s} <-- {trigger_str}")
 
 # ── CONFIDENCE vs JUNK RATE ─────────────────────────────────────────────
-print(f"\n{'='*80}")
+print(f"\n{'=' * 80}")
 print("CONFIDENCE vs JUNK RATE ANALYSIS")
-print(f"{'='*80}")
+print(f"{'=' * 80}")
 
 conf_total = defaultdict(int)
 conf_junk = defaultdict(int)
@@ -1415,7 +1415,7 @@ for nm in unique_names:
         conf_junk[conf] += 1
 
 print(f"\n  {'Confidence':<15s} {'Total Unique':>12s} {'Junk':>8s} {'Junk Rate':>10s}")
-print(f"  {'─'*50}")
+print(f"  {'─' * 50}")
 for conf in sorted(conf_total.keys()):
     total = conf_total[conf]
     junk = conf_junk[conf]
@@ -1423,9 +1423,9 @@ for conf in sorted(conf_total.keys()):
     print(f"  {conf:<15s} {total:>12,} {junk:>8,} {rate:>9.1f}%")
 
 # ── SUMMARY ─────────────────────────────────────────────────────────────
-print(f"\n{'='*80}")
+print(f"\n{'=' * 80}")
 print("OVERALL SUMMARY")
-print(f"{'='*80}")
+print(f"{'=' * 80}")
 total_r = sum(state_counts.values())
 print(f"\n  Total rows across {len(state_counts)} states:    {total_r:>10,}")
 print(f"  Total unique names:                  {len(unique_names):>10,}")
@@ -1442,9 +1442,9 @@ for cat_key in sorted(categories.keys()):
     print(f"    {cat_key:30s}: {ct:>6,} names ({pct:5.2f}%)")
 
 # ── MULTI-CATEGORY JUNK ────────────────────────────────────────────────
-print(f"\n{'─'*80}")
+print(f"\n{'─' * 80}")
 print("NAMES FLAGGED IN MULTIPLE CATEGORIES (highest-confidence junk):")
-print(f"{'─'*80}")
+print(f"{'─' * 80}")
 name_cat_count = Counter()
 name_cats = defaultdict(list)
 for cat_key in sorted(categories.keys()):
@@ -1467,9 +1467,9 @@ print(f"  Names in 2 categories:     {two_cat:,}")
 print(f"  Names in 3+ categories:    {three_plus:,}")
 
 # ── TOP TRIGGER WORDS ──────────────────────────────────────────────────
-print(f"\n{'─'*80}")
+print(f"\n{'─' * 80}")
 print("TOP 40 TRIGGER WORDS (most frequently matched):")
-print(f"{'─'*80}")
+print(f"{'─' * 80}")
 all_triggers = Counter()
 for cat_key in categories:
     for nm, triggers in categories[cat_key]["trigger_words"].items():
@@ -1482,9 +1482,9 @@ for word, ct in all_triggers.most_common(40):
 import random  # noqa: E402
 
 random.seed(42)
-print(f"\n{'─'*80}")
+print(f"\n{'─' * 80}")
 print("RANDOM SAMPLE: 30 junk entries for manual review")
-print(f"{'─'*80}")
+print(f"{'─' * 80}")
 junk_list = sorted(all_junk)
 sample = random.sample(junk_list, min(30, len(junk_list)))
 for nm in sample:
@@ -1493,9 +1493,9 @@ for nm in sample:
     print(f"  [{conf:6s}] {nm:55s} cats: {', '.join(cats)}")
 
 # ── STATE-LEVEL JUNK RATES ─────────────────────────────────────────────
-print(f"\n{'─'*80}")
+print(f"\n{'─' * 80}")
 print("JUNK RATE BY STATE:")
-print(f"{'─'*80}")
+print(f"{'─' * 80}")
 for st in sorted(state_counts.keys()):
     st_names = set()
     st_junk = 0
@@ -1509,6 +1509,6 @@ for st in sorted(state_counts.keys()):
     rate = 100.0 * st_junk / st_total if st_total > 0 else 0
     print(f"  {st:15s}: {st_total:>6,} unique names, {st_junk:>5,} junk ({rate:5.1f}%)")
 
-print(f"\n{'='*80}")
+print(f"\n{'=' * 80}")
 print("ANALYSIS COMPLETE")
-print(f"{'='*80}")
+print(f"{'=' * 80}")

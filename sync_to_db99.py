@@ -669,9 +669,9 @@ def sync_state(conn, state_dir_name, dry_run=False, skip_bulletins=False):
         print(f"[--] Directory not found: {state_dir}")
         return False
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print(f"  Syncing: {STATE_CODE_TO_NAME.get(state_code, state_code)} ({state_code})")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     cur = conn.cursor()
     start_time = time.time()
@@ -766,11 +766,11 @@ def main():
         cur.close()
 
     # Summary
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("  SYNC SUMMARY")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"  States: {len(success_states)} succeeded, {len(failed_states)} failed")
-    print(f"  Total time: {total_elapsed:.1f}s ({total_elapsed/60:.1f} min)")
+    print(f"  Total time: {total_elapsed:.1f}s ({total_elapsed / 60:.1f} min)")
 
     if not args.dry_run:
         cur = conn.cursor()

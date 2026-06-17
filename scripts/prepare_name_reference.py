@@ -525,7 +525,7 @@ def main():
     # Write non-name words
     write_non_names()
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print("Reference data preparation complete:")
     print(f"  SSA first names:    {ssa_count:,}")
     print(f"  Census surnames:    {census_count:,}")

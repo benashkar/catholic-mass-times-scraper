@@ -21,6 +21,7 @@ class TestHomePage:
 
 
 class TestHealthEndpoint:
+    @pytest.mark.requires_db
     def test_health_returns_ok(self, client):
         response = client.get("/health")
         assert response.status_code == 200
