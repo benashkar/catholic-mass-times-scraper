@@ -40,7 +40,8 @@ via `scripts/refresh_cherry_road_shapes.py` (96 projects / 845 shapes; 599 citie
 `scripts/cr_coverage_report.py`. Both built "the right way" — re-run to pick up Limpar changes.
 
 **Status / remaining:** CR-states rollout running on Render now (`run_discovermass_all.py --cr-only`,
-direct/6s); states land incrementally (AR + ME done = 2/21 at time of writing). The weekly cron
+direct/6s); states land incrementally (AR 86 + ME 144 + KS 323 done = 3/21 at time of writing — KS
+confirms the direct path writes at production scale; MO next). The weekly cron
 (Step 1 = DiscoverMass, CR-first) carries the full national sweep forward + keeps it fresh. Some CR
 micro-towns have no parish of their own (served by neighbor towns) — a parish-existence limit, not a
 coverage bug. Live count: `DB_HOST=10.10.0.8 python scripts/cr_coverage_report.py`.
