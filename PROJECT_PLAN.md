@@ -1,6 +1,42 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-06-14 (Cloudflare UA fix + dormant proxy wiring + cron build fix)._
+_Last updated: 2026-06-18 (mass-times source pivot: CatholicIndex → DiscoverMass)._
+
+## ⚠️ 2026-06-18 — MASS-TIMES SOURCE PIVOT (CatholicIndex dead → DiscoverMass)
+
+**CatholicIndex.org is unscrapeable.** It went behind a hard Cloudflare **Managed Challenge**
+(`cf-mitigated: challenge`) on all content pages (`/churches/*`, `/mass-times/*`) ~2026-04. The
+daily/weekly scrape has been a **silent no-op since ~2026-04-22** (exit 0, 0 rows): `scrape_log`
+shows `scrape=FAIL` every run since 2026-04-02, and 100% of churches were >30d stale. Nothing
+in-house beats the challenge (requests, curl_cffi, Playwright-headless, undetected-chromedriver-
+headed, residential proxy all 403). Only a paid scraping-browser (BrightData) would — not pursued.
+
+**New source = DiscoverMass.com** (open, plain `requests` 200, ~20,283 parishes via WP sitemap):
+- `src/scrapers/discover_mass.py` — `enumerate_parishes(state)` (sitemap, slug-suffix state filter)
+  + `parse_parish()` (mirrors `catholic_index.scrape_church_detail` output).
+- `discovermass_to_db99.py --state XX [--commit]` — match-or-insert into db99. Matches existing
+  churches by **geo ≤150m + normalized name/city** (preserves `church_id` + bulletin links),
+  inserts net-new, flags ambiguous (skipped). Per-church schedule replace ONLY when DM has ≥1
+  service (0-service parishes keep old schedule); per-state stale-service cleanup; explicit commit.
+- `run_discovermass_all.py` — loops states (**Cherry Road states first**), idempotent/self-healing.
+- **Weekly pipeline Step 1 now calls `run_discovermass_all.py`** (was the dead CatholicIndex
+  `run_statewide.py --detail-only`). Bulletins/rescore steps unchanged.
+- **`PROXY_URL` set on `church-mass-times-cron`** — only to dodge DiscoverMass `Crawl-delay:10`
+  throttle (it is NOT Cloudflare-walled). Proxy throughput is inconsistent; per-state idempotency
+  + the stale-cleanup make partial runs safe to re-run.
+
+**AR pilot (2026-06-18): VERIFIED.** 86 parishes refreshed + 6 net-new; stale CatholicIndex
+services retired where DM provided a schedule; 1 church (0-service) kept its old schedule by design.
+Also merged 2 pre-existing AR duplicate church rows (`scripts/merge_ar_duplicate_churches.py`),
+all bulletin names preserved.
+
+**Cherry Road geography** is synced from Limpar (source of truth) into db99 `cr_market_shape`
+via `scripts/refresh_cherry_road_shapes.py` (96 projects / 845 shapes; 599 cities). Coverage diff:
+`scripts/cr_coverage_report.py`. Both built "the right way" — re-run to pick up Limpar changes.
+
+**Remaining:** full national sweep runs over weekly-cron cycles (CR states first). Some CR
+micro-towns have no parish of their own (served by neighbor towns) — that's a parish-existence
+limit, not a coverage bug.
 
 ## Overview
 Catholic church mass times, bulletins, and extracted names dashboard.
