@@ -21,22 +21,29 @@ headed, residential proxy all 403). Only a paid scraping-browser (BrightData) wo
 - `run_discovermass_all.py` — loops states (**Cherry Road states first**), idempotent/self-healing.
 - **Weekly pipeline Step 1 now calls `run_discovermass_all.py`** (was the dead CatholicIndex
   `run_statewide.py --detail-only`). Bulletins/rescore steps unchanged.
-- **`PROXY_URL` set on `church-mass-times-cron`** — only to dodge DiscoverMass `Crawl-delay:10`
-  throttle (it is NOT Cloudflare-walled). Proxy throughput is inconsistent; per-state idempotency
-  + the stale-cleanup make partial runs safe to re-run.
+- **Fetch config: DIRECT, NO PROXY, `SCRAPE_DELAY_SECONDS=6` on `church-mass-times-cron`.**
+  The 711 residential proxy proved UNRELIABLE for DiscoverMass — a Render one-off job through the
+  proxy exited 0 but wrote **0 rows** (every proxied fetch failed; a local re-run also collapsed
+  86→2). Direct fetching at ~6s is reliable (verified). `PROXY_URL` was REMOVED from the cron.
+  http.py retries cover transient 503s. Slower (~10-15h national) but self-heals across weekly runs.
 
-**AR pilot (2026-06-18): VERIFIED.** 86 parishes refreshed + 6 net-new; stale CatholicIndex
-services retired where DM provided a schedule; 1 church (0-service) kept its old schedule by design.
-Also merged 2 pre-existing AR duplicate church rows (`scripts/merge_ar_duplicate_churches.py`),
-all bulletin names preserved.
+**VERIFIED end-to-end (2026-06-18):**
+- **AR pilot (local commit path):** 86 parishes refreshed + 6 net-new; stale CatholicIndex services
+  retired where DM provided a schedule; 1 church (0-service) kept its old schedule by design.
+  Merged 2 pre-existing AR duplicate church rows (`scripts/merge_ar_duplicate_churches.py`), all
+  bulletin names preserved.
+- **ME (Render one-off, DIRECT prod path):** 144 churches refreshed, 131 with active DM services
+  (vs 0 through the proxy) — confirms the direct path writes cleanly from Render's datacenter IP.
 
 **Cherry Road geography** is synced from Limpar (source of truth) into db99 `cr_market_shape`
 via `scripts/refresh_cherry_road_shapes.py` (96 projects / 845 shapes; 599 cities). Coverage diff:
 `scripts/cr_coverage_report.py`. Both built "the right way" — re-run to pick up Limpar changes.
 
-**Remaining:** full national sweep runs over weekly-cron cycles (CR states first). Some CR
-micro-towns have no parish of their own (served by neighbor towns) — that's a parish-existence
-limit, not a coverage bug.
+**Status / remaining:** CR-states rollout running on Render now (`run_discovermass_all.py --cr-only`,
+direct/6s); states land incrementally (AR + ME done = 2/21 at time of writing). The weekly cron
+(Step 1 = DiscoverMass, CR-first) carries the full national sweep forward + keeps it fresh. Some CR
+micro-towns have no parish of their own (served by neighbor towns) — a parish-existence limit, not a
+coverage bug. Live count: `DB_HOST=10.10.0.8 python scripts/cr_coverage_report.py`.
 
 ## Overview
 Catholic church mass times, bulletins, and extracted names dashboard.
