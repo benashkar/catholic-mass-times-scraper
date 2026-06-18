@@ -125,24 +125,22 @@ def run_cmd(cmd, description, timeout_seconds=None):
 
 
 def step_scrape_details(states):
-    """Step 1: Re-scrape church detail pages for all states."""
+    """Step 1: Refresh mass times from DiscoverMass.
+
+    CatholicIndex.org went behind a hard Cloudflare Managed Challenge (~2026-04)
+    and is unscrapeable, so the mass-times source is now DiscoverMass.com.
+    run_discovermass_all.py handles all states itself (Cherry Road states first),
+    is idempotent per state, and self-heals across runs — so we invoke it once
+    rather than batching. PROXY_URL (if set in the cron env) is inherited to dodge
+    DiscoverMass's Crawl-delay throttle. The `states` arg is kept for signature
+    compatibility but the runner owns state selection/ordering.
+    """
     log("=" * 60)
-    log("STEP 1: Re-scrape church details (all states)")
+    log("STEP 1: DiscoverMass mass-times refresh (Cherry Road states first, then all)")
     log("=" * 60)
 
-    # Process states in batches of 5 to avoid overloading CatholicIndex
-    batch_size = 5
-    all_ok = True
-
-    for i in range(0, len(states), batch_size):
-        batch = states[i : i + batch_size]
-        cmd = [sys.executable, "run_statewide.py", *batch, "--detail-only", "--resume"]
-        # 2 hours per batch of 5 states
-        ok = run_cmd(cmd, f"Detail scrape: {', '.join(batch)}", timeout_seconds=7200)
-        if not ok:
-            all_ok = False
-
-    return all_ok
+    cmd = [sys.executable, "run_discovermass_all.py"]
+    return run_cmd(cmd, "DiscoverMass refresh (all states)", timeout_seconds=None)
 
 
 def step_regenerate_dates(states):
