@@ -39,9 +39,11 @@ headed, residential proxy all 403). Only a paid scraping-browser (BrightData) wo
 via `scripts/refresh_cherry_road_shapes.py` (96 projects / 845 shapes; 599 cities). Coverage diff:
 `scripts/cr_coverage_report.py`. Both built "the right way" — re-run to pick up Limpar changes.
 
-**Status / remaining:** CR-states rollout running on Render now (`run_discovermass_all.py --cr-only`,
-direct/6s); states land incrementally (AR 86 + ME 144 + KS 323 done = 3/21 at time of writing — KS
-confirms the direct path writes at production scale; MO next). The weekly cron
+**Status: CR ROLLOUT COMPLETE (2026-06-18).** `run_discovermass_all.py --cr-only` on Render
+**succeeded — all 21/21 Cherry Road states, 9,444 churches refreshed** (were frozen since April).
+Per-state counts incl. NY 1,438 · TX 1,161 · IL 974 · OH 792 · MI 728 · MN 599 · MO 429 · IA 419 ·
+IN 394 · KS 323 · NE 269 · CO 234 · NM 206 · OK 162 · GA 160 · AL 150 · ME 144 · ID 91 · AR 86 ·
+MA 625 · UT 60. Remaining non-CR states fill in via the weekly cron. The weekly cron
 (Step 1 = DiscoverMass, CR-first) carries the full national sweep forward + keeps it fresh. Some CR
 micro-towns have no parish of their own (served by neighbor towns) — a parish-existence limit, not a
 coverage bug. Live count: `DB_HOST=10.10.0.8 python scripts/cr_coverage_report.py`.
