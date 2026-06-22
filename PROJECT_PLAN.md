@@ -39,14 +39,26 @@ headed, residential proxy all 403). Only a paid scraping-browser (BrightData) wo
 via `scripts/refresh_cherry_road_shapes.py` (96 projects / 845 shapes; 599 cities). Coverage diff:
 `scripts/cr_coverage_report.py`. Both built "the right way" — re-run to pick up Limpar changes.
 
-**Status: CR ROLLOUT COMPLETE (2026-06-18).** `run_discovermass_all.py --cr-only` on Render
-**succeeded — all 21/21 Cherry Road states, 9,444 churches refreshed** (were frozen since April).
-Per-state counts incl. NY 1,438 · TX 1,161 · IL 974 · OH 792 · MI 728 · MN 599 · MO 429 · IA 419 ·
-IN 394 · KS 323 · NE 269 · CO 234 · NM 206 · OK 162 · GA 160 · AL 150 · ME 144 · ID 91 · AR 86 ·
-MA 625 · UT 60. Remaining non-CR states fill in via the weekly cron. The weekly cron
-(Step 1 = DiscoverMass, CR-first) carries the full national sweep forward + keeps it fresh. Some CR
-micro-towns have no parish of their own (served by neighbor towns) — a parish-existence limit, not a
-coverage bug. Live count: `DB_HOST=10.10.0.8 python scripts/cr_coverage_report.py`.
+**CR ROLLOUT COMPLETE (2026-06-18): all 21/21 Cherry Road states, 9,444 churches refreshed**
+(were frozen since April) via `run_discovermass_all.py --cr-only`. Counts incl. NY 1,438 · TX 1,161 ·
+IL 974 · OH 792 · MI 728 · MN 599 · MO 429 · IA 419 · IN 394 · KS 323 · NE 269 · CO 234 · NM 206 ·
+OK 162 · GA 160 · AL 150 · ME 144 · ID 91 · AR 86 · MA 625 · UT 60.
+
+**NATIONAL (non-CR) NEW-CHURCH RUN IN PROGRESS (2026-06-22):** manual Render one-off
+`run_discovermass_all.py --states <29 non-CR states>` (`job-d8sm98i8qa3s73bfvfg0`) — inserting
+net-new churches + mass times + events for states never scraped via DiscoverMass. Landing live
+(AK 58, AZ 203 … total climbing 9,444 → 9,700+). Run is Render-side, independent of any CLI session.
+
+**⚠️ CRON DESIGN FLAW (action needed):** the scheduled cron runs `run_weekly_pipeline.py` → Step 1
+`run_discovermass_all.py` (ALL states, CR-first), which **re-scrapes every church every run** at 6s
+each (~30h national). A daily/weekly fire can't finish — it restarts CR-first and dies. Evidence: db99
+shows DiscoverMass writes only on 2026-06-18 (manual) + 06-19 (partial cron) — **nothing 06-20/21/22,
+still only 21 states**. So the national sweep is NOT self-completing via cron; it needs manual runs
+today. **Fix (proposed, not yet done):** shard states by day-of-week (each fire does ~7 states →
+full national weekly, finishes within limits) + a stale-only refresh pass instead of full re-scrape.
+
+Some CR micro-towns have no parish of their own (served by neighbor towns) — a parish-existence
+limit, not a coverage bug. Live count: `DB_HOST=10.10.0.8 python scripts/cr_coverage_report.py`.
 
 ## Overview
 Catholic church mass times, bulletins, and extracted names dashboard.
