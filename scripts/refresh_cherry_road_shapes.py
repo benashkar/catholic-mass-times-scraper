@@ -66,9 +66,14 @@ def replace_db99_table(rows):
                     "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                     [
                         (
-                            r["network"], r["project"], r["project_pipeline_id"],
-                            r["project_shape_type"], r["shape"], r["shape_type"],
-                            r["state_abbr"], norm_city(r["shape"]) if r["shape_type"] == "city" else None,
+                            r["network"],
+                            r["project"],
+                            r["project_pipeline_id"],
+                            r["project_shape_type"],
+                            r["shape"],
+                            r["shape_type"],
+                            r["state_abbr"],
+                            norm_city(r["shape"]) if r["shape_type"] == "city" else None,
                             refreshed_at,
                         )
                         for r in rows
@@ -97,7 +102,9 @@ def main():
 
     projects = {r["project"] for r in rows}
     by_type = Counter(r["shape_type"] for r in rows)
-    print(f"[OK] Limpar -> db99 {TABLE}: replaced with {len(rows)} shapes (refreshed_at={refreshed_at} UTC)")
+    print(
+        f"[OK] Limpar -> db99 {TABLE}: replaced with {len(rows)} shapes (refreshed_at={refreshed_at} UTC)"
+    )
     print(f"[OK] CSV export -> {OUT_CSV}")
     print(f"[OK] Projects: {len(projects)} | Total shapes: {len(rows)}")
     print("[OK] Shapes by type:")

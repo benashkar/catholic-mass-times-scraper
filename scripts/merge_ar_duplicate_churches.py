@@ -66,13 +66,17 @@ def main():
         rem_js = names_for(1116)
         cur.execute("SELECT church_id FROM church WHERE church_id IN (1070,1071,1115,1116)")
         survivors = sorted(r["church_id"] for r in cur.fetchall())
-        print(f"[post] total bulletin_name rows: {after_total} (delta={after_total-before_total}; must be 0)")
+        print(
+            f"[post] total bulletin_name rows: {after_total} (delta={after_total - before_total}; must be 0)"
+        )
         print(f"[post] Jonesboro #1116 names now: {rem_js} (expected 274 = 206+68)")
         print(f"[post] survivors among the 4: {survivors}")
 
         if after_total == before_total and rem_js == 274 and survivors == [1071, 1116]:
             conn.commit()
-            print("[OK] COMMITTED — duplicates merged, ALL names preserved (moved to #1116), 0 lost")
+            print(
+                "[OK] COMMITTED — duplicates merged, ALL names preserved (moved to #1116), 0 lost"
+            )
             return 0
         conn.rollback()
         print("[ERR] anomaly -> ROLLED BACK")

@@ -58,26 +58,36 @@ def main():
         key = ((c["state_abbr"] or "").upper(), c["shape_norm"] or norm_city(c["shape"]))
         n, last = covered.get(key, (0, None))
         rec = {
-            "project": c["project"], "state": c["state_abbr"], "city": c["shape"],
-            "churches": n, "last_scraped": last or "", "covered": "yes" if n > 0 else "NO",
+            "project": c["project"],
+            "state": c["state_abbr"],
+            "city": c["shape"],
+            "churches": n,
+            "last_scraped": last or "",
+            "covered": "yes" if n > 0 else "NO",
         }
         rows_out.append(rec)
         by_project[c["project"]].append(n > 0)
 
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["project", "state", "city", "churches", "last_scraped", "covered"])
+        w = csv.DictWriter(
+            fh, fieldnames=["project", "state", "city", "churches", "last_scraped", "covered"]
+        )
         w.writeheader()
         w.writerows(rows_out)
 
     total = len(rows_out)
     cov = sum(1 for r in rows_out if r["covered"] == "yes")
     pct = (100 * cov // total) if total else 0
-    print(f"[OK] CR city shapes: {total} | covered (>=1 church): {cov} ({pct}%) | gaps: {total - cov}")
+    print(
+        f"[OK] CR city shapes: {total} | covered (>=1 church): {cov} ({pct}%) | gaps: {total - cov}"
+    )
 
     full = sum(1 for v in by_project.values() if all(v))
     zero_projects = [p for p, v in by_project.items() if not any(v)]
     partial = len(by_project) - full - len(zero_projects)
-    print(f"[OK] CR markets by city coverage: fully={full}, partial={partial}, ZERO={len(zero_projects)}")
+    print(
+        f"[OK] CR markets by city coverage: fully={full}, partial={partial}, ZERO={len(zero_projects)}"
+    )
     if zero_projects:
         print("[--] Markets with ZERO city coverage:")
         for p in sorted(zero_projects):

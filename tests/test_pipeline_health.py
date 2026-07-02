@@ -150,7 +150,7 @@ def main():
 
     conn.close()
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     if all_issues:
         print(f"  {len(all_issues)} ISSUES FOUND:")
         for issue in all_issues:
