@@ -53,7 +53,7 @@ import math
 import os
 import sys
 import time
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -206,7 +206,7 @@ def load_existing_churches(cur, state_code: str) -> list[dict]:
     cur.execute(
         """
         SELECT church_id, slug, name, city, state_code, postal_code,
-               latitude, longitude, source_url
+               latitude, longitude, source_url, last_scraped_at
         FROM church
         WHERE state_code = %s
         """,
@@ -596,6 +596,7 @@ def print_report(state_code, stats, plan, samples_n=10):
     print(line)
     print("  NO DATABASE WRITES WERE PERFORMED.\n")
     print(f"  parishes enumerated ........ {stats['enumerated']}")
+    print(f"  skipped (fresh, stale-only)  {stats.get('skipped_fresh', 0)}")
     print(f"  parsed OK .................. {stats['parsed_ok']}")
     print(f"  parse failures ............. {stats['parse_fail']}")
     print(f"  -> matched to existing ..... {stats['match']}")
@@ -662,6 +663,13 @@ def main():
         help="ACTUALLY WRITE to db99. Phase 2 must NOT use this.",
     )
     parser.add_argument("--samples", type=int, default=10, help="Sample decisions to print")
+    parser.add_argument(
+        "--stale-days",
+        type=int,
+        default=0,
+        help="Skip parishes whose matching church row was scraped within the last N days "
+        "(0=disabled, re-scrape everything). Net-new parishes are always parsed.",
+    )
     args = parser.parse_args()
 
     state_code = args.state.upper()
@@ -677,8 +685,23 @@ def main():
     slugs = enumerate_parishes(state=state_code, limit=args.limit)
     print(f"[OK] enumerated {len(slugs)} DiscoverMass parishes")
 
+    # Stale-only refresh: skip parishes whose matching church row was scraped
+    # within the last N days. Keyed on slug (DiscoverMass-inserted churches store
+    # their DM slug), so net-new parishes — those with no existing slug — are never
+    # skipped. This makes each sharded run cheap and self-healing without redoing
+    # churches already refreshed this cycle.
+    fresh_slugs: set[str] = set()
+    if args.stale_days > 0:
+        cutoff = datetime.now(UTC).replace(tzinfo=None) - timedelta(days=args.stale_days)
+        for r in existing:
+            ls = r.get("last_scraped_at")
+            if r.get("slug") and ls is not None and ls >= cutoff:
+                fresh_slugs.add(r["slug"])
+        print(f"[OK] stale-days={args.stale_days}: {len(fresh_slugs)} fresh churches will be skipped")
+
     stats = {
         "enumerated": len(slugs),
+        "skipped_fresh": 0,
         "parsed_ok": 0,
         "parse_fail": 0,
         "match": 0,
@@ -690,6 +713,9 @@ def main():
     matched_ids = set()
 
     for i, slug in enumerate(slugs):
+        if slug in fresh_slugs:
+            stats["skipped_fresh"] += 1
+            continue
         try:
             detail = parse_parish(slug)
         except Exception as e:  # noqa: BLE001
