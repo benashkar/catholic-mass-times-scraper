@@ -48,10 +48,10 @@ clean_no_newline = unique_names - newline_names
 
 print(f"\n  Total unique names:              {len(unique_names):>8,}")
 print(
-    f"  Names WITH newline characters:   {len(newline_names):>8,}  ({100.0*len(newline_names)/len(unique_names):.1f}%)"
+    f"  Names WITH newline characters:   {len(newline_names):>8,}  ({100.0 * len(newline_names) / len(unique_names):.1f}%)"
 )
 print(
-    f"  Names WITHOUT newlines:          {len(clean_no_newline):>8,}  ({100.0*len(clean_no_newline)/len(unique_names):.1f}%)"
+    f"  Names WITHOUT newlines:          {len(clean_no_newline):>8,}  ({100.0 * len(clean_no_newline) / len(unique_names):.1f}%)"
 )
 
 # Confidence of newline names
@@ -195,7 +195,7 @@ print("  Many newline names also trigger noun/verb or merged-name detection.")
 # Combined unique junk: union of newline + all_caps + long + single_word
 structural_junk = newline_names | all_caps | set(n for n, wc in long_names) | single_word
 print(f"\n  Structural junk (newline/caps/long/single): {len(structural_junk):,}")
-print(f"  As % of all unique names: {100.0*len(structural_junk)/len(unique_names):.1f}%")
+print(f"  As % of all unique names: {100.0 * len(structural_junk) / len(unique_names):.1f}%")
 
 print("\n" + "=" * 80)
 print("ANALYSIS COMPLETE")

@@ -81,10 +81,12 @@ def create_app(config_class=Config):
     @app.route("/health")
     def health():
         """Full diagnostic health status for the pipeline and diagnostic agent."""
-        import sys
         import os
+        import sys
+
         sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
         from flask import request
+
         from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list
         from src.utils.health_checks import run_all_checks
 

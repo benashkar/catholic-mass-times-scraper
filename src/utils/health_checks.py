@@ -74,12 +74,14 @@ def check_junk_rate_by_state(cur, state=None):
     flagged_states = []
     issues = []
     for r in cur.fetchall():
-        flagged_states.append({
-            "state": r["state_code"],
-            "junk_pct": float(r["junk_pct"]),
-            "junk": r["junk"],
-            "total": r["total"],
-        })
+        flagged_states.append(
+            {
+                "state": r["state_code"],
+                "junk_pct": float(r["junk_pct"]),
+                "junk": r["junk"],
+                "total": r["total"],
+            }
+        )
         if r["junk_pct"] > 50:
             issues.append(f"{r['state_code']} has {r['junk_pct']}% junk rate")
     return {"flagged_states": flagged_states, "issues": issues}
@@ -88,8 +90,15 @@ def check_junk_rate_by_state(cur, state=None):
 def check_known_junk_still_present(cur):
     """Verify known junk terms are not in high/medium confidence."""
     junk_terms = [
-        "Alzheimer", "Fish Fry", "Cancer", "Access Code", "Full Page",
-        "Bulletin", "Sacrament", "Committee", "Receptionist",
+        "Alzheimer",
+        "Fish Fry",
+        "Cancer",
+        "Access Code",
+        "Full Page",
+        "Bulletin",
+        "Sacrament",
+        "Committee",
+        "Receptionist",
     ]
     found = {}
     issues = []
@@ -191,12 +200,14 @@ def check_recent_pipeline_runs(cur):
     """)
     runs = []
     for r in cur.fetchall():
-        runs.append({
-            "scrape_type": r["scrape_type"],
-            "completed_at": r["completed_at"].isoformat() if r["completed_at"] else None,
-            "status": r["status"],
-            "notes": r["notes"],
-        })
+        runs.append(
+            {
+                "scrape_type": r["scrape_type"],
+                "completed_at": r["completed_at"].isoformat() if r["completed_at"] else None,
+                "status": r["status"],
+                "notes": r["notes"],
+            }
+        )
     return {"recent_runs": runs, "issues": []}
 
 

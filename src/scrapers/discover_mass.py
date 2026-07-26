@@ -165,8 +165,7 @@ def enumerate_parishes(state: str = "", limit: int = 0, max_sitemaps: int = 30) 
             slugs.append(sl)
 
         logger.info(
-            f"[OK] sitemap item-{n}: {len(page_slugs)} parishes "
-            f"(running total kept: {len(slugs)})"
+            f"[OK] sitemap item-{n}: {len(page_slugs)} parishes (running total kept: {len(slugs)})"
         )
 
         if limit and len(slugs) >= limit:
@@ -252,7 +251,7 @@ def _strip_tags(s: str) -> str:
 
 
 def _split_time_range(time_str: str) -> tuple[str, str]:
-    """"4:00pm" -> ("16:00:00", None-as-""); "6:30pm-8:00am" -> start,end (24h)."""
+    """ "4:00pm" -> ("16:00:00", None-as-""); "6:30pm-8:00am" -> start,end (24h)."""
     time_str = (time_str or "").strip()
     if not time_str:
         return "", ""
@@ -263,7 +262,7 @@ def _split_time_range(time_str: str) -> tuple[str, str]:
 
 
 def _to_24h(t: str) -> str:
-    """"4:00pm" / "10:30am" / "8am" -> "HH:MM:SS" (24h). "" if unparseable."""
+    """ "4:00pm" / "10:30am" / "8am" -> "HH:MM:SS" (24h). "" if unparseable."""
     t = (t or "").strip().lower().replace(" ", "")
     m = re.match(r"^(\d{1,2})(?::(\d{2}))?(am|pm)?$", t)
     if not m:
@@ -473,7 +472,10 @@ def parse_parish(slug_or_url: str) -> dict | None:
         "confessionCount": confession_count,
         "adorationCount": adoration_count,
         "hasPerpetualAdoration": has_perpetual,
-        "totalServices": mass_count + confession_count + adoration_count + len(services["Devotions"]),
+        "totalServices": mass_count
+        + confession_count
+        + adoration_count
+        + len(services["Devotions"]),
         "source_url": url,
         "last_scraped": datetime.now(UTC).isoformat(),
     }

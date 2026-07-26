@@ -149,7 +149,7 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
         except requests.exceptions.Timeout:
             # The server took too long to respond
             logger.warning(
-                f"Timeout on attempt {attempt}/{MAX_RETRIES} for {url} " f"(>{REQUEST_TIMEOUT}s)"
+                f"Timeout on attempt {attempt}/{MAX_RETRIES} for {url} (>{REQUEST_TIMEOUT}s)"
             )
             if attempt < MAX_RETRIES:
                 backoff = 2**attempt
@@ -158,7 +158,7 @@ def fetch_page(url: str, extra_headers: dict = None) -> str | None:
         except requests.exceptions.RequestException as e:
             # Catch-all for any other request error
             logger.error(
-                f"Unexpected request error on attempt {attempt}/{MAX_RETRIES} " f"for {url}: {e}"
+                f"Unexpected request error on attempt {attempt}/{MAX_RETRIES} for {url}: {e}"
             )
             if attempt < MAX_RETRIES:
                 backoff = 2**attempt

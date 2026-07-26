@@ -362,9 +362,9 @@ def main():
             rate = (i + 1) / elapsed if elapsed > 0 else 0
             remaining = (len(churches) - i - 1) / rate if rate > 0 else 0
             print(
-                f"  [{i+1}/{len(churches)}] {state_code} "
+                f"  [{i + 1}/{len(churches)}] {state_code} "
                 f"ok={success} skip={skipped} fail={failed} "
-                f"({rate:.1f}/s, ~{remaining/60:.0f}min left)"
+                f"({rate:.1f}/s, ~{remaining / 60:.0f}min left)"
             )
 
         # Small delay to avoid rate limiting
@@ -392,11 +392,11 @@ def main():
         ),
     )
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' * 60}")
     print("  SCRAPE SUMMARY")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"  Churches: {success} ok, {skipped} skipped, {failed} failed")
-    print(f"  Time: {elapsed:.0f}s ({elapsed/60:.1f} min)")
+    print(f"  Time: {elapsed:.0f}s ({elapsed / 60:.1f} min)")
     print("[OK] Done!")
 
     conn.close()

@@ -52,7 +52,6 @@ import hashlib
 import math
 import os
 import sys
-import time
 from datetime import UTC, datetime, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -98,8 +97,19 @@ NAME_SIM_MIN = 0.55
 NAME_CITY_GEO_CONFLICT_METERS = 5000.0
 
 _NAME_STOPWORDS = {
-    "the", "of", "our", "lady", "parish", "church", "catholic", "roman",
-    "mission", "co", "cathedral", "shrine", "chapel",
+    "the",
+    "of",
+    "our",
+    "lady",
+    "parish",
+    "church",
+    "catholic",
+    "roman",
+    "mission",
+    "co",
+    "cathedral",
+    "shrine",
+    "chapel",
 }
 # "st"/"saint"/"ste"/"sainte" are handled by norm_city's abbreviation expansion.
 
@@ -137,11 +147,7 @@ def _name_sim(a: str, b: str) -> float:
 
     def toks(s):
         s = re.sub(r"[.\-',&]", " ", (s or "").lower())
-        return {
-            _ABBR.get(t, t)
-            for t in s.split()
-            if t and _ABBR.get(t, t) not in _NAME_STOPWORDS
-        }
+        return {_ABBR.get(t, t) for t in s.split() if t and _ABBR.get(t, t) not in _NAME_STOPWORDS}
 
     ta, tb = toks(a), toks(b)
     if not ta or not tb:
@@ -332,8 +338,8 @@ def decide_match(detail: dict, existing: list[dict]) -> dict:
                     "decision": "AMBIGUOUS",
                     "church_id": None,
                     "reason": (
-                        f"name+city match but coords {dist/1000:.1f}km apart "
-                        f"(> {NAME_CITY_GEO_CONFLICT_METERS/1000:.0f}km) - geo conflict"
+                        f"name+city match but coords {dist / 1000:.1f}km apart "
+                        f"(> {NAME_CITY_GEO_CONFLICT_METERS / 1000:.0f}km) - geo conflict"
                     ),
                     "distance_m": dist,
                     "name_sim": 1.0,
@@ -345,7 +351,11 @@ def decide_match(detail: dict, existing: list[dict]) -> dict:
                 "church_id": row["church_id"],
                 "reason": (
                     "exact normalized name+city+state"
-                    + (f" (coords agree, {dist:.0f}m)" if dist is not None else " (no coords to cross-check)")
+                    + (
+                        f" (coords agree, {dist:.0f}m)"
+                        if dist is not None
+                        else " (no coords to cross-check)"
+                    )
                 ),
                 "distance_m": dist,
                 "name_sim": 1.0,
@@ -484,11 +494,21 @@ def _commit_plan(cur, plan_item: dict) -> None:
             WHERE church_id=%s
             """,
             (
-                cv["name"], cv["street"], cv["city"], cv["postal_code"],
-                cv["latitude"], cv["longitude"], cv["phone"], cv["website_url"],
+                cv["name"],
+                cv["street"],
+                cv["city"],
+                cv["postal_code"],
+                cv["latitude"],
+                cv["longitude"],
+                cv["phone"],
+                cv["website_url"],
                 cv["has_perpetual_adoration"],
-                cv["mass_count"], cv["confession_count"], cv["adoration_count"],
-                cv["schedule_updated_at"], cv["source_url"], cv["last_scraped_at"],
+                cv["mass_count"],
+                cv["confession_count"],
+                cv["adoration_count"],
+                cv["schedule_updated_at"],
+                cv["source_url"],
+                cv["last_scraped_at"],
                 church_id,
             ),
         )
@@ -515,11 +535,23 @@ def _commit_plan(cur, plan_item: dict) -> None:
                 source_url=VALUES(source_url), last_scraped_at=VALUES(last_scraped_at)
             """,
             (
-                cv["slug"], cv["name"], cv["street"], cv["city"], cv["state_code"],
-                cv["postal_code"], cv["latitude"], cv["longitude"], cv["phone"],
-                cv["website_url"], cv["has_perpetual_adoration"],
-                cv["mass_count"], cv["confession_count"], cv["adoration_count"],
-                cv["schedule_updated_at"], cv["source_url"], cv["last_scraped_at"],
+                cv["slug"],
+                cv["name"],
+                cv["street"],
+                cv["city"],
+                cv["state_code"],
+                cv["postal_code"],
+                cv["latitude"],
+                cv["longitude"],
+                cv["phone"],
+                cv["website_url"],
+                cv["has_perpetual_adoration"],
+                cv["mass_count"],
+                cv["confession_count"],
+                cv["adoration_count"],
+                cv["schedule_updated_at"],
+                cv["source_url"],
+                cv["last_scraped_at"],
             ),
         )
         cur.execute("SELECT church_id FROM church WHERE slug=%s", (cv["slug"],))
@@ -565,11 +597,21 @@ def _commit_plan(cur, plan_item: dict) -> None:
                 notes_raw=VALUES(notes_raw), is_active=1
             """,
             (
-                church_id, sv["source_service_id"], sv["category_code"],
-                sv["schedule_type_code"], sv["day_code"], sv["time_start"],
-                sv["time_end"], sv["event_date"], sv["language_code"],
-                sv["pattern_code"], sv["relation_code"], sv["reference_service"],
-                sv["offset_minutes"], sv["location"], sv["display_name"],
+                church_id,
+                sv["source_service_id"],
+                sv["category_code"],
+                sv["schedule_type_code"],
+                sv["day_code"],
+                sv["time_start"],
+                sv["time_end"],
+                sv["event_date"],
+                sv["language_code"],
+                sv["pattern_code"],
+                sv["relation_code"],
+                sv["reference_service"],
+                sv["offset_minutes"],
+                sv["location"],
+                sv["display_name"],
                 sv["notes_raw"],
             ),
         )
@@ -604,7 +646,9 @@ def print_report(state_code, stats, plan, samples_n=10):
     print(f"  -> ambiguous (flagged) ..... {stats['ambiguous']}")
     print()
     print(f"  existing {state_code} church rows ...... {stats['existing_rows']}")
-    print(f"  would be REFRESHED (update). {stats['match']}  (distinct: {stats['distinct_matched']})")
+    print(
+        f"  would be REFRESHED (update). {stats['match']}  (distinct: {stats['distinct_matched']})"
+    )
     print(f"  net-new parishes (insert) .. {stats['new']}")
     print(line)
 
@@ -629,8 +673,10 @@ def print_report(state_code, stats, plan, samples_n=10):
             dist = p["distance_m"]
             dist_s = f"{dist:.0f}m" if dist is not None else "n/a"
             print(f"  [MATCH] {dm_name} / {dm_city} {dm_co}")
-            print(f"          <-> #{m['church_id']} {m.get('name')} / {m.get('city')} "
-                  f"{_fmt_coord(m.get('latitude'), m.get('longitude'))}")
+            print(
+                f"          <-> #{m['church_id']} {m.get('name')} / {m.get('city')} "
+                f"{_fmt_coord(m.get('latitude'), m.get('longitude'))}"
+            )
             print(f"          dist={dist_s} name_sim={p['name_sim']:.2f}  [{p['reason']}]")
         elif d == "NEW":
             print(f"  [NEW]   {dm_name} / {dm_city} {dm_co}  slug={p['slug']}")
@@ -638,8 +684,10 @@ def print_report(state_code, stats, plan, samples_n=10):
         else:
             print(f"  [AMBIG] {dm_name} / {dm_city} {dm_co}  -- {p['reason']}")
             for c in p.get("candidates", [])[:4]:
-                print(f"          candidate #{c['church_id']} {c.get('name')} / {c.get('city')} "
-                      f"{_fmt_coord(c.get('latitude'), c.get('longitude'))}")
+                print(
+                    f"          candidate #{c['church_id']} {c.get('name')} / {c.get('city')} "
+                    f"{_fmt_coord(c.get('latitude'), c.get('longitude'))}"
+                )
         shown += 1
     if shown == 0:
         print("  (no decisions)")
@@ -697,7 +745,9 @@ def main():
             ls = r.get("last_scraped_at")
             if r.get("slug") and ls is not None and ls >= cutoff:
                 fresh_slugs.add(r["slug"])
-        print(f"[OK] stale-days={args.stale_days}: {len(fresh_slugs)} fresh churches will be skipped")
+        print(
+            f"[OK] stale-days={args.stale_days}: {len(fresh_slugs)} fresh churches will be skipped"
+        )
 
     stats = {
         "enumerated": len(slugs),
@@ -753,8 +803,10 @@ def main():
         )
 
         if (i + 1) % 10 == 0:
-            print(f"  [{i+1}/{len(slugs)}] parsed_ok={stats['parsed_ok']} "
-                  f"match={stats['match']} new={stats['new']} ambig={stats['ambiguous']}")
+            print(
+                f"  [{i + 1}/{len(slugs)}] parsed_ok={stats['parsed_ok']} "
+                f"match={stats['match']} new={stats['new']} ambig={stats['ambiguous']}"
+            )
 
     stats["distinct_matched"] = len(matched_ids)
 
@@ -786,8 +838,10 @@ def main():
         )
         retired = cur.rowcount
         conn.commit()  # explicit — do not rely on implicit/autocommit
-        print(f"[OK] wrote {written} parishes (skipped {stats['ambiguous']} ambiguous); "
-              f"retired {retired} stale services; committed")
+        print(
+            f"[OK] wrote {written} parishes (skipped {stats['ambiguous']} ambiguous); "
+            f"retired {retired} stale services; committed"
+        )
     else:
         print("[OK] dry-run: building report, NO writes performed")
 
