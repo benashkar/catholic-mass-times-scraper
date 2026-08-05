@@ -118,6 +118,30 @@ def ensure_schema(cur):
         cur.execute("ALTER TABLE bulletin_name ADD COLUMN role VARCHAR(100) DEFAULT ''")
         print("  [OK] Added column bulletin_name.role")
 
+    # Rotation watermark: stamped on EVERY bulletin attempt, hit or miss, so the
+    # weekly run resumes where the last one stopped instead of restarting at AK.
+    cur.execute("""
+        SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = 'church_scrapes'
+          AND TABLE_NAME = 'church'
+          AND COLUMN_NAME = 'bulletin_checked_at'
+    """)
+    if not cur.fetchone():
+        cur.execute("ALTER TABLE church ADD COLUMN bulletin_checked_at DATETIME NULL")
+        print("  [OK] Added column church.bulletin_checked_at")
+
+    cur.execute("""
+        SELECT INDEX_NAME FROM INFORMATION_SCHEMA.STATISTICS
+        WHERE TABLE_SCHEMA = 'church_scrapes'
+          AND TABLE_NAME = 'church'
+          AND INDEX_NAME = 'idx_church_bulletin_checked_at'
+    """)
+    if not cur.fetchone():
+        cur.execute(
+            "ALTER TABLE church ADD INDEX idx_church_bulletin_checked_at (bulletin_checked_at)"
+        )
+        print("  [OK] Added index idx_church_bulletin_checked_at")
+
 
 # ---------------------------------------------------------------------------
 # Bulletin extraction pipeline
@@ -519,6 +543,12 @@ def main():
         action="store_true",
         help="Only extract from already-discovered PDFs (no new web crawling)",
     )
+    parser.add_argument(
+        "--max-runtime-minutes",
+        type=int,
+        default=0,
+        help="Exit cleanly after N minutes so the rotation watermark is kept (0=no cap)",
+    )
     args = parser.parse_args()
 
     print("=" * 60)
@@ -552,10 +582,23 @@ def main():
     where_clauses.append("website_url NOT LIKE '%%diocese%%'")
     where_clauses.append("website_url NOT LIKE '%%archdiocese%%'")
 
+    # Skip churches checked within N days, in SQL — the old per-row lookup on
+    # bulletin_source.discovered_at never skipped churches that have no bulletin
+    # page at all, so every run re-crawled the same ~13k dead ends and timed out.
+    if args.days_fresh > 0:
+        where_clauses.append(
+            "(bulletin_checked_at IS NULL OR bulletin_checked_at < NOW() - INTERVAL %s DAY)"
+        )
+        params.append(args.days_fresh)
+
     where = " AND ".join(where_clauses)
+
+    # Least-recently-checked first (never-checked first) so each capped run picks
+    # up the frontier the previous one left off at instead of restarting at AK.
     cur.execute(
         f"SELECT church_id, slug, name, city, state_code, website_url "
-        f"FROM church WHERE {where} ORDER BY state_code, slug",
+        f"FROM church WHERE {where} "
+        f"ORDER BY bulletin_checked_at IS NOT NULL, bulletin_checked_at ASC, church_id",
         params,
     )
     churches = cur.fetchall()
@@ -563,6 +606,8 @@ def main():
         churches = churches[: args.limit]
 
     print(f"Churches to process: {len(churches)}")
+    if args.max_runtime_minutes:
+        print(f"Runtime cap: {args.max_runtime_minutes} min (exits cleanly, progress kept)")
 
     start = time.time()
     totals = {
@@ -572,28 +617,24 @@ def main():
         "names_inserted": 0,
         "skipped": 0,
         "errors": 0,
+        "stopped_early": False,
     }
+
+    max_runtime_s = args.max_runtime_minutes * 60 if args.max_runtime_minutes else 0
 
     for i, church in enumerate(churches):
         church_id = church["church_id"]
         slug = church["slug"]
 
-        # Check if recently processed (skip fresh churches)
-        if args.days_fresh > 0:
-            cur.execute(
-                "SELECT discovered_at FROM bulletin_source "
-                "WHERE church_id = %s ORDER BY discovered_at DESC LIMIT 1",
-                (church_id,),
+        # Stop cleanly before the cron kills us, so the watermark survives and
+        # next week's run resumes from here instead of losing the whole batch.
+        if max_runtime_s and (time.time() - start) > max_runtime_s:
+            totals["stopped_early"] = True
+            print(
+                f"\n  [STOP] Runtime cap hit at church {i+1}/{len(churches)} "
+                f"({church.get('state_code', '')}). Progress saved."
             )
-            existing = cur.fetchone()
-            if existing and existing.get("discovered_at"):
-                scraped_at = existing["discovered_at"]
-                if hasattr(scraped_at, "replace"):
-                    scraped_at = scraped_at.replace(tzinfo=UTC)
-                days_ago = (datetime.now(UTC) - scraped_at).days
-                if days_ago < args.days_fresh:
-                    totals["skipped"] += 1
-                    continue
+            break
 
         try:
             stats = process_church(cur, church)
@@ -605,6 +646,16 @@ def main():
             totals["errors"] += 1
             if totals["errors"] <= 10:
                 print(f"  [ERR] {slug}: {e}")
+
+        # Stamp the attempt whether or not it yielded a bulletin — a church with
+        # no bulletin page must still rotate to the back of the queue.
+        try:
+            cur.execute(
+                "UPDATE church SET bulletin_checked_at = NOW() WHERE church_id = %s",
+                (church_id,),
+            )
+        except Exception as e:
+            print(f"  [ERR] watermark {slug}: {e}")
 
         # Progress
         if (i + 1) % args.batch_size == 0:
@@ -642,7 +693,8 @@ def main():
             str(totals["errors"]) if totals["errors"] else None,
             f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
             f"names={totals['names_inserted']} skip={totals['skipped']} "
-            f"err={totals['errors']} in {elapsed:.0f}s",
+            f"err={totals['errors']} in {elapsed:.0f}s"
+            + (" [runtime-cap]" if totals["stopped_early"] else " [queue-drained]"),
         ),
     )
 

@@ -21,6 +21,12 @@ from datetime import UTC, datetime
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 os.chdir(PROJECT_ROOT)
 
+# How long the bulletin crawl gets. The bulletin cron is weekly (Tue 03:00 UTC)
+# and nothing else competes for the window, so give it a real one — the old 2h
+# cap killed the step mid-California every week (bulletins=FAIL since Jul 14).
+# Override with BULLETIN_RUNTIME_MINUTES on the Render service.
+BULLETIN_RUNTIME_MINUTES = int(os.getenv("BULLETIN_RUNTIME_MINUTES", "600"))
+
 
 def log(msg):
     ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -77,17 +83,26 @@ def main():
         results["scrape"] = run_cmd(scrape_cmd, "Scrape mass times to db99", timeout_seconds=3600)
 
     # Step 2: Extract bulletin names directly to db99
-    # --days-fresh 14: skip churches discovered in last 14 days to avoid
-    # re-crawling every church website each week (the slow part).
+    # --days-fresh 14: skip churches checked in the last 14 days (SQL-side, on
+    # church.bulletin_checked_at) so each run advances the rotation frontier.
+    # --max-runtime-minutes: exit cleanly inside the timeout below, keeping the
+    # watermark, instead of being SIGKILLed mid-batch as it was every week.
     # PDF extraction itself already skips via text_extracted=1.
     if not args.skip_scrape:
-        bulletin_cmd = [sys.executable, "extract_bulletins_to_db99.py", "--days-fresh", "14"]
+        bulletin_cmd = [
+            sys.executable,
+            "extract_bulletins_to_db99.py",
+            "--days-fresh", "14",
+            "--max-runtime-minutes", str(BULLETIN_RUNTIME_MINUTES),
+        ]
         if args.state:
             bulletin_cmd += ["--state", args.state]
         if args.limit:
             bulletin_cmd += ["--limit", str(args.limit)]
         results["bulletins"] = run_cmd(
-            bulletin_cmd, "Extract bulletin names to db99", timeout_seconds=7200
+            bulletin_cmd,
+            "Extract bulletin names to db99",
+            timeout_seconds=(BULLETIN_RUNTIME_MINUTES + 20) * 60,
         )
 
     # Step 2b: Backfill empty fields from context (Layer 2 self-healing)
