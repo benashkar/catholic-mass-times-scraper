@@ -720,6 +720,12 @@ def main():
         help="Concurrent churches. Rate limiting is per-host, so parallel "
         "workers hit different parishes rather than the same server.",
     )
+    parser.add_argument(
+        "--shards", type=int, default=1, help="Split the queue across N containers"
+    )
+    parser.add_argument(
+        "--shard", type=int, default=0, help="Which shard this process handles (0-based)"
+    )
     args = parser.parse_args()
 
     print("=" * 60)
@@ -777,6 +783,15 @@ def main():
     elif args.known_sources_only:
         where += " AND EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
 
+    # Sharding splits the queue across several CONTAINERS. Threads only overlap
+    # network waits — PDF text extraction is CPU-bound and the GIL serialises it,
+    # so one 1-vCPU instance plateaus regardless of --workers. Disjoint shards
+    # give real parallelism, and because bulletin_pdf has no unique index the
+    # shards MUST NOT overlap or concurrent processes would duplicate rows.
+    if args.shards > 1:
+        where += " AND MOD(c.church_id, %s) = %s"
+        params.extend([args.shards, args.shard])
+
     cur.execute(
         f"SELECT c.church_id, c.slug, c.name, c.city, c.state_code, c.website_url "
         f"FROM church c WHERE {where} "
@@ -790,6 +805,8 @@ def main():
     if args.limit:
         churches = churches[: args.limit]
 
+    if args.shards > 1:
+        print(f"Shard {args.shard}/{args.shards}")
     print(f"Churches to process: {len(churches)}")
     if args.max_runtime_minutes:
         print(f"Runtime cap: {args.max_runtime_minutes} min (exits cleanly, progress kept)")
