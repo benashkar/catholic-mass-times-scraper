@@ -45,6 +45,7 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 from pathlib import Path
 from urllib.parse import parse_qs, urljoin, urlparse
@@ -96,13 +97,40 @@ try:
 except ImportError:
     HAS_PROBABLEPEOPLE = False
 
-# NER veto gate — lazy-loaded spaCy model
+# NER veto gate — lazy-loaded spaCy model.
+# A spaCy Language object is not safe to call from several threads at once, and
+# the lazy load itself would race, so both are serialised on _ner_lock. Callers
+# that run a pool should warm this up first (see prewarm_shared_state).
 _ner_nlp = None
 _ner_tried = False
+_ner_lock = threading.RLock()
+_browser_lock = threading.RLock()
+
+
+def prewarm_shared_state():
+    """Load every lazily-cached global before any worker threads start.
+
+    Each of these caches is populated on first use behind a plain `if is None`
+    check. That is fine single-threaded, but with a pool several workers hit it
+    at once and duplicate the (slow) load. Warming up front makes the pool's
+    first moments deterministic.
+    """
+    _get_ner_nlp()
+    try:
+        _load_reference_data()
+    except Exception as e:  # reference data is optional for scoring
+        logger.debug(f"prewarm: reference data unavailable: {e}")
+    _get_non_name_words()
 
 
 def _get_ner_nlp():
     """Lazy-load spaCy model for NER veto gate."""
+    global _ner_nlp, _ner_tried
+    with _ner_lock:
+        return _get_ner_nlp_locked()
+
+
+def _get_ner_nlp_locked():
     global _ner_nlp, _ner_tried
     if _ner_tried:
         return _ner_nlp
@@ -125,7 +153,8 @@ def ner_veto(name, context=""):
     if nlp is None:
         return True  # Pass through if NER unavailable
     text = context if context else name
-    doc = nlp(text)
+    with _ner_lock:
+        doc = nlp(text)
     name_lower = name.lower().strip()
     for ent in doc.ents:
         if ent.label_ == "PERSON":
@@ -142,7 +171,9 @@ def ner_veto_batch(names, contexts=None):
     contexts = contexts or [""] * len(names)
     texts = [c if c else n for c, n in zip(contexts, names)]
     results = []
-    docs = list(nlp.pipe(texts, batch_size=50))
+    # nlp.pipe() mutates shared model state; one thread through it at a time.
+    with _ner_lock:
+        docs = list(nlp.pipe(texts, batch_size=50))
     for name, doc in zip(names, docs):
         name_lower = name.lower().strip()
         is_person = False
@@ -406,23 +437,61 @@ def resolve_state(name: str):
 # ── HTTP Helpers ───────────────────────────────────────────────────────────────
 
 _last_request_time = 0.0
-_session = requests.Session()
-_session.headers.update(HEADERS)
-if PROXIES:
-    _session.proxies.update(PROXIES)
+
+# Rate limiting is PER HOST, not global. Politeness is owed to each parish
+# server; two different parishes share nothing, so making them wait on each
+# other only throttles us. A single global clock capped the whole process at
+# 1/REQUEST_DELAY requests per second no matter how many workers were running.
+_domain_last_request = {}
+_rate_lock = threading.Lock()
+
+# requests.Session is not documented as thread-safe, so each worker gets one.
+_thread_local = threading.local()
+
+
+def _get_session():
+    """The calling thread's HTTP session."""
+    sess = getattr(_thread_local, "session", None)
+    if sess is None:
+        sess = requests.Session()
+        sess.headers.update(HEADERS)
+        if PROXIES:
+            sess.proxies.update(PROXIES)
+        _thread_local.session = sess
+    return sess
+
+
+def _throttle(url: str):
+    """Block until this URL's host is allowed another request."""
+    host = urlparse(url).netloc.lower()
+    while True:
+        with _rate_lock:
+            now = time.time()
+            ready_at = _domain_last_request.get(host, 0.0) + REQUEST_DELAY
+            if now >= ready_at:
+                # Claim the slot while still holding the lock, so two threads
+                # cannot both decide they are clear for the same host.
+                _domain_last_request[host] = now
+                return
+            wait = ready_at - now
+        time.sleep(wait)
+
+
+# Kept as a module-level alias so existing single-threaded callers behave the
+# same; the session is per-thread underneath.
+class _SessionProxy:
+    def __getattr__(self, name):
+        return getattr(_get_session(), name)
+
+
+_session = _SessionProxy()
 
 
 def _rate_limited_get(url: str, timeout: int = REQUEST_TIMEOUT, allow_redirects=True):
-    """Make a rate-limited GET request. Returns Response or None."""
-    global _last_request_time
-
-    elapsed = time.time() - _last_request_time
-    if elapsed < REQUEST_DELAY:
-        time.sleep(REQUEST_DELAY - elapsed)
-    _last_request_time = time.time()
-
+    """Make a per-host rate-limited GET request. Returns Response or None."""
+    _throttle(url)
     try:
-        resp = _session.get(url, timeout=timeout, allow_redirects=allow_redirects)
+        resp = _get_session().get(url, timeout=timeout, allow_redirects=allow_redirects)
         return resp
     except requests.exceptions.RequestException as e:
         logger.debug(f"Request failed for {url}: {e}")
@@ -485,17 +554,19 @@ def _extract_pdfs_with_browser(url: str):
 
     Returns a list of absolute PDF URLs found in the rendered DOM.
     """
-    global _last_request_time
+    # Playwright's sync API is not thread-safe and the browser here is a single
+    # shared instance, so only one worker may drive it at a time.
+    with _browser_lock:
+        return _extract_pdfs_with_browser_locked(url)
 
+
+def _extract_pdfs_with_browser_locked(url: str):
     browser = _get_playwright_browser()
     if not browser:
         return []
 
     # Rate limit browser requests the same as HTTP
-    elapsed = time.time() - _last_request_time
-    if elapsed < REQUEST_DELAY:
-        time.sleep(REQUEST_DELAY - elapsed)
-    _last_request_time = time.time()
+    _throttle(url)
 
     pdfs = []
     page = None

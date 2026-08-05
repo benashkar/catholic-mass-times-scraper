@@ -25,7 +25,9 @@ import json
 import os
 import re
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from urllib.parse import unquote
 
@@ -44,6 +46,7 @@ from run_bulletin_scraper import (
     find_bulletin_page,
     ner_veto_batch,
     parse_name_parts,
+    prewarm_shared_state,
     score_name_confidence,
 )
 from src.parsers.fallback_parsers import (
@@ -65,7 +68,10 @@ PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
 PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
 MAX_PDF_SIZE_MB = 25
-MAX_PDFS_PER_CHURCH = 100
+# How deep into a parish's archive to go. Raised from 100 because at least one
+# church hit that ceiling exactly, meaning its back-editions were truncated at
+# an unknown depth — and back-editions are the point of the recovery sweep.
+MAX_PDFS_PER_CHURCH = int(os.environ.get("MAX_PDFS_PER_CHURCH", "400"))
 
 
 # ---------------------------------------------------------------------------
@@ -707,6 +713,13 @@ def main():
         action="store_true",
         help="Only crawl churches with no bulletin page yet (hunt for new sources)",
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=int(os.environ.get("BULLETIN_WORKERS", "12")),
+        help="Concurrent churches. Rate limiting is per-host, so parallel "
+        "workers hit different parishes rather than the same server.",
+    )
     args = parser.parse_args()
 
     print("=" * 60)
@@ -794,56 +807,91 @@ def main():
 
     max_runtime_s = args.max_runtime_minutes * 60 if args.max_runtime_minutes else 0
 
-    for i, church in enumerate(churches):
-        church_id = church["church_id"]
+    # Warm every lazily-cached global (spaCy model, SSA/Census reference data)
+    # before the pool starts, so workers do not race to load them.
+    prewarm_shared_state()
+
+    stop = threading.Event()
+    lock = threading.Lock()
+    counter = {"done": 0}
+    # Each worker needs its OWN connection: a pymysql connection is not safe to
+    # share across threads.
+    local = threading.local()
+
+    def worker(idx_church):
+        i, church = idx_church
+        if stop.is_set():
+            return
         slug = church["slug"]
 
-        # Stop cleanly before the cron kills us, so the watermark survives and
-        # next week's run resumes from here instead of losing the whole batch.
-        if max_runtime_s and (time.time() - start) > max_runtime_s:
-            totals["stopped_early"] = True
-            print(
-                f"\n  [STOP] Runtime cap hit at church {i+1}/{len(churches)} "
-                f"({church.get('state_code', '')}). Progress saved."
-            )
-            break
+        conn_t = getattr(local, "conn", None)
+        if conn_t is None:
+            conn_t = get_connection()
+            conn_t.autocommit(True)
+            local.conn = conn_t
+        cur_t = conn_t.cursor()
 
         try:
-            stats = process_church(cur, church)
-            totals["discovered"] += 1
-            totals["pdfs_found"] += stats["pdfs_found"]
-            totals["pdfs_extracted"] += stats["pdfs_extracted"]
-            totals["names_inserted"] += stats["names_inserted"]
+            stats = process_church(cur_t, church)
+            with lock:
+                totals["discovered"] += 1
+                totals["pdfs_found"] += stats["pdfs_found"]
+                totals["pdfs_extracted"] += stats["pdfs_extracted"]
+                totals["names_inserted"] += stats["names_inserted"]
         except Exception as e:
-            totals["errors"] += 1
-            if totals["errors"] <= 10:
-                print(f"  [ERR] {slug}: {e}")
+            with lock:
+                totals["errors"] += 1
+                if totals["errors"] <= 10:
+                    print(f"  [ERR] {slug}: {e}", flush=True)
 
         # Stamp the attempt whether or not it yielded a bulletin — a church with
         # no bulletin page must still rotate to the back of the queue.
         try:
-            cur.execute(
+            cur_t.execute(
                 "UPDATE church SET bulletin_checked_at = NOW() WHERE church_id = %s",
-                (church_id,),
+                (church["church_id"],),
             )
         except Exception as e:
-            print(f"  [ERR] watermark {slug}: {e}")
+            print(f"  [ERR] watermark {slug}: {e}", flush=True)
+        finally:
+            cur_t.close()
 
-        # Progress
-        if (i + 1) % args.batch_size == 0:
-            elapsed = time.time() - start
-            rate = (i + 1) / elapsed if elapsed > 0 else 0
-            remaining = (len(churches) - i - 1) / rate if rate > 0 else 0
-            print(
-                f"  [{i+1}/{len(churches)}] {church.get('state_code', '')} "
-                f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
-                f"names={totals['names_inserted']} skip={totals['skipped']} "
-                f"err={totals['errors']} "
-                f"({rate:.1f}/s, ~{remaining/60:.0f}min left)"
-            )
+        with lock:
+            counter["done"] += 1
+            n = counter["done"]
+            if n % args.batch_size == 0:
+                el = time.time() - start
+                rate = n / el if el > 0 else 0
+                left = (len(churches) - n) / rate if rate > 0 else 0
+                print(
+                    f"  [{n}/{len(churches)}] {church.get('state_code', '')} "
+                    f"discovered={totals['discovered']} pdfs={totals['pdfs_extracted']} "
+                    f"names={totals['names_inserted']} err={totals['errors']} "
+                    f"({rate*60:.1f}/min, ~{left/60:.0f}min left)",
+                    flush=True,
+                )
 
-        # Small delay between churches to avoid rate limiting
-        time.sleep(0.5)
+    print(f"Workers: {args.workers}")
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        futures = [pool.submit(worker, (i, c)) for i, c in enumerate(churches)]
+        try:
+            for _ in as_completed(futures):
+                # Stop cleanly before the cron kills us, so watermarks survive
+                # and the next run resumes from the frontier.
+                if max_runtime_s and (time.time() - start) > max_runtime_s:
+                    if not stop.is_set():
+                        totals["stopped_early"] = True
+                        print(
+                            f"\n  [STOP] Runtime cap hit after {counter['done']}"
+                            f"/{len(churches)} churches. Progress saved.",
+                            flush=True,
+                        )
+                        stop.set()
+                        for f in futures:
+                            f.cancel()
+        except KeyboardInterrupt:
+            stop.set()
+            raise
 
     elapsed = time.time() - start
 
