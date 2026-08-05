@@ -41,6 +41,20 @@
                         </a>
                     </li>
                 </ul>
+                {% if session.get('user') %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link text-muted small">
+                            <i class="bi bi-person-circle"></i> {{ session['user'] }}
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">
+                            <i class="bi bi-box-arrow-right"></i> Sign out
+                        </a>
+                    </li>
+                </ul>
+                {% endif %}
             </div>
         </div>
     </nav>

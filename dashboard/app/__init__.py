@@ -22,6 +22,14 @@ def create_app(config_class=Config):
 
     init_data(app)
 
+    # Login gate — registered before the content blueprints so every view below
+    # is behind it. /health and /login stay public (see auth.PUBLIC_ENDPOINTS).
+    from app.auth import bp as auth_bp
+    from app.auth import require_login
+
+    app.register_blueprint(auth_bp)
+    app.before_request(require_login)
+
     # Register blueprints
     from app.routes.bulletin import bp as bulletin_bp
     from app.routes.main import bp as main_bp
