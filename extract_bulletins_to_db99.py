@@ -549,6 +549,16 @@ def main():
         default=0,
         help="Exit cleanly after N minutes so the rotation watermark is kept (0=no cap)",
     )
+    parser.add_argument(
+        "--known-sources-only",
+        action="store_true",
+        help="Only refresh churches that already have a bulletin page (the name producers)",
+    )
+    parser.add_argument(
+        "--discovery-only",
+        action="store_true",
+        help="Only crawl churches with no bulletin page yet (hunt for new sources)",
+    )
     args = parser.parse_args()
 
     print("=" * 60)
@@ -593,12 +603,26 @@ def main():
 
     where = " AND ".join(where_clauses)
 
-    # Least-recently-checked first (never-checked first) so each capped run picks
-    # up the frontier the previous one left off at instead of restarting at AK.
+    # Priority, then staleness:
+    #   1. churches with a known bulletin page  — these publish a NEW bulletin
+    #      every week, so they are the only ones that yield fresh names, and a
+    #      capped run must reach all of them before spending time anywhere else;
+    #   2. churches that have never yielded one — re-crawled for discovery with
+    #      whatever window is left (hit rate is ~1%, so they must not go first).
+    # Within each tier, least-recently-checked first, so each capped run resumes
+    # the frontier the previous one left off at instead of restarting at AK.
+    if args.discovery_only:
+        where += " AND NOT EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
+    elif args.known_sources_only:
+        where += " AND EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
+
     cur.execute(
-        f"SELECT church_id, slug, name, city, state_code, website_url "
-        f"FROM church WHERE {where} "
-        f"ORDER BY bulletin_checked_at IS NOT NULL, bulletin_checked_at ASC, church_id",
+        f"SELECT c.church_id, c.slug, c.name, c.city, c.state_code, c.website_url "
+        f"FROM church c WHERE {where} "
+        f"ORDER BY EXISTS (SELECT 1 FROM bulletin_source bs "
+        f"                 WHERE bs.church_id = c.church_id) DESC, "
+        f"         c.bulletin_checked_at IS NOT NULL, "
+        f"         c.bulletin_checked_at ASC, c.church_id",
         params,
     )
     churches = cur.fetchall()
