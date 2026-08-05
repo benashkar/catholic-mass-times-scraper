@@ -39,6 +39,12 @@ CASES = [
     ("https://irp.cdn-website.com/x/uploaded/hccc_santa-cruz_bulletin_2026_01_26-02-01.pdf.pdf", "2026-01-26"),
     ("https://x.org/bulletin-2025-07-20.pdf", "2025-07-20"),
 
+    # YYMMDD in filename, trusted only because it agrees with the upload path
+    ("https://x.org/chapel/wp-content/uploads/sites/6/2023/11/31353_231126-1.pdf", "2023-11-26"),
+    ("https://x.org/chapel/wp-content/uploads/sites/6/2025/06/31353_250615.pdf", "2025-06-15"),
+    # 6-digit run that does NOT agree with the path is an id -> fall back to the 1st
+    ("https://x.org/uploads/2024/03/99887766-doc.pdf", "2024-03-01"),
+
     # --- must stay None ---
     ("https://x.org/bulletin/latest.pdf", None),
     ("https://x.org/b/20991231_x.pdf", None),                      # future

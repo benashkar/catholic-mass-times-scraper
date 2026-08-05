@@ -31,24 +31,39 @@ def main():
     ap.add_argument("--commit", action="store_true", help="Write changes (default is dry-run)")
     ap.add_argument("--dry-run", action="store_true", help="Report only")
     ap.add_argument("--limit", type=int, default=0, help="Max rows to scan (0=all)")
+    ap.add_argument(
+        "--refix-invalid",
+        action="store_true",
+        help="Re-parse rows whose stored pdf_date is impossible (future / pre-1995)",
+    )
     args = ap.parse_args()
     write = args.commit and not args.dry_run
 
     conn = get_connection(autocommit=False)
     cur = conn.cursor()
 
-    cur.execute("SELECT COUNT(*) v FROM bulletin_pdf WHERE pdf_date IS NULL")
+    # Rows the old whole-URL parser got wrong: it read digits out of hashes and
+    # ids with no validity check, producing editions dated 2089 or 1970. Those
+    # are objectively wrong, so re-parse them; a row that still will not yield a
+    # plausible date goes back to NULL rather than keeping the bad value.
+    target = (
+        "pdf_date IS NOT NULL AND (pdf_date > CURDATE() OR pdf_date < '1995-01-01')"
+        if args.refix_invalid
+        else "pdf_date IS NULL"
+    )
+
+    cur.execute(f"SELECT COUNT(*) v FROM bulletin_pdf WHERE {target}")
     todo = cur.fetchone()["v"]
-    print(f"rows missing pdf_date: {todo:,}")
+    print(f"rows to process ({'invalid dates' if args.refix_invalid else 'missing pdf_date'}): {todo:,}")
     print(f"mode: {'COMMIT' if write else 'DRY-RUN'}")
 
-    scanned = parsed = written = 0
+    scanned = parsed = written = cleared = 0
     last_id = 0
     while True:
         cur.execute(
-            "SELECT bulletin_pdf_id, pdf_url FROM bulletin_pdf "
-            "WHERE pdf_date IS NULL AND bulletin_pdf_id > %s "
-            "ORDER BY bulletin_pdf_id LIMIT %s",
+            f"SELECT bulletin_pdf_id, pdf_url FROM bulletin_pdf "
+            f"WHERE {target} AND bulletin_pdf_id > %s "
+            f"ORDER BY bulletin_pdf_id LIMIT %s",
             (last_id, BATCH),
         )
         rows = cur.fetchall()
@@ -63,6 +78,11 @@ def main():
             if d:
                 parsed += 1
                 updates.append((d, r["bulletin_pdf_id"]))
+            elif args.refix_invalid:
+                # Unrecoverable, but the stored value is known-wrong. NULL is
+                # honest; a confident wrong date is not.
+                cleared += 1
+                updates.append((None, r["bulletin_pdf_id"]))
 
         if updates and write:
             # One statement per batch, not one per row. executemany() here means
@@ -79,12 +99,16 @@ def main():
             written += len(updates)
 
         pct = (parsed / scanned * 100) if scanned else 0
-        print(f"  scanned={scanned:,} parsed={parsed:,} ({pct:.1f}%) written={written:,}", flush=True)
+        extra = f" cleared={cleared:,}" if args.refix_invalid else ""
+        print(
+            f"  scanned={scanned:,} parsed={parsed:,} ({pct:.1f}%) written={written:,}{extra}",
+            flush=True,
+        )
 
         if args.limit and scanned >= args.limit:
             break
 
-    print(f"\nscanned={scanned:,} parsed={parsed:,} written={written:,}")
+    print(f"\nscanned={scanned:,} parsed={parsed:,} written={written:,} cleared_to_null={cleared:,}")
     if not write:
         print("DRY-RUN — nothing written. Re-run with --commit.")
     conn.close()

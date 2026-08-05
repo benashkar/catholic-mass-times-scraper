@@ -285,11 +285,25 @@ def pdf_date_from_url(pdf_url):
         if got:
             return got
 
-    # 6. /YYYY/MM/ upload path — day unknown, so anchor to the 1st. Least
-    #    specific, tried last.
+    # 6. /YYYY/MM/ upload path. Least specific, tried last.
     m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/", path)
     if m:
-        got = _valid(int(m.group(1)), int(m.group(2)), 1)
+        year, month = int(m.group(1)), int(m.group(2))
+
+        # A bare 6-digit run in the filename is usually YYMMDD but could just as
+        # easily be an id, so it is only trusted when its year and month agree
+        # with the upload path ("/2023/11/31353_231126.pdf" -> 2023-11-26).
+        # That agreement is what makes it safe; alone it would be a guess.
+        for cand in re.findall(r"(?<!\d)(\d{2})(\d{2})(\d{2})(?!\d)", fname):
+            cy, cm, cd = 2000 + int(cand[0]), int(cand[1]), int(cand[2])
+            if cy == year and cm == month:
+                got = _valid(cy, cm, cd)
+                if got:
+                    return got
+
+        # Otherwise the day is genuinely unknown. Anchor to the 1st — the month
+        # is right even though the day (and so the ISO week) may not be.
+        got = _valid(year, month, 1)
         if got:
             return got
 
