@@ -1,6 +1,100 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-06-18 (mass-times source pivot: CatholicIndex → DiscoverMass)._
+_Last updated: 2026-08-05 (bulletin cron no-forward-progress fixed; ~5.5-month edition backfill running)._
+
+## 🔴 2026-08-05 — BULLETIN CRON MADE NO FORWARD PROGRESS FOR ~5.5 MONTHS
+
+**The weekly bulletin scrape ran, inserted names, and reported "completed" every Tuesday — while
+covering only the first five states alphabetically.** It looked healthy from every angle anyone was
+checking, which is the real lesson here.
+
+### What was wrong
+- `extract_bulletins_to_db99.py` selected all 22,519 churches `ORDER BY state_code, slug` and was
+  SIGKILLed by a 2h step timeout around **California**, so every run restarted at **Alaska**.
+  States ever reached: `AK, AL, AR, AZ, CA`. **CO→WY were never reached.**
+- `scrape_log` read `bulletins=FAIL` every Tuesday from 2026-07-14 on, but `bulletins` is in
+  `run_daily_pipeline.py`'s `non_critical` set, so the pipeline still logged `completed`.
+- `--days-fresh` could not save it: it keyed on `bulletin_source.discovered_at`, which is NULL for
+  churches that have no bulletin page, so each run re-crawled the same ~13k dead ends first.
+- **Coverage proof** (`report_edition_coverage.py`, by publish week): parishes-with-an-edition fell
+  off a cliff at **2026-02-23** (1,459 → 433) and decayed to ~70 by August. The residual ~430 is
+  exactly the AK/AL/AR/AZ/CA set — independent corroboration of the root cause. The break is
+  **2026-02-23**, months earlier than `scrape_log` retention suggested.
+
+### The fix (commits 80a1aa0, 7b8a609, 5da29e2, 98f4d0f)
+- **`church.bulletin_checked_at`** (+ index), stamped on EVERY attempt hit-or-miss, so a church with
+  no bulletin page still rotates to the back. `--days-fresh` now keys off it, in SQL.
+- **`--max-runtime-minutes`** — exit cleanly and KEEP the watermark instead of losing the batch to a
+  SIGKILL. Bulletin window raised 2h → 10h (`BULLETIN_RUNTIME_MINUTES`).
+- **Priority ordering — load-bearing:** `ORDER BY EXISTS(bulletin_source) DESC, bulletin_checked_at ASC`.
+  Churches that already have a bulletin page go FIRST; they publish weekly and are the only ones that
+  yield names. Seeding the watermark from `bulletin_source.discovered_at` leaves NULL for churches that
+  never *yielded* a page, which is NOT "never tried" — ordering those first burned the whole window
+  (measured: 1 new source per 76 churches, **0 names in 30 min**). After reordering: 39 churches →
+  207 PDFs → **4,923 names in 12 min**.
+- **`MAX_PDFS_PER_CHURCH` 100 → 400** — a church hit the old ceiling exactly, truncating its archive.
+
+### Throughput: 2.7 → 43 churches/min (16x)
+- **Per-HOST rate limiting.** The blocker was a single global `_last_request_time` in
+  `run_bulletin_scraper.py`: every request waited `REQUEST_DELAY` behind every other, capping the
+  process at 1/`REQUEST_DELAY` req/s regardless of workers. Every parish is a different server, so
+  they were only ever waiting on each other. Verified: same host still serialises (1.0s), 12 distinct
+  hosts no longer wait (0.00s).
+- **Threads** (`--workers`) with per-thread DB connections and `requests.Session`; `_ner_lock` around
+  spaCy (`nlp.pipe` mutates shared model state), `_browser_lock` around Playwright's sync API, and
+  `prewarm_shared_state()` so workers don't race the lazy loads.
+- **Shards** (`--shards N --shard I`, `MOD(church_id, N)`). Threads only overlap network waits; PDF
+  extraction is CPU-bound and the cron is a **1-vCPU standard plan**, so one container plateaued at
+  ~7/min. Shards give real parallelism. **Verify disjoint+complete before launching** (6 shards summed
+  to 8,057 = union = unsharded count).
+- **Shards OOM at high worker counts** on the 2GB plan — a shard died in ~5 min with no runtime logs
+  (the Render logs API does not serve cron stdout). Relaunch at `--workers 5-6`; the per-church
+  watermark means a dead shard resumes where it stopped.
+
+### Edition dating — you cannot fix what you cannot measure
+`pdf_date` was NULL on all **1,076,400** rows the direct-to-db99 extractor ever wrote, so there was no
+way to ask which editions we hold. Now parsed from the URL (`pdf_date_from_url`), **287,625 recovered**.
+Parsing needs care — patterns run against the FILENAME only, most-specific first:
+- matching the whole URL let a UUID tail glue onto the filename (`.../74fc…f3ab07/07-06-25-x.pdf`
+  → 2006-07-07 instead of 2025-07-06);
+- the query string is dropped, or cache-busters (`?t=1768507880000`) parse as dates;
+- the filename is split off BEFORE percent-decoding, so `6%2F15%2F2025.pdf` stays a filename;
+- `YYYY-MM-DD` is matched before the 2-digit-year rule, which read `_2026_01_26-02-01` as Jan 26 **2002**;
+- a 6-digit `YYMMDD` is trusted only when it agrees with the `/YYYY/MM/` upload path.
+Every candidate must pass a real-calendar + 1995..now check, so Feb 30 / month 13 / future → NULL.
+**Undated stays NULL — the download timestamp is not the publish date.**
+`--refix-invalid` repaired **2,065** legacy rows the old parser got wrong (editions dated 2089, 0000-00-00):
+1,453 recovered a real date, 612 cleared to NULL. **Impossible dates remaining: 0.**
+
+### Weekly verification (commit 98cc76a) — the actual safeguard
+`verify_bulletin_run.py` asserts on **data**, not exit codes: PDFs, names, **UNIQUE names**, and distinct
+parishes against floors, plus an explicit "<10 states touched = rotation stuck again" alarm. Unique-vs-total
+is the load-bearing metric — a sweep re-reading the same bulletins inserts nothing new, so total names can
+look fine while nothing moved. Reports to **Telegram pass or fail** (silence == a dead cron). Wired as the
+pipeline's last step, runs unconditionally, and is deliberately NOT `non_critical`.
+Also a standalone cron **`church-bulletin-verify` `crn-d9pscd67bikc7380h680`, Tue 16:00 UTC**, so a
+*dead* bulletin cron still alerts.
+
+### Known limitation (accepted)
+`bulletin_pdf` has no unique index on `(bulletin_source_id, pdf_url)`, so check-then-insert is advisory and
+two concurrent PROCESSES can duplicate a row. Within one sweep each church is submitted once, so shards are
+safe. Duplicates are tolerated by decision; a unique index on a URL hash would make it unconditional.
+
+### Open
+1. Backfill sweep to completion (8,057 productive churches) + re-run `report_edition_coverage.py` to
+   confirm the Feb→Aug hole refilled.
+2. Discovery tier (~13,383 never-yielded churches, ~1% hit rate) after the productive tier.
+3. `/health` 500s on the dashboard — `dashboard/Dockerfile` copies only `dashboard/app/`, so
+   `src/utils/health_checks` is absent. `healthCheckPath` is empty so nothing depends on it.
+4. Name quality: `ministry_contextual`/`low` rows contain sliding-window permutations of one name run
+   ("Weber Eric Stuhlsatz", "Eric Stuhlsatz Eddie"). High-confidence rows are clean.
+
+## 🔒 2026-08-05 — DASHBOARD BEHIND A LOGIN (commit a95d317)
+Every view requires a session; only `/login` and `/health` are public (`/debug/*` and
+`/bulletin/*/api/*` are gated). Credentials in **`DASHBOARD_USERS`** on `srv-d6li8dtm5p6s73chuh7g`
+(`user:pass,user:pass`), never committed. Username case-insensitive, password exact via
+`compare_digest`. **Unset var fails closed (503), not open.** `SECRET_KEY` was already a stable random
+value — regenerating it would drop every session. Regression suite: `tests/test_dashboard_auth.py` (20 checks).
 
 ## ⚠️ 2026-06-18 — MASS-TIMES SOURCE PIVOT (CatholicIndex dead → DiscoverMass)
 
