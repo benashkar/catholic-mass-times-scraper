@@ -65,8 +65,15 @@ def main():
                 updates.append((d, r["bulletin_pdf_id"]))
 
         if updates and write:
-            cur.executemany(
-                "UPDATE bulletin_pdf SET pdf_date = %s WHERE bulletin_pdf_id = %s", updates
+            # One statement per batch, not one per row. executemany() here means
+            # 5,000 round trips, which took ~4 minutes per batch (~14h overall);
+            # a single CASE update collapses that to one.
+            case = " ".join(f"WHEN {pid} THEN %s" for _, pid in updates)
+            ids = ",".join(str(pid) for _, pid in updates)
+            cur.execute(
+                f"UPDATE bulletin_pdf SET pdf_date = CASE bulletin_pdf_id {case} END "
+                f"WHERE bulletin_pdf_id IN ({ids})",
+                [d for d, _ in updates],
             )
             conn.commit()
             written += len(updates)
