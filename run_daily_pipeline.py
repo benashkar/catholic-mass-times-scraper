@@ -157,6 +157,17 @@ def main():
         log("  [--] RENDER_API_KEY not set, skipping redeploy")
         results["redeploy"] = True
 
+    # Step 6: Prove the scraper actually did work, and say so on Telegram.
+    # Runs LAST and unconditionally, including when the bulletin step failed —
+    # that is the case it exists to catch. For four months this pipeline logged
+    # "completed" every week while the bulletin step was being killed partway,
+    # because a green exit code says nothing about whether rows landed.
+    results["verify"] = run_cmd(
+        [sys.executable, "verify_bulletin_run.py", "--days", "7"],
+        "Verify bulletin run + Telegram report",
+        timeout_seconds=300,
+    )
+
     elapsed = time.time() - start
 
     # Non-critical steps: failures logged as warnings, don't cause exit code 1.
