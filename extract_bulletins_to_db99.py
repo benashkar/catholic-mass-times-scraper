@@ -23,9 +23,11 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 from datetime import UTC, datetime
+from urllib.parse import unquote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -36,6 +38,7 @@ import requests
 from run_bulletin_scraper import (
     confidence_label,
     detect_couple,
+    extract_date_score,
     extract_names_from_text,
     extract_text_from_pdf,
     find_bulletin_page,
@@ -171,6 +174,128 @@ def url_hash(url):
     return hashlib.md5(url.encode("utf-8")).hexdigest()
 
 
+_MONTHS = {
+    "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
+    "april": 4, "apr": 4, "may": 5, "june": 6, "jun": 6, "july": 7, "jul": 7,
+    "august": 8, "aug": 8, "september": 9, "sept": 9, "sep": 9,
+    "october": 10, "oct": 10, "november": 11, "nov": 11, "december": 12, "dec": 12,
+}
+
+
+def _valid(y, m, d):
+    """ISO date string if this is a real, plausible bulletin date, else None."""
+    try:
+        dt = datetime(y, m, d, tzinfo=UTC)
+    except ValueError:
+        return None  # e.g. Feb 30 — the digits were not a date
+    # Bulletins predating the web, or dated in the future, are parse errors.
+    if not (datetime(1995, 1, 1, tzinfo=UTC) <= dt <= datetime.now(UTC)):
+        return None
+    return dt.strftime("%Y-%m-%d")
+
+
+def pdf_date_from_url(pdf_url):
+    """Edition date parsed out of a bulletin PDF URL, or None.
+
+    Bulletin filenames almost always carry the edition date, in one of a
+    handful of shapes:
+        .../bulletins/20230521_t-1684641512000.pdf      YYYYMMDD
+        .../Bulletin September 22 2024.pdf              month name
+        .../4338_Cecilia_Bos_2_8_2026.pdf               M_D_YYYY
+        .../Bulletin 8-3-25.pdf                         M-D-YY
+        .../1eef/05/30/24/173737-....pdf                MM/DD/YY in path
+        .../wp-content/uploads/2026/07/bulletin.pdf     YYYY/MM (day unknown)
+
+    That is the REAL publish date; the download timestamp is not. Anything
+    ambiguous stays None — an undated edition must not claim to be this
+    week's. Patterns are tried most-specific first so a full year beats a
+    two-digit one.
+    """
+    if not pdf_url:
+        return None
+
+    # Drop the query string first — cache-buster epochs (?t=1768507880000) are
+    # not dates. Split the filename off while slashes are still percent-encoded,
+    # so an encoded separator (6%2F15%2F2025.pdf) stays part of the filename
+    # instead of being read as directories, THEN decode.
+    raw_path = pdf_url.split("?", 1)[0].split("#", 1)[0]
+    path = unquote(raw_path)
+    # Underscores and plusses stand in for spaces in most parish CMS filenames;
+    # a decoded slash inside the filename is just another date separator.
+    fname = re.sub(r"[_+]", " ", unquote(raw_path.rsplit("/", 1)[-1])).replace("/", ".")
+
+    # Patterns run against the FILENAME only. Matching across the whole URL lets
+    # a UUID tail glue onto the filename (".../74fc...f3ab07/07-06-25-x.pdf"
+    # once parsed as 2006-07-07 instead of 2025-07-06), so "/" is deliberately
+    # not a separator here.
+    sep = r"[-. ]"
+
+    # 1. YYYYMMDD — unambiguous, and the most common shape.
+    m = re.search(r"(?<!\d)(20\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])(?!\d)", fname)
+    if m:
+        got = _valid(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if got:
+            return got
+
+    # 1b. YYYY-MM-DD with separators ("bulletin 2026 01 26-02-01" — a date
+    #     range, whose START is the edition date). Must precede the two-digit
+    #     year rule, which would otherwise read "01 26-02" as Jan 26 2002.
+    m = re.search(rf"(?<!\d)(20\d{{2}}){sep}(0[1-9]|1[0-2]){sep}(0[1-9]|[12]\d|3[01])(?!\d)", fname)
+    if m:
+        got = _valid(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if got:
+            return got
+
+    # 2. Month name + day + 4-digit year ("September 22 2024", "january 11 2026").
+    m = re.search(
+        r"(?<![a-z])(" + "|".join(_MONTHS) + r")[ .,-]*(\d{1,2})(?:st|nd|rd|th)?[ .,-]+(20\d{2})",
+        fname, re.IGNORECASE,
+    )
+    if m:
+        got = _valid(int(m.group(3)), _MONTHS[m.group(1).lower()], int(m.group(2)))
+        if got:
+            return got
+
+    # 3. M-D-YYYY / M.D.YYYY / M D YYYY.
+    m = re.search(rf"(?<!\d)(\d{{1,2}}){sep}(\d{{1,2}}){sep}(20\d{{2}})(?!\d)", fname)
+    if m:
+        got = _valid(int(m.group(3)), int(m.group(1)), int(m.group(2)))
+        if got:
+            return got
+
+    # 4. Two-digit year (M-D-YY). Ambiguous, so it runs last of the filename
+    #    patterns and still has to survive _valid().
+    m = re.search(rf"(?<!\d)(0?[1-9]|1[0-2]){sep}(0?[1-9]|[12]\d|3[01]){sep}(\d{{2}})(?!\d)", fname)
+    if m:
+        got = _valid(2000 + int(m.group(3)), int(m.group(1)), int(m.group(2)))
+        if got:
+            return got
+
+    # 5. Date carried by the directory structure instead of the filename.
+    #    Anchored between slashes so it cannot straddle a path boundary.
+    m = re.search(r"/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/(\d{2})/", path)  # /MM/DD/YY/
+    if m:
+        got = _valid(2000 + int(m.group(3)), int(m.group(1)), int(m.group(2)))
+        if got:
+            return got
+
+    m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/(0[1-9]|[12]\d|3[01])/", path)  # /YYYY/MM/DD/
+    if m:
+        got = _valid(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if got:
+            return got
+
+    # 6. /YYYY/MM/ upload path — day unknown, so anchor to the 1st. Least
+    #    specific, tried last.
+    m = re.search(r"/(20\d{2})/(0[1-9]|1[0-2])/", path)
+    if m:
+        got = _valid(int(m.group(1)), int(m.group(2)), 1)
+        if got:
+            return got
+
+    return None
+
+
 def process_church(cur, church):
     """Discover, download, extract, and insert names for one church.
 
@@ -233,15 +358,24 @@ def process_church(cur, church):
             continue
 
         # UPSERT bulletin_pdf
+        edition_date = pdf_date_from_url(pdf_url)
+
         if existing_pdf:
             bulletin_pdf_id = existing_pdf["bulletin_pdf_id"]
+            # Fill in the edition date on rows inserted before we parsed it.
+            if edition_date:
+                cur.execute(
+                    "UPDATE bulletin_pdf SET pdf_date = %s "
+                    "WHERE bulletin_pdf_id = %s AND pdf_date IS NULL",
+                    (edition_date, bulletin_pdf_id),
+                )
         else:
             cur.execute(
                 """
-                INSERT INTO bulletin_pdf (bulletin_source_id, pdf_url, downloaded_at)
-                VALUES (%s, %s, NOW())
+                INSERT INTO bulletin_pdf (bulletin_source_id, pdf_url, pdf_date, downloaded_at)
+                VALUES (%s, %s, %s, NOW())
             """,
-                (bulletin_source_id, pdf_url[:2048]),
+                (bulletin_source_id, pdf_url[:2048], edition_date),
             )
             bulletin_pdf_id = cur.lastrowid
 
