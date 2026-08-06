@@ -90,12 +90,90 @@ def latest_per_shard():
     return latest
 
 
+def queue_remaining():
+    """Productive churches still due. 0 means the sweep has drained."""
+    from src.utils.db_connection import get_connection
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT COUNT(*) v FROM church c
+                WHERE website_url IS NOT NULL AND website_url != ''
+                  AND website_url NOT LIKE '%%facebook.com%%'
+                  AND website_url NOT LIKE '%%diocese%%'
+                  AND website_url NOT LIKE '%%archdiocese%%'
+                  AND (bulletin_checked_at IS NULL
+                       OR bulletin_checked_at < NOW() - INTERVAL 14 DAY)
+                  AND EXISTS (SELECT 1 FROM bulletin_source bs
+                              WHERE bs.church_id = c.church_id)
+                """
+            )
+            return cur.fetchone()["v"]
+
+
+def finish_sweep():
+    """Score the harvest and refresh the dashboard once the queue has drained.
+
+    extract_bulletins_to_db99.py inserts every name at a provisional 'low';
+    rescore_names_sql.py is what actually assigns confidence from the SSA and
+    Census reference data. run_daily_pipeline.py does this after its own run,
+    but an ad-hoc sharded sweep does not — which left 646,157 recovered names
+    sitting at 100% low until it was run by hand. Doing it here means the sweep
+    finishes itself.
+    """
+    import subprocess
+
+    root = os.path.dirname(os.path.abspath(__file__))
+    steps = [
+        ("rescore", [sys.executable, "rescore_names_sql.py", "--new-only"], 2400),
+        ("refresh-stats", [sys.executable, "rescore_names_sql.py", "--refresh-stats"], 1800),
+    ]
+    done = []
+    for label, cmd, timeout in steps:
+        print(f"  [sweep-complete] {label}...", flush=True)
+        try:
+            rc = subprocess.run(cmd, cwd=root, timeout=timeout).returncode
+        except Exception as e:
+            print(f"  [ERR] {label}: {e}")
+            rc = 1
+        done.append(f"{label}={'OK' if rc == 0 else 'FAIL'}")
+    return done
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--stop", action="store_true", help="Do not relaunch anything")
     ap.add_argument("--no-telegram", action="store_true")
     args = ap.parse_args()
+
+    # If the queue has drained and nothing is still running, the sweep is done:
+    # score it, refresh the dashboard, and say so. Checked BEFORE relaunching so
+    # a drained queue does not get six more shards with nothing to do.
+    try:
+        remaining = queue_remaining()
+    except Exception as e:
+        print(f"  [WARN] queue check failed: {e}")
+        remaining = None
+
+    if remaining == 0 and not args.dry_run and not args.stop:
+        live_now = [s for s, j in latest_per_shard().items()
+                    if j.get("status") in ("running", "pending")]
+        if not live_now:
+            print("Queue drained and no shards running — finishing the sweep.")
+            done = finish_sweep()
+            msg = ("<b>Bulletin recovery sweep COMPLETE</b>\n"
+                   "productive queue drained\n" + "\n".join(done))
+            print(msg.replace("<b>", "").replace("</b>", ""))
+            if not args.no_telegram:
+                send_telegram(msg)
+            return 0
+        print(f"Queue drained; {len(live_now)} shard(s) still finishing.")
+        return 0
+
+    if remaining is not None:
+        print(f"Productive queue remaining: {remaining:,}")
 
     latest = latest_per_shard()
     running, relaunched, failed = [], [], []
