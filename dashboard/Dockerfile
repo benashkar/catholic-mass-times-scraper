@@ -15,6 +15,15 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 # Copy dashboard application code
 COPY dashboard/app/ /app/app/
 
+# /health imports src.utils.health_checks, which was absent from this image and
+# made the endpoint 500. Copy ONLY those three files, not all of src/: the rest
+# pulls scraper dependencies (spacy, playwright, pdfplumber) the dashboard does
+# not need. health_checks.py imports nothing outside the stdlib and both
+# __init__.py files are docstring-only, so this stays slim.
+COPY src/__init__.py /app/src/__init__.py
+COPY src/utils/__init__.py /app/src/utils/__init__.py
+COPY src/utils/health_checks.py /app/src/utils/health_checks.py
+
 # Environment
 ENV FLASK_APP=app
 ENV SECRET_KEY=change-me-in-production

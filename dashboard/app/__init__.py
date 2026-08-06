@@ -91,7 +91,15 @@ def create_app(config_class=Config):
         """Full diagnostic health status for the pipeline and diagnostic agent."""
         import sys
         import os
-        sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+
+        # src/ sits one level up in the container (/app/src, next to /app/app)
+        # but two levels up in the repo (dashboard/app -> repo root). Add both
+        # so this resolves in development and in the deployed image.
+        _here = os.path.dirname(__file__)
+        for _candidate in (os.path.join(_here, ".."), os.path.join(_here, "..", "..")):
+            _candidate = os.path.abspath(_candidate)
+            if os.path.isdir(os.path.join(_candidate, "src")) and _candidate not in sys.path:
+                sys.path.insert(0, _candidate)
         from flask import request
         from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list
         from src.utils.health_checks import run_all_checks
