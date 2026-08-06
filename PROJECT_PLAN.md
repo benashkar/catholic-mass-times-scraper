@@ -1,6 +1,82 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-05 (bulletin cron no-forward-progress fixed; ~5.5-month edition backfill running)._
+_Last updated: 2026-08-06 (bulletin recovery sweep self-healing; Render startCommand trap; proxy policy)._
+
+## ⚠️ 2026-08-06 — RENDER `startCommand` IS NOT A SHELL (cost hours, read this first)
+
+Every shard the supervisor launched died within seconds. It looked exactly like the OOM being
+chased at the time, and led to a long detour tuning memory that changed nothing.
+
+**Render does not run `startCommand` through a shell.** So this:
+
+```
+MAX_PDFS_PER_CHURCH=150 NER_MODEL=en_core_web_sm python -u extract_bulletins_to_db99.py ...
+```
+
+is parsed with `MAX_PDFS_PER_CHURCH=150` as the **executable name**, and the job fails instantly.
+The same mistake had already broken a `sh -c "python a.py; b=$?; ..."` verify command.
+
+**Rules:**
+- `startCommand` must be **bare argv**: `python -u script.py --flag`. No env-var prefixes, no
+  `sh -c`, no `;`, `&&`, `$?`, `$(...)`, or redirection.
+- Pass configuration as **service env vars** (one-off jobs inherit them), not command prefixes.
+- Need several steps? Write a Python wrapper (`verify_all.py`) instead of shell chaining.
+
+**How it was proved:** three concurrent one-off jobs with the bare command `sleep 300` all ran and
+succeeded, while `sh -c "...sleep 420..."` jobs failed in ~80s. That isolated the cause to command
+parsing — not memory, not concurrency, not the scraper. The one shard that survived all night was
+the only one launched before the prefix was introduced.
+
+**Corrected diagnosis:** the earlier "shards are OOMing on the 2GB plan" conclusion was **wrong**.
+Memory was never demonstrated to be the limit. `MAX_PDF_SIZE_MB` had been dropped to 12 on that bad
+theory and is **restored to 25** — real bulletins run 6–8MB and a 12MB cap silently skips them.
+(An oversized PDF creates no row, so it is deferred to a later pass, not lost.)
+
+## 🔁 2026-08-06 — SWEEP IS SELF-HEALING (`church-sweep-supervisor`)
+
+Shards still die intermittently. `supervise_bulletin_sweep.py` on cron
+**`crn-d9pugau417fc73f6lj10`, `*/20 * * * *`** relaunches any shard that is not running, and pings
+Telegram only when it actually intervened. Restarting is free: `church.bulletin_checked_at` is
+stamped per church, so a relaunched shard resumes at the frontier instead of redoing work.
+
+**Verified live:** two shards died between 03:01 and 03:15; the 03:20 tick relaunched both with no
+human involved.
+
+Two gotchas worth keeping:
+- Treat a **`pending`** job as alive. Counting it as dead launches a duplicate for the same shard
+  every tick and piles up jobs that compete for resources.
+- **`/v1/services/{id}/jobs` lists only one-off jobs, not scheduled cron runs.** An empty list does
+  NOT mean the cron never fired — read `serviceDetails.lastSuccessfulRunAt` instead. (Note this
+  field is unreliable on some crons, where it stays `None` despite runs; cross-check by looking for
+  side effects the run would have produced.)
+
+## 🌐 2026-08-06 — PROXY POLICY: NOTHING HERE NEEDS ONE
+Full table in `docs/PROXY_POLICY.md`; global rule added to `global-config/CLAUDE.md`.
+Measured direct from a residential IP: parish websites **38/40 → 200, zero blocks**;
+`discovermass.com`, `bulletins.discovermass.com`, `parishesonline.com`, `irp.cdn-website.com`,
+`files.ecatholic.com`, `4.files.edl.io` all 200 with valid PDFs. **`PROXY_URL` stays unset.**
+- **Probe a real URL, not the domain root.** `files.ecatholic.com/` 403s at the root (directory
+  listing denied) while real bulletin PDFs under it return 200 — a root probe would have put a
+  proxy on a host that never needed one.
+- `catholicindex.org` is a Cloudflare **managed challenge** (`cf-mitigated: challenge`), which a
+  proxy cannot fix; already retired in favour of DiscoverMass.
+
+## ✅ 2026-08-06 — MASS TIMES CONFIRMED HEALTHY
+`verify_mass_times_run.py`: **17,689 churches re-scraped over 7 days across all 50 states**,
+462,243 services on file, 28.9% stale >30d. Checks distinct states touched, because a stuck
+rotation there would look exactly like the bulletin bug, plus a global-staleness floor to catch the
+slow death that killed CatholicIndex silently for months.
+
+`verify_all.py` runs both verifications in one process (a Python wrapper, not shell chaining) and
+exits with the worst child code. Cron **`church-bulletin-verify` `crn-d9pscd67bikc7380h680`** now
+runs **Tue 15:00 UTC — 12 hours after the bulletin cron's 03:00 start.**
+
+## 📊 Recovery sweep — status at 2026-08-06 03:20 UTC
+- **386,701 names** (101,088 unique) from **17,967 editions** across **2,151 churches**
+- ~6,325 productive churches remaining; 6 shards, ~10–20 churches/min depending on how many are live
+
+_(Original 2026-08-05 entry below.)_
+
 
 ## 🔴 2026-08-05 — BULLETIN CRON MADE NO FORWARD PROGRESS FOR ~5.5 MONTHS
 
