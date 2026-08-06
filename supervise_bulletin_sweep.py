@@ -57,9 +57,15 @@ def api(path, method="GET", payload=None):
 
 
 def shard_command(shard):
+    """Bare argv — Render does NOT run startCommand through a shell.
+
+    An env-var prefix ("FOO=1 python ...") is shell syntax: Render treats FOO=1
+    as the executable and the job dies within seconds, which looked exactly like
+    an OOM and cost a long detour. Memory tuning (MAX_PDFS_PER_CHURCH,
+    MAX_PDF_SIZE_MB, NER_MODEL) lives in the SERVICE env vars, which one-off
+    jobs inherit. For the same reason, no `sh -c "..."` and no shell operators.
+    """
     return (
-        f"MAX_PDFS_PER_CHURCH={PDF_CAP} MAX_PDF_SIZE_MB={PDF_SIZE_MB} "
-        f"NER_MODEL=en_core_web_sm "
         f"python -u extract_bulletins_to_db99.py --known-sources-only --days-fresh 14 "
         f"--shards {SHARDS} --shard {shard} --workers {WORKERS} "
         f"--batch-size 25 --max-runtime-minutes {RUNTIME_MIN}"
@@ -97,7 +103,10 @@ def main():
     for shard in range(SHARDS):
         j = latest.get(shard)
         status = j.get("status") if j else "never-started"
-        if status == "running":
+        # "pending" is a job that has been accepted but not started yet. Treating
+        # it as dead would launch a second job for the same shard every tick and
+        # pile up duplicates that compete for the same resources.
+        if status in ("running", "pending"):
             running.append(shard)
             continue
         if args.stop:
