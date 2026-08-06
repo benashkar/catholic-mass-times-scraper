@@ -32,6 +32,12 @@ from src.utils.telegram import send_telegram
 API = "https://api.render.com/v1"
 CRON_ID = "crn-d6s8t02a214c73bt62s0"          # church-bulletin-cron
 SHARDS = int(os.environ.get("SWEEP_SHARDS", "6"))
+# After the productive tier drains, move on to discovery: churches that have
+# never yielded a bulletin page. Hit rate is ~1%, so it must never run before
+# the productive tier is done — it would spend the window on known dead ends.
+# Set SWEEP_DISCOVERY=0 to stop after the productive tier.
+DISCOVERY_AFTER = os.environ.get("SWEEP_DISCOVERY", "1") == "1"
+DISCOVERY_SHARDS = int(os.environ.get("SWEEP_DISCOVERY_SHARDS", "4"))
 WORKERS = int(os.environ.get("SWEEP_WORKERS", "4"))
 # Memory budget, not politeness: these two keep a shard inside 2GB.
 PDF_CAP = os.environ.get("SWEEP_PDF_CAP", "150")
@@ -72,14 +78,21 @@ def shard_command(shard):
     )
 
 
-def latest_per_shard():
-    """Most recent job per shard, from the sweep's own start commands."""
+def latest_per_shard(mode="--known-sources-only"):
+    """Most recent job per shard for ONE tier.
+
+    The productive and discovery tiers both use --shard, so they must be told
+    apart by their mode flag; otherwise a running discovery shard reads as a
+    live productive shard and neither tier gets relaunched.
+    """
     jobs = api(f"/services/{CRON_ID}/jobs?limit=60")
     latest = {}
     for row in jobs:
         j = row.get("job", row)
         sc = j.get("startCommand", "") or ""
         if "--shard " not in sc or "extract_bulletins_to_db99" not in sc:
+            continue
+        if mode not in sc:
             continue
         try:
             shard = int(sc.split("--shard ")[1].split()[0])
@@ -88,6 +101,28 @@ def latest_per_shard():
         # /jobs comes back newest-first, so the first sighting wins.
         latest.setdefault(shard, j)
     return latest
+
+
+def discovery_remaining():
+    """Churches with no bulletin page yet that are due a discovery crawl."""
+    from src.utils.db_connection import get_connection
+
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                SELECT COUNT(*) v FROM church c
+                WHERE website_url IS NOT NULL AND website_url != ''
+                  AND website_url NOT LIKE '%%facebook.com%%'
+                  AND website_url NOT LIKE '%%diocese%%'
+                  AND website_url NOT LIKE '%%archdiocese%%'
+                  AND (bulletin_checked_at IS NULL
+                       OR bulletin_checked_at < NOW() - INTERVAL 14 DAY)
+                  AND NOT EXISTS (SELECT 1 FROM bulletin_source bs
+                                  WHERE bs.church_id = c.church_id)
+                """
+            )
+            return cur.fetchone()["v"]
 
 
 def queue_remaining():
@@ -146,6 +181,28 @@ def finish_sweep():
     return done
 
 
+def start_discovery():
+    """Launch the discovery tier: churches that have never yielded a bulletin.
+
+    Fewer shards than the productive tier — the hit rate is ~1%, so this is a
+    long tail worth working steadily rather than throwing everything at.
+    """
+    launched = 0
+    for shard in range(DISCOVERY_SHARDS):
+        cmd = (
+            f"python -u extract_bulletins_to_db99.py --discovery-only --days-fresh 14 "
+            f"--shards {DISCOVERY_SHARDS} --shard {shard} --workers {WORKERS} "
+            f"--batch-size 50 --max-runtime-minutes {RUNTIME_MIN}"
+        )
+        try:
+            api(f"/services/{CRON_ID}/jobs", "POST", {"startCommand": cmd})
+            launched += 1
+        except Exception as e:
+            print(f"  [ERR] discovery shard {shard}: {e}")
+    print(f"  [OK] discovery tier: {launched} shards launched")
+    return launched
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -163,24 +220,60 @@ def main():
         remaining = None
 
     if remaining == 0 and not args.dry_run and not args.stop:
-        live_now = [s for s, j in latest_per_shard().items()
-                    if j.get("status") in ("running", "pending")]
-        if not live_now:
-            print("Queue drained and no shards running — finishing the sweep.")
-            done = finish_sweep()
-            msg = ("<b>Bulletin recovery sweep COMPLETE</b>\n"
-                   "productive queue drained\n" + "\n".join(done))
-            print(msg.replace("<b>", "").replace("</b>", ""))
-            if not args.no_telegram:
-                send_telegram(msg)
+        live_prod = [s for s, j in latest_per_shard("--known-sources-only").items()
+                     if j.get("status") in ("running", "pending")]
+        if live_prod:
+            print(f"Queue drained; {len(live_prod)} productive shard(s) still finishing.")
             return 0
-        print(f"Queue drained; {len(live_now)} shard(s) still finishing.")
+
+        # Productive tier is done. If discovery has already been started, this
+        # tick's job is simply to keep those shards alive.
+        disc = latest_per_shard("--discovery-only")
+        if disc:
+            try:
+                disc_left = discovery_remaining()
+            except Exception:
+                disc_left = None
+            print(f"Discovery tier active; remaining: "
+                  f"{disc_left:,}" if isinstance(disc_left, int) else "Discovery tier active")
+            if disc_left == 0:
+                print("Discovery tier drained too — nothing left to sweep.")
+                return 0
+            for shard in range(DISCOVERY_SHARDS):
+                j = disc.get(shard)
+                if j and j.get("status") in ("running", "pending"):
+                    continue
+                cmd = (
+                    f"python -u extract_bulletins_to_db99.py --discovery-only --days-fresh 14 "
+                    f"--shards {DISCOVERY_SHARDS} --shard {shard} --workers {WORKERS} "
+                    f"--batch-size 50 --max-runtime-minutes {RUNTIME_MIN}"
+                )
+                try:
+                    api(f"/services/{CRON_ID}/jobs", "POST", {"startCommand": cmd})
+                    print(f"  [OK] relaunched discovery shard {shard}")
+                except Exception as e:
+                    print(f"  [ERR] discovery shard {shard}: {e}")
+            return 0
+
+        print("Queue drained and no shards running — finishing the sweep.")
+        done = finish_sweep()
+        extra = ""
+        # Only move to discovery once the scoring steps actually succeeded;
+        # starting new work on top of a failed finish would bury the failure.
+        if DISCOVERY_AFTER and all("FAIL" not in d for d in done):
+            started = start_discovery()
+            extra = f"\n\nnext: discovery tier started ({started} shards)"
+        msg = ("<b>Bulletin recovery sweep COMPLETE</b>\n"
+               "productive queue drained\n" + "\n".join(done) + extra)
+        print(msg.replace("<b>", "").replace("</b>", ""))
+        if not args.no_telegram:
+            send_telegram(msg)
         return 0
 
     if remaining is not None:
         print(f"Productive queue remaining: {remaining:,}")
 
-    latest = latest_per_shard()
+    latest = latest_per_shard("--known-sources-only")
     running, relaunched, failed = [], [], []
 
     for shard in range(SHARDS):
