@@ -22,12 +22,52 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from src.utils.db_connection import get_connection
+from src.utils.telegram import send_telegram
+
+# The bulletin cron made no forward progress from this date until 2026-08-05:
+# coverage fell from 1,459 parishes/week to 433 in a single week and decayed
+# from there. Recovery is judged by whether these weeks refilled.
+GAP_START = "2026-02-23"
+GAP_END = "2026-08-05"
+
+
+def gap_summary(cur):
+    """Compact before/during-gap comparison, small enough for a Telegram message."""
+    cur.execute(
+        """
+        SELECT DATE_FORMAT(pdf_date, '%%Y-%%m') m,
+               COUNT(*) editions,
+               COUNT(DISTINCT bulletin_source_id) parishes
+        FROM bulletin_pdf
+        WHERE pdf_date IS NOT NULL
+          AND pdf_date >= DATE_SUB(%s, INTERVAL 3 MONTH)
+          AND pdf_date <= %s
+        GROUP BY 1 ORDER BY 1
+        """,
+        (GAP_START, GAP_END),
+    )
+    rows = cur.fetchall()
+    lines = ["<b>Bulletin edition coverage — gap recovery</b>", "month  parishes  editions"]
+    for r in rows:
+        marker = "  <- gap" if r["m"] >= GAP_START[:7] else ""
+        lines.append(f"{r['m']}  {r['parishes']:>6,}  {r['editions']:>7,}{marker}")
+
+    pre = [r["parishes"] for r in rows if r["m"] < GAP_START[:7]]
+    during = [r["parishes"] for r in rows if r["m"] >= GAP_START[:7]]
+    if pre and during:
+        base = max(pre)
+        worst = min(during)
+        lines.append("")
+        lines.append(f"pre-gap best month : {base:,} parishes")
+        lines.append(f"worst gap month    : {worst:,} ({worst/base*100:.0f}% of pre-gap)")
+    return "\n".join(lines)
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--weeks", type=int, default=52, help="How many weeks back to show")
     ap.add_argument("--state", type=str, help="Limit to one state")
+    ap.add_argument("--telegram", action="store_true", help="Send the gap summary to Telegram")
     args = ap.parse_args()
 
     conn = get_connection()
@@ -80,6 +120,12 @@ def main():
     cur.execute("SELECT COUNT(*) t, COUNT(pdf_date) d FROM bulletin_pdf")
     r = cur.fetchone()
     print(f"\npdf_date populated: {r['d']:,} / {r['t']:,} ({r['d']/r['t']*100:.1f}%)")
+
+    if args.telegram:
+        summary = gap_summary(cur)
+        print("\n" + summary.replace("<b>", "").replace("</b>", ""))
+        send_telegram(summary)
+
     conn.close()
     return 0
 

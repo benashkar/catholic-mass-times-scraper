@@ -128,6 +128,11 @@ def finish_sweep():
     steps = [
         ("rescore", [sys.executable, "rescore_names_sql.py", "--new-only"], 2400),
         ("refresh-stats", [sys.executable, "rescore_names_sql.py", "--refresh-stats"], 1800),
+        # The coverage report is the actual proof the recovery worked: it shows
+        # whether the 2026-02-23 -> 2026-08-05 hole refilled. Telegram it so the
+        # answer is waiting rather than needing someone to go and run it.
+        ("coverage-report",
+         [sys.executable, "report_edition_coverage.py", "--weeks", "40", "--telegram"], 1800),
     ]
     done = []
     for label, cmd, timeout in steps:
