@@ -851,6 +851,27 @@ def main():
             local.conn = conn_t
         cur_t = conn_t.cursor()
 
+        # CLAIM the church before processing it, not after.
+        #
+        # Stamping only on success made a church that kills its worker immortal:
+        # it stays at the head of a queue ordered oldest-checked-first, so every
+        # relaunched shard picks it up again, dies on it again, and never gets
+        # past it. That is what stalled the sweep with 2,477 churches left —
+        # parishes holding 3,000-3,900 PDFs, last stamped in May, blocking the
+        # line on every single run.
+        #
+        # Claiming first turns an infinite retry into one attempt. The cost is
+        # that a church whose worker dies mid-way waits for the next cycle
+        # instead of being retried immediately, which is the right trade: one
+        # deferred church beats a permanently blocked queue.
+        try:
+            cur_t.execute(
+                "UPDATE church SET bulletin_checked_at = NOW() WHERE church_id = %s",
+                (church["church_id"],),
+            )
+        except Exception as e:
+            print(f"  [ERR] claim {slug}: {e}", flush=True)
+
         try:
             stats = process_church(cur_t, church)
             with lock:
@@ -864,17 +885,8 @@ def main():
                 if totals["errors"] <= 10:
                     print(f"  [ERR] {slug}: {e}", flush=True)
 
-        # Stamp the attempt whether or not it yielded a bulletin — a church with
-        # no bulletin page must still rotate to the back of the queue.
-        try:
-            cur_t.execute(
-                "UPDATE church SET bulletin_checked_at = NOW() WHERE church_id = %s",
-                (church["church_id"],),
-            )
-        except Exception as e:
-            print(f"  [ERR] watermark {slug}: {e}", flush=True)
-        finally:
-            cur_t.close()
+        # Already claimed above; nothing to stamp here.
+        cur_t.close()
 
         with lock:
             counter["done"] += 1
