@@ -480,6 +480,36 @@ def main():
     init_cnt = cur.rowcount
     print(f"    [OK] {init_cnt:,} single-initial last names downgraded")
 
+    # Step 8b: Names merged across bulletin rows.
+    # Column-aware extraction still runs one row into the next, producing
+    # "Lynette Eilermann Hannah" or "Vince Eimer Vince" at HIGH confidence.
+    # split_merged_name()'s SSA-first-name heuristic cannot catch these —
+    # Hannah, Anthony and Jeffery are all genuine Census surnames, and trimming
+    # them blindly would damage real names like "Sarah Jane Hannah". (It is also
+    # a no-op in production: it reads data/reference/*.csv, which is not in the
+    # repo or the image.)
+    # Evidence beats guessing: only downgrade a 3-word name when its first two
+    # words ALREADY exist as their own name in the SAME PDF. That proves the
+    # third word bled in from the neighbouring row, and nothing is lost — the
+    # correct 2-word name is already stored at its own confidence.
+    print("  Step 8b: Downgrading names merged across rows...")
+    merged_sql = (
+        "UPDATE bulletin_name a "
+        "JOIN bulletin_name b "
+        "  ON b.bulletin_pdf_id = a.bulletin_pdf_id "
+        " AND b.person_name = SUBSTRING_INDEX(a.person_name, ' ', 2) "
+        "SET a.confidence = 'low', a.is_suspect = 1 "
+        "WHERE a.confidence IN ('high','medium') AND a.is_suspect = 0 "
+        "  AND LENGTH(a.person_name) - LENGTH(REPLACE(a.person_name, ' ', '')) + 1 = 3"
+    )
+    if watermark > 0:
+        merged_sql += " AND a.bulletin_name_id > %s"
+        cur.execute(merged_sql, (watermark,))
+    else:
+        cur.execute(merged_sql)
+    merged_cnt = cur.rowcount
+    print(f"    [OK] {merged_cnt:,} row-merged names downgraded")
+
     # Step 9: Refresh stats (skip in --new-only mode; sync_to_db99 already rebuilt stats)
     if watermark > 0:
         print("  Step 9: SKIPPED (sync_to_db99 already refreshed stats)")
