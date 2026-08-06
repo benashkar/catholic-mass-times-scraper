@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-06 (bulletin recovery sweep self-healing; Render startCommand trap; proxy policy)._
+_Last updated: 2026-08-06 06:10 UTC (rescore-after-sweep rule; merged-name cleanup; /health fixed)._
 
 ## ⚠️ 2026-08-06 — RENDER `startCommand` IS NOT A SHELL (cost hours, read this first)
 
@@ -71,9 +71,66 @@ slow death that killed CatholicIndex silently for months.
 exits with the worst child code. Cron **`church-bulletin-verify` `crn-d9pscd67bikc7380h680`** now
 runs **Tue 15:00 UTC — 12 hours after the bulletin cron's 03:00 start.**
 
-## 📊 Recovery sweep — status at 2026-08-06 03:20 UTC
-- **386,701 names** (101,088 unique) from **17,967 editions** across **2,151 churches**
-- ~6,325 productive churches remaining; 6 shards, ~10–20 churches/min depending on how many are live
+## ⚠️ 2026-08-06 — RECOVERED NAMES WERE ALL `low` UNTIL RESCORED
+
+The sweep inserted **646,157 names at 100% `low` confidence — zero high, zero medium.** Not a bug in
+scoring: `extract_bulletins_to_db99.py` inserts a provisional score, and **`rescore_names_sql.py` is
+what actually assigns confidence** from the SSA/Census reference tables in db99.
+`run_daily_pipeline.py` runs it after its own extraction; an ad-hoc sharded sweep does not.
+
+Running it turned that into **415,856 high / 136,879 medium / 97,711 low**.
+
+**Rule: any run of `extract_bulletins_to_db99.py` outside `run_daily_pipeline.py` MUST be followed by
+`rescore_names_sql.py --new-only`.** Names that look worthless in the dashboard are worse than
+missing names, because nobody goes looking for them. The supervisor now does this automatically when
+the queue drains (rescore → refresh-stats → coverage report → Telegram).
+
+## 🧹 2026-08-06 — MERGED-NAME CLEANUP: 194,363 artifacts downgraded (Step 8b)
+
+Column-aware extraction runs one bulletin row into the next, producing `Lynette Eilermann Hannah`
+and `Vince Eimer Vince` **at HIGH confidence**.
+
+**`split_merged_name()` does NOT fix this — two traps:**
+1. It reads `data/reference/ssa_first_names.csv` / `census_surnames.csv`, which are **not in the repo
+   or the Docker image**. It is a **silent no-op in production**. Wiring it into the extractor ships
+   dead code (attempted and reverted).
+2. Its heuristic ("last word is a common SSA first name and NOT a Census surname") is wrong for these
+   cases anyway: **Hannah, Anthony and Jeffery are all genuine Census surnames** (ranks 1779, 618,
+   3638), so it skips them — and loosening it would destroy real names like `Sarah Jane Hannah`.
+
+**Step 8b in `rescore_names_sql.py` uses evidence instead:** downgrade a 3-word name only when its
+first two words **already exist as their own name in the SAME PDF**. That proves the third word bled
+in from the neighbouring row, and nothing is lost — the correct 2-word name is already stored at its
+own confidence. Needs no reference files and cannot fire on a genuine three-part name unless the
+two-part version is also present in the same document.
+
+Backlog cleanup across all 23.5M rows: **194,363 downgraded**. Clean high-confidence names now
+16,160,189 of 23,490,583 (68.8%).
+
+**Deliberately conservative — some artifacts remain.** It only fires when the 2-word base was also
+extracted, so `Michaela Maze Linda` and `Laurence Husak John` survive at high confidence. Catching
+those needs a heuristic that would also destroy `Jose Benito Chavez` and `Juan Carlos Montes`, which
+are correctly preserved today. Do not "improve" this without a way to tell the two apart.
+
+## ✅ 2026-08-06 — DASHBOARD `/health` FIXED (commit 43514ab)
+`dashboard/Dockerfile` copied only `dashboard/app/`, so `src.utils.health_checks` was absent and the
+endpoint 500'd **in production while working locally** — which is exactly why it went unnoticed.
+Copies only the three files the import needs (not all of `src/`, which drags spacy/playwright into a
+dashboard image that does not need them). Also fixed the `sys.path` insert, which was correct in the
+repo (`dashboard/app` → root) but resolved to `/` in the container where `src/` sits at `/app/src`;
+it now probes both and adds whichever actually contains `src/`. Verified 200, `db=connected`.
+
+## 📊 Recovery sweep — status at 2026-08-06 06:09 UTC
+- **756,312 names** from **35,265 editions** across **5,096 churches**
+- **3,380** productive churches remaining (of 8,057); shards 1 and 4 have `succeeded` outright
+- Supervisor relaunches dead shards every 20 min and will self-finish (rescore + stats + coverage
+  report to Telegram) when the queue drains
+
+### Next (blocked on the sweep finishing — both compete for the same shards)
+1. **Discovery tier** — ~13,383 churches that have never yielded a bulletin page (~1% hit rate):
+   `--discovery-only`.
+2. **Deeper archive pass** — `MAX_PDFS_PER_CHURCH` is env-set to 150 on the cron; a later pass at 400
+   reaches further back for churches with long archives.
 
 _(Original 2026-08-05 entry below.)_
 
