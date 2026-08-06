@@ -67,7 +67,10 @@ USER_AGENT = (
 PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
 PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
-MAX_PDF_SIZE_MB = 25
+# Tunable because memory, not bandwidth, is the binding constraint: a 25MB PDF
+# can expand to hundreds of MB inside pdfplumber, and several workers doing that
+# at once on a 2GB instance is what OOMs a shard.
+MAX_PDF_SIZE_MB = int(os.environ.get("MAX_PDF_SIZE_MB", "25"))
 # How deep into a parish's archive to go. Raised from 100 because at least one
 # church hit that ceiling exactly, meaning its back-editions were truncated at
 # an unknown depth — and back-editions are the point of the recovery sweep.

@@ -138,8 +138,12 @@ def _get_ner_nlp_locked():
     try:
         import spacy
 
+        # en_core_web_lg is ~800MB resident. On the 2GB cron instance that alone
+        # crowds out several PDF-parsing workers and OOMs the job, so allow the
+        # small model to be forced with NER_MODEL=en_core_web_sm.
+        preferred = os.environ.get("NER_MODEL", "en_core_web_lg")
         try:
-            _ner_nlp = spacy.load("en_core_web_lg")
+            _ner_nlp = spacy.load(preferred)
         except OSError:
             _ner_nlp = spacy.load("en_core_web_sm")
     except Exception:
