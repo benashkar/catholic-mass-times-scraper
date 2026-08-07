@@ -22,15 +22,41 @@ and collapsing it into `needs_proxy` is exactly the waste this table prevents.
 **Re-label with `label_host_proxy_policy.py`, and run it as a Render one-off job** — it probes
 direct, probes the proxy *only when direct failed*, and records both statuses with the egress IP.
 
-### First results (2026-08-07, from Render)
-| policy | hosts |
-|---|---|
-| `direct` | 152 |
-| `blocked` | 111 |
-| `needs_proxy` | 8 |
+### Full survey — all 15,024 hosts, measured from Render 2026-08-07
+| policy | hosts | share |
+|---|---|---|
+| `direct` | 9,195 | 61.2% |
+| `blocked` | 5,597 | 37.3% |
+| **`needs_proxy`** | **232** | **1.5%** |
 
-`needs_proxy` examples are unambiguous — `acparishes.org` 403→200, `abjcatholic.org`
-SSLError→200. `blocked` is dominated by `*.sites.ecatholic.com` returning 403 both ways.
+**Only 1.5% of hosts justify a proxy.** That is the number that makes per-host enforcement worth
+having: proxying everything would spend metered GB on 98.5% of traffic that does not need it, and
+proxying nothing would lose 232 hosts.
+
+**What the proxy actually fixed** (`needs_proxy`, by direct failure mode):
+
+| direct | → proxy | hosts |
+|---|---|---|
+| 403 | 200 | 114 |
+| **429** | 200 | **51** |
+| SSLError | 200 | 32 |
+| 307 / ReadTimeout / 404 | 200 | 27 |
+
+Those **51 hosts returning 429 (Too Many Requests) direct, and 200 through a fresh IP, are
+evidence we are being rate-limited from Render** — not merely refused for being a datacenter. It
+supports the "we may have earned this with our own volume" theory. Keep per-host rates modest.
+
+### `blocked` is three different things — read it carefully
+Of the 5,597:
+- **~4,354 genuinely blocked** — 403 direct *and* 403 through the proxy.
+- **~850 simply dead or broken** — `ConnectionError`, `404`, DNS/TLS failures. No proxy fixes a site
+  that is not there; these are a data-quality problem in `church.website_url`, not an egress one.
+- **711 inconclusive** — the verdict is `blocked` because the **proxy leg itself errored**
+  (`ProxyError`), which proves the proxy failed, not that the host refused it. Worth re-probing when
+  the proxy is healthy; `classify()` currently collapses these into `blocked`.
+
+All three correctly result in **no proxy**, so enforcement is right either way — but do not read
+"5,597 blocked" as "5,597 hosts are refusing us".
 
 > ⚠️ **The verdict is probabilistic, because the proxy rotates.** `27823.sites.ecatholic.com` scored
 > `needs_proxy` while `17009.sites.ecatholic.com` scored `blocked` — same vendor platform, so the
