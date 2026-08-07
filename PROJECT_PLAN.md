@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-06 23:15 UTC (recovery sweep COMPLETE — both tiers drained; not_found clobber fixed)._
+_Last updated: 2026-08-07 04:00 UTC (ALL items complete — 1.22M names; Render-403 finding; deeper pass done)._
 
 ## ⚠️ 2026-08-06 — RENDER `startCommand` IS NOT A SHELL (cost hours, read this first)
 
@@ -175,6 +175,45 @@ May. **Claim before processing**, always — one deferred church beats a permane
 ### Post-sweep settings restored
 `MAX_PDF_SIZE_MB=25`, `MAX_PDFS_PER_CHURCH=150`, `SWEEP_WORKERS=5`. The tail ran at 8/40/2 to survive;
 leaving those in place would have made the weekly run permanently shallower.
+
+## 🚫 2026-08-07 — ~1,441 PARISH SITES 403 FROM RENDER, AND NO PROXY FIXES IT
+
+Chasing why discovery kept failing on the deep-archive parishes produced a three-way measurement on
+the same 7 sites:
+
+| Fetched from | Result |
+|---|---|
+| Residential laptop | **7/7 → 200** |
+| **Render datacenter** (`74.220.49.50`) | **7/7 → 403** |
+| **711 residential proxy** (`-country-US`) | **7/7 → 403** |
+
+So the `not_found` flags were frequently *accurate from Render's vantage point*. Two lessons, both
+now global rules:
+1. **Measure from the machine that runs the scraper.** The original "nothing here needs a proxy"
+   verdict was measured from a laptop and certified sources as fine that were 403ing in production.
+2. **A datacenter block does not imply a proxy fixes it.** 711's exits sit on the same reputation
+   lists (`proxy_ok: 0` of 18). This stays a no-proxy project — not because nothing is blocked, but
+   because the proxy we have does not help. `PROXY_URL` was set only for the probe and removed
+   immediately.
+
+**Unresolved: we may have earned these blocks.** The same hosts hold thousands of PDFs we scraped
+successfully before, so they were reachable at some point. Keep per-host rates modest.
+Reproduce: `python -u diagnose_discovery_egress.py --limit 20 --compare-proxy` (writes to
+`scrape_log`, since Render does not serve cron runtime logs).
+
+## ✅ 2026-08-07 — DEEPER ARCHIVE PASS (item 7) COMPLETE
+Targeted rather than a full re-sweep: only **129 sources** had been truncated by a cap (102 at 40,
+27 at 100) and all 129 were still reachable. Re-queued them, raised `MAX_PDFS_PER_CHURCH` to 400,
+ran, then **restored the cap to 150**.
+
+Yield: **4,088 editions → 83,500 names** (57,497 high / 16,071 medium / 9,932 low) from 129 churches
+— by far the richest per-church return of the whole recovery, which is what a removed truncation
+looks like. Both queues drained; `bulletin_state_stats` refreshed to 1,494,920.
+
+### 🏁 Recovery grand total (2026-08-05 20:24 → 2026-08-07 04:00 UTC)
+- **1,216,587 names** from **58,305 editions**
+- Table totals: `bulletin_name` 23,952,145 · `bulletin_pdf` 2,813,437
+- `bulletin_source` 9,499 → 19,399 churches; 968 sources produced a first-ever PDF
 
 ## 📊 Recovery sweep — earlier status at 2026-08-06 06:09 UTC
 - **756,312 names** from **35,265 editions** across **5,096 churches**
