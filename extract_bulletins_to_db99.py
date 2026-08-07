@@ -49,6 +49,7 @@ from run_bulletin_scraper import (
     prewarm_shared_state,
     score_name_confidence,
 )
+from src.utils import host_policy
 from src.parsers.fallback_parsers import (
     parse_category_from_context,
     parse_first_last_from_person_name,
@@ -62,10 +63,12 @@ USER_AGENT = (
     "Chrome/131.0.0.0 Safari/537.36"
 )
 
-# Optional rotating residential proxy (shared PROXY_URL convention). When set,
-# PDF downloads route through it; when unset, requests go direct.
+# Proxy use is PER HOST, never global. Setting PROXY_URL alone no longer tunnels
+# anything: a host must be labelled needs_proxy in scrape_host_policy, which is
+# only awarded when the proxy was measured to actually fix that host. See
+# src/utils/host_policy.py — hosts that fail direct AND through the proxy are
+# 'blocked', and sending those through it would spend metered GB for the same 403.
 PROXY_URL = os.environ.get("PROXY_URL", "").strip() or None
-PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
 # Tunable because memory, not bandwidth, is the binding constraint: a 25MB PDF
 # can expand to hundreds of MB inside pdfplumber, and several workers doing that
@@ -164,7 +167,10 @@ def download_pdf_to_memory(url, timeout=30):
     """Download a PDF into memory (no disk). Returns bytes or None."""
     try:
         resp = requests.get(
-            url, timeout=timeout, headers={"User-Agent": USER_AGENT}, proxies=PROXIES
+            url,
+            timeout=timeout,
+            headers={"User-Agent": USER_AGENT},
+            proxies=host_policy.proxies_for(url),
         )
         if resp.status_code != 200:
             return None

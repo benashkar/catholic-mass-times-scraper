@@ -220,6 +220,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config.settings import OUTPUT_DIR  # noqa: E402
 from src.utils.logger import get_logger  # noqa: E402
+from src.utils import host_policy as _host_policy  # noqa: E402
 
 logger = get_logger(__name__)
 
@@ -454,13 +455,17 @@ _thread_local = threading.local()
 
 
 def _get_session():
-    """The calling thread's HTTP session."""
+    """The calling thread's HTTP session.
+
+    Deliberately NOT proxied at the session level. A session-wide proxy applies
+    to every host the thread touches, which is the "set PROXY_URL and tunnel the
+    whole estate" failure this project is trying to avoid. The proxy is chosen
+    per request instead, from the per-host policy table.
+    """
     sess = getattr(_thread_local, "session", None)
     if sess is None:
         sess = requests.Session()
         sess.headers.update(HEADERS)
-        if PROXIES:
-            sess.proxies.update(PROXIES)
         _thread_local.session = sess
     return sess
 
@@ -492,10 +497,18 @@ _session = _SessionProxy()
 
 
 def _rate_limited_get(url: str, timeout: int = REQUEST_TIMEOUT, allow_redirects=True):
-    """Make a per-host rate-limited GET request. Returns Response or None."""
+    """Make a per-host rate-limited GET request. Returns Response or None.
+
+    The proxy (if any) is selected per host, so an unlabelled host goes direct.
+    """
     _throttle(url)
     try:
-        resp = _get_session().get(url, timeout=timeout, allow_redirects=allow_redirects)
+        resp = _get_session().get(
+            url,
+            timeout=timeout,
+            allow_redirects=allow_redirects,
+            proxies=_host_policy.proxies_for(url),
+        )
         return resp
     except requests.exceptions.RequestException as e:
         logger.debug(f"Request failed for {url}: {e}")
