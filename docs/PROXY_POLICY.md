@@ -3,6 +3,41 @@
 **Default: NO PROXY.** Every host this project touches is measured below. A proxy is
 opt-in per source, only where evidence shows it is required.
 
+## How it is ENFORCED (not just documented)
+
+Per-host labels live in **`scrape_host_policy`** and are applied per request by
+`src/utils/host_policy.py`. **Setting `PROXY_URL` alone no longer tunnels anything** — a host must
+be labelled `needs_proxy` to be proxied. The scraper session is deliberately *not* proxied
+session-wide, because that applies to every host a thread touches.
+
+| policy | meaning | what the scraper does |
+|---|---|---|
+| `direct` | fetches fine from our own egress | **no proxy** (the default) |
+| `needs_proxy` | fails direct, and the proxy **demonstrably fixes it** | use the proxy |
+| `blocked` | fails direct **and** through the proxy | **no proxy** — it would burn metered GB for the same 403 |
+
+Unknown hosts fail open to `direct`. Three states, not two: `blocked` is the one that saves money,
+and collapsing it into `needs_proxy` is exactly the waste this table prevents.
+
+**Re-label with `label_host_proxy_policy.py`, and run it as a Render one-off job** — it probes
+direct, probes the proxy *only when direct failed*, and records both statuses with the egress IP.
+
+### First results (2026-08-07, from Render)
+| policy | hosts |
+|---|---|
+| `direct` | 152 |
+| `blocked` | 111 |
+| `needs_proxy` | 8 |
+
+`needs_proxy` examples are unambiguous — `acparishes.org` 403→200, `abjcatholic.org`
+SSLError→200. `blocked` is dominated by `*.sites.ecatholic.com` returning 403 both ways.
+
+> ⚠️ **The verdict is probabilistic, because the proxy rotates.** `27823.sites.ecatholic.com` scored
+> `needs_proxy` while `17009.sites.ecatholic.com` scored `blocked` — same vendor platform, so the
+> difference is most likely which residential exit IP was drawn on that attempt, not a property of
+> the host. Treat a single `blocked` verdict on a host whose siblings pass as "worth re-probing",
+> not as settled. Do not build automatic proxy-retry on `blocked` without watching the GB bill.
+
 > ## ⚠️ 2026-08-07 CORRECTION — measure from the machine that RUNS the scraper
 >
 > The table below was originally measured from a laptop on a residential connection. That was the
