@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-06 06:10 UTC (rescore-after-sweep rule; merged-name cleanup; /health fixed)._
+_Last updated: 2026-08-06 23:15 UTC (recovery sweep COMPLETE — both tiers drained; not_found clobber fixed)._
 
 ## ⚠️ 2026-08-06 — RENDER `startCommand` IS NOT A SHELL (cost hours, read this first)
 
@@ -120,7 +120,56 @@ dashboard image that does not need them). Also fixed the `sys.path` insert, whic
 repo (`dashboard/app` → root) but resolved to `/` in the container where `src/` sits at `/app/src`;
 it now probes both and adds whichever actually contains `src/`. Verified 200, `db=connected`.
 
-## 📊 Recovery sweep — status at 2026-08-06 06:09 UTC
+## ✅ 2026-08-06 23:00 UTC — RECOVERY SWEEP COMPLETE (both tiers drained)
+
+| | |
+|---|---|
+| Productive queue | **0** (was 8,057) |
+| Discovery queue | **0** (of ~13,383) |
+| Churches swept | **21,770** |
+| Names recovered | **1,119,435** (591,180 high / 190,377 medium) |
+| `bulletin_pdf` | 2,808,920 · `bulletin_name` 23,854,993 · clean high 16,280,490 |
+
+Ran to completion unattended: supervisor drained the productive tier → rescore →
+refresh-stats → coverage report → chained into discovery → drained that too. Verified rather than
+assumed (names are NOT 100% `low`, stats moved 1,273,271 → 1,425,689, shards exit `[queue-drained]`).
+
+**Discovery more than doubled the source base:** `bulletin_source` 9,499 → 19,399 churches; **968
+sources produced their first-ever PDF.**
+
+### Gap recovery: parishes came back, editions did not
+| month | parishes | editions |
+|---|---|---|
+| 2026-01 (pre-gap) | 2,071 | 108,473 |
+| 2026-03 | 1,257 | 6,498 |
+| 2026-05 | 1,441 | 6,369 |
+| 2026-07 | 1,673 | 6,629 |
+
+Worst gap month went from ~300 parishes (17% of best) to **1,257 (61%)**. But gap months hold ~6,000
+editions against ~110,000 pre-gap, and **that is the real ceiling, not a measurement artifact**:
+parishes publish only the last 8–12 weeks, so March–June editions rolled off the public web before
+we reached them. We recovered every parish still hosting an archive; the rest are gone. 11 weeks
+remain below 50% of the best week.
+
+### ⚠️ Self-inflicted damage found and fixed (commit 2af10b5)
+`process_church` UPSERTed `discovery_source` + `bulletin_page_url` unconditionally, so any transient
+failure overwrote a real bulletin page with the bare homepage and marked it `not_found`. **1,441
+sources now read `not_found` while holding thousands of PDFs** — the constrained tail runs (8MB /
+40-PDF caps, 2 workers) timed out on deep-archive churches and downgraded them. Failure now only
+touches `discovered_at`; the previous discovery survives, and the damaged rows **self-heal on the
+next successful weekly crawl** rather than needing a repair script.
+
+### ⚠️ Head-of-line blocking (commit 9a29235) — the reason the tail stalled
+`bulletin_checked_at` was stamped only AFTER `process_church` returned, so a church that killed its
+worker was never stamped, stayed at the head of an oldest-first queue, and was retried by every
+relaunched shard forever. The blockers were parishes holding **3,000–3,900 PDFs**, last stamped in
+May. **Claim before processing**, always — one deferred church beats a permanently blocked queue.
+
+### Post-sweep settings restored
+`MAX_PDF_SIZE_MB=25`, `MAX_PDFS_PER_CHURCH=150`, `SWEEP_WORKERS=5`. The tail ran at 8/40/2 to survive;
+leaving those in place would have made the weekly run permanently shallower.
+
+## 📊 Recovery sweep — earlier status at 2026-08-06 06:09 UTC
 - **756,312 names** from **35,265 editions** across **5,096 churches**
 - **3,380** productive churches remaining (of 8,057); shards 1 and 4 have `succeeded` outright
 - Supervisor relaunches dead shards every 20 min and will self-finish (rescore + stats + coverage
