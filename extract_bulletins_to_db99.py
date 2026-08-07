@@ -335,18 +335,38 @@ def process_church(cur, church):
     bulletin_page_url = result.get("bulletin_page_url") or website_url
     source_type = result.get("source") or "not_found"
 
-    # UPSERT bulletin_source
-    cur.execute(
-        """
-        INSERT INTO bulletin_source (church_id, discovery_source, bulletin_page_url, discovered_at)
-        VALUES (%s, %s, %s, NOW())
-        ON DUPLICATE KEY UPDATE
-            discovery_source = VALUES(discovery_source),
-            bulletin_page_url = VALUES(bulletin_page_url),
-            discovered_at = NOW()
-    """,
-        (church_id, source_type[:30], bulletin_page_url[:2048]),
-    )
+    # UPSERT bulletin_source.
+    #
+    # A failed discovery must NOT clobber a known-good record. Discovery fails
+    # for transient reasons — a slow site, a timeout, a worker killed mid-crawl —
+    # and the old unconditional UPSERT then overwrote a real bulletin_page_url
+    # with the bare homepage and marked it 'not_found'. That is not hypothetical:
+    # it cost 1,441 sources their page URL during this recovery, including
+    # parishes holding 3,800 stored PDFs, whose pages plainly do exist.
+    #
+    # So on failure only touch discovered_at (the church WAS checked, which is
+    # what the rotation needs); leave the previous discovery in place.
+    if source_type == "not_found":
+        cur.execute(
+            """
+            INSERT INTO bulletin_source (church_id, discovery_source, bulletin_page_url, discovered_at)
+            VALUES (%s, %s, %s, NOW())
+            ON DUPLICATE KEY UPDATE discovered_at = NOW()
+        """,
+            (church_id, source_type[:30], bulletin_page_url[:2048]),
+        )
+    else:
+        cur.execute(
+            """
+            INSERT INTO bulletin_source (church_id, discovery_source, bulletin_page_url, discovered_at)
+            VALUES (%s, %s, %s, NOW())
+            ON DUPLICATE KEY UPDATE
+                discovery_source = VALUES(discovery_source),
+                bulletin_page_url = VALUES(bulletin_page_url),
+                discovered_at = NOW()
+        """,
+            (church_id, source_type[:30], bulletin_page_url[:2048]),
+        )
 
     if not pdf_urls:
         return stats
