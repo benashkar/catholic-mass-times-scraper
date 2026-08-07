@@ -22,7 +22,9 @@ import argparse
 import os
 import socket
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,9 +40,22 @@ UA = (
 
 
 def probe(url, proxies=None, timeout=25):
+    """Status code (or exception name) for one fetch.
+
+    Streams and reads only the first chunk: we need the status, not the page.
+    That matters on the proxy leg, which is billed by the gigabyte — pulling
+    full pages for thousands of hosts would be paying to discard the body.
+    """
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=timeout, proxies=proxies)
-        return r.status_code
+        with requests.get(
+            url,
+            headers={"User-Agent": UA},
+            timeout=timeout,
+            proxies=proxies,
+            stream=True,
+        ) as r:
+            next(r.iter_content(2048), b"")
+            return r.status_code
     except Exception as e:
         return type(e).__name__
 
@@ -50,6 +65,9 @@ def main():
     ap.add_argument("--limit", type=int, default=200)
     ap.add_argument("--only-unlabelled", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--workers", type=int, default=16,
+                    help="Concurrent host probes; each host is hit once, so this "
+                         "does not concentrate load on any single server")
     args = ap.parse_args()
 
     proxy = os.environ.get("PROXY_URL", "").strip() or None
@@ -102,29 +120,44 @@ def main():
             and len(h) < 200
         )
 
-    skipped = 0
+    targets = [(r["host"], r["url"]) for r in rows if looks_like_host(r["host"])]
+    skipped = len(rows) - len(targets)
+
     tally = {"direct": 0, "needs_proxy": 0, "blocked": 0}
-    for i, r in enumerate(rows, 1):
-        host, url = r["host"], r["url"]
-        if not looks_like_host(host):
-            skipped += 1
-            continue
+    lock = threading.Lock()
+    done = {"n": 0}
+
+    def work(item):
+        host, url = item
         d = probe(url)
-        # Only pay for a proxy probe when the direct fetch actually failed.
+        # Only pay for a proxy probe when the direct fetch actually failed —
+        # the proxy leg is metered, and a host that already works needs nothing.
         p = None
         if d != 200 and proxies:
             p = probe(url, proxies=proxies, timeout=40)
-
         verdict = host_policy.classify(d, p)
-        tally[verdict] += 1
-        if not args.dry_run:
-            host_policy.set_policy(
-                cur, host, verdict, str(d), str(p), egress,
-                note="auto-probe",
-            )
-        if i % 25 == 0 or args.dry_run:
-            print(f"  [{i}/{len(rows)}] {host} direct={d} proxy={p} -> {verdict}", flush=True)
-        time.sleep(0.2)
+
+        with lock:
+            tally[verdict] += 1
+            done["n"] += 1
+            n = done["n"]
+            if not args.dry_run:
+                try:
+                    host_policy.set_policy(
+                        cur, host, verdict, str(d), str(p), egress, note="auto-probe"
+                    )
+                except Exception as e:
+                    print(f"  [ERR] write {host}: {str(e)[:70]}", flush=True)
+            if n % 100 == 0 or args.dry_run:
+                print(
+                    f"  [{n}/{len(targets)}] {host} direct={d} proxy={p} -> {verdict}",
+                    flush=True,
+                )
+
+    # Each host is probed once, so concurrency here does not hammer any single
+    # server; the work is almost entirely waiting on the network.
+    with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        list(pool.map(work, targets))
 
     print(f"\negress={egress}  hosts={len(rows)}  skipped_malformed={skipped}")
     print(f"  direct      : {tally['direct']:,}")
