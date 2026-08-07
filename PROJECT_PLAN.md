@@ -50,7 +50,12 @@ Two gotchas worth keeping:
   field is unreliable on some crons, where it stays `None` despite runs; cross-check by looking for
   side effects the run would have produced.)
 
-## 🌐 2026-08-06 — PROXY POLICY: NOTHING HERE NEEDS ONE
+## 🌐 2026-08-06 — PROXY POLICY (⚠️ SUPERSEDED — see the 2026-08-07 Render-403 entry below)
+**This entry was measured from a laptop, which was the wrong vantage point.** The conclusion
+("`PROXY_URL` stays unset") still holds, but not for the reason given here: ~1,441 parish sites DO
+403 from Render, and the 711 proxy does not fix them. Read the 2026-08-07 entry before acting on
+anything in this section.
+
 Full table in `docs/PROXY_POLICY.md`; global rule added to `global-config/CLAUDE.md`.
 Measured direct from a residential IP: parish websites **38/40 → 200, zero blocks**;
 `discovermass.com`, `bulletins.discovermass.com`, `parishesonline.com`, `irp.cdn-website.com`,
