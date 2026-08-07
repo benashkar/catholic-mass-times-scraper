@@ -36,7 +36,15 @@ UA = (
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=25)
+    ap.add_argument(
+        "--compare-proxy",
+        action="store_true",
+        help="Also fetch each site through PROXY_URL, to prove whether a residential "
+        "exit fixes what the datacenter IP cannot reach",
+    )
     args = ap.parse_args()
+    proxy = os.environ.get("PROXY_URL", "").strip() or None
+    proxies = {"http": proxy, "https": proxy} if proxy else None
 
     conn = get_connection()
     cur = conn.cursor()
@@ -63,7 +71,8 @@ def main():
     except Exception as e:
         egress_ip = f"unknown ({type(e).__name__})"
 
-    results = {"ok": 0, "no_page": 0, "http_err": 0, "conn_err": 0}
+    results = {"ok": 0, "no_page": 0, "http_err": 0, "conn_err": 0,
+               "proxy_ok": 0, "proxy_err": 0}
     detail = []
     for r in rows:
         url = r["website_url"] or ""
@@ -97,7 +106,26 @@ def main():
         elif isinstance(code, int):
             results["http_err"] += 1
 
-        detail.append(f"{r['church_id']}|http={code}|disc={found}|{took:.1f}s")
+        # Same URL through a residential exit. If direct 403s and this 200s, the
+        # host is refusing the datacenter IP, not refusing us.
+        pcode = None
+        if args.compare_proxy and proxies:
+            try:
+                presp = requests.get(
+                    url, headers={"User-Agent": UA}, timeout=40, proxies=proxies
+                )
+                pcode = presp.status_code
+                if pcode == 200:
+                    results["proxy_ok"] += 1
+                else:
+                    results["proxy_err"] += 1
+            except Exception as e:
+                pcode = type(e).__name__
+                results["proxy_err"] += 1
+
+        detail.append(
+            f"{r['church_id']}|http={code}|proxy={pcode}|disc={found}|{took:.1f}s"
+        )
 
     notes = json.dumps(
         {
