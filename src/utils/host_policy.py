@@ -51,9 +51,27 @@ def ensure_schema(cur):
             note           VARCHAR(255) NULL,
             PRIMARY KEY (host),
             KEY idx_policy (policy)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
         """
     )
+    # Collation must match the rest of church_scrapes. Left at the MySQL 8
+    # default (utf8mb4_0900_ai_ci) this table cannot be joined or compared
+    # against church.website_url: "Illegal mix of collations ... for operation
+    # '='". Fix any table created before this was pinned.
+    cur.execute(
+        """
+        SELECT table_collation FROM information_schema.tables
+        WHERE table_schema = DATABASE() AND table_name = 'scrape_host_policy'
+        """
+    )
+    row = cur.fetchone()
+    current = (row or {}).get("table_collation") or (row or {}).get("TABLE_COLLATION")
+    if current and current != "utf8mb4_unicode_ci":
+        cur.execute(
+            "ALTER TABLE scrape_host_policy "
+            "CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
+        )
+        print("  [OK] scrape_host_policy collation -> utf8mb4_unicode_ci")
 
 
 def load(cur):
