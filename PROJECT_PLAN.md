@@ -151,13 +151,20 @@ parishes publish only the last 8–12 weeks, so March–June editions rolled off
 we reached them. We recovered every parish still hosting an archive; the rest are gone. 11 weeks
 remain below 50% of the best week.
 
-### ⚠️ Self-inflicted damage found and fixed (commit 2af10b5)
+### ⚠️ Self-inflicted metadata regression, found and fixed (commit 2af10b5)
 `process_church` UPSERTed `discovery_source` + `bulletin_page_url` unconditionally, so any transient
 failure overwrote a real bulletin page with the bare homepage and marked it `not_found`. **1,441
-sources now read `not_found` while holding thousands of PDFs** — the constrained tail runs (8MB /
-40-PDF caps, 2 workers) timed out on deep-archive churches and downgraded them. Failure now only
-touches `discovered_at`; the previous discovery survives, and the damaged rows **self-heal on the
-next successful weekly crawl** rather than needing a repair script.
+sources read `not_found` while holding thousands of PDFs** — the constrained tail runs (8MB / 40-PDF
+caps, 2 workers) timed out on deep-archive churches and downgraded them.
+
+**Scope: metadata only.** Discovery always starts from `church.website_url`
+(`extract_bulletins_to_db99.py:333`), never from the stored `bulletin_page_url`, so scraping
+capability was never affected and no PDF or name was lost. What degraded is the recorded page URL
+and the `discovery_source` label (dashboard display and reporting).
+
+Failure now only touches `discovered_at`; the previous discovery survives. The affected rows were
+re-queued (`bulletin_checked_at = NULL`) and repair themselves as each church is successfully
+crawled — a slow drip, because these are the same slow deep-archive sites whose discovery times out.
 
 ### ⚠️ Head-of-line blocking (commit 9a29235) — the reason the tail stalled
 `bulletin_checked_at` was stamped only AFTER `process_church` returned, so a church that killed its
