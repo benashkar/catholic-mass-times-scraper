@@ -61,12 +61,15 @@ def main():
     host_policy.ensure_schema(cur)
 
     # One church per host — the policy is a property of the host, not the parish.
+    # NOTE the doubled %% in the LIKE patterns: this statement is executed WITH
+    # args, so pymysql runs it through % formatting first and a bare 'http%'
+    # raises "unsupported format character".
     sql = """
         SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(website_url, '/', 3), '/', -1) AS host,
                MIN(website_url) AS url
         FROM church
-        WHERE website_url LIKE 'http%'
-          AND website_url NOT LIKE '%facebook.com%'
+        WHERE website_url LIKE 'http%%'
+          AND website_url NOT LIKE '%%facebook.com%%'
         GROUP BY host
     """
     if args.only_unlabelled:
@@ -84,10 +87,27 @@ def main():
     except Exception:
         egress = socket.gethostname()
 
+    # church.website_url contains malformed entries ("http:// ic-brw@cdob.org",
+    # embedded tabs, bare paths). Labelling those would fill the table with
+    # hosts that cannot be fetched by anyone, so skip anything that is not a
+    # plausible hostname rather than recording a meaningless verdict.
+    def looks_like_host(h):
+        return bool(
+            h
+            and "." in h
+            and " " not in h
+            and "\t" not in h
+            and "@" not in h
+            and not h.endswith(":")
+            and len(h) < 200
+        )
+
+    skipped = 0
     tally = {"direct": 0, "needs_proxy": 0, "blocked": 0}
     for i, r in enumerate(rows, 1):
         host, url = r["host"], r["url"]
-        if not host:
+        if not looks_like_host(host):
+            skipped += 1
             continue
         d = probe(url)
         # Only pay for a proxy probe when the direct fetch actually failed.
@@ -106,7 +126,7 @@ def main():
             print(f"  [{i}/{len(rows)}] {host} direct={d} proxy={p} -> {verdict}", flush=True)
         time.sleep(0.2)
 
-    print(f"\negress={egress}  hosts={len(rows)}")
+    print(f"\negress={egress}  hosts={len(rows)}  skipped_malformed={skipped}")
     print(f"  direct      : {tally['direct']:,}")
     print(f"  needs_proxy : {tally['needs_proxy']:,}")
     print(f"  blocked     : {tally['blocked']:,}")
