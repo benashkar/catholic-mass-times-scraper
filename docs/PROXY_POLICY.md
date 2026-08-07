@@ -3,6 +3,34 @@
 **Default: NO PROXY.** Every host this project touches is measured below. A proxy is
 opt-in per source, only where evidence shows it is required.
 
+> ## ⚠️ 2026-08-07 CORRECTION — measure from the machine that RUNS the scraper
+>
+> The table below was originally measured from a laptop on a residential connection. That was the
+> wrong vantage point, and it gave a wrong answer for part of the estate.
+>
+> **~1,441 parish sites return 403 from Render but 200 from a residential IP.** These are the
+> deep-archive parishes (3,000–3,900 stored PDFs each) that the 2026-08 recovery sweep hit hardest.
+>
+> | Same 7 sites, fetched from… | Result |
+> |---|---|
+> | Residential laptop | **7/7 → 200** |
+> | **Render datacenter egress** (`74.220.49.50`) | **7/7 → 403** |
+> | **711 residential proxy** (`-country-US`) | **7/7 → 403** |
+>
+> **The 711 proxy does NOT fix it** (`proxy_ok: 0` of 18). So this is still a "no proxy" project —
+> not because nothing is blocked, but because the proxy we have does not help. Its exits are
+> presumably on the same reputation lists as the datacenter ranges; only a clean residential IP
+> passes.
+>
+> Whether our own volume triggered these blocks is **not established**: the same hosts hold
+> thousands of PDFs we previously scraped successfully, so they were reachable before. Treat
+> "we may have earned this block" as a live possibility and keep per-host rates modest.
+>
+> Impact is limited: those parishes are already deeply archived, and the other ~20,000 churches
+> scrape fine from Render. Reproduce with
+> `python -u diagnose_discovery_egress.py --limit 20 --compare-proxy` (writes to `scrape_log`,
+> because Render does not serve cron runtime logs).
+
 Using a proxy where it is not needed is not neutral — it costs money, adds latency, and has
 actively *broken* scrapes here (see "Proxy made things worse").
 
