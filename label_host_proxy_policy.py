@@ -158,7 +158,16 @@ def main():
         # the proxy leg is metered, and a host that already works needs nothing.
         p = None
         if d != 200 and proxies:
-            p = probe(url, proxies=proxies, timeout=40)
+            # Retry a proxy-side failure: the pool rotates, so a ProxyError means
+            # we drew a bad exit node, NOT that the host refused us. Without this
+            # 424 of 690 re-probes came back inconclusive and had to be redone.
+            # A real HTTP status (even 403) is an answer and is kept immediately.
+            for attempt in range(3):
+                p = probe(url, proxies=proxies, timeout=40)
+                if isinstance(p, int):
+                    break
+                if attempt < 2:
+                    time.sleep(1.5)
         verdict = host_policy.classify(d, p)
 
         with lock:
