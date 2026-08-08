@@ -73,6 +73,30 @@ def main():
     proxy = os.environ.get("PROXY_URL", "").strip() or None
     proxies = {"http": proxy, "https": proxy} if proxy else None
 
+    # PREFLIGHT: prove the proxy itself works before believing anything measured
+    # through it. On 2026-08-07 the 711 plan expired mid-survey and every proxied
+    # fetch came back 407; 690 hosts were recorded as "blocked" when the only
+    # thing that had failed was our own account. A dead proxy must abort the run,
+    # not quietly relabel the estate.
+    if proxies:
+        try:
+            probe_code, _ = None, None
+            r = requests.get(
+                "http://example.com", headers={"User-Agent": UA},
+                timeout=30, proxies=proxies,
+            )
+            probe_code = r.status_code
+        except Exception as e:
+            probe_code = type(e).__name__
+        if probe_code != 200:
+            print(
+                f"[ABORT] proxy preflight failed: http://example.com -> {probe_code}.\n"
+                "        A 407 means our account is out of traffic or unauthenticated.\n"
+                "        Refusing to record verdicts that would blame the hosts."
+            )
+            return 2
+        print("  [OK] proxy preflight passed (200)")
+
     conn = get_connection()
     conn.autocommit(True)
     cur = conn.cursor()
