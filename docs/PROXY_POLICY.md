@@ -46,6 +46,25 @@ Those **51 hosts returning 429 (Too Many Requests) direct, and 200 through a fre
 evidence we are being rate-limited from Render** — not merely refused for being a datacenter. It
 supports the "we may have earned this with our own volume" theory. Keep per-host rates modest.
 
+### 🔴 2026-08-08 — the 711 proxy account is DEAD (`407`), and it corrupted measurements
+Verified directly: `http://example.com` through the endpoint returns **407 Proxy Authentication
+Required**. Same GB-depletion pattern as 2026-06-19.
+
+**690 host verdicts were recorded while this was happening** and are now flagged
+`note = 'proxy-unverified'`. Their proxy leg proves the *account* failed, not that the host refuses
+a proxy, so they must be re-probed once the plan is topped up:
+
+```sql
+DELETE FROM scrape_host_policy WHERE note LIKE 'proxy-unverified%';
+-- then re-run label_host_proxy_policy.py --only-unlabelled
+```
+
+**Rule: assert the proxy works before trusting any proxied measurement.** Fetch a known-good URL
+through it and require 200 first; otherwise a dead account quietly relabels the whole estate
+"blocked". The 232 `needs_proxy` labels predate the outage and are still valid (they were 200s).
+
+Note this affects other projects too — a dead 711 account breaks every proxied market at once.
+
 ### `blocked` is three different things — read it carefully
 Of the 5,597:
 - **~4,354 genuinely blocked** — 403 direct *and* 403 through the proxy.
