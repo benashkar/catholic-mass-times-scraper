@@ -22,6 +22,9 @@ import sys
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 CHECKS = [
+    # Preconditions first: if the proxy is dead or the rotation is stuck, the
+    # output checks below can still look healthy while the run was meaningless.
+    ("scrape preconditions", "verify_scrape_preconditions.py"),
     ("bulletin PDFs", "verify_bulletin_run.py"),
     ("mass times", "verify_mass_times_run.py"),
 ]
