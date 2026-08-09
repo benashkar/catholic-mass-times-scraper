@@ -765,6 +765,23 @@ def main():
     cur = conn.cursor()
     ensure_schema(cur)
 
+    # Load the per-host proxy policy into the module cache. WITHOUT THIS every
+    # call to proxies_for() sees an empty policy and returns None, so the
+    # scraper silently goes direct for every host — including the ones that only
+    # answer through the proxy. It fails open, so nothing errors; the hosts just
+    # quietly never yield. Measured: 342 needs_proxy churches stuck at 23%
+    # coverage because the policy was never loaded.
+    try:
+        host_policy.ensure_schema(cur)
+        _pol = host_policy.load(cur)
+        _n_proxy = sum(1 for v in _pol.values() if v == "needs_proxy")
+        print(f"Host policy: {len(_pol):,} hosts loaded ({_n_proxy:,} needs_proxy)")
+        if _n_proxy and not host_policy.PROXY_URL:
+            print("  [WARN] hosts are labelled needs_proxy but PROXY_URL is unset — "
+                  "those hosts will fail")
+    except Exception as e:
+        print(f"  [WARN] host policy unavailable ({str(e)[:70]}) — all hosts direct")
+
     # If skip-discovery, just process unextracted PDFs and exit
     if args.skip_discovery:
         print("\n  Mode: extract-only (no new discovery)")
