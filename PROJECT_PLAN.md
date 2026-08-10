@@ -1,6 +1,68 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-07 04:00 UTC (ALL items complete — 1.22M names; Render-403 finding; deeper pass done)._
+_Last updated: 2026-08-10 15:30 UTC (per-host proxy policy enforced; precondition checks; cron pre-flighted green)._
+
+## 🔀 2026-08-08..10 — PER-HOST PROXY POLICY, ENFORCED IN CODE
+
+`PROXY_URL` no longer tunnels anything on its own. Every host is labelled in **`scrape_host_policy`**
+and the proxy is chosen **per request** by `src/utils/host_policy.py`.
+
+| policy | meaning | scraper does |
+|---|---|---|
+| `direct` | fine from our egress | no proxy |
+| `needs_proxy` | fails direct, proxy **demonstrably fixes it** | use proxy |
+| `blocked` | fails direct **and** via proxy | **no proxy** — same 403, but paid for |
+
+Three states, not two: `blocked` is what stops us paying metered GB to receive identical 403s.
+Unknown hosts fail open to `direct`. Survey of all **15,055 hosts from Render**:
+**direct 9,326 (61.9%) · blocked 5,491 (36.5%) · needs_proxy 238 (1.6%)**.
+Only 1.6% justify a proxy — that ratio is the whole argument for per-host enforcement.
+
+### ⚠️ The bug that made it a no-op for two days
+`host_policy.load()` was **never called**, so the cache stayed empty, `proxies_for()` returned None
+for every URL, and the scraper went **direct for all 15,055 hosts** — including the 238 that only
+answer through the proxy. It fails open, so nothing errored; those hosts just silently never yielded.
+Symptom: 342 `needs_proxy` churches stuck at 23% coverage through a full re-sweep with a healthy
+proxy. **The earlier unit test passed because it handed `proxies_for()` a policy dict directly — it
+tested the function, not the wiring.** Fixed; the regression test now asserts the real path (before
+`load()` a needs_proxy host routes direct = the bug; after, it routes via proxy).
+Proof it works in production: **244 PDFs pulled from needs_proxy hosts**, which 403 direct.
+
+### Proxy findings that overturned an earlier conclusion
+- The original "nothing needs a proxy" verdict was measured **from a laptop** — the wrong vantage
+  point. ~4,400 hosts 403 from Render while returning 200 residentially.
+- **Measure from the machine that runs the scraper.** Now a global rule.
+- **A datacenter block does not imply a proxy fixes it:** 711's exits got 403 on 7/7 of the same
+  hosts. `blocked` exists because of this.
+- **711 died mid-survey (`407`)** and silently relabelled **690 hosts** as "blocked" when only our
+  own account had failed. Root cause was **plan expiry** (Regular tiers are 30-day; Enterprise is
+  "Lifetime valid"), not consumption — our own probing used ~12 MB.
+
+## 🛡️ 2026-08-10 — PRECONDITION CHECKS (`verify_scrape_preconditions.py`)
+
+Every silent failure here shared one shape: green exit code, rows landing, result still wrong.
+So these assert **preconditions**, each earned from a real incident — proxy reachable,
+`needs_proxy` cohort yielding, host policy fresh, rotation advancing, label sanity.
+Runs **first** in `verify_all.py` so a meaningless run is flagged before its output is judged healthy.
+
+**A check that cries wolf gets ignored** — which is how the original bug survived five months. The
+first version reported a 163-day-old frontier; all 63 "stale" churches were ones the sweep
+deliberately excludes (diocese directory pages, Facebook links) and **zero were real**. The check now
+mirrors the sweep's own exclusion filter and reads 12 days.
+
+## ✅ 2026-08-10 — PRE-FLIGHT OF THE REAL CRON ENTRYPOINT
+Everything during the recovery ran `extract_bulletins_to_db99.py` directly; the cron's actual command
+(`run_daily_pipeline.py --bulletins-only`, which also does backfill → rescore → refresh-stats →
+health → redeploy → verify) had **never run on the new code**. Pre-flighted with `--limit 25`:
+
+```
+2026-08-10  bulletins=OK,   backfill=OK, rescore=OK, refresh_stats=OK, health=OK, redeploy=OK, verify=OK
+2026-08-04  bulletins=FAIL, backfill=OK, rescore=OK, refresh_stats=OK, health=OK, redeploy=OK
+2026-07-28  bulletins=FAIL, backfill=OK, rescore=OK, refresh_stats=OK, health=OK, redeploy=OK
+```
+
+**Rule: exercise the cron's real entrypoint, not the script it wraps.** The wrapper's other six steps
+are where the untested risk lives.
 
 ## ⚠️ 2026-08-06 — RENDER `startCommand` IS NOT A SHELL (cost hours, read this first)
 
