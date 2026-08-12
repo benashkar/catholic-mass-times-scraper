@@ -83,8 +83,18 @@ def main():
         results["scrape"] = run_cmd(scrape_cmd, "Scrape mass times to db99", timeout_seconds=3600)
 
     # Step 2: Extract bulletin names directly to db99
-    # --days-fresh 14: skip churches checked in the last 14 days (SQL-side, on
+    # --days-fresh 6: skip churches checked in the last 6 days (SQL-side, on
     # church.bulletin_checked_at) so each run advances the rotation frontier.
+    #
+    # This MUST stay shorter than the cron period. At 14 days on a weekly cron
+    # a church checked last Tuesday was still "fresh" this Tuesday, so it was
+    # skipped: the Aug 11 run drained its queue in 14 minutes against a 10h
+    # budget and touched 378 churches. The bulk of the corpus then waited a
+    # further two weeks, giving an effective ~3-week refresh on parishes that
+    # publish a NEW bulletin every week — 2 of every 3 editions were missed
+    # (bulletin_pdf: ~1,600/wk through July, 43 for the week of Aug 3).
+    # 6 mirrors the mass-times cron's --stale-days 6 for the same reason.
+    #
     # --max-runtime-minutes: exit cleanly inside the timeout below, keeping the
     # watermark, instead of being SIGKILLed mid-batch as it was every week.
     # PDF extraction itself already skips via text_extracted=1.
@@ -92,7 +102,7 @@ def main():
         bulletin_cmd = [
             sys.executable,
             "extract_bulletins_to_db99.py",
-            "--days-fresh", "14",
+            "--days-fresh", "6",
             "--max-runtime-minutes", str(BULLETIN_RUNTIME_MINUTES),
         ]
         if args.state:
@@ -162,8 +172,13 @@ def main():
     # that is the case it exists to catch. For four months this pipeline logged
     # "completed" every week while the bulletin step was being killed partway,
     # because a green exit code says nothing about whether rows landed.
+    # Scoped to THIS run, not a trailing week: on 2026-08-11 the bulletin cron
+    # drained its queue in 14 minutes and touched 378 churches, but --days 7
+    # still saw the 47k PDFs a manual sweep had pulled on Aug 6 and reported
+    # OK. A trailing window lets yesterday's work vouch for today's dead run.
+    run_minutes = max(int((time.time() - start) / 60) + 5, 10)
     results["verify"] = run_cmd(
-        [sys.executable, "verify_bulletin_run.py", "--days", "7"],
+        [sys.executable, "verify_bulletin_run.py", "--since-minutes", str(run_minutes)],
         "Verify bulletin run + Telegram report",
         timeout_seconds=300,
     )
@@ -171,8 +186,14 @@ def main():
     elapsed = time.time() - start
 
     # Non-critical steps: failures logged as warnings, don't cause exit code 1.
-    # Bulletins may partially fail (some churches unreachable) but still extract names.
-    non_critical = {"bulletins", "backfill", "health", "redeploy"}
+    #
+    # "bulletins" used to live here because the step exited 1 on a single
+    # unreachable parish, which made a red status meaningless. Now that its
+    # exit code only fires on a run that produced nothing (or errored on >25%
+    # of churches), a bulletin failure is real and must fail the pipeline —
+    # masking it is what let bulletins=FAIL run unnoticed from 2026-07-14 to
+    # 2026-08-04 while every run still logged "completed".
+    non_critical = {"backfill", "health", "redeploy"}
 
     # Summary
     log("")

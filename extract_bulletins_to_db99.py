@@ -1006,7 +1006,29 @@ def main():
     print("[OK] Done!")
 
     conn.close()
-    return 0 if totals["errors"] == 0 else 1
+
+    # Exit code describes the RUN, not whether any single church errored.
+    #
+    # `errors == 0` was too strict to be useful: a 16k-church sweep always has
+    # a few unreachable parish sites, so the step failed almost every time, so
+    # it was put in run_daily_pipeline's non_critical set — and that is what
+    # hid four months of genuine failures (bulletins=FAIL every Tuesday from
+    # 2026-07-14 to 2026-08-04 while the pipeline reported "completed").
+    #
+    # Fail only on what actually means the run did not work: it processed
+    # churches but extracted nothing at all, or a quarter of them blew up.
+    # An empty queue is a scheduling problem, not a run failure — the verify
+    # step catches that by asserting on data.
+    processed = counter["done"]
+    no_output = processed > 0 and totals["pdfs_extracted"] == 0 and totals["names_inserted"] == 0
+    mostly_errors = processed > 0 and totals["errors"] / processed > 0.25
+    if no_output or mostly_errors:
+        reason = "no PDFs or names extracted" if no_output else (
+            f"{totals['errors']}/{processed} churches errored"
+        )
+        print(f"[ERR] Run failed: {reason}")
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
