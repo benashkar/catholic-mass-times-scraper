@@ -27,6 +27,18 @@ os.chdir(PROJECT_ROOT)
 # Override with BULLETIN_RUNTIME_MINUTES on the Render service.
 BULLETIN_RUNTIME_MINUTES = int(os.getenv("BULLETIN_RUNTIME_MINUTES", "600"))
 
+# Same env var supervise_bulletin_sweep reads, so the two cannot drift: if the
+# launcher and the "is it drained?" counter disagree on the window, a full
+# queue reads as empty. See the comment on the bulletin step below for why this
+# must stay shorter than the refresh period.
+DAYS_FRESH = int(os.getenv("SWEEP_DAYS_FRESH", "6"))
+
+# One in-process sweep runs ~15 churches/min at the 4 workers that fit in 2GB,
+# so a 10h window covers ~9,000 of the ~17,000 due — a 2-week cycle against
+# parishes that publish weekly. Sharded across containers it finishes in one
+# night. Set BULLETIN_SHARDED=0 to fall back to the single-process path.
+BULLETIN_SHARDED = os.getenv("BULLETIN_SHARDED", "1") == "1"
+
 
 def log(msg):
     ts = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -52,6 +64,64 @@ def run_cmd(cmd, description, timeout_seconds=None):
     except Exception as e:
         log(f"  [ERR] {description}: {e}")
         return False
+
+
+def run_sharded_bulletin_sweep(deadline_minutes):
+    """Drive the sharded sweep to completion, then return.
+
+    The in-process path is capped by one container's memory: 4 workers is what
+    fits in 2GB (12 was OOM-killed at ~240 churches), and 4 workers is ~15
+    churches/min. The sweep supervisor already solves this by running disjoint
+    shards as separate one-off jobs, each a fresh process — it just had no
+    caller, so the weekly cron did the work single-threaded instead.
+
+    Ticks the supervisor rather than launching once: shards die (OOM, a parish
+    holding thousands of PDFs) and a dead shard contributes nothing until
+    something restarts it. Progress survives a restart because
+    church.bulletin_checked_at is stamped per church before it is processed.
+    """
+    import supervise_bulletin_sweep as sweep
+
+    if not os.environ.get("RENDER_API_KEY"):
+        log("  [--] RENDER_API_KEY unset; falling back to the in-process sweep")
+        return None
+
+    deadline = time.time() + deadline_minutes * 60
+    tick = 0
+    while time.time() < deadline:
+        tick += 1
+        try:
+            remaining = sweep.queue_remaining()
+        except Exception as e:
+            log(f"  [ERR] queue check failed: {e}")
+            return False
+
+        if remaining == 0:
+            live = [s for s, j in sweep.latest_per_shard("--known-sources-only").items()
+                    if j.get("status") in ("running", "pending")]
+            if not live:
+                log(f"  [OK] sweep drained after {tick} tick(s)")
+                return True
+            log(f"  queue drained; {len(live)} shard(s) still finishing")
+        else:
+            latest = sweep.latest_per_shard("--known-sources-only")
+            relaunched = 0
+            for shard in range(sweep.SHARDS):
+                j = latest.get(shard)
+                if j and j.get("status") in ("running", "pending"):
+                    continue
+                try:
+                    sweep.api(f"/services/{sweep.CRON_ID}/jobs", "POST",
+                              {"startCommand": sweep.shard_command(shard)})
+                    relaunched += 1
+                except Exception as e:
+                    log(f"  [ERR] shard {shard}: {e}")
+            log(f"  tick {tick}: {remaining:,} due, {relaunched} shard(s) launched")
+
+        time.sleep(120)
+
+    log(f"  [--] deadline reached after {tick} tick(s); shards keep running")
+    return True
 
 
 def main():
@@ -99,10 +169,18 @@ def main():
     # watermark, instead of being SIGKILLed mid-batch as it was every week.
     # PDF extraction itself already skips via text_extracted=1.
     if not args.skip_scrape:
+        # A whole-corpus sweep goes through the shard supervisor; --state and
+        # --limit are targeted runs, so those stay in-process.
+        sharded = BULLETIN_SHARDED and not args.state and not args.limit
+        swept = run_sharded_bulletin_sweep(BULLETIN_RUNTIME_MINUTES) if sharded else None
+        if swept is not None:
+            results["bulletins"] = swept
+
+    if not args.skip_scrape and "bulletins" not in results:
         bulletin_cmd = [
             sys.executable,
             "extract_bulletins_to_db99.py",
-            "--days-fresh", "6",
+            "--days-fresh", str(DAYS_FRESH),
             "--max-runtime-minutes", str(BULLETIN_RUNTIME_MINUTES),
         ]
         if args.state:

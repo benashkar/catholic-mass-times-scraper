@@ -14,6 +14,14 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir pymysql boto3 \
     && python -m spacy download en_core_web_lg
 
+# The pip package ships no browser binary. Without this every church that needs
+# the JS-rendered fallback (LPi widgets, eCatholic) died with
+# "Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-*"
+# — a per-church error, so the run continued and the failures only showed up as
+# a raised err= count. --with-deps pulls the shared libraries chromium needs on
+# a slim image; without it the binary is present but will not start.
+RUN python -m playwright install --with-deps chromium
+
 # Copy project source (see .dockerignore for exclusions)
 COPY . .
 

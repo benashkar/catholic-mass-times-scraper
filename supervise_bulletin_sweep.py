@@ -43,6 +43,16 @@ WORKERS = int(os.environ.get("SWEEP_WORKERS", "4"))
 PDF_CAP = os.environ.get("SWEEP_PDF_CAP", "150")
 PDF_SIZE_MB = os.environ.get("SWEEP_PDF_SIZE_MB", "12")
 RUNTIME_MIN = os.environ.get("SWEEP_RUNTIME_MIN", "600")
+# ONE definition, used by the shard commands AND the "is the queue drained?"
+# counts. They must agree: if the launcher asks for churches older than 6 days
+# but the counter asks for older than 14, the supervisor reads a queue it just
+# filled as empty and declares the sweep complete.
+#
+# Must also stay SHORTER than the refresh period, for the reason recorded in
+# run_daily_pipeline: at 14 days on a weekly cadence a church checked last
+# Tuesday is still "fresh" this Tuesday, so the queue drains before it starts.
+# That bug lived here too — 14 was hardcoded in four places.
+DAYS_FRESH = int(os.environ.get("SWEEP_DAYS_FRESH", "6"))
 
 
 def api(path, method="GET", payload=None):
@@ -72,9 +82,20 @@ def shard_command(shard):
     jobs inherit. For the same reason, no `sh -c "..."` and no shell operators.
     """
     return (
-        f"python -u extract_bulletins_to_db99.py --known-sources-only --days-fresh 14 "
+        f"python -u extract_bulletins_to_db99.py --known-sources-only "
+        f"--days-fresh {DAYS_FRESH} "
         f"--shards {SHARDS} --shard {shard} --workers {WORKERS} "
         f"--batch-size 25 --max-runtime-minutes {RUNTIME_MIN}"
+    )
+
+
+def discovery_command(shard):
+    """Discovery tier: churches that have never yielded a bulletin page."""
+    return (
+        f"python -u extract_bulletins_to_db99.py --discovery-only "
+        f"--days-fresh {DAYS_FRESH} "
+        f"--shards {DISCOVERY_SHARDS} --shard {shard} --workers {WORKERS} "
+        f"--batch-size 50 --max-runtime-minutes {RUNTIME_MIN}"
     )
 
 
@@ -117,10 +138,11 @@ def discovery_remaining():
                   AND website_url NOT LIKE '%%diocese%%'
                   AND website_url NOT LIKE '%%archdiocese%%'
                   AND (bulletin_checked_at IS NULL
-                       OR bulletin_checked_at < NOW() - INTERVAL 14 DAY)
+                       OR bulletin_checked_at < NOW() - INTERVAL %s DAY)
                   AND NOT EXISTS (SELECT 1 FROM bulletin_source bs
                                   WHERE bs.church_id = c.church_id)
-                """
+                """,
+                (DAYS_FRESH,),
             )
             return cur.fetchone()["v"]
 
@@ -139,10 +161,11 @@ def queue_remaining():
                   AND website_url NOT LIKE '%%diocese%%'
                   AND website_url NOT LIKE '%%archdiocese%%'
                   AND (bulletin_checked_at IS NULL
-                       OR bulletin_checked_at < NOW() - INTERVAL 14 DAY)
+                       OR bulletin_checked_at < NOW() - INTERVAL %s DAY)
                   AND EXISTS (SELECT 1 FROM bulletin_source bs
                               WHERE bs.church_id = c.church_id)
-                """
+                """,
+                (DAYS_FRESH,),
             )
             return cur.fetchone()["v"]
 
@@ -189,11 +212,7 @@ def start_discovery():
     """
     launched = 0
     for shard in range(DISCOVERY_SHARDS):
-        cmd = (
-            f"python -u extract_bulletins_to_db99.py --discovery-only --days-fresh 14 "
-            f"--shards {DISCOVERY_SHARDS} --shard {shard} --workers {WORKERS} "
-            f"--batch-size 50 --max-runtime-minutes {RUNTIME_MIN}"
-        )
+        cmd = discovery_command(shard)
         try:
             api(f"/services/{CRON_ID}/jobs", "POST", {"startCommand": cmd})
             launched += 1
@@ -243,11 +262,7 @@ def main():
                 j = disc.get(shard)
                 if j and j.get("status") in ("running", "pending"):
                     continue
-                cmd = (
-                    f"python -u extract_bulletins_to_db99.py --discovery-only --days-fresh 14 "
-                    f"--shards {DISCOVERY_SHARDS} --shard {shard} --workers {WORKERS} "
-                    f"--batch-size 50 --max-runtime-minutes {RUNTIME_MIN}"
-                )
+                cmd = discovery_command(shard)
                 try:
                     api(f"/services/{CRON_ID}/jobs", "POST", {"startCommand": cmd})
                     print(f"  [OK] relaunched discovery shard {shard}")
