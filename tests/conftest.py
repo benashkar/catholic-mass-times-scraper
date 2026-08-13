@@ -53,6 +53,7 @@ def anon_client(app):
 def client(app):
     """Logged-in test client, so route tests assert on pages and not redirects."""
     c = app.test_client()
+    os.environ["DASHBOARD_USERS"] = f"{TEST_USER}:{TEST_PASSWORD}"
     resp = c.post(
         "/login",
         data={"username": TEST_USER, "password": TEST_PASSWORD},
@@ -63,6 +64,20 @@ def client(app):
         f"asserts against the /login redirect instead of the real page"
     )
     return c
+
+
+@pytest.fixture(autouse=True)
+def _dashboard_credentials():
+    """Keep DASHBOARD_USERS set for every test.
+
+    auth._load_users() re-reads the env var on each request, and
+    test_dashboard_auth.py is a bare script whose module-level code pytest
+    still executes at collection — its last line sets DASHBOARD_USERS to ""
+    to prove the app fails closed. Collection happens before any test runs, so
+    without this the whole route suite would log in against an empty user map.
+    """
+    os.environ["DASHBOARD_USERS"] = f"{TEST_USER}:{TEST_PASSWORD}"
+    yield
 
 
 @pytest.fixture(autouse=True)
