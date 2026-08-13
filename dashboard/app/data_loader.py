@@ -26,6 +26,11 @@ _bulletin_filters_cache = {}
 # Set to None since we no longer use CSV files.
 DATA_DIR = None
 
+# A mass schedule older than this is shown as unverified rather than current.
+# The mass-times cron sweeps all 50 states every week, so 30 days is well past
+# "we missed a run" and means no live source still lists that church.
+STALE_AFTER_DAYS = 30
+
 # ── State code mappings ─────────────────────────────────────────────────
 
 STATE_DIR_TO_NAME = {
@@ -467,7 +472,14 @@ def get_services(state_dir):
                 COALESCE(lst.display_name, '')                  AS `Schedule Type`,
                 COALESCE(ll.display_name, '')                   AS `Language`,
                 COALESCE(s.location, '')                        AS `Location`,
-                COALESCE(s.notes_raw, '')                       AS `Notes`
+                COALESCE(s.notes_raw, '')                       AS `Notes`,
+                -- Surfaced so the UI can say when a schedule stopped being
+                -- refreshed. DiscoverMass does not list ~7.2k of our churches
+                -- (chapels, missions, seminaries, campus and hospital
+                -- ministries that CatholicIndex carried), so their times have
+                -- been frozen since CatholicIndex went behind Cloudflare in
+                -- April. Showing them undated reads as "current".
+                c.last_scraped_at                               AS last_scraped_at
             FROM service s
             JOIN church c ON s.church_id = c.church_id
             LEFT JOIN lk_service_category lcat ON s.category_code = lcat.category_code
@@ -497,6 +509,17 @@ def get_services(state_dir):
     df["Time Start"] = df["time_start_raw"].apply(_format_time)
     df["Time End"] = df["time_end_raw"].apply(_format_time)
     df.drop(columns=["time_start_raw", "time_end_raw"], inplace=True)
+
+    # Staleness, computed once here so every view agrees on the threshold.
+    # The mass-times cron refreshes the whole country weekly, so anything past
+    # 30 days is not "a run we missed" — it is a church no source still covers.
+    # -1 means "never scraped", which is stale by definition — not 0 days ago.
+    df["days_since_scrape"] = (
+        (
+            pd.Timestamp.now().normalize() - pd.to_datetime(df["last_scraped_at"], errors="coerce")
+        ).dt.days
+    ).fillna(-1).astype(int)
+    df["is_stale"] = (df["days_since_scrape"] > STALE_AFTER_DAYS) | (df["days_since_scrape"] < 0)
 
     # Build church_display: "Church Name (City)" for duplicate names
     if "Church" in df.columns and "city" in df.columns:

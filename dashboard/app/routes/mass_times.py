@@ -7,6 +7,7 @@ for legacy URLs.
 from flask import Blueprint, Response, abort, render_template, request
 
 from app.data_loader import (
+    STALE_AFTER_DAYS,
     _load_church_details_jsonl,
     church_has_bulletin_names,
     get_bulletin_names,
@@ -48,6 +49,8 @@ def state_view(state):
             phone=("Phone", "first"),
             city=("city", "first"),
             service_count=("Church", "count"),
+            days_since_scrape=("days_since_scrape", "max"),
+            is_stale=("is_stale", "max"),
         )
         .reset_index(drop=True)
         .sort_values("Church")
@@ -76,12 +79,15 @@ def state_view(state):
         churches["has_bulletin"] = False
         churches["bulletin_count"] = 0
 
+    records = churches.to_dict("records")
     display_name = state.replace("_", " ").title()
     return render_template(
         "mass_times/state.html",
         state=state,
         display_name=display_name,
-        churches=churches.to_dict("records"),
+        churches=records,
+        stale_count=sum(1 for r in records if r.get("is_stale")),
+        stale_after_days=STALE_AFTER_DAYS,
     )
 
 
@@ -186,6 +192,9 @@ def church_view(state, church_id):
         website_url=website_url,
         has_bulletin=has_bulletin,
         categories=sorted_cats,
+        days_since_scrape=int(info.get("days_since_scrape", -1) or -1),
+        is_stale=bool(info.get("is_stale", False)),
+        stale_after_days=STALE_AFTER_DAYS,
     )
 
 

@@ -745,9 +745,16 @@ def main():
     parser.add_argument(
         "--workers",
         type=int,
-        default=int(os.environ.get("BULLETIN_WORKERS", "12")),
+        # 4, not 12: this is a memory budget. Each worker can hold a PDF inside
+        # pdfplumber alongside the spaCy model, and 12 of them exhausts the 2GB
+        # cron plan — a 400-church run was oomKilled at ~240 on 2026-08-12.
+        # supervise_bulletin_sweep already ran its shards at 4 for this reason;
+        # the weekly cron invoked this directly and never got the same budget,
+        # which went unnoticed only because its queue was always empty.
+        default=int(os.environ.get("BULLETIN_WORKERS", "4")),
         help="Concurrent churches. Rate limiting is per-host, so parallel "
-        "workers hit different parishes rather than the same server.",
+        "workers hit different parishes rather than the same server. Raising "
+        "this past ~4 risks an OOM kill on the 2GB plan.",
     )
     parser.add_argument(
         "--shards", type=int, default=1, help="Split the queue across N containers"

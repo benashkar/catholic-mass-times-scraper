@@ -18,6 +18,16 @@
     </a>
 </p>
 
+{% if stale_count %}
+<div class="alert alert-warning py-2" role="alert">
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    <strong>{{ stale_count }}</strong> of {{ churches|length }} churches here have
+    schedules that have not been confirmed in over {{ stale_after_days }} days &mdash;
+    marked <span class="badge bg-warning text-dark">Unverified</span> below. Our
+    mass-times source no longer lists them, so their times are the last known ones.
+</div>
+{% endif %}
+
 <div class="card">
     <div class="card-body p-0">
         <table class="table table-hover table-striped mb-0" id="churchesTable">
@@ -38,6 +48,12 @@
                         <a href="{{ url_for('mass_times.church_view', state=state, church_id=c.church_id) }}" class="text-decoration-none fw-bold">
                             {{ c.church_display }}
                         </a>
+                        {% if c.is_stale %}
+                        <span class="badge bg-warning text-dark ms-1"
+                              title="Last confirmed {% if c.days_since_scrape > 0 %}{{ c.days_since_scrape }} days ago{% else %}never{% endif %} — our mass-times source no longer lists this church, so these are the last known times.">
+                            Unverified
+                        </span>
+                        {% endif %}
                     </td>
                     <td>{{ c.city }}</td>
                     <td class="small text-muted">{{ c.address }}</td>

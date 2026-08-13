@@ -36,6 +36,24 @@
     </div>
 </div>
 
+{% if is_stale %}
+<div class="alert alert-warning d-flex align-items-start" role="alert">
+    <i class="bi bi-exclamation-triangle-fill me-2 mt-1"></i>
+    <div>
+        <strong>These times are unverified.</strong>
+        {% if days_since_scrape and days_since_scrape > 0 %}
+        This schedule was last confirmed against a live source
+        <strong>{{ days_since_scrape }} days ago</strong>.
+        {% else %}
+        This schedule has never been confirmed against a live source.
+        {% endif %}
+        Our mass-times source no longer lists this church, so what follows is the
+        last known schedule and may be out of date. Check the parish website
+        before relying on it.
+    </div>
+</div>
+{% endif %}
+
 {% for cat_name, services in categories %}
 <div class="card mb-3">
     <div class="card-header">

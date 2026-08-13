@@ -18,11 +18,19 @@ FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures", "data_output"
 _db_available = False
 
 
+# Every view is behind a session (added 2026-08-05); only /login and /health
+# are public. Tests need a real credential pair or every route request is a
+# 302 to /login — which is what silently happened to the whole route suite:
+# the assertions kept passing against the redirect body, not the page.
+TEST_USER, TEST_PASSWORD = "pytest@example.com", "pytest-only"
+
+
 @pytest.fixture(scope="session")
 def app():
     """Create a Flask app configured with fixture data."""
     global _db_available
     os.environ["DATA_DIR"] = FIXTURES_DIR
+    os.environ["DASHBOARD_USERS"] = f"{TEST_USER}:{TEST_PASSWORD}"
     from app import create_app
 
     application = create_app()
@@ -36,9 +44,25 @@ def app():
 
 
 @pytest.fixture(scope="session")
-def client(app):
-    """Flask test client for making requests."""
+def anon_client(app):
+    """Unauthenticated client — for asserting the login gate holds."""
     return app.test_client()
+
+
+@pytest.fixture(scope="session")
+def client(app):
+    """Logged-in test client, so route tests assert on pages and not redirects."""
+    c = app.test_client()
+    resp = c.post(
+        "/login",
+        data={"username": TEST_USER, "password": TEST_PASSWORD},
+        follow_redirects=False,
+    )
+    assert resp.status_code == 302, (
+        f"test login failed ({resp.status_code}); without it every route test "
+        f"asserts against the /login redirect instead of the real page"
+    )
+    return c
 
 
 @pytest.fixture(autouse=True)
