@@ -18,9 +18,23 @@ RUN pip install --no-cache-dir -r requirements.txt \
 # the JS-rendered fallback (LPi widgets, eCatholic) died with
 # "Executable doesn't exist at /root/.cache/ms-playwright/chromium_headless_shell-*"
 # — a per-church error, so the run continued and the failures only showed up as
-# a raised err= count. --with-deps pulls the shared libraries chromium needs on
-# a slim image; without it the binary is present but will not start.
-RUN python -m playwright install --with-deps chromium
+# a raised err= count.
+#
+# The libraries are installed by hand rather than with `playwright install
+# --with-deps`: python:3.12-slim is Debian trixie, which Playwright 1.49 does
+# not recognise ("your OS is not officially supported"), so it falls back to an
+# ubuntu20.04 package list and asks for ttf-unifont and ttf-ubuntu-font-family.
+# Trixie carries neither (fonts-unifont replaces the first), apt exits 100 and
+# the whole image build fails. The t64 suffixes are trixie's 64-bit-time_t
+# renames — libasound2 and friends do not resolve under their old names.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libnss3 libnspr4 libdbus-1-3 libdrm2 libxkbcommon0 libx11-6 \
+    libxcomposite1 libxdamage1 libxext6 libxfixes3 libxrandr2 libgbm1 \
+    libpango-1.0-0 libcairo2 fonts-liberation \
+    libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64 libatspi2.0-0t64 \
+    libasound2t64 \
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m playwright install chromium
 
 # Copy project source (see .dockerignore for exclusions)
 COPY . .
