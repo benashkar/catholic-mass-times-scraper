@@ -228,10 +228,20 @@ def api_names_csv(state):
     confidence = request.args.get("confidence", "")
     search = request.args.get("q", "")
 
+    # Ask how many rows the filter actually matches before fetching them.
+    # The old hardcoded length=500000 silently dropped everything past half a
+    # million: Wisconsin has 744,120 names, so a "complete" download was
+    # missing 244,120 of them with nothing to say so.
+    _probe, _total, filtered_count, _unique = get_bulletin_names_page(
+        state, start=0, length=1, search=search, order_col=8, order_dir="desc",
+        church_filter=church, city_filter=city,
+        category_filter=category, confidence_filter=confidence,
+    )
+    cap = int(os.environ.get("CSV_ROW_CAP", "2000000"))
     rows, _total, _filtered, _unique = get_bulletin_names_page(
         state,
         start=0,
-        length=500000,
+        length=min(filtered_count, cap),
         search=search,
         order_col=8,
         order_dir="desc",
@@ -265,8 +275,12 @@ def api_names_csv(state):
         filename += f"_{confidence}"
     filename += ".csv"
 
-    return Response(
-        buf.getvalue(),
-        mimetype="text/csv",
-        headers={"Content-Disposition": f"attachment; filename={filename}"},
-    )
+    headers = {"Content-Disposition": f"attachment; filename={filename}"}
+    # If a cap ever does bite, say so in a header rather than shipping a short
+    # file that looks whole. No silent truncation.
+    headers["X-Total-Matching-Rows"] = str(filtered_count)
+    headers["X-Rows-Returned"] = str(len(rows))
+    if len(rows) < filtered_count:
+        headers["X-Truncated"] = "true"
+
+    return Response(buf.getvalue(), mimetype="text/csv", headers=headers)

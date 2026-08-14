@@ -9,6 +9,7 @@ import json
 import logging
 import os
 import threading
+import time
 from collections import defaultdict
 from functools import lru_cache
 
@@ -21,6 +22,13 @@ logger = logging.getLogger(__name__)
 _state_list = None
 _bulletin_stats_cache = {}
 _bulletin_filters_cache = {}
+
+# False until a load has fully succeeded in THIS worker. Each gunicorn worker
+# has its own copy, which is why one worker's failed boot used to be invisible:
+# its siblings kept serving real data and the fault looked intermittent.
+_data_loaded = False
+_last_load_attempt = 0.0
+_RELOAD_COOLDOWN_SECONDS = 30.0
 
 # Keep DATA_DIR for backward compat (calendar_download imports it).
 # Set to None since we no longer use CSV files.
@@ -258,13 +266,43 @@ def _state_code(state_dir):
 
 
 def init_data(app):
-    """
-    Called once on app startup. Builds state list and pre-computes
-    bulletin stats/filters from db99.
-    """
-    global _state_list, _bulletin_stats_cache, _bulletin_filters_cache
+    """Called once on app startup — see _load_from_db for the retry semantics."""
+    _load_from_db(app.logger)
 
-    app.logger.info("Loading church data from db99...")
+
+def _ensure_loaded():
+    """Reload if the startup load never succeeded.
+
+    The startup load is six heavy queries against db99, and gunicorn boots
+    several workers at once. When one of them timed out, the old code set
+    _state_list = [] and returned, so THAT worker served "No bulletin name data
+    available yet" for the rest of its life while its siblings served the real
+    thing — the dashboard looked randomly broken depending on which worker took
+    the request, and reloading "fixed" it about half the time.
+
+    A failed load is now a retryable condition rather than a permanent verdict.
+    The cooldown stops a dead database from turning every page view into six
+    more slow queries.
+    """
+    global _last_load_attempt
+
+    if _data_loaded:
+        return
+    now = time.monotonic()
+    if now - _last_load_attempt < _RELOAD_COOLDOWN_SECONDS:
+        return
+    _last_load_attempt = now
+    logger.warning("State list is empty; retrying the db99 load")
+    _load_from_db(logger)
+
+
+def _load_from_db(log):
+    """Build the state list and precomputed caches. Returns True on success."""
+    global _state_list, _bulletin_stats_cache, _bulletin_filters_cache
+    global _data_loaded, _last_load_attempt
+
+    _last_load_attempt = time.monotonic()
+    log.info("Loading church data from db99...")
 
     try:
         conn = _get_db_connection()
@@ -314,18 +352,22 @@ def init_data(app):
 
         conn.close()
     except Exception as e:
-        app.logger.error(f"Failed to load data from db99: {e}")
-        _state_list = []
-        return
+        # Leave whatever we already have in place — a transient failure must not
+        # replace a good state list with an empty one, and must not mark the
+        # load done. _ensure_loaded() will try again on the next request.
+        log.error(f"Failed to load data from db99: {e}")
+        if _state_list is None:
+            _state_list = []
+        return False
 
     # Build state list
-    _state_list = []
+    new_state_list = []
     for row in state_rows:
         sc = row["state_code"]
         state_dir = STATE_ABBREV_TO_DIR.get(sc)
         if not state_dir:
             continue
-        _state_list.append(
+        new_state_list.append(
             {
                 "state_dir": state_dir,
                 "state_code": sc,
@@ -335,10 +377,13 @@ def init_data(app):
                 "has_services": sc in states_with_services,
             }
         )
-    _state_list.sort(key=lambda x: x["display_name"])
+    new_state_list.sort(key=lambda x: x["display_name"])
+    # Swap in only once it is fully built, so a request landing mid-load sees
+    # the previous list rather than a half-populated one.
+    _state_list = new_state_list
 
     total_churches = sum(s["church_count"] for s in _state_list)
-    app.logger.info(f"Loaded {total_churches} churches across {len(_state_list)} states")
+    log.info(f"Loaded {total_churches} churches across {len(_state_list)} states")
 
     # Build bulletin stats cache from bulletin_state_stats table
     for sc, bs in bulletin_summary.items():
@@ -354,7 +399,7 @@ def init_data(app):
             "last_updated": str(lu.date()) if lu else "",
         }
 
-    app.logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
+    log.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
 
     # Build bulletin filters cache
     state_churches = defaultdict(list)
@@ -387,7 +432,11 @@ def init_data(app):
             "church_options": church_options,
         }
 
-    app.logger.info(f"Pre-computed bulletin filters for {len(_bulletin_filters_cache)} states")
+    log.info(f"Pre-computed bulletin filters for {len(_bulletin_filters_cache)} states")
+
+    # Only now is the worker genuinely usable.
+    _data_loaded = True
+    return True
 
 
 # ── Public API ──────────────────────────────────────────────────────────
@@ -395,12 +444,14 @@ def init_data(app):
 
 def get_states():
     """Return list of state dicts with counts and data availability."""
-    return _state_list
+    _ensure_loaded()
+    return _state_list or []
 
 
 def get_states_with_bulletins():
     """Return list of state dicts that have bulletin name data."""
-    return [s for s in _state_list if s["has_bulletin"]]
+    _ensure_loaded()
+    return [s for s in (_state_list or []) if s["has_bulletin"]]
 
 
 def get_churches_for_state(state_dir):
@@ -599,12 +650,19 @@ def get_bulletin_names(state_dir, include_low=False):
 
 
 def get_bulletin_stats(state_dir):
-    """Return summary stats for bulletin names in a state (pre-computed)."""
+    """Return summary stats for bulletin names in a state (pre-computed).
+
+    Routes treat None as "no such state" and abort(404), so on a worker whose
+    startup load failed every state 404'd — /bulletin/wisconsin/ was reachable
+    or missing depending purely on which worker answered.
+    """
+    _ensure_loaded()
     return _bulletin_stats_cache.get(state_dir)
 
 
 def get_bulletin_filters(state_dir):
     """Return pre-computed filter dropdown data (cities + church options)."""
+    _ensure_loaded()
     return _bulletin_filters_cache.get(state_dir)
 
 
