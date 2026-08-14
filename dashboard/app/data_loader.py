@@ -751,9 +751,14 @@ def get_bulletin_names_page(
             where.append("category = %s")
             params.append(category_filter)
 
-        # Total count (medium+high confidence for this state — unfiltered baseline)
+        # Baseline count, grouped the same way the table is — otherwise the
+        # "filtered from N total" footer compares people against mentions.
         cur.execute(
-            "SELECT COUNT(*) AS cnt FROM v_bulletin_ui_names WHERE state_code = %s AND confidence IN ('high', 'medium') AND is_suspect = 0",
+            """SELECT COUNT(*) AS cnt FROM (
+                   SELECT 1 FROM v_bulletin_ui_names
+                   WHERE state_code = %s AND confidence IN ('high','medium')
+                     AND is_suspect = 0
+                   GROUP BY person_name, church_name) t""",
             (sc,),
         )
         total_records = cur.fetchone()["cnt"]
@@ -777,29 +782,63 @@ def get_bulletin_names_page(
 
         where_sql = " AND ".join(where)
 
-        # Filtered count + unique names count
+        # Filtered count + unique names count.
+        #
+        # cnt counts one row per person-per-church, matching what the table now
+        # lists. It used to count raw mentions: Wisconsin read "398,086 entries"
+        # while showing Madelyn Barr four times at the same parish, because she
+        # is named in four different bulletins there.
+        #
+        # uniq stays a STATEWIDE distinct-person count — it answers "how many
+        # different people", so someone serving at two parishes counts once.
+        # That is why the two numbers differ (WI high: 28,478 vs 15,004).
         cur.execute(
-            f"""SELECT COUNT(*) AS cnt,
-                       COUNT(DISTINCT CONCAT(first_name, '|', last_name)) AS uniq
+            f"""SELECT COUNT(*) AS cnt FROM (
+                    SELECT 1 FROM v_bulletin_ui_names WHERE {where_sql}
+                    GROUP BY person_name, church_name) t""",
+            params,
+        )
+        filtered_records = cur.fetchone()["cnt"]
+
+        # Counted over the raw rows, not the grouped set: collapsing first,
+        # then counting distinct names, loses people whose name was split
+        # differently in different bulletins (14,995 vs the true 15,004).
+        cur.execute(
+            f"""SELECT COUNT(DISTINCT CONCAT(first_name, '|', last_name)) AS uniq
                 FROM v_bulletin_ui_names WHERE {where_sql}""",
             params,
         )
-        counts = cur.fetchone()
-        filtered_records = counts["cnt"]
-        unique_filtered = counts["uniq"]
+        unique_filtered = cur.fetchone()["uniq"]
 
         # Order — whitelist column names to prevent injection
         sort_col = _COL_INDEX_TO_SQL.get(order_col, "person_name")
         sort_dir = "DESC" if order_dir == "desc" else "ASC"
 
-        # Fetch page
+        # Fetch page — one row per person per church.
+        #
+        # pdf_url is taken from the person's MOST RECENT bulletin at that
+        # church rather than an arbitrary one, so the provenance link still
+        # points at a real document. Packing date and url into one string and
+        # taking MAX() picks the pair together; CHAR(31) is the separator
+        # because it cannot occur in a URL.
         cur.execute(
             f"""
-            SELECT person_name, title, first_name, last_name,
-                   church_name, church_city, category, confidence,
-                   pdf_url, bulletin_date
+            SELECT person_name,
+                   MAX(title)                AS title,
+                   MAX(first_name)           AS first_name,
+                   MAX(last_name)            AS last_name,
+                   church_name,
+                   MAX(church_city)          AS church_city,
+                   MAX(category)             AS category,
+                   MAX(confidence)           AS confidence,
+                   SUBSTRING_INDEX(
+                       MAX(CONCAT(COALESCE(bulletin_date, '1000-01-01'),
+                                  CHAR(31), COALESCE(pdf_url, ''))),
+                       CHAR(31), -1)         AS pdf_url,
+                   MAX(bulletin_date)        AS bulletin_date
             FROM v_bulletin_ui_names
             WHERE {where_sql}
+            GROUP BY person_name, church_name
             ORDER BY {sort_col} {sort_dir}
             LIMIT %s OFFSET %s
             """,

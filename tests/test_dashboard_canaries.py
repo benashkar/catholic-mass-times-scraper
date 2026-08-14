@@ -63,6 +63,42 @@ class TestBulletinStateCanary:
             "names API returned no rows — the names table renders empty"
         )
 
+    def test_rows_are_unique_per_person_per_church(self):
+        """One row per person per church — not one per bulletin mention.
+
+        Wisconsin listed 398,086 "entries" for 15,004 people: Madelyn Barr
+        appeared four times at Holy Family - St. Peter because she is named in
+        four of its bulletins. The footer count and the CSV were both counting
+        mentions while the header counted people.
+        """
+        from app.data_loader import get_bulletin_names_page
+
+        rows, _total, filtered, uniq = get_bulletin_names_page(
+            STATE_DIR, start=0, length=500, confidence_filter="high"
+        )
+        pairs = [(r[0], r[5]) for r in rows]  # person_name, church_name
+        assert len(pairs) == len(set(pairs)), (
+            "the same person appears twice for one church — the names table is "
+            "listing bulletin mentions instead of people"
+        )
+        assert filtered < 100000, (
+            f"filtered count is {filtered:,}; that is mention-scale, so the "
+            f"footer is counting mentions rather than people"
+        )
+        assert uniq <= filtered, (
+            "statewide unique people cannot exceed person-per-church rows"
+        )
+
+    def test_pdf_link_survives_grouping(self):
+        """Collapsing rows must still leave a usable provenance link."""
+        from app.data_loader import get_bulletin_names_page
+
+        rows, *_ = get_bulletin_names_page(
+            STATE_DIR, start=0, length=200, confidence_filter="high"
+        )
+        with_link = [r for r in rows if r[9]]
+        assert with_link, "no row kept a PDF URL — provenance column is empty"
+
     def test_filters_populated(self, client):
         from app.data_loader import get_bulletin_filters
 
