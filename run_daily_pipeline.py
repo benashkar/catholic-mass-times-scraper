@@ -66,6 +66,48 @@ def run_cmd(cmd, description, timeout_seconds=None):
         return False
 
 
+SWEEP_OK, SWEEP_NOTHING_DUE, SWEEP_FAILED = "ok", "nothing_due", "failed"
+
+# How stale the oldest un-checked parish may get before the sweep is considered
+# stalled. --days-fresh is 6 and the cron fires daily, so anything past 8 days
+# means work is due and is not being picked up.
+CORPUS_STALE_AFTER_DAYS = 8
+
+
+def corpus_is_stale():
+    """(stale, oldest_days) — has due work been sitting unclaimed too long?
+
+    A per-run check cannot see this: a run that legitimately had nothing to do
+    looks identical to a sweep that has silently stopped claiming work. This
+    asks the opposite question — is anything overdue right now?
+    """
+    try:
+        from rescore_names_sql import get_connection
+
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT DATEDIFF(NOW(), MIN(c.bulletin_checked_at)) AS oldest_days
+            FROM church c
+            WHERE c.website_url IS NOT NULL AND c.website_url <> ''
+              AND c.website_url NOT LIKE '%%facebook.com%%'
+              AND c.website_url NOT LIKE '%%diocese%%'
+              AND c.website_url NOT LIKE '%%archdiocese%%'
+              AND EXISTS (SELECT 1 FROM bulletin_source bs
+                          WHERE bs.church_id = c.church_id)
+            """
+        )
+        oldest = (cur.fetchone() or {}).get("oldest_days")
+        conn.close()
+        if oldest is None:
+            return False, None
+        return oldest > CORPUS_STALE_AFTER_DAYS, int(oldest)
+    except Exception as e:
+        log(f"  [WARN] corpus freshness check failed: {e}")
+        return False, None
+
+
 def run_sharded_bulletin_sweep(deadline_minutes):
     """Drive the sharded sweep to completion, then return.
 
@@ -88,20 +130,30 @@ def run_sharded_bulletin_sweep(deadline_minutes):
 
     deadline = time.time() + deadline_minutes * 60
     tick = 0
+    started_empty = None
     while time.time() < deadline:
         tick += 1
         try:
             remaining = sweep.queue_remaining()
         except Exception as e:
             log(f"  [ERR] queue check failed: {e}")
-            return False
+            return SWEEP_FAILED
+
+        # On a daily cron most days have nothing due, and that is a legitimate
+        # outcome — but it must not be reported as a successful sweep. A
+        # trivially-true OK is exactly what hid the original failure for weeks.
+        if started_empty is None:
+            started_empty = remaining == 0
+            if started_empty:
+                log("  [--] nothing due; no sweep needed this run")
+                return SWEEP_NOTHING_DUE
 
         if remaining == 0:
             live = [s for s, j in sweep.latest_per_shard("--known-sources-only").items()
                     if j.get("status") in ("running", "pending")]
             if not live:
                 log(f"  [OK] sweep drained after {tick} tick(s)")
-                return True
+                return SWEEP_OK
             log(f"  queue drained; {len(live)} shard(s) still finishing")
         else:
             latest = sweep.latest_per_shard("--known-sources-only")
@@ -121,7 +173,7 @@ def run_sharded_bulletin_sweep(deadline_minutes):
         time.sleep(120)
 
     log(f"  [--] deadline reached after {tick} tick(s); shards keep running")
-    return True
+    return SWEEP_OK
 
 
 def main():
@@ -168,13 +220,21 @@ def main():
     # --max-runtime-minutes: exit cleanly inside the timeout below, keeping the
     # watermark, instead of being SIGKILLed mid-batch as it was every week.
     # PDF extraction itself already skips via text_extracted=1.
+    nothing_was_due = False
     if not args.skip_scrape:
         # A whole-corpus sweep goes through the shard supervisor; --state and
         # --limit are targeted runs, so those stay in-process.
         sharded = BULLETIN_SHARDED and not args.state and not args.limit
         swept = run_sharded_bulletin_sweep(BULLETIN_RUNTIME_MINUTES) if sharded else None
-        if swept is not None:
-            results["bulletins"] = swept
+        if swept == SWEEP_NOTHING_DUE:
+            # Not a success and not a failure. The cron fires daily but
+            # --days-fresh is 6, so most days there is genuinely nothing to
+            # sweep; calling that OK would make a stalled sweep and a quiet day
+            # look identical, which is the whole bug this pipeline keeps hitting.
+            nothing_was_due = True
+            results["bulletins"] = True
+        elif swept is not None:
+            results["bulletins"] = swept == SWEEP_OK
 
     if not args.skip_scrape and "bulletins" not in results:
         bulletin_cmd = [
@@ -254,12 +314,26 @@ def main():
     # drained its queue in 14 minutes and touched 378 churches, but --days 7
     # still saw the 47k PDFs a manual sweep had pulled on Aug 6 and reported
     # OK. A trailing window lets yesterday's work vouch for today's dead run.
-    run_minutes = max(int((time.time() - start) / 60) + 5, 10)
-    results["verify"] = run_cmd(
-        [sys.executable, "verify_bulletin_run.py", "--since-minutes", str(run_minutes)],
-        "Verify bulletin run + Telegram report",
-        timeout_seconds=300,
-    )
+    if nothing_was_due:
+        # A no-op run cannot clear per-run floors, so asserting on them would
+        # fail every quiet day. Ask the question that still has meaning: is
+        # anything overdue? That is what a permanently stalled sweep looks
+        # like, and no per-run check can see it.
+        stale, oldest = corpus_is_stale()
+        if stale:
+            log(f"  [ERR] nothing due, but the oldest parish was checked "
+                f"{oldest} days ago (> {CORPUS_STALE_AFTER_DAYS}) — sweep is stalled")
+            results["verify"] = False
+        else:
+            log(f"  [OK] nothing due; oldest parish checked {oldest} day(s) ago")
+            results["verify"] = True
+    else:
+        run_minutes = max(int((time.time() - start) / 60) + 5, 10)
+        results["verify"] = run_cmd(
+            [sys.executable, "verify_bulletin_run.py", "--since-minutes", str(run_minutes)],
+            "Verify bulletin run + Telegram report",
+            timeout_seconds=300,
+        )
 
     elapsed = time.time() - start
 
@@ -292,7 +366,11 @@ def main():
         log(f"  FAILED: {', '.join(critical_failed)}")
 
     # Log step results to scrape_log for remote diagnosis
-    step_summary = ", ".join(f"{k}={'OK' if v else 'FAIL'}" for k, v in results.items())
+    step_summary = ", ".join(
+        f"{k}=" + ("SKIPPED(nothing due)" if k == "bulletins" and nothing_was_due
+                   else ("OK" if v else "FAIL"))
+        for k, v in results.items()
+    )
     try:
         from rescore_names_sql import get_connection
 

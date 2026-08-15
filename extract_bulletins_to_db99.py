@@ -1022,13 +1022,26 @@ def main():
     # hid four months of genuine failures (bulletins=FAIL every Tuesday from
     # 2026-07-14 to 2026-08-04 while the pipeline reported "completed").
     #
-    # Fail only on what actually means the run did not work: it processed
-    # churches but extracted nothing at all, or a quarter of them blew up.
-    # An empty queue is a scheduling problem, not a run failure — the verify
-    # step catches that by asserting on data.
+    # Fail only on what actually means the run did not work: it processed a
+    # MEANINGFUL number of churches and still extracted nothing, or a quarter
+    # of them blew up. An empty queue is a scheduling problem, not a run
+    # failure — the verify step catches that by asserting on data.
+    #
+    # The sample floor matters. `processed > 0` marked healthy shards failed:
+    # a shard that picks up one church whose PDFs are all already extracted
+    # legitimately reports pdfs=0 names=0. That is what killed all six shards
+    # at 2026-08-14 03:01 and shard 0 at 2026-08-15 18:20 — every one of them
+    # wrote a scrape_log row saying "completed" and then exited 1. Since
+    # `bulletins` is no longer in run_daily_pipeline's non_critical set, that
+    # false failure now fails the entire pipeline.
+    MIN_SAMPLE = 50
     processed = counter["done"]
-    no_output = processed > 0 and totals["pdfs_extracted"] == 0 and totals["names_inserted"] == 0
-    mostly_errors = processed > 0 and totals["errors"] / processed > 0.25
+    no_output = (
+        processed >= MIN_SAMPLE
+        and totals["pdfs_extracted"] == 0
+        and totals["names_inserted"] == 0
+    )
+    mostly_errors = processed >= MIN_SAMPLE and totals["errors"] / processed > 0.25
     if no_output or mostly_errors:
         reason = "no PDFs or names extracted" if no_output else (
             f"{totals['errors']}/{processed} churches errored"
