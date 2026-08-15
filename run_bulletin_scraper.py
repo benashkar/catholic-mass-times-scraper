@@ -570,15 +570,48 @@ def _extract_pdfs_with_browser(url: str):
     Load a URL in headless Chromium, wait for JS to render, extract all PDF links.
 
     Returns a list of absolute PDF URLs found in the rendered DOM.
+
+    The browser is created AND destroyed inside the lock, on the calling thread.
+    A lock alone is not enough: sync_playwright() binds its greenlet to whichever
+    thread started it, so a cached browser reused by a second worker dies with
+    "greenlet.error: Cannot switch to a different thread". That stayed hidden
+    while the image had no browser binary and every call failed instantly —
+    installing chromium turned a fast no-op into a real, thread-unsafe code path
+    and OOM-killed two shards on 2026-08-15.
+
+    Building it per call costs ~1s, which is fine: this is a fallback for
+    JS-rendered parish sites (LPi widgets, eCatholic), not the common path. It
+    also caps memory, since a long-lived Chromium alongside spaCy and pdfplumber
+    is what pushed a 4-worker shard past 2GB.
     """
-    # Playwright's sync API is not thread-safe and the browser here is a single
-    # shared instance, so only one worker may drive it at a time.
+    if not HAS_PLAYWRIGHT:
+        return []
+
     with _browser_lock:
-        return _extract_pdfs_with_browser_locked(url)
+        pw = browser = None
+        try:
+            pw = sync_playwright().start()
+            launch_kwargs = {"headless": True}
+            proxy = _playwright_proxy()
+            if proxy:
+                launch_kwargs["proxy"] = proxy
+            browser = pw.chromium.launch(**launch_kwargs)
+            return _extract_pdfs_with_browser_locked(url, browser)
+        except Exception as e:
+            logger.debug(f"Browser extraction unavailable for {url}: {e}")
+            return []
+        finally:
+            for closer in (getattr(browser, "close", None), getattr(pw, "stop", None)):
+                if closer:
+                    try:
+                        closer()
+                    except Exception:
+                        pass
 
 
-def _extract_pdfs_with_browser_locked(url: str):
-    browser = _get_playwright_browser()
+def _extract_pdfs_with_browser_locked(url: str, browser=None):
+    if browser is None:
+        browser = _get_playwright_browser()
     if not browser:
         return []
 
