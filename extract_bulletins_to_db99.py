@@ -28,7 +28,7 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from urllib.parse import unquote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -197,16 +197,74 @@ _MONTHS = {
 }
 
 
+# A bulletin is published BEFORE the weekend it covers: a parish posts the
+# 16 August edition on the 13th. Rejecting anything dated after today therefore
+# threw away precisely the current week's editions — the ones that matter most —
+# and they landed as pdf_date NULL. Two weeks of lookahead covers normal
+# publishing (and parishes that post the following weekend early) while still
+# rejecting a mis-parse that lands years out.
+FUTURE_GRACE_DAYS = 14
+
+
 def _valid(y, m, d):
     """ISO date string if this is a real, plausible bulletin date, else None."""
     try:
         dt = datetime(y, m, d, tzinfo=UTC)
     except ValueError:
         return None  # e.g. Feb 30 — the digits were not a date
-    # Bulletins predating the web, or dated in the future, are parse errors.
-    if not (datetime(1995, 1, 1, tzinfo=UTC) <= dt <= datetime.now(UTC)):
+    # Bulletins predating the web, or dated implausibly far ahead, are parse errors.
+    horizon = datetime.now(UTC) + timedelta(days=FUTURE_GRACE_DAYS)
+    if not (datetime(1995, 1, 1, tzinfo=UTC) <= dt <= horizon):
         return None
     return dt.strftime("%Y-%m-%d")
+
+
+def pdf_date_from_text(text):
+    """Edition date read off the bulletin's own cover, or None.
+
+    The URL carries no date at all on CDN-hosted files (irp.cdn-website.com,
+    img1.wsimg.com, bulletins.discovermass.com), which is most of what lands as
+    pdf_date NULL. The masthead almost always prints it — "Twentieth Sunday in
+    Ordinary Time | August 16, 2026" — and the text is already in hand because
+    name extraction just parsed it, so this costs nothing extra.
+
+    Only the first page's worth is searched: mass intentions and event listings
+    further in are full of other dates, and the first plausible date on the
+    cover is the edition date.
+    """
+    if not text:
+        return None
+    head = text[:3000]
+
+    # Masthead style first: "August 16, 2026" / "Aug. 16th 2026".
+    month_alt = "|".join(sorted(_MONTHS, key=len, reverse=True))
+    m = re.search(
+        rf"\b({month_alt})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(20\d{{2}})\b",
+        head, re.IGNORECASE,
+    )
+    if m:
+        got = _valid(int(m.group(3)), _MONTHS[m.group(1).lower()], int(m.group(2)))
+        if got:
+            return got
+
+    # "16 August 2026"
+    m = re.search(
+        rf"\b(\d{{1,2}})(?:st|nd|rd|th)?\s+({month_alt})\.?,?\s+(20\d{{2}})\b",
+        head, re.IGNORECASE,
+    )
+    if m:
+        got = _valid(int(m.group(3)), _MONTHS[m.group(2).lower()], int(m.group(1)))
+        if got:
+            return got
+
+    # Numeric, US order. Last resort: most likely to collide with other numbers.
+    m = re.search(r"(?<!\d)(0?[1-9]|1[0-2])[/-](0?[1-9]|[12]\d|3[01])[/-](20\d{2})(?!\d)", head)
+    if m:
+        got = _valid(int(m.group(3)), int(m.group(1)), int(m.group(2)))
+        if got:
+            return got
+
+    return None
 
 
 def pdf_date_from_url(pdf_url):
@@ -439,6 +497,17 @@ def process_church(cur, church):
                 (bulletin_pdf_id,),
             )
             continue
+
+        # The URL had no date, but the cover almost always prints one. Do this
+        # only as a fallback — a filename date is the more reliable signal.
+        if not edition_date:
+            edition_date = pdf_date_from_text(full_text)
+            if edition_date:
+                cur.execute(
+                    "UPDATE bulletin_pdf SET pdf_date = %s "
+                    "WHERE bulletin_pdf_id = %s AND pdf_date IS NULL",
+                    (edition_date, bulletin_pdf_id),
+                )
 
         # Phase 4: Extract names from each column
         all_names = []
