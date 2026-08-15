@@ -38,8 +38,12 @@ SHARDS = int(os.environ.get("SWEEP_SHARDS", "6"))
 # Set SWEEP_DISCOVERY=0 to stop after the productive tier.
 DISCOVERY_AFTER = os.environ.get("SWEEP_DISCOVERY", "1") == "1"
 DISCOVERY_SHARDS = int(os.environ.get("SWEEP_DISCOVERY_SHARDS", "4"))
-WORKERS = int(os.environ.get("SWEEP_WORKERS", "4"))
-# Memory budget, not politeness: these two keep a shard inside 2GB.
+# 2, not 4. Measured 2026-08-13..15: shards at --workers 4 were oomKilled 27
+# times across 56 jobs, dying between 4 and 48 minutes in; the same sweep at 2
+# ran clean. Throughput halves to ~8 churches/min per shard, so 6 shards clear
+# ~18k in ~8h — still inside the 10h cap and the daily cron.
+WORKERS = int(os.environ.get("SWEEP_WORKERS", "2"))
+# Memory budget, not politeness: these keep a shard inside 2GB.
 PDF_CAP = os.environ.get("SWEEP_PDF_CAP", "150")
 PDF_SIZE_MB = os.environ.get("SWEEP_PDF_SIZE_MB", "12")
 RUNTIME_MIN = os.environ.get("SWEEP_RUNTIME_MIN", "600")
