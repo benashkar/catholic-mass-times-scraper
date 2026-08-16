@@ -157,18 +157,31 @@ def run_sharded_bulletin_sweep(deadline_minutes):
             log(f"  queue drained; {len(live)} shard(s) still finishing")
         else:
             latest = sweep.latest_per_shard("--known-sources-only")
-            relaunched = 0
+            relaunched = idle = 0
             for shard in range(sweep.SHARDS):
                 j = latest.get(shard)
                 if j and j.get("status") in ("running", "pending"):
                     continue
+                # Work is partitioned by MOD(church_id, SHARDS), so partitions
+                # drain at different rates. Relaunching purely because a shard
+                # is "not running" restarts already-empty partitions on every
+                # tick — on 2026-08-16 that was ~2 containers every 2 minutes,
+                # each loading spaCy and exiting within a minute having found
+                # nothing, for the last hour of the sweep.
+                try:
+                    if sweep.queue_remaining(shard=shard, shards=sweep.SHARDS) == 0:
+                        idle += 1
+                        continue
+                except Exception as e:
+                    log(f"  [WARN] shard {shard} queue check failed, launching anyway: {e}")
                 try:
                     sweep.api(f"/services/{sweep.CRON_ID}/jobs", "POST",
                               {"startCommand": sweep.shard_command(shard)})
                     relaunched += 1
                 except Exception as e:
                     log(f"  [ERR] shard {shard}: {e}")
-            log(f"  tick {tick}: {remaining:,} due, {relaunched} shard(s) launched")
+            log(f"  tick {tick}: {remaining:,} due, {relaunched} launched"
+                + (f", {idle} partition(s) already empty" if idle else ""))
 
         time.sleep(120)
 

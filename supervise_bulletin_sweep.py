@@ -151,25 +151,39 @@ def discovery_remaining():
             return cur.fetchone()["v"]
 
 
-def queue_remaining():
-    """Productive churches still due. 0 means the sweep has drained."""
+def queue_remaining(shard=None, shards=None):
+    """Productive churches still due. 0 means the sweep has drained.
+
+    Pass shard/shards to ask about ONE partition. Work is split by
+    MOD(church_id, shards), so at the tail some partitions empty out while
+    others still have hours left. Without a per-shard count the supervisor only
+    knows "shard N is not running" and relaunches it every tick — during the
+    2026-08-16 sweep that started ~2 containers every 2 minutes, each loading
+    spaCy and exiting within a minute having found nothing, while 3,541
+    churches sat in the partitions that were still busy.
+    """
     from src.utils.db_connection import get_connection
+
+    extra, params = "", []
+    if shard is not None and shards:
+        extra = " AND MOD(c.church_id, %s) = %s"
+        params = [shards, shard]
 
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(
-                """
+                f"""
                 SELECT COUNT(*) v FROM church c
                 WHERE website_url IS NOT NULL AND website_url != ''
                   AND website_url NOT LIKE '%%facebook.com%%'
                   AND website_url NOT LIKE '%%diocese%%'
                   AND website_url NOT LIKE '%%archdiocese%%'
                   AND (bulletin_checked_at IS NULL
-                       OR bulletin_checked_at < NOW() - INTERVAL %s DAY)
+                       OR bulletin_checked_at < NOW() - INTERVAL %s DAY){extra}
                   AND EXISTS (SELECT 1 FROM bulletin_source bs
                               WHERE bs.church_id = c.church_id)
                 """,
-                (DAYS_FRESH,),
+                [DAYS_FRESH] + params,
             )
             return cur.fetchone()["v"]
 
