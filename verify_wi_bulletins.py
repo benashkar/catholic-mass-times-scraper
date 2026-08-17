@@ -18,9 +18,9 @@ import os
 import sys
 import traceback
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from scripts._readback import publish  # noqa: E402
+from _readback import publish  # noqa: E402
 
 # The 69 Wisconsin churches that had zero extracted names going in.
 ZERO_NAME_IDS = [
