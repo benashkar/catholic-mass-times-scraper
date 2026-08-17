@@ -95,8 +95,12 @@ apply to all of them; a full re-sweep is what converts it.
 | churches carrying the current (2026-08-16) edition | 43 | **97** | **+54** |
 | bulletin_pdf rows | 78,645 | 79,317 | +672 |
 
-Holy Cross (28532) is the clean proof of the fallback specifically: stored site
-`sahcsjcatholics.com`, real bulletins on `holycrosswi.org`, 0 → 12 PDFs / 561 names.
+Holy Cross (28532) went 0 → 12 PDFs / 561 names in the run that carried the fallback fix, and
+its stored site (`sahcsjcatholics.com`) is not where its bulletins live (`holycrosswi.org`) —
+consistent with the fallback, but NOT proof of it. Discovery from the stored site could have
+found the LPi widget unaided, and the log line that would separate the two paths is not
+retrievable from a one-off. Attributing a specific recovery to a specific code path needs the
+source recorded in `bulletin_source.discovery_source`, which is a fair follow-up.
 
 ### A fifth defect, found only because production disagreed with local
 
