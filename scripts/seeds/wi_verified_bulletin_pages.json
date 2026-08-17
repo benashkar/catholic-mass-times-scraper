@@ -1,0 +1,698 @@
+[
+ {
+  "church_id": 28491,
+  "name": "Our Lady of the Lakes",
+  "bulletin_page_url": "https://www.dsoll.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0583/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget embedded in cluster site dsoll.org)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28511,
+  "name": "Nativity of the Blessed Virgin Mary",
+  "bulletin_page_url": "https://www.stmarysbigriver.com/bulletins",
+  "example_pdf_url": "https://files.ecatholic.com/22480/bulletins/20260816.pdf?t=1786725958000",
+  "platform": "eCatholic",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28552,
+  "name": "St. Louis",
+  "bulletin_page_url": "https://www.stlouiscaledoniawi.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0363/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28571,
+  "name": "St. Francis Borgia (South Church)",
+  "bulletin_page_url": "https://www.saintfrancisborgia.org/news-photos/parish-bulletin/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0025/20260816B.pdf",
+  "platform": "WordPress page embedding parishesonline/LPi widget",
+  "confidence": "high"
+ },
+ {
+  "church_id": 494860,
+  "name": "St. Francis Borgia (South Church)",
+  "bulletin_page_url": "https://www.saintfrancisborgia.org/news-photos/parish-bulletin/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0025/20260816B.pdf",
+  "platform": "WordPress page embedding parishesonline/LPi widget",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28641,
+  "name": "Holy Rosary",
+  "bulletin_page_url": "https://www.catholictriparish.org/bulletins.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0801/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28693,
+  "name": "St. Benedict",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-benedict-church",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0649/20260816B.pdf",
+  "platform": "parishesonline/LPi (React SPA; parish's own site is stbensparish.org)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28509,
+  "name": "St. Ladislaus",
+  "bulletin_page_url": "https://stladislaus.weebly.com/bulletins.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0753/20260816B.pdf",
+  "platform": "Weebly page linking out to parishesonline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28768,
+  "name": "St. Ladislaus",
+  "bulletin_page_url": "https://stladislaus.weebly.com/bulletins.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0753/20260816B.pdf",
+  "platform": "Weebly page linking out to parishesonline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28789,
+  "name": "St.Thomas the Apostle",
+  "bulletin_page_url": "https://parishesonline.com/organization/ss-joseph-kilian-thomas",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1347/20260816B.pdf",
+  "platform": "parishesonline/LPi (React SPA; cluster site https://www.threecatholicchurches.com/)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28863,
+  "name": "St Mary's Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-francis-solanus-st-mary-catholic-church",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/2072/20260816B.pdf",
+  "platform": "Legacy Yahoo Sites page (broken SSL) linking out to parishesonline/LPi cluster org",
+  "confidence": "medium"
+ },
+ {
+  "church_id": 28864,
+  "name": "St Mary's Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-francis-solanus-st-mary-catholic-church",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/2072/20260816B.pdf",
+  "platform": "Legacy Yahoo Sites page (broken SSL) linking out to parishesonline/LPi cluster org",
+  "confidence": "medium"
+ },
+ {
+  "church_id": 29038,
+  "name": "St. Leonard Congregation",
+  "bulletin_page_url": "https://www.stleonards.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0373/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29051,
+  "name": "St. Kilian",
+  "bulletin_page_url": "https://parishesonline.com/organization/ss-joseph-kilian-thomas",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1347/20260816B.pdf",
+  "platform": "parishesonline/LPi (React SPA; cluster site https://www.threecatholicchurches.com/)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29093,
+  "name": "St. Mary",
+  "bulletin_page_url": "https://pastorate14.org/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/2203/20260816B.pdf",
+  "platform": "eCatholic homepage embedding a parishesonline/LPi bulletin link (shared pastorate-wide bulletin)",
+  "confidence": "medium"
+ },
+ {
+  "church_id": 29146,
+  "name": "St. Paul the Apostle",
+  "bulletin_page_url": "https://stpacc.org/bulletins/",
+  "example_pdf_url": "https://bulletins.discovermass.com/download.php?bulletin=%2BIsyo6v%2BUr0aPxK3q0iyLbJRynTfIqo%2B4n%2FbJaVzXrYv8ux36glp1sd3A02ahSYiZm0k26oazxT%2BsB80wdkwCfvmPKcnTA2iLhjdPu5pqCg%3D",
+  "platform": "WordPress + DiscoverMass bulletin hosting (encrypted download.php token links, not LPi)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29211,
+  "name": "St. Joseph",
+  "bulletin_page_url": "https://89347a.sites.ecatholic.com/bulletins",
+  "example_pdf_url": "https://files.ecatholic.com/35715/bulletins/20260816.pdf?t=1786644235000",
+  "platform": "eCatholic (Pastorate 2 - St. Dominic - Platteville, WI cluster site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29256,
+  "name": "St. Kunegunda of Poland",
+  "bulletin_page_url": "https://www.northernlakescatholics.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1406/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 494861,
+  "name": "St. Kunegunda of Poland",
+  "bulletin_page_url": "https://www.northernlakescatholics.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1406/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29302,
+  "name": "St. Henry",
+  "bulletin_page_url": "https://stlwi.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0507/20260816B.pdf",
+  "platform": "eCatholic site embedding a parishesonline/LPi widget (not eCatholic's own file host)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29303,
+  "name": "St. Henry",
+  "bulletin_page_url": "https://stlwi.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0507/20260816B.pdf",
+  "platform": "eCatholic site embedding a parishesonline/LPi widget (not eCatholic's own file host)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29333,
+  "name": "Sacred Hearts of Jesus and Mary",
+  "bulletin_page_url": "https://websterwicatholics.org/bulletins",
+  "example_pdf_url": "https://files.ecatholic.com/36320/bulletins/20260816.pdf?t=1786906463000",
+  "platform": "eCatholic (Webster Area Catholic Churches cluster site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29345,
+  "name": "Holy Trinity",
+  "bulletin_page_url": "https://holytrinitynewburg.org/news-and-resources/parish-bulletin/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0318/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 494846,
+  "name": "Holy Trinity",
+  "bulletin_page_url": "https://holytrinitynewburg.org/news-and-resources/parish-bulletin/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0318/20260816B.pdf",
+  "platform": "parishesonline/LPi (widget on WordPress site)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29058,
+  "name": "St. Alphonsus",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-alphonsus-john-the-evangelist-holy-cross-catholic-parishes",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1101/20250824B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28532,
+  "name": "Holy Cross Parish",
+  "bulletin_page_url": "https://holycrosswi.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1101/20250824B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28533,
+  "name": "Holy Cross Parish",
+  "bulletin_page_url": "https://holycrosswi.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1101/20250824B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28554,
+  "name": "St. Peter",
+  "bulletin_page_url": "https://sspbandj.org/weekly-bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0764/20250413B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28592,
+  "name": "St. Columbkille",
+  "bulletin_page_url": "https://www.stkatharinedrexelbd.org/bulletin9ab2b387",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1731/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28593,
+  "name": "St. Columbkille",
+  "bulletin_page_url": "https://www.stkatharinedrexelbd.org/bulletin9ab2b387",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1731/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28642,
+  "name": "St. Mary's Assumption",
+  "bulletin_page_url": "https://www.catholictriparish.org/bulletins.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0801/20250601B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28442,
+  "name": "St. Joseph",
+  "bulletin_page_url": "https://www.parishesonline.com/organization/st-joseph-catholic-church-53910",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1480/20260816B.pdf",
+  "platform": "parishesonline/LPi (CDN serves Content-Type application/octet-stream, but content verified as a real PDF via magic bytes %PDF-1.7 on a ranged GET)",
+  "confidence": null
+ },
+ {
+  "church_id": 28707,
+  "name": "St. Joseph",
+  "bulletin_page_url": "https://www.parishesonline.com/organization/st-joseph-catholic-church-53910",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1480/20260816B.pdf",
+  "platform": "parishesonline/LPi (CDN serves Content-Type application/octet-stream, but content verified as a real PDF via magic bytes %PDF-1.7 on a ranged GET)",
+  "confidence": null
+ },
+ {
+  "church_id": 28770,
+  "name": "St. Mary of Czestochowa",
+  "bulletin_page_url": "https://www.ruskcountycatholiccommunity.org/st-mary-of-czestochowa.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0847/20260816B.pdf",
+  "platform": "parishesonline/LPi, published as a shared cluster bulletin (\"Rusk County Catholic Community\") covering St. Mary of Czestochowa + St. Francis of Assisi (Flambeau) + St. Anthony de Padua (Tony) + Ss. Peter & Paul (Weyerhaeuser) + St. Mary (Bruce); the parish's own site is Weebly with no PDFs hosted on it",
+  "confidence": null
+ },
+ {
+  "church_id": 28791,
+  "name": "Saints Peter and Paul",
+  "bulletin_page_url": "https://www.ssppwi.org/bulletins-calendar/weekly-bulletins",
+  "example_pdf_url": "https://drive.usercontent.google.com/download?id=1LkjjyjYu6eQSCXz1pr5V5PewhEctJS8F&export=download",
+  "platform": "Google Sites (parish website) embedding a Google Drive file (\"Bulletin 8-16-26-2026ENG.pdf\"); download endpoint serves Content-Type application/octet-stream but content is confirmed a real PDF (starts with %PDF-1.7) via the Content-Disposition filename and byte inspection",
+  "confidence": null
+ },
+ {
+  "church_id": 28875,
+  "name": "St. Anthony",
+  "bulletin_page_url": "https://stanthonyloyal.org/bulletins",
+  "example_pdf_url": "https://files.ecatholic.com/2133/bulletins/20260816.pdf",
+  "platform": "eCatholic",
+  "confidence": null
+ },
+ {
+  "church_id": 29039,
+  "name": "St. Joan of Arc, Delafield",
+  "bulletin_page_url": "https://www.scsjcluster.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1135/20250907B.pdf",
+  "platform": "parishesonline/LPi (bulletin PDF hosted on container.parishesonline.com; the parish-facing page is a custom/WordPress-style site at scsjcluster.org)",
+  "confidence": null
+ },
+ {
+  "church_id": 29073,
+  "name": "St. Stephen",
+  "bulletin_page_url": "https://www.saintstephenmil.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0766/20250817B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29099,
+  "name": "St. Margaret",
+  "bulletin_page_url": "https://www.stanthonyniagara.org/bulletins",
+  "example_pdf_url": "https://www.stanthonyniagara.org/_downloads/722424cc756a1c05b35f1da3a093ea57",
+  "platform": "Jimdo (custom site builder) \u2014 shared cluster site for Sacred Heart (Aurora), St. Anthony (Niagara), and St. Margaret (Pembine)",
+  "confidence": null
+ },
+ {
+  "church_id": 29178,
+  "name": "St. John",
+  "bulletin_page_url": "https://stkiliancong.org/bulletins-1",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0037/20250706B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29222,
+  "name": "Christ the King",
+  "bulletin_page_url": "https://parishesonline.com/organization/christ-the-king-corpus-christi-parishes",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/2123/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29280,
+  "name": "St Ann's Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-anthony-the-abbot-st-ann-sacred-heart-of-jesus",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0892/20260816B.pdf",
+  "platform": "parishesonline/LPi (parish cluster site actinfaith.net itself runs eCatholic, but the bulletin file is served through LPi/parishesonline)",
+  "confidence": null
+ },
+ {
+  "church_id": 29281,
+  "name": "St Ann's Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-anthony-the-abbot-st-ann-sacred-heart-of-jesus",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0892/20260816B.pdf",
+  "platform": "parishesonline/LPi (parish cluster site actinfaith.net itself runs eCatholic, but the bulletin file is served through LPi/parishesonline)",
+  "confidence": null
+ },
+ {
+  "church_id": 29313,
+  "name": "St. Mary Magdalene",
+  "bulletin_page_url": "https://smm-waupaca.org/bulletins/",
+  "example_pdf_url": "https://drive.google.com/uc?export=download&id=1AuzhLgiXuhZ1LJMpw9tWE6wTQnZpCHi9",
+  "platform": "custom site (WordPress-style) with bulletins hosted as individual Google Drive files, not a PDF host",
+  "confidence": null
+ },
+ {
+  "church_id": 29347,
+  "name": "Saint Frances Cabrini Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-frances-cabrini-church-53095",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0631/20260816B.pdf",
+  "platform": "eCatholic (parish site) linking out to parishesonline/LPi for the live weekly bulletin; eCatholic's own files.ecatholic.com only hosts a stale 2019 archive",
+  "confidence": null
+ },
+ {
+  "church_id": 29348,
+  "name": "Saint Frances Cabrini Catholic Church",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-frances-cabrini-church-53095",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0631/20260816B.pdf",
+  "platform": "eCatholic (parish site) linking out to parishesonline/LPi for the live weekly bulletin; eCatholic's own files.ecatholic.com only hosts a stale 2019 archive",
+  "confidence": null
+ },
+ {
+  "church_id": 28440,
+  "name": "St. Bernard",
+  "bulletin_page_url": "https://www.abbydore.org/?page_id=19",
+  "example_pdf_url": null,
+  "platform": "WordPress",
+  "confidence": null
+ },
+ {
+  "church_id": 28441,
+  "name": "St. Bernard",
+  "bulletin_page_url": "https://www.abbydore.org/?page_id=19",
+  "example_pdf_url": null,
+  "platform": "WordPress",
+  "confidence": null
+ },
+ {
+  "church_id": 28536,
+  "name": "St. John Vianney",
+  "bulletin_page_url": "https://stjohnv.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0957/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28537,
+  "name": "St. John Vianney",
+  "bulletin_page_url": "https://stjohnv.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0957/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28558,
+  "name": "St. Martin",
+  "bulletin_page_url": "https://www.stmatthewofcsport.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0255/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28609,
+  "name": "St. Anthony Abbot",
+  "bulletin_page_url": "https://actinfaith.net/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0892/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28610,
+  "name": "St. Anthony Abbot",
+  "bulletin_page_url": "https://actinfaith.net/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0892/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28645,
+  "name": "St. Peter the Fisherman",
+  "bulletin_page_url": "https://www.northernlakescatholics.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1406/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28758,
+  "name": "St. Mary",
+  "bulletin_page_url": "https://www.stmarygreenville.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1023/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 494834,
+  "name": "St. Mary",
+  "bulletin_page_url": "https://www.stmarygreenville.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1023/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28779,
+  "name": "St. Francis of Assisi",
+  "bulletin_page_url": "https://www.ruskcountycatholiccommunity.org/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0847/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28826,
+  "name": "St. Michael",
+  "bulletin_page_url": "https://www.kewaskumcatholicparishes.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0681/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28881,
+  "name": "St. Joseph",
+  "bulletin_page_url": "https://www.ourblcc.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1617/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29040,
+  "name": "St. Francis of Assisi",
+  "bulletin_page_url": "https://saintfrancisnecedah.org/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1097/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29041,
+  "name": "St. Francis of Assisi",
+  "bulletin_page_url": "https://saintfrancisnecedah.org/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1097/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29076,
+  "name": "St. Jerome",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-jerome-church-53066",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0468/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29104,
+  "name": "St. Mary",
+  "bulletin_page_url": "https://www.northernlakescatholics.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1406/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29190,
+  "name": "St. Mary",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-anne-church-northwoods-catholic-community",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0386/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29244,
+  "name": "St. Philip",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-joseph-catholic-community-54843",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0560/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29288,
+  "name": "St. Robert Bellarmine",
+  "bulletin_page_url": "https://www.krcatholics.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0242/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29314,
+  "name": "St. Joseph",
+  "bulletin_page_url": "https://parishesonline.com/organization/st-katharine-drexel-53916",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1731/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 29356,
+  "name": "Saints Peter and Paul",
+  "bulletin_page_url": "https://parishesonline.com/organization/rusk-county-catholic-community",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0847/20260816B.pdf",
+  "platform": "parishesonline/LPi",
+  "confidence": null
+ },
+ {
+  "church_id": 28452,
+  "name": "St. Maximilian Kolbe",
+  "bulletin_page_url": "https://stmaxkolbe.org/bulletin",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1749/20260816B.pdf",
+  "platform": "eCatholic site + embedded ParishesOnline/LPi bulletin widget",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28547,
+  "name": "St. Ann",
+  "bulletin_page_url": "https://www.parishesonline.com/organization/st-joseph-catholic-community-54843",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0560/20260816B.pdf",
+  "platform": "eCatholic (cablecatholic.org) linking out to a ParishesOnline/LPi organization shared by a 5-parish Hayward-area cluster",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28565,
+  "name": "St. Paul the Apostle",
+  "bulletin_page_url": "https://sttheresephillips.weebly.com/bulletins.html",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0355/20260816B.pdf",
+  "platform": "Weebly cluster site (St. Therese of Lisieux, Phillips) + ParishesOnline/LPi, covering a 3-parish cluster: St. Therese (Phillips), St. John's (Prentice), St. Paul's (Catawba)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28631,
+  "name": "Parish of St. Mary\u2013Stark Site",
+  "bulletin_page_url": "https://denmarkareacatholic.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0748/20260823B.pdf",
+  "platform": "Custom CMS site (denmarkareacatholic.com) + ParishesOnline/LPi, 5-parish cluster (All Saints, St. Mary, Holy Trinity, St. James, St. Joseph)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 494825,
+  "name": "Parish of St. Mary\u2013Stark Site",
+  "bulletin_page_url": "https://denmarkareacatholic.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0748/20260823B.pdf",
+  "platform": "Custom CMS site (denmarkareacatholic.com) + ParishesOnline/LPi, 5-parish cluster (All Saints, St. Mary, Holy Trinity, St. James, St. Joseph)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28682,
+  "name": "St. Raymond of Penafort",
+  "bulletin_page_url": "https://smsrwi.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0290/20260816B.pdf",
+  "platform": "eCatholic site (smsrwi.com, \"St. Mary St. Raymond WI\" cluster) + ParishesOnline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28683,
+  "name": "St. Raymond of Penafort",
+  "bulletin_page_url": "https://smsrwi.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0290/20260816B.pdf",
+  "platform": "eCatholic site (smsrwi.com, \"St. Mary St. Raymond WI\" cluster) + ParishesOnline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28762,
+  "name": "St. Mary Catholic Faith Community",
+  "bulletin_page_url": "https://stmaryhc.org/page.php?id=208",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0963/20260816B.pdf",
+  "platform": "Custom PHP site + ParishesOnline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28785,
+  "name": "Holy Hill - Basilica and National Shrine of Mary Help of Christians",
+  "bulletin_page_url": "https://www.holyhill.com/basilica/bulletin-2",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0574/20260816B.pdf",
+  "platform": "Custom CMS site + embedded ParishesOnline/LPi widget iframe",
+  "confidence": "high"
+ },
+ {
+  "church_id": 28858,
+  "name": "St. Albert",
+  "bulletin_page_url": "https://www.northernlakescatholics.org/bulletins",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1406/20260816B.pdf",
+  "platform": "Custom CMS site + embedded ParishesOnline/LPi widget iframe",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29048,
+  "name": "St. James",
+  "bulletin_page_url": "https://sites.google.com/pastorate10.com/pastorate-10/bulletins",
+  "example_pdf_url": "https://drive.google.com/uc?export=download&id=1kyTPbEMCv9wmwwtrFKZg4c5nlUXM_imE",
+  "platform": "Google Sites (\"Diocese of Madison - Pastorate 10\") embedding a Google Drive folder of bulletin PDFs",
+  "confidence": "medium"
+ },
+ {
+  "church_id": 29083,
+  "name": "Assumption of the Blessed Virgin Mary",
+  "bulletin_page_url": "https://www.parishesonline.com/organization/st-anne-st-joseph-and-assumption-of-the-blessed-virgin-mary",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/02/0232/20260816B.pdf",
+  "platform": "Custom CMS site (stannesomerset.org, 3-parish cluster: St. Anne, St. Joseph, Assumption BVM) + ParishesOnline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29144,
+  "name": "St. Mary by the Lake",
+  "bulletin_page_url": "https://www.stmarybythelake.org/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0363/20260816B.pdf",
+  "platform": "Custom website-builder site (stmarybythelake.org) + embedded ParishesOnline/LPi widget",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29352,
+  "name": "St. Agnes",
+  "bulletin_page_url": "https://www.stagnescatholicparish.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0655/20260816B.pdf",
+  "platform": "Custom CMS site + ParishesOnline/LPi (cluster with St. Florian)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29254,
+  "name": "St Benedict Catholic Church",
+  "bulletin_page_url": "https://stbenedictsuamico.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1490/20260816B.pdf",
+  "platform": "WordPress + embedded ParishesOnline/LPi widget iframe (cluster with St. Pius)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29255,
+  "name": "St Benedict Catholic Church",
+  "bulletin_page_url": "https://stbenedictsuamico.com/",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/1490/20260816B.pdf",
+  "platform": "WordPress + embedded ParishesOnline/LPi widget iframe (cluster with St. Pius)",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29297,
+  "name": "St. Thomas Aquinas",
+  "bulletin_page_url": "https://www.windandwatercatholic.org/news/bulletinnewsletter.cfm",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0014/20260816B.pdf",
+  "platform": "Custom ColdFusion (.cfm) site (2-parish cluster with St. Clare) + ParishesOnline/LPi",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29333,
+  "name": "Sacred Hearts of Jesus and Mary",
+  "bulletin_page_url": "https://websterwicatholics.org/bulletins",
+  "example_pdf_url": "https://files.ecatholic.com/36320/bulletins/20260816.pdf?t=1786906463000",
+  "platform": "eCatholic (cluster site \"Webster Area Catholic Churches\")",
+  "confidence": "high"
+ },
+ {
+  "church_id": 29374,
+  "name": "St. Clare",
+  "bulletin_page_url": "https://www.windandwatercatholic.org/news/bulletinnewsletter.cfm",
+  "example_pdf_url": "https://container.parishesonline.com/bulletins/01/0014/20260816B.pdf",
+  "platform": "Custom ColdFusion (.cfm) site (2-parish cluster with St. Thomas Aquinas) + ParishesOnline/LPi",
+  "confidence": "high"
+ }
+]
