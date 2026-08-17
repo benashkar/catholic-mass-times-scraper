@@ -73,6 +73,26 @@ Wisconsin has **1,009 churches, 974 with a bulletin source, but only 271 with an
 **700 WI churches** sit in the same failure state as the 69 that were reported. The merged fixes
 apply to all of them; a full re-sweep is what converts it.
 
+### National scale of the same bug (measured 2026-08-17 21:16 UTC)
+
+`verify_bulletins_national.py`, per state because a roll-up hides exactly the failure this
+project already lived through:
+
+| | |
+|---|---|
+| states | 50 |
+| churches with a website | 24,158 |
+| with a bulletin source | 22,581 |
+| **with any PDF** | **7,584** |
+| **gap — source but no PDF** | **14,997** |
+
+So the 69 churches that were reported are ~0.5% of the population in that state. Worst coverage:
+ME 6.4%, IA 20.8%, KS 20.9%, OK 21.7%, AL 23.0%.
+
+**Wisconsin, the only state with the fixes applied, is at 46.5%** against a 33.6% national
+average — it went 28% → 47%. If that +19 points holds elsewhere it implies roughly +4,000
+churches nationally, though that is an extrapolation from one state, not a promise.
+
 ### Two hours lost to invisible infrastructure — worth recording
 
 - **`scripts/` is in `.dockerignore`.** Three one-off jobs failed in ~55s producing *nothing*,
