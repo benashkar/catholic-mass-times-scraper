@@ -267,6 +267,33 @@ def _playwright_proxy():
     return proxy
 
 
+# Strategy 5 (walled hosts, browser through the proxy) is OFF unless asked for.
+# Enabling it by default cost the national sweep three shards to OOM in one
+# round: every blocked host tried to launch Chromium alongside spaCy and
+# pdfplumber on a 2GB box.
+WALLED_BROWSER_ENABLED = os.environ.get("WALLED_BROWSER", "0") == "1"
+# Hard ceiling on browser launches per process, so a shard full of blocked
+# hosts cannot spawn them without limit.
+WALLED_BROWSER_BUDGET = int(os.environ.get("WALLED_BROWSER_BUDGET", "40"))
+_walled_spent = 0
+_walled_budget_lock = threading.Lock()
+
+
+def _walled_budget_left():
+    with _walled_budget_lock:
+        return _walled_spent < WALLED_BROWSER_BUDGET
+
+
+def _walled_budget_spend():
+    """Claim one browser launch. False when the budget is exhausted."""
+    global _walled_spent
+    with _walled_budget_lock:
+        if _walled_spent >= WALLED_BROWSER_BUDGET:
+            return False
+        _walled_spent += 1
+        return True
+
+
 def _effective_pdf_cap():
     """Return the active per-church PDF cap. 0 means unlimited."""
     if _pdf_cap_override is not None:
@@ -961,7 +988,25 @@ def find_bulletin_page(base_url: str):
     #
     # Gated to policy-blocked hosts: a browser is built per call and costs ~1s
     # plus memory, which must not be spent on churches that answer a plain GET.
-    if not result["pdf_urls"] and HAS_PLAYWRIGHT and _playwright_proxy():
+    #
+    # AND GATED OFF BY DEFAULT. On its first outing this cost the national sweep
+    # three shards: blocked hosts are common, this tried up to four candidates
+    # each, and a Chromium per candidate alongside spaCy and pdfplumber does not
+    # fit in 2GB — the same ceiling that forced --workers from 4 to 2. A better
+    # classifier is not worth destabilising the sweep that is actually
+    # recovering churches. Run it as its own low-concurrency pass:
+    #
+    #     WALLED_BROWSER=1 python extract_bulletins_to_db99.py --church-ids ... --workers 1
+    #
+    # Two candidates, not four, and a per-process budget, so one pathological
+    # run cannot spawn browsers without limit.
+    if (
+        not result["pdf_urls"]
+        and WALLED_BROWSER_ENABLED
+        and _walled_budget_left()
+        and HAS_PLAYWRIGHT
+        and _playwright_proxy()
+    ):
         try:
             walled = _host_policy.policy_for(base_url) == "blocked"
         except Exception:
@@ -976,9 +1021,10 @@ def find_bulletin_page(base_url: str):
             for candidate in (
                 base_origin + "/bulletin",
                 base_origin + "/bulletins",
-                base_origin + "/parish-bulletin",
                 base_url,
             ):
+                if not _walled_budget_spend():
+                    break
                 browser_pdfs = _extract_pdfs_with_browser(candidate)
                 if not browser_pdfs:
                     continue
