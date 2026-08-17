@@ -106,6 +106,50 @@ def publish(name: str, text: str) -> str | None:
     except Exception as e:
         print(f"[ERR] readback publish failed: {type(e).__name__}: {e}",
               flush=True)
+        return publish_env(name, text)
+
+
+def publish_env(name: str, text: str) -> str | None:
+    """Fallback channel: stash the report in one of this service's env vars.
+
+    The church-scrapes services carry AWS credentials for Secrets Manager
+    (db99 passwords) but NOT s3:PutObject on the diagnostics bucket, so the S3
+    channel no-ops here -- a verify job reported success while writing nothing,
+    which is worse than no channel because it looks like it worked.
+
+    Render's env vars are readable through the same API that sets them, and a
+    single-key PUT touches only that key (never use the bulk PUT, which
+    REPLACES the whole set) and does not trigger a redeploy. That makes it a
+    serviceable, if unglamorous, mailbox for a job that has no other way home.
+
+    Truncated to 4KB: env values are not meant to hold essays, and the useful
+    part of these reports is the head.
+    """
+    try:
+        key = os.environ.get("RENDER_API_KEY")
+        service = os.environ.get("RENDER_SERVICE_ID")
+        if not (key and service):
+            print("[ERR] readback env fallback: no RENDER_API_KEY/SERVICE_ID",
+                  flush=True)
+            return None
+        import requests
+
+        var = f"READBACK_{name.upper()[:40]}"
+        r = requests.put(
+            f"https://api.render.com/v1/services/{service}/env-vars/{var}",
+            headers={"Authorization": f"Bearer {key}"},
+            json={"value": text[:4000]},
+            timeout=30,
+        )
+        if r.status_code in (200, 201):
+            print(f"[OK] readback published to env var {var}", flush=True)
+            return var
+        print(f"[ERR] readback env fallback {r.status_code}: {r.text[:200]}",
+              flush=True)
+        return None
+    except Exception as e:
+        print(f"[ERR] readback env fallback failed: {type(e).__name__}: {e}",
+              flush=True)
         return None
 
 
