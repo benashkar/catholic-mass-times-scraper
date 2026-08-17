@@ -82,11 +82,18 @@ def main():
     probe = scorer.score_batch(["John Smith"], [""])[0]
     active = sorted(probe.engine_results.keys())
     if len(active) < 3:
-        raise SystemExit(
+        # Publish BEFORE exiting. SystemExit inherits BaseException, so the
+        # `except Exception` handler at the bottom never saw it — the first
+        # version of this guard aborted correctly and then reported nothing,
+        # which from outside is indistinguishable from a crash.
+        msg = (
             f"ABORT: only {len(active)} engines active ({', '.join(active)}). "
             "Expected dictionary + spacy_ner + name_dataset. A missing engine "
             "silently inverts verdicts — refusing to report a consensus."
         )
+        print(msg, flush=True)
+        publish("measure_rescore_impact", msg)
+        raise SystemExit(msg)
     lines_prefix = f"engines active: {', '.join(active)}"
 
     results = scorer.score_batch(names, contexts)
@@ -162,7 +169,9 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception:
+    except SystemExit:
+        raise  # already reported at the raise site
+    except BaseException:
         tb = "measure_rescore_impact FAILED\n" + traceback.format_exc()
         print(tb, flush=True)
         publish("measure_rescore_impact", tb)
