@@ -881,12 +881,26 @@ def main():
         "this past 2 risks an OOM kill on the 2GB plan.",
     )
     parser.add_argument(
+        "--church-ids",
+        type=str,
+        default="",
+        help="Only process these church_ids (comma or space separated). For "
+        "targeted recovery — re-checking a few corrected churches should not "
+        "cost a full state sweep. Ignores --days-fresh.",
+    )
+    parser.add_argument(
         "--shards", type=int, default=1, help="Split the queue across N containers"
     )
     parser.add_argument(
         "--shard", type=int, default=0, help="Which shard this process handles (0-based)"
     )
     args = parser.parse_args()
+
+    # Naming churches explicitly is itself the statement that they need
+    # re-checking, so the freshness window must not silently drop them —
+    # they were almost certainly "checked" moments ago and found wanting.
+    if args.church_ids:
+        args.days_fresh = 0
 
     print("=" * 60)
     print("  Extract Bulletin Names -> db99 (Direct)")
@@ -959,6 +973,15 @@ def main():
         where += " AND NOT EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
     elif args.known_sources_only:
         where += " AND EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
+
+    # Targeted re-run. Recovering a handful of churches — say the ones whose
+    # stored website_url was just corrected — should not require re-sweeping a
+    # whole state for hours. Overrides the freshness window on purpose: naming
+    # churches explicitly IS the statement that they need re-checking.
+    if args.church_ids:
+        ids = [int(x) for x in args.church_ids.replace(",", " ").split()]
+        where += " AND c.church_id IN (" + ",".join(["%s"] * len(ids)) + ")"
+        params.extend(ids)
 
     # Sharding splits the queue across several CONTAINERS. Threads only overlap
     # network waits — PDF text extraction is CPU-bound and the GIL serialises it,
