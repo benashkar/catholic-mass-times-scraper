@@ -73,6 +73,53 @@ Wisconsin has **1,009 churches, 974 with a bulletin source, but only 271 with an
 **700 WI churches** sit in the same failure state as the 69 that were reported. The merged fixes
 apply to all of them; a full re-sweep is what converts it.
 
+### 🔓 'blocked' was never a dead end — walled hosts answer a browser THROUGH the proxy
+
+The single most useful finding of the day, and it inverts a standing assumption.
+
+Maine sits at 6.4% coverage with 185 of its 205 zero-PDF churches on hosts labelled `blocked`.
+Those verdicts were *correct* — every host records direct 403 **and** proxy 403, real responses on
+both legs, not the 407/ProxyError signature of our own account lapsing. So a proxy alone was
+never going to move them, and re-labelling would not have helped.
+
+But the full access matrix, measured across **eight hosts in two states**:
+
+| | requests | requests + proxy | browser | **browser + proxy** |
+|---|---|---|---|---|
+| hc-catholics.org | 403 | 403 | 403 | **200** (94 KB) |
+| portlanddiocese.net | 403 | 403 | 403 | **200** (13 KB) |
+| sjvcatholics.org | 403 | 403 | 403 | **200** (180 KB) |
+| theppb.org | 403 | 403 | 403 | **200** (89 KB) |
+| allsaintsmaine.com | 403 | 403 | 403 | **200** (100 KB) |
+| stmaxkolbe.org | 403 | 403 | 403 | **200** (28 KB) |
+| stmarysbigriver.com | 403 | 403 | 403 | **200** (71 KB) |
+| holycrosswi.org | 403 | 403 | 403 | **200** (101 KB) |
+
+**8 of 8.** The WAF scores both signals and wants both: neither a residential address nor a real
+browser passes alone. Which means `blocked` — defined as "go direct, WITHOUT a proxy" — is
+precisely the one combination that cannot work. **5,457 hosts carry that verdict** and gate a
+large share of the 14,997-church gap. They were never permanently unreachable; they were being
+retried in the only way guaranteed to fail.
+
+This refines the standing note that WI's Cloudflare walls need "a residential proxy **or** a
+CF-solver". The answer is a residential proxy **and** a real browser, together.
+
+**Strategy 5** in `find_bulletin_page` now gives policy-blocked hosts one browser attempt through
+the proxy. Gated to blocked hosts because a browser is built per call. `proxies_for()` is
+deliberately unchanged — plain requests through the proxy still 403, so widening it there would
+spend metered GB for the same failure.
+
+**Verified end to end, and honestly: it is an unlock, not a cure.** Of five walled hosts run
+through real discovery — two returned **100 genuine bulletins each including the current
+2026-08-16 edition**, two were reachable but yielded nothing, and one returned four PDFs that
+were not bulletins at all (a cemetery fee schedule, a stewardship worksheet) because the homepage
+was tried first and a browser harvests every PDF on the page it lands on. Those would have been
+mined for names and produced confident junk — worse than the zero they replaced. Fixed by trying
+bulletin paths before the homepage and filtering the fallback.
+
+A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
+those two is the error that started this whole day.
+
 ### National scale of the same bug (measured 2026-08-17 21:16 UTC)
 
 `verify_bulletins_national.py`, per state because a roll-up hides exactly the failure this
