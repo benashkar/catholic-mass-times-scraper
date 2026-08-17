@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-17 19:45 UTC (LPi/ParishesOnline recovery — PROVEN in db99: +74 churches, +23,295 names; full WI sweep in flight)._
+_Last updated: 2026-08-17 20:35 UTC (recovery PROVEN: +74 churches, +23,295 names; name classifier found outdated — NameDataset to be exported to db99)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -149,6 +149,61 @@ New flags `--recheck-proxy-failures` (the precise suspect cohort) and `--only-bl
 Three WI parish sites (stmaxkolbe, stmarysbigriver, holycrosswi) 403 **direct AND through a
 residential IP** — genuinely blocked, consistent with the existing finding that the WI Cloudflare
 walls need a solver, not an IP.
+
+### Name classifier is outdated against name_engine — and the fix is not the obvious one
+
+Compared the live scorer against `names_people_matcher` (the source of truth for
+[[identify-score-person-names]]). Four divergences:
+
+| | church-scrapes | `name_engine` |
+|---|---|---|
+| engines | 2 — SSA/Census dict + spaCy NER *veto* | **3** — Dictionary, spaCy NER, **NameDataset** |
+| combination | dict score; NER failure caps it at 0.35 | weighted average of all three |
+| `high` | `score >= 0.7` | `>= 0.7` **and all engines agree** |
+| `medium` | **`>= 0.4`** | **`>= 0.5`** |
+| `is_suspect` | only when the NER veto fails | `engines disagree AND spread > 0.3`, **any tier** |
+
+The costly one is the **missing NameDataset engine**. SSA + Census are US-centric; Catholic
+bulletins are full of Polish, Hispanic, Vietnamese and Filipino surnames, which score low on US
+dictionaries and get filtered off the dashboard — indistinguishable from the scraper having
+missed them. Second: `medium >= 0.4` means the 0.4–0.5 band is displayed as real people when
+current logic calls it `low`.
+
+`name_engine/` is now **vendored** into this repo (names_people_matcher is private, so a
+pip-install would need a Docker build secret). **This copy must be kept in sync with the source
+repo.**
+
+**A silent-degradation hazard, worth knowing about generally.** The engines *disable themselves*
+on import failure rather than raising, so a broken spaCy quietly reduces the "consensus" to two
+engines. That does not merely weaken scores — it inverts them. Measured on Python 3.14 where
+spaCy cannot load: `Parish Council` → medium/0.67, `Fr. John Smith` → low/0.35. Rescoring 776K
+rows in that state would corrupt the table while reporting success. `measure_rescore_impact.py`
+therefore **aborts unless all three engines are active**.
+
+**Memory is the binding constraint, and it rules out the obvious integration.** Measured on the
+2GB cron plan:
+
+| loaded | RSS |
+|---|---|
+| baseline | 11 MB |
+| + Dictionary (SSA+Census) | 92 MB |
+| **+ NameDataset** | **1,948 MB** |
+| + spaCy `en_core_web_sm` | 1,948 MB |
+
+NameDataset alone costs **~1.86 GB**. With `en_core_web_lg` (709 MB) the total is ~2.6 GB —
+impossible here. Even the `sm` configuration leaves ~100 MB of headroom before any batch work.
+So the consensus **cannot** be wired inline: extraction already carries spaCy lg plus pdfplumber
+across 2 workers, which is why `--workers` was cut from 4 to 2 after 27 OOM kills in 56 jobs.
+
+**Decision: export the name lists to db99 instead of loading them per process.** Holding 1.86 GB
+of Python objects to answer membership questions is the wrong shape, and this project already
+solved it twice — `ref_ssa_names` and `ref_census_surnames` are db99 tables, not in-process
+dicts. A `ref_name_dataset` table plus indexed lookups gives the international coverage inline,
+at near-zero memory, on the existing plan, keeping `lg`.
+
+**Upstream bug to fix in names_people_matcher:** `_compute_consensus`'s docstring says
+`spread > 0.4`; the code uses `0.3`. The skill doc matches the code, so the docstring is the odd
+one out.
 
 ### Status — what is proven and what is not
 
