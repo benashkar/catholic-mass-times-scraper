@@ -56,14 +56,38 @@ def via_requests(url, proxies=None):
         return f"EXC {type(e).__name__}"
 
 
-def via_browser(url):
+def _proxy_for_playwright():
+    """Split PROXY_URL into Playwright's server/username/password form."""
+    raw = os.environ.get("PROXY_URL", "").strip()
+    if not raw:
+        return None
+    from urllib.parse import urlparse
+
+    u = urlparse(raw)
+    if not u.hostname:
+        return None
+    server = f"{u.scheme or 'http'}://{u.hostname}:{u.port or 80}"
+    cfg = {"server": server}
+    if u.username:
+        cfg["username"] = u.username
+        cfg["password"] = u.password or ""
+    return cfg
+
+
+def via_browser(url, use_proxy=False):
     try:
         from playwright.sync_api import sync_playwright
     except Exception as e:
         return f"no playwright ({type(e).__name__})"
+    launch_kw = {"args": ["--no-sandbox", "--disable-dev-shm-usage"]}
+    if use_proxy:
+        cfg = _proxy_for_playwright()
+        if not cfg:
+            return "no PROXY_URL"
+        launch_kw["proxy"] = cfg
     try:
         with sync_playwright() as p:
-            b = p.chromium.launch(args=["--no-sandbox", "--disable-dev-shm-usage"])
+            b = p.chromium.launch(**launch_kw)
             try:
                 page = b.new_page(user_agent=UA)
                 resp = page.goto(url, timeout=45000, wait_until="domcontentloaded")
@@ -84,15 +108,18 @@ def main():
         "Maine walled hosts — client fingerprint vs address",
         f"PROXY_URL set: {bool(proxy)}",
         "",
-        f"{'host':34} {'requests':>14} {'req+proxy':>14} {'browser':>18}",
-        "-" * 84,
+        f"{'host':30} {'requests':>13} {'req+proxy':>13} {'browser':>13} {'brow+proxy':>14}",
+        "-" * 90,
     ]
     for url in HOSTS:
         r1 = via_requests(url)
         r2 = via_requests(url, proxies) if proxies else "-"
         r3 = via_browser(url)
-        host = url.replace("https://", "")[:32]
-        lines.append(f"{host:34} {r1:>14} {r2:>14} {r3:>18}")
+        # The only untested cell. Neither a residential address nor a real
+        # browser works alone; some WAFs score several signals and want both.
+        r4 = via_browser(url, use_proxy=True) if proxies else "-"
+        host = url.replace("https://", "")[:28]
+        lines.append(f"{host:30} {r1:>13} {r2:>13} {r3:>13} {r4:>14}")
         # Publish as we go: the browser step is the one that might be killed.
         publish("diag_browser_vs_requests", "\n".join(lines))
 
