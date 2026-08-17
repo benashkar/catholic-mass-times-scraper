@@ -94,11 +94,31 @@ def load(cur):
         return _cache
 
 
+def policy_for(url, policy=None):
+    """The recorded verdict for this URL's host, or None if unmeasured.
+
+    Exposed because 'blocked' is no longer a dead end. Measured 2026-08-17 on
+    eight walled hosts across two states: requests 403, requests+proxy 403,
+    browser 403, browser+proxy 200. The WAF wants a residential address AND a
+    real browser together, so a blocked host is worth one browser attempt
+    THROUGH the proxy before being written off — see find_bulletin_page
+    strategy 5.
+    """
+    if policy is None:
+        policy = _cache or {}
+    return policy.get(host_of(url))
+
+
 def proxies_for(url, policy=None):
     """requests-style proxies dict for this URL, or None for direct.
 
     Returns a proxy ONLY for hosts explicitly labelled needs_proxy. Everything
     else — including hosts we know are blocked — goes direct.
+
+    NOTE: this stays as it is deliberately. Sending plain requests through the
+    proxy does NOT rescue a blocked host — measured 403 either way. Only a
+    browser through the proxy does, which is handled in the scraper rather than
+    here, because it costs a browser launch per call.
     """
     if not PROXY_URL:
         return None

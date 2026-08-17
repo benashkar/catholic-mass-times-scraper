@@ -942,6 +942,39 @@ def find_bulletin_page(base_url: str):
                         result["pdf_urls"] = wp_pdfs
                         return result
 
+    # Strategy 5: the host is WALLED — go at it with a browser THROUGH the proxy.
+    #
+    # Measured 2026-08-17 across two states — five Maine hosts and three
+    # Wisconsin ones — every combination:
+    #
+    #     requests          403
+    #     requests + proxy  403
+    #     browser           403
+    #     browser + proxy   200   <- 8 of 8, with real content
+    #
+    # The WAF scores both signals and wants both. Neither a residential address
+    # nor a real browser passes alone, which is why every earlier probe recorded
+    # these hosts as 'blocked' — and 'blocked' means go direct WITHOUT a proxy,
+    # i.e. precisely the one combination that cannot work. 5,457 hosts carry
+    # that verdict, gating a large share of the 14,997 churches that have a
+    # bulletin source but no PDF.
+    #
+    # Gated to policy-blocked hosts: a browser is built per call and costs ~1s
+    # plus memory, which must not be spent on churches that answer a plain GET.
+    if not result["pdf_urls"] and HAS_PLAYWRIGHT and _playwright_proxy():
+        try:
+            walled = _host_policy.policy_for(base_url) == "blocked"
+        except Exception:
+            walled = False
+        if walled:
+            for candidate in (base_url, base_origin + "/bulletin", base_origin + "/bulletins"):
+                browser_pdfs = _extract_pdfs_with_browser(candidate)
+                if browser_pdfs:
+                    result["pdf_urls"] = browser_pdfs
+                    result["bulletin_page_url"] = candidate
+                    result["source"] = "walled_browser_proxy"
+                    return result
+
     return result
 
 
