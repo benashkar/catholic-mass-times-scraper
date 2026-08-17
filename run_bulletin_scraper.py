@@ -784,6 +784,14 @@ def find_bulletin_page(base_url: str):
     # Strategy 2: Fetch homepage and look for bulletin/newsletter links
     soup = safe_get_html(base_url)
     if soup:
+        # Following every "bulletin"-ish link with a headless browser is the most
+        # expensive thing this function can do (a browser is built per call), and
+        # now that we no longer return on the first candidate a link-heavy nav
+        # could trigger it dozens of times. Spend it on the first few only.
+        browser_attempts = 0
+        MAX_BROWSER_ATTEMPTS = 2
+        candidate_links = 0
+        MAX_CANDIDATE_LINKS = 8
         # Find links with "bulletin" or "newsletter" in text or href
         for link in soup.find_all("a", href=True):
             link_text = (link.get_text() or "").strip().lower()
@@ -793,6 +801,9 @@ def find_bulletin_page(base_url: str):
                 # Skip if it's just the same page
                 if full_url.rstrip("/") == base_url.rstrip("/"):
                     continue
+                candidate_links += 1
+                if candidate_links > MAX_CANDIDATE_LINKS:
+                    break
                 # Check if it's a direct PDF link
                 if full_url.lower().endswith(".pdf"):
                     result["pdf_urls"].append(full_url)
@@ -804,8 +815,17 @@ def find_bulletin_page(base_url: str):
                     result["bulletin_page_url"] = full_url
                     result["source"] = "lpi_link"
                     lpi_pdfs = extract_lpi_pdfs(full_url)
-                    result["pdf_urls"] = lpi_pdfs
-                    return result
+                    if not lpi_pdfs:
+                        # Scraping the LPi page yields nothing when the reader is
+                        # client-side. Pull the handle out of the URL itself and
+                        # go at the JSON API instead of giving up.
+                        handle = find_lpi_parish_id(None, full_url)
+                        if handle:
+                            result["lpi_parish_id"] = handle
+                            lpi_pdfs = extract_lpi_pdfs_any(handle)
+                    if lpi_pdfs:
+                        result["pdf_urls"] = lpi_pdfs
+                        return result
                 # Check if it links to discovermass.com
                 if "discovermass.com" in full_url:
                     result["bulletin_page_url"] = full_url
@@ -837,13 +857,18 @@ def find_bulletin_page(base_url: str):
                             result["pdf_urls"] = wp_pdfs
                             result["source"] = "homepage_link_wordpress"
                     # If still no PDFs, try Playwright for JS-heavy pages
-                    if not result["pdf_urls"] and HAS_PLAYWRIGHT:
+                    if (
+                        not result["pdf_urls"]
+                        and HAS_PLAYWRIGHT
+                        and browser_attempts < MAX_BROWSER_ATTEMPTS
+                    ):
                         page_html = str(bulletin_soup).lower()
                         if (
                             "ecatholic" in page_html
                             or "myparish" in page_html
                             or not result["lpi_parish_id"]
                         ):
+                            browser_attempts += 1
                             browser_pdfs = _extract_pdfs_with_browser(full_url)
                             if browser_pdfs:
                                 result["pdf_urls"] = browser_pdfs
