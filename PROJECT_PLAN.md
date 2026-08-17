@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-17 20:35 UTC (recovery PROVEN: +74 churches, +23,295 names; name classifier found outdated — NameDataset to be exported to db99)._
+_Last updated: 2026-08-17 23:30 UTC (WI recovery: +197 churches, +78,093 names, 45/86 targets; walled-host unlock proven; national sweep running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -155,12 +155,17 @@ churches nationally, though that is an extrapolation from one state, not a promi
 
 ### Result, measured in db99
 
-| | session start | after fixes | gain |
+| | session start | final | gain |
 |---|---|---|---|
-| churches with ≥1 PDF | 271 | **345** | **+74** |
-| bulletin_name rows | 752,782 | **776,077** | **+23,295** |
-| churches carrying the current (2026-08-16) edition | 43 | **97** | **+54** |
-| bulletin_pdf rows | 78,645 | 79,317 | +672 |
+| churches with ≥1 PDF | 271 | **468** | **+197** |
+| bulletin_name rows | 752,782 | **830,875** | **+78,093** |
+| churches carrying the current (2026-08-16) edition | 43 | **181** | **+138** |
+| bulletin_pdf rows | 78,645 | 80,997 | +2,352 |
+| the 86 named recovery targets | 0 | **45** | **+45** |
+
+Contributions, in order: the LPi API + wrapper unwrapping + removing the four early-returns took
+it 271 → 345; the fallback exception fix and full sweep took it to 457; the walled-host browser
+pass took it to 468 and lifted the named targets from 34 to 45.
 
 Holy Cross (28532) went 0 → 12 PDFs / 561 names in the run that carried the fallback fix, and
 its stored site (`sahcsjcatholics.com`) is not where its bulletins live (`holycrosswi.org`) —
