@@ -1,6 +1,110 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-10 15:30 UTC (per-host proxy policy enforced; precondition checks; cron pre-flighted green)._
+_Last updated: 2026-08-17 18:45 UTC (LPi/ParishesOnline recovery — fixes merged and deployed; production recovery IN FLIGHT, not yet proven)._
+
+## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
+
+69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
+publish. They do. Four probe agents checked all 69 by hand against the live web:
+
+| | |
+|---|---|
+| Publish a bulletin | **66 of 69** |
+| Have a verifiable bulletin page | **68 of 69** |
+| Genuinely none | **1** — St. Bernard, Abbotsford (site states email/paper only) |
+| Real but stale | 2 — St. John Nepomucene (2024), St. James Neshkoro (Mar 2025) |
+
+Every PDF was confirmed by **HTTP status *and* `%PDF` magic bytes**, because the ParishesOnline
+CDN serves genuine PDFs as `application/octet-stream` — trusting `Content-Type` would have
+rejected the real files.
+
+### Why they looked empty
+
+**1. The sweep that judged them was itself broken.** All 67 were last checked **2026-08-13** —
+two days *before* the Playwright thread-safety and worker-OOM fixes (`8473ceb`, `c2eebd7`) landed
+on 08-15. Their zeros were an artifact of that run, then read as fact.
+
+**2. Discovery returned on finding a PAGE, not PDFs.** Four separate early-returns, one root
+cause. Each abandoned the church with 0 PDFs and skipped every remaining strategy:
+
+- Strategy 1 returned on any truthy LPi id even when the widget produced nothing
+- Strategy 2 returned on the first link merely *matching* "bulletin"/"newsletter" — frequently a
+  submission form or an advertiser page
+- Strategy 3 returned from an LPi homepage embed with 0 PDFs
+- the `lpi_link` branch returned whatever `extract_lpi_pdfs` gave, including nothing
+
+**3. `find_lpi_parish_id` pattern 3 returns a bare org SLUG** (`st-therese-of-lisieux-church`)
+that the widget API cannot resolve, so every slug parish silently looked empty.
+
+**4. The download path discarded the file it was handed.** LPi returns reader links shaped
+`parishesonline.com/publication-page/<slug>?selectedPublication=<real pdf>`. Both download paths
+fetched the *wrapper*, got `text/html`, and dropped it — so a church could discover a dozen
+bulletins and still record **0 downloaded**.
+
+### The fix that matters most
+
+ParishesOnline/LPi is ~75% of these parishes and renders bulletins client-side, so the PDF is
+never an `<a href>` in the served HTML. It also exposes a public, unauthenticated JSON API that
+returns the direct file:
+
+```
+GET /organizations/slug/<slug>                        -> data.salesforce_id
+GET /organizations/<sf_id>/publications?type=bulletin -> data[].fileUrl
+```
+
+`extract_lpi_pdfs_from_api()` now runs ahead of the widget and org-page scrapes and accepts either
+handle form. Verified against four parishes covering both forms — 12 bulletins each, newest dated
+2026-08-16.
+
+### Better parsing cannot fix a wrong input
+
+Discovery re-derives from `church.website_url` every run, so a parish whose stored site is expired
+or superseded by a merger can never recover however good the parsing gets — and small WI parishes
+merge constantly (`stlouisparishwi.com` is dead; St. Columbkille now publishes under St. Katharine
+Drexel; St. Joan of Arc under `scsjcluster.org`). Two additions:
+
+- `process_church()` falls back to a **known** bulletin page on another host when discovery from
+  `website_url` comes up empty
+- `seeds/wi_verified_bulletin_pages.json` — 87 hand-verified pages, seeded into `bulletin_source`
+
+### Scale: this is ~10× bigger than the reported CSV
+
+Wisconsin has **1,009 churches, 974 with a bulletin source, but only 271 with any PDF**. About
+**700 WI churches** sit in the same failure state as the 69 that were reported. The merged fixes
+apply to all of them; a full re-sweep is what converts it.
+
+### Two hours lost to invisible infrastructure — worth recording
+
+- **`scripts/` is in `.dockerignore`.** Three one-off jobs failed in ~55s producing *nothing*,
+  which looked exactly like an OOM or an import crash. Nothing under `scripts/` reaches the image,
+  so `python scripts/foo.py` had no file to run. A bare `python -c print(1)` one-off succeeding at
+  the same moment is what isolated it. **Runnable entry points belong at the repo root here.**
+- **`_readback.py` to S3 no-ops on these services.** They carry Secrets Manager access for db99
+  but not `s3:PutObject`, and `publish()` swallows failures by design — so a verify job reported
+  *succeeded* having written nothing, which is worse than no channel at all. Fallback added: stash
+  the report in a Render env var, readable through the same API that sets it.
+- **db99 is unreachable from the workstation even with the VPN up** (VPC endpoint). All
+  verification must therefore run on Render and report back.
+
+### Status — what is proven and what is not
+
+| | |
+|---|---|
+| ✅ Proven locally | 0 → 12 PDFs for a slug parish; wrapper URL downloads as a real 7.2 MB `%PDF`; 21 → 43 of 69 churches yield PDFs |
+| ✅ Proven in prod | 87 corrected pages seeded into `bulletin_source`; readback channel working |
+| ⏳ **NOT yet proven** | **Recovery of the 69 in db99.** The first WI sweep raced the seeding — it processed the tier-1 churches before the corrected URLs existed, so they are still at 0 PDFs. Cancelled and re-running targeted. |
+
+### Next
+
+1. Targeted `--church-ids` run over the 87 (new flag — recovering a few corrected churches must
+   not cost a two-hour state sweep)
+2. Verify those specific church_ids show PDFs > 0 — per-church, not a state aggregate that
+   averages the answer away
+3. Full WI sweep, fully seeded from the start
+4. Remaining states
+
+**Operating rule reaffirmed:** everything is proven by a **forced run on Render**, verified against
+db99 in the same session. Never by waiting for the cron, and never off a green deploy.
 
 ## 🔀 2026-08-08..10 — PER-HOST PROXY POLICY, ENFORCED IN CODE
 
