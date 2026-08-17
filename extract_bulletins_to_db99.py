@@ -428,7 +428,17 @@ def process_church(cur, church):
     stats = {"pdfs_found": 0, "pdfs_extracted": 0, "names_inserted": 0}
 
     # Phase 1: Discover bulletin page
-    result = find_bulletin_page(website_url)
+    #
+    # This is wrapped because the fallback below is FOR churches whose stored
+    # site is broken, and a broken site is exactly what raises rather than
+    # returning empty — a dead domain, a TLS failure, or the literal string "#"
+    # sitting in website_url (church 28511 really does). Letting that propagate
+    # skipped the fallback for precisely the churches it exists to rescue.
+    try:
+        result = find_bulletin_page(website_url)
+    except Exception as exc:
+        logger.info(f"  discovery from website_url failed ({exc}); trying known page")
+        result = {}
     pdf_urls = result.get("pdf_urls") or []
 
     # Discovery always re-derives from website_url, so a church whose stored
@@ -439,7 +449,11 @@ def process_church(cur, church):
     if not pdf_urls:
         known_page = get_known_bulletin_page(cur, church_id)
         if known_page and _different_host(known_page, website_url):
-            alt = find_bulletin_page(known_page)
+            try:
+                alt = find_bulletin_page(known_page)
+            except Exception as exc:
+                logger.info(f"  known bulletin page {known_page} failed: {exc}")
+                alt = {}
             if alt.get("pdf_urls"):
                 logger.info(f"  recovered via known bulletin page: {known_page}")
                 result = alt
