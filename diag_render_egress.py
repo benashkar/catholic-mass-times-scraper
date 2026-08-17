@@ -90,21 +90,40 @@ def main():
     # would get 300+ hosts relabelled wrongly for the second time.
     lines.append("")
     lines.append("--- proxy exit vantage ---")
+    # Several echoes, because a single one that serves a challenge page or
+    # rate-limits us reports nothing and leaves the question open. Raw text is
+    # printed on a parse failure rather than swallowed as "EXC JSONDecodeError",
+    # which is what the first attempt did and it told us nothing at all.
+    echoes = [
+        "http://ip-api.com/json",
+        "https://api.ipify.org?format=json",
+        "https://ifconfig.co/json",
+    ]
     for label, prox in (("direct", None), ("via proxy", proxies)):
-        if prox is None and proxies is None:
-            pass
-        try:
-            r = requests.get(
-                "https://ipinfo.io/json", headers={"User-Agent": UA},
-                timeout=40, proxies=prox,
-            )
-            d = r.json()
-            lines.append(
-                f"  {label:10} ip={d.get('ip')} country={d.get('country')} "
-                f"region={d.get('region')} org={str(d.get('org'))[:40]}"
-            )
-        except Exception as e:
-            lines.append(f"  {label:10} EXC {type(e).__name__}")
+        if prox is None and label == "via proxy":
+            lines.append(f"  {label:10} (no PROXY_URL set)")
+            continue
+        for echo in echoes:
+            try:
+                r = requests.get(
+                    echo, headers={"User-Agent": UA}, timeout=40, proxies=prox,
+                )
+                try:
+                    d = r.json()
+                    ip = d.get("query") or d.get("ip")
+                    country = d.get("countryCode") or d.get("country")
+                    who = d.get("isp") or d.get("org") or d.get("asn_org") or ""
+                    lines.append(
+                        f"  {label:10} ip={ip} country={country} isp={str(who)[:44]}"
+                    )
+                except ValueError:
+                    lines.append(
+                        f"  {label:10} {echo} -> {r.status_code} raw={r.text[:90]!r}"
+                    )
+                break
+            except Exception as e:
+                lines.append(f"  {label:10} {echo} EXC {type(e).__name__}")
+                continue
 
     out = "\n".join(lines)
     print(out, flush=True)
