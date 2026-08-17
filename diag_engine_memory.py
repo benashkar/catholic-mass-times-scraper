@@ -53,17 +53,22 @@ d = DictionaryEngine()
 d.score_batch(["John Smith"], [""])
 note("+ DictionaryEngine (SSA+Census)")
 
-from name_engine.engines.spacy_ner import SpacyNEREngine  # noqa: E402
-
-s = SpacyNEREngine()
-s.score_batch(["John Smith"], [""])
-note("+ SpacyNEREngine (en_core_web_lg)")
-
+# NameDataset BEFORE spaCy this time. The first run died loading it on top of
+# spaCy lg at 801 MB, which tells us the sum is too big but not what
+# NameDataset alone costs — and that is the number that decides whether the
+# small spaCy model buys enough headroom to run all three at all.
 from name_engine.engines.name_dataset_engine import NameDatasetEngine  # noqa: E402
 
 n = NameDatasetEngine()
 n.score_batch(["John Smith"], [""])
 note("+ NameDatasetEngine (730K/983K)")
+
+from name_engine.engines.spacy_ner import SpacyNEREngine  # noqa: E402
+
+model = os.environ.get("NER_MODEL", "en_core_web_sm")
+s = SpacyNEREngine(model=model)
+s.score_batch(["John Smith"], [""])
+note(f"+ SpacyNEREngine ({model})")
 
 steps.append("")
 steps.append("ALL THREE LOADED — consensus is affordable in one process.")
