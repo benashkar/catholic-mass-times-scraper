@@ -226,12 +226,25 @@ def main():
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
         list(pool.map(work, targets))
 
-    print(f"\negress={egress}  hosts={len(rows)}  skipped_malformed={skipped}")
-    print(f"  direct      : {tally['direct']:,}")
-    print(f"  needs_proxy : {tally['needs_proxy']:,}")
-    print(f"  blocked     : {tally['blocked']:,}")
-    if args.dry_run:
-        print("DRY-RUN — nothing written.")
+    summary = (
+        f"egress={egress}  hosts={len(rows)}  skipped_malformed={skipped}\n"
+        f"  direct      : {tally['direct']:,}\n"
+        f"  needs_proxy : {tally['needs_proxy']:,}\n"
+        f"  blocked     : {tally['blocked']:,}\n"
+        + ("DRY-RUN — nothing written.\n" if args.dry_run else "")
+    )
+    print("\n" + summary, flush=True)
+
+    # A Render one-off's stdout cannot be read back — GET /v1/logs returns
+    # logs: null once it exits — so a labelling run that only printed its
+    # verdict was unreadable. That includes the dry run, whose whole purpose is
+    # to report a count BEFORE we spend metered GB.
+    try:
+        from _readback import publish
+
+        publish("label_host_proxy_policy", summary)
+    except Exception as exc:  # reporting must never break the run
+        print(f"  [WARN] readback failed: {exc}", flush=True)
 
     cur.execute(
         "INSERT INTO scrape_log (scrape_type, completed_at, status, communities_scraped,"
