@@ -134,9 +134,17 @@ Value, measured rather than assumed — WI's 671 zero-PDF churches by host polic
 
 **Re-measuring the mislabelled cohort.** 713 hosts carried a `blocked` verdict whose proxy leg
 never produced a real HTTP code (407 / ProxyError / timeout) — i.e. the verdict blamed the host
-for our own account lapsing. Re-probed with a healthy proxy: **31 flip to `direct`, 5 to
-`needs_proxy`, 677 confirm blocked.** So 36 hosts reclaimed and the original verdicts were mostly
-right. New flags `--recheck-proxy-failures` (the precise suspect cohort) and `--only-blocked`.
+for our own account lapsing. Re-probed with a healthy proxy and written: **31 flip to `direct`,
+3 to `needs_proxy`, 679 confirm blocked.** (The dry run a few minutes earlier read 31/5/677 —
+run-to-run variance on flaky hosts, not a bug.)
+
+**Be honest about what that buys.** `proxies_for()` returns a proxy ONLY for `needs_proxy`;
+`blocked` and `direct` both go direct, and nothing skips a blocked host. So the 31
+`blocked` → `direct` corrections change **no scraping behaviour at all** — they make the table
+truthful, nothing more. The functional gain is the **3** hosts that became `needs_proxy`. The
+value of this exercise was mostly confirmatory: 679 of 713 suspect verdicts were right.
+
+New flags `--recheck-proxy-failures` (the precise suspect cohort) and `--only-blocked`.
 
 Three WI parish sites (stmaxkolbe, stmarysbigriver, holycrosswi) 403 **direct AND through a
 residential IP** — genuinely blocked, consistent with the existing finding that the WI Cloudflare
