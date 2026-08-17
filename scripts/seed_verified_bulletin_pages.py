@@ -26,13 +26,17 @@ Usage:
 """
 
 import argparse
+import contextlib
+import io
 import json
 import os
 import sys
+import traceback
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from extract_bulletins_to_db99 import get_connection  # noqa: E402
+from scripts._readback import publish  # noqa: E402
 
 DEFAULT_SEED = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "seeds", "wi_verified_bulletin_pages.json"
@@ -106,4 +110,19 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # A Render one-off job's stdout cannot be read back — /v1/logs returns
+    # logs: null once it exits — so capture everything, including a traceback,
+    # and publish it to S3 where it can actually be retrieved.
+    buf = io.StringIO()
+    failed = False
+    try:
+        with contextlib.redirect_stdout(buf):
+            main()
+    except Exception:
+        failed = True
+        buf.write("\n[ERR] seed failed:\n" + traceback.format_exc())
+
+    out = buf.getvalue()
+    print(out, flush=True)
+    publish("seed_verified_bulletin_pages", out)
+    sys.exit(1 if failed else 0)
