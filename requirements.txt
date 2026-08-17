@@ -33,6 +33,9 @@ playwright==1.49.*       # Headless browser for JS-rendered sites (LPi widgets, 
 # --- Name Quality Engine ---
 nameparser>=1.1           # Robust name parsing (handles titles, suffixes, compound names)
 probablepeople>=0.5       # CRF-based name parser — detects couple/household names
+names-dataset>=3.1        # 730K first / 983K last names across 54 countries — the third
+                          # consensus engine. SSA+Census alone are US-centric and demote
+                          # Polish/Hispanic/Vietnamese/Filipino parish names to 'low'.
 
 # spaCy stack — EXACT PINS (do not loosen).
 # These are pinned to the known-good set that resolves on python:3.12-slim so the
