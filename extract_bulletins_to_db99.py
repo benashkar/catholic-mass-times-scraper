@@ -29,7 +29,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime, timedelta
-from urllib.parse import unquote
+from urllib.parse import unquote, urlparse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,6 +45,7 @@ from run_bulletin_scraper import (
     extract_text_from_pdf,
     find_bulletin_page,
     ner_veto_batch,
+    unwrap_pdf_url,
     parse_name_parts,
     prewarm_shared_state,
     score_name_confidence,
@@ -164,7 +165,14 @@ def ensure_schema(cur):
 
 
 def download_pdf_to_memory(url, timeout=30):
-    """Download a PDF into memory (no disk). Returns bytes or None."""
+    """Download a PDF into memory (no disk). Returns bytes or None.
+
+    The URL may be a reader/viewer wrapper rather than the file itself — LPi
+    serves parishesonline.com/publication-page/...?selectedPublication=<pdf>,
+    which returns HTML. That failed the %PDF magic check below and was dropped
+    silently, so a church could discover a dozen bulletins and store none.
+    """
+    url = unwrap_pdf_url(url)
     try:
         resp = requests.get(
             url,
@@ -383,6 +391,32 @@ def pdf_date_from_url(pdf_url):
     return None
 
 
+def _different_host(a: str, b: str) -> bool:
+    """True when two URLs point at different sites (ignoring a www. prefix)."""
+    def host(u):
+        try:
+            return (urlparse(u or "").netloc or "").lower().removeprefix("www.")
+        except Exception:
+            return ""
+    ha, hb = host(a), host(b)
+    return bool(ha) and ha != hb
+
+
+def get_known_bulletin_page(cur, church_id):
+    """Return the bulletin page previously recorded for this church, if any."""
+    try:
+        cur.execute(
+            "SELECT bulletin_page_url FROM bulletin_source WHERE church_id = %s LIMIT 1",
+            (church_id,),
+        )
+        row = cur.fetchone()
+    except Exception:
+        return None
+    if not row:
+        return None
+    return (row.get("bulletin_page_url") if isinstance(row, dict) else row[0]) or None
+
+
 def process_church(cur, church):
     """Discover, download, extract, and insert names for one church.
 
@@ -396,6 +430,21 @@ def process_church(cur, church):
     # Phase 1: Discover bulletin page
     result = find_bulletin_page(website_url)
     pdf_urls = result.get("pdf_urls") or []
+
+    # Discovery always re-derives from website_url, so a church whose stored
+    # site is dead, expired, or superseded by a merger can never recover no
+    # matter how good the parsing is — and small parishes merge constantly.
+    # When we already know a bulletin page that lives somewhere else, try it
+    # before giving up.
+    if not pdf_urls:
+        known_page = get_known_bulletin_page(cur, church_id)
+        if known_page and _different_host(known_page, website_url):
+            alt = find_bulletin_page(known_page)
+            if alt.get("pdf_urls"):
+                logger.info(f"  recovered via known bulletin page: {known_page}")
+                result = alt
+                pdf_urls = alt["pdf_urls"]
+
     bulletin_page_url = result.get("bulletin_page_url") or website_url
     source_type = result.get("source") or "not_found"
 
