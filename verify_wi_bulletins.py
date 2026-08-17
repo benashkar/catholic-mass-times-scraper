@@ -23,11 +23,25 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _readback import publish  # noqa: E402
 from src.utils.telegram import send_telegram  # noqa: E402
 
-# The 69 Wisconsin churches that had zero extracted names going in.
-ZERO_NAME_IDS = [
-    28440, 28441, 28491, 28511, 28532, 28533, 28552, 28592, 28593, 28770,
-    28863, 28864, 29036, 29039, 29048, 29058, 29146, 29222,
-]
+def _target_ids():
+    """The churches this recovery is about — read from the seed file itself.
+
+    This used to be a hand-copied slice of 18 ids, which quietly reported 0
+    recovered while 30 churches had in fact just gained their first PDF: the
+    sample simply missed all of them. Read the real list so the report cannot
+    disagree with what was actually worked on.
+    """
+    import json
+
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seeds",
+                        "wi_verified_bulletin_pages.json")
+    try:
+        return sorted({int(r["church_id"]) for r in json.load(open(path, encoding="utf-8"))})
+    except Exception:
+        return []
+
+
+ZERO_NAME_IDS = _target_ids()
 
 
 def main():
@@ -76,10 +90,12 @@ def main():
         lines.append(f"  {r['pdf_date']}  {r['n']}")
 
     lines.append("")
-    lines.append("--- the churches that had zero names ---")
+    lines.append(f"--- the {len(ZERO_NAME_IDS)} recovery targets ---")
     fmt = ",".join(["%s"] * len(ZERO_NAME_IDS))
     cur.execute(
-        f"SELECT c.church_id, c.name, "
+        f"SELECT c.church_id, c.name, c.website_url, "
+        f"  (SELECT bs.bulletin_page_url FROM bulletin_source bs "
+        f"   WHERE bs.church_id=c.church_id LIMIT 1) page, "
         f"  (SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs "
         f"     ON bs.bulletin_source_id=bp.bulletin_source_id "
         f"   WHERE bs.church_id=c.church_id) pdfs, "
@@ -90,8 +106,18 @@ def main():
         f"FROM church c WHERE c.church_id IN ({fmt}) ORDER BY c.church_id",
         ZERO_NAME_IDS,
     )
-    for r in cur.fetchall():
-        lines.append(f"  {r['church_id']:6} {(r['name'] or '')[:34]:36} pdfs={r['pdfs']:4} names={r['names']}")
+    rows = cur.fetchall()
+    got = [r for r in rows if r["pdfs"]]
+    still = [r for r in rows if not r["pdfs"]]
+    lines.append(f"RECOVERED {len(got)} / {len(rows)}   still-zero {len(still)}")
+    lines.append("")
+    lines.append("  -- recovered --")
+    for r in got:
+        lines.append(f"  {r['church_id']:6} {(r['name'] or '')[:30]:32} pdfs={r['pdfs']:4} names={r['names']}")
+    lines.append("")
+    lines.append("  -- still zero (website_url | stored bulletin page) --")
+    for r in still:
+        lines.append(f"  {r['church_id']:6} {(r['name'] or '')[:26]:28} {(r['website_url'] or '(none)')[:38]:40} {(r['page'] or '(none)')[:44]}")
 
     cur.close()
     conn.close()

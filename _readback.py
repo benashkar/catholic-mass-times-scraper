@@ -135,10 +135,20 @@ def publish_env(name: str, text: str) -> str | None:
         import requests
 
         var = f"READBACK_{name.upper()[:40]}"
+        # Stamp it. Unlike the S3 channel, which keys every report by
+        # timestamp, this mailbox has ONE key per name and each write
+        # overwrites the last. Read it while a job is still running and you get
+        # the PREVIOUS run's text, which looks exactly like a fresh result that
+        # happens to be unchanged -- a genuinely dangerous way to misread a
+        # verification. The stamp makes staleness visible.
+        stamped = (
+            datetime.datetime.now(datetime.timezone.utc).strftime(
+                "published %Y-%m-%dT%H:%M:%SZ") + "\n" + text
+        )
         r = requests.put(
             f"https://api.render.com/v1/services/{service}/env-vars/{var}",
             headers={"Authorization": f"Bearer {key}"},
-            json={"value": text[:4000]},
+            json={"value": stamped[:4000]},
             timeout=30,
         )
         if r.status_code in (200, 201):
