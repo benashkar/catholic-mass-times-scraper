@@ -39,13 +39,19 @@ UA = (
     "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 )
 
-HOSTS = [
+DEFAULT_HOSTS = [
     "https://hc-catholics.org",
     "https://www.portlanddiocese.net",
     "https://www.sjvcatholics.org",
     "https://www.theppb.org",
     "https://www.allsaintsmaine.com",
 ]
+
+# Override with --hosts so the same matrix can be pointed at another state's
+# walls. The Maine result (403/403/403 but 200 on browser+proxy) needs testing
+# against the Wisconsin hosts that defeated the recovery, because those are the
+# ones still holding the originally-reported churches at zero.
+HOSTS = DEFAULT_HOSTS
 
 
 def via_requests(url, proxies=None):
@@ -101,11 +107,21 @@ def via_browser(url, use_proxy=False):
 
 
 def main():
+    global HOSTS
+    import argparse
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--hosts", default="", help="Comma-separated URLs to test")
+    ap.add_argument("--label", default="Maine walled hosts")
+    args = ap.parse_args()
+    if args.hosts:
+        HOSTS = [h.strip() for h in args.hosts.split(",") if h.strip()]
+
     proxy = os.environ.get("PROXY_URL", "").strip() or None
     proxies = {"http": proxy, "https": proxy} if proxy else None
 
     lines = [
-        "Maine walled hosts — client fingerprint vs address",
+        f"{args.label} — client fingerprint vs address",
         f"PROXY_URL set: {bool(proxy)}",
         "",
         f"{'host':30} {'requests':>13} {'req+proxy':>13} {'browser':>13} {'brow+proxy':>14}",
