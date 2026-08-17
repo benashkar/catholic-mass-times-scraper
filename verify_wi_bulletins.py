@@ -55,7 +55,10 @@ def main():
     lines.append(f"with website_url         {scalar('SELECT COUNT(*) FROM church WHERE state_code=%s AND website_url IS NOT NULL AND website_url<>%s', (state, ''))}")
     lines.append(f"with bulletin_source     {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
     lines.append(f"with >=1 bulletin_pdf    {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN bulletin_pdf bp ON bp.bulletin_source_id=bs.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
-    lines.append(f"total bulletin_pdf rows  {scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
+    # Captured here, while the cursor is still open, because the exit-status
+    # check at the bottom runs after the connection is closed.
+    total_pdfs = int(scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,)))
+    lines.append(f"total bulletin_pdf rows  {total_pdfs}")
     lines.append(f"pdfs text_extracted      {scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s AND bp.text_extracted=1', (state,))}")
     lines.append(f"bulletin_name rows       {scalar('SELECT COUNT(*) FROM bulletin_name bn JOIN bulletin_pdf bp ON bp.bulletin_pdf_id=bn.bulletin_pdf_id JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
 
@@ -105,13 +108,12 @@ def main():
 
     # A one-off job's stdout is unreadable, but failed-vs-succeeded does
     # survive back to the caller. Make that one bit carry what matters.
-    pdfs = int(scalar(
-        "SELECT COUNT(*) FROM bulletin_pdf bp "
-        "JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id "
-        "JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s",
-        (state,),
-    ))
-    if pdfs == 0:
+    #
+    # This used to re-query here, after cur.close()/conn.close() a few lines
+    # up, and died with "Cursor closed" every time — which read from outside
+    # as "the state has no PDFs" when the counts had in fact been gathered and
+    # sent successfully. Use the value captured while the cursor was open.
+    if total_pdfs == 0:
         raise SystemExit("NO bulletin_pdf rows for " + state)
 
 
