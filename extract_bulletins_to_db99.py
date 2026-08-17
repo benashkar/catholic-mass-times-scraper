@@ -458,6 +458,12 @@ def process_church(cur, church):
                 logger.info(f"  recovered via known bulletin page: {known_page}")
                 result = alt
                 pdf_urls = alt["pdf_urls"]
+                # Mark WHICH path recovered this church. Without it the two
+                # routes are indistinguishable afterwards, and a one-off job's
+                # logs are not retrievable — so "did the fallback actually do
+                # anything?" could only be answered by inference. 'fb:' is kept
+                # short because discovery_source is truncated to 30 chars.
+                result["source"] = f"fb:{alt.get('source') or 'unknown'}"[:30]
 
     bulletin_page_url = result.get("bulletin_page_url") or website_url
     source_type = result.get("source") or "not_found"
