@@ -21,6 +21,7 @@ import traceback
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from _readback import publish  # noqa: E402
+from src.utils.telegram import send_telegram  # noqa: E402
 
 # The 69 Wisconsin churches that had zero extracted names going in.
 ZERO_NAME_IDS = [
@@ -94,7 +95,24 @@ def main():
 
     out = "\n".join(lines)
     print(out, flush=True)
+
+    # S3 publish is best-effort. This service's IAM user carries Secrets
+    # Manager access for db99 but not s3:PutObject on the diagnostics bucket,
+    # so publish() no-ops here — the first verify job reported success while
+    # writing nothing at all. Telegram is the channel that works from here.
     publish("verify_wi_bulletins", out)
+    send_telegram("<pre>" + out[:3800] + "</pre>")
+
+    # A one-off job's stdout is unreadable, but failed-vs-succeeded does
+    # survive back to the caller. Make that one bit carry what matters.
+    pdfs = int(scalar(
+        "SELECT COUNT(*) FROM bulletin_pdf bp "
+        "JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id "
+        "JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s",
+        (state,),
+    ))
+    if pdfs == 0:
+        raise SystemExit("NO bulletin_pdf rows for " + state)
 
 
 if __name__ == "__main__":
