@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-17 18:45 UTC (LPi/ParishesOnline recovery — fixes merged and deployed; production recovery IN FLIGHT, not yet proven)._
+_Last updated: 2026-08-17 19:45 UTC (LPi/ParishesOnline recovery — PROVEN in db99: +74 churches, +23,295 names; full WI sweep in flight)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -86,13 +86,67 @@ apply to all of them; a full re-sweep is what converts it.
 - **db99 is unreachable from the workstation even with the VPN up** (VPC endpoint). All
   verification must therefore run on Render and report back.
 
+### Result, measured in db99
+
+| | session start | after fixes | gain |
+|---|---|---|---|
+| churches with ≥1 PDF | 271 | **345** | **+74** |
+| bulletin_name rows | 752,782 | **776,077** | **+23,295** |
+| churches carrying the current (2026-08-16) edition | 43 | **97** | **+54** |
+| bulletin_pdf rows | 78,645 | 79,317 | +672 |
+
+Holy Cross (28532) is the clean proof of the fallback specifically: stored site
+`sahcsjcatholics.com`, real bulletins on `holycrosswi.org`, 0 → 12 PDFs / 561 names.
+
+### A fifth defect, found only because production disagreed with local
+
+The known-page fallback never ran for the churches it was built for. If
+`find_bulletin_page(website_url)` **raised** instead of returning empty, the exception
+propagated straight past it — and raising is exactly what a broken stored site does: a lapsed
+domain, a TLS failure, or the literal string `#` (church 28511 genuinely has that in
+`website_url`). So the fallback was reachable only for churches whose site worked well enough to
+return an empty result, and unreachable for precisely the dead and merged parishes it existed to
+rescue. Both discovery calls are now wrapped.
+
+Local testing could never have caught this: locally those sites answer. Only the production/local
+disagreement exposed it — dsoll.org and stlouiscaledoniawi.org both return **200 from Render** yet
+yielded nothing, which ruled out egress and left the code.
+
+### Proxy: what a top-up actually bought
+
+The shared 711 endpoint was returning **407** from Render — account, not consumption. After the
+owner topped up, verified from Render: 200 through the tunnel, exiting a **genuine US residential
+ISP** (WideOpenWest), so the country code is right (a lowercase `-country-us` authenticates but
+returns useless exits).
+
+Value, measured rather than assumed — WI's 671 zero-PDF churches by host policy:
+
+| policy | churches | what a proxy does |
+|---|---|---|
+| `direct` | **329** | nothing — already reachable; this is the real prize |
+| `blocked` | 308 | nothing — fails direct *and* proxied |
+| unmeasured | 23 | unknown |
+| `needs_proxy` | **11** | the only ones a proxy directly unblocks |
+
+**Re-measuring the mislabelled cohort.** 713 hosts carried a `blocked` verdict whose proxy leg
+never produced a real HTTP code (407 / ProxyError / timeout) — i.e. the verdict blamed the host
+for our own account lapsing. Re-probed with a healthy proxy: **31 flip to `direct`, 5 to
+`needs_proxy`, 677 confirm blocked.** So 36 hosts reclaimed and the original verdicts were mostly
+right. New flags `--recheck-proxy-failures` (the precise suspect cohort) and `--only-blocked`.
+
+Three WI parish sites (stmaxkolbe, stmarysbigriver, holycrosswi) 403 **direct AND through a
+residential IP** — genuinely blocked, consistent with the existing finding that the WI Cloudflare
+walls need a solver, not an IP.
+
 ### Status — what is proven and what is not
 
 | | |
 |---|---|
 | ✅ Proven locally | 0 → 12 PDFs for a slug parish; wrapper URL downloads as a real 7.2 MB `%PDF`; 21 → 43 of 69 churches yield PDFs |
 | ✅ Proven in prod | 87 corrected pages seeded into `bulletin_source`; readback channel working |
-| ⏳ **NOT yet proven** | **Recovery of the 69 in db99.** The first WI sweep raced the seeding — it processed the tier-1 churches before the corrected URLs existed, so they are still at 0 PDFs. Cancelled and re-running targeted. |
+| ✅ Proven in prod | **Recovery in db99: +74 churches with a first-ever PDF, +23,295 names, +54 churches on the current edition.** 34 of the 86 named targets recovered outright. |
+| ⏳ In flight | Full WI sweep on the fixed code (4 shards) over the ~626 churches still at zero, then the remaining states. |
+| ❌ Not recoverable today | The Cloudflare-walled WI hosts. They 403 direct AND through a verified US residential exit, so more proxy GB will not move them — they need a solver. |
 
 ### Next
 
