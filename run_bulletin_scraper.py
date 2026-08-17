@@ -48,7 +48,7 @@ import sys
 import threading
 import time
 from pathlib import Path
-from urllib.parse import parse_qs, urljoin, urlparse
+from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -751,13 +751,15 @@ def find_bulletin_page(base_url: str):
 
                 # Strategy 1c: LPi widget — try extracting PDFs via widget API
                 if lpi_id:
-                    widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                    widget_pdfs = extract_lpi_pdfs_any(lpi_id)
                     if widget_pdfs:
                         result["pdf_urls"] = widget_pdfs
                         result["source"] = "direct_path_lpi_widget"
                         return result
-                    # Even without PDFs, having the LPi ID is useful
-                    return result
+                    # An LPi id that yields no PDFs is NOT a result. It is often a
+                    # bare org slug (find_lpi_parish_id pattern 3) that the widget
+                    # API cannot resolve. Returning here used to abandon the church
+                    # with 0 PDFs and skip strategies 1b/1d/2/3/4 entirely.
 
                 # Strategy 1b: WordPress blog-style archive — no direct PDFs,
                 # but sub-page links (e.g. /bulletins/first-sunday-of-lent/)
@@ -824,7 +826,7 @@ def find_bulletin_page(base_url: str):
                         result["lpi_parish_id"] = lpi_id
                     # If we found the page but no PDFs, try LPi widget
                     if not result["pdf_urls"] and lpi_id:
-                        widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                        widget_pdfs = extract_lpi_pdfs_any(lpi_id)
                         if widget_pdfs:
                             result["pdf_urls"] = widget_pdfs
                             result["source"] = "homepage_link_lpi_widget"
@@ -846,18 +848,25 @@ def find_bulletin_page(base_url: str):
                             if browser_pdfs:
                                 result["pdf_urls"] = browser_pdfs
                                 result["source"] = "homepage_link_browser"
-                    return result
+                    if result["pdf_urls"]:
+                        return result
+                    # No PDFs behind this link. Keep the page as a best-effort
+                    # breadcrumb but keep looking: the first link matching
+                    # "bulletin"/"newsletter" is frequently a submission form, a
+                    # staff login or an advertiser page. Returning here used to
+                    # strand the church with 0 PDFs and skip strategies 3/3b/4.
 
         # Strategy 3: Check for LPi embed on homepage
         lpi_id = find_lpi_parish_id(soup, str(soup))
         if lpi_id:
             result["lpi_parish_id"] = lpi_id
             result["source"] = "lpi_embed_homepage"
-            # Try to get PDFs from the widget
-            widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+            # Try to get PDFs from the widget, then from the organization page
+            widget_pdfs = extract_lpi_pdfs_any(lpi_id)
             if widget_pdfs:
                 result["pdf_urls"] = widget_pdfs
-            return result
+                return result
+            # Otherwise keep going — 3b and 4 below still have a real chance.
 
         # Strategy 3b: Check for direct PDF links on homepage with
         # bulletin/newsletter in the link text (catches "Open Latest Newsletter (PDF)")
@@ -896,7 +905,7 @@ def find_bulletin_page(base_url: str):
                         result["lpi_parish_id"] = lpi_id
                         result["bulletin_page_url"] = resp.url
                         result["source"] = "direct_path_extended_lpi"
-                        widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+                        widget_pdfs = extract_lpi_pdfs_any(lpi_id)
                         if widget_pdfs:
                             result["pdf_urls"] = widget_pdfs
                         return result
@@ -1269,6 +1278,38 @@ def find_lpi_parish_id(soup, raw_html: str):
     return None
 
 
+def extract_lpi_pdfs_any(lpi_id: str):
+    """Resolve an LPi/ParishesOnline handle to bulletin PDFs, whichever form it is.
+
+    find_lpi_parish_id returns several different things depending on which
+    pattern matched: a Salesforce-style widget id (0018000000Qc07PAAR), a hex
+    publications hash, a numeric container id, or — pattern 3 — a bare
+    organization SLUG such as "st-therese-of-lisieux-church". Only the first
+    kinds work against the widget API; a slug silently yields nothing, which
+    previously read as "this parish has no bulletins".
+
+    Try the widget first, then fall back to scraping the organization page.
+    """
+    if not lpi_id:
+        return []
+    widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
+    if widget_pdfs:
+        return widget_pdfs
+    # A slug (or anything the widget rejected) may still resolve as an org page.
+    if not re.fullmatch(r"[0-9a-fA-F]+", lpi_id):
+        for tmpl in (
+            "https://www.parishesonline.com/organization/{}",
+            "https://www.parishesonline.com/find/{}",
+        ):
+            try:
+                org_pdfs = extract_lpi_pdfs(tmpl.format(lpi_id))
+            except Exception:
+                org_pdfs = []
+            if org_pdfs:
+                return org_pdfs
+    return []
+
+
 def extract_discovermass_pdfs(dm_url: str):
     """
     Extract bulletin PDF download URLs from a DiscoverMass church page.
@@ -1423,20 +1464,58 @@ def _extract_pdfs_with_browser_from_page(page_url: str):
 # ── Phase 2: PDF Download ─────────────────────────────────────────────────────
 
 
+def unwrap_pdf_url(pdf_url: str) -> str:
+    """Return the directly-downloadable PDF behind a viewer/wrapper URL.
+
+    LPi hands back reader links shaped like
+
+        parishesonline.com/publication-page/<slug>?selectedPublication=<REAL PDF>
+
+    Fetching that wrapper returns an HTML reader page, so the download step saw
+    Content-Type: text/html and discarded it — a church could discover a dozen
+    bulletins and still record 0 downloaded. Google Drive viewer links have the
+    same problem and are rewritten to their direct-download form.
+    """
+    if not pdf_url:
+        return pdf_url
+
+    try:
+        qs = parse_qs(urlparse(pdf_url).query)
+    except Exception:
+        return pdf_url
+    for key in ("selectedPublication", "publication", "file", "url", "src"):
+        for candidate in qs.get(key, []):
+            candidate = unquote(candidate)
+            if candidate.lower().startswith("http") and ".pdf" in candidate.lower():
+                return candidate
+
+    # Google Drive viewer -> direct download
+    m = re.search(r"drive\.google\.com/file/d/([A-Za-z0-9_-]+)", pdf_url)
+    if m:
+        return f"https://drive.google.com/uc?export=download&id={m.group(1)}"
+    m = re.search(r"drive\.google\.com/open\?id=([A-Za-z0-9_-]+)", pdf_url)
+    if m:
+        return f"https://drive.google.com/uc?export=download&id={m.group(1)}"
+
+    return pdf_url
+
+
 def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
     """
     Download a bulletin PDF. Returns the local file path or None.
     """
-    # Create a filename from church slug + date hash
+    # Name from the ORIGINAL url so re-runs dedupe against existing files, but
+    # fetch the unwrapped one.
+    fetch_url = unwrap_pdf_url(pdf_url)
     url_hash = hashlib.md5(pdf_url.encode()).hexdigest()[:8]
 
-    # Try to extract date from URL
+    # Try to extract date from URL (the unwrapped one carries the real date)
     date_str = ""
-    m = re.search(r"(20\d{6})", pdf_url)
+    m = re.search(r"(20\d{6})", fetch_url)
     if m:
         date_str = m.group(1) + "_"
     else:
-        m = re.search(r"(20\d{2})[-/](0[1-9]|1[0-2])[-/](\d{2})", pdf_url)
+        m = re.search(r"(20\d{2})[-/](0[1-9]|1[0-2])[-/](\d{2})", fetch_url)
         if m:
             date_str = m.group(1) + m.group(2) + m.group(3) + "_"
 
@@ -1448,12 +1527,12 @@ def download_bulletin_pdf(pdf_url: str, save_dir: Path, church_slug: str):
         logger.debug(f"Already downloaded: {filename}")
         return save_path
 
-    resp = _rate_limited_get(pdf_url)
+    resp = _rate_limited_get(fetch_url)
     if resp is None:
         return None
 
     if resp.status_code != 200:
-        logger.debug(f"PDF download failed ({resp.status_code}): {pdf_url}")
+        logger.debug(f"PDF download failed ({resp.status_code}): {fetch_url}")
         return None
 
     # Check content type
