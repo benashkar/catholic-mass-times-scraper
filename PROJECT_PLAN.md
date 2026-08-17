@@ -162,12 +162,28 @@ walls need a solver, not an IP.
 
 ### Next
 
-1. Targeted `--church-ids` run over the 87 (new flag — recovering a few corrected churches must
-   not cost a two-hour state sweep)
-2. Verify those specific church_ids show PDFs > 0 — per-church, not a state aggregate that
-   averages the answer away
-3. Full WI sweep, fully seeded from the start
-4. Remaining states
+1. ✅ Targeted `--church-ids` run over the 87 (new flag — recovering a few corrected churches must
+   not cost a two-hour state sweep). Ran twice: 32/86 recovered, then 34/86 after the fallback fix.
+2. ✅ Verified per-church rather than by state aggregate. This mattered: the first report used a
+   hand-copied slice of 18 ids and read "0 recovered" in the very run where 30 churches gained
+   their first PDF. The target list is now read from the seed file so the report cannot disagree
+   with what was worked on.
+3. ⏳ Full WI sweep on the fixed code, 4 disjoint shards (`MOD(church_id, 4)`), over the ~626
+   churches still at zero — 329 of them on `direct` hosts needing no proxy at all.
+4. Remaining states, via `supervise_bulletin_sweep.py` (6 shards, relaunches OOM-killed ones).
+
+### Follow-ups worth doing
+
+- **Record the discovery path per church.** `bulletin_source.discovery_source` should say whether a
+  recovery came from `website_url` or the known-page fallback. Right now attribution is guesswork:
+  Holy Cross recovered in the run carrying the fallback fix and its stored site is not where its
+  bulletins live, but that is circumstantial, and the log line that would settle it is not
+  retrievable from a one-off.
+- **A unique index on `bulletin_pdf(bulletin_source_id, pdf_url_hash)`.** Already listed as an
+  accepted limitation below, and it is what forces every concurrent run to be sequenced by hand —
+  it is why the sweep had to be cancelled before each targeted run today.
+- **The Cloudflare-walled WI hosts** need a solver. More proxy GB will not move them; that is now
+  measured, not assumed.
 
 **Operating rule reaffirmed:** everything is proven by a **forced run on Render**, verified against
 db99 in the same session. Never by waiting for the cron, and never off a green deploy.
