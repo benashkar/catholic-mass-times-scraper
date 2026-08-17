@@ -64,6 +64,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=200)
     ap.add_argument("--only-unlabelled", action="store_true")
+    ap.add_argument(
+        "--only-blocked",
+        action="store_true",
+        help="Re-measure hosts currently labelled blocked. 'blocked' is the "
+        "verdict that says never spend GB here again, so it must not be left "
+        "standing from a run in which OUR proxy was the thing that failed.",
+    )
+    ap.add_argument(
+        "--recheck-proxy-failures",
+        action="store_true",
+        help="Re-measure only blocked hosts whose recorded proxy_status is NOT "
+        "a real HTTP code — 407, ProxyError, a timeout. Those verdicts rest on "
+        "our proxy dying rather than the host refusing us, which is exactly "
+        "what mislabelled 690 hosts on 2026-08-07. Far cheaper than re-probing "
+        "every blocked host on a metered plan.",
+    )
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--workers", type=int, default=16,
                     help="Concurrent host probes; each host is hit once, so this "
@@ -119,6 +135,24 @@ def main():
             "GROUP BY host",
             "AND SUBSTRING_INDEX(SUBSTRING_INDEX(website_url,'/',3),'/',-1) "
             "NOT IN (SELECT host FROM scrape_host_policy) GROUP BY host",
+        )
+    elif args.recheck_proxy_failures:
+        # Blocked hosts whose proxy leg never produced a real HTTP answer. A
+        # genuine block looks like proxy_status '403'; an account failure looks
+        # like '407', 'ProxyError' or a timeout. Only the latter is suspect.
+        sql = sql.replace(
+            "GROUP BY host",
+            "AND SUBSTRING_INDEX(SUBSTRING_INDEX(website_url,'/',3),'/',-1) IN "
+            "(SELECT host FROM scrape_host_policy WHERE policy = 'blocked' "
+            " AND (proxy_status IS NULL OR proxy_status NOT REGEXP '^[0-9]{3}$')) "
+            "GROUP BY host",
+        )
+    elif args.only_blocked:
+        sql = sql.replace(
+            "GROUP BY host",
+            "AND SUBSTRING_INDEX(SUBSTRING_INDEX(website_url,'/',3),'/',-1) IN "
+            "(SELECT host FROM scrape_host_policy WHERE policy = 'blocked') "
+            "GROUP BY host",
         )
     sql += " ORDER BY host LIMIT %s"
     cur.execute(sql, (args.limit,))
