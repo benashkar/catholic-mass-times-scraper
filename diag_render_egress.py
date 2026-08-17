@@ -81,6 +81,31 @@ def main():
         p = probe(url, proxies) if proxies else "-"
         lines.append(f"{label:26} {d:>16}   {p:>16}")
 
+    # WHERE is the proxy actually exiting? A 200 through the tunnel does not
+    # mean a useful exit: this endpoint authenticates fine with a lowercase
+    # -country-us and then hands back empty or non-US nodes, and a plain
+    # -zone-custom returns a random global IP (Brazil, once). Parish sites that
+    # 403 a datacenter will also 403 a foreign residential IP, so without this
+    # check a bad country code looks identical to "the host is blocked" — and
+    # would get 300+ hosts relabelled wrongly for the second time.
+    lines.append("")
+    lines.append("--- proxy exit vantage ---")
+    for label, prox in (("direct", None), ("via proxy", proxies)):
+        if prox is None and proxies is None:
+            pass
+        try:
+            r = requests.get(
+                "https://ipinfo.io/json", headers={"User-Agent": UA},
+                timeout=40, proxies=prox,
+            )
+            d = r.json()
+            lines.append(
+                f"  {label:10} ip={d.get('ip')} country={d.get('country')} "
+                f"region={d.get('region')} org={str(d.get('org'))[:40]}"
+            )
+        except Exception as e:
+            lines.append(f"  {label:10} EXC {type(e).__name__}")
+
     out = "\n".join(lines)
     print(out, flush=True)
     publish("diag_render_egress", out)
