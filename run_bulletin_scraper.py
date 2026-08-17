@@ -967,13 +967,34 @@ def find_bulletin_page(base_url: str):
         except Exception:
             walled = False
         if walled:
-            for candidate in (base_url, base_origin + "/bulletin", base_origin + "/bulletins"):
+            # Bulletin PATHS first, homepage last. Trying the homepage first
+            # harvested whatever PDFs happened to be lying on it — St John
+            # Vianney returned a cemetery fee schedule and a stewardship
+            # worksheet, which would then be mined for names and produce
+            # confident junk. A bulletin page yields bulletins; a homepage
+            # yields documents.
+            for candidate in (
+                base_origin + "/bulletin",
+                base_origin + "/bulletins",
+                base_origin + "/parish-bulletin",
+                base_url,
+            ):
                 browser_pdfs = _extract_pdfs_with_browser(candidate)
-                if browser_pdfs:
-                    result["pdf_urls"] = browser_pdfs
-                    result["bulletin_page_url"] = candidate
-                    result["source"] = "walled_browser_proxy"
-                    return result
+                if not browser_pdfs:
+                    continue
+                # On the homepage fall-through, keep only links that actually
+                # look like bulletins, rather than every PDF on the page.
+                if candidate == base_url:
+                    browser_pdfs = [
+                        u for u in browser_pdfs
+                        if any(k in u.lower() for k in ("bulletin", "/bulletins/", "weekly"))
+                    ]
+                    if not browser_pdfs:
+                        continue
+                result["pdf_urls"] = browser_pdfs
+                result["bulletin_page_url"] = candidate
+                result["source"] = "walled_browser_proxy"
+                return result
 
     return result
 
