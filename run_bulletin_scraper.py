@@ -1278,6 +1278,53 @@ def find_lpi_parish_id(soup, raw_html: str):
     return None
 
 
+LPI_API_BASE = "https://api.parishesonline.com"
+
+
+def extract_lpi_pdfs_from_api(lpi_id: str):
+    """Resolve an LPi handle to direct bulletin PDF URLs via ParishesOnline's API.
+
+    ParishesOnline renders bulletins through a client-side widget, so the PDF
+    never appears as an <a href> in the served HTML — which is why the great
+    majority of these parishes looked bulletin-less. The site's own public,
+    unauthenticated JSON API is far more reliable than scraping that widget:
+
+        GET /organizations/slug/<slug>            -> data.salesforce_id
+        GET /organizations/<salesforce_id>/publications?type=bulletin
+                                                  -> data[].fileUrl
+
+    fileUrl is the direct container.parishesonline.com PDF, so nothing needs
+    unwrapping downstream. Note the CDN mislabels these as
+    application/octet-stream, so never trust Content-Type alone.
+    """
+    if not lpi_id:
+        return []
+
+    salesforce_id = lpi_id
+    # Anything that is not already a Salesforce-style id is treated as a slug.
+    if not re.fullmatch(r"001[A-Za-z0-9]{12,15}", lpi_id):
+        resp = _rate_limited_get(f"{LPI_API_BASE}/organizations/slug/{lpi_id}")
+        if not resp or resp.status_code != 200:
+            return []
+        try:
+            salesforce_id = (resp.json().get("data") or {}).get("salesforce_id")
+        except Exception:
+            return []
+        if not salesforce_id:
+            return []
+
+    resp = _rate_limited_get(
+        f"{LPI_API_BASE}/organizations/{salesforce_id}/publications?type=bulletin"
+    )
+    if not resp or resp.status_code != 200:
+        return []
+    try:
+        pubs = resp.json().get("data") or []
+    except Exception:
+        return []
+    return [p["fileUrl"] for p in pubs if isinstance(p, dict) and p.get("fileUrl")]
+
+
 def extract_lpi_pdfs_any(lpi_id: str):
     """Resolve an LPi/ParishesOnline handle to bulletin PDFs, whichever form it is.
 
@@ -1288,10 +1335,17 @@ def extract_lpi_pdfs_any(lpi_id: str):
     kinds work against the widget API; a slug silently yields nothing, which
     previously read as "this parish has no bulletins".
 
-    Try the widget first, then fall back to scraping the organization page.
+    Try the JSON API first, then the widget, then the organization page.
     """
     if not lpi_id:
         return []
+    try:
+        api_pdfs = extract_lpi_pdfs_from_api(lpi_id)
+    except Exception as exc:
+        logger.debug(f"LPi API lookup failed for {lpi_id}: {exc}")
+        api_pdfs = []
+    if api_pdfs:
+        return api_pdfs
     widget_pdfs = extract_lpi_pdfs_from_widget(lpi_id)
     if widget_pdfs:
         return widget_pdfs
