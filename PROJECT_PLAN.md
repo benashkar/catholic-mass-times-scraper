@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 19:05 UTC (national +863; walled passes rolled out to 12 states; WI 560 at 57.4%, ME + IA complete)._
+_Last updated: 2026-08-18 20:10 UTC (national +1,126 churches, gap 14,997 -> 13,875; walled passes running in all 50 states)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -134,7 +134,12 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**Rolled out to 12 states (2026-08-18 18:00 UTC).** WI + KS still running, plus the ten largest
+**Rolled out to ALL 50 STATES (2026-08-18 19:45 UTC), 48 passes tracked.** National crossed
+**+1,126 churches** (7,584 -> 8,710), gap 14,997 -> 13,875, with every large state moving:
+MN +97, CA +115, IL +83, MA +47, NY +45, OH +44. Render absorbed ~48 concurrent containers with
+only one launch rejection.
+
+**Rolled out to 12 states first (2026-08-18 18:00 UTC).** WI + KS still running, plus the ten largest
 gaps: NY, CA, TX, PA, IL, OH, MN, MA, NJ, MI — roughly 7,800 of the national gap in one batch.
 A supervisor script (`scratchpad/walled_supervise.sh`, mirroring
 `supervise_bulletin_sweep.py`) relaunches whatever dies every 10 minutes, because these passes
