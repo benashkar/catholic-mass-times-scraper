@@ -901,6 +901,18 @@ def main():
         "this past 2 risks an OOM kill on the 2GB plan.",
     )
     parser.add_argument(
+        "--walled-browser",
+        action="store_true",
+        help="Enable the browser-through-proxy pass for policy-blocked hosts. "
+        "OFF by default because it OOM-killed three sweep shards: a Chromium "
+        "per blocked host alongside spaCy and pdfplumber does not fit in 2GB. "
+        "Use it in its OWN low-concurrency run (--workers 1). A CLI flag rather "
+        "than only an env var, because Render's startCommand is argv and not a "
+        "shell — an inline VAR=1 prefix is read as the executable and the job "
+        "dies in seconds looking exactly like an OOM. Setting it service-wide "
+        "would also hand it to the next scheduled cron.",
+    )
+    parser.add_argument(
         "--church-ids",
         type=str,
         default="",
@@ -921,6 +933,12 @@ def main():
     # they were almost certainly "checked" moments ago and found wanting.
     if args.church_ids:
         args.days_fresh = 0
+
+    if args.walled_browser:
+        import run_bulletin_scraper as _rbs
+
+        _rbs.WALLED_BROWSER_ENABLED = True
+        print("  [OK] walled-host browser pass ENABLED for this run", flush=True)
 
     print("=" * 60)
     print("  Extract Bulletin Names -> db99 (Direct)")
