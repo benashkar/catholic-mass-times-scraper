@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 12:35 UTC (national +526 churches; WI 518, IA 257 doubled, KS 142, ME 89 complete)._
+_Last updated: 2026-08-18 13:15 UTC (IA complete: 101 -> 260, 706,304 names; WI 518 running, KS relaunched, ME 89 complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -129,7 +129,7 @@ per-state work:
 |---|---|---|---|
 | WI | 271 (28%) | **518** (53.5%) | **+247** |
 | ME | 13 (6.4%) | **89** (43.8%) — complete | **+76** |
-| IA | 101 (20.8%) | **257** (52.9%) | **+156** |
+| IA | 101 (20.8%) | **260** (52.3%) — complete, 706,304 names | **+159** |
 | KS | 73 (20.9%) | **142** (40.7%) | **+69** |
 
 **National: 7,584 -> 8,110 churches with bulletins (+526)**, gap 14,997 -> 14,471. WI and IA have
