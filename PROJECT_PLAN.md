@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 09:20 UTC (national +381 churches: WI 478, ME 89, IA 176, KS 118; walled unlock is not state-specific)._
+_Last updated: 2026-08-18 10:35 UTC (national +444 churches; WI crosses 50% at 498, IA 210, KS 127, ME 89 complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -125,14 +125,15 @@ those two is the error that started this whole day.
 The walled pass is not state-specific — IA and KS converted at the same rate ME did, without any
 per-state work:
 
-| state | before | now | gain |
+| state | before | now (10:35 UTC) | gain |
 |---|---|---|---|
-| WI | 271 (28%) | **478** (49.4%) | **+207** |
-| ME | 13 (6.4%) | **89** (43.8%) | **+76** |
-| IA | 101 (20.8%) | **176** (36.2%) | **+75** |
-| KS | 73 (20.9%) | **118** (33.8%) | **+45** |
+| WI | 271 (28%) | **498** (51.4%) | **+227** |
+| ME | 13 (6.4%) | **89** (43.8%) — complete | **+76** |
+| IA | 101 (20.8%) | **210** (43.2%) | **+109** |
+| KS | 73 (20.9%) | **127** (36.4%) | **+54** |
 
-**National: 7,584 -> 7,965 churches with bulletins (+381)**, gap 14,997 -> 14,616.
+**National: 7,584 -> 8,028 churches with bulletins (+444)**, gap 14,997 -> 14,553. Wisconsin has
+crossed half its sourced churches, from 28%.
 
 **Operational reality:** the walled pass runs at the memory ceiling by construction — a browser per
 walled host alongside spaCy and pdfplumber on 2GB — so it dies and needs relaunching. WI's first
