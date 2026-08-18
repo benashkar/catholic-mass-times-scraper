@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-17 23:30 UTC (WI recovery: +197 churches, +78,093 names, 45/86 targets; walled-host unlock proven; national sweep running)._
+_Last updated: 2026-08-18 06:30 UTC (WI +197 churches / +78,093 names; walled unlock scales — ME 13 -> 69 churches; IA + KS passes running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -120,6 +120,32 @@ bulletin paths before the homepage and filtering the fallback.
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
 
+### Maine proves the walled unlock scales to a whole state
+
+Maine was the worst-covered state in the country: **13 of 203** sourced churches had any PDF
+(6.4%), with 185 of its 205 zero-PDF churches on `blocked` hosts. Ran the walled pass against it
+— `--walled-browser --workers 1`, its own container:
+
+| | churches with ≥1 PDF | coverage | PDF rows | name rows |
+|---|---|---|---|---|
+| before | 13 | 6.4% | — | — |
+| +2h | 52 | 25.6% | 4,841 | 82,380 |
+| +3h | **69** | **34%** | 6,202 | **115,119** |
+
+Still running at the time of writing. So the finding is not confined to the eight hosts it was
+discovered on — it converts a state, and Maine had been capped at 6% for as long as those labels
+have existed. Iowa (20.8%) and Kansas (20.9%) launched next; whether their gaps are as
+concentrated on blocked hosts is measured, not assumed.
+
+**How to run it** (never inline in a sweep — see the OOM note above):
+
+    python extract_bulletins_to_db99.py --state ME --walled-browser --walled-budget 400 --workers 1
+
+`--walled-browser` is a CLI flag rather than an env var for two reasons, both learned the hard
+way: Render's `startCommand` is argv, so an inline `WALLED_BROWSER=1` prefix is read as the
+executable and the job dies in seconds looking exactly like an OOM; and setting it on the service
+would hand browser-launching to the next scheduled cron, which is how three shards died.
+
 ### National scale of the same bug (measured 2026-08-17 21:16 UTC)
 
 `verify_bulletins_national.py`, per state because a roll-up hides exactly the failure this
@@ -130,8 +156,8 @@ project already lived through:
 | states | 50 |
 | churches with a website | 24,158 |
 | with a bulletin source | 22,581 |
-| **with any PDF** | **7,584** |
-| **gap — source but no PDF** | **14,997** |
+| **with any PDF** | **7,584** at baseline -> **7,788** after one full sweep cycle |
+| **gap — source but no PDF** | **14,997** -> **14,793** |
 
 So the 69 churches that were reported are ~0.5% of the population in that state. Worst coverage:
 ME 6.4%, IA 20.8%, KS 20.9%, OK 21.7%, AL 23.0%.
