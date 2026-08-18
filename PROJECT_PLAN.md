@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 08:20 UTC (WI +210 churches / +97,362 names and climbing; ME 13 -> 89; IA + KS walled passes running)._
+_Last updated: 2026-08-18 09:20 UTC (national +381 churches: WI 478, ME 89, IA 176, KS 118; walled unlock is not state-specific)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -119,6 +119,26 @@ bulletin paths before the homepage and filtering the fallback.
 
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
+
+### Four states, measured 2026-08-18 09:20 UTC
+
+The walled pass is not state-specific — IA and KS converted at the same rate ME did, without any
+per-state work:
+
+| state | before | now | gain |
+|---|---|---|---|
+| WI | 271 (28%) | **478** (49.4%) | **+207** |
+| ME | 13 (6.4%) | **89** (43.8%) | **+76** |
+| IA | 101 (20.8%) | **176** (36.2%) | **+75** |
+| KS | 73 (20.9%) | **118** (33.8%) | **+45** |
+
+**National: 7,584 -> 7,965 churches with bulletins (+381)**, gap 14,997 -> 14,616.
+
+**Operational reality:** the walled pass runs at the memory ceiling by construction — a browser per
+walled host alongside spaCy and pdfplumber on 2GB — so it dies and needs relaunching. WI's first
+attempt failed at 1h53m. Because each church is CLAIMED before processing and the queue is ordered
+least-recently-checked-first, a relaunch resumes at the frontier rather than redoing work. Budget
+for several cycles per large state, and never run it inline in a sweep.
 
 ### Maine proves the walled unlock scales to a whole state
 
