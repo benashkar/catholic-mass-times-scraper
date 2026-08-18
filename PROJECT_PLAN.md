@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 23:35 UTC (national 10,502 +2,918; ROOT CAUSE found — fallback crashed on its own success log; 19 states complete)._
+_Last updated: 2026-08-18 23:55 UTC (86 targets: 55 recovered; WI 603 churches / 1,013,288 names; national 10,502 +2,918; 21 states complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -119,6 +119,29 @@ bulletin paths before the homepage and filtering the fallback.
 
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
+
+### After the logger fix (2026-08-18 23:55 UTC)
+
+| | |
+|---|---|
+| the 86 named targets | **55** recovered, 31 still zero |
+| WI churches with >=1 PDF | **603** (61.9%) |
+| WI bulletin_name rows | **1,013,288** |
+
+The fix moved 47 -> 55. Verified examples: 28511 Nativity/Big River now holds **100 bulletin_pdf
+rows**, and 28491 Our Lady of the Lakes took **4 PDFs / 127 names** on the next pass — its earlier
+"download failed" was only the newest listed edition (dated 2026-08-23), which LPi advertises
+before uploading. The older editions download fine.
+
+**What the remaining 31 actually are** — three different things, not one backlog:
+
+1. **Genuinely no bulletin.** St. Bernard, Abbotsford states on its own site that the bulletin is
+   email/paper only. Correctly zero, and no amount of engineering changes that.
+2. **Real but stale.** St. John Nepomucene (last edition 2024), St. James Neshkoro (March 2025).
+3. **Same-host, undiscoverable.** e.g. 28536 St. John Vianney, whose known page is on the SAME
+   host as its website_url, so the fallback is correctly skipped — but ordinary discovery finds
+   nothing there either. This is a distinct failure from the dead-domain case and needs its own
+   investigation rather than being counted as generic backlog.
 
 ### Wisconsin state of play (2026-08-18 22:20 UTC)
 
@@ -302,7 +325,7 @@ churches nationally, though that is an extrapolation from one state, not a promi
 | bulletin_name rows | 752,782 | **830,875** | **+78,093** |
 | churches carrying the current (2026-08-16) edition | 43 | **181** | **+138** |
 | bulletin_pdf rows | 78,645 | 80,997 | +2,352 |
-| the 86 named recovery targets | 0 | **47** | **+47** |
+| the 86 named recovery targets | 0 | **55** | **+55** |
 
 Then the state-wide walled pass (297 WI churches on `blocked` hosts, which the earlier targeted
 run never touched) carried it further — mid-run at 08:19 UTC: **481 churches with PDFs, 850,144
