@@ -913,6 +913,14 @@ def main():
         "would also hand it to the next scheduled cron.",
     )
     parser.add_argument(
+        "--walled-budget",
+        type=int,
+        default=0,
+        help="Browser launches allowed in this run (0 = leave the default 40). "
+        "The cap exists so a shard full of blocked hosts cannot spawn Chromium "
+        "without limit; a dedicated single-worker pass can afford more.",
+    )
+    parser.add_argument(
         "--church-ids",
         type=str,
         default="",
@@ -938,7 +946,13 @@ def main():
         import run_bulletin_scraper as _rbs
 
         _rbs.WALLED_BROWSER_ENABLED = True
-        print("  [OK] walled-host browser pass ENABLED for this run", flush=True)
+        if args.walled_budget:
+            _rbs.WALLED_BROWSER_BUDGET = args.walled_budget
+        print(
+            f"  [OK] walled-host browser pass ENABLED, budget="
+            f"{_rbs.WALLED_BROWSER_BUDGET}",
+            flush=True,
+        )
 
     print("=" * 60)
     print("  Extract Bulletin Names -> db99 (Direct)")
