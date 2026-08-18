@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 20:10 UTC (national +1,126 churches, gap 14,997 -> 13,875; walled passes running in all 50 states)._
+_Last updated: 2026-08-18 21:45 UTC (national +1,126; 50-state passes running, 5 complete; walled BUDGET found silently capping recovery of the 86 WI targets)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -119,6 +119,34 @@ bulletin paths before the homepage and filtering the fallback.
 
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
+
+### The walled browser BUDGET silently capped recovery (2026-08-18 21:40 UTC)
+
+The 86 named WI churches were re-run with `--walled-browser` and only **2** more recovered
+(45 -> 47), which contradicted direct measurement: 28511 has 100 bulletins available at
+stmarysbigriver.com and 28491 has 12 at dsoll.org, both with verified pages already seeded.
+
+Rather than theorise again — one confident-but-wrong diagnosis had already cost a round —
+`diag_church_path.py` traces the REAL production path per church_id: stored URL, its policy
+verdict, primary discovery, whether `_different_host()` lets the fallback fire, the fallback
+result, and whether the first PDF actually downloads. It found **three different causes**:
+
+| church | discovery | download | verdict |
+|---|---|---|---|
+| 28511 Nativity / Big River | 100 PDFs via `walled_browser_proxy` | **OK, 846 KB** | works end to end, yet DB says 0 |
+| 28491 Our Lady of the Lakes | 12 PDFs | **FAILED** | newest listed edition is dated 2026-08-23 and not uploaded yet |
+| 28533 Holy Cross | 0 | — | host reachable, bulletins genuinely not discoverable — real parser gap |
+| 28440 St. Bernard | 0 | — | **correct** — this parish publishes no PDF at all |
+
+**28511 is the tell.** It succeeds in isolation and fails in production, and the only difference is
+`WALLED_BROWSER_BUDGET`. The cap was 400, but 86 churches x 2 discovery calls (primary + fallback)
+x 3 candidate paths is **up to 516** — so the budget ran out partway and every church after that
+got no browser attempt at all, silently. Recovery became a function of queue position.
+
+That cap was added earlier the same day as an OOM guard, and the guard itself was right — an
+ungated version had already killed three sweep shards. Setting it too low for a targeted run is
+the error, and it fails in the same shape as everything else here: **a limit that reads as an
+absence of data.** Re-ran at `--walled-budget 3000`.
 
 ### Four states, measured 2026-08-18 09:20 UTC
 
