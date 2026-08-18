@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 14:00 UTC (national +546; WI 534 at 55.2% still running, IA + ME complete, KS 143 relaunched)._
+_Last updated: 2026-08-18 19:05 UTC (national +863; walled passes rolled out to 12 states; WI 560 at 57.4%, ME + IA complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -132,7 +132,13 @@ per-state work:
 | IA | 101 (20.8%) | **260** (52.3%) — complete, 706,304 names | **+159** |
 | KS | 73 (20.9%) | **143** (40.7%) | **+70** |
 
-**National: 7,584 -> 8,130 churches with bulletins (+546)**, gap 14,997 -> 14,455. WI and IA have
+**National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
+
+**Rolled out to 12 states (2026-08-18 18:00 UTC).** WI + KS still running, plus the ten largest
+gaps: NY, CA, TX, PA, IL, OH, MN, MA, NJ, MI — roughly 7,800 of the national gap in one batch.
+A supervisor script (`scratchpad/walled_supervise.sh`, mirroring
+`supervise_bulletin_sweep.py`) relaunches whatever dies every 10 minutes, because these passes
+run at the memory ceiling by design and failure is the normal case, not the exception. WI and IA have
 both crossed half their sourced churches; Iowa has more than doubled.
 
 **Operational reality:** the walled pass runs at the memory ceiling by construction — a browser per
