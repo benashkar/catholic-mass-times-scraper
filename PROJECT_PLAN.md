@@ -130,9 +130,11 @@ Maine was the worst-covered state in the country: **13 of 203** sourced churches
 |---|---|---|---|---|
 | before | 13 | 6.4% | — | — |
 | +2h | 52 | 25.6% | 4,841 | 82,380 |
-| +3h | **69** | **34%** | 6,202 | **115,119** |
+| +3h | 69 | 34% | 6,202 | 115,119 |
+| **final (4h25m)** | **89** | **43.8%** | **7,853** | **156,943** |
 
-Still running at the time of writing. So the finding is not confined to the eight hosts it was
+**+76 churches, a 6.8x increase**, and 156,943 names from a state that was effectively dark.
+Maine went from worst-covered in the country to above the national average. So the finding is not confined to the eight hosts it was
 discovered on — it converts a state, and Maine had been capped at 6% for as long as those labels
 have existed. Iowa (20.8%) and Kansas (20.9%) launched next; whether their gaps are as
 concentrated on blocked hosts is measured, not assumed.
