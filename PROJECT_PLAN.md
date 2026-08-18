@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 22:20 UTC (national CROSSED 10,013 churches, +2,429; gap 14,997 -> 12,580; 11 states complete)._
+_Last updated: 2026-08-18 22:25 UTC (national 10,013 churches +2,429; WI 591 at 60.6% and 1,007,227 names; 11 states complete, 31 running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -119,6 +119,17 @@ bulletin paths before the homepage and filtering the fallback.
 
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
+
+### Wisconsin state of play (2026-08-18 22:20 UTC)
+
+| | session start | now |
+|---|---|---|
+| churches with >=1 PDF | 271 (28%) | **591 (60.6%)** |
+| bulletin_name rows | 752,782 | **1,007,227** |
+| the 86 named targets | 0 | **47** |
+
+Wisconsin has crossed **a million name rows** and 60% coverage, from 28%. The named targets sit at
+47 pending the budget-fixed rerun.
 
 ### The walled browser BUDGET silently capped recovery (2026-08-18 21:40 UTC)
 
@@ -253,7 +264,7 @@ churches nationally, though that is an extrapolation from one state, not a promi
 | bulletin_name rows | 752,782 | **830,875** | **+78,093** |
 | churches carrying the current (2026-08-16) edition | 43 | **181** | **+138** |
 | bulletin_pdf rows | 78,645 | 80,997 | +2,352 |
-| the 86 named recovery targets | 0 | **45** | **+45** |
+| the 86 named recovery targets | 0 | **47** | **+47** |
 
 Then the state-wide walled pass (297 WI churches on `blocked` hosts, which the earlier targeted
 run never touched) carried it further — mid-run at 08:19 UTC: **481 churches with PDFs, 850,144
