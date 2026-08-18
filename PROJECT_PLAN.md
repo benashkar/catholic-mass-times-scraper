@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 21:45 UTC (national +1,126; 50-state passes running, 5 complete; walled BUDGET found silently capping recovery of the 86 WI targets)._
+_Last updated: 2026-08-18 22:20 UTC (national CROSSED 10,013 churches, +2,429; gap 14,997 -> 12,580; 11 states complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -161,6 +161,10 @@ per-state work:
 | KS | 73 (20.9%) | **143** (40.7%) | **+70** |
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
+
+**RESULT (2026-08-18 22:16 UTC): national crossed 10,013 churches with bulletins, +2,429 from
+the 7,584 baseline — a third of the entire national gap, which fell 14,997 -> 12,580.** Eleven
+states finished their pass (AR, HI, NV, WV, WY, MS, SC, RI, MT, ID, NH); 31 still running.
 
 **Rolled out to ALL 50 STATES (2026-08-18 19:45 UTC), 48 passes tracked.** National crossed
 **+1,126 churches** (7,584 -> 8,710), gap 14,997 -> 13,875, with every large state moving:
