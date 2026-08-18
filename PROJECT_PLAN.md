@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 13:15 UTC (IA complete: 101 -> 260, 706,304 names; WI 518 running, KS relaunched, ME 89 complete)._
+_Last updated: 2026-08-18 14:00 UTC (national +546; WI 534 at 55.2% still running, IA + ME complete, KS 143 relaunched)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -127,12 +127,12 @@ per-state work:
 
 | state | before | now (12:33 UTC) | gain |
 |---|---|---|---|
-| WI | 271 (28%) | **518** (53.5%) | **+247** |
+| WI | 271 (28%) | **534** (55.2%) | **+263** |
 | ME | 13 (6.4%) | **89** (43.8%) — complete | **+76** |
 | IA | 101 (20.8%) | **260** (52.3%) — complete, 706,304 names | **+159** |
-| KS | 73 (20.9%) | **142** (40.7%) | **+69** |
+| KS | 73 (20.9%) | **143** (40.7%) | **+70** |
 
-**National: 7,584 -> 8,110 churches with bulletins (+526)**, gap 14,997 -> 14,471. WI and IA have
+**National: 7,584 -> 8,130 churches with bulletins (+546)**, gap 14,997 -> 14,455. WI and IA have
 both crossed half their sourced churches; Iowa has more than doubled.
 
 **Operational reality:** the walled pass runs at the memory ceiling by construction — a browser per
