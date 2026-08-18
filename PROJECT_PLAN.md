@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 07:00 UTC (WI +197 churches / +78,093 names; ME walled pass done; denomination expansion planned — multi-source, WI first)._
+_Last updated: 2026-08-18 08:20 UTC (WI +210 churches / +97,362 names and climbing; ME 13 -> 89; IA + KS walled passes running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -190,6 +190,11 @@ churches nationally, though that is an extrapolation from one state, not a promi
 | churches carrying the current (2026-08-16) edition | 43 | **181** | **+138** |
 | bulletin_pdf rows | 78,645 | 80,997 | +2,352 |
 | the 86 named recovery targets | 0 | **45** | **+45** |
+
+Then the state-wide walled pass (297 WI churches on `blocked` hosts, which the earlier targeted
+run never touched) carried it further — mid-run at 08:19 UTC: **481 churches with PDFs, 850,144
+name rows, 192 carrying the current edition**. So WI stands at **+210 churches and +97,362 names**
+for the session, still climbing.
 
 Contributions, in order: the LPi API + wrapper unwrapping + removing the four early-returns took
 it 271 → 345; the fallback exception fix and full sweep took it to 457; the walled-host browser
