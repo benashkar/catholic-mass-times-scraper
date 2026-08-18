@@ -437,7 +437,7 @@ def process_church(cur, church):
     try:
         result = find_bulletin_page(website_url)
     except Exception as exc:
-        logger.info(f"  discovery from website_url failed ({exc}); trying known page")
+        print(f"  [--] discovery from website_url failed ({exc}); trying known page", flush=True)
         result = {}
     pdf_urls = result.get("pdf_urls") or []
 
@@ -452,10 +452,10 @@ def process_church(cur, church):
             try:
                 alt = find_bulletin_page(known_page)
             except Exception as exc:
-                logger.info(f"  known bulletin page {known_page} failed: {exc}")
+                print(f"  [--] known bulletin page {known_page} failed: {exc}", flush=True)
                 alt = {}
             if alt.get("pdf_urls"):
-                logger.info(f"  recovered via known bulletin page: {known_page}")
+                print(f"  [OK] recovered via known bulletin page: {known_page}", flush=True)
                 result = alt
                 pdf_urls = alt["pdf_urls"]
                 # Mark WHICH path recovered this church. Without it the two
