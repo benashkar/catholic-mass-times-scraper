@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 22:25 UTC (national 10,013 churches +2,429; WI 591 at 60.6% and 1,007,227 names; 11 states complete, 31 running)._
+_Last updated: 2026-08-18 23:35 UTC (national 10,502 +2,918; ROOT CAUSE found — fallback crashed on its own success log; 19 states complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -130,6 +130,44 @@ those two is the error that started this whole day.
 
 Wisconsin has crossed **a million name rows** and 60% coverage, from 28%. The named targets sit at
 47 pending the budget-fixed rerun.
+
+### ROOT CAUSE of the stuck 39: the fallback crashed on the line logging its success
+
+Two diagnoses were wrong before this one — a budget cap, then queue ordering — and both were
+reasoned rather than measured. Calling the real `process_church()` directly (`diag_process_church.py`)
+produced the answer in one run:
+
+```
+NameError: name 'logger' is not defined
+  extract_bulletins_to_db99.py:458
+  logger.info(f"  recovered via known bulletin page: {known_page}")
+```
+
+`extract_bulletins_to_db99.py` has **no logger** — it prints. `logger.info` was copied in from
+`run_bulletin_scraper.py`, which does have one, when the known-page fallback was ported to the
+production path.
+
+**Why it stayed hidden for hours.** The failing line sits on the SUCCESS branch:
+
+```python
+if alt.get("pdf_urls"):
+    logger.info(...)          # <- NameError
+    result = alt
+    pdf_urls = alt["pdf_urls"]
+```
+
+The fallback discovered the bulletins and then died before assigning them — **it failed precisely
+when it worked**. Churches where the fallback found nothing never reached the line and looked
+perfectly healthy. So the symptom read as "the fallback does not recover these churches", which is
+what sent two investigations down the wrong path.
+
+Concretely: church 28511 discovers **100 bulletins** and downloads an **846 KB** PDF on the same
+box, and still read 0 in the database.
+
+**The lesson worth keeping: every isolated component passed.** Discovery, the walled strategy, the
+download, the URLs, the church list — all verified working separately. The defect existed only in
+the integration, only on the success path, and only calling the real function found it. Test the
+pieces to build confidence; call the actual entry point to find the truth.
 
 ### The walled browser BUDGET silently capped recovery (2026-08-18 21:40 UTC)
 
