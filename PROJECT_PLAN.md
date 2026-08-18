@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 06:30 UTC (WI +197 churches / +78,093 names; walled unlock scales — ME 13 -> 69 churches; IA + KS passes running)._
+_Last updated: 2026-08-18 07:00 UTC (WI +197 churches / +78,093 names; ME walled pass done; denomination expansion planned — multi-source, WI first)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -340,6 +340,83 @@ one out.
 
 **Operating rule reaffirmed:** everything is proven by a **forced run on Render**, verified against
 db99 in the same session. Never by waiting for the cron, and never off a green deploy.
+
+## 🆕 2026-08-18 — BEYOND CATHOLIC: DENOMINATION SCHEMA + MULTI-SOURCE WISCONSIN
+
+Wisconsin holds ~987 Catholic churches here. It is also the most Lutheran state in the country:
+ELCA ~694, WELS ~452, LCMS ~414 (199 South District + 215 North). **~1,560 Lutheran congregations
+alone**, before Methodist, Baptist, UCC, Presbyterian, Episcopal and non-denominational. Adding
+other denominations plausibly triples WI, and every new church feeds the same product — service
+times, bulletin PDFs, extracted names.
+
+### Schema: additive only, nothing renamed
+
+The schema is Catholic *in its bones*, not just its comments: no `denomination` column and no
+`source`/`provider` column at all (provenance is currently inferred from a
+`service.source_service_id` prefix, `dm-`). `lk_service_category` is
+`mass/confession/adoration/devotions/education/community/other`, so a Protestant "Sunday Worship"
+falls through `CATEGORY_MAP.get(name, "other")` into the catch-all and **loses its meaning while
+looking like a success**. `church.has_perpetual_adoration`, `mass_count`, `confession_count`,
+`adoration_count`, `lk_diocese` and `lk_note_tag` (`vigil`, `exposition`, `holy_day`) are all
+Catholic-specific.
+
+Planned, all additive so the Catholic path behaves identically:
+
+- `church.denomination VARCHAR(60) NULL` + index
+- `church.source_provider VARCHAR(40) NULL` — retires the fragile `dm-` prefix as the only
+  provenance signal
+- **new `lk_service_category` rows only**: `worship`, `sunday_school`, `bible_study`, `prayer`,
+  `youth`. Existing Catholic rows and the `*_count` columns are untouched — `data_loader.py`
+  reads them.
+- extend `CATEGORY_MAP` in **both** `sync_to_db99.py:89` **and** `scrape_to_db99.py:68` — they are
+  duplicated, and changing one leaves the two paths disagreeing.
+- **backfill `denomination='catholic'` on all existing rows.** Every current row came from a
+  Catholic-only source, so this makes the column trustworthy immediately and lets the dedup
+  matcher gate on it. Without it NULL would mean both "unknown" and "Catholic legacy". ~23k rows
+  on a shared DB, so it goes through the Telegram approval bridge.
+
+### Sources: many, not one
+
+Deliberately multi-source — no single directory covers the field, and each has a different failure
+mode. **Permissions checked, not assumed:**
+
+| Source | robots | Gives | Verdict |
+|---|---|---|---|
+| `locator.lcms.org` | `Allow: /` | LCMS, both WI districts (~414) | primary |
+| `elca.org/directory/congregations` | permitted | ELCA (~694) | primary |
+| **OpenStreetMap / Overpass** | open data | `amenity=place_of_worship` + `denomination` + `website` tags | primary — free, structured, no ToS friction, and it carries the website field the bulletin pipeline needs |
+| `umc.org`, `ucc.org`, `pcusa.org`, `episcopalchurch.org`, `ag.org`, `efca.org`, `crcna.org` | to check | their own congregations | per-denomination adapters |
+| `faithstreet.com` | `Allow: /` + sitemap index | name/address/geo/phone, 1,138+ WI in sitemap1 alone | roster / gap-filler only |
+| `yearbook.wels.net` | **`Disallow: /`** | — | **EXCLUDED. Do not scrape.** Reach WELS congregations through permitted rosters or not at all. |
+
+**FaithStreet is a roster, not a full source** — measured: its church pages carry JSON-LD
+`@type: Church` with name, address, `geo` and phone (which plugs straight into the existing ≤150m
+matcher), but its `url` field is the FaithStreet page itself, **not the congregation's website**,
+and service times are React-rendered. Since `website_url` drives the entire bulletin pipeline,
+FaithStreet alone yields no bulletins.
+
+### Bulletin vocabulary is half-ready
+
+`BULLETIN_PATHS`/`BULLETIN_PAGE_KEYWORDS` already cover "bulletin" and "newsletter", both common in
+mainline Protestant use. They will **miss** the Lutheran/Methodist "worship folder", "order of
+worship", "order of service", "weekly update" — worth adding, especially in Wisconsin. Vendor
+handling is Catholic-only (LPi/ParishesOnline, eCatholic); the Protestant equivalents are
+Subsplash, Sharefaith, Ekklesia 360, Planning Center/Church Center, Tithe.ly, Breeze. Everything
+else generalises unchanged: `unwrap_pdf_url()`, the walled-host browser+proxy strategy, the
+column-aware PDF extraction and the name engine.
+
+### Adding a source is copy-the-pattern, not implement-an-interface
+
+There is no ABC or registry. Each source needs the DiscoverMass trio: `src/scrapers/<source>.py`
+(enumerate + parse returning the shared `{"church": ..., "services": ...}` dict),
+`<source>_to_db99.py` (match-or-insert), `run_<source>_all.py` (state orchestrator). Reuse
+`decide_match()` (geo ≤150m + normalized name/city, with its **AMBIGUOUS verdict that must never
+auto-merge** — that rule protects FK-linked bulletin history) and `_synth_service_id()` for
+idempotency, with a new prefix per source.
+
+**Cross-denomination dedup risk:** a Protestant church can sit within 150m of a Catholic one.
+The matcher must gate on `denomination` so a Lutheran congregation can never silently merge onto
+a Catholic `church_id`.
 
 ## 🔀 2026-08-08..10 — PER-HOST PROXY POLICY, ENFORCED IN CODE
 
