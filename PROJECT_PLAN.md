@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 09:45 UTC (national +4,699 at 12,283, gap 10,372; 31 states done, 13 running; supervisor race + unknown-as-failure fixed)._
+_Last updated: 2026-08-19 14:00 UTC (national +4,841 at 12,425 — corpus up 64%; gap 10,270; 33 states done, 9 running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -233,6 +233,25 @@ ungated version had already killed three sweep shards. Setting it too low for a 
 the error, and it fails in the same shape as everything else here: **a limit that reads as an
 absence of data.** Re-ran at `--walled-budget 3000`.
 
+### Knowing when a state is done rather than stuck (South Dakota)
+
+SD failed and relaunched eight times. The tempting read is "flaky, keep relaunching". The numbers
+said otherwise:
+
+| SD | 07:27 | 12:36 |
+|---|---|---|
+| churches with >=1 PDF | 117 | **117 (unchanged)** |
+| bulletin_pdf rows | 20,497 | 20,589 (+92) |
+| bulletin_name rows | 344,746 | 348,129 (+3,383) |
+
+Five hours and eight relaunches bought **zero** additional churches — only more editions for
+churches that already worked. Its remaining 82 sourced churches do not yield to this technique.
+Dropped from the supervisor and its job cancelled.
+
+The distinction that matters: *"still producing rows"* is not the same as *"still making
+progress"*. Coverage is the metric; row counts will keep ticking up long after a pass has stopped
+finding anything new.
+
 ### My own supervisor reproduced the bug it was watching for (2026-08-19 09:30 UTC)
 
 The per-state supervisor developed two faults, both of which produced a **confident wrong signal**
@@ -268,8 +287,8 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**RESULT (2026-08-19 07:50 UTC): national at 12,169 churches with bulletins, +4,585 from the
-7,584 baseline — a 60% growth in the corpus; gap 14,997 -> 10,486.** The large states are converting hardest, which is where
+**RESULT (2026-08-19 14:00 UTC): national at 12,425 churches with bulletins, +4,841 from the
+7,584 baseline — the corpus grew 64%; gap 14,997 -> 10,270.** 33 states finished, 9 running. The large states are converting hardest, which is where
 the churches actually are:
 
 | state | before | now |
@@ -280,7 +299,7 @@ the churches actually are:
 | IL | 448 (37.6%) | **703 (58.6%)** |
 | TX | 347 (25.4%) | **530 (38.8%)** |
 
-29 states finished, 13 still running. Wisconsin, the state this started from, is complete at 603
+ Wisconsin, the state this started from, is complete at 603
 (61.8%).
 
 **Rolled out to ALL 50 STATES (2026-08-18 19:45 UTC), 48 passes tracked.** National crossed
