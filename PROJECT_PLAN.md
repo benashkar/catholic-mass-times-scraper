@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-18 23:55 UTC (86 targets: 55 recovered; WI 603 churches / 1,013,288 names; national 10,502 +2,918; 21 states complete)._
+_Last updated: 2026-08-19 00:50 UTC (WISCONSIN COMPLETE: 271 -> 603 churches, +260,749 names; 25 states done, 18 running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -119,6 +119,19 @@ bulletin paths before the homepage and filtering the fallback.
 
 A 200 proves a page is reachable. It does not prove bulletins can be found on it. Conflating
 those two is the error that started this whole day.
+
+### WISCONSIN COMPLETE (2026-08-19 00:46 UTC)
+
+| | reported | final | change |
+|---|---|---|---|
+| churches with >=1 PDF | 271 (28%) | **603 (61.8%)** | **+332** |
+| bulletin_name rows | 752,782 | **1,013,531** | **+260,749** |
+| bulletin_pdf rows | 78,645 | **87,571** | +8,926 |
+| the 86 named targets | 0 | **55** | +55 |
+
+Wisconsin more than doubled its bulletin coverage and gained a quarter of a million names, from a
+starting report of 69 churches that appeared to have no bulletins. They did — and so did roughly
+330 others in the same state.
 
 ### After the logger fix (2026-08-18 23:55 UTC)
 
