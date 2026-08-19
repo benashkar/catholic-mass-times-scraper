@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 01:20 UTC (national +3,500 churches at 11,084, gap 11,533; WI complete; 26 states done)._
+_Last updated: 2026-08-19 03:20 UTC (national +3,938 churches at 11,522, gap 11,111; 27 states done, 16 running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -247,9 +247,10 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**RESULT (2026-08-19 01:16 UTC): national at 11,084 churches with bulletins, +3,500 from the
-7,584 baseline; gap 14,997 -> 11,533.** 26 states have finished their pass, 16 still running.
-Wisconsin, the state this started from, is complete at 603 (61.8%).
+**RESULT (2026-08-19 03:17 UTC): national at 11,522 churches with bulletins, +3,938 from the
+7,584 baseline; gap 14,997 -> 11,111.** 27 states finished, 16 still running — including the
+largest (NY, CA, TX, PA), which hold the biggest remaining gaps. Wisconsin, the state this started
+from, is complete at 603 (61.8%).
 
 **Rolled out to ALL 50 STATES (2026-08-18 19:45 UTC), 48 passes tracked.** National crossed
 **+1,126 churches** (7,584 -> 8,710), gap 14,997 -> 13,875, with every large state moving:
