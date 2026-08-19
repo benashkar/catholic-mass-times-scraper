@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 07:50 UTC (national +4,585 churches at 12,169 — corpus up 60%; gap 10,486; 29 states done)._
+_Last updated: 2026-08-19 09:45 UTC (national +4,699 at 12,283, gap 10,372; 31 states done, 13 running; supervisor race + unknown-as-failure fixed)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -232,6 +232,27 @@ That cap was added earlier the same day as an OOM guard, and the guard itself wa
 ungated version had already killed three sweep shards. Setting it too low for a targeted run is
 the error, and it fails in the same shape as everything else here: **a limit that reads as an
 absence of data.** Re-ran at `--walled-budget 3000`.
+
+### My own supervisor reproduced the bug it was watching for (2026-08-19 09:30 UTC)
+
+The per-state supervisor developed two faults, both of which produced a **confident wrong signal**
+— the same failure mode as every real bug in this effort:
+
+1. **Race on the job file.** Several armed monitors each invoked the supervisor; a run that read
+   the tracking list before another rewrote it wrote back a SHORTER list. Eight states — including
+   NY, CA and TX — silently stopped being tracked, so a failure in them would never have been
+   relaunched. Fixed with an atomic `mkdir` lock.
+2. **Unknown treated as failure.** The status check relaunched on any non-running value, including
+   the **empty string returned when the API call itself fails**. One transient Render blip
+   relaunched all 13 states at once — and since `bulletin_pdf` has no unique index, two passes on
+   the same church would duplicate rows. Fixed: unknown keeps tracking and looks again next cycle.
+
+The second is the operational form of a rule already in CLAUDE.md: *a timeout is not a denial*.
+Unknown is not failure.
+
+Both were caught only by reconciling against Render instead of trusting the tracker — the tracker
+reported "ALL STATE PASSES COMPLETE" while all 13 were still running. **Verify against the system
+of record, never against your own bookkeeping.**
 
 ### Four states, measured 2026-08-18 09:20 UTC
 
