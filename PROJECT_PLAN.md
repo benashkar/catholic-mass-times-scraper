@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 05:25 UTC (national +4,354 churches at 11,938, gap 10,705; NY 932, IL 698, PA 681, CA 665)._
+_Last updated: 2026-08-19 07:50 UTC (national +4,585 churches at 12,169 — corpus up 60%; gap 10,486; 29 states done)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -247,19 +247,19 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**RESULT (2026-08-19 05:25 UTC): national at 11,938 churches with bulletins, +4,354 from the
-7,584 baseline; gap 14,997 -> 10,705.** The large states are converting hardest, which is where
+**RESULT (2026-08-19 07:50 UTC): national at 12,169 churches with bulletins, +4,585 from the
+7,584 baseline — a 60% growth in the corpus; gap 14,997 -> 10,486.** The large states are converting hardest, which is where
 the churches actually are:
 
 | state | before | now |
 |---|---|---|
-| NY | 614 (33.7%) | **932 (51.1%)** |
-| CA | 443 (29.1%) | **665 (43.7%)** |
-| PA | 517 (34.3%) | **681 (45.1%)** |
-| IL | 448 (37.6%) | **698 (58.2%)** |
-| TX | 347 (25.4%) | **494 (36.1%)** |
+| NY | 614 (33.7%) | **968 (53.1%)** |
+| CA | 443 (29.1%) | **695 (45.7%)** |
+| PA | 517 (34.3%) | **699 (46.3%)** |
+| IL | 448 (37.6%) | **703 (58.6%)** |
+| TX | 347 (25.4%) | **530 (38.8%)** |
 
-27 states finished, 18 still running. Wisconsin, the state this started from, is complete at 603
+29 states finished, 13 still running. Wisconsin, the state this started from, is complete at 603
 (61.8%).
 
 **Rolled out to ALL 50 STATES (2026-08-18 19:45 UTC), 48 passes tracked.** National crossed
