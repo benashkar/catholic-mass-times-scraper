@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 14:00 UTC (national +4,841 at 12,425 — corpus up 64%; gap 10,270; 33 states done, 9 running)._
+_Last updated: 2026-08-19 16:10 UTC (national +4,908 at 12,492 — corpus up 65%; gap 10,210; NY 1,038, IL 709, CA 726)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -287,8 +287,22 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**RESULT (2026-08-19 14:00 UTC): national at 12,425 churches with bulletins, +4,841 from the
-7,584 baseline — the corpus grew 64%; gap 14,997 -> 10,270.** 33 states finished, 9 running. The large states are converting hardest, which is where
+**RESULT (2026-08-19 16:10 UTC): national at 12,492 churches with bulletins, +4,908 from the
+7,584 baseline — the corpus grew 65%; gap 14,997 -> 10,210.** 33 states finished, 10 running.
+
+Where the largest states landed, each from a low base with no per-state work:
+
+| state | before | now |
+|---|---|---|
+| NY | 614 (33.7%) | **1,038 (56.2%)** |
+| CA | 443 (29.1%) | **726 (47.7%)** |
+| PA | 517 (34.3%) | **703 (46.5%)** |
+| IL | 448 (37.6%) | **709 (59.0%)** |
+| TX | 347 (25.4%) | **595 (43.4%)** |
+| OH | 375 (37.8%) | **570 (57.2%)** |
+| WI | 271 (28%) | **596 (61.6%)** |
+
+New York alone gained **424 churches**. The large states are converting hardest, which is where
 the churches actually are:
 
 | state | before | now |
