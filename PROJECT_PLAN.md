@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 22:20 UTC (national PAST +5,000 — 12,625 churches, gap 10,077; NY 1,084, IL 715, CA 745)._
+_Last updated: 2026-08-19 23:20 UTC (focus states WI/AZ/GA/PA/MN re-running on fixed code; most completed states ran the BROKEN fallback and need re-running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -166,6 +166,36 @@ before uploading. The older editions download fine.
 
 Wisconsin has crossed **a million name rows** and 60% coverage, from 28%. The named targets sit at
 47 pending the budget-fixed rerun.
+
+### CONSEQUENCE: most completed state passes ran the BROKEN fallback
+
+Render one-off jobs run the image they were **launched** with, not the current one. The state
+passes launched at 15:30 UTC (the ten largest) and 19:45 UTC (the other 36) on 2026-08-18. The
+logger fix deployed at **22:45**. So **every state pass that completed on its first attempt ran
+with the crashing known-page fallback** — the same defect that pinned the 86 named WI churches at
+47 instead of 55.
+
+Only states that happened to FAIL and get relaunched after 22:45 picked up the fix. That is luck,
+not design, and it means roughly twenty completed states carry avoidable under-recovery.
+
+**Re-running them is cheap and uses the same tooling.** The rule to carry forward: after any fix
+to discovery or the fallback, a state is only "done" if its pass STARTED after that deploy.
+Completion time is not enough.
+
+### Focus states, re-run with the fixed code (2026-08-19 23:00 UTC)
+
+| state | churches | with source | with PDFs | gap |
+|---|---|---|---|---|
+| PA | 1,611 | 1,513 | 703 (46.5%) | **810** |
+| WI | 980 | 968 | 596 (61.6%) | 372 |
+| MN | 791 | 786 | 501 (63.7%) | 285 |
+| AZ | 324 | 318 | 127 (39.9%) | **191** |
+| GA | 251 | 246 | 141 (57.3%) | 105 |
+
+All five relaunched with `--days-fresh 0`, which rechecks every church not producing bulletins.
+Note the churches->source gap is already small in these states (PA 98, WI 12, MN 5), so real
+coverage expansion here means MORE CHURCHES — the denomination work — not more scraping of the
+existing roster.
 
 ### ROOT CAUSE of the stuck 39: the fallback crashed on the line logging its success
 
