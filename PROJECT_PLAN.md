@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-19 23:20 UTC (focus states WI/AZ/GA/PA/MN re-running on fixed code; most completed states ran the BROKEN fallback and need re-running)._
+_Last updated: 2026-08-20 03:10 UTC (AZ flatline explained: 1,681 churches nationally have an unusable website_url — 14% of the gap is bad data, not hard targets)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -166,6 +166,37 @@ before uploading. The older editions download fine.
 
 Wisconsin has crossed **a million name rows** and 60% coverage, from 28%. The named targets sit at
 47 pending the budget-fixed rerun.
+
+### 14% of the remaining gap is BAD DATA, not hard targets (2026-08-20 03:10 UTC)
+
+Arizona sat flat at 39.9% while every other focus state moved. It was not a scraping problem:
+**101 of AZ's 197 zero-PDF churches share one fake "host"** —
+`out?id=us-az-ak-chin-st-francis-of-assisi-mi` — a query-string fragment sitting in `website_url`
+where a domain should be. Half of Arizona's remaining gap is unscrapeable by construction.
+
+Measured nationally with `diag_bad_urls.py`: of **12,076** zero-PDF churches, **1,681 (14%)** have
+an unusable `website_url`:
+
+| shape | count | example |
+|---|---|---|
+| `/api/out?id=...` unresolved | **522** | CA 366, TX 129, NY 106, AZ 100, PA 87 |
+| empty | 632 | `''` |
+| placeholder | 499 | `#` |
+| malformed host | 28 | `http:// http://www.sjccc.net/`, `https://stmary@stmarykeywest.com` |
+
+**The 522 are stale, not merely unresolved — three hypotheses tested and discarded:**
+
+1. Follow it on discovermass.com -> 301s to an unrelated "out-of-love" interstitial.
+2. Treat the embedded id as a DiscoverMass parish slug -> 404 on every slug shape.
+3. The real origin is **masstimes.org**, which resolves the destination CLIENT-side in an
+   AngularJS app (a plain fetch only ever sees the shell). Resolved it with headless Chromium —
+   the same tool that beat the walled hosts — and it lands on **masstimes.org/404**.
+
+So those ids no longer exist upstream. **No redirect-following approach can recover them**;
+they need genuine URL re-discovery, for which `run_resolve_urls.py` already exists.
+
+Recording the negative result deliberately: it would have been easy to build a redirect-repair
+pass on hypothesis 1 or 2 and ship something that silently produced nothing.
 
 ### CONSEQUENCE: most completed state passes ran the BROKEN fallback
 
