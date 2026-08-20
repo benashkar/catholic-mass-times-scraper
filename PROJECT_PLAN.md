@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-20 19:20 UTC (national +5,280 at 12,864 — corpus up 70%, gap 9,838; PA 822, NY 1,121; WI/MN/GA/IL complete)._
+_Last updated: 2026-08-20 23:30 UTC (ALL 50 states relaunched on fixed code — national 12,942, gap 9,760; OSM confirmed as the lowest-hanging denomination source)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -212,6 +212,47 @@ a link.
 
 Recording the negative result deliberately: it would have been easy to build a redirect-repair
 pass on hypothesis 1 or 2 and ship something that silently produced nothing.
+
+### ALL 50 STATES RELAUNCHED ON FIXED CODE (2026-08-20 23:20 UTC)
+
+Acting on the consequence below: every state was relaunched with `--days-fresh 0` on the
+post-logger-fix image, so no state is left carrying the crashing fallback. National at
+**12,942 (+5,358)**, gap 14,997 -> 9,760, and climbing again as the re-run reaches churches the
+broken passes skipped.
+
+### NON-CATHOLIC EXPANSION: the source ranking flipped, with evidence
+
+A planning agent tested the three candidate sources live rather than trusting the strategy doc.
+**The Phase 0 gate resolved the OPPOSITE way to the "Decisions taken" section:**
+
+| source | verified result |
+|---|---|
+| **OpenStreetMap / Overpass** | WI has 2,943 places of worship; **2,341 Christian non-Catholic**; 1,849 with name+coords; **527 with a website**, 86% returning HTTP 200 on sample. One HTTP POST. |
+| **locator.lcms.org** | `/api/congregations` returns **401**. The SPA sends a rolling anti-abuse token derived from `Date.now()`. Re-implementing it is a judgment call for the owner, not a detail to bake in — prefer asking LCMS for API access. |
+| **elca.org** | **Zero** congregation data in HTML, no API in any of its 9 JS chunks, no per-congregation sitemap URLs, `auth0-spa-js` present. Needs a browser network capture just to establish feasibility. |
+
+So the two "primary" directories yield **no websites today**, and OSM yields ~450 usable ones.
+`website_url` is what the entire bulletin pipeline runs on, so OSM leads.
+
+**Three findings that change the build:**
+
+1. **`CATEGORY_MAP` has THREE copies, not two** — `scrape_to_db99.py:68`, `sync_to_db99.py:89`,
+   and **`src/etl/transformers.py:40`**. Update fewer than all three and Protestant services
+   silently become `other`: data loss that looks like success.
+2. **The cross-denomination merge risk is measured, not theoretical.** 33 WI non-Catholic OSM
+   churches sit within 150 m of a Catholic one, 8 within 60 m — and `decide_match`'s 60 m branch
+   matches on **distance alone, ignoring name similarity**. Ungated, ~15-20 Lutheran congregations
+   would silently UPDATE a Catholic `church_id` and re-point its FK-linked bulletin history.
+   Unrecoverable without a restore. Gate on denomination FAMILY (db99 says `catholic`, OSM says
+   `roman_catholic`), exclude known-mismatches from the candidate list entirely, and when either
+   side is unknown TIGHTEN rather than guess. Prefer a visible duplicate over a bad merge.
+3. **ODbL / share-alike.** OSM data carries attribution and share-alike obligations, and mixing it
+   into `church` arguably makes db99 a Derivative Database. Mitigations are cheap (stamp
+   `source_provider='osm'`, put the OSM object URL in `source_url`, footer attribution) but the
+   decision is the owner's to make.
+
+Full plan: `C:\Users\cashk\.claude\plans\virtual-conjuring-treasure.md` and the agent's build
+plan in-session.
 
 ### CONSEQUENCE: most completed state passes ran the BROKEN fallback
 
