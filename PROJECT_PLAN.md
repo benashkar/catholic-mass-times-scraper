@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-20 06:00 UTC (focus states: MN 522 done, WI 616, PA 733, GA 147 done, AZ stalled on missing websites; national 12,746, gap 9,940)._
+_Last updated: 2026-08-20 06:10 UTC (WI COMPLETE: 271 -> 623 churches, +284,974 names, 55/86 targets; MN 522 and GA 147 done; PA 733 running)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -245,7 +245,7 @@ All five relaunched with `--days-fresh 0`, which rechecks every church not produ
 | state | session start | now | status |
 |---|---|---|---|
 | MN | 208 (26.5%) | **522 (66.4%)** | complete — best of the five |
-| WI | 271 (28%) | **616 (63.6%)** | running |
+| WI | 271 (28%) | **623 (64.4%)** — 1,037,756 names | **complete** |
 | GA | 107 (43.9%) | **147 (59.8%)** | complete |
 | PA | 517 (34.3%) | **733 (48.4%)** | running |
 | AZ | 83 (26.1%) | **127 (39.9%)** | **stalled — needs website discovery, not scraping** |
