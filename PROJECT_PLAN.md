@@ -184,7 +184,13 @@ an unusable `website_url`:
 | placeholder | 499 | `#` |
 | malformed host | 28 | `http:// http://www.sjccc.net/`, `https://stmary@stmarykeywest.com` |
 
-**The 522 are stale, not merely unresolved — three hypotheses tested and discarded:**
+**CORRECTION on the 522.** They are not one population. The Alabama sample I first probed points
+at **masstimes.org**; the Arizona rows point at **catholicindex.org** and all 84 of them DO carry
+the `&sig=` that `run_resolve_urls.py` was written for. Generalising from the first sample was
+wrong. What is true of both: the upstream is dead — CatholicIndex is Cloudflare-blocked, and the
+masstimes ids now resolve to /404 — so **neither can be re-resolved from its redirect**.
+
+**Three hypotheses tested and discarded for the masstimes shape:**
 
 1. Follow it on discovermass.com -> 301s to an unrelated "out-of-love" interstitial.
 2. Treat the embedded id as a DiscoverMass parish slug -> 404 on every slug shape.
@@ -192,8 +198,17 @@ an unusable `website_url`:
    AngularJS app (a plain fetch only ever sees the shell). Resolved it with headless Chromium —
    the same tool that beat the walled hosts — and it lands on **masstimes.org/404**.
 
-So those ids no longer exist upstream. **No redirect-following approach can recover them**;
-they need genuine URL re-discovery, for which `run_resolve_urls.py` already exists.
+So those ids no longer exist upstream. **No redirect-following approach can recover either
+shape.** And `run_resolve_urls.py` is not the answer despite the matching URL shape: it fetches
+the CatholicIndex interstitial, which Cloudflare now blocks, and it writes local JSONL rather than
+db99.
+
+**What AZ actually has to pivot on:** all 100 of its broken-URL churches carry a usable
+`source_url`, and 0 have a stored bulletin page. But the DiscoverMass route does not rescue them
+either — parsed `st-francis-of-assisi-bagdad-az` and DiscoverMass holds the parish with an
+**empty website field**. So the website is genuinely absent upstream, not merely unresolved, and
+recovering these means finding the parish site fresh (search / diocese directory), not repairing
+a link.
 
 Recording the negative result deliberately: it would have been easy to build a redirect-repair
 pass on hypothesis 1 or 2 and ship something that silently produced nothing.
