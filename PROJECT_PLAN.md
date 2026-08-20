@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-20 03:10 UTC (AZ flatline explained: 1,681 churches nationally have an unusable website_url — 14% of the gap is bad data, not hard targets)._
+_Last updated: 2026-08-20 06:00 UTC (focus states: MN 522 done, WI 616, PA 733, GA 147 done, AZ stalled on missing websites; national 12,746, gap 9,940)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -239,6 +239,19 @@ Completion time is not enough.
 | GA | 251 | 246 | 141 (57.3%) | 105 |
 
 All five relaunched with `--days-fresh 0`, which rechecks every church not producing bulletins.
+
+**Where they stand (2026-08-20 06:00 UTC):**
+
+| state | session start | now | status |
+|---|---|---|---|
+| MN | 208 (26.5%) | **522 (66.4%)** | complete — best of the five |
+| WI | 271 (28%) | **616 (63.6%)** | running |
+| GA | 107 (43.9%) | **147 (59.8%)** | complete |
+| PA | 517 (34.3%) | **733 (48.4%)** | running |
+| AZ | 83 (26.1%) | **127 (39.9%)** | **stalled — needs website discovery, not scraping** |
+
+AZ is the outlier and the reason is now known: ~100 of its 191 remaining churches have no website
+anywhere upstream, so no pass can move them.
 Note the churches->source gap is already small in these states (PA 98, WI 12, MN 5), so real
 coverage expansion here means MORE CHURCHES — the denomination work — not more scraping of the
 existing roster.
