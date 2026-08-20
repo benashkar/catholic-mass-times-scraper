@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-20 06:10 UTC (WI COMPLETE: 271 -> 623 churches, +284,974 names, 55/86 targets; MN 522 and GA 147 done; PA 733 running)._
+_Last updated: 2026-08-20 19:20 UTC (national +5,280 at 12,864 — corpus up 70%, gap 9,838; PA 822, NY 1,121; WI/MN/GA/IL complete)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -247,8 +247,8 @@ All five relaunched with `--days-fresh 0`, which rechecks every church not produ
 | MN | 208 (26.5%) | **522 (66.4%)** | complete — best of the five |
 | WI | 271 (28%) | **623 (64.4%)** — 1,037,756 names | **complete** |
 | GA | 107 (43.9%) | **147 (59.8%)** | complete |
-| PA | 517 (34.3%) | **733 (48.4%)** | running |
-| AZ | 83 (26.1%) | **127 (39.9%)** | **stalled — needs website discovery, not scraping** |
+| PA | 517 (34.3%) | **822 (54.3%)** | running |
+| AZ | 83 (26.1%) | **128 (40.3%)** | **website-limited — still gains slowly, but ~100 churches have no site upstream** |
 
 AZ is the outlier and the reason is now known: ~100 of its 191 remaining churches have no website
 anywhere upstream, so no pass can move them.
@@ -376,18 +376,18 @@ per-state work:
 
 **National: 7,584 -> 8,447 churches with bulletins (+863)**, gap 14,997 -> 14,138.
 
-**RESULT (2026-08-19 22:20 UTC): national at 12,625 churches with bulletins, +5,041 from the
-7,584 baseline — the corpus grew 66%; gap 14,997 -> 10,077.** 33 states finished, 10 running.
+**RESULT (2026-08-20 19:20 UTC): national at 12,864 churches with bulletins, +5,280 from the
+7,584 baseline — the corpus grew 70%; gap 14,997 -> 9,838.** 33 states finished, 10 running.
 
 Where the largest states landed, each from a low base with no per-state work:
 
 | state | before | now |
 |---|---|---|
-| NY | 614 (33.7%) | **1,084 (58.7%)** |
-| CA | 443 (29.1%) | **745 (49.0%)** |
+| NY | 614 (33.7%) | **1,121 (60.7%)** |
+| CA | 443 (29.1%) | **758 (49.8%)** |
 | PA | 517 (34.3%) | **703 (46.5%)** |
-| IL | 448 (37.6%) | **715 (59.5%)** |
-| TX | 347 (25.4%) | **615 (44.9%)** |
+| IL | 448 (37.6%) | **717 (59.7%)** — complete |
+| TX | 347 (25.4%) | **621 (45.3%)** |
 | OH | 375 (37.8%) | **570 (57.2%)** |
 | WI | 271 (28%) | **596 (61.6%)** |
 
