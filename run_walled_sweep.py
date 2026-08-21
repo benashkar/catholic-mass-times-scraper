@@ -150,7 +150,28 @@ def main():
             ok += 1
         time.sleep(3)
 
-    print(f"\nwalled sweep done: {ok}/{len(todays)} states completed cleanly", flush=True)
+    summary = f"walled sweep done: {ok}/{len(todays)} states completed cleanly"
+    print("
+" + summary, flush=True)
+
+    # Report, or this cron is invisible. A Render one-off's stdout is not
+    # retrievable (GET /v1/logs returns logs: null once it exits), so a job that
+    # only prints has no readout — and a walled sweep that quietly stopped
+    # working would look exactly like "these parishes have no bulletins", which
+    # is the failure this cron exists to prevent.
+    try:
+        from src.utils.telegram import send_telegram
+
+        states_ran = ", ".join(st for st, _ in todays) or "(none)"
+        send_telegram(
+            f"<b>walled sweep</b> weekday={weekday}
+"
+            f"states: {states_ran}
+"
+            f"{ok}/{len(todays)} completed cleanly"
+        )
+    except Exception as exc:  # reporting must never fail the run
+        print(f"  [WARN] telegram: {exc}", flush=True)
     # Exit 0 even on per-state failures: the watermark makes them resumable, and
     # a red cron for one OOM'd state would train everyone to ignore the alarm.
     return 0
