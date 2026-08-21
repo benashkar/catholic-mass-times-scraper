@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-21 03:05 UTC (fixed-code re-run: 30/50 states done, national 13,051 (+5,467), gap 9,651)._
+_Last updated: 2026-08-21 13:10 UTC (walled recovery is now SCHEDULED — church-walled-sweep daily 05:00 UTC, verified end to end; it had only ever run by hand)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -212,6 +212,48 @@ a link.
 
 Recording the negative result deliberately: it would have been easy to build a redirect-repair
 pass on hypothesis 1 or 2 and ship something that silently produced nothing.
+
+### THE RECOVERY WAS NEVER SCHEDULED — now it is (2026-08-21)
+
+The owner asked whether this would run weekly or need watching. It needed watching, and worse:
+
+```
+grep walled render.yaml supervise_bulletin_sweep.py run_daily_pipeline.py  ->  NOTHING
+```
+
+**The walled-host pass recovered +5,532 churches nationally and was scheduled nowhere.** Every
+run over 08-18..21 was launched and babysat by hand. The moment nobody was watching, any church
+needing browser+proxy would have gone quietly back to yielding zero PDFs — indistinguishable from
+"this parish publishes no bulletin", which is the exact failure this whole effort existed to fix.
+It would have reappeared by omission.
+
+**Two traps found while fixing it:**
+
+1. **`render.yaml` in this repo is connected to nothing.** No blueprint is linked, so editing it
+   creates and changes NOTHING — the live services were all made by hand. Anyone reading that file
+   would reasonably assume otherwise. The cron had to be created explicitly via
+   `POST /v1/services` (note: `runtime: docker`, not `image`, or it 400s asking for an image).
+2. **`PROXY_URL` had to be copied to the new service.** Without it the cron would run green and
+   recover nothing, because browser+proxy *together* is the entire mechanism.
+
+**`church-walled-sweep`** — `crn-da43b7n10e5c73anojc0`, daily **05:00 UTC**, own container:
+
+- 05:00 is deliberate: two hours clear of the 03:00 bulletin cron, so they never share a box. A
+  Chromium per blocked host alongside spaCy and pdfplumber does not fit 2GB — running it inline
+  OOM-killed three shards.
+- `run_walled_sweep.py` orders states by **live gap** read from the database, then round-robins
+  them into 7 buckets (`states[i::7]`). Round-robin rather than contiguous slices so no single day
+  draws all of NY/CA/TX/PA; ordered by gap so the rotation follows the work and re-orders itself as
+  coverage improves. **Every state is retried weekly, unattended.**
+- One worker, bounded per-run browser budget, bounded per-state timeout. Exits 0 on a per-state
+  failure — the per-church watermark makes those resumable, and a red cron for one OOM'd state
+  trains everyone to ignore the alarm.
+- Reports to Telegram every run, because a Render one-off's stdout is not retrievable and a cron
+  that quietly stopped working would look exactly like the problem it prevents.
+
+**Verified end to end on the cron itself, not just locally:** a real run against Georgia took it
+**149 -> 153 churches**. Build, secrets, db99, live-gap query, bucketing, browser+proxy, and the
+database write are all proven on the scheduled service.
 
 ### ALL 50 STATES RELAUNCHED ON FIXED CODE (2026-08-20 23:20 UTC)
 
