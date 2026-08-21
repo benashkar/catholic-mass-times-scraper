@@ -151,8 +151,7 @@ def main():
         time.sleep(3)
 
     summary = f"walled sweep done: {ok}/{len(todays)} states completed cleanly"
-    print("
-" + summary, flush=True)
+    print("\n" + summary, flush=True)
 
     # Report, or this cron is invisible. A Render one-off's stdout is not
     # retrievable (GET /v1/logs returns logs: null once it exits), so a job that
@@ -164,10 +163,8 @@ def main():
 
         states_ran = ", ".join(st for st, _ in todays) or "(none)"
         send_telegram(
-            f"<b>walled sweep</b> weekday={weekday}
-"
-            f"states: {states_ran}
-"
+            f"<b>walled sweep</b> weekday={weekday}\n"
+            f"states: {states_ran}\n"
             f"{ok}/{len(todays)} completed cleanly"
         )
     except Exception as exc:  # reporting must never fail the run
