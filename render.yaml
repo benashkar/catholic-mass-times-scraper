@@ -59,6 +59,43 @@ services:
       - key: GIT_COMMITTER_EMAIL
         sync: false
 
+  # Walled-host recovery: a headless browser THROUGH the residential proxy, for
+  # hosts labelled 'blocked'. This recovered +5,532 churches nationally over
+  # 2026-08-18..21 — and every one of those runs was launched BY HAND. Nothing
+  # scheduled ran it, so the moment nobody was watching, churches needing
+  # browser+proxy would have gone quietly back to yielding zero.
+  #
+  # It gets its OWN cron rather than living inside the bulletin sweep because a
+  # Chromium per blocked host alongside spaCy and pdfplumber does not fit 2GB —
+  # enabling it inline OOM-killed three shards on its first outing.
+  #
+  # 05:00 UTC, two hours clear of the 03:00 bulletin cron so they never share
+  # the box. States are ordered by CURRENT gap and round-robined into 7 buckets,
+  # so every state is retried weekly and the biggest gaps are always in rotation.
+  - type: cron_job
+    name: church-walled-sweep
+    runtime: docker
+    dockerfilePath: Dockerfile.cron
+    region: virginia
+    plan: standard
+    schedule: "0 5 * * *"
+    startCommand: "python -u run_walled_sweep.py"
+    envVars:
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+      - key: AWS_DEFAULT_REGION
+        value: us-east-1
+      - key: PROXY_URL
+        sync: false
+      - key: RENDER_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+
   # Bulletin pipeline: bulletin PDF collection + NER + rescore + redeploy
   # Runs every Tuesday at 3 AM UTC (mass times handled by mass-times cron)
   - type: cron_job
