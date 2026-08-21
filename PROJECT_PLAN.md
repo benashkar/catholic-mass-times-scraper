@@ -1,6 +1,63 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-21 13:10 UTC (walled recovery is now SCHEDULED — church-walled-sweep daily 05:00 UTC, verified end to end; it had only ever run by hand)._
+_Last updated: 2026-08-21 15:00 UTC — national 13,140 (+5,556, corpus +73%), gap 9,562. See STATE OF PLAY at the top._
+
+## 📊 STATE OF PLAY — 2026-08-21 15:00 UTC (read this first)
+
+**Where it started:** a CSV of 69 Wisconsin churches that appeared to have no bulletins.
+They had bulletins. So did roughly five and a half thousand others.
+
+| | baseline (08-17) | now | change |
+|---|---|---|---|
+| **national churches with a bulletin PDF** | 7,584 | **13,140** | **+5,556 (corpus +73%)** |
+| national gap (source but no PDF) | 14,997 | **9,562** | −5,435 |
+| **Wisconsin** | 271 (28%) | **620 (64.0%)** | +349, 1.03M name rows |
+| the 86 named WI church ids | 0 | **55** | +55 |
+
+Focus states: MN **527 (67.0%)** · WI **620 (64.0%)** · GA **150 (61.0%)** · PA **837 (55.3%)** ·
+AZ **128 (40.3%, website-limited)**. Large states: NY **1,135 (61.5%)** · IL 718 · TX 623 · CA 759.
+
+### The seven defects, each of which looked like "this parish has no bulletin"
+
+1. The sweep that judged them ran 2026-08-13, two days BEFORE its own Playwright/OOM fixes landed.
+2. Four early-returns in discovery: it stopped on finding a PAGE rather than PDFs.
+3. Both download paths fetched LPi's HTML reader wrapper and silently discarded it.
+4. ParishesOnline's public JSON API (which returns the PDF directly) was never used.
+5. Wrong stored URLs for merged/dead parishes, with no fallback to a known-good page.
+6. **`blocked` hosts were retried the one way that provably cannot work** (see below).
+7. **The known-page fallback crashed on the line that logged its own success** — a `logger.info`
+   in a file that has no logger, sitting on the SUCCESS branch, so it failed exactly when it
+   worked. Two wrong diagnoses preceded finding it; only calling the real `process_church()`
+   directly exposed it.
+
+### The finding that mattered most
+
+`blocked` hosts answer a residential IP **and** a real browser **together** — 8 of 8 tested go
+403 → 200. Neither signal alone passes. Since `blocked` meant "go direct, WITHOUT a proxy", 5,457
+hosts were being retried in the only way guaranteed to fail. **This also unblocks the crime
+project's WI Cloudflare walls**, which had the whole stack built and were waiting on exactly this.
+
+### What is now automated (it was not before)
+
+**`church-walled-sweep`** — `crn-da43b7n10e5c73anojc0`, daily 05:00 UTC, own container. Orders
+states by LIVE gap, round-robins them across 7 days, retries every state weekly unattended,
+reports to Telegram. Verified end to end: a real run took GA 149 → 153.
+
+### Open items
+
+- **`ref_name_dataset` is NOT created** — needs owner approval. Until then US-only dictionaries
+  keep demoting Polish/Hispanic/Vietnamese/Filipino surnames off the dashboard.
+- **Non-Catholic expansion**: planned and evidence-backed (OSM wins; LCMS 401s, ELCA serves no
+  data). Three owner decisions first: ODbL share-alike, whether to email LCMS for API access, and
+  go-ahead on OSM-first.
+- **1,681 churches nationally have an unusable `website_url`** (14% of the gap) — measured, not
+  fixed. AZ is half of its own gap this way.
+- **`render.yaml` here is linked to no blueprint** — editing it changes nothing; services are
+  created by hand via the API.
+- 31 of the 86 WI targets remain zero: some genuinely publish nothing, some are years stale, the
+  rest are same-host-undiscoverable.
+
+---
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
