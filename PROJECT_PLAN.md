@@ -1,6 +1,6 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-20 23:30 UTC (ALL 50 states relaunched on fixed code — national 12,942, gap 9,760; OSM confirmed as the lowest-hanging denomination source)._
+_Last updated: 2026-08-21 03:05 UTC (fixed-code re-run: 30/50 states done, national 13,051 (+5,467), gap 9,651)._
 
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
@@ -216,9 +216,13 @@ pass on hypothesis 1 or 2 and ship something that silently produced nothing.
 ### ALL 50 STATES RELAUNCHED ON FIXED CODE (2026-08-20 23:20 UTC)
 
 Acting on the consequence below: every state was relaunched with `--days-fresh 0` on the
-post-logger-fix image, so no state is left carrying the crashing fallback. National at
-**12,942 (+5,358)**, gap 14,997 -> 9,760, and climbing again as the re-run reaches churches the
-broken passes skipped.
+post-logger-fix image, so no state is left carrying the crashing fallback. **30 of 50 have now
+finished the re-run; national at 13,051 (+5,467), gap 14,997 -> 9,651.**
+
+The re-run is earning its keep, and the gains are small per state but real — exactly the shape
+predicted. Georgia had already "completed" once with the broken fallback and picked up 2 more on
+the fixed pass (147 -> 149); MN 522 -> 524; PA 822 -> 824. Invisible before, because the states
+reported themselves finished.
 
 ### NON-CATHOLIC EXPANSION: the source ranking flipped, with evidence
 
