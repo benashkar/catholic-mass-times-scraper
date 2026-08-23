@@ -43,9 +43,42 @@ SWEEP_CRON_ID = os.environ.get("SWEEP_CRON_ID", "crn-da43b7n10e5c73anojc0")
 STATE_KEY = "WATCHDOG_BULLETIN_LAST"
 MAX_RUN_AGE_H = float(os.environ.get("WATCHDOG_MAX_RUN_AGE_H", "26"))
 
+# A stall does not have to be a zero. The failure this watchdog was written for
+# was national coverage moving +54 in 48 hours while every service showed green
+# -- a crawl, not a stop. "> 0" would have passed it silently, so the assertion
+# has to be a RATE.
+#
+# A FIXED rate is wrong in the other direction. The gap is 9,532 today and a
+# bar of 100/day is fair; when the gap is down to 400 the same bar fires every
+# single morning and gets muted, which is how a watchdog dies. So the bar is a
+# fraction of the work REMAINING -- 1% of the gap per day -- which is a
+# demanding target early, relaxes as the corpus saturates, and never asks for
+# more churches than are actually left to find.
+#
+# Calibration: at the 08-21 stall the gap was ~9,600, so the bar was ~96/day
+# and the observed +54 over 48h (needing 192) alerts, which is the whole point.
+GAP_FRACTION_PER_DAY = float(os.environ.get("WATCHDOG_GAP_FRACTION", "0.01"))
+# Below this the percentage becomes noise; a small absolute floor keeps the
+# check meaningful without being shrill.
+MIN_GAIN_FLOOR = float(os.environ.get("WATCHDOG_MIN_GAIN_FLOOR", "5"))
+
 
 def _utcnow():
     return datetime.datetime.now(datetime.timezone.utc)
+
+
+def _elapsed_hours(ts):
+    """Hours since an ISO stamp, or 24.0 if it cannot be read.
+
+    Falling back to 24 rather than 0 matters: 0 would make the required gain 0
+    and turn an unreadable timestamp into a silent pass, which is the exact
+    class of bug this file exists to catch.
+    """
+    try:
+        when = datetime.datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        return max((_utcnow() - when).total_seconds() / 3600.0, 0.0)
+    except Exception:
+        return 24.0
 
 
 def national_with_pdf():
@@ -66,11 +99,21 @@ def national_with_pdf():
         """
     )
     n = int(cur.fetchone()["n"])
+    cur.execute(
+        """
+        SELECT COUNT(*) AS n
+        FROM church c
+        WHERE c.website_url IS NOT NULL AND c.website_url <> ''
+          AND EXISTS (SELECT 1 FROM bulletin_source bs
+                      WHERE bs.church_id = c.church_id)
+        """
+    )
+    with_source = int(cur.fetchone()["n"])
     cur.execute("SELECT COUNT(*) AS n FROM bulletin_pdf")
     pdfs = int(cur.fetchone()["n"])
     cur.close()
     conn.close()
-    return n, pdfs
+    return n, pdfs, with_source
 
 
 def _render(path):
@@ -192,11 +235,13 @@ def main():
     )
     args = ap.parse_args()
 
-    now, pdfs = national_with_pdf()
+    now, pdfs, with_source = national_with_pdf()
+    gap = with_source - now
     prev_ts, prev_n = read_previous()
     age_h, status, detail = last_sweep_run()
 
     print(f"national with_pdf = {now:,}   bulletin_pdf rows = {pdfs:,}", flush=True)
+    print(f"remaining gap     = {gap:,}", flush=True)
     print(f"previous          = {prev_n} @ {prev_ts}", flush=True)
     age_s = "unknown" if age_h is None else f"{age_h:.1f}h"
     print(f"last sweep run    = {status} {age_s} ago {detail}", flush=True)
@@ -208,10 +253,26 @@ def main():
     #    watchdog establishes the baseline and asserts nothing.
     if prev_n is None:
         print("[--] no previous reading; establishing baseline", flush=True)
-    elif now <= prev_n:
-        problems.append(
-            f"coverage has not moved since {prev_ts}: {prev_n:,} -> {now:,}"
+    else:
+        # Compare against a RATE, not against zero, and scale by the actual
+        # elapsed time rather than assuming the check ran exactly a day ago --
+        # a watchdog that skipped a run would otherwise be handed twice the
+        # budget and stay quiet through a real stall.
+        elapsed_h = _elapsed_hours(prev_ts)
+        gain = now - prev_n
+        per_day = max(gap * GAP_FRACTION_PER_DAY, MIN_GAIN_FLOOR)
+        required = per_day * (elapsed_h / 24.0)
+        print(
+            f"gain              = {gain:+,} over {elapsed_h:.1f}h "
+            f"(bar {per_day:.0f}/day -> need >= {required:.0f})",
+            flush=True,
         )
+        if gain < required:
+            problems.append(
+                f"recovery has stalled: {gain:+,} churches in {elapsed_h:.1f}h "
+                f"({prev_n:,} -> {now:,}), expected at least {required:.0f} "
+                f"({per_day:.0f}/day against a {gap:,} gap)"
+            )
 
     # 2. Did the sweep actually run recently?
     if age_h is None:
@@ -231,6 +292,7 @@ def main():
     body = (
         f"<b>bulletin recovery watchdog</b>\n"
         f"churches with a PDF: {now:,}{gained}\n"
+        f"still to recover: {gap:,}\n"
         f"bulletin_pdf rows: {pdfs:,}\n"
         f"last sweep: {status}"
         + (f" {age_h:.1f}h ago" if age_h is not None else "")
