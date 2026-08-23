@@ -59,6 +59,37 @@ reports to Telegram. Verified end to end: a real run took GA 149 → 153.
 
 ---
 
+### 2026-08-23 — the walled recovery had quietly stopped
+
+Asked "are the states all done?" the honest answer was no, and the reason was a
+gap in how this was set up rather than in the scraping itself.
+
+**What had happened.** Eight per-state walled passes (AZ, CA, NY, PA, TX, KS, NE,
+VT) were OOM-killed on 2026-08-21 and were never relaunched, because the thing
+relaunching them was a supervisor loop living inside an interactive session. When
+the session ended, the supervisor ended, and the eight states simply stopped. Only
+IL finished. National coverage moved 13,116 -> 13,170 in two days: +54.
+
+**The scheduled sweep was fine** — `church-walled-sweep` fired on both 08-22 and
+08-23 as designed. But 08-22 was OOM-killed at the 2Gi ceiling six hours in, and
+because `bucket_for_day()` shards on the weekday, every state that day's run had
+not yet reached would not come around again for a week.
+
+**Fix.** Schedule changed `0 5 * * *` -> `0 5,17 * * *`. Both runs on a given day
+resolve to the same weekday bucket, and the per-state queue is
+least-recently-checked-first with per-church claims, so the 17:00 run resumes at
+the frontier the 05:00 OOM left behind instead of starting over. No code change,
+and it removes the need for a supervisor to exist at all.
+
+The eight states were relaunched by hand at the same time to recover the lost two
+days.
+
+**Reading at the time of writing (live, over VPN):**
+national 24,158 churches / 22,702 with a source / 13,170 with a PDF; gap 9,532.
+WI 620 (64.0%), MN 527 (67.0%), PA 840 (55.5%), GA 151 (61.4%), AZ 128 (40.3%).
+Worst gaps: CA 761, TX 748, NY 706, PA 673, IL 483.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
