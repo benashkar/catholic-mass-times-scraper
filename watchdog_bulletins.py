@@ -164,6 +164,39 @@ def last_sweep_run():
     return None, "no_runs", "no cron_job_run_ended event in the last 30 events"
 
 
+def proxy_health():
+    """(ok, detail) for the residential proxy the walled passes depend on.
+
+    Added after the proxy was found returning 407 while sixteen walled passes
+    ran against it. Nothing broke loudly: walled hosts 403 exactly as they do
+    when they are simply blocked, the passes exit 0, and the only visible
+    symptom is coverage crawling -- which is the same symptom as a dozen other
+    causes. A direct check names it in one line instead.
+
+    Checked separately from the rate assertion because a dead proxy is worth
+    saying even on a day the number moved: direct-fetchable churches keep the
+    total climbing while every walled host silently yields nothing.
+    """
+    proxy = os.environ.get("PROXY_URL", "").strip()
+    if not proxy:
+        return None, "PROXY_URL not set on this service"
+    try:
+        import requests
+
+        r = requests.get(
+            "http://api.ipify.org",
+            proxies={"http": proxy, "https": proxy},
+            timeout=30,
+        )
+        if r.status_code == 407:
+            return False, "407 Proxy Authentication Required (account/balance)"
+        if r.status_code >= 400:
+            return False, f"HTTP {r.status_code}"
+        return True, f"exit ip {r.text.strip()[:24]}"
+    except Exception as e:
+        return False, f"{type(e).__name__}: {str(e)[:80]}"
+
+
 def read_previous():
     try:
         raw = os.environ.get(STATE_KEY, "").strip()
@@ -302,6 +335,15 @@ def main():
     #    saying out loud, because two in a row means the frontier is stuck.
     if status not in ("successful", "no_runs") and age_h is not None:
         problems.append(f"last sweep run ended '{status}' {detail}".strip())
+
+    # 4. Is the proxy alive? The walled passes need browser AND proxy together;
+    #    with a dead proxy they exit 0 having recovered nothing from any walled
+    #    host, which is indistinguishable from those hosts simply being blocked.
+    proxy_ok, proxy_detail = proxy_health()
+    print(f"proxy             = {proxy_ok} ({proxy_detail})", flush=True)
+    if proxy_ok is False:
+        problems.append(f"residential proxy is DOWN — {proxy_detail}; "
+                        f"every walled-host pass is running blind")
 
     gained = "" if prev_n is None else f" ({now - prev_n:+,} since last check)"
     body = (
