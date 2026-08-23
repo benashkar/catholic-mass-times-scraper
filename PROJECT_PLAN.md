@@ -138,6 +138,44 @@ Telegram delivery confirmed 200. Final job on Render `succeeded`, state
 persisted to the service env var.
 
 
+### 2026-08-23 (later still) — the supervisor is a cron now, not a session
+
+Within minutes of reporting the above fixed, the replacement supervisor loop was
+killed and VT died with nothing to relaunch it. Same class of failure, third
+time. The loop was never the fix; it was the bug wearing a different hat.
+
+**`church-walled-supervisor`** — `crn-da5mhdrncjis739da9u0`, hourly at :20.
+
+It holds **no state file**, which also retires the older race: several armed
+monitors ran the old bash script concurrently, and a cycle that read the tracker
+before another rewrote it wrote back a SHORTER list — silently dropping NY, CA
+and TX from being watched at all. Truth now comes from two places that cannot be
+raced. Render is asked which passes are running (parse `--state XX` out of
+running/pending job commands); db99 is asked which states still have a gap.
+Nothing is remembered between runs.
+
+A failed jobs API returns None rather than an empty set and the cycle stands
+down. Treating an API blip as "nothing is running" once relaunched all thirteen
+states at once, and `bulletin_pdf` has no unique index while the per-church
+claim is select-then-stamp, so two passes over one state duplicate rows.
+
+Verified against live infrastructure before and after shipping: it saw all 8
+passes in flight and stood down; given free slots it picked IL and OH, the worst
+states not already running; given a bad API key it stood down rather than
+fanning out. The deployed run on Render succeeded and launched nothing, exactly
+as it should with 8 of 8 slots full.
+
+**The three crons, and what each is for:**
+
+| cron | when | job |
+|---|---|---|
+| `church-walled-sweep` | 05:00 + 17:00 UTC | does the work; evening resumes the morning's OOM frontier |
+| `church-walled-supervisor` | hourly :20 | relaunches dead per-state passes, caps at 8 concurrent |
+| `church-bulletin-watchdog` | 12:30 UTC | tells Ben if the NUMBER stops moving |
+
+None of them depends on a session being open.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
