@@ -427,6 +427,20 @@ def process_church(cur, church):
     church_name = church["name"] or ""
     stats = {"pdfs_found": 0, "pdfs_extracted": 0, "names_inserted": 0}
 
+    # church.website_url_clean holds a RESOLVED url that nothing in this
+    # codebase has ever read. For hundreds of parishes website_url is still the
+    # raw CatholicIndex redirect stub -- a bare "/api/out?id=..." with no scheme
+    # or host, which cannot be fetched at all -- while the real parish site sits
+    # unused one column over. Those churches were guaranteed to produce nothing,
+    # forever, no matter how good discovery got.
+    clean_url = (church.get("website_url_clean") or "").strip()
+    if not re.match(r"^https?://", website_url or "", re.I) and re.match(
+        r"^https?://", clean_url, re.I
+    ):
+        print(f"  [--] website_url is not fetchable; using clean: {clean_url}",
+              flush=True)
+        website_url = clean_url
+
     # Phase 1: Discover bulletin page
     #
     # This is wrapped because the fallback below is FOR churches whose stored
@@ -464,6 +478,25 @@ def process_church(cur, church):
                 # anything?" could only be answered by inference. 'fb:' is kept
                 # short because discovery_source is truncated to 30 chars.
                 result["source"] = f"fb:{alt.get('source') or 'unknown'}"[:30]
+
+    # Second address for the same parish. Where website_url and
+    # website_url_clean point at DIFFERENT hosts one of them is usually stale --
+    # a merged parish, a rebuilt site, a diocese landing page standing in for a
+    # parish that has its own domain. 868 churches in the gap look like this.
+    # Trying the other spelling costs one request and only runs after both the
+    # primary and the known-page fallback have already come up empty.
+    if not pdf_urls and clean_url and _different_host(clean_url, website_url):
+        try:
+            alt = find_bulletin_page(clean_url)
+        except Exception as exc:
+            print(f"  [--] clean url {clean_url} failed: {exc}", flush=True)
+            alt = {}
+        if alt.get("pdf_urls"):
+            print(f"  [OK] recovered via website_url_clean: {clean_url}", flush=True)
+            result = alt
+            pdf_urls = alt["pdf_urls"]
+            # Same reasoning as 'fb:' above; 30-char cap.
+            result["source"] = f"cl:{alt.get('source') or 'unknown'}"[:30]
 
     bulletin_page_url = result.get("bulletin_page_url") or website_url
     source_type = result.get("source") or "not_found"
@@ -997,10 +1030,26 @@ def main():
         where_clauses.append("state_code = %s")
         params.append(args.state.upper())
 
-    # Skip Facebook pages and diocese-level sites
-    where_clauses.append("website_url NOT LIKE '%%facebook.com%%'")
-    where_clauses.append("website_url NOT LIKE '%%diocese%%'")
-    where_clauses.append("website_url NOT LIKE '%%archdiocese%%'")
+    # Skip Facebook pages and diocese-level sites -- UNLESS website_url_clean
+    # names a real parish site.
+    #
+    # These three filters exclude 1,637 churches from every sweep. That is right
+    # for a parish whose only known address really is a Facebook page or its
+    # diocese's directory. It is wrong for the 142 whose website_url is one of
+    # those but whose resolved clean url is the parish's own domain: they were
+    # being dropped before discovery ever saw them, so they could not appear in
+    # any failure report either -- invisible, not merely unsuccessful.
+    junk = (
+        "(website_url LIKE '%%facebook.com%%' OR website_url LIKE '%%diocese%%' "
+        "OR website_url LIKE '%%archdiocese%%')"
+    )
+    clean_ok = (
+        "(website_url_clean REGEXP '^https?://' "
+        "AND website_url_clean NOT LIKE '%%facebook.com%%' "
+        "AND website_url_clean NOT LIKE '%%diocese%%' "
+        "AND website_url_clean NOT LIKE '%%archdiocese%%')"
+    )
+    where_clauses.append(f"(NOT {junk} OR {clean_ok})")
 
     # Skip churches checked within N days, in SQL — the old per-row lookup on
     # bulletin_source.discovered_at never skipped churches that have no bulletin
@@ -1045,7 +1094,8 @@ def main():
         params.extend([args.shards, args.shard])
 
     cur.execute(
-        f"SELECT c.church_id, c.slug, c.name, c.city, c.state_code, c.website_url "
+        f"SELECT c.church_id, c.slug, c.name, c.city, c.state_code, "
+        f"       c.website_url, c.website_url_clean "
         f"FROM church c WHERE {where} "
         f"ORDER BY EXISTS (SELECT 1 FROM bulletin_source bs "
         f"                 WHERE bs.church_id = c.church_id) DESC, "
