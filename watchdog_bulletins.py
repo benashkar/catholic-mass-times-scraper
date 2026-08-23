@@ -61,6 +61,9 @@ GAP_FRACTION_PER_DAY = float(os.environ.get("WATCHDOG_GAP_FRACTION", "0.01"))
 # Below this the percentage becomes noise; a small absolute floor keeps the
 # check meaningful without being shrill.
 MIN_GAIN_FLOOR = float(os.environ.get("WATCHDOG_MIN_GAIN_FLOOR", "5"))
+# Shorter than this and the rate is not worth judging -- see the guard in
+# main(). Well under the 24h schedule, so a real daily run always judges.
+MIN_ELAPSED_H = float(os.environ.get("WATCHDOG_MIN_ELAPSED_H", "6"))
 
 
 def _utcnow():
@@ -267,7 +270,19 @@ def main():
             f"(bar {per_day:.0f}/day -> need >= {required:.0f})",
             flush=True,
         )
-        if gain < required:
+        if elapsed_h < MIN_ELAPSED_H:
+            # Too short a window to judge. A run six minutes after the last one
+            # sets the bar at 0.4 churches and a gain of 0 "fails" -- which is
+            # exactly what happened the first time this shipped, on a manual
+            # test run. Churches arrive in bursts as each state pass finishes,
+            # so a few minutes of flat is normal and alerting on it is how a
+            # watchdog earns a mute.
+            print(
+                f"[--] only {elapsed_h:.2f}h since the last check "
+                f"(need {MIN_ELAPSED_H}h) — not judging the rate",
+                flush=True,
+            )
+        elif gain < required:
             problems.append(
                 f"recovery has stalled: {gain:+,} churches in {elapsed_h:.1f}h "
                 f"({prev_n:,} -> {now:,}), expected at least {required:.0f} "
