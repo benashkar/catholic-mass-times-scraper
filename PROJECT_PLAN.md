@@ -90,6 +90,54 @@ WI 620 (64.0%), MN 527 (67.0%), PA 840 (55.5%), GA 151 (61.4%), AZ 128 (40.3%).
 Worst gaps: CA 761, TX 748, NY 706, PA 673, IL 483.
 
 
+### 2026-08-23 (later) — proving it, and a watchdog so Ben is not the monitor
+
+Ben's answer to the fix above was "make sure this is live and working and I
+don't constantly have to remind you." Fair, so this is what was verified rather
+than asserted, and what now does the reminding instead of him.
+
+**Verified live, by reading Render back rather than trusting the write:**
+`church-walled-sweep` is `0 5,17 * * *`, not suspended, carrying PROXY_URL and
+both Telegram vars. The eight states that had been dead since 08-21 (AZ, CA, NY,
+PA, TX, KS, NE, VT) were relaunched and confirmed `running`.
+
+**A bug this turn is worth recording,** because two verification steps passed
+while it was live. The watchdog below was committed, pushed, built and run — and
+failed twice — before `git ls-tree origin/master` showed the file had never
+reached master at all. The working branch is `fix/bulletin-lpi-zero-pdfs` and
+`git push origin HEAD` pushes THERE, while every Render service builds from
+`master`. `python <file-not-in-image>.py` exits 2, Render reports a bare
+`nonZeroExit: 2` with no runtime logs, and it reads exactly like an argparse
+bug. Neither "the commit exists" nor "the build succeeded" checks the branch.
+
+**`church-bulletin-watchdog`** — `crn-da5m378u01pc73fobqv0`, daily 12:30 UTC.
+It does not check whether services are up; every service was green throughout
+the 08-21 failure. It checks whether the NUMBER MOVED, which is the one signal
+a healthy process doing nothing cannot fake:
+
+  1. churches-with-a-PDF up by at least 1% of the remaining gap per day
+  2. the sweep cron ran within 26h (read from service EVENTS — cron runs are not
+     jobs, and polling /jobs concludes the cron never fired when it fires daily)
+  3. that run did not die
+
+Failure sends Telegram and exits non-zero. A healthy run says nothing.
+
+**The bar is a fraction of the gap, not a fixed number, and that mattered.** The
+first cut asserted `coverage > previous`. Replayed against the actual 08-21
+failure — +54 churches over 48 hours — it passed silently, which is the only
+test that counted. A stall here is a crawl, not a zero. A fixed bar would have
+caught it but goes shrill as the corpus saturates, and an alert that fires every
+morning gets muted. 1% of the gap per day is ~95/day now and relaxes later.
+
+Test matrix, all against live db99: healthy (+1,170/24h) quiet; the real
+08-21 stall (+54/48h) alerts against a 192 bar; a hard stop (+0/25h) alerts; a
+6-minute window is not judged at all — that last guard exists because the first
+deployed run false-alarmed six minutes after a manual test.
+
+Telegram delivery confirmed 200. Final job on Render `succeeded`, state
+persisted to the service env var.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
