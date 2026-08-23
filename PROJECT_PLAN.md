@@ -176,6 +176,51 @@ as it should with 8 of 8 slots full.
 None of them depends on a session being open.
 
 
+### 2026-08-23 — working the residual 9,530 gap
+
+**A wrong conclusion, corrected in the same session.** 9,387 of the 9,530 gap
+churches carry a `bulletin_checked_at` inside the last seven days, and I read
+that as "we already tried these, so re-running cannot help." That is wrong.
+`bulletin_checked_at` is stamped as a CLAIM *before* processing — deliberately,
+because stamping only on success made a church that kills its worker immortal at
+the head of the queue. A stamp therefore proves a church was claimed, not that
+it was finished. `sainthelenampls.org` is the proof: in the gap, stamped
+recently, and discovery finds **12 PDFs on it right now**. Re-running with the
+current code does help; throughput is the constraint, not a missing fix.
+
+**What the gap actually is.** Probing a 160-church sample of the 6,285 marked
+`not_found` (`diag_gap_notfound.py`, fixed seed so it re-measures like for like):
+
+| verdict | share | ≈ churches | meaning |
+|---|---|---|---|
+| DEAD | 38.1% | ~2,400 | url does not resolve or 404s |
+| ALIVE, says "bulletin" | 26.9% | ~1,690 | site is fine — not yet successfully processed |
+| ALIVE, no keyword | 33.1% | ~2,080 | mixed; some JS-only, some genuinely have none |
+| WALLED | 1.9% | ~120 | needs the browser+proxy path |
+
+The gap spans **5,236 distinct hosts**, so no single shared-vendor fix remains
+of the kind that took national coverage 7,584 -> 13,140 (the LPi JSON API).
+
+**Defect 8: nothing ever read `church.website_url_clean`.** It holds a resolved
+url; for 130 parishes `website_url` is still a bare CatholicIndex stub
+(`/api/out?id=...`, no scheme or host, unfetchable by construction) while the
+real site sits one column over. Also fixed: 868 gap churches where raw and clean
+are on different hosts now get a second attempt, and the facebook/diocese
+filters — which excluded 1,637 churches from every sweep — now let a church
+through when its clean url is the parish's own domain. Those 142 were dropped
+before discovery saw them, so they never appeared in a failure report either.
+
+Measured, not assumed: **2 of 40** test churches recovered (baseline 0), and the
+URL repair upgraded **147** urls. Both real, both small. Worth having, not the
+answer to 9,530.
+
+**The actual lever is throughput.** States are disjoint by construction, so
+running more of them at once cannot duplicate rows (`bulletin_pdf` has no unique
+index, which is why this matters). `WALLED_MAX_RUNNING` raised 8 -> 16;
+sixteen state passes now in flight across the worst-gap states — CA, TX, NY, PA,
+IL, OH, WI, MI, NJ, MO, MA, MN, FL, KS, CT, MD.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
