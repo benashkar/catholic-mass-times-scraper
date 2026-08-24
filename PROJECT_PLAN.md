@@ -347,6 +347,57 @@ but they are unreachable, and items 1–4 above are worth more names than the
 entire blocked set.
 
 
+### 2026-08-24 — all three tracks launched in parallel; ELCA is national
+
+Everything below runs on Render, so none of it depends on a workstation staying
+up.
+
+**ELCA is loaded nationally. 8,322 congregations, 6,247 of them carrying their
+own website.** The corpus went **24,879 -> 33,201 churches (+33%)** in one job,
+from a single unauthenticated GET per state. Top states: PA 1,024, MN 970,
+WI 624, OH 464, IL 407, CA 376, IA 376, ND 327 — note that ELCA's geography is
+the upper midwest, which is exactly where the Catholic corpus was already
+strongest, so the two stack in the same markets rather than trading off.
+
+`denomination` now partitions the table cleanly: catholic 24,879, elca 8,322.
+
+**In flight right now:**
+
+| job | what |
+|---|---|
+| `osm_to_db99.py --all-states --commit --require-website` | every OSM christian place of worship with a website tag, all 50 states, deduped on geometry against the post-ELCA table |
+| `extract_bulletins_to_db99.py --state WI` | bulletin harvest across WI's new ELCA + OSM rows |
+| `church-walled-supervisor` (hourly) | keeps 16 per-state walled passes alive |
+| `church-walled-sweep` (05:00 + 17:00) | the standing recovery |
+| `church-bulletin-watchdog` (12:30) | alerts if the number stops moving or the proxy dies |
+
+**First WI ELCA result, measured:** from a standing start of zero, **144 ELCA
+congregations had bulletin PDFs within about an hour**, 364 reached by
+discovery. At the measured ~93 distinct names per church with bulletins, ELCA WI
+alone is on track for the ~25,000 names the grid projected.
+
+**What the national ELCA number implies.** 6,247 congregations with websites,
+against the measured funnel (~82% reachable, ~64% publishing) is roughly
+**3,280 new churches with bulletins**, and at ~93 distinct names each that is on
+the order of **300,000 additional distinct names** — before OSM adds anything.
+That makes the single GET-per-state ELCA endpoint the highest-leverage thing
+found in this project since the LPi JSON API.
+
+**Still open, in priority order:**
+1. OSM's siteless rows — 1,006 in WI alone — need a URL-resolution pass built.
+   `run_resolve_urls.py` cannot be reused; it is hard-wired to CatholicIndex
+   signed interstitials and writes JSONL, not db99.
+2. UMC — the guessed endpoint (`umc.org/api/find-a-church/search`) returns 404.
+   The real one has to be found before any estimate is worth quoting. Largely
+   overlaps OSM's methodist rows regardless.
+3. National bulletin harvest across the new ELCA rows, state by state, once the
+   OSM load settles.
+
+**Blocked and staying blocked:** LCMS (401, needs a key they must issue), WELS
+and the UCC backend (explicit `Disallow: /`). ~866 WI congregations between
+them. Items 1–3 above are worth more names than the entire blocked set.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
