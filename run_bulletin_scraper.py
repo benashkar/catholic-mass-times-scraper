@@ -327,6 +327,29 @@ BULLETIN_PATHS = [
     "/parish-newsletter",
     "/news-events/bulletin",
     "/news/bulletin",
+    # Protestant vocabulary. The corpus was Catholic-only until ELCA landed, and
+    # Lutheran, Methodist and UCC congregations mostly do not use the word
+    # "bulletin" for the thing that is a bulletin -- it is a worship folder, an
+    # order of worship, or just announcements. A sampled 64% of reachable ELCA
+    # sites link one from the homepage, so this vocabulary is the difference
+    # between reaching them and recording another 'not_found'.
+    #
+    # APPENDED, never inserted: BULLETIN_PATHS[2] and BULLETIN_PATHS[3:] are
+    # referenced by index further down this file, so anything added at the front
+    # silently changes which paths those two call sites mean.
+    "/worship-folder",
+    "/worship-folders",
+    "/order-of-worship",
+    "/order-of-service",
+    "/worship-bulletin",
+    "/worship-bulletins",
+    "/service-bulletin",
+    "/announcements",
+    "/weekly-announcements",
+    "/worship/bulletins",
+    "/worship/worship-bulletins",
+    "/media/bulletins",
+    "/resources/bulletins",
 ]
 
 # Keywords that indicate a bulletin page (case-insensitive)
@@ -346,6 +369,15 @@ BULLETIN_PAGE_KEYWORDS = [
     "parish newsletter",
     "current newsletter",
     "download newsletter",
+    # Protestant equivalents — see the note on BULLETIN_PATHS above.
+    "worship folder",
+    "order of worship",
+    "order of service",
+    "worship bulletin",
+    "service bulletin",
+    "weekly update",
+    "announcements",
+    "weekly announcements",
 ]
 
 # Patterns to find bulletin links on church homepages
@@ -353,6 +385,9 @@ BULLETIN_LINK_PATTERNS = [
     re.compile(r"bulletin", re.IGNORECASE),
     re.compile(r"newsletter", re.IGNORECASE),
     re.compile(r"weekly\s*(news|update|publication)", re.IGNORECASE),
+    re.compile(r"worship\s*folder", re.IGNORECASE),
+    re.compile(r"order\s*of\s*(worship|service)", re.IGNORECASE),
+    re.compile(r"announcements", re.IGNORECASE),
 ]
 
 # State aliases (same as run_resolve_urls.py)
