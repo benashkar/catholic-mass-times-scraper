@@ -280,6 +280,73 @@ confirmed live (both legs 200). The watchdog now probes the proxy directly every
 run, so it can never be silent again.
 
 
+### 2026-08-24 — Wisconsin denomination grid, and what each is worth in NAMES
+
+The goal is names of people connected to Christian parishes — first name, last
+name, and the city of the church. Every decision below is ranked by that, not by
+how many congregations a source lists.
+
+**The yield multiplier, measured not guessed.** Wisconsin currently has 795
+churches with at least one bulletin PDF, 91,325 PDFs, and 1,101,168 extracted
+name rows. Deduplicated that is:
+
+| | WI today |
+|---|---|
+| distinct person names | **73,735** |
+| distinct with BOTH first and last name | **73,747** |
+| distinct high-confidence, not flagged suspect | **36,201** |
+
+So **~93 distinct names per church that has bulletins**, ~46 of them
+high-confidence. That is the number to multiply any new congregation count by —
+and note the funnel before it: of ELCA's 624 WI congregations, 513 carry a
+website (82%), ~82% of those are reachable, and ~64% of reachable ones publish a
+bulletin. **Roughly 43% of listed congregations end up producing names.**
+
+#### The grid
+
+| Source / denomination | WI spaces | with website | permitted? | est. churches w/ bulletins | est. distinct names |
+|---|---|---|---|---|---|
+| **Catholic** (already loaded) | 1,009 | — | yes, done | ~651 today | ~60,500 (in hand) |
+| **ELCA** (loaded this session) | **624** | 513 | **yes** — public Xano API | ~270 | **~25,000** |
+| **OSM net-new, has website** | 441 | 441 | yes (ODbL attribution) | ~231 | **~21,500** |
+| **OSM net-new, no website** | 1,006 | 0 | yes, but needs a URL-resolution pass first | ~322 if 50% resolve | ~30,000 |
+| UMC | ~132 in OSM | — | robots clean, **endpoint unverified (404)** | folded into OSM | — |
+| LCMS | ~414 | — | **no** — API returns 401, needs a key from LCMS | 0 | 0 |
+| WELS | ~452 | — | **no** — `Disallow: /` | 0 | 0 |
+| UCC (suran backend) | — | — | **no** — names ClaudeBot, `Disallow: /` | 0 | 0 |
+
+**OSM net-new is genuinely new.** 2,234 named Christian places of worship in WI;
+787 sit within 150m of a church already in db99 (the dedup ran *after* the ELCA
+load, so ELCA is accounted for); **1,447 are net new**, 441 of them carrying a
+`website` tag. Breakdown of those 441: 100 unspecified, 77 lutheran, 40 baptist,
+40 methodist/UMC, 14 nondenominational, 13 presbyterian, 13 catholic, 12
+evangelical-lutheran, 12 evangelical, 12 orthodox, 11 LDS, 9 UCC, 8 AoG.
+
+#### What this adds up to for Wisconsin
+
+WI holds **1,633 churches today** (1,009 Catholic + 624 ELCA) against a
+reachable ceiling of about **3,080**. On names: **73,735 distinct today**, and
+roughly **150,000** if ELCA finishes, OSM's 441 with-websites are loaded, and the
+1,006 without websites get a resolution pass. **Approximately double.**
+
+#### Priority order, highest names-per-hour first
+
+1. **Finish ELCA WI** — running now; 144 churches already have PDFs from a
+   standing start. Zero new code. ~25,000 names.
+2. **OSM net-new with websites (441)** — one Overpass POST, reuses the ELCA
+   loader shape. ~21,500 names. ODbL attribution is the only obligation.
+3. **Roll ELCA to all 50 states** — the same single GET per state; ~8,356
+   congregations nationally, the single largest lever in the project.
+4. **URL-resolution pass for OSM's 1,006 without websites** — needs building;
+   `run_resolve_urls.py` is hard-wired to CatholicIndex and cannot be reused.
+5. UMC — find the real endpoint first; largely overlaps OSM methodist rows.
+
+Deliberately not pursued: LCMS (needs a key they must grant), WELS and the UCC
+backend (explicit `Disallow: /`). Together ~866 WI congregations, which is real —
+but they are unreachable, and items 1–4 above are worth more names than the
+entire blocked set.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
