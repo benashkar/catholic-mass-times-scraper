@@ -221,6 +221,65 @@ sixteen state passes now in flight across the worst-gap states — CA, TX, NY, P
 IL, OH, WI, MI, NJ, MO, MA, MN, FL, KS, CT, MD.
 
 
+### 2026-08-24 — Wisconsin goes non-Catholic: ELCA is in
+
+The corpus was Catholic-only, and not by convention — `church` had no
+`denomination` column at all. Wisconsin is the most Lutheran state in the
+country, so it is where the first non-Catholic adapter pays best.
+
+**The source.** `elca.org/directory/congregations` is Webflow with no data in
+its JS chunks, which is why an earlier look concluded the directory served
+nothing. It is rendered by **Wized**, whose config names a public **Xano**
+backend returning an entire state in one unauthenticated GET:
+
+    GET {xano}/api:tzLVgPph/api/get_congregations?LocationState=Wisconsin
+
+`LocationState` takes the **full state name** — passing "WI" returns `[]`, which
+is almost certainly what the earlier probe hit and read as "no data".
+
+**Verified independently before building on it** (not taken from the agent's
+report): 624 WI records, **513 with the congregation's own `LocationURL`**, 624
+with lat/lon, 553 with email. `website_url` drives the entire bulletin pipeline,
+so a roster without websites would have been worthless; this one carries them,
+plus coordinates that feed the existing ≤150m dedup and a synod that gives
+denomination for free. It carries **no worship times** — `services` stays empty
+rather than inventing a Sunday 10am.
+
+**Loaded:** WI now holds **1,009 Catholic + 624 ELCA**, 513 of the ELCA rows
+with a website. Catholic count identical before and after — the additive
+guarantee held.
+
+**The guard that matters.** `decide_match` pairs churches within 150m with
+similar names, and downtown blocks put a Lutheran congregation that close to a
+Catholic parish routinely. `bulletin_pdf` hangs off `church_id`, so one bad
+merge would silently attribute a congregation's bulletins — and everyone named
+in them — to the wrong church. All 24,879 existing rows were backfilled
+`denomination='catholic'` (every one came from a Catholic-only source), which is
+what makes the cross-denomination refusal reliable rather than a guess.
+
+**Protestant vocabulary.** Lutherans and Methodists mostly do not call it a
+bulletin: it is a worship folder, an order of worship, or announcements. Added
+to `BULLETIN_PATHS`, `BULLETIN_PAGE_KEYWORDS` and `BULLETIN_LINK_PATTERNS`,
+**appended not inserted** — `BULLETIN_PATHS[2]` and `[3:]` are referenced by
+index further down the file, and there is now an assertion that `[2]` is still
+`/bulletin/`. Discovery tested on three real ELCA sites: **12, 1 and 1 PDFs**.
+
+**Sources ruled out, and why.** LCMS returns 401 and needs a key from them —
+their anti-abuse token was deliberately not reverse-engineered. `engage.suran.com`
+(the UCC finder's backend) names ClaudeBot with `Disallow: /`, and WELS is
+`Disallow: /`; neither was fetched. PCUSA's finder sits under a disallowed path.
+Between them they yielded 0 WI congregations, so the cost of leaving them is nil
+against ELCA's 624. Remaining permitted headroom: **OSM/Overpass** (2,341 WI
+non-Catholic Christian, 526 with websites, ODbL attribution required) and
+**UMC** (`church_url` *and* worship times, needs a lat/lon grid).
+
+**Also this session:** the residential proxy was found returning **407** while
+sixteen walled passes ran against it — recovering nothing from any walled host
+and exiting 0, the exact "green while doing nothing" failure. Topped up and
+confirmed live (both legs 200). The watchdog now probes the proxy directly every
+run, so it can never be silent again.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
