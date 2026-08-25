@@ -54,17 +54,7 @@ def get_connection():
     )
 
 
-def refresh_stats_only():
-    """Rebuild bulletin_state_stats without rescoring or cleanup."""
-    import time
-
-    print("[OK] Refreshing bulletin_state_stats...")
-    t = time.time()
-    conn = get_connection()
-    cur = conn.cursor()
-    cur.execute("TRUNCATE TABLE bulletin_state_stats")
-    cur.execute("""
-        INSERT INTO bulletin_state_stats (state_code, total_names, unique_names, church_count, city_count)
+STATS_SELECT = """
         SELECT c.state_code,
                COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name, '|', c.name, '|', c.city)) AS total_names,
                COUNT(DISTINCT CONCAT(bn.first_name, '|', bn.last_name)) AS unique_names,
@@ -77,16 +67,99 @@ def refresh_stats_only():
         WHERE bn.confidence IN ('high', 'medium') AND bn.is_suspect = 0
           AND bn.first_name != '' AND bn.last_name != ''
         GROUP BY c.state_code
-    """)
-    elapsed = time.time() - t
-    cur.execute(
-        "INSERT INTO scrape_log (scrape_type, completed_at, status, notes) "
-        "VALUES ('refresh_stats', NOW(), 'completed', %s)",
-        (f"rebuilt in {elapsed:.0f}s",),
-    )
-    conn.close()
-    print(f"[OK] Stats refreshed in {int(elapsed)}s")
-    return 0
+"""
+
+
+def refresh_stats_only():
+    """Rebuild bulletin_state_stats. Build-then-swap, never truncate-then-fill.
+
+    This function had been EMPTYING the table rather than refreshing it, and the
+    reason was not where it looked. `get_connection()` sets `read_timeout=900`,
+    and the aggregate below now scans 34.4M name rows across a 51,134-church
+    corpus, so it overruns. TRUNCATE performs an implicit COMMIT in MySQL, so
+    when the INSERT was subsequently killed by the CLIENT timeout the table was
+    left empty -- not stale, empty. The health check duly reported
+    "bulletin_state_stats: 0 (expected 40+)", the daily cron exited 1, and the
+    whole pipeline read as broken while bulletins succeeded every single night.
+
+    Raising the subprocess timeout would not have fixed this, because the limit
+    that bites is on the CONNECTION.
+
+    So: a longer read timeout for this one operation, and the aggregate is built
+    into a side table and swapped in by an atomic RENAME. If the rebuild dies
+    for any reason -- timeout, OOM, killed container -- the previous stats stay
+    live. Stale numbers on a dashboard are a small problem; zero rows is a
+    dashboard that looks like the data has been deleted.
+    """
+    import os
+    import time
+
+    import pymysql
+
+    print("[OK] Refreshing bulletin_state_stats...", flush=True)
+    t = time.time()
+
+    # A dedicated connection: this aggregate legitimately takes many minutes and
+    # the shared 900s ceiling is the bug being fixed.
+    base = get_connection()
+    cfg = dict(host=base.host, port=base.port, user=base.user,
+               password=base.password, database="church_scrapes",
+               charset="utf8mb4", autocommit=True,
+               cursorclass=pymysql.cursors.DictCursor)
+    base.close()
+    long_s = int(os.getenv("STATS_READ_TIMEOUT_S", "5400"))
+    conn = pymysql.connect(connect_timeout=30, read_timeout=long_s,
+                           write_timeout=long_s, **cfg)
+    cur = conn.cursor()
+
+    try:
+        cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_new")
+        cur.execute("CREATE TABLE bulletin_state_stats_new "
+                    "LIKE bulletin_state_stats")
+        cur.execute(
+            "INSERT INTO bulletin_state_stats_new "
+            "(state_code, total_names, unique_names, church_count, city_count)"
+            + STATS_SELECT
+        )
+        cur.execute("SELECT COUNT(*) AS n FROM bulletin_state_stats_new")
+        n = int(cur.fetchone()["n"])
+        # Refuse to publish an empty rebuild. Zero rows is exactly the failure
+        # this function has been causing every night.
+        if n == 0:
+            raise RuntimeError("rebuild produced 0 rows; refusing to swap")
+
+        cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_old")
+        cur.execute("RENAME TABLE bulletin_state_stats TO bulletin_state_stats_old,"
+                    " bulletin_state_stats_new TO bulletin_state_stats")
+        cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_old")
+
+        elapsed = time.time() - t
+        cur.execute(
+            "INSERT INTO scrape_log (scrape_type, completed_at, status, notes) "
+            "VALUES ('refresh_stats', NOW(), 'completed', %s)",
+            (f"rebuilt {n} states in {elapsed:.0f}s",),
+        )
+        print(f"[OK] Stats refreshed: {n} states in {int(elapsed)}s", flush=True)
+        return 0
+    except Exception as e:
+        elapsed = time.time() - t
+        print(f"[ERR] stats rebuild failed after {int(elapsed)}s: {e}", flush=True)
+        try:
+            cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_new")
+            cur.execute(
+                "INSERT INTO scrape_log (scrape_type, completed_at, status, notes) "
+                "VALUES ('refresh_stats', NOW(), 'failed', %s)",
+                (f"{type(e).__name__}: {str(e)[:200]}",),
+            )
+        except Exception:
+            pass
+        # Non-zero so the cron's failure surface agrees with the log.
+        return 1
+    finally:
+        try:
+            conn.close()
+        except Exception:
+            pass
 
 
 def main():
