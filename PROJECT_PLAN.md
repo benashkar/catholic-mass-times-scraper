@@ -459,6 +459,46 @@ The corpus has **doubled**, and `denomination` now partitions it meaningfully
 for the first time.
 
 
+### 2026-08-25 (cont.) — refresh_stats was EMPTYING the table, and my first fix was wrong
+
+Worth recording because I got this wrong once before getting it right, and the
+wrong version was already committed.
+
+`bulletin_state_stats` sat at **0 rows against an expected 40+**. My first
+diagnosis was the 900s *subprocess* timeout in `run_daily_pipeline.py`, and I
+raised it to 3600s. That fix was necessary but could never have worked, and the
+proof was immediate: a local run finished and the table was still empty.
+
+The limit that actually bites is on the **connection**. `get_connection()` sets
+`read_timeout=900`, and the aggregate scans **34.4M name rows across 51,134
+churches**, so pymysql kills the query client-side. And because the function did
+`TRUNCATE` first — which performs an implicit COMMIT in MySQL — the table was
+left **empty rather than stale** every single night.
+
+That is the whole chain behind "the bulletin cron is broken":
+
+    corpus doubles -> aggregate overruns read_timeout=900
+      -> INSERT killed, TRUNCATE already committed
+      -> bulletin_state_stats = 0 rows
+      -> health check fails ("expected 40+")
+      -> daily cron exits 1
+      -> looks like the bulletin pipeline is down, while bulletins=OK nightly
+
+**Fixed properly:** a dedicated connection with a real read timeout, and the
+aggregate is now built into a side table and swapped in with an atomic
+`RENAME`, with an explicit refusal to swap in a zero-row rebuild. Any failure
+now leaves the previous stats live. Stale numbers on a dashboard are a small
+problem; zero rows looks like the data has been deleted. Failures write a
+`failed` row to `scrape_log` and return non-zero so the cron's surface agrees
+with the log instead of contradicting it.
+
+**Lesson worth keeping:** two timeouts governed the same operation and only one
+was visible from the calling code. The verification that caught the bad fix was
+checking the TABLE, not the exit code — the local run's `exit=0` was `tail`'s
+exit code, not Python's, which is the pipe-masks-the-exit-code trap this project
+has been bitten by before.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
