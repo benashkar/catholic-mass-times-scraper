@@ -281,10 +281,22 @@ def main():
     )
 
     # Step 3b: Rebuild dashboard stats (--new-only skips this in rescore)
+    #
+    # 900s was survivable when the corpus was ~25k churches. It is not now: ELCA
+    # and OSM took the table past 51k with 34M name rows, the rebuild ran past
+    # the cap, and the failure is silent in the worst way -- the step is killed
+    # PART WAY, so bulletin_state_stats is left EMPTY rather than stale. The
+    # health check then reports "bulletin_state_stats: 0 (expected 40+)", the
+    # run exits 1, and the whole daily pipeline reads as broken even though
+    # bulletins=OK every single day. Chased that chain backwards from a cron
+    # showing nonZeroExit=1 with no retrievable logs.
+    #
+    # This is the precompute the no-live-calcs rule depends on, so it gets a
+    # real window rather than a tight one.
     results["refresh_stats"] = run_cmd(
         [sys.executable, "rescore_names_sql.py", "--refresh-stats"],
         "Refresh bulletin_state_stats",
-        timeout_seconds=900,
+        timeout_seconds=int(os.getenv("REFRESH_STATS_TIMEOUT_S", "3600")),
     )
 
     # Step 4: Health check
