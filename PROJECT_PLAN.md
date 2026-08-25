@@ -398,6 +398,67 @@ and the UCC backend (explicit `Disallow: /`). ~866 WI congregations between
 them. Items 1–3 above are worth more names than the entire blocked set.
 
 
+### 2026-08-25 — cron audit: the daily bulletin cron was never the problem
+
+**Answering the question directly: the bulletin cron is scheduled, it fires, and
+the bulletin step succeeds every run.** It is `church-bulletin-cron`
+(`crn-d6s8t02a214c73bt62s0`), **daily at 03:00 UTC**, running
+`run_daily_pipeline.py --bulletins-only` — daily rather than weekly, which is
+better than the docstring in that file still claims.
+
+But it has exited 1 on every scheduled run since 08-20, which made it look dead.
+Render keeps no runtime logs for a cron after it exits, so the diagnosis came
+out of `scrape_log`, the table that exists precisely because a one-off run's
+stdout dies with its container:
+
+| date | steps |
+|---|---|
+| 08-24 | bulletins=**OK**, backfill=OK, rescore=OK, refresh_stats=FAIL, health=FAIL, redeploy=OK, verify=OK |
+| 08-23 | bulletins=**OK**, … refresh_stats=FAIL, health=FAIL … |
+| 08-21 | bulletins=**OK**, … refresh_stats=FAIL … |
+
+**`bulletins=OK` every single day.** The two failing steps are one failure
+twice: `refresh_stats` had a 900s cap that was fine at ~25k churches, but ELCA
+and OSM took the table past **51,134 churches and 34.4M name rows**, so the
+rebuild now runs past the cap. It is killed *part way*, which leaves
+`bulletin_state_stats` **empty rather than stale** — verified, 0 rows against an
+expected 40+. The health check reads that, reports it, and the run exits 1.
+
+Cap raised 900s -> 3600s, env-overridable. This is the precompute the
+no-live-calcs rule depends on, so it gets a real window. Stats table is being
+rebuilt now.
+
+#### Full church cron inventory, verified against Render events
+
+| cron | schedule | status |
+|---|---|---|
+| `church-bulletin-cron` | 03:00 daily | fires; bulletins OK; exit-1 cause now fixed |
+| `church-walled-sweep` | 05:00 + 17:00 | fires — **the 17:00 slot added on 08-23 is confirmed working** |
+| `church-walled-supervisor` | hourly :20 | fires |
+| `church-sweep-supervisor` | every 20 min | fires, all recent runs successful |
+| `church-bulletin-watchdog` | 12:30 daily | fires |
+| `church-bulletin-verify` | Tue 15:00 | scheduled; no run inside the current event window |
+
+#### Corpus after tonight
+
+| denomination | churches |
+|---|---|
+| catholic | 25,735 |
+| elca | 8,322 |
+| christian (OSM, unspecified) | 4,783 |
+| baptist | 2,906 |
+| presbyterian | 939 |
+| methodist | 904 |
+| episcopal | 692 |
+| lutheran | 629 |
+| orthodox | 538 |
+| nondenominational | 535 |
+| **TOTAL** | **51,134** — from 24,879 at the start of the session |
+
+The corpus has **doubled**, and `denomination` now partitions it meaningfully
+for the first time.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
