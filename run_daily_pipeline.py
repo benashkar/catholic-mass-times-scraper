@@ -24,6 +24,13 @@ os.chdir(PROJECT_ROOT)
 # How long the bulletin crawl gets. The bulletin cron is weekly (Tue 03:00 UTC)
 # and nothing else competes for the window, so give it a real one — the old 2h
 # cap killed the step mid-California every week (bulletins=FAIL since Jul 14).
+#
+# Weekly is deliberate and matches the source: a parish uploads ONE bulletin a
+# week. Running nightly re-crawls 48,000 sites to find six new PDFs, which
+# burns the proxy and the hosts' patience for nothing. The schedule had drifted
+# to daily (0 3 * * *) while this very comment still said weekly; it is now
+# 0 3 * * 2 again, and SWEEP_DAYS_FRESH is 6 to match (it MUST stay shorter
+# than the 7-day period, or churches fall through the gap between runs).
 # Override with BULLETIN_RUNTIME_MINUTES on the Render service.
 BULLETIN_RUNTIME_MINUTES = int(os.getenv("BULLETIN_RUNTIME_MINUTES", "600"))
 
@@ -33,10 +40,20 @@ BULLETIN_RUNTIME_MINUTES = int(os.getenv("BULLETIN_RUNTIME_MINUTES", "600"))
 # must stay shorter than the refresh period.
 DAYS_FRESH = int(os.getenv("SWEEP_DAYS_FRESH", "6"))
 
-# One in-process sweep runs ~15 churches/min at the 4 workers that fit in 2GB,
-# so a 10h window covers ~9,000 of the ~17,000 due — a 2-week cycle against
-# parishes that publish weekly. Sharded across containers it finishes in one
-# night. Set BULLETIN_SHARDED=0 to fall back to the single-process path.
+# One in-process sweep runs ~15 churches/min at the 4 workers that fit in 2GB.
+# Sharded across containers it finishes in one night; unsharded it cannot.
+#
+# The arithmetic moved under this comment and is worth restating, because it is
+# what sets the shard count. It used to read "~17,000 due". ELCA and OSM took
+# the corpus to 48,339 churches WITH A WEBSITE, and on a weekly cadence every
+# one of them comes due each Tuesday — not a fraction of them. At 15/min/shard
+# that is 48,339 / (15 x SHARDS) minutes: 6 shards ~= 8.9h against what was a
+# 10h window, which is too tight to absorb a single OOM. Hence SWEEP_SHARDS=8
+# and BULLETIN_RUNTIME_MINUTES=720 on the service. Weekly cadence means there
+# is a week of slack, so a longer window costs nothing and a short one costs
+# coverage.
+#
+# Set BULLETIN_SHARDED=0 to fall back to the single-process path.
 BULLETIN_SHARDED = os.getenv("BULLETIN_SHARDED", "1") == "1"
 
 
