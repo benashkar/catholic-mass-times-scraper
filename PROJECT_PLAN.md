@@ -1,21 +1,68 @@
 # Church Scrapes — Project Plan
 
-_Last updated: 2026-08-21 15:00 UTC — national 13,140 (+5,556, corpus +73%), gap 9,562. See STATE OF PLAY at the top._
+## STATE OF PLAY (as of 2026-08-27)
 
-## 📊 STATE OF PLAY — 2026-08-21 15:00 UTC (read this first)
+**The corpus doubled and stopped being Catholic-only.**
 
-**Where it started:** a CSV of 69 Wisconsin churches that appeared to have no bulletins.
-They had bulletins. So did roughly five and a half thousand others.
+| | before this run | now |
+|---|---|---|
+| churches | 24,879 | **51,134** |
+| churches with a bulletin PDF | 7,584 | **17,648** |
+| bulletin_pdf rows | — | **3,253,140** |
+| bulletin_name rows | — | **35,153,251** |
+| denominations represented | 1 | **10+** |
 
-| | baseline (08-17) | now | change |
-|---|---|---|---|
-| **national churches with a bulletin PDF** | 7,584 | **13,140** | **+5,556 (corpus +73%)** |
-| national gap (source but no PDF) | 14,997 | **9,562** | −5,435 |
-| **Wisconsin** | 271 (28%) | **620 (64.0%)** | +349, 1.03M name rows |
-| the 86 named WI church ids | 0 | **55** | +55 |
+catholic 25,735 · elca 8,322 · christian/OSM 4,783 · baptist 2,906 ·
+presbyterian 939 · methodist 904 · episcopal 692 · lutheran 629 · orthodox 538 ·
+nondenominational 535.
+Wisconsin: **1,633 churches, 838 with a PDF** (from 980 / 271 at the start).
 
-Focus states: MN **527 (67.0%)** · WI **620 (64.0%)** · GA **150 (61.0%)** · PA **837 (55.3%)** ·
-AZ **128 (40.3%, website-limited)**. Large states: NY **1,135 (61.5%)** · IL 718 · TX 623 · CA 759.
+**The goal is names** — first name, last name, city of the church. Measured
+yield is **~93 distinct names per church that has bulletins**; WI's 795 churches
+produced 73,735 distinct names.
+
+### What runs, and none of it needs a session open
+
+| cron | schedule | job |
+|---|---|---|
+| `church-bulletin-cron` | **Tue 03:00 UTC** | the weekly harvest — parishes publish weekly |
+| `church-walled-sweep` | 05:00 + 17:00 | walled-host recovery; the evening run resumes the morning's OOM frontier |
+| `church-walled-supervisor` | hourly :20 | relaunches dead per-state passes, caps concurrency |
+| `church-sweep-supervisor` | every 20 min | keeps shards fed |
+| `church-bulletin-watchdog` | 12:30 UTC | **alerts Telegram if the number stops moving or the proxy dies** |
+| `church-bulletin-verify` | Tue 15:00 | verifies 12h after the harvest |
+
+All six verified live and unsuspended. Cadence is governed by one variable —
+`SWEEP_DAYS_FRESH=6` — read by the cron, the sweep supervisor and the walled
+supervisor alike, so they cannot drift.
+
+### The three things worth knowing before touching anything
+
+1. **A green exit code proves nothing here.** Every significant failure this
+   run looked healthy: eight states OOM-killed and silently unrelaunched; a
+   proxy returning 407 while sixteen passes ran against it; a stats table being
+   emptied nightly. Verify against db99 or Render events. Cron RUNS are service
+   *events*, not `/jobs`. There are no runtime logs after a cron exits — read
+   `scrape_log`.
+2. **`bulletin_checked_at` is a claim stamped BEFORE processing.** It proves a
+   church was claimed, not that it was processed. Reading it the other way cost
+   a wrong diagnosis this session.
+3. **`bulletin_pdf` has no unique index.** States are disjoint so parallel
+   states are safe; two passes over one state duplicate rows.
+
+### Open work, in priority order
+
+1. **National bulletin harvest** over the ~23,000 non-Catholic churches with a
+   website. Only Wisconsin has been harvested. Biggest available win.
+2. **Load OSM churches that have no website tag, then resolve their URLs.**
+   `--require-website` meant they were skipped, not loaded. `run_resolve_urls.py`
+   cannot be reused — it is hard-wired to CatholicIndex interstitials.
+3. **Find UMC's real endpoint** — the guessed path 404s. Carries worship times
+   as well as websites.
+
+Not pursued, deliberately: LCMS (401, needs a key they must issue), WELS and the
+UCC backend (explicit `Disallow: /`), PCUSA (`/search` disallowed).
+
 
 ### The seven defects, each of which looked like "this parish has no bulletin"
 
