@@ -40,6 +40,17 @@ RUNNER_SERVICE = os.environ.get("WALLED_RUNNER_SERVICE", "crn-d6s8t02a214c73bt62
 # politeness to the hosts, not RAM.
 MAX_RUNNING = int(os.environ.get("WALLED_MAX_RUNNING", "8"))
 WALLED_BUDGET = int(os.environ.get("WALLED_BUDGET", "600"))
+# Match the weekly cadence the bulletin cron runs on. These passes used
+# --days-fresh 0, which re-crawls every church in a state on every relaunch --
+# and since the supervisor relaunches hourly, that quietly put the walled
+# recovery on a continuous churn no matter what the weekly cron said. A parish
+# publishes ONE bulletin a week; crawling it hourly finds nothing and spends
+# the residential proxy and the host's patience to find it.
+#
+# 6 days, matching SWEEP_DAYS_FRESH, so a relaunch still resumes at the
+# frontier (churches are claim-stamped before processing) but stops re-walking
+# ground covered this week.
+WALLED_DAYS_FRESH = int(os.environ.get("SWEEP_DAYS_FRESH", "6"))
 # Below this a state is not worth a dedicated 90-minute pass; the twice-daily
 # sweep will reach it on its weekday turn.
 MIN_GAP = int(os.environ.get("WALLED_MIN_GAP", "25"))
@@ -124,7 +135,7 @@ def launch(state):
     cmd = (
         f"python -u extract_bulletins_to_db99.py --state {state} "
         f"--walled-browser --walled-budget {WALLED_BUDGET} "
-        f"--workers 1 --days-fresh 0"
+        f"--workers 1 --days-fresh {WALLED_DAYS_FRESH}"
     )
     d = _render("POST", f"/services/{RUNNER_SERVICE}/jobs", json={"startCommand": cmd})
     return d.get("id", "ERR")
