@@ -499,6 +499,49 @@ exit code, not Python's, which is the pipe-masks-the-exit-code trap this project
 has been bitten by before.
 
 
+### 2026-08-27 — bulletins are WEEKLY, because parishes publish weekly
+
+Ben: "bulletins should not be every night, it should be once a week as bulletins
+are uploaded once a week to each church site." Correct, and the code already
+agreed with him — `run_daily_pipeline.py` carried the comment *"The bulletin
+cron is weekly (Tue 03:00 UTC)"* three lines above the constant, while the
+actual schedule had drifted to `0 3 * * *`. A parish uploads ONE bulletin a
+week; a nightly run re-crawls 48,000 sites to find a handful of new PDFs and
+spends the residential proxy and the hosts' patience doing it.
+
+**Changing the schedule alone would not have worked.** Three things governed
+cadence and only one was the cron:
+
+| lever | was | now | why it mattered |
+|---|---|---|---|
+| `church-bulletin-cron` schedule | `0 3 * * *` | **`0 3 * * 2`** | the visible one |
+| `SWEEP_DAYS_FRESH` (service env) | **2** | **6** | `supervise_bulletin_sweep` re-reads this every 20 min; at 2 the whole system stays on a 2-day churn whatever the cron says |
+| walled passes in `supervise_walled_states` | `--days-fresh 0` | **`--days-fresh 6`** | the supervisor relaunches hourly and 0 re-crawls the entire state every time |
+
+All three now read the same `SWEEP_DAYS_FRESH`, so they cannot drift apart
+again. 6 days is deliberate: it MUST stay shorter than the 7-day period or
+churches fall through the gap between runs.
+
+**Coverage arithmetic, restated because it had gone stale.** The comment in
+`run_daily_pipeline.py` still said "~17,000 due". ELCA and OSM took the corpus
+to **48,339 churches with a website**, and on a weekly cadence *all* of them
+come due each Tuesday rather than a fraction:
+
+    6 shards x 15/min  ->  8.9h against a 10h window   (too tight for one OOM)
+    8 shards x 15/min  ->  6.7h against a 12h window   (5.3h headroom)
+
+Hence `SWEEP_SHARDS=8` and `BULLETIN_RUNTIME_MINUTES=720`. Weekly cadence buys a
+week of slack, so a longer window costs nothing while a short one costs
+coverage. Verified by reading the service back from Render, not from the write.
+
+Tuesday 03:00 UTC also pairs with `church-bulletin-verify` at Tue 15:00 — the
+verification runs twelve hours after the harvest it is verifying.
+
+**Where the numbers stand:** 51,134 churches, **16,624 with a bulletin PDF** (up
+from 13,170 two days ago), 48,339 carrying a website. `bulletin_state_stats`
+rebuilt successfully at 50 rows after the read_timeout fix.
+
+
 ## 🔴 2026-08-17 — "THESE CHURCHES HAVE NO BULLETINS" WAS WRONG
 
 69 Wisconsin churches carried zero extracted names and read as parishes that simply do not
