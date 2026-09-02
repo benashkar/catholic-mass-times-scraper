@@ -17,6 +17,17 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    # Close every db99 connection opened during a request, however the view
+    # exits. db99 is shared by every project (max_connections=1289,
+    # wait_timeout=28800) and hit 1,286 of 1,289 on 2026-09-02. Twelve call
+    # sites in this file and data_loader.py closed only on the happy path,
+    # inside handlers that swallow the exception -- so any query error stranded
+    # a connection for eight hours in a gunicorn process that never restarts.
+    # Anchoring the close here also covers routes added later.
+    from app.data_loader import close_db99_conns
+
+    app.teardown_appcontext(close_db99_conns)
+
     # Initialize the data loader (loads master church list on startup)
     from app.data_loader import init_data
 

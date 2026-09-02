@@ -10,7 +10,7 @@ from pathlib import Path
 
 os.environ.setdefault("DB_HOST", "10.10.0.8")
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from src.utils.db_connection import get_connection  # noqa: E402
+from src.utils.db_connection import close_quietly, get_connection  # noqa: E402
 
 CR = {"KS", "MO", "MN", "OH", "AR", "TX", "OK", "UT", "CO", "IN", "IA",
       "NE", "NY", "GA", "AL", "MI", "ID", "MA", "IL", "NM", "ME"}
@@ -18,6 +18,13 @@ SINCE = "2026-06-18"
 
 seen = set()
 for _ in range(300):  # ~15h at 180s
+    # The close MUST be in a finally. It used to sit inside the try, and the
+    # except below just sleeps and continues -- so every failed poll leaked a
+    # connection. Over a 15-hour loop at one poll per 180s, and with db99's
+    # 8-hour wait_timeout, that is up to ~160 stranded connections, accumulated
+    # precisely while db99 was already erroring. A monitor must not deepen the
+    # outage it is watching.
+    conn = None
     try:
         conn = get_connection(); cur = conn.cursor()
         cur.execute(
@@ -25,9 +32,10 @@ for _ in range(300):  # ~15h at 180s
             "WHERE source_url LIKE '%%discovermass%%' AND last_scraped_at >= %s "
             "GROUP BY state_code", (SINCE,))
         counts = {r["state_code"]: r["n"] for r in cur.fetchall()}
-        conn.close()
     except Exception as e:
         print(f"[poll-err] {str(e)[:80]}", flush=True); time.sleep(180); continue
+    finally:
+        close_quietly(conn)
     cur_cr = set(counts) & CR
     for s in sorted(cur_cr - seen):
         print(f"[CR landed] {s}: {counts[s]} churches  ({len(cur_cr)}/21 CR states)", flush=True)

@@ -59,6 +59,120 @@ query. That is what makes emergency cleanup safe.
 The universal version of this rule now lives in `benashkar/global-config` `CLAUDE.md`, which every
 project loads.
 
+
+## What was found and fixed in THIS repo (2026-09-02)
+
+Measured before the work: `church_scrapes` sat at 2 idle connections at rest,
+but rose to **32** while a bulletin sweep was running -- so the footprint is
+driven by the sweep, not by a steady background leak.
+
+### The checklist item that was still open: the per-thread connection
+
+`extract_bulletins_to_db99.py` had **exactly the `cherry_road_dashboard`
+bug**. Each `ThreadPoolExecutor` worker lazily opened its own connection into
+a `threading.local` and **nothing ever closed it** -- no `try/finally`, no
+`with`, no shutdown hook. Repo-wide grep for `conn_t.close` / `local.conn.close`
+returned nothing.
+
+Being precise about the cost, because the first draft of this note overstated
+it: **process exit does reclaim these**, since the OS closes the sockets. What
+it does not reclaim is the accumulation *during* a run. This file runs as 6
+sharded Render jobs across 50 states, so a long shard retires many pools' worth
+of threads and holds every one of their connections until it exits -- unreused,
+unreusable, and counted against every other project the whole time.
+
+**Fixed**: worker connections are registered in `worker_conns` and closed in a
+`finally` after the executor block, which also covers the runtime-cap and
+`KeyboardInterrupt` exit paths.
+
+### The dashboard: 12 sites, zero `finally`
+
+`dashboard/app/data_loader.py` (7 sites) and `dashboard/app/__init__.py`
+(5 routes: `/schema`, `/health`, `/debug/query`, `/debug/audit`, `/debug/logs`)
+all shared one shape:
+
+```python
+conn = _get_db_connection()
+...queries...
+conn.close()          # only reached when nothing raises
+except Exception:
+    log it and return an empty result
+```
+
+Not one `finally` between them, in a gunicorn process that never restarts. This
+is the same substance as the "unregistered teardown" pattern, without the `g`
+machinery -- there was no `flask.g`, no `close_db`, no `teardown_appcontext`
+anywhere in the repo.
+
+**Fixed**: `_get_db_connection()` now registers each connection on Flask's `g`
+when an app context exists, and `create_app()` registers
+`close_db99_conns` via `teardown_appcontext`. Patching 12 sites individually
+would have left the next new route free to repeat the bug. Outside an app
+context (the cache loader, scripts) behaviour is unchanged. The existing
+`conn.close()` calls remain and are now harmless.
+
+### Retry: 1040 only
+
+There was no 1040 handling anywhere -- zero repo-wide hits for `1040`,
+`ER_CON_COUNT_ERROR` or "Too many connections". Worse, `_ensure_loaded()`
+retried on **any** exception with a 30-second cooldown driven by page views, so
+during an exhaustion event every page view launched another attempt.
+
+**Fixed**: `src/utils/db_connection.get_connection()` and the dashboard's
+`_get_db_connection()` retry **only** errno 1040, linear backoff 2s/4s/6s.
+Everything else raises immediately.
+
+### The monitors that deepened the outage
+
+`scripts/_cr_progress_monitor.py` (~15h loop) and
+`scripts/_dm_progress_monitor.py` (~18h loop) both had `conn.close()` *inside*
+the `try`, with an `except` that sleeps 180s and continues. A failing poll
+leaked a connection every three minutes -- accumulating precisely while db99
+was already erroring. **Fixed**: `close_quietly(conn)` in a `finally`.
+
+### A separate bug found on the way: `_load_from_db` never ran
+
+`dashboard/app/data_loader.py` called `log.info(...)` / `log.error(...)` at
+**5 sites while only `logger` was ever defined**. This is committed on master,
+not a local edit. `_load_from_db()`'s **first statement** was `log.info(...)`,
+so it raised `NameError` on every call -- and the `except Exception` handler's
+`log.error(...)` raised `NameError` too, so the failure did not even log.
+
+That means the dashboard's data cache never loaded and `_ensure_loaded()`
+retried every 30 seconds forever. Not a connection leak (it failed before
+connecting), but a live outage of the dashboard's data. **Fixed** by renaming
+all 7 `log.` calls to `logger.`, with a regression test that greps for the
+pattern.
+
+### New helpers
+
+`src/utils/db_connection.py` gained `close_quietly(conn)` (safe on `None` and
+on double-close) and a `connection()` context manager. Use the context manager
+at every new call site.
+
+### Verified
+
+`tests/test_db99_connection_hygiene.py` -- 7 tests, confirmed to **FAIL**
+against the pre-fix code and **PASS** after.
+
+### Deliberately NOT changed
+
+* **`extract_bulletins_to_db99.py` main connection** (opened before
+  `ensure_schema`, closed ~270 lines later with no `finally`). Wrapping it means
+  refactoring `main()` around a connection-owning helper. Process exit reclaims
+  it, so the payoff is small and the risk to a live sweep is not. Left as a
+  follow-up.
+* **~30 one-shot cron/CLI scripts** with `close()` on the happy path only.
+  Process exit reaps them.
+* **`label_host_proxy_policy.py` / `repair_dead_website_urls.py`** share ONE
+  pymysql connection across `ThreadPoolExecutor` workers. pymysql is not
+  thread-safe, so this is a real correctness bug -- but fixing it means giving
+  each worker its own connection, which is a behaviour change that deserves its
+  own PR and its own test.
+* **`dashboard/app/templates/schema.html`** shows copy-paste connection
+  snippets with no `close()`. That is how the pattern propagates; worth
+  updating next time the template is touched.
+
 ---
 
 # Church Scrapes — Project Plan

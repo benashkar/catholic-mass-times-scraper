@@ -5,15 +5,29 @@ Reads credentials from AWS Secrets Manager (primary), falls back to .env
 when Secrets Manager is unreachable.
 
 Usage:
-    from src.utils.db_connection import get_connection
+    from src.utils.db_connection import connection
+    with connection() as conn:      # always closed, even on an exception
+        ...
+
+    # or, when you must manage it yourself:
+    from src.utils.db_connection import get_connection, close_quietly
     conn = get_connection()
+    try:
+        ...
+    finally:
+        close_quietly(conn)
 """
 
 import json
+import logging
 import os
 import threading
+import time
+from contextlib import contextmanager
 
 import pymysql
+
+logger = logging.getLogger(__name__)
 
 _secrets_cache = {}
 _SECRET_ID = "/ben/ai-tool/db99"
@@ -68,23 +82,82 @@ def _get_credentials():
     )
 
 
-def get_connection(database=_DATABASE, autocommit=False):
-    """Get a MySQL connection to church_scrapes on db99."""
+# db99 is ONE MySQL instance shared by every project: max_connections=1289,
+# wait_timeout=28800 (EIGHT HOURS). On 2026-09-02 it reached 1,286 of 1,289 and
+# began refusing new connections with errno 1040, breaking scrapes in five
+# unrelated projects. A connection this project fails to close holds its slot
+# for most of a day. See PROJECT_PLAN.md.
+ER_CON_COUNT_ERROR = 1040  # "Too many connections"
+
+
+def get_connection(database=_DATABASE, autocommit=False, attempts=4, base_delay=2.0):
+    """Get a MySQL connection to church_scrapes on db99.
+
+    Retries ONLY errno 1040 (ER_CON_COUNT_ERROR), with linear backoff, so a
+    connection-ceiling spike caused by another project costs this project a few
+    seconds instead of a night's data. Every other error -- bad credentials, an
+    unknown database, a genuine outage -- is raised immediately. Retrying
+    everything turns a real fault into a slow one, which is harder to diagnose.
+    """
     secret = _get_secret() or {}
     host = os.getenv("DB_HOST") or secret.get("DB_HOST") or "db99.rds.blockshopper.com"
     port = int(os.getenv("DB_PORT") or secret.get("DB_PORT") or "3306")
     user, password = _get_credentials()
 
-    return pymysql.connect(
-        host=host,
-        port=port,
-        user=user,
-        password=password,
-        database=database,
-        connect_timeout=30,
-        read_timeout=300,
-        write_timeout=300,
-        autocommit=autocommit,
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor,
-    )
+    last_err = None
+    for attempt in range(attempts):
+        try:
+            return pymysql.connect(
+                host=host,
+                port=port,
+                user=user,
+                password=password,
+                database=database,
+                connect_timeout=30,
+                read_timeout=300,
+                write_timeout=300,
+                autocommit=autocommit,
+                charset="utf8mb4",
+                cursorclass=pymysql.cursors.DictCursor,
+            )
+        except pymysql.err.OperationalError as e:
+            code = e.args[0] if e.args else None
+            if code != ER_CON_COUNT_ERROR:
+                raise
+            last_err = e
+            if attempt < attempts - 1:
+                delay = base_delay * (attempt + 1)  # linear: 2s, 4s, 6s
+                logger.warning(
+                    "[--] db99 at max connections (1040), retry %d/%d in %.0fs",
+                    attempt + 1, attempts - 1, delay,
+                )
+                time.sleep(delay)
+    logger.error("[ERR] db99 refused connection (1040) after %d attempts", attempts)
+    raise last_err
+
+
+def close_quietly(conn):
+    """Close a connection, swallowing errors. Safe on None and double-close.
+
+    Use in a `finally`. A connection left open is held by db99 for the full
+    eight-hour wait_timeout, so 'we closed it on the happy path' is not enough.
+    """
+    if conn is None:
+        return
+    try:
+        conn.close()
+    except Exception:
+        pass
+
+
+@contextmanager
+def connection(database=_DATABASE, autocommit=False):
+    """Context manager that always closes its connection.
+
+    Prefer this over a bare get_connection() at every new call site.
+    """
+    conn = get_connection(database=database, autocommit=autocommit)
+    try:
+        yield conn
+    finally:
+        close_quietly(conn)

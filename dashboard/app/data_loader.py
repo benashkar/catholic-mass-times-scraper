@@ -15,6 +15,7 @@ from functools import lru_cache
 
 import pandas as pd
 import pymysql
+from flask import g, has_app_context
 
 logger = logging.getLogger(__name__)
 
@@ -215,13 +216,91 @@ def _get_credentials():
     )
 
 
-def _get_db_connection():
-    """Create a new MySQL connection to church_scrapes on db99."""
+# db99 is ONE MySQL instance shared by every project: max_connections=1289,
+# wait_timeout=28800 (EIGHT HOURS). On 2026-09-02 it reached 1,286 of 1,289 and
+# began refusing connections with errno 1040, breaking five unrelated projects.
+ER_CON_COUNT_ERROR = 1040  # "Too many connections"
+
+# Flask `g` key holding every connection opened during the current app context.
+_G_CONNS = "_db99_conns"
+
+
+def close_db99_conns(exc=None):
+    """Close every connection opened during this Flask app context.
+
+    Registered as a teardown_appcontext handler by create_app(). This is the
+    safety net: every query function in this module was shaped
+
+        conn = _get_db_connection()
+        ...queries...
+        conn.close()          # only reached when nothing raises
+        ...
+        except Exception:
+            log and return an empty result
+
+    so any query error stranded a connection for eight hours -- in a gunicorn
+    process that never restarts. Twelve call sites across this file and
+    app/__init__.py had that shape and not one `finally` between them.
+
+    Patching each site individually would leave the next new route free to
+    repeat the bug, so the close is anchored here instead. The existing
+    conn.close() calls remain correct and simply make this a no-op.
+    """
+    conns = g.pop(_G_CONNS, None) or []
+    for conn in conns:
+        try:
+            conn.close()
+        except Exception:  # already closed by the caller, or a dead socket
+            pass
+
+
+def _get_db_connection(attempts=4, base_delay=2.0):
+    """Create a new MySQL connection to church_scrapes on db99.
+
+    Inside a Flask app context the connection is registered on `g` so
+    close_db99_conns() closes it however the view exits. Outside one (the
+    cache-loader path, scripts) the behaviour is unchanged.
+
+    Retries ONLY errno 1040 with linear backoff. Every other error is raised
+    immediately -- retrying everything turns a real fault into a slow one.
+    """
     secret = _get_secret() or {}
     host = os.getenv("DB_HOST") or secret.get("DB_HOST") or "db99.rds.blockshopper.com"
     port = int(os.getenv("DB_PORT") or secret.get("DB_PORT") or "3306")
     user, password = _get_credentials()
 
+    last_err = None
+    conn = None
+    for attempt in range(attempts):
+        try:
+            conn = _connect(host, port, user, password)
+            break
+        except pymysql.err.OperationalError as e:
+            code = e.args[0] if e.args else None
+            if code != ER_CON_COUNT_ERROR:
+                raise
+            last_err = e
+            if attempt < attempts - 1:
+                delay = base_delay * (attempt + 1)  # linear: 2s, 4s, 6s
+                logger.warning(
+                    "[--] db99 at max connections (1040), retry %d/%d in %.0fs",
+                    attempt + 1, attempts - 1, delay,
+                )
+                time.sleep(delay)
+    if conn is None:
+        logger.error("[ERR] db99 refused connection (1040) after %d attempts", attempts)
+        raise last_err
+
+    if has_app_context():
+        conns = g.get(_G_CONNS)
+        if conns is None:
+            conns = []
+            setattr(g, _G_CONNS, conns)
+        conns.append(conn)
+    return conn
+
+
+def _connect(host, port, user, password):
     return pymysql.connect(
         host=host,
         port=port,
@@ -302,7 +381,7 @@ def _load_from_db(log):
     global _data_loaded, _last_load_attempt
 
     _last_load_attempt = time.monotonic()
-    log.info("Loading church data from db99...")
+    logger.info("Loading church data from db99...")
 
     try:
         conn = _get_db_connection()
@@ -355,7 +434,7 @@ def _load_from_db(log):
         # Leave whatever we already have in place — a transient failure must not
         # replace a good state list with an empty one, and must not mark the
         # load done. _ensure_loaded() will try again on the next request.
-        log.error(f"Failed to load data from db99: {e}")
+        logger.error(f"Failed to load data from db99: {e}")
         if _state_list is None:
             _state_list = []
         return False
@@ -383,7 +462,7 @@ def _load_from_db(log):
     _state_list = new_state_list
 
     total_churches = sum(s["church_count"] for s in _state_list)
-    log.info(f"Loaded {total_churches} churches across {len(_state_list)} states")
+    logger.info(f"Loaded {total_churches} churches across {len(_state_list)} states")
 
     # Build bulletin stats cache from bulletin_state_stats table
     for sc, bs in bulletin_summary.items():
@@ -399,7 +478,7 @@ def _load_from_db(log):
             "last_updated": str(lu.date()) if lu else "",
         }
 
-    log.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
+    logger.info(f"Pre-computed bulletin stats for {len(_bulletin_stats_cache)} states")
 
     # Build bulletin filters cache
     state_churches = defaultdict(list)
@@ -432,7 +511,7 @@ def _load_from_db(log):
             "church_options": church_options,
         }
 
-    log.info(f"Pre-computed bulletin filters for {len(_bulletin_filters_cache)} states")
+    logger.info(f"Pre-computed bulletin filters for {len(_bulletin_filters_cache)} states")
 
     # Only now is the worker genuinely usable.
     _data_loaded = True

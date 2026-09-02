@@ -1135,7 +1135,24 @@ def main():
     counter = {"done": 0}
     # Each worker needs its OWN connection: a pymysql connection is not safe to
     # share across threads.
+    #
+    # But a threading.local slot becomes UNREACHABLE when its thread retires,
+    # and pymysql has no __del__ that sends COM_QUIT, so a connection left in
+    # one is never closed. It stays Sleep on db99 for the rest of THIS
+    # process's life -- and db99 is shared by every project, which hit 1,286 of
+    # 1,289 connections on 2026-09-02.
+    #
+    # To be precise about the cost: process exit does reclaim these, because
+    # the OS closes the sockets. What it does NOT reclaim is the accumulation
+    # DURING a run. This file runs as 6 sharded Render jobs against 50 states,
+    # so a single long shard retires many pools' worth of threads and holds
+    # every one of their connections until it exits -- unreused, unreusable,
+    # and counted against every other project the whole time.
+    #
+    # worker_conns is the registry that makes them closeable; see the finally
+    # after the executor block.
     local = threading.local()
+    worker_conns = []
 
     def worker(idx_church):
         i, church = idx_church
@@ -1147,6 +1164,8 @@ def main():
         if conn_t is None:
             conn_t = get_connection()
             conn_t.autocommit(True)
+            with lock:
+                worker_conns.append(conn_t)
             local.conn = conn_t
         cur_t = conn_t.cursor()
 
@@ -1203,26 +1222,43 @@ def main():
                 )
 
     print(f"Workers: {args.workers}")
-    with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = [pool.submit(worker, (i, c)) for i, c in enumerate(churches)]
-        try:
-            for _ in as_completed(futures):
-                # Stop cleanly before the cron kills us, so watermarks survive
-                # and the next run resumes from the frontier.
-                if max_runtime_s and (time.time() - start) > max_runtime_s:
-                    if not stop.is_set():
-                        totals["stopped_early"] = True
-                        print(
-                            f"\n  [STOP] Runtime cap hit after {counter['done']}"
-                            f"/{len(churches)} churches. Progress saved.",
-                            flush=True,
-                        )
-                        stop.set()
-                        for f in futures:
-                            f.cancel()
-        except KeyboardInterrupt:
-            stop.set()
-            raise
+    try:
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            futures = [pool.submit(worker, (i, c)) for i, c in enumerate(churches)]
+            try:
+                for _ in as_completed(futures):
+                    # Stop cleanly before the cron kills us, so watermarks survive
+                    # and the next run resumes from the frontier.
+                    if max_runtime_s and (time.time() - start) > max_runtime_s:
+                        if not stop.is_set():
+                            totals["stopped_early"] = True
+                            print(
+                                f"\n  [STOP] Runtime cap hit after {counter['done']}"
+                                f"/{len(churches)} churches. Progress saved.",
+                                flush=True,
+                            )
+                            stop.set()
+                            for f in futures:
+                                f.cancel()
+            except KeyboardInterrupt:
+                stop.set()
+                raise
+    finally:
+        # The worker threads are gone. Close what they opened -- a
+        # threading.local slot is unreachable once its thread retires, so
+        # without this every worker connection sits Sleep on the shared db99
+        # instance for eight hours. Runs on the runtime-cap path and the
+        # KeyboardInterrupt path too, which is where shards usually exit.
+        closed = 0
+        for _c in worker_conns:
+            try:
+                _c.close()
+                closed += 1
+            except Exception:
+                pass
+        worker_conns.clear()
+        if closed:
+            print(f"  [OK] Closed {closed} worker DB connection(s)", flush=True)
 
     elapsed = time.time() - start
 
