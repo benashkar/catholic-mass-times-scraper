@@ -1,3 +1,66 @@
+# CROSS-PROJECT INCIDENT - 2026-09-02: db99 connection exhaustion
+
+**This did not originate in this project, and this project may be a victim, a cause, or both.**
+Recorded here because the outage was caused in one repo and felt in five, and two agents diagnosed
+it independently, hours apart, without knowing about each other.
+
+## What happened
+
+db99 reached **1,286 of 1,289 connections** and began refusing new ones with `ER_CON_COUNT_ERROR`
+(errno 1040, "Too many connections"). Golf's weekly pull died. So did scrapes in projects with
+nothing to do with the cause. **1,071 connections have been refused since April.**
+
+**This project's footprint at the time: 42 idle connections** (database `church_scrapes`).
+
+## Why it is not a capacity problem
+
+* **`wait_timeout` on db99 is 28800 -- EIGHT HOURS.** A connection you do not close holds its slot
+  for most of a day. Raising `max_connections` only buys time; the leak rate is what grows.
+* **It is invisible from inside a service.** Of 1,219 `cr_sources` connections at the peak,
+  exactly **ONE** was doing work. Every other was `Sleep`. Your service looks healthy while it
+  starves the instance.
+* Observed idle ages: `cr_sources` **7.5 hours**, `crime` **6.7 hours**, `funeral_homes` 95 minutes.
+
+## What to check in THIS project
+
+1. Does every path that opens a db99 connection close it? The leak found in
+   `cherry_road_dashboard` was a **per-thread connection that became unreachable when its thread
+   retired but was never closed** -- correct for a process that builds its pool once, fatal for a
+   long-running process that builds a pool per batch.
+2. Is there a connection pool with no idle timeout? The shape to copy, from Englewood, which held
+   2 connections while another project held 96: `connectionLimit: 5, maxIdle: 2, idleTimeout: 30_000`.
+3. Do loaders retry `ER_CON_COUNT_ERROR`? A ninety-second spike caused by a DIFFERENT project
+   should not cost this one a night's data. Retry **only** 1040, with linear backoff -- swallowing
+   every error turns a real fault into a slow one.
+
+Diagnose with:
+
+    SHOW STATUS LIKE 'Threads_connected';
+    SHOW VARIABLES LIKE 'max_connections';
+    SELECT db, COUNT(*), SUM(COMMAND='Sleep'), MAX(TIME)
+      FROM information_schema.PROCESSLIST GROUP BY db ORDER BY 2 DESC;
+
+A `Sleep` connection is idle *between* statements, so killing one cannot interrupt a running
+query. That is what makes emergency cleanup safe.
+
+## What has been done
+
+* **511 abandoned connections killed** during the peak; the instance is back to ~11% usage.
+* **The `cherry_road_dashboard` leak is fixed** (`lnse/fetch_cache.py` now prunes dead-thread
+  connections) -- that project went from 1,219 idle to ~13.
+* **A reaper runs every 15 minutes**: `cr-db99-conn-reaper` in `cherry-road-dashboard`
+  (`scripts/db99_connection_reaper.py`). It reaps `Sleep` connections idle over 30 minutes **across
+  every database on the instance**, but only above 60% usage, and never touches `rdsadmin`.
+  **It is a safety net, not a fix** -- it does not excuse a leak in this repo.
+* **The real fix is lowering `wait_timeout`**, which needs an RDS parameter-group change.
+  `rds:DescribeDBInstances` is AccessDenied for `ben-ai-bot` and `SET GLOBAL wait_timeout` needs
+  `SUPER`/`SYSTEM_VARIABLES_ADMIN`, so it must be done in the AWS console. **Still outstanding.**
+
+The universal version of this rule now lives in `benashkar/global-config` `CLAUDE.md`, which every
+project loads.
+
+---
+
 # Church Scrapes — Project Plan
 
 ## STATE OF PLAY (as of 2026-08-27)
