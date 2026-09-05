@@ -82,11 +82,18 @@ def _get_credentials():
     )
 
 
-# db99 is ONE MySQL instance shared by every project: max_connections=1289,
-# wait_timeout=28800 (EIGHT HOURS). On 2026-09-02 it reached 1,286 of 1,289 and
-# began refusing new connections with errno 1040, breaking scrapes in five
-# unrelated projects. A connection this project fails to close holds its slot
-# for most of a day. See PROJECT_PLAN.md.
+# db99 is ONE MySQL instance shared by every project: max_connections=1289.
+# On 2026-09-02 it reached 1,286 of 1,289 and began refusing connections with
+# errno 1040, breaking five unrelated projects.
+#
+# wait_timeout was long believed to be 28800 (eight hours). MEASURED LIVE
+# 2026-09-04 it is 300 SECONDS -- the census dated the change to a 15-minute
+# window on 2026-09-03, when the oldest idle connection fell 9,486s -> 182s.
+# Whether 300 is permanent is not established, so do not depend on it: still
+# close every connection. Two consequences if it holds -- a leak is a
+# five-minute problem rather than an overnight one, and any pool_recycle must
+# sit BELOW 300 (600 was silently above it).
+# See PROJECT_PLAN.md.
 ER_CON_COUNT_ERROR = 1040  # "Too many connections"
 
 

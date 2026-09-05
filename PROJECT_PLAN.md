@@ -1,5 +1,89 @@
 # CROSS-PROJECT INCIDENT - 2026-09-02: db99 connection exhaustion
 
+## 2026-09-05 — `/health` stopped lying, and `/debug/query` stopped reaching sideways
+
+Follow-up to the db99 incident below. The connection leak was netted on
+2026-09-03 (`ef9fe5e`); this is the other half of the brief — the endpoints
+themselves.
+
+### `/health` had three defects
+
+**1. It returned HTTP 200 while the body said `status: "error"`.** Every uptime
+monitor and platform probe reads the status code, so an unreachable database
+presented as a healthy service. The body told the truth and the code
+contradicted it, and the code is the part machines read.
+
+Now the three-state contract:
+
+| status | HTTP | meaning |
+|---|---|---|
+| `ok` | 200 | everything configured is working |
+| `degraded` | **200** | something is wrong **that a restart cannot fix** |
+| `faulted` | 503 | the service genuinely cannot do its job |
+
+`degraded` returning 200 is the load-bearing line. Data-quality issues — junk
+names, stale scrapes — are real and worth alerting on, and bouncing the
+container does nothing for them. Only an unreachable database is `faulted`.
+
+**2. It ran NINE aggregate queries synchronously per request** against the
+instance that hit 1,286 of 1,289 connections on 2026-09-02. Now cached for
+`HEALTH_CACHE_TTL_SECONDS` (default 900), with `?fresh=1` to bypass. Measured:
+the health test file went from **113s to 47s**.
+
+The cache is per gunicorn **worker**, not per service — N workers means at most
+N computations per TTL, not one. Stated in the docstring so nobody reads a low
+query count as a service-wide guarantee.
+
+**3. No liveness/readiness split.** Added `/livez`: DB-free, always 200, and in
+`PUBLIC_ENDPOINTS` (a probe behind the login gate gets a 302 and reads as
+broken). This is what a restart trigger must point at — db99 is shared, and
+restarting every worker cannot fix another host's database.
+
+### `/debug/query` was scoped to the whole instance
+
+Authenticated, so not an open door — but `"SELECT only"` bounds the **verb, not
+the blast radius**. The connection is not scoped to `church_scrapes`, so
+`SELECT * FROM finance.people` read another project's data. Now refused:
+
+- **cross-schema qualifiers after FROM/JOIN** — the only syntax that can pull in
+  another database's table. Column qualifiers (`c.name`) are deliberately *not*
+  matched: an alias is not a schema, and a guard that rejects ordinary queries
+  gets switched off, which is how a security control becomes a comment. There is
+  a test for that non-over-blocking.
+- **`;`** — without it, "SELECT only" is satisfied by the first statement while
+  the second does anything it likes.
+- **INTO OUTFILE / DUMPFILE / LOAD_FILE** — filesystem reach from inside a SELECT.
+- **unbounded results** — capped at `DEBUG_QUERY_MAX_ROWS` (1000), and the
+  response says `truncated` so a clipped result is not read as complete.
+
+### A stale fact corrected in five places
+
+Every comment claimed db99's `wait_timeout` was **28800 (eight hours)**.
+**Measured live 2026-09-04 it is 300 seconds.** Not pedantry: "holds its slot
+for most of a day" and "holds it for five minutes" imply different urgency, and
+any `pool_recycle` must sit *below* the server timeout — 28800 made 600 look
+safe when it was not. Whether 300 is permanent is **not** established, so the
+comments say so and still require closing every connection.
+
+### Verification
+
+- `tests/test_health_endpoint_semantics.py` — 5 tests, **all 5 failed against
+  the pre-fix code**, all pass now.
+- `tests/test_debug_query_scope.py` — 7 passed, **1 skipped**: the row-cap test
+  needs a reachable db99 and skipped when it was not. **The cap is therefore not
+  verified against a real result set** — re-run it on the VPN before trusting it.
+- The SQL guard was also exercised directly on 9 cases including both
+  must-not-over-block ones.
+
+### Not done
+
+Not deployed. `crime`'s equivalent fix is also undeployed pending a merge to
+master, and `autoDeploy` is off fleet-wide, so both need an explicit deploy and
+a live check of the endpoint afterwards.
+
+---
+
+
 **This did not originate in this project, and this project may be a victim, a cause, or both.**
 Recorded here because the outage was caused in one repo and felt in five, and two agents diagnosed
 it independently, hours apart, without knowing about each other.
