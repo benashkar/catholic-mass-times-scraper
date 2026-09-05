@@ -92,36 +92,77 @@ def test_health_is_cached_so_it_is_not_nine_aggregates_per_request(app, client, 
 
     Health is polled far more often than it changes, and the checks are
     GROUP BY aggregates over the whole table on a SHARED database instance.
+
+    Deliberately does NOT use the real connection. An earlier version wrapped
+    the live `_get_db_connection`, and when db99 was unreachable the test hung
+    for minutes on TCP retries and stalled the whole suite. A test that hangs
+    when a dependency is down is a test that will be deleted. Stubbing also
+    makes the count exact instead of environment-dependent.
     """
+    import app as app_pkg
     from app import data_loader
 
+    # Cross-test isolation: another test may have primed the cache.
+    app_pkg._HEALTH_CACHE.clear()
+
     calls = {"n": 0}
-    real = data_loader._get_db_connection
 
-    def _counting(*a, **kw):
+    def _stub(*a, **kw):
         calls["n"] += 1
-        return real(*a, **kw)
+        raise RuntimeError("stubbed -- no real database in this test")
 
-    monkeypatch.setattr(data_loader, "_get_db_connection", _counting)
+    monkeypatch.setattr(data_loader, "_get_db_connection", _stub)
 
-    _get(client, "/health?fresh=1")   # prime, counts as 1
-    before = calls["n"]
-    _get(client, "/health")           # must be served from cache
+    _get(client, "/health?fresh=1")   # prime; this one must reach the stub
+    assert calls["n"] == 1, "the priming call did not reach the database"
+
+    # The primed entry is a FAULT, which is cached only briefly by design --
+    # long enough to prove caching happens, short enough to notice recovery.
     _get(client, "/health")
-    assert calls["n"] == before, (
-        "/health opened %d more connection(s) across two cached calls; the "
-        "nine aggregates are still running per request"
-        % (calls["n"] - before)
+    _get(client, "/health")
+    assert calls["n"] == 1, (
+        "/health opened %d connection(s) across two cached calls; the nine "
+        "aggregates are still running per request" % calls["n"]
     )
 
 
-def test_health_body_says_when_it_was_built(app, client):
+def test_a_faulted_answer_is_not_cached_for_the_full_ttl(app, client, monkeypatch):
+    """Recovery must be noticed promptly.
+
+    Caching a failure for the full 15 minutes would keep reporting `faulted`
+    long after db99 recovered -- stale, confident and wrong, which is the same
+    class of lie this endpoint was just fixed for. Caching it for nothing at
+    all would fire nine aggregates per poll at a database already in trouble.
+    """
+    import app as app_pkg
+
+    assert app_pkg._HEALTH_FAULT_TTL < app_pkg._HEALTH_CACHE_TTL, (
+        "a failed health answer is cached as long as a successful one, so the "
+        "service keeps reporting faulted after the database has recovered"
+    )
+    assert app_pkg._HEALTH_FAULT_TTL <= 60, (
+        "fault TTL of %ss is too long to notice a recovery"
+        % app_pkg._HEALTH_FAULT_TTL
+    )
+
+
+def test_health_body_says_when_it_was_built(app, client, monkeypatch):
     """A cached health answer that hides its age is worse than an uncached one.
 
     Without this the reader cannot tell a live 'ok' from one computed before
     the outage started.
+
+    Stubbed rather than hitting db99: this must not depend on a database being
+    reachable, and must never hang waiting for one.
     """
-    resp = _get(client, "/health")
+    from app import data_loader
+
+    monkeypatch.setattr(
+        data_loader, "_get_db_connection",
+        lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("stubbed")),
+    )
+
+    resp = _get(client, "/health?fresh=1")
     body = json.loads(resp.data)
-    assert "built_at" in body, "cached /health does not report when it was built"
-    assert "cache_age_seconds" in body, "cached /health does not report its age"
+    assert "built_at" in body, "/health does not report when it was built"
+    assert "cache_age_seconds" in body, "/health does not report its age"

@@ -26,6 +26,19 @@ from app.config import Config
 _HEALTH_CACHE = {}
 _HEALTH_CACHE_TTL = int(os.environ.get("HEALTH_CACHE_TTL_SECONDS", "900"))
 
+# A FAILURE is cached far more briefly than a success, and the two pull in
+# opposite directions:
+#   - not caching failures at all means every poll during an outage fires nine
+#     aggregate queries at a database that is already struggling, and the
+#     health check becomes part of the incident;
+#   - caching them for the full 15 minutes means the service keeps reporting
+#     `faulted` for a quarter of an hour after db99 has recovered, which is the
+#     same class of lie this endpoint was just fixed for -- stale, confident,
+#     and wrong.
+# 30s is short enough to notice recovery promptly and long enough that a
+# hammered database is not polled per request.
+_HEALTH_FAULT_TTL = int(os.environ.get("HEALTH_FAULT_TTL_SECONDS", "30"))
+
 # /debug/query row cap. An unbounded SELECT on a shared instance is a denial of
 # service against every project on db99, not just this one.
 _DEBUG_QUERY_MAX_ROWS = int(os.environ.get("DEBUG_QUERY_MAX_ROWS", "1000"))
@@ -230,11 +243,13 @@ def create_app(config_class=Config):
         now = time.time()
 
         cached = _HEALTH_CACHE.get(quick)
-        if not fresh and cached and (now - cached["built_at"]) < _HEALTH_CACHE_TTL:
-            payload = dict(cached["payload"])
-            payload["cache_age_seconds"] = round(now - cached["built_at"], 1)
-            payload["cached"] = True
-            return payload, cached["code"]
+        if not fresh and cached:
+            ttl = _HEALTH_FAULT_TTL if cached["code"] >= 500 else _HEALTH_CACHE_TTL
+            if (now - cached["built_at"]) < ttl:
+                payload = dict(cached["payload"])
+                payload["cache_age_seconds"] = round(now - cached["built_at"], 1)
+                payload["cached"] = True
+                return payload, cached["code"]
 
         result = {
             "states_loaded": len(data_loader._state_list) if data_loader._state_list else 0,
