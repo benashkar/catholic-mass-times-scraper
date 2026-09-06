@@ -235,7 +235,21 @@ def create_app(config_class=Config):
         from app import data_loader
         from src.utils.health_checks import run_all_checks
 
-        quick = request.args.get("quick", "").lower() in ("1", "true", "yes")
+        # QUICK BY DEFAULT since 2026-09-06. The deep sweep is a DIAGNOSTIC, not
+        # a health check, and it could not finish: /health returned HTTP 500
+        # after 122s -- the gunicorn worker timeout -- because nine aggregates
+        # over a 35.6M-row bulletin_name table do not complete in time. Meanwhile
+        # ?quick=1 answered in 16s.
+        #
+        # Caching it, added earlier the same day, did NOT fix that, and it is
+        # worth being exact about why: a cache only helps AFTER one successful
+        # computation, and there had never been one. An endpoint monitors poll
+        # has to answer reliably every time, not eventually.
+        #
+        # ?full=1 asks for the deep sweep explicitly and accepts the wait.
+        # ?quick=1 keeps working for anything that already passes it.
+        full = request.args.get("full", "").lower() in ("1", "true", "yes")
+        quick = not full
         fresh = request.args.get("fresh", "").lower() in ("1", "true", "yes")
         now = time.time()
 
