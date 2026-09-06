@@ -74,7 +74,15 @@ def _run_auth_checks(verbose=True):
 
         section("/health stays public (Render health check)")
         with app.test_client() as c:
-            check("/health -> 200", c.get("/health?quick=1").status_code == 200)
+            # The point of this check is that /health is PUBLIC -- it must not
+            # redirect to /login. Its status code depends on whether db99 is
+            # reachable (200 ok / 503 faulted), and in CI it is not, so
+            # asserting a flat 200 tested the database rather than the auth gate.
+            _h = c.get("/health?quick=1")
+            check(
+                f"/health public (not a login redirect), got {_h.status_code}",
+                _h.status_code in (200, 503),
+            )
 
         section("login page renders")
         with app.test_client() as c:
