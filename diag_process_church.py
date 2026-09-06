@@ -32,9 +32,9 @@ def main():
     args = ap.parse_args()
     ids = [int(x) for x in args.ids.replace(",", " ").split()]
 
-    from extract_bulletins_to_db99 import get_connection, process_church, prewarm_shared_state
-    from src.utils import host_policy
     import run_bulletin_scraper as R
+    from extract_bulletins_to_db99 import get_connection, prewarm_shared_state, process_church
+    from src.utils import host_policy
 
     R.WALLED_BROWSER_ENABLED = True
     R.WALLED_BROWSER_BUDGET = 3000
@@ -59,7 +59,8 @@ def main():
     fmt = ",".join(["%s"] * len(ids))
     cur.execute(
         f"SELECT church_id, slug, name, city, state_code, website_url "
-        f"FROM church WHERE church_id IN ({fmt})", ids
+        f"FROM church WHERE church_id IN ({fmt})",
+        ids,
     )
     churches = cur.fetchall()
 
@@ -76,12 +77,14 @@ def main():
 
         cur.execute(
             "SELECT COUNT(*) n FROM bulletin_pdf bp JOIN bulletin_source bs "
-            "ON bs.bulletin_source_id=bp.bulletin_source_id WHERE bs.church_id=%s", (cid,)
+            "ON bs.bulletin_source_id=bp.bulletin_source_id WHERE bs.church_id=%s",
+            (cid,),
         )
         lines.append(f"    bulletin_pdf rows now: {cur.fetchone()['n']}")
         publish("diag_process_church", "\n".join(lines))
 
-    cur.close(); conn.close()
+    cur.close()
+    conn.close()
     out = "\n".join(lines)
     print(out, flush=True)
     publish("diag_process_church", out)

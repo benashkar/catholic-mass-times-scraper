@@ -23,7 +23,7 @@ def _load_ssa_names(path=None):
     names = {}
     if not os.path.exists(path):
         return names
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             name = (row.get("name") or "").strip().lower()
@@ -40,7 +40,7 @@ def _load_census_surnames(path=None):
     names = {}
     if not os.path.exists(path):
         return names
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             name = (row.get("name") or "").strip().lower()
@@ -52,9 +52,30 @@ def _load_census_surnames(path=None):
 
 # Common non-name words that score high in dictionaries
 _SCORE_GAMING_WORDS = {
-    "grace", "faith", "hope", "joy", "christian", "dean", "rich", "art",
-    "mark", "bill", "frank", "ray", "grant", "young", "page", "cook",
-    "long", "short", "love", "angel", "fortune", "best", "fair", "noble",
+    "grace",
+    "faith",
+    "hope",
+    "joy",
+    "christian",
+    "dean",
+    "rich",
+    "art",
+    "mark",
+    "bill",
+    "frank",
+    "ray",
+    "grant",
+    "young",
+    "page",
+    "cook",
+    "long",
+    "short",
+    "love",
+    "angel",
+    "fortune",
+    "best",
+    "fair",
+    "noble",
 }
 
 

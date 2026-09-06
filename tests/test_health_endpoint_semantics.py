@@ -27,6 +27,7 @@ The status contract (see the health-endpoint-liveness-semantics skill):
 names, stale scrapes -- are `degraded`: real, worth alerting on, and completely
 unaffected by bouncing the container.
 """
+
 import json
 
 
@@ -37,10 +38,9 @@ def _get(client, path):
 def test_livez_exists_and_never_touches_the_database(app, client):
     """Liveness must answer without a DB, or it cannot survive a db99 outage."""
     resp = _get(client, "/livez")
-    assert resp.status_code == 200, (
-        "/livez must return 200 whenever the process is alive; got %s"
-        % resp.status_code
-    )
+    assert (
+        resp.status_code == 200
+    ), f"/livez must return 200 whenever the process is alive; got {resp.status_code}"
     body = json.loads(resp.data)
     assert body.get("status") == "alive"
     # The whole point: no DB key, because it must not have asked.
@@ -77,13 +77,12 @@ def test_health_reports_faulted_with_503_when_the_db_is_unreachable(app, client,
     resp = _get(client, "/health?fresh=1")
     body = json.loads(resp.data)
 
-    assert body.get("status") == "faulted", (
-        "expected status 'faulted' when the DB is unreachable, got %r" % body.get("status")
-    )
+    assert (
+        body.get("status") == "faulted"
+    ), "expected status 'faulted' when the DB is unreachable, got {!r}".format(body.get("status"))
     assert resp.status_code == 503, (
-        "/health returned HTTP %s while reporting the database unreachable. "
+        f"/health returned HTTP {resp.status_code} while reporting the database unreachable. "
         "Every monitor that checks the status code reads that as healthy."
-        % resp.status_code
     )
 
 
@@ -113,7 +112,7 @@ def test_health_is_cached_so_it_is_not_nine_aggregates_per_request(app, client, 
 
     monkeypatch.setattr(data_loader, "_get_db_connection", _stub)
 
-    _get(client, "/health?fresh=1")   # prime; this one must reach the stub
+    _get(client, "/health?fresh=1")  # prime; this one must reach the stub
     assert calls["n"] == 1, "the priming call did not reach the database"
 
     # The primed entry is a FAULT, which is cached only briefly by design --
@@ -140,10 +139,9 @@ def test_a_faulted_answer_is_not_cached_for_the_full_ttl(app, client, monkeypatc
         "a failed health answer is cached as long as a successful one, so the "
         "service keeps reporting faulted after the database has recovered"
     )
-    assert app_pkg._HEALTH_FAULT_TTL <= 60, (
-        "fault TTL of %ss is too long to notice a recovery"
-        % app_pkg._HEALTH_FAULT_TTL
-    )
+    assert (
+        app_pkg._HEALTH_FAULT_TTL <= 60
+    ), f"fault TTL of {app_pkg._HEALTH_FAULT_TTL}s is too long to notice a recovery"
 
 
 def test_health_body_says_when_it_was_built(app, client, monkeypatch):
@@ -158,7 +156,8 @@ def test_health_body_says_when_it_was_built(app, client, monkeypatch):
     from app import data_loader
 
     monkeypatch.setattr(
-        data_loader, "_get_db_connection",
+        data_loader,
+        "_get_db_connection",
         lambda *a, **kw: (_ for _ in ()).throw(RuntimeError("stubbed")),
     )
 

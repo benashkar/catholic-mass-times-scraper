@@ -95,7 +95,9 @@ class NameDatasetSQLEngine(BaseEngine):
             logger.warning(f"ref_name_dataset lookup failed ({exc}); engine neutral")
             return [
                 EngineResult(
-                    engine_name=self.name, score=0.5, is_name=True,
+                    engine_name=self.name,
+                    score=0.5,
+                    is_name=True,
                     details={"reason": "name_dataset_unavailable"},
                 )
                 for _ in names
@@ -107,7 +109,9 @@ class NameDatasetSQLEngine(BaseEngine):
             if len(words) < 2:
                 results.append(
                     EngineResult(
-                        engine_name=self.name, score=0.0, is_name=False,
+                        engine_name=self.name,
+                        score=0.0,
+                        is_name=False,
                         details={"reason": "too_few_words"},
                     )
                 )
@@ -133,8 +137,10 @@ class NameDatasetSQLEngine(BaseEngine):
             score = max(0.0, min(1.0, score))
             results.append(
                 EngineResult(
-                    engine_name=self.name, score=score,
-                    is_name=score >= 0.4, details=details,
+                    engine_name=self.name,
+                    score=score,
+                    is_name=score >= 0.4,
+                    details=details,
                 )
             )
         return results

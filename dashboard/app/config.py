@@ -12,9 +12,7 @@ class Config:
 
     # Login sessions. SECRET_KEY must be stable across restarts and gunicorn
     # workers or everyone gets logged out on each deploy.
-    PERMANENT_SESSION_LIFETIME = timedelta(
-        days=int(os.environ.get("SESSION_DAYS", "30"))
-    )
+    PERMANENT_SESSION_LIFETIME = timedelta(days=int(os.environ.get("SESSION_DAYS", "30")))
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
     # Render terminates TLS in front of the app; cookies should be HTTPS-only

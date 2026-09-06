@@ -94,12 +94,18 @@ def bucket_for_day(ordered, weekday):
 
 def run_state(state, budget):
     cmd = [
-        sys.executable, "-u", "extract_bulletins_to_db99.py",
-        "--state", state,
+        sys.executable,
+        "-u",
+        "extract_bulletins_to_db99.py",
+        "--state",
+        state,
         "--walled-browser",
-        "--walled-budget", str(budget),
-        "--workers", str(WORKERS),
-        "--days-fresh", "0",
+        "--walled-budget",
+        str(budget),
+        "--workers",
+        str(WORKERS),
+        "--days-fresh",
+        "0",
     ]
     print(f"  -> {' '.join(cmd)}", flush=True)
     try:
@@ -130,12 +136,16 @@ def main():
     else:
         ordered = states_by_gap()
         todays = bucket_for_day(ordered, weekday)
-        print(f"{len(ordered)} states have a gap; bucket {weekday % BUCKETS} of {BUCKETS}",
-              flush=True)
+        print(
+            f"{len(ordered)} states have a gap; bucket {weekday % BUCKETS} of {BUCKETS}", flush=True
+        )
 
     budget = args.budget or BUDGET
-    print(f"walled sweep — weekday={weekday} states={[s for s, _ in todays]} "
-          f"workers={WORKERS} budget={budget}", flush=True)
+    print(
+        f"walled sweep — weekday={weekday} states={[s for s, _ in todays]} "
+        f"workers={WORKERS} budget={budget}",
+        flush=True,
+    )
     for st, gap in todays:
         print(f"  {st}: gap={gap}", flush=True)
 

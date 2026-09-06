@@ -77,13 +77,15 @@ def load_state(cur, state, commit, limit=None):
     if limit:
         parsed = parsed[:limit]
     existing = existing_in_state(cur, state)
-    print(f"\n=== {state}: {len(parsed)} ELCA congregations, "
-          f"{len(existing):,} churches already in db99 ===", flush=True)
+    print(
+        f"\n=== {state}: {len(parsed)} ELCA congregations, "
+        f"{len(existing):,} churches already in db99 ===",
+        flush=True,
+    )
 
     # Only same-denomination rows are candidates. See the module docstring: a
     # cross-denomination merge is silent and corrupts attribution downstream.
-    same_denom = [e for e in existing
-                  if (e.get("denomination") or "").lower() == "elca"]
+    same_denom = [e for e in existing if (e.get("denomination") or "").lower() == "elca"]
 
     counts = {"NEW": 0, "MATCH": 0, "AMBIGUOUS": 0, "SKIP_NO_SITE": 0}
     ambiguous = []
@@ -115,8 +117,13 @@ def load_state(cur, state, commit, limit=None):
                            denomination = COALESCE(denomination, 'elca'),
                            source_provider = COALESCE(source_provider, 'elca')
                        WHERE church_id = %s""",
-                    (ch["website_url"], ch["latitude"], ch["longitude"],
-                     ch["phone"], d["church_id"]),
+                    (
+                        ch["website_url"],
+                        ch["latitude"],
+                        ch["longitude"],
+                        ch["phone"],
+                        d["church_id"],
+                    ),
                 )
                 updated += 1
             continue
@@ -139,18 +146,31 @@ def load_state(cur, state, commit, limit=None):
                      phone       = COALESCE(NULLIF(church.phone,''), VALUES(phone)),
                      denomination = COALESCE(church.denomination, VALUES(denomination)),
                      source_provider = COALESCE(church.source_provider, VALUES(source_provider))""",
-                (slug, ch["name"], ch["street"], ch["city"] or "", state,
-                 ch["postal_code"], ch["postal_code_clean"], ch["latitude"],
-                 ch["longitude"], ch["phone"], ch["website_url"],
-                 "elca", "elca"),
+                (
+                    slug,
+                    ch["name"],
+                    ch["street"],
+                    ch["city"] or "",
+                    state,
+                    ch["postal_code"],
+                    ch["postal_code_clean"],
+                    ch["latitude"],
+                    ch["longitude"],
+                    ch["phone"],
+                    ch["website_url"],
+                    "elca",
+                    "elca",
+                ),
             )
             inserted += 1
         except Exception as e:
             print(f"  [ERR] insert {ch['name']}: {e}", flush=True)
 
     withsite = sum(1 for p in parsed if p["church"]["website_url"])
-    print(f"  NEW={counts['NEW']}  MATCH={counts['MATCH']}  "
-          f"AMBIGUOUS={counts['AMBIGUOUS']}", flush=True)
+    print(
+        f"  NEW={counts['NEW']}  MATCH={counts['MATCH']}  " f"AMBIGUOUS={counts['AMBIGUOUS']}",
+        flush=True,
+    )
     print(f"  carrying a website_url: {withsite}/{len(parsed)}", flush=True)
     if ambiguous:
         print("  --- AMBIGUOUS (left alone for review) ---", flush=True)
@@ -174,8 +194,7 @@ def main():
     if not args.state and not args.all_states:
         ap.error("give --state XX or --all-states")
 
-    states = ([s.upper() for s in STATE_NAMES] if args.all_states
-              else [args.state.upper()])
+    states = [s.upper() for s in STATE_NAMES] if args.all_states else [args.state.upper()]
 
     conn = get_conn()
     conn.autocommit(True)
@@ -189,8 +208,11 @@ def main():
         except Exception as e:
             # One bad state must not abandon the other 49.
             print(f"[ERR] {st}: {type(e).__name__}: {e}", flush=True)
-    print(f"\n==== TOTAL  NEW={total['NEW']}  MATCH={total['MATCH']}  "
-          f"AMBIGUOUS={total['AMBIGUOUS']} ====", flush=True)
+    print(
+        f"\n==== TOTAL  NEW={total['NEW']}  MATCH={total['MATCH']}  "
+        f"AMBIGUOUS={total['AMBIGUOUS']} ====",
+        flush=True,
+    )
     cur.close()
     conn.close()
     return 0

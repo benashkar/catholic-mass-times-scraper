@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / "dashboard"))
 
 # --- central helper: 1040-only retry, and a close that cannot throw ---------
 
+
 def test_get_connection_retries_only_1040(monkeypatch):
     import pymysql
 
@@ -49,8 +50,7 @@ def test_get_connection_retries_only_1040(monkeypatch):
     def flaky(**kw):
         state["n"] += 1
         if state["n"] < 3:
-            raise pymysql.err.OperationalError(
-                dbc.ER_CON_COUNT_ERROR, "Too many connections")
+            raise pymysql.err.OperationalError(dbc.ER_CON_COUNT_ERROR, "Too many connections")
         return sentinel
 
     monkeypatch.setattr(pymysql, "connect", flaky)
@@ -59,8 +59,7 @@ def test_get_connection_retries_only_1040(monkeypatch):
 
     # A 1040 that never clears must raise, not spin forever.
     def always(**kw):
-        raise pymysql.err.OperationalError(
-            dbc.ER_CON_COUNT_ERROR, "Too many connections")
+        raise pymysql.err.OperationalError(dbc.ER_CON_COUNT_ERROR, "Too many connections")
 
     monkeypatch.setattr(pymysql, "connect", always)
     with pytest.raises(pymysql.err.OperationalError):
@@ -80,8 +79,8 @@ def test_close_quietly_is_safe_on_none_and_double_close():
 
     c = C()
     close_quietly(c)
-    close_quietly(c)      # must not raise
-    close_quietly(None)   # must not raise
+    close_quietly(c)  # must not raise
+    close_quietly(None)  # must not raise
     assert closed["n"] == 2
 
 
@@ -103,12 +102,12 @@ def test_connection_context_manager_closes_on_exception(monkeypatch):
 
 # --- dashboard: teardown net closes what a failing view opened --------------
 
+
 def test_dashboard_teardown_closes_connections_a_failing_view_opened(monkeypatch):
     """Every data_loader query function closed only on the happy path, inside
     a handler that swallows the exception. The teardown is the safety net."""
-    from flask import Flask
-
     from app import data_loader as dl
+    from flask import Flask
 
     closed = {"n": 0}
 
@@ -126,9 +125,9 @@ def test_dashboard_teardown_closes_connections_a_failing_view_opened(monkeypatch
     @app.route("/boom")
     def boom():
         try:
-            dl._get_db_connection()      # opened, never closed by the view
+            dl._get_db_connection()  # opened, never closed by the view
             raise RuntimeError("query failed")
-        except Exception as e:           # the swallow that caused the leak
+        except Exception as e:  # the swallow that caused the leak
             return f"error: {e}", 500
 
     assert app.test_client().get("/boom").status_code == 500
@@ -137,8 +136,8 @@ def test_dashboard_teardown_closes_connections_a_failing_view_opened(monkeypatch
 
 def test_create_app_registers_the_teardown():
     """Defining the handler is not enough -- it has to be registered."""
-    from app import data_loader as dl
     from app import create_app
+    from app import data_loader as dl
 
     assert callable(dl.close_db99_conns)
     # Registration is asserted structurally so this does not need a live DB.
@@ -160,11 +159,12 @@ def test_get_db_connection_outside_an_app_context_still_works(monkeypatch):
     monkeypatch.setattr(dl, "_get_credentials", lambda: ("u", "p"))
     monkeypatch.setattr(dl, "_connect", lambda *a: C())
 
-    conn = dl._get_db_connection()   # no app context active
+    conn = dl._get_db_connection()  # no app context active
     assert conn is not None
 
 
 # --- the logger typo that made _load_from_db fail on its first line ---------
+
 
 def test_data_loader_has_no_undefined_log_calls():
     """`log.info(...)` was used at 5 sites but only `logger` was ever defined.

@@ -166,8 +166,11 @@ def run_sharded_bulletin_sweep(deadline_minutes):
                 return SWEEP_NOTHING_DUE
 
         if remaining == 0:
-            live = [s for s, j in sweep.latest_per_shard("--known-sources-only").items()
-                    if j.get("status") in ("running", "pending")]
+            live = [
+                s
+                for s, j in sweep.latest_per_shard("--known-sources-only").items()
+                if j.get("status") in ("running", "pending")
+            ]
             if not live:
                 log(f"  [OK] sweep drained after {tick} tick(s)")
                 return SWEEP_OK
@@ -192,13 +195,18 @@ def run_sharded_bulletin_sweep(deadline_minutes):
                 except Exception as e:
                     log(f"  [WARN] shard {shard} queue check failed, launching anyway: {e}")
                 try:
-                    sweep.api(f"/services/{sweep.CRON_ID}/jobs", "POST",
-                              {"startCommand": sweep.shard_command(shard)})
+                    sweep.api(
+                        f"/services/{sweep.CRON_ID}/jobs",
+                        "POST",
+                        {"startCommand": sweep.shard_command(shard)},
+                    )
                     relaunched += 1
                 except Exception as e:
                     log(f"  [ERR] shard {shard}: {e}")
-            log(f"  tick {tick}: {remaining:,} due, {relaunched} launched"
-                + (f", {idle} partition(s) already empty" if idle else ""))
+            log(
+                f"  tick {tick}: {remaining:,} due, {relaunched} launched"
+                + (f", {idle} partition(s) already empty" if idle else "")
+            )
 
         time.sleep(120)
 
@@ -270,8 +278,10 @@ def main():
         bulletin_cmd = [
             sys.executable,
             "extract_bulletins_to_db99.py",
-            "--days-fresh", str(DAYS_FRESH),
-            "--max-runtime-minutes", str(BULLETIN_RUNTIME_MINUTES),
+            "--days-fresh",
+            str(DAYS_FRESH),
+            "--max-runtime-minutes",
+            str(BULLETIN_RUNTIME_MINUTES),
         ]
         if args.state:
             bulletin_cmd += ["--state", args.state]
@@ -363,8 +373,10 @@ def main():
         # like, and no per-run check can see it.
         stale, oldest = corpus_is_stale()
         if stale:
-            log(f"  [ERR] nothing due, but the oldest parish was checked "
-                f"{oldest} days ago (> {CORPUS_STALE_AFTER_DAYS}) — sweep is stalled")
+            log(
+                f"  [ERR] nothing due, but the oldest parish was checked "
+                f"{oldest} days ago (> {CORPUS_STALE_AFTER_DAYS}) — sweep is stalled"
+            )
             results["verify"] = False
         else:
             log(f"  [OK] nothing due; oldest parish checked {oldest} day(s) ago")
@@ -409,8 +421,12 @@ def main():
 
     # Log step results to scrape_log for remote diagnosis
     step_summary = ", ".join(
-        f"{k}=" + ("SKIPPED(nothing due)" if k == "bulletins" and nothing_was_due
-                   else ("OK" if v else "FAIL"))
+        f"{k}="
+        + (
+            "SKIPPED(nothing due)"
+            if k == "bulletins" and nothing_was_due
+            else ("OK" if v else "FAIL")
+        )
         for k, v in results.items()
     )
     try:

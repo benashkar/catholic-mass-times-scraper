@@ -88,8 +88,12 @@ def probe(row):
     url = row["website_url"]
     if not url.startswith("http"):
         url = "https://" + url
-    out = {"church_id": row["church_id"], "state": row["state_code"],
-           "name": row["name"], "url": url}
+    out = {
+        "church_id": row["church_id"],
+        "state": row["state_code"],
+        "name": row["name"],
+        "url": url,
+    }
 
     def attempt(proxies, label):
         try:
@@ -108,9 +112,7 @@ def probe(row):
     r, how, err = attempt(None, "direct")
     if r is None or r.status_code in (403, 406, 429, 503):
         if PROXY_URL:
-            r2, how2, err2 = attempt(
-                {"http": PROXY_URL, "https": PROXY_URL}, "proxy"
-            )
+            r2, how2, err2 = attempt({"http": PROXY_URL, "https": PROXY_URL}, "proxy")
             if r2 is not None and r2.status_code < 400:
                 r, how, err = r2, how2, err2
 
@@ -135,16 +137,28 @@ def probe(row):
     body = (r.text or "")[:400000].lower()
     # Does the page even mention a bulletin? If it does and discovery still
     # found nothing, that is a scraper bug and the most actionable class here.
-    words = ("bulletin", "newsletter", "worship folder", "order of worship",
-             "weekly update", "announcements")
+    words = (
+        "bulletin",
+        "newsletter",
+        "worship folder",
+        "order of worship",
+        "weekly update",
+        "announcements",
+    )
     hit = [w for w in words if w in body]
     out["verdict"] = "ALIVE_HAS_BULLETIN_WORD" if hit else "ALIVE_NO_BULLETIN_WORD"
     out["detail"] = ",".join(hit[:3]) if hit else f"{len(body)}b, no keyword"
 
     # Parked / for-sale / registrar placeholder pages answer 200 and look alive.
-    for junk in ("domain is for sale", "buy this domain", "godaddy.com/forsale",
-                 "this domain may be for sale", "website coming soon",
-                 "under construction", "account suspended"):
+    for junk in (
+        "domain is for sale",
+        "buy this domain",
+        "godaddy.com/forsale",
+        "this domain may be for sale",
+        "website coming soon",
+        "under construction",
+        "account suspended",
+    ):
         if junk in body:
             out["verdict"] = "PARKED"
             out["detail"] = junk
@@ -157,8 +171,11 @@ def main():
     ap.add_argument("--sample", type=int, default=150)
     ap.add_argument("--state", default=None)
     ap.add_argument("--workers", type=int, default=12)
-    ap.add_argument("--all-gap", action="store_true",
-                    help="Sample the whole gap, not just discovery_source=not_found")
+    ap.add_argument(
+        "--all-gap",
+        action="store_true",
+        help="Sample the whole gap, not just discovery_source=not_found",
+    )
     args = ap.parse_args()
 
     import urllib3
@@ -166,10 +183,13 @@ def main():
     urllib3.disable_warnings()
 
     rows = gap_sample(args.sample, args.state, only_notfound=not args.all_gap)
-    print(f"probing {len(rows)} churches "
-          f"({'whole gap' if args.all_gap else 'not_found only'}"
-          f"{', ' + args.state if args.state else ''})"
-          f"  proxy={'yes' if PROXY_URL else 'NO'}", flush=True)
+    print(
+        f"probing {len(rows)} churches "
+        f"({'whole gap' if args.all_gap else 'not_found only'}"
+        f"{', ' + args.state if args.state else ''})"
+        f"  proxy={'yes' if PROXY_URL else 'NO'}",
+        flush=True,
+    )
 
     results = []
     with ThreadPoolExecutor(max_workers=args.workers) as ex:
@@ -194,8 +214,10 @@ def main():
 
     alive = counts["ALIVE_HAS_BULLETIN_WORD"]
     print("\n================ READING ================")
-    print(f"sites that are UP and say 'bulletin' but yielded nothing: {alive}"
-          f" ({100.0*alive/len(results):.0f}%)")
+    print(
+        f"sites that are UP and say 'bulletin' but yielded nothing: {alive}"
+        f" ({100.0*alive/len(results):.0f}%)"
+    )
     print("That fraction of the gap is a DISCOVERY bug, not a dead parish.")
     return 0
 

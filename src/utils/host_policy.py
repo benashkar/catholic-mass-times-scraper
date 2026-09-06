@@ -129,8 +129,9 @@ def proxies_for(url, policy=None):
     return None
 
 
-def set_policy(cur, host, policy, direct_status=None, proxy_status=None,
-               checked_from=None, note=None):
+def set_policy(
+    cur, host, policy, direct_status=None, proxy_status=None, checked_from=None, note=None
+):
     """Record a measured verdict for one host."""
     cur.execute(
         """
@@ -145,8 +146,7 @@ def set_policy(cur, host, policy, direct_status=None, proxy_status=None,
             checked_at = NOW(),
             note = VALUES(note)
         """,
-        (host.lower()[:255], policy, direct_status, proxy_status, checked_from,
-         (note or "")[:255]),
+        (host.lower()[:255], policy, direct_status, proxy_status, checked_from, (note or "")[:255]),
     )
 
 

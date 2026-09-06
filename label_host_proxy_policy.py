@@ -81,9 +81,13 @@ def main():
         "every blocked host on a metered plan.",
     )
     ap.add_argument("--dry-run", action="store_true")
-    ap.add_argument("--workers", type=int, default=16,
-                    help="Concurrent host probes; each host is hit once, so this "
-                         "does not concentrate load on any single server")
+    ap.add_argument(
+        "--workers",
+        type=int,
+        default=16,
+        help="Concurrent host probes; each host is hit once, so this "
+        "does not concentrate load on any single server",
+    )
     args = ap.parse_args()
 
     proxy = os.environ.get("PROXY_URL", "").strip() or None
@@ -98,8 +102,10 @@ def main():
         try:
             probe_code, _ = None, None
             r = requests.get(
-                "http://example.com", headers={"User-Agent": UA},
-                timeout=30, proxies=proxies,
+                "http://example.com",
+                headers={"User-Agent": UA},
+                timeout=30,
+                proxies=proxies,
             )
             probe_code = r.status_code
         except Exception as e:
@@ -250,9 +256,13 @@ def main():
         "INSERT INTO scrape_log (scrape_type, completed_at, status, communities_scraped,"
         " churches_scraped, services_upserted, errors, notes)"
         " VALUES (%s, NOW(), %s, 0, %s, 0, NULL, %s)",
-        ("host_policy_labelling", "completed", len(rows),
-         f"egress={egress} direct={tally['direct']} needs_proxy={tally['needs_proxy']}"
-         f" blocked={tally['blocked']}"),
+        (
+            "host_policy_labelling",
+            "completed",
+            len(rows),
+            f"egress={egress} direct={tally['direct']} needs_proxy={tally['needs_proxy']}"
+            f" blocked={tally['blocked']}",
+        ),
     )
     conn.close()
     return 0

@@ -46,8 +46,11 @@ DEAD_STATUSES = ("ConnectionError", "ConnectTimeout", "SSLError", "404", "500", 
 def try_url(url, timeout=12):
     try:
         with requests.get(
-            url, headers={"User-Agent": UA}, timeout=timeout,
-            allow_redirects=True, stream=True,
+            url,
+            headers={"User-Agent": UA},
+            timeout=timeout,
+            allow_redirects=True,
+            stream=True,
         ) as r:
             next(r.iter_content(512), b"")
             return r.status_code, r.url
@@ -58,12 +61,16 @@ def try_url(url, timeout=12):
 def variants(host):
     bare = host[4:] if host.startswith("www.") else host
     # Ordered by how likely they are to be the site's canonical form.
-    return list(dict.fromkeys([
-        f"https://{host}",
-        f"https://www.{bare}",
-        f"https://{bare}",
-        f"http://www.{bare}",
-    ]))
+    return list(
+        dict.fromkeys(
+            [
+                f"https://{host}",
+                f"https://www.{bare}",
+                f"https://{bare}",
+                f"http://www.{bare}",
+            ]
+        )
+    )
 
 
 def main():
@@ -123,8 +130,13 @@ def main():
             stats["churches"] += cur.rowcount
             # The host answers now, so its policy verdict is stale.
             host_policy.set_policy(
-                cur, host_policy.host_of(good), "direct", "200", None,
-                "url-repair", note=f"repaired from {host}",
+                cur,
+                host_policy.host_of(good),
+                "direct",
+                "200",
+                None,
+                "url-repair",
+                note=f"repaired from {host}",
             )
             print(f"  [OK] {host} -> {good}  ({cur.rowcount} churches)")
 

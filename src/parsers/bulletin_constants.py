@@ -59,9 +59,21 @@ MINISTRY_ROLES = (
 
 # Honorific prefixes recognized in bulletin names
 HONORIFIC_TITLES = {
-    "Fr.", "Father", "Rev.", "Reverend", "Msgr.", "Monsignor",
-    "Dcn.", "Deacon", "Sr.", "Sister", "Br.", "Brother",
-    "Dr.", "Bishop", "Archbishop",
+    "Fr.",
+    "Father",
+    "Rev.",
+    "Reverend",
+    "Msgr.",
+    "Monsignor",
+    "Dcn.",
+    "Deacon",
+    "Sr.",
+    "Sister",
+    "Br.",
+    "Brother",
+    "Dr.",
+    "Bishop",
+    "Archbishop",
 }
 
 # Regex pattern for matching honorific prefixes

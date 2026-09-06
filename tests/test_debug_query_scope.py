@@ -18,6 +18,7 @@ What is checked, and why each one:
   - an unbounded result set -- a full-table SELECT on a shared instance is a
     denial of service against every other project, not just this one.
 """
+
 import json
 
 import pytest
@@ -47,9 +48,9 @@ CROSS_SCHEMA = [
 def test_cross_schema_reads_are_refused(auth_client, sql):
     """Reading another project's database is the actual risk here."""
     resp = _q(auth_client, sql)
-    assert resp.status_code == 400, (
-        "cross-schema query was not refused (HTTP %s): %s" % (resp.status_code, sql)
-    )
+    assert (
+        resp.status_code == 400
+    ), f"cross-schema query was not refused (HTTP {resp.status_code}): {sql}"
     body = json.loads(resp.data)
     assert "error" in body
 
@@ -61,10 +62,9 @@ def test_column_qualifiers_are_not_mistaken_for_schemas(auth_client):
     how a security control becomes a comment.
     """
     resp = _q(auth_client, "SELECT c.name FROM church c LIMIT 1")
-    assert resp.status_code != 400, (
-        "a normal aliased query was refused; the guard is too broad: %s"
-        % resp.data[:300]
-    )
+    assert (
+        resp.status_code != 400
+    ), f"a normal aliased query was refused; the guard is too broad: {resp.data[:300]}"
 
 
 def test_multiple_statements_are_refused(auth_client):
@@ -73,13 +73,16 @@ def test_multiple_statements_are_refused(auth_client):
     assert resp.status_code == 400, "stacked statements were accepted"
 
 
-@pytest.mark.parametrize("sql", [
-    "SELECT * FROM church INTO OUTFILE '/tmp/x'",
-    "SELECT LOAD_FILE('/etc/passwd')",
-])
+@pytest.mark.parametrize(
+    "sql",
+    [
+        "SELECT * FROM church INTO OUTFILE '/tmp/x'",
+        "SELECT LOAD_FILE('/etc/passwd')",
+    ],
+)
 def test_filesystem_reach_is_refused(auth_client, sql):
     resp = _q(auth_client, sql)
-    assert resp.status_code == 400, "filesystem access was accepted: %s" % sql
+    assert resp.status_code == 400, f"filesystem access was accepted: {sql}"
 
 
 def test_results_are_capped(auth_client):
@@ -88,7 +91,5 @@ def test_results_are_capped(auth_client):
     if resp.status_code != 200:
         pytest.skip("db99 unreachable in this environment")
     body = json.loads(resp.data)
-    assert body["count"] <= 1000, (
-        "returned %d rows uncapped" % body["count"]
-    )
+    assert body["count"] <= 1000, "returned %d rows uncapped" % body["count"]
     assert "truncated" in body, "a capped result does not say that it was capped"

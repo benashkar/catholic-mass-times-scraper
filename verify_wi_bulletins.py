@@ -23,6 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _readback import publish  # noqa: E402
 from src.utils.telegram import send_telegram  # noqa: E402
 
+
 def _target_ids():
     """The churches this recovery is about — read from the seed file itself.
 
@@ -33,8 +34,9 @@ def _target_ids():
     """
     import json
 
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seeds",
-                        "wi_verified_bulletin_pages.json")
+    path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "seeds", "wi_verified_bulletin_pages.json"
+    )
     try:
         return sorted({int(r["church_id"]) for r in json.load(open(path, encoding="utf-8"))})
     except Exception:
@@ -65,16 +67,33 @@ def main():
 
     lines.append("")
     lines.append(f"--- {state} totals ---")
-    lines.append(f"churches                 {scalar('SELECT COUNT(*) FROM church WHERE state_code=%s', (state,))}")
-    lines.append(f"with website_url         {scalar('SELECT COUNT(*) FROM church WHERE state_code=%s AND website_url IS NOT NULL AND website_url<>%s', (state, ''))}")
-    lines.append(f"with bulletin_source     {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
-    lines.append(f"with >=1 bulletin_pdf    {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN bulletin_pdf bp ON bp.bulletin_source_id=bs.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
+    lines.append(
+        f"churches                 {scalar('SELECT COUNT(*) FROM church WHERE state_code=%s', (state,))}"
+    )
+    lines.append(
+        f"with website_url         {scalar('SELECT COUNT(*) FROM church WHERE state_code=%s AND website_url IS NOT NULL AND website_url<>%s', (state, ''))}"
+    )
+    lines.append(
+        f"with bulletin_source     {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}"
+    )
+    lines.append(
+        f"with >=1 bulletin_pdf    {scalar('SELECT COUNT(DISTINCT bs.church_id) FROM bulletin_source bs JOIN bulletin_pdf bp ON bp.bulletin_source_id=bs.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}"
+    )
     # Captured here, while the cursor is still open, because the exit-status
     # check at the bottom runs after the connection is closed.
-    total_pdfs = int(scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,)))
+    total_pdfs = int(
+        scalar(
+            "SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s",
+            (state,),
+        )
+    )
     lines.append(f"total bulletin_pdf rows  {total_pdfs}")
-    lines.append(f"pdfs text_extracted      {scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s AND bp.text_extracted=1', (state,))}")
-    lines.append(f"bulletin_name rows       {scalar('SELECT COUNT(*) FROM bulletin_name bn JOIN bulletin_pdf bp ON bp.bulletin_pdf_id=bn.bulletin_pdf_id JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}")
+    lines.append(
+        f"pdfs text_extracted      {scalar('SELECT COUNT(*) FROM bulletin_pdf bp JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s AND bp.text_extracted=1', (state,))}"
+    )
+    lines.append(
+        f"bulletin_name rows       {scalar('SELECT COUNT(*) FROM bulletin_name bn JOIN bulletin_pdf bp ON bp.bulletin_pdf_id=bn.bulletin_pdf_id JOIN bulletin_source bs ON bs.bulletin_source_id=bp.bulletin_source_id JOIN church c ON c.church_id=bs.church_id WHERE c.state_code=%s', (state,))}"
+    )
 
     lines.append("")
     lines.append("--- newest bulletin editions ---")
@@ -113,11 +132,15 @@ def main():
     lines.append("")
     lines.append("  -- recovered --")
     for r in got:
-        lines.append(f"  {r['church_id']:6} {(r['name'] or '')[:30]:32} pdfs={r['pdfs']:4} names={r['names']}")
+        lines.append(
+            f"  {r['church_id']:6} {(r['name'] or '')[:30]:32} pdfs={r['pdfs']:4} names={r['names']}"
+        )
     lines.append("")
     lines.append("  -- still zero (website_url | stored bulletin page) --")
     for r in still:
-        lines.append(f"  {r['church_id']:6} {(r['name'] or '')[:26]:28} {(r['website_url'] or '(none)')[:38]:40} {(r['page'] or '(none)')[:44]}")
+        lines.append(
+            f"  {r['church_id']:6} {(r['name'] or '')[:26]:28} {(r['website_url'] or '(none)')[:38]:40} {(r['page'] or '(none)')[:44]}"
+        )
 
     cur.close()
     conn.close()

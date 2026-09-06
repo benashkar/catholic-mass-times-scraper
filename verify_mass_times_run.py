@@ -31,9 +31,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from src.utils.db_connection import get_connection
 from src.utils.telegram import send_telegram
 
-MIN_CHURCHES = 500      # a week of sharded runs should refresh thousands
+MIN_CHURCHES = 500  # a week of sharded runs should refresh thousands
 MIN_STATES = 8
-MAX_STALE_PCT = 60.0    # share of churches with no scrape in 30 days
+MAX_STALE_PCT = 60.0  # share of churches with no scrape in 30 days
 
 
 def main():
@@ -64,8 +64,10 @@ def main():
     cur.execute("SELECT COUNT(*) v FROM service")
     services = cur.fetchone()["v"]
 
-    cur.execute("SELECT COUNT(*) total, SUM(last_scraped_at < NOW() - INTERVAL 30 DAY "
-                "OR last_scraped_at IS NULL) stale FROM church")
+    cur.execute(
+        "SELECT COUNT(*) total, SUM(last_scraped_at < NOW() - INTERVAL 30 DAY "
+        "OR last_scraped_at IS NULL) stale FROM church"
+    )
     r = cur.fetchone()
     total, stale = r["total"], int(r["stale"] or 0)
     stale_pct = (stale / total * 100) if total else 100.0
@@ -74,7 +76,7 @@ def main():
         ("churches re-scraped", scraped, MIN_CHURCHES),
         ("states touched", states, MIN_STATES),
     ]
-    failures = [(l, g, f) for l, g, f in checks if g < f]
+    failures = [(label, got, floor) for label, got, floor in checks if got < floor]
     if stale_pct > MAX_STALE_PCT:
         failures.append(("stale >30d %", round(stale_pct, 1), MAX_STALE_PCT))
 

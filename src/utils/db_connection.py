@@ -136,7 +136,9 @@ def get_connection(database=_DATABASE, autocommit=False, attempts=4, base_delay=
                 delay = base_delay * (attempt + 1)  # linear: 2s, 4s, 6s
                 logger.warning(
                     "[--] db99 at max connections (1040), retry %d/%d in %.0fs",
-                    attempt + 1, attempts - 1, delay,
+                    attempt + 1,
+                    attempts - 1,
+                    delay,
                 )
                 time.sleep(delay)
     logger.error("[ERR] db99 refused connection (1040) after %d attempts", attempts)

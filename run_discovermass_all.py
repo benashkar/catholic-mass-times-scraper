@@ -36,14 +36,79 @@ ACTIVE_WEEKDAYS = [0, 2, 3, 4, 5, 6]  # Mon, Wed, Thu, Fri, Sat, Sun
 
 # Cherry Road market states (from cr_market_shape) — refreshed first.
 CR_STATES = [
-    "KS", "MO", "MN", "OH", "AR", "TX", "OK", "UT", "CO", "IN", "IA",
-    "NE", "NY", "GA", "AL", "MI", "ID", "MA", "IL", "NM", "ME",
+    "KS",
+    "MO",
+    "MN",
+    "OH",
+    "AR",
+    "TX",
+    "OK",
+    "UT",
+    "CO",
+    "IN",
+    "IA",
+    "NE",
+    "NY",
+    "GA",
+    "AL",
+    "MI",
+    "ID",
+    "MA",
+    "IL",
+    "NM",
+    "ME",
 ]
 ALL_STATES = [
-    "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL",
-    "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
-    "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI",
-    "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY",
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
 ]
 
 
@@ -70,7 +135,14 @@ def shard_for_today(weekday: int) -> list[str]:
 
 
 def run_state(state: str, timeout_s: int, stale_days: int = 0) -> bool:
-    cmd = [sys.executable, "-u", str(ROOT / "discovermass_to_db99.py"), "--state", state, "--commit"]
+    cmd = [
+        sys.executable,
+        "-u",
+        str(ROOT / "discovermass_to_db99.py"),
+        "--state",
+        state,
+        "--commit",
+    ]
     if stale_days > 0:
         cmd += ["--stale-days", str(stale_days)]
     print(f"\n{'='*60}\n[RUN] DiscoverMass commit: {state}\n{'='*60}", flush=True)
@@ -101,7 +173,9 @@ def main():
         help="Skip churches scraped within the last N days (passed to "
         "discovermass_to_db99.py). 0=disabled.",
     )
-    ap.add_argument("--per-state-timeout", type=int, default=21600, help="Seconds per state (default 6h)")
+    ap.add_argument(
+        "--per-state-timeout", type=int, default=21600, help="Seconds per state (default 6h)"
+    )
     args = ap.parse_args()
 
     if args.states:
@@ -116,7 +190,9 @@ def main():
 
     print(f"[START] DiscoverMass refresh for {len(states)} states: {', '.join(states)}", flush=True)
     if args.stale_days > 0:
-        print(f"[START] stale-only: skipping churches scraped within {args.stale_days}d", flush=True)
+        print(
+            f"[START] stale-only: skipping churches scraped within {args.stale_days}d", flush=True
+        )
     results = {}
     for st in states:
         results[st] = run_state(st, args.per_state_timeout, stale_days=args.stale_days)

@@ -21,6 +21,7 @@ def _get_name_dataset():
     if _nd is None:
         try:
             from names_dataset import NameDataset
+
             _nd = NameDataset()
             logger.info("Loaded name-dataset (730K+ first, 983K+ last)")
         except ImportError as e:

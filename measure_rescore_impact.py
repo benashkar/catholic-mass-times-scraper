@@ -130,16 +130,19 @@ def main():
     unchanged = sum(v for (o, n), v in matrix.items() if o == n)
     changed = sum(v for (o, n), v in matrix.items() if o != n)
     lines.append("")
-    lines.append(f"unchanged {unchanged}   changed {changed}  "
-                 f"({(100.0 * changed / max(1, len(rows))):.1f}%)")
+    lines.append(
+        f"unchanged {unchanged}   changed {changed}  "
+        f"({(100.0 * changed / max(1, len(rows))):.1f}%)"
+    )
 
     # Dashboard visibility is confidence IN (high, medium) AND is_suspect = 0,
     # so that is the number that actually matters to a reader.
     def visible(tier, suspect):
         return tier in ("high", "medium") and not suspect
 
-    old_vis = sum(1 for r in rows if visible((r["confidence"] or "low").lower(),
-                                             int(r["is_suspect"] or 0)))
+    old_vis = sum(
+        1 for r in rows if visible((r["confidence"] or "low").lower(), int(r["is_suspect"] or 0))
+    )
     new_vis = sum(1 for res in results if visible(res.confidence, res.is_suspect))
     lines.append(f"dashboard-visible: {old_vis} -> {new_vis}  ({new_vis - old_vis:+d})")
 

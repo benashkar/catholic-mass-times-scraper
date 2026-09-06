@@ -63,14 +63,16 @@ def main():
     if proxy:
         try:
             r = requests.get(
-                "http://example.com", timeout=30,
+                "http://example.com",
+                timeout=30,
                 proxies={"http": proxy, "https": proxy},
             )
             code = r.status_code
         except Exception as e:
             code = type(e).__name__
         check(
-            "proxy reachable", code == 200,
+            "proxy reachable",
+            code == 200,
             f"http://example.com via PROXY_URL -> {code}"
             + ("  (407 = account out of traffic / unauthenticated)" if code == 407 else ""),
         )
@@ -96,19 +98,19 @@ def main():
     # These hosts answer ONLY through the proxy, so a healthy run should find a
     # page for a decent share of them. Near-zero means we scraped them direct.
     check(
-        "needs_proxy hosts yielding", total == 0 or pct >= 25,
+        "needs_proxy hosts yielding",
+        total == 0 or pct >= 25,
         f"{with_page:,}/{total:,} needs_proxy churches have a bulletin page ({pct:.0f}%)",
     )
 
     # 3. Host policy freshness.
     cur.execute("SELECT MAX(checked_at) v, COUNT(*) n FROM scrape_host_policy")
     r = cur.fetchone()
-    cur.execute(
-        "SELECT DATEDIFF(NOW(), MAX(checked_at)) d FROM scrape_host_policy"
-    )
+    cur.execute("SELECT DATEDIFF(NOW(), MAX(checked_at)) d FROM scrape_host_policy")
     age = cur.fetchone()["d"]
     check(
-        "host policy fresh", age is not None and age <= POLICY_MAX_AGE_DAYS,
+        "host policy fresh",
+        age is not None and age <= POLICY_MAX_AGE_DAYS,
         f"{r['n']:,} hosts labelled, newest {age} days old "
         f"(limit {POLICY_MAX_AGE_DAYS}) — re-run label_host_proxy_policy.py",
     )
@@ -133,7 +135,8 @@ def main():
     )
     frontier = cur.fetchone()["d"]
     check(
-        "rotation advancing", frontier is not None and frontier <= FRONTIER_MAX_AGE_DAYS,
+        "rotation advancing",
+        frontier is not None and frontier <= FRONTIER_MAX_AGE_DAYS,
         f"oldest checked church is {frontier} days old (limit {FRONTIER_MAX_AGE_DAYS})",
     )
 
@@ -141,7 +144,8 @@ def main():
     cur.execute("SELECT policy, COUNT(*) n FROM scrape_host_policy GROUP BY policy")
     counts = {row["policy"]: row["n"] for row in cur.fetchall()}
     check(
-        "policy labels sane", counts.get("needs_proxy", 0) > 0 and counts.get("direct", 0) > 0,
+        "policy labels sane",
+        counts.get("needs_proxy", 0) > 0 and counts.get("direct", 0) > 0,
         f"direct={counts.get('direct',0):,} blocked={counts.get('blocked',0):,} "
         f"needs_proxy={counts.get('needs_proxy',0):,}",
     )

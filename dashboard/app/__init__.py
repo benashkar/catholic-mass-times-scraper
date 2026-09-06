@@ -57,9 +57,7 @@ _QUALIFIED_TABLE_RE = re.compile(
 )
 
 # Filesystem reach from inside a SELECT. No data-exploration query needs it.
-_FILE_REACH_RE = re.compile(
-    r"\b(?:into\s+(?:out|dump)file|load_file\s*\()", re.IGNORECASE
-)
+_FILE_REACH_RE = re.compile(r"\b(?:into\s+(?:out|dump)file|load_file\s*\()", re.IGNORECASE)
 
 
 def _reject_unsafe_debug_sql(sql):
@@ -79,9 +77,8 @@ def _reject_unsafe_debug_sql(sql):
     for schema in _QUALIFIED_TABLE_RE.findall(sql):
         if schema.lower() != _OWN_SCHEMA:
             return (
-                "cross-database access refused: %r is not %s. db99 is shared by "
+                f"cross-database access refused: {schema!r} is not {_OWN_SCHEMA}. db99 is shared by "
                 "every project and this tool reads only its own schema."
-                % (schema, _OWN_SCHEMA)
             )
     return None
 
@@ -281,7 +278,7 @@ def create_app(config_class=Config):
                 except Exception:
                     pass
 
-        result["built_at"] = _dt.datetime.now(_dt.timezone.utc).isoformat()
+        result["built_at"] = _dt.datetime.now(_dt.UTC).isoformat()
         result["cache_age_seconds"] = 0.0
         result["cached"] = False
         _HEALTH_CACHE[quick] = {"built_at": now, "payload": result, "code": code}
@@ -320,14 +317,16 @@ def create_app(config_class=Config):
             rows = cur.fetchmany(_DEBUG_QUERY_MAX_ROWS + 1)
             truncated = len(rows) > _DEBUG_QUERY_MAX_ROWS
             rows = rows[:_DEBUG_QUERY_MAX_ROWS]
-            return jsonify({
-                "rows": rows,
-                "count": len(rows),
-                # Say so. A silently truncated result read as complete is how
-                # someone concludes a table is empty when it is not.
-                "truncated": truncated,
-                "max_rows": _DEBUG_QUERY_MAX_ROWS,
-            })
+            return jsonify(
+                {
+                    "rows": rows,
+                    "count": len(rows),
+                    # Say so. A silently truncated result read as complete is how
+                    # someone concludes a table is empty when it is not.
+                    "truncated": truncated,
+                    "max_rows": _DEBUG_QUERY_MAX_ROWS,
+                }
+            )
         except Exception as e:
             return jsonify({"error": str(e)[:500]}), 500
         finally:

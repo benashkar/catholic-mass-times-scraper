@@ -54,7 +54,9 @@ def main():
 
     cur.execute(f"SELECT COUNT(*) v FROM bulletin_pdf WHERE {target}")
     todo = cur.fetchone()["v"]
-    print(f"rows to process ({'invalid dates' if args.refix_invalid else 'missing pdf_date'}): {todo:,}")
+    print(
+        f"rows to process ({'invalid dates' if args.refix_invalid else 'missing pdf_date'}): {todo:,}"
+    )
     print(f"mode: {'COMMIT' if write else 'DRY-RUN'}")
 
     scanned = parsed = written = cleared = 0
@@ -108,7 +110,9 @@ def main():
         if args.limit and scanned >= args.limit:
             break
 
-    print(f"\nscanned={scanned:,} parsed={parsed:,} written={written:,} cleared_to_null={cleared:,}")
+    print(
+        f"\nscanned={scanned:,} parsed={parsed:,} written={written:,} cleared_to_null={cleared:,}"
+    )
     if not write:
         print("DRY-RUN — nothing written. Re-run with --commit.")
     conn.close()

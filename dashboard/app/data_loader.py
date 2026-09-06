@@ -292,7 +292,9 @@ def _get_db_connection(attempts=4, base_delay=2.0):
                 delay = base_delay * (attempt + 1)  # linear: 2s, 4s, 6s
                 logger.warning(
                     "[--] db99 at max connections (1040), retry %d/%d in %.0fs",
-                    attempt + 1, attempts - 1, delay,
+                    attempt + 1,
+                    attempts - 1,
+                    delay,
                 )
                 time.sleep(delay)
     if conn is None:
@@ -654,9 +656,14 @@ def get_services(state_dir):
     # -1 means "never scraped", which is stale by definition — not 0 days ago.
     df["days_since_scrape"] = (
         (
-            pd.Timestamp.now().normalize() - pd.to_datetime(df["last_scraped_at"], errors="coerce")
-        ).dt.days
-    ).fillna(-1).astype(int)
+            (
+                pd.Timestamp.now().normalize()
+                - pd.to_datetime(df["last_scraped_at"], errors="coerce")
+            ).dt.days
+        )
+        .fillna(-1)
+        .astype(int)
+    )
     df["is_stale"] = (df["days_since_scrape"] > STALE_AFTER_DAYS) | (df["days_since_scrape"] < 0)
 
     # Build church_display: "Church Name (City)" for duplicate names

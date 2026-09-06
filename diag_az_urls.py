@@ -9,17 +9,26 @@ signal — a source_url, or an existing bulletin_source page — we could pivot 
 Read-only. Usage:
     python -u diag_az_urls.py --state AZ
 """
-import argparse, os, sys, traceback
+
+import argparse
+import os
+import sys
+import traceback
 from collections import Counter
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _readback import publish  # noqa: E402
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--state", default="AZ")
-    a = ap.parse_args(); st = a.state.upper()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--state", default="AZ")
+    a = ap.parse_args()
+    st = a.state.upper()
     from extract_bulletins_to_db99 import get_connection
-    conn = get_connection(); cur = conn.cursor()
+
+    conn = get_connection()
+    cur = conn.cursor()
     cur.execute(
         """
         SELECT c.church_id, c.name, c.website_url, c.source_url,
@@ -32,19 +41,35 @@ def main():
                           WHERE bs.church_id=c.church_id)
           AND (c.website_url IS NULL OR c.website_url='' OR c.website_url='#'
                OR c.website_url NOT LIKE 'http%%')
-        """, (st,))
+        """,
+        (st,),
+    )
     rows = cur.fetchall()
-    shapes = Counter(); has_src = 0; has_page = 0; sig = 0
+    shapes = Counter()
+    has_src = 0
+    has_page = 0
+    sig = 0
     lines = [f"{st}: zero-PDF churches with an unusable website_url = {len(rows)}", ""]
     for r in rows:
-        u = (r["website_url"] or "")
-        shapes["empty" if not u.strip() else ("placeholder #" if u.strip()=="#" else
-              ("/api/out" if "/api/out" in u else "other"))] += 1
-        if "sig=" in u: sig += 1
-        if (r["source_url"] or "").startswith("http"): has_src += 1
-        if (r["page"] or "").startswith("http"): has_page += 1
+        u = r["website_url"] or ""
+        shapes[
+            "empty"
+            if not u.strip()
+            else (
+                "placeholder #"
+                if u.strip() == "#"
+                else ("/api/out" if "/api/out" in u else "other")
+            )
+        ] += 1
+        if "sig=" in u:
+            sig += 1
+        if (r["source_url"] or "").startswith("http"):
+            has_src += 1
+        if (r["page"] or "").startswith("http"):
+            has_page += 1
     lines.append("--- shapes ---")
-    for k, n in shapes.most_common(): lines.append(f"  {k:16} {n}")
+    for k, n in shapes.most_common():
+        lines.append(f"  {k:16} {n}")
     lines.append("")
     lines.append(f"carry a &sig= (the CatholicIndex shape run_resolve_urls handles): {sig}")
     lines.append(f"have a usable source_url to pivot on:                            {has_src}")
@@ -56,13 +81,20 @@ def main():
         lines.append(f"     website: {(r['website_url'] or '')[:78]!r}")
         lines.append(f"     source : {(r['source_url'] or '')[:78]!r}")
         lines.append(f"     page   : {(r['page'] or '')[:78]!r}")
-    cur.close(); conn.close()
-    out = "\n".join(lines); print(out, flush=True); publish("diag_az_urls", out)
+    cur.close()
+    conn.close()
+    out = "\n".join(lines)
+    print(out, flush=True)
+    publish("diag_az_urls", out)
 
 
 if __name__ == "__main__":
-    try: main()
-    except SystemExit: raise
+    try:
+        main()
+    except SystemExit:
+        raise
     except BaseException:
         tb = "diag_az_urls FAILED\n" + traceback.format_exc()
-        print(tb, flush=True); publish("diag_az_urls", tb); sys.exit(1)
+        print(tb, flush=True)
+        publish("diag_az_urls", tb)
+        sys.exit(1)

@@ -3,6 +3,7 @@ DiscoverMass in db99. Exits when all 21 CR states are in. For use with Monitor.
 
 Run: DB_HOST=10.10.0.8 python -u scripts/_cr_progress_monitor.py
 """
+
 import os
 import sys
 import time
@@ -12,8 +13,29 @@ os.environ.setdefault("DB_HOST", "10.10.0.8")
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.utils.db_connection import close_quietly, get_connection  # noqa: E402
 
-CR = {"KS", "MO", "MN", "OH", "AR", "TX", "OK", "UT", "CO", "IN", "IA",
-      "NE", "NY", "GA", "AL", "MI", "ID", "MA", "IL", "NM", "ME"}
+CR = {
+    "KS",
+    "MO",
+    "MN",
+    "OH",
+    "AR",
+    "TX",
+    "OK",
+    "UT",
+    "CO",
+    "IN",
+    "IA",
+    "NE",
+    "NY",
+    "GA",
+    "AL",
+    "MI",
+    "ID",
+    "MA",
+    "IL",
+    "NM",
+    "ME",
+}
 SINCE = "2026-06-18"
 
 seen = set()
@@ -26,14 +48,19 @@ for _ in range(300):  # ~15h at 180s
     # outage it is watching.
     conn = None
     try:
-        conn = get_connection(); cur = conn.cursor()
+        conn = get_connection()
+        cur = conn.cursor()
         cur.execute(
             "SELECT state_code, COUNT(*) n FROM church "
             "WHERE source_url LIKE '%%discovermass%%' AND last_scraped_at >= %s "
-            "GROUP BY state_code", (SINCE,))
+            "GROUP BY state_code",
+            (SINCE,),
+        )
         counts = {r["state_code"]: r["n"] for r in cur.fetchall()}
     except Exception as e:
-        print(f"[poll-err] {str(e)[:80]}", flush=True); time.sleep(180); continue
+        print(f"[poll-err] {str(e)[:80]}", flush=True)
+        time.sleep(180)
+        continue
     finally:
         close_quietly(conn)
     cur_cr = set(counts) & CR

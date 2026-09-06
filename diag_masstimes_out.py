@@ -51,7 +51,7 @@ def main():
                     try:
                         pg = b.new_page()
                         pg.goto(url, timeout=45000, wait_until="domcontentloaded")
-                        pg.wait_for_timeout(6000)   # let the SPA do its redirect
+                        pg.wait_for_timeout(6000)  # let the SPA do its redirect
                         final = pg.url
                         lines.append(f"{i[:52]}\n    final: {final[:110]}")
                     finally:

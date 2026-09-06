@@ -233,9 +233,16 @@ def api_names_csv(state):
     # million: Wisconsin has 744,120 names, so a "complete" download was
     # missing 244,120 of them with nothing to say so.
     _probe, _total, filtered_count, _unique = get_bulletin_names_page(
-        state, start=0, length=1, search=search, order_col=8, order_dir="desc",
-        church_filter=church, city_filter=city,
-        category_filter=category, confidence_filter=confidence,
+        state,
+        start=0,
+        length=1,
+        search=search,
+        order_col=8,
+        order_dir="desc",
+        church_filter=church,
+        city_filter=city,
+        category_filter=category,
+        confidence_filter=confidence,
     )
     cap = int(os.environ.get("CSV_ROW_CAP", "2000000"))
     rows, _total, _filtered, _unique = get_bulletin_names_page(
