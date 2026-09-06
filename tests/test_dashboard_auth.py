@@ -8,6 +8,7 @@ not just this file. It also set DASHBOARD_USERS to "" as its last act, which
 leaked into every other module's requests because auth._load_users() re-reads
 the env var per request. Both are why the checks live inside a function now.
 """
+
 import os
 import sys
 
@@ -23,9 +24,18 @@ PASSWORD = "auth-test-password"
 USERS = f"{USER_EMAIL}:{PASSWORD},{USER_NAME}:{PASSWORD}"
 
 GATED_PATHS = (
-    "/", "/bulletin", "/bulletin/OH", "/schema", "/debug/query?sql=select+1",
-    "/debug/audit", "/debug/logs", "/mass-times/OH", "/mass-times/OH/calendar/",
-    "/bulletin/OH/api/names", "/bulletin/OH/api/names.csv", "/bulletin/suspect/",
+    "/",
+    "/bulletin",
+    "/bulletin/OH",
+    "/schema",
+    "/debug/query?sql=select+1",
+    "/debug/audit",
+    "/debug/logs",
+    "/mass-times/OH",
+    "/mass-times/OH/calendar/",
+    "/bulletin/OH/api/names",
+    "/bulletin/OH/api/names.csv",
+    "/bulletin/suspect/",
 )
 
 
@@ -64,7 +74,15 @@ def _run_auth_checks(verbose=True):
 
         section("/health stays public (Render health check)")
         with app.test_client() as c:
-            check("/health -> 200", c.get("/health?quick=1").status_code == 200)
+            # The point of this check is that /health is PUBLIC -- it must not
+            # redirect to /login. Its status code depends on whether db99 is
+            # reachable (200 ok / 503 faulted), and in CI it is not, so
+            # asserting a flat 200 tested the database rather than the auth gate.
+            _h = c.get("/health?quick=1")
+            check(
+                f"/health public (not a login redirect), got {_h.status_code}",
+                _h.status_code in (200, 503),
+            )
 
         section("login page renders")
         with app.test_client() as c:
@@ -98,8 +116,14 @@ def _run_auth_checks(verbose=True):
         with app.test_client() as c:
             r = c.get("/bulletin/")
             check("next= carried", "next=/bulletin/" in r.headers.get("Location", ""))
-            r = c.post("/login", data={"username": USER_NAME, "password": PASSWORD,
-                                       "next": "https://evil.example.com"})
+            r = c.post(
+                "/login",
+                data={
+                    "username": USER_NAME,
+                    "password": PASSWORD,
+                    "next": "https://evil.example.com",
+                },
+            )
             check("external next -> / not evil", r.headers.get("Location") == "/")
 
         section("sign out drops the session")

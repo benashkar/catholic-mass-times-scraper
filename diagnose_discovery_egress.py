@@ -71,8 +71,7 @@ def main():
     except Exception as e:
         egress_ip = f"unknown ({type(e).__name__})"
 
-    results = {"ok": 0, "no_page": 0, "http_err": 0, "conn_err": 0,
-               "proxy_ok": 0, "proxy_err": 0}
+    results = {"ok": 0, "no_page": 0, "http_err": 0, "conn_err": 0, "proxy_ok": 0, "proxy_err": 0}
     detail = []
     for r in rows:
         url = r["website_url"] or ""
@@ -111,9 +110,7 @@ def main():
         pcode = None
         if args.compare_proxy and proxies:
             try:
-                presp = requests.get(
-                    url, headers={"User-Agent": UA}, timeout=40, proxies=proxies
-                )
+                presp = requests.get(url, headers={"User-Agent": UA}, timeout=40, proxies=proxies)
                 pcode = presp.status_code
                 if pcode == 200:
                     results["proxy_ok"] += 1
@@ -123,9 +120,7 @@ def main():
                 pcode = type(e).__name__
                 results["proxy_err"] += 1
 
-        detail.append(
-            f"{r['church_id']}|http={code}|proxy={pcode}|disc={found}|{took:.1f}s"
-        )
+        detail.append(f"{r['church_id']}|http={code}|proxy={pcode}|disc={found}|{took:.1f}s")
 
     notes = json.dumps(
         {

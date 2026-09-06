@@ -163,21 +163,20 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--max-running", type=int, default=MAX_RUNNING)
-    ap.add_argument("--quiet", action="store_true",
-                    help="Never send Telegram, even when launching")
+    ap.add_argument("--quiet", action="store_true", help="Never send Telegram, even when launching")
     args = ap.parse_args()
 
     busy = busy_states()
     if busy is None:
-        print("[--] standing down this cycle; will look again next hour",
-              flush=True)
+        print("[--] standing down this cycle; will look again next hour", flush=True)
         return 0
 
     gaps = states_with_gap()
-    print(f"in flight: {sorted(busy) or 'none'}  ({len(busy)}/{args.max_running})",
-          flush=True)
-    print(f"states with a gap: {len(gaps)}  worst: "
-          f"{', '.join(f'{s}={g}' for s, g in gaps[:6])}", flush=True)
+    print(f"in flight: {sorted(busy) or 'none'}  ({len(busy)}/{args.max_running})", flush=True)
+    print(
+        f"states with a gap: {len(gaps)}  worst: " f"{', '.join(f'{s}={g}' for s, g in gaps[:6])}",
+        flush=True,
+    )
 
     slots = args.max_running - len(busy)
     if slots <= 0:

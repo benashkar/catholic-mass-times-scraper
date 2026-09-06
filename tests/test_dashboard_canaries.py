@@ -11,6 +11,7 @@ naming the UI element that disappears when it returns nothing.
 
 Run:  PYTHONPATH=dashboard DB_HOST=10.10.0.8 pytest tests/test_dashboard_canaries.py -v
 """
+
 import pytest
 
 # NOTE: requires_db is applied per class, not to the whole module. CI has no
@@ -38,9 +39,7 @@ class TestBulletinIndexCanary:
 
     def test_index_names_a_known_state(self, client):
         r = client.get("/bulletin/")
-        assert b"Wisconsin" in r.data, (
-            "/bulletin/ does not list Wisconsin — state cards vanish"
-        )
+        assert b"Wisconsin" in r.data, "/bulletin/ does not list Wisconsin — state cards vanish"
 
 
 @pytest.mark.requires_db
@@ -56,12 +55,12 @@ class TestBulletinStateCanary:
         r = client.get(f"/bulletin/{STATE_DIR}/api/names?start=0&length=25")
         assert r.status_code == 200
         payload = r.get_json()
-        assert payload["recordsTotal"] > 0, (
-            "names API recordsTotal is 0 — the names table renders empty"
-        )
-        assert len(payload["data"]) > 0, (
-            "names API returned no rows — the names table renders empty"
-        )
+        assert (
+            payload["recordsTotal"] > 0
+        ), "names API recordsTotal is 0 — the names table renders empty"
+        assert (
+            len(payload["data"]) > 0
+        ), "names API returned no rows — the names table renders empty"
 
     def test_rows_are_unique_per_person_per_church(self):
         """One row per person per church — not one per bulletin mention.
@@ -85,17 +84,13 @@ class TestBulletinStateCanary:
             f"filtered count is {filtered:,}; that is mention-scale, so the "
             f"footer is counting mentions rather than people"
         )
-        assert uniq <= filtered, (
-            "statewide unique people cannot exceed person-per-church rows"
-        )
+        assert uniq <= filtered, "statewide unique people cannot exceed person-per-church rows"
 
     def test_pdf_link_survives_grouping(self):
         """Collapsing rows must still leave a usable provenance link."""
         from app.data_loader import get_bulletin_names_page
 
-        rows, *_ = get_bulletin_names_page(
-            STATE_DIR, start=0, length=200, confidence_filter="high"
-        )
+        rows, *_ = get_bulletin_names_page(STATE_DIR, start=0, length=200, confidence_filter="high")
         with_link = [r for r in rows if r[9]]
         assert with_link, "no row kept a PDF URL — provenance column is empty"
 
@@ -113,9 +108,9 @@ class TestMassTimesCanary:
     def test_state_page_lists_churches(self, client):
         r = client.get(f"/mass-times/{STATE_WITH_MASS_TIMES}/")
         assert r.status_code == 200
-        assert b"church" in r.data.lower(), (
-            "mass-times state page has no churches — the church table vanishes"
-        )
+        assert (
+            b"church" in r.data.lower()
+        ), "mass-times state page has no churches — the church table vanishes"
 
     def test_services_present(self):
         from app.data_loader import get_services

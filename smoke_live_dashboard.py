@@ -15,6 +15,7 @@ Usage:
     python smoke_live_dashboard.py --repeats 12
     python smoke_live_dashboard.py --no-telegram
 """
+
 import argparse
 import os
 import sys
@@ -37,8 +38,12 @@ SCREENS = {
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--repeats", type=int, default=10,
-                    help="Requests per screen. Each gunicorn worker must be sampled.")
+    ap.add_argument(
+        "--repeats",
+        type=int,
+        default=10,
+        help="Requests per screen. Each gunicorn worker must be sampled.",
+    )
     ap.add_argument("--no-telegram", action="store_true")
     args = ap.parse_args()
 
@@ -49,8 +54,12 @@ def main():
     username, password = users.split(",")[0].split(":", 1)
 
     s = requests.Session()
-    r = s.post(f"{BASE}/login", data={"username": username, "password": password},
-               allow_redirects=False, timeout=90)
+    r = s.post(
+        f"{BASE}/login",
+        data={"username": username, "password": password},
+        allow_redirects=False,
+        timeout=90,
+    )
     if r.status_code != 302:
         print(f"[ERR] login failed: {r.status_code}")
         return 2
@@ -75,18 +84,23 @@ def main():
             elif len(resp.text) < min_bytes:
                 bad += 1
                 failures.append(
-                    f"{path}: {len(resp.text):,} bytes < {min_bytes:,} — {element} looks empty")
+                    f"{path}: {len(resp.text):,} bytes < {min_bytes:,} — {element} looks empty"
+                )
         rng = f"{min(sizes):,}-{max(sizes):,}" if sizes else "n/a"
-        print(f"  {'[OK] ' if not bad else '[FAIL]'} {path:<26} "
-              f"{args.repeats - bad}/{args.repeats} good, bytes {rng}")
+        print(
+            f"  {'[OK] ' if not bad else '[FAIL]'} {path:<26} "
+            f"{args.repeats - bad}/{args.repeats} good, bytes {rng}"
+        )
 
     # Downloads must not silently shrink.
     r = s.get(f"{BASE}/bulletin/wisconsin/api/names.csv?confidence=high", timeout=600)
     total = r.headers.get("X-Total-Matching-Rows")
     returned = r.headers.get("X-Rows-Returned")
     truncated = r.headers.get("X-Truncated")
-    print(f"  {'[FAIL]' if truncated else '[OK] '} CSV rows {returned}/{total}"
-          f"{' TRUNCATED' if truncated else ''}")
+    print(
+        f"  {'[FAIL]' if truncated else '[OK] '} CSV rows {returned}/{total}"
+        f"{' TRUNCATED' if truncated else ''}"
+    )
     if truncated:
         failures.append(f"CSV truncated: {returned} of {total} rows returned")
 

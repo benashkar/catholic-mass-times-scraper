@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 @dataclass
 class EngineResult:
     """Result from a single scoring engine."""
+
     engine_name: str
     score: float  # 0.0 to 1.0
     is_name: bool  # Engine's binary verdict

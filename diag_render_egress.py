@@ -42,16 +42,18 @@ TARGETS = [
     ("28552 stlouiscaledonia", "https://www.stlouiscaledoniawi.org/bulletin"),
     ("28452 stmaxkolbe", "https://stmaxkolbe.org/bulletin"),
     # the LPi resolver chain the fix depends on
-    ("LPi api slug lookup",
-     "https://api.parishesonline.com/organizations/slug/st-therese-of-lisieux-church"),
-    ("LPi api publications",
-     "https://api.parishesonline.com/organizations/0018000000Qc2VWAAZ/publications?type=bulletin"),
+    (
+        "LPi api slug lookup",
+        "https://api.parishesonline.com/organizations/slug/st-therese-of-lisieux-church",
+    ),
+    (
+        "LPi api publications",
+        "https://api.parishesonline.com/organizations/0018000000Qc2VWAAZ/publications?type=bulletin",
+    ),
     # a CDN that DID work in production (32 churches recovered through it)
-    ("LPi container pdf",
-     "https://container.parishesonline.com/bulletins/01/0355/20260816B.pdf"),
+    ("LPi container pdf", "https://container.parishesonline.com/bulletins/01/0355/20260816B.pdf"),
     # eCatholic file host
-    ("eCatholic file",
-     "https://files.ecatholic.com/22480/bulletins/20260816.pdf"),
+    ("eCatholic file", "https://files.ecatholic.com/22480/bulletins/20260816.pdf"),
     ("control: example.com", "http://example.com"),
 ]
 
@@ -59,8 +61,12 @@ TARGETS = [
 def probe(url, proxies):
     try:
         r = requests.get(
-            url, headers={"User-Agent": UA}, timeout=40,
-            proxies=proxies, allow_redirects=True, stream=True,
+            url,
+            headers={"User-Agent": UA},
+            timeout=40,
+            proxies=proxies,
+            allow_redirects=True,
+            stream=True,
         )
         body = r.raw.read(600, decode_content=True) or b""
         kind = "PDF" if body[:5].startswith(b"%PDF") else f"{len(body)}b"
@@ -106,20 +112,19 @@ def main():
         for echo in echoes:
             try:
                 r = requests.get(
-                    echo, headers={"User-Agent": UA}, timeout=40, proxies=prox,
+                    echo,
+                    headers={"User-Agent": UA},
+                    timeout=40,
+                    proxies=prox,
                 )
                 try:
                     d = r.json()
                     ip = d.get("query") or d.get("ip")
                     country = d.get("countryCode") or d.get("country")
                     who = d.get("isp") or d.get("org") or d.get("asn_org") or ""
-                    lines.append(
-                        f"  {label:10} ip={ip} country={country} isp={str(who)[:44]}"
-                    )
+                    lines.append(f"  {label:10} ip={ip} country={country} isp={str(who)[:44]}")
                 except ValueError:
-                    lines.append(
-                        f"  {label:10} {echo} -> {r.status_code} raw={r.text[:90]!r}"
-                    )
+                    lines.append(f"  {label:10} {echo} -> {r.status_code} raw={r.text[:90]!r}")
                 break
             except Exception as e:
                 lines.append(f"  {label:10} {echo} EXC {type(e).__name__}")

@@ -6,7 +6,7 @@ All engines implement the same interface:
 """
 
 from name_engine.engines.dictionary import DictionaryEngine
-from name_engine.engines.spacy_ner import SpacyNEREngine
 from name_engine.engines.name_dataset_engine import NameDatasetEngine
+from name_engine.engines.spacy_ner import SpacyNEREngine
 
 __all__ = ["DictionaryEngine", "SpacyNEREngine", "NameDatasetEngine"]

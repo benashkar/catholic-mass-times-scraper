@@ -216,9 +216,17 @@ def _get_credentials():
     )
 
 
-# db99 is ONE MySQL instance shared by every project: max_connections=1289,
-# wait_timeout=28800 (EIGHT HOURS). On 2026-09-02 it reached 1,286 of 1,289 and
-# began refusing connections with errno 1040, breaking five unrelated projects.
+# db99 is ONE MySQL instance shared by every project: max_connections=1289.
+# On 2026-09-02 it reached 1,286 of 1,289 and began refusing connections with
+# errno 1040, breaking five unrelated projects.
+#
+# wait_timeout was long believed to be 28800 (eight hours). MEASURED LIVE
+# 2026-09-04 it is 300 SECONDS -- the census dated the change to a 15-minute
+# window on 2026-09-03, when the oldest idle connection fell 9,486s -> 182s.
+# Whether 300 is permanent is not established, so do not depend on it: still
+# close every connection. Two consequences if it holds -- a leak is a
+# five-minute problem rather than an overnight one, and any pool_recycle must
+# sit BELOW 300 (600 was silently above it).
 ER_CON_COUNT_ERROR = 1040  # "Too many connections"
 
 # Flask `g` key holding every connection opened during the current app context.
@@ -238,8 +246,8 @@ def close_db99_conns(exc=None):
         except Exception:
             log and return an empty result
 
-    so any query error stranded a connection for eight hours -- in a gunicorn
-    process that never restarts. Twelve call sites across this file and
+    so any query error stranded a connection -- in a gunicorn process that
+    never restarts. Twelve call sites across this file and
     app/__init__.py had that shape and not one `finally` between them.
 
     Patching each site individually would leave the next new route free to
@@ -284,7 +292,9 @@ def _get_db_connection(attempts=4, base_delay=2.0):
                 delay = base_delay * (attempt + 1)  # linear: 2s, 4s, 6s
                 logger.warning(
                     "[--] db99 at max connections (1040), retry %d/%d in %.0fs",
-                    attempt + 1, attempts - 1, delay,
+                    attempt + 1,
+                    attempts - 1,
+                    delay,
                 )
                 time.sleep(delay)
     if conn is None:
@@ -646,9 +656,14 @@ def get_services(state_dir):
     # -1 means "never scraped", which is stale by definition — not 0 days ago.
     df["days_since_scrape"] = (
         (
-            pd.Timestamp.now().normalize() - pd.to_datetime(df["last_scraped_at"], errors="coerce")
-        ).dt.days
-    ).fillna(-1).astype(int)
+            (
+                pd.Timestamp.now().normalize()
+                - pd.to_datetime(df["last_scraped_at"], errors="coerce")
+            ).dt.days
+        )
+        .fillna(-1)
+        .astype(int)
+    )
     df["is_stale"] = (df["days_since_scrape"] > STALE_AFTER_DAYS) | (df["days_since_scrape"] < 0)
 
     # Build church_display: "Church Name (City)" for duplicate names

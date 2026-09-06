@@ -67,9 +67,7 @@ def _extract_name_candidates(text):
     candidates = []
 
     # Pattern: Two or more capitalized words (basic name pattern)
-    name_re = re.compile(
-        r"\b([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{2,})\b"
-    )
+    name_re = re.compile(r"\b([A-Z][a-z]+(?:\s+[A-Z]\.?)?\s+[A-Z][a-z]{2,})\b")
 
     for match in name_re.finditer(text):
         name = match.group(1).strip()

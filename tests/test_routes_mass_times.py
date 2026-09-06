@@ -97,8 +97,9 @@ class TestStaleScheduleWarning:
         # Every flagged row must actually be past the threshold (or never scraped).
         flagged = df[df["is_stale"]]
         assert not flagged.empty, "New Mexico is ~59% frozen; expected stale rows"
-        assert ((flagged["days_since_scrape"] > STALE_AFTER_DAYS)
-                | (flagged["days_since_scrape"] < 0)).all()
+        assert (
+            (flagged["days_since_scrape"] > STALE_AFTER_DAYS) | (flagged["days_since_scrape"] < 0)
+        ).all()
         # ...and nothing recently scraped may be flagged.
         clean = df[~df["is_stale"]]
         if not clean.empty:
@@ -108,7 +109,6 @@ class TestStaleScheduleWarning:
     def test_never_scraped_is_stale_not_zero_days(self):
         """NULL last_scraped_at must mean 'never confirmed', not 'today'."""
         import pandas as pd
-
         from app.data_loader import STALE_AFTER_DAYS
 
         days = (pd.Timestamp.now().normalize() - pd.to_datetime([None])).days
@@ -121,8 +121,10 @@ class TestStaleScheduleWarning:
         assert response.status_code == 200
         body = response.data
         assert b"Unverified" in body
-        assert b"have\n    schedules that have not been confirmed" in body or \
-               b"schedules that have not been confirmed" in body
+        assert (
+            b"have\n    schedules that have not been confirmed" in body
+            or b"schedules that have not been confirmed" in body
+        )
 
     def test_church_page_warns_when_stale(self, client):
         row = self._stale_church("new_mexico")

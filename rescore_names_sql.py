@@ -102,24 +102,27 @@ def refresh_stats_only():
     # A dedicated connection: this aggregate legitimately takes many minutes and
     # the shared 900s ceiling is the bug being fixed.
     base = get_connection()
-    cfg = dict(host=base.host, port=base.port, user=base.user,
-               password=base.password, database="church_scrapes",
-               charset="utf8mb4", autocommit=True,
-               cursorclass=pymysql.cursors.DictCursor)
+    cfg = dict(
+        host=base.host,
+        port=base.port,
+        user=base.user,
+        password=base.password,
+        database="church_scrapes",
+        charset="utf8mb4",
+        autocommit=True,
+        cursorclass=pymysql.cursors.DictCursor,
+    )
     base.close()
     long_s = int(os.getenv("STATS_READ_TIMEOUT_S", "5400"))
-    conn = pymysql.connect(connect_timeout=30, read_timeout=long_s,
-                           write_timeout=long_s, **cfg)
+    conn = pymysql.connect(connect_timeout=30, read_timeout=long_s, write_timeout=long_s, **cfg)
     cur = conn.cursor()
 
     try:
         cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_new")
-        cur.execute("CREATE TABLE bulletin_state_stats_new "
-                    "LIKE bulletin_state_stats")
+        cur.execute("CREATE TABLE bulletin_state_stats_new " "LIKE bulletin_state_stats")
         cur.execute(
             "INSERT INTO bulletin_state_stats_new "
-            "(state_code, total_names, unique_names, church_count, city_count)"
-            + STATS_SELECT
+            "(state_code, total_names, unique_names, church_count, city_count)" + STATS_SELECT
         )
         cur.execute("SELECT COUNT(*) AS n FROM bulletin_state_stats_new")
         n = int(cur.fetchone()["n"])
@@ -129,8 +132,10 @@ def refresh_stats_only():
             raise RuntimeError("rebuild produced 0 rows; refusing to swap")
 
         cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_old")
-        cur.execute("RENAME TABLE bulletin_state_stats TO bulletin_state_stats_old,"
-                    " bulletin_state_stats_new TO bulletin_state_stats")
+        cur.execute(
+            "RENAME TABLE bulletin_state_stats TO bulletin_state_stats_old,"
+            " bulletin_state_stats_new TO bulletin_state_stats"
+        )
         cur.execute("DROP TABLE IF EXISTS bulletin_state_stats_old")
 
         elapsed = time.time() - t
@@ -251,10 +256,13 @@ def main():
     # Step 2: Junk blocklist (always runs on all medium+high, not just new — catches edge cases)
     print("  Step 2: Applying junk blocklist...")
     # Load blocklist from config/blocklist.csv (externalized for easy editing)
-    blocklist_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config", "blocklist.csv")
+    blocklist_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "config", "blocklist.csv"
+    )
     blocklist = []
-    with open(blocklist_path, "r", encoding="utf-8") as f:
+    with open(blocklist_path, encoding="utf-8") as f:
         import csv
+
         reader = csv.DictReader(f)
         for row in reader:
             blocklist.append(row["term"])
@@ -640,6 +648,7 @@ if __name__ == "__main__":
         sys.exit(main())
     except Exception as e:
         import traceback
+
         traceback.print_exc()
         try:
             conn = get_connection()

@@ -101,8 +101,7 @@ def backfill_names(cur, limit=50000, dry_run=False):
         if updates:
             params.append(row["bulletin_name_id"])
             cur.execute(
-                f"UPDATE bulletin_name SET {', '.join(updates)} "
-                f"WHERE bulletin_name_id = %s",
+                f"UPDATE bulletin_name SET {', '.join(updates)} " f"WHERE bulletin_name_id = %s",
                 params,
             )
             updated += cur.rowcount
@@ -187,9 +186,7 @@ def main():
     parser.add_argument(
         "--limit", type=int, default=50000, help="Max rows per field (default 50000)"
     )
-    parser.add_argument(
-        "--dry-run", action="store_true", help="Show counts without updating"
-    )
+    parser.add_argument("--dry-run", action="store_true", help="Show counts without updating")
     args = parser.parse_args()
 
     print("=" * 60)

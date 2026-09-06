@@ -29,7 +29,9 @@ from flask import (
 bp = Blueprint("auth", __name__)
 
 # Endpoints reachable without a session.
-PUBLIC_ENDPOINTS = {"auth.login", "auth.logout", "health", "static"}
+# `livez` is public for the same reason `health` is: a platform probe behind a
+# login gate gets a 302 to /login and reads the service as broken.
+PUBLIC_ENDPOINTS = {"auth.login", "auth.logout", "health", "livez", "static"}
 
 
 def _load_users():

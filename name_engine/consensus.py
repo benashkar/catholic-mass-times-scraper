@@ -7,12 +7,11 @@ agree, we have high confidence in the verdict (whether it's a name or junk).
 
 from dataclasses import dataclass, field
 
-from name_engine.engines.base import EngineResult
-
 
 @dataclass
 class ConsensusResult:
     """Final verdict from combining all engines."""
+
     name: str
     confidence: str  # "high", "medium", "low"
     final_score: float  # 0.0 to 1.0
@@ -53,6 +52,7 @@ class ConsensusScorer:
                 NameDatasetEngine,
                 SpacyNEREngine,
             )
+
             engines = [DictionaryEngine(), SpacyNEREngine(), NameDatasetEngine()]
 
         self.engines = engines
@@ -97,8 +97,7 @@ class ConsensusScorer:
         consensus_results = []
         for i, name in enumerate(names):
             engine_results_for_name = {
-                engine_name: results[i]
-                for engine_name, results in all_results.items()
+                engine_name: results[i] for engine_name, results in all_results.items()
             }
             consensus = self._compute_consensus(name, engine_results_for_name)
             consensus_results.append(consensus)
@@ -125,8 +124,11 @@ class ConsensusScorer:
 
         if total_weight == 0:
             return ConsensusResult(
-                name=name, confidence="low", final_score=0.0,
-                is_suspect=True, engine_results=engine_results,
+                name=name,
+                confidence="low",
+                final_score=0.0,
+                is_suspect=True,
+                engine_results=engine_results,
                 reason="no_engines",
             )
 

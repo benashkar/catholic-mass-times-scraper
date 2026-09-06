@@ -35,8 +35,10 @@ def _detect_columns(words, gap_threshold=None):
         return [x_positions[0]] if x_positions else [0]
 
     # Calculate gaps between adjacent x positions
-    gaps = [(x_positions[i + 1] - x_positions[i], x_positions[i + 1])
-            for i in range(len(x_positions) - 1)]
+    gaps = [
+        (x_positions[i + 1] - x_positions[i], x_positions[i + 1])
+        for i in range(len(x_positions) - 1)
+    ]
 
     if not gaps:
         return [x_positions[0]]
@@ -153,12 +155,14 @@ def extract_text_by_columns(pdf_path, pages=None):
             )
 
             if not words:
-                results.append({
-                    "page": page_num,
-                    "num_columns": 0,
-                    "columns": [],
-                    "full_text": "",
-                })
+                results.append(
+                    {
+                        "page": page_num,
+                        "num_columns": 0,
+                        "columns": [],
+                        "full_text": "",
+                    }
+                )
                 continue
 
             boundaries = _detect_columns(words)
@@ -173,12 +177,14 @@ def extract_text_by_columns(pdf_path, pages=None):
             # Join columns with a clear separator
             full_text = "\n\n--- COLUMN BREAK ---\n\n".join(column_texts)
 
-            results.append({
-                "page": page_num,
-                "num_columns": len(column_texts),
-                "columns": column_texts,
-                "full_text": full_text,
-            })
+            results.append(
+                {
+                    "page": page_num,
+                    "num_columns": len(column_texts),
+                    "columns": column_texts,
+                    "full_text": full_text,
+                }
+            )
 
     return results
 

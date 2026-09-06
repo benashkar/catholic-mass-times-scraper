@@ -35,12 +35,14 @@ def main():
     args = ap.parse_args()
     ids = [int(x) for x in args.ids.replace(",", " ").split()]
 
+    import run_bulletin_scraper as R
     from extract_bulletins_to_db99 import (
-        get_connection, get_known_bulletin_page, _different_host,
+        _different_host,
         download_pdf_to_memory,
+        get_connection,
+        get_known_bulletin_page,
     )
     from src.utils import host_policy
-    import run_bulletin_scraper as R
 
     R.WALLED_BROWSER_ENABLED = True
 
@@ -57,9 +59,7 @@ def main():
     publish("diag_church_path", "\n".join(lines))
 
     fmt = ",".join(["%s"] * len(ids))
-    cur.execute(
-        f"SELECT church_id, name, website_url FROM church WHERE church_id IN ({fmt})", ids
-    )
+    cur.execute(f"SELECT church_id, name, website_url FROM church WHERE church_id IN ({fmt})", ids)
     rows = cur.fetchall()
 
     for r in rows:

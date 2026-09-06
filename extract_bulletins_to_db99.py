@@ -40,23 +40,22 @@ import requests
 from run_bulletin_scraper import (
     confidence_label,
     detect_couple,
-    extract_date_score,
     extract_names_from_text,
     extract_text_from_pdf,
     find_bulletin_page,
     ner_veto_batch,
-    unwrap_pdf_url,
     parse_name_parts,
     prewarm_shared_state,
     score_name_confidence,
+    unwrap_pdf_url,
 )
-from src.utils import host_policy
 from src.parsers.fallback_parsers import (
     parse_category_from_context,
     parse_first_last_from_person_name,
     parse_role_from_context,
     parse_title_from_person_name,
 )
+from src.utils import host_policy
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -198,10 +197,30 @@ def url_hash(url):
 
 
 _MONTHS = {
-    "january": 1, "jan": 1, "february": 2, "feb": 2, "march": 3, "mar": 3,
-    "april": 4, "apr": 4, "may": 5, "june": 6, "jun": 6, "july": 7, "jul": 7,
-    "august": 8, "aug": 8, "september": 9, "sept": 9, "sep": 9,
-    "october": 10, "oct": 10, "november": 11, "nov": 11, "december": 12, "dec": 12,
+    "january": 1,
+    "jan": 1,
+    "february": 2,
+    "feb": 2,
+    "march": 3,
+    "mar": 3,
+    "april": 4,
+    "apr": 4,
+    "may": 5,
+    "june": 6,
+    "jun": 6,
+    "july": 7,
+    "jul": 7,
+    "august": 8,
+    "aug": 8,
+    "september": 9,
+    "sept": 9,
+    "sep": 9,
+    "october": 10,
+    "oct": 10,
+    "november": 11,
+    "nov": 11,
+    "december": 12,
+    "dec": 12,
 }
 
 
@@ -248,7 +267,8 @@ def pdf_date_from_text(text):
     month_alt = "|".join(sorted(_MONTHS, key=len, reverse=True))
     m = re.search(
         rf"\b({month_alt})\.?\s+(\d{{1,2}})(?:st|nd|rd|th)?,?\s+(20\d{{2}})\b",
-        head, re.IGNORECASE,
+        head,
+        re.IGNORECASE,
     )
     if m:
         got = _valid(int(m.group(3)), _MONTHS[m.group(1).lower()], int(m.group(2)))
@@ -258,7 +278,8 @@ def pdf_date_from_text(text):
     # "16 August 2026"
     m = re.search(
         rf"\b(\d{{1,2}})(?:st|nd|rd|th)?\s+({month_alt})\.?,?\s+(20\d{{2}})\b",
-        head, re.IGNORECASE,
+        head,
+        re.IGNORECASE,
     )
     if m:
         got = _valid(int(m.group(3)), _MONTHS[m.group(2).lower()], int(m.group(1)))
@@ -330,7 +351,8 @@ def pdf_date_from_url(pdf_url):
     # 2. Month name + day + 4-digit year ("September 22 2024", "january 11 2026").
     m = re.search(
         r"(?<![a-z])(" + "|".join(_MONTHS) + r")[ .,-]*(\d{1,2})(?:st|nd|rd|th)?[ .,-]+(20\d{2})",
-        fname, re.IGNORECASE,
+        fname,
+        re.IGNORECASE,
     )
     if m:
         got = _valid(int(m.group(3)), _MONTHS[m.group(1).lower()], int(m.group(2)))
@@ -393,11 +415,13 @@ def pdf_date_from_url(pdf_url):
 
 def _different_host(a: str, b: str) -> bool:
     """True when two URLs point at different sites (ignoring a www. prefix)."""
+
     def host(u):
         try:
             return (urlparse(u or "").netloc or "").lower().removeprefix("www.")
         except Exception:
             return ""
+
     ha, hb = host(a), host(b)
     return bool(ha) and ha != hb
 
@@ -437,8 +461,7 @@ def process_church(cur, church):
     if not re.match(r"^https?://", website_url or "", re.I) and re.match(
         r"^https?://", clean_url, re.I
     ):
-        print(f"  [--] website_url is not fetchable; using clean: {clean_url}",
-              flush=True)
+        print(f"  [--] website_url is not fetchable; using clean: {clean_url}", flush=True)
         website_url = clean_url
 
     # Phase 1: Discover bulletin page
@@ -961,9 +984,7 @@ def main():
         "targeted recovery — re-checking a few corrected churches should not "
         "cost a full state sweep. Ignores --days-fresh.",
     )
-    parser.add_argument(
-        "--shards", type=int, default=1, help="Split the queue across N containers"
-    )
+    parser.add_argument("--shards", type=int, default=1, help="Split the queue across N containers")
     parser.add_argument(
         "--shard", type=int, default=0, help="Which shard this process handles (0-based)"
     )
@@ -982,8 +1003,7 @@ def main():
         if args.walled_budget:
             _rbs.WALLED_BROWSER_BUDGET = args.walled_budget
         print(
-            f"  [OK] walled-host browser pass ENABLED, budget="
-            f"{_rbs.WALLED_BROWSER_BUDGET}",
+            f"  [OK] walled-host browser pass ENABLED, budget=" f"{_rbs.WALLED_BROWSER_BUDGET}",
             flush=True,
         )
 
@@ -1007,8 +1027,10 @@ def main():
         _n_proxy = sum(1 for v in _pol.values() if v == "needs_proxy")
         print(f"Host policy: {len(_pol):,} hosts loaded ({_n_proxy:,} needs_proxy)")
         if _n_proxy and not host_policy.PROXY_URL:
-            print("  [WARN] hosts are labelled needs_proxy but PROXY_URL is unset — "
-                  "those hosts will fail")
+            print(
+                "  [WARN] hosts are labelled needs_proxy but PROXY_URL is unset — "
+                "those hosts will fail"
+            )
     except Exception as e:
         print(f"  [WARN] host policy unavailable ({str(e)[:70]}) — all hosts direct")
 
@@ -1071,7 +1093,9 @@ def main():
     # Within each tier, least-recently-checked first, so each capped run resumes
     # the frontier the previous one left off at instead of restarting at AK.
     if args.discovery_only:
-        where += " AND NOT EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
+        where += (
+            " AND NOT EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
+        )
     elif args.known_sources_only:
         where += " AND EXISTS (SELECT 1 FROM bulletin_source bs WHERE bs.church_id = c.church_id)"
 
@@ -1322,14 +1346,14 @@ def main():
     MIN_SAMPLE = 50
     processed = counter["done"]
     no_output = (
-        processed >= MIN_SAMPLE
-        and totals["pdfs_extracted"] == 0
-        and totals["names_inserted"] == 0
+        processed >= MIN_SAMPLE and totals["pdfs_extracted"] == 0 and totals["names_inserted"] == 0
     )
     mostly_errors = processed >= MIN_SAMPLE and totals["errors"] / processed > 0.25
     if no_output or mostly_errors:
-        reason = "no PDFs or names extracted" if no_output else (
-            f"{totals['errors']}/{processed} churches errored"
+        reason = (
+            "no PDFs or names extracted"
+            if no_output
+            else (f"{totals['errors']}/{processed} churches errored")
         )
         print(f"[ERR] Run failed: {reason}")
         return 1

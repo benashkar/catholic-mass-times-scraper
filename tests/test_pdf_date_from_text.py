@@ -11,6 +11,7 @@ Two causes put 34% of downloaded PDFs on pdf_date NULL:
     img1.wsimg.com, bulletins.discovermass.com were the top three). The cover
     prints it, and the text is already extracted for name parsing.
 """
+
 from datetime import UTC, datetime, timedelta
 
 import pytest
@@ -76,10 +77,8 @@ class TestDateFromCoverText:
 
 class TestUrlStillWins:
     def test_url_parsing_unaffected(self):
-        assert pdf_date_from_url(
-            "https://example.org/bulletins/20260816_t-168.pdf") == "2026-08-16"
+        assert pdf_date_from_url("https://example.org/bulletins/20260816_t-168.pdf") == "2026-08-16"
 
     def test_dateless_cdn_url_returns_none(self):
         """These are the ones the text fallback exists to rescue."""
-        assert pdf_date_from_url(
-            "https://irp.cdn-website.com/abc123/files/bulletin.pdf") is None
+        assert pdf_date_from_url("https://irp.cdn-website.com/abc123/files/bulletin.pdf") is None

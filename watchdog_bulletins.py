@@ -67,7 +67,7 @@ MIN_ELAPSED_H = float(os.environ.get("WATCHDOG_MIN_ELAPSED_H", "6"))
 
 
 def _utcnow():
-    return datetime.datetime.now(datetime.timezone.utc)
+    return datetime.datetime.now(datetime.UTC)
 
 
 def _elapsed_hours(ts):
@@ -326,9 +326,7 @@ def main():
     if age_h is None:
         problems.append(f"cannot determine last sweep run ({status}: {detail})")
     elif age_h > MAX_RUN_AGE_H:
-        problems.append(
-            f"walled sweep has not run for {age_h:.1f}h (limit {MAX_RUN_AGE_H}h)"
-        )
+        problems.append(f"walled sweep has not run for {age_h:.1f}h (limit {MAX_RUN_AGE_H}h)")
 
     # 3. Did it die? A single OOM is survivable by design -- the evening run
     #    resumes at the frontier the morning run left -- but it is still worth
@@ -342,8 +340,10 @@ def main():
     proxy_ok, proxy_detail = proxy_health()
     print(f"proxy             = {proxy_ok} ({proxy_detail})", flush=True)
     if proxy_ok is False:
-        problems.append(f"residential proxy is DOWN — {proxy_detail}; "
-                        f"every walled-host pass is running blind")
+        problems.append(
+            f"residential proxy is DOWN — {proxy_detail}; "
+            f"every walled-host pass is running blind"
+        )
 
     gained = "" if prev_n is None else f" ({now - prev_n:+,} since last check)"
     body = (

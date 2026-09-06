@@ -54,8 +54,13 @@ CREATE TABLE IF NOT EXISTS {TABLE} (
 
 # Columns pulled from Limpar (order matches LIMPAR_QUERY).
 LIMPAR_COLUMNS = [
-    "network", "project", "project_pipeline_id", "project_shape_type",
-    "shape", "shape_type", "state_abbr",
+    "network",
+    "project",
+    "project_pipeline_id",
+    "project_shape_type",
+    "shape",
+    "shape_type",
+    "state_abbr",
 ]
 
 _ABBR = {"st": "saint", "ste": "sainte", "ft": "fort", "mt": "mount", "mtn": "mountain"}
@@ -80,8 +85,9 @@ def get_limpar_connection():
     import psycopg2
 
     secret = json.loads(
-        boto3.client("secretsmanager", region_name="us-east-1")
-        .get_secret_value(SecretId="/ben/ai-tool/limpar")["SecretString"]
+        boto3.client("secretsmanager", region_name="us-east-1").get_secret_value(
+            SecretId="/ben/ai-tool/limpar"
+        )["SecretString"]
     )
     return psycopg2.connect(
         host="10.11.1.124",

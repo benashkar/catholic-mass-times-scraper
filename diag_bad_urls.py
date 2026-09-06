@@ -95,7 +95,7 @@ def main():
             )
 
     lines = [
-        f"unusable website_url among zero-PDF churches"
+        "unusable website_url among zero-PDF churches"
         + (f" — state={args.state.upper()}" if args.state else " — ALL STATES"),
         f"zero-PDF churches examined: {len(rows):,}",
         f"with an UNUSABLE website_url: {sum(kinds.values()):,}",

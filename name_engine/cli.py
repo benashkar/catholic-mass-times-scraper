@@ -32,13 +32,15 @@ def cmd_extract(args):
         writer = csv.DictWriter(out, fieldnames=fieldnames)
         writer.writeheader()
         for r in results:
-            writer.writerow({
-                "name": r.name,
-                "confidence": r.confidence,
-                "final_score": round(r.final_score, 3),
-                "is_suspect": r.is_suspect,
-                "reason": r.reason,
-            })
+            writer.writerow(
+                {
+                    "name": r.name,
+                    "confidence": r.confidence,
+                    "final_score": round(r.final_score, 3),
+                    "is_suspect": r.is_suspect,
+                    "reason": r.reason,
+                }
+            )
         if args.output:
             out.close()
 
@@ -59,7 +61,7 @@ def cmd_score(args):
     from name_engine import score_names
 
     names = []
-    with open(args.input, "r", encoding="utf-8") as f:
+    with open(args.input, encoding="utf-8") as f:
         reader = csv.DictReader(f)
         name_col = args.name_column or "person_name"
         for row in reader:
@@ -99,7 +101,9 @@ def main():
     score_parser = subparsers.add_parser("score", help="Score names from a CSV")
     score_parser.add_argument("--input", "-i", required=True, help="Input CSV path")
     score_parser.add_argument("--output", "-o", help="Output file (default: stdout)")
-    score_parser.add_argument("--name-column", default="person_name", help="Column containing names")
+    score_parser.add_argument(
+        "--name-column", default="person_name", help="Column containing names"
+    )
     score_parser.set_defaults(func=cmd_score)
 
     args = parser.parse_args()

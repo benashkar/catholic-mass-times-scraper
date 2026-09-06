@@ -25,6 +25,7 @@ def _get_nlp(model="en_core_web_lg"):
     if _nlp is None:
         try:
             import spacy
+
             try:
                 _nlp = spacy.load(model)
             except OSError:
@@ -111,8 +112,7 @@ class SpacyNEREngine(BaseEngine):
         nlp = _get_nlp(self._model)
         if nlp is None:
             return [
-                EngineResult(self.name, 0.5, True, {"reason": "spacy_unavailable"})
-                for _ in names
+                EngineResult(self.name, 0.5, True, {"reason": "spacy_unavailable"}) for _ in names
             ]
 
         contexts = contexts or [""] * len(names)

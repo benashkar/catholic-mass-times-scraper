@@ -126,9 +126,10 @@ def _website(tags):
 def _haversine_m(a1, o1, a2, o2):
     dl = math.radians(a2 - a1)
     dn = math.radians(o2 - o1)
-    h = (math.sin(dl / 2) ** 2
-         + math.cos(math.radians(a1)) * math.cos(math.radians(a2))
-         * math.sin(dn / 2) ** 2)
+    h = (
+        math.sin(dl / 2) ** 2
+        + math.cos(math.radians(a1)) * math.cos(math.radians(a2)) * math.sin(dn / 2) ** 2
+    )
     return 6371000 * 2 * math.asin(math.sqrt(h))
 
 
@@ -143,8 +144,7 @@ def load_state(cur, state, commit, require_website):
     els = [e for e in fetch_state(state) if (e.get("tags") or {}).get("name")]
 
     cur.execute(
-        "SELECT latitude, longitude FROM church "
-        "WHERE state_code=%s AND latitude IS NOT NULL",
+        "SELECT latitude, longitude FROM church " "WHERE state_code=%s AND latitude IS NOT NULL",
         (state,),
     )
     db = [(float(r["latitude"]), float(r["longitude"])) for r in cur.fetchall()]
@@ -173,8 +173,10 @@ def load_state(cur, state, commit, require_website):
             continue
         new.append((e, tags, lat, lon, site))
 
-    print(f"\n=== {state}: {len(els)} OSM christian places, "
-          f"{len(db):,} already in db99 ===", flush=True)
+    print(
+        f"\n=== {state}: {len(els)} OSM christian places, " f"{len(db):,} already in db99 ===",
+        flush=True,
+    )
     print(f"  within 150m of an existing church : {dup}", flush=True)
     if require_website:
         print(f"  net-new but no website tag       : {skipped_nosite}", flush=True)
@@ -182,9 +184,12 @@ def load_state(cur, state, commit, require_website):
 
     if not commit:
         for e, tags, lat, lon, site in new[:6]:
-            print(f"    [DRY] {tags['name'][:34]:34} "
-                  f"{(tags.get('denomination') or 'unspecified'):20} "
-                  f"{(site or '')[:40]}", flush=True)
+            print(
+                f"    [DRY] {tags['name'][:34]:34} "
+                f"{(tags.get('denomination') or 'unspecified'):20} "
+                f"{(site or '')[:40]}",
+                flush=True,
+            )
         print("  [DRY] nothing written — pass --commit", flush=True)
         return {"new": len(new), "dup": dup, "inserted": 0}
 
@@ -192,8 +197,9 @@ def load_state(cur, state, commit, require_website):
         raw = (tags.get("denomination") or "").lower().strip()
         denom = DENOM_FIX.get(raw, raw or "christian")
         city = (tags.get("addr:city") or "").strip()
-        street = " ".join(x for x in [tags.get("addr:housenumber"),
-                                      tags.get("addr:street")] if x).strip()
+        street = " ".join(
+            x for x in [tags.get("addr:housenumber"), tags.get("addr:street")] if x
+        ).strip()
         pc = (tags.get("addr:postcode") or "").strip()
         slug = slugify(tags["name"], city, state, f"{e.get('type','n')}{e.get('id')}")
         try:
@@ -208,17 +214,30 @@ def load_state(cur, state, commit, require_website):
                      latitude    = COALESCE(church.latitude, VALUES(latitude)),
                      longitude   = COALESCE(church.longitude, VALUES(longitude)),
                      denomination = COALESCE(church.denomination, VALUES(denomination))""",
-                (slug, tags["name"][:200], street or None, city, state,
-                 pc or None, (pc.split("-")[0] or None) if pc else None,
-                 lat, lon, (tags.get("phone") or tags.get("contact:phone")),
-                 site, denom[:60]),
+                (
+                    slug,
+                    tags["name"][:200],
+                    street or None,
+                    city,
+                    state,
+                    pc or None,
+                    (pc.split("-")[0] or None) if pc else None,
+                    lat,
+                    lon,
+                    (tags.get("phone") or tags.get("contact:phone")),
+                    site,
+                    denom[:60],
+                ),
             )
             inserted += 1
         except Exception as ex:
             print(f"  [ERR] {tags['name'][:40]}: {ex}", flush=True)
 
-    print(f"  [OK] inserted {inserted}  (ODbL: credit OpenStreetMap "
-          f"contributors when publishing these)", flush=True)
+    print(
+        f"  [OK] inserted {inserted}  (ODbL: credit OpenStreetMap "
+        f"contributors when publishing these)",
+        flush=True,
+    )
     return {"new": len(new), "dup": dup, "inserted": inserted}
 
 
@@ -227,9 +246,12 @@ def main():
     ap.add_argument("--state")
     ap.add_argument("--all-states", action="store_true")
     ap.add_argument("--commit", action="store_true")
-    ap.add_argument("--require-website", action="store_true",
-                    help="Only load congregations carrying a website tag — "
-                         "the ones the bulletin pipeline can actually use")
+    ap.add_argument(
+        "--require-website",
+        action="store_true",
+        help="Only load congregations carrying a website tag — "
+        "the ones the bulletin pipeline can actually use",
+    )
     args = ap.parse_args()
     if not args.state and not args.all_states:
         ap.error("give --state XX or --all-states")
@@ -239,8 +261,7 @@ def main():
     conn = get_connection()
     conn.autocommit(True)
     cur = conn.cursor()
-    states = ([s.upper() for s in STATE_NAMES] if args.all_states
-              else [args.state.upper()])
+    states = [s.upper() for s in STATE_NAMES] if args.all_states else [args.state.upper()]
     tot = {"new": 0, "dup": 0, "inserted": 0}
     for st in states:
         try:
@@ -251,8 +272,10 @@ def main():
             print(f"[ERR] {st}: {type(e).__name__}: {e}", flush=True)
         if len(states) > 1:
             time.sleep(8)  # Overpass is free and shared; do not hammer it.
-    print(f"\n==== TOTAL net-new={tot['new']} dup={tot['dup']} "
-          f"inserted={tot['inserted']} ====", flush=True)
+    print(
+        f"\n==== TOTAL net-new={tot['new']} dup={tot['dup']} " f"inserted={tot['inserted']} ====",
+        flush=True,
+    )
     cur.close()
     conn.close()
     return 0

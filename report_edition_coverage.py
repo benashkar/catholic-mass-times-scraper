@@ -107,15 +107,19 @@ def main():
     for r in rows:
         bar = "#" * int(r["parishes"] / peak * 34) if peak else ""
         pct = r["parishes"] / peak * 100 if peak else 0
-        print(f"{str(r['week_start']):<12} {r['parishes']:>9,} {r['editions']:>9,}   {bar:<34} {pct:5.1f}%")
+        print(
+            f"{str(r['week_start']):<12} {r['parishes']:>9,} {r['editions']:>9,}   {bar:<34} {pct:5.1f}%"
+        )
 
     print()
     print(f"best week: {peak:,} parishes")
     weak = [r for r in rows if r["parishes"] < peak * 0.5]
     if weak:
-        print(f"weeks below 50% of best ({len(weak)}): "
-              f"{', '.join(str(r['week_start']) for r in weak[:14])}"
-              f"{' ...' if len(weak) > 14 else ''}")
+        print(
+            f"weeks below 50% of best ({len(weak)}): "
+            f"{', '.join(str(r['week_start']) for r in weak[:14])}"
+            f"{' ...' if len(weak) > 14 else ''}"
+        )
 
     cur.execute("SELECT COUNT(*) t, COUNT(pdf_date) d FROM bulletin_pdf")
     r = cur.fetchone()

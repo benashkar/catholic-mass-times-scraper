@@ -35,6 +35,7 @@ Never raises. A readback channel that can fail the job it is reporting on is
 worse than no channel -- the whole point is to observe the run, not to become
 another way for it to die.
 """
+
 from __future__ import annotations
 
 import datetime
@@ -64,17 +65,15 @@ def _client():
     Returns (None, None) rather than raising when nothing is configured, so a
     credential-less local run degrades to print-only.
     """
-    key = os.environ.get("S3_ACCESS_KEY_ID") or os.environ.get(
-        "AWS_ACCESS_KEY_ID")
-    secret = os.environ.get("S3_SECRET_ACCESS_KEY") or os.environ.get(
-        "AWS_SECRET_ACCESS_KEY")
+    key = os.environ.get("S3_ACCESS_KEY_ID") or os.environ.get("AWS_ACCESS_KEY_ID")
+    secret = os.environ.get("S3_SECRET_ACCESS_KEY") or os.environ.get("AWS_SECRET_ACCESS_KEY")
     bucket = os.environ.get("S3_BUCKET", "hamster-storage1")
-    region = (os.environ.get("S3_REGION")
-              or os.environ.get("AWS_DEFAULT_REGION") or "us-east-1")
+    region = os.environ.get("S3_REGION") or os.environ.get("AWS_DEFAULT_REGION") or "us-east-1"
     if not (key and secret):
         logger.warning("[ERR] readback: no S3/AWS credentials, skipping")
         return None, None
     import boto3  # imported lazily: local dev may not have it
+
     return boto3.client(
         "s3",
         aws_access_key_id=key,
@@ -93,19 +92,18 @@ def publish(name: str, text: str) -> str | None:
         s3, bucket = _client()
         if s3 is None:
             return None
-        stamp = datetime.datetime.now(datetime.timezone.utc).strftime(
-            "%Y%m%dT%H%M%SZ")
+        stamp = datetime.datetime.now(datetime.UTC).strftime("%Y%m%dT%H%M%SZ")
         key = f"{PREFIX}/{name}/{stamp}.txt"
         s3.put_object(
-            Bucket=bucket, Key=key,
+            Bucket=bucket,
+            Key=key,
             Body=text.encode("utf-8", errors="replace"),
             ContentType="text/plain; charset=utf-8",
         )
         print(f"[OK] readback published s3://{bucket}/{key}", flush=True)
         return key
     except Exception as e:
-        print(f"[ERR] readback publish failed: {type(e).__name__}: {e}",
-              flush=True)
+        print(f"[ERR] readback publish failed: {type(e).__name__}: {e}", flush=True)
         return publish_env(name, text)
 
 
@@ -129,8 +127,7 @@ def publish_env(name: str, text: str) -> str | None:
         key = os.environ.get("RENDER_API_KEY")
         service = os.environ.get("RENDER_SERVICE_ID")
         if not (key and service):
-            print("[ERR] readback env fallback: no RENDER_API_KEY/SERVICE_ID",
-                  flush=True)
+            print("[ERR] readback env fallback: no RENDER_API_KEY/SERVICE_ID", flush=True)
             return None
         import requests
 
@@ -142,8 +139,9 @@ def publish_env(name: str, text: str) -> str | None:
         # happens to be unchanged -- a genuinely dangerous way to misread a
         # verification. The stamp makes staleness visible.
         stamped = (
-            datetime.datetime.now(datetime.timezone.utc).strftime(
-                "published %Y-%m-%dT%H:%M:%SZ") + "\n" + text
+            datetime.datetime.now(datetime.UTC).strftime("published %Y-%m-%dT%H:%M:%SZ")
+            + "\n"
+            + text
         )
         r = requests.put(
             f"https://api.render.com/v1/services/{service}/env-vars/{var}",
@@ -154,12 +152,10 @@ def publish_env(name: str, text: str) -> str | None:
         if r.status_code in (200, 201):
             print(f"[OK] readback published to env var {var}", flush=True)
             return var
-        print(f"[ERR] readback env fallback {r.status_code}: {r.text[:200]}",
-              flush=True)
+        print(f"[ERR] readback env fallback {r.status_code}: {r.text[:200]}", flush=True)
         return None
     except Exception as e:
-        print(f"[ERR] readback env fallback failed: {type(e).__name__}: {e}",
-              flush=True)
+        print(f"[ERR] readback env fallback failed: {type(e).__name__}: {e}", flush=True)
         return None
 
 
@@ -189,6 +185,5 @@ def fetch_latest(name: str) -> tuple[str | None, str | None]:
         body = s3.get_object(Bucket=bucket, Key=key)["Body"].read()
         return key, body.decode("utf-8", errors="replace")
     except Exception as e:
-        print(f"[ERR] readback fetch failed: {type(e).__name__}: {e}",
-              flush=True)
+        print(f"[ERR] readback fetch failed: {type(e).__name__}: {e}", flush=True)
         return None, None

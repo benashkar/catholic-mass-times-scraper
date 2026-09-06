@@ -7,15 +7,21 @@ by a stale-cleanup); or no DiscoverMass slug to scrape from at all.
 
 Read-only.
 """
-import os, sys, traceback
+
+import os
+import sys
+import traceback
 from collections import Counter
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _readback import publish  # noqa: E402
 
 
 def main():
     from extract_bulletins_to_db99 import get_connection
-    conn = get_connection(); cur = conn.cursor()
+
+    conn = get_connection()
+    cur = conn.cursor()
     cur.execute("""
         SELECT c.church_id, c.state_code, c.name, c.slug, c.website_url,
                c.source_url, c.last_scraped_at,
@@ -40,27 +46,37 @@ def main():
 
     L = [f"churches with a bulletin PDF but NO active service row: {len(rows)}", ""]
     L.append("--- why ---")
-    for k, n in shapes.most_common(): L.append(f"  {k:46} {n}")
+    for k, n in shapes.most_common():
+        L.append(f"  {k:46} {n}")
     L.append("")
     L.append("--- by state ---")
     L.append("  " + "  ".join(f"{k}:{v}" for k, v in states.most_common(18)))
     L.append("")
     L.append("--- samples ---")
     for r in rows[:10]:
-        L.append(f"  {r['church_id']:6} {r['state_code']} {(r['name'] or '')[:26]:28} "
-                 f"svc={r['all_svc']}/{r['act_svc']} scraped={str(r['last_scraped_at'])[:10]}")
+        L.append(
+            f"  {r['church_id']:6} {r['state_code']} {(r['name'] or '')[:26]:28} "
+            f"svc={r['all_svc']}/{r['act_svc']} scraped={str(r['last_scraped_at'])[:10]}"
+        )
         L.append(f"         slug={(r['slug'] or '')[:60]}")
     ids = ",".join(str(r["church_id"]) for r in rows)
     L.append("")
     L.append("church_ids:")
     L.append(ids)
-    cur.close(); conn.close()
-    out = "\n".join(L); print(out, flush=True); publish("diag_service_gap", out)
+    cur.close()
+    conn.close()
+    out = "\n".join(L)
+    print(out, flush=True)
+    publish("diag_service_gap", out)
 
 
 if __name__ == "__main__":
-    try: main()
-    except SystemExit: raise
+    try:
+        main()
+    except SystemExit:
+        raise
     except BaseException:
         tb = "diag_service_gap FAILED\n" + traceback.format_exc()
-        print(tb, flush=True); publish("diag_service_gap", tb); sys.exit(1)
+        print(tb, flush=True)
+        publish("diag_service_gap", tb)
+        sys.exit(1)

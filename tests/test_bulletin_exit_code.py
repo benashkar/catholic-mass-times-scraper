@@ -16,6 +16,7 @@ Two real incidents bracket this behaviour:
 So the rule needs a sample floor: judge the run only once it has seen enough
 churches for "nothing came out" to mean something.
 """
+
 import pytest
 
 MIN_SAMPLE = 50

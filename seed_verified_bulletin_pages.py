@@ -35,8 +35,8 @@ import traceback
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from extract_bulletins_to_db99 import get_connection  # noqa: E402
 from _readback import publish  # noqa: E402
+from extract_bulletins_to_db99 import get_connection  # noqa: E402
 
 DEFAULT_SEED = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "seeds", "wi_verified_bulletin_pages.json"

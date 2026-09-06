@@ -33,9 +33,9 @@ TARGETS = [
 
 
 def main():
+    import run_bulletin_scraper as R
     from extract_bulletins_to_db99 import get_connection
     from src.utils import host_policy
-    import run_bulletin_scraper as R
 
     conn = get_connection()
     cur = conn.cursor()

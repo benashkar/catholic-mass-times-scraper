@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from src.utils.telegram import send_telegram
 
 API = "https://api.render.com/v1"
-CRON_ID = "crn-d6s8t02a214c73bt62s0"          # church-bulletin-cron
+CRON_ID = "crn-d6s8t02a214c73bt62s0"  # church-bulletin-cron
 SHARDS = int(os.environ.get("SWEEP_SHARDS", "6"))
 # After the productive tier drains, move on to discovery: churches that have
 # never yielded a bulletin page. Hit rate is ~1%, so it must never run before
@@ -207,8 +207,11 @@ def finish_sweep():
         # The coverage report is the actual proof the recovery worked: it shows
         # whether the 2026-02-23 -> 2026-08-05 hole refilled. Telegram it so the
         # answer is waiting rather than needing someone to go and run it.
-        ("coverage-report",
-         [sys.executable, "report_edition_coverage.py", "--weeks", "40", "--telegram"], 1800),
+        (
+            "coverage-report",
+            [sys.executable, "report_edition_coverage.py", "--weeks", "40", "--telegram"],
+            1800,
+        ),
     ]
     done = []
     for label, cmd, timeout in steps:
@@ -257,8 +260,11 @@ def main():
         remaining = None
 
     if remaining == 0 and not args.dry_run and not args.stop:
-        live_prod = [s for s, j in latest_per_shard("--known-sources-only").items()
-                     if j.get("status") in ("running", "pending")]
+        live_prod = [
+            s
+            for s, j in latest_per_shard("--known-sources-only").items()
+            if j.get("status") in ("running", "pending")
+        ]
         if live_prod:
             print(f"Queue drained; {len(live_prod)} productive shard(s) still finishing.")
             return 0
@@ -271,8 +277,11 @@ def main():
                 disc_left = discovery_remaining()
             except Exception:
                 disc_left = None
-            print(f"Discovery tier active; remaining: "
-                  f"{disc_left:,}" if isinstance(disc_left, int) else "Discovery tier active")
+            print(
+                f"Discovery tier active; remaining: " f"{disc_left:,}"
+                if isinstance(disc_left, int)
+                else "Discovery tier active"
+            )
             if disc_left == 0:
                 print("Discovery tier drained too — nothing left to sweep.")
                 return 0
@@ -296,8 +305,10 @@ def main():
         if DISCOVERY_AFTER and all("FAIL" not in d for d in done):
             started = start_discovery()
             extra = f"\n\nnext: discovery tier started ({started} shards)"
-        msg = ("<b>Bulletin recovery sweep COMPLETE</b>\n"
-               "productive queue drained\n" + "\n".join(done) + extra)
+        msg = (
+            "<b>Bulletin recovery sweep COMPLETE</b>\n"
+            "productive queue drained\n" + "\n".join(done) + extra
+        )
         print(msg.replace("<b>", "").replace("</b>", ""))
         if not args.no_telegram:
             send_telegram(msg)

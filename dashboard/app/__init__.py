@@ -7,9 +7,80 @@ Creates and configures the Flask app with three main views:
   3. Bulletin Names Browser — state → city → church → extracted names
 """
 
+import os
+import re
+
 from flask import Flask
 
 from app.config import Config
+
+# /health used to run nine aggregate queries against db99 on EVERY request, on
+# the instance that hit 1,286 of 1,289 connections on 2026-09-02. Health is
+# polled far more often than it changes, so the answer is cached.
+#
+# Keyed by the `quick` flag, because the two modes return different bodies and
+# sharing one slot would serve a table-counts-only answer to a caller asking for
+# the full check.
+#
+# Per gunicorn WORKER, not per service -- see the /health docstring.
+_HEALTH_CACHE = {}
+_HEALTH_CACHE_TTL = int(os.environ.get("HEALTH_CACHE_TTL_SECONDS", "900"))
+
+# A FAILURE is cached far more briefly than a success, and the two pull in
+# opposite directions:
+#   - not caching failures at all means every poll during an outage fires nine
+#     aggregate queries at a database that is already struggling, and the
+#     health check becomes part of the incident;
+#   - caching them for the full 15 minutes means the service keeps reporting
+#     `faulted` for a quarter of an hour after db99 has recovered, which is the
+#     same class of lie this endpoint was just fixed for -- stale, confident,
+#     and wrong.
+# 30s is short enough to notice recovery promptly and long enough that a
+# hammered database is not polled per request.
+_HEALTH_FAULT_TTL = int(os.environ.get("HEALTH_FAULT_TTL_SECONDS", "30"))
+
+# /debug/query row cap. An unbounded SELECT on a shared instance is a denial of
+# service against every project on db99, not just this one.
+_DEBUG_QUERY_MAX_ROWS = int(os.environ.get("DEBUG_QUERY_MAX_ROWS", "1000"))
+
+# The schema /debug/query is allowed to read. db99 hosts every project's
+# database on one instance and this connection is not scoped, so without this
+# a SELECT can read finance, crime, or newsmaker data.
+_OWN_SCHEMA = (os.environ.get("DB_NAME") or "church_scrapes").lower()
+
+# A cross-database table can only enter a query through FROM or JOIN, so that
+# is what we check. Column qualifiers (`c.name`) are deliberately NOT matched:
+# an alias is not a schema, and a guard that rejects ordinary queries gets
+# switched off, which is how a security control becomes a comment.
+_QUALIFIED_TABLE_RE = re.compile(
+    r"\b(?:from|join)\s+`?([A-Za-z_][A-Za-z0-9_]*)`?\s*\.", re.IGNORECASE
+)
+
+# Filesystem reach from inside a SELECT. No data-exploration query needs it.
+_FILE_REACH_RE = re.compile(r"\b(?:into\s+(?:out|dump)file|load_file\s*\()", re.IGNORECASE)
+
+
+def _reject_unsafe_debug_sql(sql):
+    """Return a refusal string, or None when the query is in bounds.
+
+    Kept at module level and pure so it can be tested without a database or a
+    request context.
+    """
+    # One statement per request. Without this, "SELECT only" is satisfied by
+    # the first statement while the second does whatever it likes.
+    if ";" in sql.rstrip().rstrip(";"):
+        return "one statement per request (';' not allowed)"
+
+    if _FILE_REACH_RE.search(sql):
+        return "filesystem access (OUTFILE/DUMPFILE/LOAD_FILE) is not allowed"
+
+    for schema in _QUALIFIED_TABLE_RE.findall(sql):
+        if schema.lower() != _OWN_SCHEMA:
+            return (
+                f"cross-database access refused: {schema!r} is not {_OWN_SCHEMA}. db99 is shared by "
+                "every project and this tool reads only its own schema."
+            )
+    return None
 
 
 def create_app(config_class=Config):
@@ -19,10 +90,11 @@ def create_app(config_class=Config):
 
     # Close every db99 connection opened during a request, however the view
     # exits. db99 is shared by every project (max_connections=1289,
-    # wait_timeout=28800) and hit 1,286 of 1,289 on 2026-09-02. Twelve call
+    # wait_timeout=300s as measured 2026-09-04, NOT the 28800 long assumed)
+    # and hit 1,286 of 1,289 on 2026-09-02. Twelve call
     # sites in this file and data_loader.py closed only on the happy path,
     # inside handlers that swallow the exception -- so any query error stranded
-    # a connection for eight hours in a gunicorn process that never restarts.
+    # a connection in a gunicorn process that never restarts.
     # Anchoring the close here also covers routes added later.
     from app.data_loader import close_db99_conns
 
@@ -97,11 +169,55 @@ def create_app(config_class=Config):
         docs_dir = os.path.join(os.path.dirname(__file__), "..", "..", "docs")
         return send_from_directory(os.path.abspath(docs_dir), "erd.html")
 
+    @app.route("/livez")
+    def livez():
+        """Liveness: is this process alive? Never touches the database.
+
+        This is what a platform restart trigger must point at. /health checks
+        db99, and db99 is shared by every project -- pointing the restart
+        trigger there means one shared-database blip restarts every worker,
+        repeatedly, when a restart cannot possibly fix another host's database.
+
+        Always 200 unless the process is unrecoverable, in which case it is not
+        answering at all.
+        """
+        return {"status": "alive", "service": "church-dashboard"}, 200
+
     @app.route("/health")
     def health():
-        """Full diagnostic health status for the pipeline and diagnostic agent."""
-        import sys
+        """Readiness + diagnostics, cached.
+
+        THREE THINGS THIS FIXES (all present before 2026-09-05):
+
+        1. It returned HTTP 200 while the body said `status: "error"`. Every
+           uptime monitor and platform probe reads the status code, so a dead
+           database presented as fine. The contract now is:
+               ok        200  everything configured is working
+               degraded  200  something is wrong that a RESTART CANNOT FIX
+               faulted   503  the service genuinely cannot do its job
+           Data-quality issues (junk names, stale scrapes) are `degraded` and
+           deliberately still 200 -- they are real and worth alerting on, and
+           bouncing the container does nothing for them. Only an unreachable
+           database is `faulted`.
+
+        2. It ran NINE aggregate queries synchronously per request, against a
+           shared instance that hit 1,286 of 1,289 connections on 2026-09-02.
+           Health is polled far more often than it changes, so the answer is
+           cached for HEALTH_CACHE_TTL_SECONDS (default 900).
+
+        3. There was no liveness/readiness split -- see /livez above.
+
+        The cache is per gunicorn WORKER, not per service: N workers means at
+        most N computations per TTL, not one. That is fine here, and is said
+        out loud so nobody reads a low query count as a service-wide guarantee.
+
+        `?fresh=1` bypasses the cache (for the diagnostic agent).
+        `?quick=1` runs table counts only.
+        """
+        import datetime as _dt
         import os
+        import sys
+        import time
 
         # src/ sits one level up in the container (/app/src, next to /app/app)
         # but two levels up in the repo (dashboard/app -> repo root). Add both
@@ -112,26 +228,61 @@ def create_app(config_class=Config):
             if os.path.isdir(os.path.join(_candidate, "src")) and _candidate not in sys.path:
                 sys.path.insert(0, _candidate)
         from flask import request
-        from app.data_loader import _bulletin_stats_cache, _get_db_connection, _state_list
+
+        # Imported as a MODULE, not as names: the tests patch
+        # data_loader._get_db_connection, and `from ... import _get_db_connection`
+        # would bind the original function here and sail straight past the patch.
+        from app import data_loader
         from src.utils.health_checks import run_all_checks
 
         quick = request.args.get("quick", "").lower() in ("1", "true", "yes")
+        fresh = request.args.get("fresh", "").lower() in ("1", "true", "yes")
+        now = time.time()
+
+        cached = _HEALTH_CACHE.get(quick)
+        if not fresh and cached:
+            ttl = _HEALTH_FAULT_TTL if cached["code"] >= 500 else _HEALTH_CACHE_TTL
+            if (now - cached["built_at"]) < ttl:
+                payload = dict(cached["payload"])
+                payload["cache_age_seconds"] = round(now - cached["built_at"], 1)
+                payload["cached"] = True
+                return payload, cached["code"]
 
         result = {
-            "states_loaded": len(_state_list) if _state_list else 0,
-            "bulletin_states": len(_bulletin_stats_cache),
+            "states_loaded": len(data_loader._state_list) if data_loader._state_list else 0,
+            "bulletin_states": len(data_loader._bulletin_stats_cache),
         }
+        conn = None
         try:
-            conn = _get_db_connection()
+            conn = data_loader._get_db_connection()
             cur = conn.cursor()
             result["db"] = "connected"
             checks = run_all_checks(cur, quick=quick)
             result.update(checks)
-            conn.close()
-        except Exception as e:
-            result["status"] = "error"
+            # run_all_checks reports "healthy"/"degraded" about the DATA. Map it
+            # onto the service contract -- neither of those is a service fault.
+            result["status"] = "ok" if checks.get("status") == "healthy" else "degraded"
+            code = 200
+        except Exception as e:  # noqa: BLE001 -- a health check must never throw
+            # An unhandled exception here is indistinguishable from a dead
+            # service, which is the one thing this endpoint must never look like.
+            result["status"] = "faulted"
             result["db"] = f"error: {str(e)[:200]}"
-        return result, 200
+            code = 503
+        finally:
+            # teardown_appcontext also closes this. The explicit close returns
+            # the slot to db99 now rather than at the end of the request.
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
+
+        result["built_at"] = _dt.datetime.now(_dt.UTC).isoformat()
+        result["cache_age_seconds"] = 0.0
+        result["cached"] = False
+        _HEALTH_CACHE[quick] = {"built_at": now, "payload": result, "code": code}
+        return result, code
 
     @app.route("/debug/query")
     def debug_query():
@@ -146,15 +297,44 @@ def create_app(config_class=Config):
         sql_lower = sql.strip().lower()
         if not sql_lower.startswith("select"):
             return jsonify({"error": "SELECT only"}), 400
+
+        # "SELECT only" bounds the VERB, not the blast radius. db99 is one
+        # instance shared by every project and this connection is not scoped to
+        # church_scrapes, so `SELECT * FROM finance.people` reads another
+        # project's data. The route is authenticated, so this is not an open
+        # door -- but a data-exploration tool has no business reaching sideways.
+        refusal = _reject_unsafe_debug_sql(sql)
+        if refusal:
+            return jsonify({"error": refusal}), 400
+
+        conn = None
         try:
             conn = _get_db_connection()
             cur = conn.cursor()
             cur.execute(sql)
-            rows = cur.fetchall()
-            conn.close()
-            return jsonify({"rows": rows, "count": len(rows)})
+            # Cap the read. An unbounded SELECT against a shared instance is a
+            # denial of service against every other project, not just this one.
+            rows = cur.fetchmany(_DEBUG_QUERY_MAX_ROWS + 1)
+            truncated = len(rows) > _DEBUG_QUERY_MAX_ROWS
+            rows = rows[:_DEBUG_QUERY_MAX_ROWS]
+            return jsonify(
+                {
+                    "rows": rows,
+                    "count": len(rows),
+                    # Say so. A silently truncated result read as complete is how
+                    # someone concludes a table is empty when it is not.
+                    "truncated": truncated,
+                    "max_rows": _DEBUG_QUERY_MAX_ROWS,
+                }
+            )
         except Exception as e:
             return jsonify({"error": str(e)[:500]}), 500
+        finally:
+            if conn is not None:
+                try:
+                    conn.close()
+                except Exception:
+                    pass
 
     @app.route("/debug/audit")
     def debug_audit():
