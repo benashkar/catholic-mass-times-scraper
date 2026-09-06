@@ -4,8 +4,19 @@ test_bulletin_names.py
 Unit tests for the bulletin name scoring, cleaning, and validation functions
 in run_bulletin_scraper.py.
 
-These tests use the real SSA/Census reference data files in data/reference/
-(loaded automatically by _load_reference_data). No mocking needed.
+These tests used to claim they ran against "the real SSA/Census reference data
+files in data/reference/ ... No mocking needed." That was never true in CI:
+`data/reference/ssa_first_names.csv` and `census_surnames.csv` are NOT tracked
+in git. Without them `_load_reference_data()` logs a warning, returns two empty
+dicts, and every score collapses to 0.0 -- so 16 of these tests have failed on
+master since at least 2026-08-27 and the CI "Test" job has been red that whole
+time.
+
+They now seed the module-level caches with a small deterministic fixture. That
+is better than shipping the real CSVs even if we could: the assertions here are
+about the SCORING RULES, not about who is actually in the census, and a unit
+test that silently depends on an untracked 100k-row file fails for a reason
+unrelated to the thing it claims to check.
 
 Run these tests with:
     pytest tests/test_bulletin_names.py -v
@@ -25,6 +36,51 @@ except ImportError:
     pytestmark = pytest.mark.skip(
         reason="run_bulletin_scraper missing required functions (confidence_label, score_name_confidence, split_merged_name)"
     )
+
+
+# Ranks matter, not just membership: score_name_confidence() pays a separate
+# +0.10 for a top-1000 first name and another for a top-1000 surname.
+#
+#   CYNTHIA is SSA-only and deliberately OUTSIDE the top 1000 -- the merged-name
+#           tests ("Kevin Steinkamp Cynthia") need a trailing word that is a
+#           first name but NOT a surname.
+#   JAMES   is in BOTH, because test_no_split_when_last_is_also_surname needs a
+#           trailing word that IS a legitimate surname.
+#   XYZNOTANAME appears in neither, by design -- it is the negative control.
+_SSA_FIXTURE = {
+    "JOHN": 1,
+    "JAMES": 2,
+    "MICHAEL": 3,
+    "ROBERT": 4,
+    "WILLIAM": 5,
+    "MARY": 7,
+    "KEVIN": 50,
+    "ANDREW": 60,
+    "CYNTHIA": 3000,
+}
+_CENSUS_FIXTURE = {
+    "SMITH": 1,
+    "JOHNSON": 2,
+    "WILLIAMS": 3,
+    "JAMES": 500,
+    "MARY": 900,
+    "STEINKAMP": 5000,
+}
+
+
+@pytest.fixture(autouse=True)
+def _seed_reference_data(monkeypatch):
+    """Populate the reference caches so scoring tests measure scoring.
+
+    `_load_reference_data()` short-circuits when both module globals are already
+    set, so seeding them means the untracked CSVs are never consulted.
+    monkeypatch restores them afterwards, so this cannot leak into other modules.
+    """
+    import run_bulletin_scraper as rbs
+
+    monkeypatch.setattr(rbs, "_ssa_names", dict(_SSA_FIXTURE), raising=False)
+    monkeypatch.setattr(rbs, "_census_surnames", dict(_CENSUS_FIXTURE), raising=False)
+
 
 # ── TestScoreNameConfidence ──────────────────────────────────────────────────
 
